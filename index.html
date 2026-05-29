@@ -14,26 +14,26 @@ body{
 font-family:'Vazirmatn';
 background:#000;
 overflow:hidden;
-color:white;
 height:100vh;
+color:white;
 }
 
-/* 🌑 cinematic background */
+/* BACKGROUND */
 .bg{
 position:fixed;
 inset:0;
 background:radial-gradient(circle at center,#3b0000 0%,#000 70%);
-z-index:-3;
+z-index:-2;
 }
 
-/* 🌫 fog */
+/* FOG */
 .fog{
 position:fixed;
 inset:0;
 background:url('https://i.imgur.com/3ZQ3ZQZ.png');
 opacity:.04;
-animation:move 25s linear infinite;
-z-index:-2;
+animation:move 30s linear infinite;
+z-index:-1;
 }
 
 @keyframes move{
@@ -41,22 +41,7 @@ from{transform:translateX(0)}
 to{transform:translateX(-300px)}
 }
 
-/* 🩸 blood particles */
-.blood{
-position:fixed;
-top:-20px;
-width:2px;
-height:120px;
-background:linear-gradient(to bottom,#ff0000,transparent);
-opacity:.35;
-animation:fall linear infinite;
-}
-
-@keyframes fall{
-to{transform:translateY(120vh)}
-}
-
-/* 🔐 login */
+/* LOGIN */
 .login{
 position:absolute;
 top:50%;
@@ -64,9 +49,9 @@ left:50%;
 transform:translate(-50%,-50%);
 width:340px;
 padding:35px;
-background:rgba(0,0,0,.7);
-border:1px solid rgba(255,255,255,.1);
+background:rgba(0,0,0,.75);
 border-radius:24px;
+border:1px solid rgba(255,255,255,.1);
 backdrop-filter:blur(12px);
 text-align:center;
 box-shadow:0 0 80px rgba(255,0,0,.25);
@@ -75,7 +60,6 @@ box-shadow:0 0 80px rgba(255,0,0,.25);
 .login h1{
 font-family:'Cinzel';
 color:#ff2b2b;
-margin-bottom:10px;
 }
 
 input{
@@ -87,6 +71,10 @@ border-radius:12px;
 background:#120707;
 color:white;
 outline:none;
+}
+
+input::placeholder{
+color:rgba(255,255,255,.5);
 }
 
 button{
@@ -105,7 +93,7 @@ background:#ff0000;
 transform:scale(1.03);
 }
 
-/* 💌 main */
+/* MAIN */
 #main{
 display:none;
 height:100vh;
@@ -113,7 +101,6 @@ overflow-y:auto;
 padding:60px 20px;
 }
 
-/* letter */
 .letter{
 max-width:900px;
 margin:auto;
@@ -122,7 +109,7 @@ border-radius:30px;
 background:rgba(10,0,0,.75);
 border:1px solid rgba(255,255,255,.08);
 backdrop-filter:blur(14px);
-box-shadow:0 0 100px rgba(255,0,0,.25);
+box-shadow:0 0 120px rgba(255,0,0,.25);
 animation:open 2s ease;
 }
 
@@ -136,11 +123,11 @@ font-family:'Cinzel';
 font-size:3rem;
 text-align:center;
 color:#ff3b3b;
-text-shadow:0 0 30px rgba(255,0,0,.4);
 margin-bottom:25px;
+text-shadow:0 0 30px rgba(255,0,0,.4);
 }
 
-/* gallery */
+/* GALLERY */
 .gallery{
 display:flex;
 gap:12px;
@@ -160,56 +147,46 @@ transition:.4s;
 }
 
 .gallery img:hover{
-transform:scale(1.08) rotate(-1deg);
+transform:scale(1.08);
 filter:brightness(1.2);
 }
 
-/* text typing */
+/* TEXT */
 .text{
 font-size:1.2rem;
 line-height:2.7;
 text-shadow:0 0 10px rgba(255,0,0,.2);
-white-space:pre-line;
-min-height:200px;
 }
 
-/* quote */
-.quote{
+/* MUSIC */
+.music{
 margin-top:40px;
 text-align:center;
-font-size:1.7rem;
-color:#ff6b6b;
-font-family:'Cinzel';
 }
 
-/* heart */
-.heart{
-text-align:center;
-font-size:2rem;
-animation:beat 1.2s infinite;
-margin-top:20px;
+iframe{
+width:100%;
+max-width:600px;
+height:166px;
+border-radius:16px;
+box-shadow:0 0 40px rgba(255,0,0,.25);
+border:none;
 }
 
-@keyframes beat{
-0%{transform:scale(1)}
-50%{transform:scale(1.3)}
-100%{transform:scale(1)}
+/* BLOOD */
+.blood{
+position:fixed;
+top:-20px;
+width:2px;
+height:120px;
+background:linear-gradient(to bottom,#ff0000,transparent);
+animation:fall linear infinite;
+opacity:.35;
 }
 
-/* final dedication */
-.end{
-margin-top:50px;
-text-align:center;
-line-height:2;
-opacity:.9;
+@keyframes fall{
+to{transform:translateY(120vh)}
 }
-
-.end h2{
-font-family:'Cinzel';
-color:#ff2b2b;
-margin-bottom:15px;
-}
-
 </style>
 </head>
 
@@ -221,15 +198,14 @@ margin-bottom:15px;
 <!-- LOGIN -->
 <div class="login" id="login">
 <h1>Niyayesh 🥹🫂💕</h1>
-<p>Only love knows the password...</p>
+<p>Only love knows the password</p>
 
-<input type="password" id="pass">
-<button onclick="start()">Enter</button>
+<input id="pass" type="password" placeholder="type password...">
+<button onclick="enter()">Enter</button>
 </div>
 
 <!-- MAIN -->
 <div id="main">
-
 <div class="letter">
 
 <div class="title">For Niyayesh 🥹🫂💕</div>
@@ -239,27 +215,34 @@ margin-bottom:15px;
 <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png">
 </div>
 
-<div class="text" id="type"></div>
+<div class="text">
+نیایش…<br><br>
 
-<div class="quote">“Forever. Always. You and Me.”</div>
+تو فقط عشق من نیستی.<br>
+تو دلیل نفس کشیدن منی.<br><br>
 
-<div class="heart">🖤</div>
+اگر دنیا هزار بار دیگر ساخته شود…<br>
+باز هم تو را انتخاب می‌کنم.<br><br>
 
-<div class="end">
-<h2>Dedicated to my love, Niyayesh</h2>
-<p>
-تقدیم به عشقم نیایش از طرف مبین<br><br>
-Dedicated to my love, Niyayesh, from Mobin
-</p>
+تو خانه‌ی منی… همیشه.
+</div>
+
+<div class="music">
+<iframe 
+src="https://www.youtube.com/embed/GCdwKhTtNNw?autoplay=1&mute=1"
+allow="autoplay">
+</iframe>
 </div>
 
 </div>
 </div>
 
 <script>
-function start(){
+function enter(){
 let p=document.getElementById("pass").value;
-if(p==="niyayesh14284@"){
+
+if(p==="mobinloveniyayesh"){
+
 document.getElementById("login").style.display="none";
 document.getElementById("main").style.display="block";
 
@@ -271,27 +254,6 @@ b.style.left=Math.random()*100+"vw";
 b.style.animationDuration=(2+Math.random()*4)+"s";
 document.body.appendChild(b);
 }
-
-/* typing effect */
-let text = `نیایش...
-تو برای من فقط عشق نیستی.
-
-تو آرامشی هستی که در تاریک‌ترین شب‌ها هم روشنم می‌کند.
-
-اگر هزار دنیا وجود داشته باشد،
-باز هم در همه آن‌ها تو را انتخاب می‌کنم.
-
-تو خانه‌ی منی...
-نفس منی...
-و دلیل ادامه دادن منی.`;
-
-let i=0;
-function type(){
-document.getElementById("type").innerHTML += text[i];
-i++;
-if(i<text.length) setTimeout(type,35);
-}
-type();
 
 }else{
 alert("Wrong password...");
