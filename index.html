@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mobin & Niyayesh</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;800&family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
+<!-- لود فونت‌ها -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;800&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Vazirmatn', sans-serif;
-    background: #050000;
+    background: #030000;
     overflow: hidden;
     height: 100vh;
     color: white;
@@ -23,7 +24,7 @@ body {
 .bg {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at center, #2a0000 0%, #050000 100%);
+    background: radial-gradient(circle at center, #240000 0%, #030000 100%);
     z-index: -3;
 }
 
@@ -31,8 +32,8 @@ body {
     position: fixed;
     inset: 0;
     background: url('https://i.imgur.com/3ZQ3ZQZ.png');
-    opacity: .03;
-    animation: moveFog 40s linear infinite;
+    opacity: .05;
+    animation: moveFog 60s linear infinite;
     z-index: -2;
 }
 
@@ -54,19 +55,19 @@ body {
 
 .netflix-text {
     font-family: 'Cinzel', serif;
-    font-size: 7rem;
+    font-size: 8rem;
     font-weight: 800;
     color: #e50914;
-    letter-spacing: 4px;
-    animation: zoomOut 3.5s forwards ease-in-out;
-    text-shadow: 0 0 40px rgba(229, 9, 20, 0.6);
+    letter-spacing: 5px;
+    animation: zoomOut 3.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-shadow: 0 0 50px rgba(229, 9, 20, 0.8);
 }
 
 @keyframes zoomOut {
-    0% { transform: scale(0.6); filter: blur(10px); opacity: 0; }
-    20% { transform: scale(1); filter: blur(0); opacity: 1; }
-    60% { transform: scale(1.1); filter: blur(0); opacity: 1; box-shadow: none; }
-    100% { transform: scale(3.5); filter: blur(15px); opacity: 0; }
+    0% { transform: scale(0.5); filter: blur(15px); opacity: 0; }
+    15% { transform: scale(1); filter: blur(0); opacity: 1; }
+    60% { transform: scale(1.05); filter: blur(0); opacity: 1; box-shadow: none; }
+    100% { transform: scale(4.5); filter: blur(25px); opacity: 0; }
 }
 
 /* LOGIN BOX */
@@ -75,67 +76,72 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 360px;
-    padding: 40px;
-    background: rgba(15, 2, 2, 0.65);
-    border-radius: 28px;
-    border: 1px solid rgba(255, 43, 43, 0.15);
+    width: 380px;
+    padding: 50px 35px;
+    background: rgba(10, 2, 2, 0.6);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 43, 43, 0.25);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     text-align: center;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 60px rgba(235, 9, 20, 0.15);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 90px rgba(235, 9, 20, 0.25);
     transition: all 0.8s ease;
 }
 
 .login-container h1 {
     font-family: 'Cinzel', serif;
     color: #ff3333;
-    font-size: 2.2rem;
-    margin-bottom: 10px;
-    text-shadow: 0 0 20px rgba(255, 51, 51, 0.4);
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    text-shadow: 0 0 30px rgba(255, 51, 51, 0.6);
 }
 
 .login-container p {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 25px;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
 }
 
 input {
     width: 100%;
-    padding: 16px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
-    background: rgba(0, 0, 0, 0.6);
+    padding: 18px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.5);
     color: white;
     outline: none;
     text-align: center;
-    font-size: 1rem;
-    transition: 0.3s;
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    transition: 0.4s;
 }
 
 input:focus {
     border-color: #ff3333;
-    box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
+    box-shadow: 0 0 25px rgba(255, 51, 51, 0.3);
+    transform: scale(1.03);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 button {
     width: 100%;
-    padding: 16px;
+    padding: 18px;
     border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #bd0812 0%, #e50914 100%);
+    border-radius: 16px;
+    background: linear-gradient(135deg, #a60009 0%, #e50914 100%);
     color: white;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.15rem;
+    font-weight: 800;
     cursor: pointer;
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
+    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4);
 }
 
 button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
+    transform: translateY(-5px) scale(1.04);
+    box-shadow: 0 15px 35px rgba(229, 9, 20, 0.6);
 }
 
 /* MAIN CONTENT */
@@ -143,87 +149,125 @@ button:hover {
     display: none;
     height: 100vh;
     overflow-y: auto;
-    padding: 80px 20px;
+    padding: 60px 20px;
     opacity: 0;
-    transition: opacity 2s ease;
+    transition: opacity 2.5s ease;
 }
 
+/* Custom Scrollbar */
+#main::-webkit-scrollbar { width: 6px; }
+#main::-webkit-scrollbar-track { background: transparent; }
+#main::-webkit-scrollbar-thumb { background: rgba(255, 51, 51, 0.3); border-radius: 10px; }
+
 .letter {
-    max-width: 750px;
+    max-width: 800px;
     margin: auto;
-    padding: 60px 40px;
-    border-radius: 35px;
-    background: rgba(10, 1, 1, 0.8);
-    border: 1px solid rgba(255, 51, 51, 0.12);
+    padding: 70px 50px;
+    border-radius: 40px;
+    background: rgba(10, 1, 1, 0.7);
+    border: 1px solid rgba(255, 51, 51, 0.2);
     backdrop-filter: blur(25px);
-    box-shadow: 0 30px 100px rgba(0,0,0,0.8), 0 0 100px rgba(255, 0, 0, 0.15);
+    -webkit-backdrop-filter: blur(25px);
+    box-shadow: 0 40px 120px rgba(0,0,0,0.9), 0 0 120px rgba(255, 0, 0, 0.2);
     text-align: center;
+    position: relative;
 }
 
 .title {
     font-family: 'Cinzel', serif;
-    font-size: 2.8rem;
-    font-weight: 700;
+    font-size: 3.2rem;
+    font-weight: 800;
     color: #ff3b3b;
-    margin-bottom: 40px;
-    text-shadow: 0 0 35px rgba(255, 59, 59, 0.5);
+    margin-bottom: 45px;
+    text-shadow: 0 0 40px rgba(255, 59, 59, 0.6);
+    animation: pulse 3s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { text-shadow: 0 0 20px rgba(255, 59, 59, 0.4); transform: scale(1); }
+    100% { text-shadow: 0 0 50px rgba(255, 59, 59, 0.8); transform: scale(1.02); }
 }
 
 /* GALLERY */
 .gallery {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .gallery img {
-    width: 220px;
-    height: 280px;
+    width: 240px;
+    height: 300px;
     object-fit: cover;
-    border-radius: 22px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-    transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+    transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .gallery img:hover {
-    transform: translateY(-10px) scale(1.05) rotate(1deg);
-    border-color: rgba(255, 59, 59, 0.5);
-    box-shadow: 0 20px 5px rgba(255, 0, 0, 0.15);
+    transform: translateY(-12px) scale(1.06) rotate(3deg);
+    border-color: rgba(255, 59, 59, 0.7);
+    box-shadow: 0 25px 60px rgba(255, 0, 0, 0.3);
 }
 
 /* TEXT WITH TYPING EFFECT */
 .text {
-    font-size: 1.35rem;
-    line-height: 2.5;
-    color: #f0f0f0;
-    margin: 30px 0;
-    font-weight: 300;
-    min-height: 200px;
+    font-size: 1.4rem;
+    line-height: 2.6;
+    color: #fdfdfd;
+    margin: 40px 0;
+    font-weight: 400;
+    min-height: 350px;
+    text-align: right;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
 }
 
-/* MUSIC PLAYER */
+/* SPOTIFY MUSIC PLAYER */
 .music {
     margin-top: 50px;
     display: flex;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 2s ease;
+}
+
+.music.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 iframe {
     width: 100%;
-    max-width: 500px;
-    height: 120px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    border: 1px solid rgba(255,255,255,0.05);
+    max-width: 600px;
+    border-radius: 16px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.05);
+    border: none;
+}
+
+/* FOOTER CREATED BY */
+.creator {
+    margin-top: 60px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.creator:hover {
+    color: rgba(255, 59, 59, 0.8);
+    text-shadow: 0 0 15px rgba(255, 59, 59, 0.5);
 }
 
 /* PARTICLES EFFECT */
 .particle {
     position: fixed;
-    background: radial-gradient(circle, #ff1a1a 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,50,50,0.8) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: -1;
@@ -232,8 +276,8 @@ iframe {
 
 @keyframes floatUp {
     0% { transform: translateY(105vh) translateX(0) scale(0); opacity: 0; }
-    50% { opacity: 0.6; }
-    100% { transform: translateY(-10vh) translateX(50px) scale(1); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-10vh) translateX(80px) scale(1.5); opacity: 0; }
 }
 </style>
 </head>
@@ -243,10 +287,12 @@ iframe {
 <div class="bg"></div>
 <div class="fog"></div>
 
+<!-- NETFLIX INTRO SCREEN -->
 <div id="netflix-intro">
     <div class="netflix-text">N</div>
 </div>
 
+<!-- LOGIN -->
 <div class="login-container" id="login">
     <h1>Niyayesh 🥹🫂💕</h1>
     <p>Only love knows the password</p>
@@ -254,6 +300,7 @@ iframe {
     <button onclick="enter()">ورود به قلب من</button>
 </div>
 
+<!-- MAIN CONTENT -->
 <div id="main">
     <div class="letter">
         <div class="title">For Niyayesh 🥹🫂💕</div>
@@ -263,50 +310,45 @@ iframe {
             <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2">
         </div>
 
+        <!-- متن عاشقانه -->
         <div class="text" id="typed-text"></div>
 
-        <div class="music" id="music-container"></div>
+        <!-- اسپاتیفای پلیر: آهنگ Sweater Weather از The Neighbourhood -->
+        <div class="music" id="music-container">
+            <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+
+        <!-- امضای سازنده -->
+        <div class="creator">Created by Mobin</div>
     </div>
 </div>
 
 <script>
-// متن عاشقانه برای افکت تایپ شدن
-const loveLetter = `نیایش…\n\nتو فقط عشق من نیستی.\nتو دلیل نفس کشیدن منی.\n\nاگر دنیا هزار بار دیگر ساخته شود…\nباز هم تو را انتخاب می‌کنم.\n\nتو خانه‌ی منی… همیشه. ❤️`;
+// متن جدید و فوق‌العاده احساسی تو
+const loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
 
 function enter(){
     let p = document.getElementById("pass").value;
 
     if(p === "mobinloveniyayesh"){
-        // مخفی کردن باکس لاگین
         document.getElementById("login").style.display = "none";
-        
-        // فعال کردن افکت صوتی تپش قلب/سینمایی (با استفاده از Audio API مرورگر بدون نیاز به فایل خارجی)
         playCinematicSound();
 
-        // نشان دادن اینتروی نتفلیکسی
         const intro = document.getElementById("netflix-intro");
         intro.style.display = "flex";
 
-        // بعد از اتمام انیمیشن نتفلیکس (3.5 ثانیه)
         setTimeout(() => {
-            intro.style.fadeOut = "all 0.5s";
             intro.style.display = "none";
             
-            // نمایش صفحه اصلی با افکت نرم
             const mainContent = document.getElementById("main");
             mainContent.style.display = "block";
-            setTimeout(() => { mainContent.style.opacity = "1"; }, 50);
             
-            // شروع افکت ذرات معلق سرخ
+            setTimeout(() => { mainContent.style.opacity = "1"; }, 100);
+            
             createParticles();
             
-            // شروع تایپ شدن متن عاشقانه
+            // شروع تایپ متن به محض ورود
             typeWriter(loveLetter, 0, "typed-text");
-            
-            // لود کردن موزیک یوتیوب همراه با صدا (چون کاربر کلیک کرده، مرورگر اجازه پخش صدا می‌دهد)
-            document.getElementById("music-container").innerHTML = `
-                <iframe src="https://www.youtube.com/embed/GCdwKhTtNNw?autoplay=1" allow="autoplay; encrypted-media"></iframe>
-            `;
             
         }, 3400);
 
@@ -315,7 +357,7 @@ function enter(){
     }
 }
 
-// تابع افکت تایپ شدن متن
+// تابع افکت تایپ احساسی
 function typeWriter(text, i, elementId) {
     if (i < text.length) {
         let char = text.charAt(i);
@@ -324,42 +366,50 @@ function typeWriter(text, i, elementId) {
         } else {
             document.getElementById(elementId).innerHTML += char;
         }
-        setTimeout(() => { typeWriter(text, i + 1, elementId); }, 75);
+        
+        // تنظیم سرعت تایپ: روی نقطه‌ها و ویرگول‌ها مکث می‌کنه تا حس خوندن واقعی بده
+        let speed = char === "." || char === "،" || char === "…" ? 450 : 60;
+        setTimeout(() => { typeWriter(text, i + 1, elementId); }, speed);
+    } else {
+        // وقتی نوشتن متن تموم شد، آهنگ اسپاتیفای خیلی شیک و آروم ظاهر میشه
+        setTimeout(() => {
+            document.getElementById("music-container").classList.add("show");
+        }, 800);
     }
 }
 
-// تابع تولید ذرات جادویی سرخ رنگ متحرک در پس‌زمینه
+// تولید ذرات معلق (شبیه جرقه‌های عاشقانه قرمز)
 function createParticles() {
-    for(let i = 0; i < 40; i++) {
+    for(let i = 0; i < 50; i++) {
         let p = document.createElement("div");
         p.className = "particle";
-        let size = Math.random() * 6 + 2;
+        let size = Math.random() * 5 + 3;
         p.style.width = size + "px";
         p.style.height = size + "px";
         p.style.left = Math.random() * 100 + "vw";
-        p.style.animationDuration = (Math.random() * 6 + 4) + "s";
+        p.style.animationDuration = (Math.random() * 8 + 5) + "s";
         p.style.animationDelay = Math.random() * 5 + "s";
         document.body.appendChild(p);
     }
 }
 
-// تولید یک صدای سینمایی ساب‌بیس الکترونیکی فرکانس پایین (بدون نیاز به فایل صوتی خارجی) برای افکت ورود
+// صدای بم سینمایی (همون حس نتفلیکسی اول کار)
 function playCinematicSound() {
     try {
         let context = new (window.AudioContext || window.webkitAudioContext)();
         let osc = context.createOscillator();
         let gain = context.createGain();
         osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(60, context.currentTime); 
-        osc.frequency.exponentialRampToValueAtTime(20, context.currentTime + 2.5);
-        gain.gain.setValueAtTime(0.4, context.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 2.5);
+        osc.frequency.setValueAtTime(55, context.currentTime); 
+        osc.frequency.exponentialRampToValueAtTime(15, context.currentTime + 3.5);
+        gain.gain.setValueAtTime(0.5, context.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 3.5);
         osc.connect(gain);
         gain.connect(context.destination);
         osc.start();
-        osc.stop(context.currentTime + 2.5);
+        osc.stop(context.currentTime + 3.5);
     } catch(e) {
-        console.log("Audio couldn't play automatically");
+        console.log("Audio API not supported");
     }
 }
 </script>
