@@ -5,44 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mobin & Niyayesh</title>
 
-<!-- لود فونت‌ها -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;800&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+<!-- لود فونت‌های بسیار زیبا -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Vazirmatn', sans-serif;
-    background: #030000;
+    background: #000;
     overflow: hidden;
     height: 100vh;
     color: white;
     user-select: none;
 }
 
-/* BACKGROUNDS */
+/* 1. ELEGANT ANIMATED BACKGROUND */
 .bg {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at center, #240000 0%, #030000 100%);
+    background: linear-gradient(120deg, #1a0004 0%, #000000 50%, #220008 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
     z-index: -3;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 .fog {
     position: fixed;
     inset: 0;
     background: url('https://i.imgur.com/3ZQ3ZQZ.png');
-    opacity: .05;
-    animation: moveFog 60s linear infinite;
+    opacity: 0.06;
+    animation: moveFog 70s linear infinite;
     z-index: -2;
+    pointer-events: none;
 }
 
 @keyframes moveFog {
-    from { transform: translateX(0); }
-    to { transform: translateX(-500px); }
+    from { transform: translateX(0) scale(1.1); }
+    to { transform: translateX(-600px) scale(1.1); }
 }
 
-/* NETFLIX CINEMATIC INTRO */
+/* 2. ROMANTIC NETFLIX INTRO */
 #netflix-intro {
     position: fixed;
     inset: 0;
@@ -55,184 +64,191 @@ body {
 
 .netflix-text {
     font-family: 'Cinzel', serif;
-    font-size: 8rem;
-    font-weight: 800;
-    color: #e50914;
+    font-size: 9rem;
+    font-weight: 900;
+    color: #ff1a40;
     letter-spacing: 5px;
-    animation: zoomOut 3.5s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    text-shadow: 0 0 50px rgba(229, 9, 20, 0.8);
+    opacity: 0;
+    animation: romanticZoom 4s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-shadow: 0 0 60px rgba(255, 26, 64, 0.9), 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
-@keyframes zoomOut {
-    0% { transform: scale(0.5); filter: blur(15px); opacity: 0; }
-    15% { transform: scale(1); filter: blur(0); opacity: 1; }
-    60% { transform: scale(1.05); filter: blur(0); opacity: 1; box-shadow: none; }
-    100% { transform: scale(4.5); filter: blur(25px); opacity: 0; }
+@keyframes romanticZoom {
+    0% { transform: scale(0.6); filter: blur(20px); opacity: 0; }
+    20% { transform: scale(1); filter: blur(0); opacity: 1; }
+    60% { transform: scale(1.03); filter: blur(0); opacity: 1; text-shadow: 0 0 80px rgba(255, 26, 64, 1); }
+    100% { transform: scale(5); filter: blur(30px); opacity: 0; }
 }
 
-/* LOGIN BOX */
+/* 3. LOGIN BOX (GLASSMORPHISM) */
 .login-container {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 380px;
-    padding: 50px 35px;
-    background: rgba(10, 2, 2, 0.6);
-    border-radius: 30px;
-    border: 1px solid rgba(255, 43, 43, 0.25);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    padding: 55px 40px;
+    background: rgba(20, 0, 5, 0.4);
+    border-radius: 35px;
+    border: 1px solid rgba(255, 100, 100, 0.15);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     text-align: center;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 90px rgba(235, 9, 20, 0.25);
-    transition: all 0.8s ease;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(255, 26, 64, 0.05);
+    transition: all 1s ease;
 }
 
 .login-container h1 {
     font-family: 'Cinzel', serif;
-    color: #ff3333;
-    font-size: 2.5rem;
-    margin-bottom: 12px;
-    text-shadow: 0 0 30px rgba(255, 51, 51, 0.6);
+    color: #ff4d6d;
+    font-size: 2.6rem;
+    margin-bottom: 15px;
+    text-shadow: 0 0 30px rgba(255, 77, 109, 0.6);
 }
 
 .login-container p {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 35px;
-    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    font-weight: 300;
 }
 
 input {
     width: 100%;
     padding: 18px;
-    margin-bottom: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
     background: rgba(0, 0, 0, 0.5);
     color: white;
     outline: none;
     text-align: center;
-    font-size: 1.05rem;
-    letter-spacing: 2px;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
     transition: 0.4s;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
 }
 
 input:focus {
-    border-color: #ff3333;
-    box-shadow: 0 0 25px rgba(255, 51, 51, 0.3);
-    transform: scale(1.03);
+    border-color: #ff4d6d;
+    box-shadow: 0 0 25px rgba(255, 77, 109, 0.3), inset 0 0 15px rgba(255, 77, 109, 0.1);
+    transform: scale(1.02);
     background: rgba(0, 0, 0, 0.7);
 }
 
 button {
     width: 100%;
-    padding: 18px;
+    padding: 20px;
     border: none;
-    border-radius: 16px;
-    background: linear-gradient(135deg, #a60009 0%, #e50914 100%);
+    border-radius: 18px;
+    background: linear-gradient(135deg, #a60021 0%, #ff1a40 100%);
     color: white;
-    font-size: 1.15rem;
-    font-weight: 800;
+    font-size: 1.2rem;
+    font-weight: 600;
     cursor: pointer;
     transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 26, 64, 0.3);
 }
 
 button:hover {
-    transform: translateY(-5px) scale(1.04);
-    box-shadow: 0 15px 35px rgba(229, 9, 20, 0.6);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(255, 26, 64, 0.5);
 }
 
-/* MAIN CONTENT */
+/* 4. MAIN CONTENT & FLOATING LETTER */
 #main {
     display: none;
     height: 100vh;
     overflow-y: auto;
-    padding: 60px 20px;
+    padding: 80px 20px;
     opacity: 0;
-    transition: opacity 2.5s ease;
+    transition: opacity 3s ease;
+    perspective: 1000px;
 }
 
-/* Custom Scrollbar */
-#main::-webkit-scrollbar { width: 6px; }
+#main::-webkit-scrollbar { width: 5px; }
 #main::-webkit-scrollbar-track { background: transparent; }
-#main::-webkit-scrollbar-thumb { background: rgba(255, 51, 51, 0.3); border-radius: 10px; }
+#main::-webkit-scrollbar-thumb { background: rgba(255, 77, 109, 0.3); border-radius: 10px; }
 
 .letter {
-    max-width: 800px;
+    max-width: 850px;
     margin: auto;
-    padding: 70px 50px;
+    padding: 80px 60px;
     border-radius: 40px;
-    background: rgba(10, 1, 1, 0.7);
-    border: 1px solid rgba(255, 51, 51, 0.2);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    box-shadow: 0 40px 120px rgba(0,0,0,0.9), 0 0 120px rgba(255, 0, 0, 0.2);
+    background: rgba(15, 2, 5, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(35px);
+    -webkit-backdrop-filter: blur(35px);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.9), inset 0 0 60px rgba(255, 77, 109, 0.05);
     text-align: center;
     position: relative;
+    animation: floatLetter 8s ease-in-out infinite;
+}
+
+@keyframes floatLetter {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
 .title {
     font-family: 'Cinzel', serif;
-    font-size: 3.2rem;
-    font-weight: 800;
-    color: #ff3b3b;
-    margin-bottom: 45px;
-    text-shadow: 0 0 40px rgba(255, 59, 59, 0.6);
-    animation: pulse 3s infinite alternate;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ff4d6d;
+    margin-bottom: 50px;
+    text-shadow: 0 0 45px rgba(255, 77, 109, 0.5);
+    letter-spacing: 2px;
 }
 
-@keyframes pulse {
-    0% { text-shadow: 0 0 20px rgba(255, 59, 59, 0.4); transform: scale(1); }
-    100% { text-shadow: 0 0 50px rgba(255, 59, 59, 0.8); transform: scale(1.02); }
-}
-
-/* GALLERY */
+/* 5. ELEGANT GALLERY */
 .gallery {
     display: flex;
-    gap: 25px;
+    gap: 30px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .gallery img {
-    width: 240px;
-    height: 300px;
+    width: 250px;
+    height: 320px;
     object-fit: cover;
-    border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.7);
-    transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+    transition: 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+    filter: brightness(0.9);
 }
 
 .gallery img:hover {
-    transform: translateY(-12px) scale(1.06) rotate(3deg);
-    border-color: rgba(255, 59, 59, 0.7);
-    box-shadow: 0 25px 60px rgba(255, 0, 0, 0.3);
+    transform: translateY(-15px) scale(1.05) rotate(2deg);
+    border-color: rgba(255, 77, 109, 0.4);
+    box-shadow: 0 30px 60px rgba(255, 26, 64, 0.2);
+    filter: brightness(1.1);
 }
 
-/* TEXT WITH TYPING EFFECT */
+/* 6. TYPING TEXT */
 .text {
-    font-size: 1.4rem;
-    line-height: 2.6;
-    color: #fdfdfd;
+    font-size: 1.5rem;
+    line-height: 2.8;
+    color: #f8f8f8;
     margin: 40px 0;
-    font-weight: 400;
+    font-weight: 300;
     min-height: 350px;
     text-align: right;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    text-shadow: 0 2px 15px rgba(0,0,0,0.9);
 }
 
-/* SPOTIFY MUSIC PLAYER */
+/* 7. SPOTIFY PLAYER */
 .music {
-    margin-top: 50px;
+    margin-top: 60px;
     display: flex;
     justify-content: center;
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 2s ease;
+    transform: translateY(40px);
+    transition: all 2.5s ease;
 }
 
 .music.show {
@@ -242,42 +258,45 @@ button:hover {
 
 iframe {
     width: 100%;
-    max-width: 600px;
-    border-radius: 16px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.8), 0 0 20px rgba(255,255,255,0.05);
+    max-width: 650px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 30px rgba(255,255,255,0.03);
     border: none;
 }
 
-/* FOOTER CREATED BY */
+/* 8. CREATOR SIGNATURE */
 .creator {
-    margin-top: 60px;
+    margin-top: 70px;
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: 4px;
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.2);
+    letter-spacing: 5px;
     text-transform: uppercase;
-    transition: 0.3s;
+    transition: 0.5s;
+    font-weight: 500;
 }
 
 .creator:hover {
-    color: rgba(255, 59, 59, 0.8);
-    text-shadow: 0 0 15px rgba(255, 59, 59, 0.5);
+    color: rgba(255, 77, 109, 0.9);
+    text-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+    letter-spacing: 7px;
 }
 
-/* PARTICLES EFFECT */
+/* 9. GLOWING ORB PARTICLES */
 .particle {
     position: fixed;
-    background: radial-gradient(circle, rgba(255,50,50,0.8) 0%, transparent 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: -1;
-    animation: floatUp linear infinite;
+    background: #fff;
+    animation: floatUp ease-in infinite;
 }
 
 @keyframes floatUp {
-    0% { transform: translateY(105vh) translateX(0) scale(0); opacity: 0; }
-    50% { opacity: 0.8; }
-    100% { transform: translateY(-10vh) translateX(80px) scale(1.5); opacity: 0; }
+    0% { transform: translateY(110vh) translateX(0) scale(0); opacity: 0; }
+    30% { opacity: 0.6; }
+    70% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) translateX(100px) scale(1.5); opacity: 0; }
 }
 </style>
 </head>
@@ -324,7 +343,7 @@ iframe {
 </div>
 
 <script>
-// متن جدید و فوق‌العاده احساسی تو
+// متن بسیار احساسی و زیبای تو
 const loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
 
 function enter(){
@@ -332,7 +351,9 @@ function enter(){
 
     if(p === "mobinloveniyayesh"){
         document.getElementById("login").style.display = "none";
-        playCinematicSound();
+        
+        // پخش صدای جادویی و عاشقانه جدید
+        playRomanticSound();
 
         const intro = document.getElementById("netflix-intro");
         intro.style.display = "flex";
@@ -345,12 +366,12 @@ function enter(){
             
             setTimeout(() => { mainContent.style.opacity = "1"; }, 100);
             
-            createParticles();
+            createMagicParticles();
             
             // شروع تایپ متن به محض ورود
             typeWriter(loveLetter, 0, "typed-text");
             
-        }, 3400);
+        }, 4000); // زمان رو کمی بیشتر کردم تا صدای جادویی کامل شنیده بشه
 
     } else {
         alert("رمز اشتباه است... دوباره تلاش کن عشق من");
@@ -367,47 +388,66 @@ function typeWriter(text, i, elementId) {
             document.getElementById(elementId).innerHTML += char;
         }
         
-        // تنظیم سرعت تایپ: روی نقطه‌ها و ویرگول‌ها مکث می‌کنه تا حس خوندن واقعی بده
-        let speed = char === "." || char === "،" || char === "…" ? 450 : 60;
+        let speed = char === "." || char === "،" || char === "…" ? 450 : 65;
         setTimeout(() => { typeWriter(text, i + 1, elementId); }, speed);
     } else {
-        // وقتی نوشتن متن تموم شد، آهنگ اسپاتیفای خیلی شیک و آروم ظاهر میشه
+        // نمایش اسپاتیفای بعد از اتمام متن
         setTimeout(() => {
             document.getElementById("music-container").classList.add("show");
         }, 800);
     }
 }
 
-// تولید ذرات معلق (شبیه جرقه‌های عاشقانه قرمز)
-function createParticles() {
-    for(let i = 0; i < 50; i++) {
+// تولید هاله‌های نورانی معلق (خیلی رویایی‌تر از قبل)
+function createMagicParticles() {
+    const colors = ['rgba(255, 77, 109, 0.6)', 'rgba(255, 26, 64, 0.4)', 'rgba(255, 179, 193, 0.5)'];
+    for(let i = 0; i < 40; i++) {
         let p = document.createElement("div");
         p.className = "particle";
-        let size = Math.random() * 5 + 3;
+        let size = Math.random() * 8 + 4;
         p.style.width = size + "px";
         p.style.height = size + "px";
         p.style.left = Math.random() * 100 + "vw";
-        p.style.animationDuration = (Math.random() * 8 + 5) + "s";
+        p.style.boxShadow = `0 0 ${Math.random() * 15 + 10}px ${colors[Math.floor(Math.random() * colors.length)]}`;
+        p.style.background = 'transparent';
+        p.style.animationDuration = (Math.random() * 10 + 6) + "s";
         p.style.animationDelay = Math.random() * 5 + "s";
         document.body.appendChild(p);
     }
 }
 
-// صدای بم سینمایی (همون حس نتفلیکسی اول کار)
-function playCinematicSound() {
+// تولید صدای عاشقانه، گرم و جادویی (جایگزین صدای بم نتفلیکس)
+function playRomanticSound() {
     try {
-        let context = new (window.AudioContext || window.webkitAudioContext)();
-        let osc = context.createOscillator();
-        let gain = context.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(55, context.currentTime); 
-        osc.frequency.exponentialRampToValueAtTime(15, context.currentTime + 3.5);
-        gain.gain.setValueAtTime(0.5, context.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 3.5);
-        osc.connect(gain);
-        gain.connect(context.destination);
-        osc.start();
-        osc.stop(context.currentTime + 3.5);
+        let ctx = new (window.AudioContext || window.webkitAudioContext)();
+        let t = ctx.currentTime;
+        
+        // تابعی برای ساخت آکورد نرم
+        function playTone(freq, type, startTime, duration, vol) {
+            let osc = ctx.createOscillator();
+            let gain = ctx.createGain();
+            osc.type = type;
+            osc.frequency.value = freq;
+            
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(vol, startTime + 0.5);
+            gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+        }
+
+        // یک آکورد گرم و ملایم (مثل صدای چنگ یا زنگوله نرم)
+        playTone(261.63, 'sine', t, 3.5, 0.4); // نُت دو
+        playTone(329.63, 'sine', t, 3.5, 0.4); // نُت می
+        playTone(392.00, 'sine', t, 3.5, 0.4); // نُت سل
+        
+        // یه صدای درخشان کوچیک با کمی تاخیر
+        playTone(523.25, 'triangle', t + 0.4, 4, 0.15); 
+        playTone(659.25, 'triangle', t + 0.6, 4, 0.1); 
+
     } catch(e) {
         console.log("Audio API not supported");
     }
