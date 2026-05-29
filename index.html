@@ -5,187 +5,235 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mobin & Niyayesh</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;800&family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-body{
-font-family:'Vazirmatn';
-background:#000;
-overflow:hidden;
-height:100vh;
-color:white;
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: #050000;
+    overflow: hidden;
+    height: 100vh;
+    color: white;
+    user-select: none;
 }
 
-/* BACKGROUND */
-.bg{
-position:fixed;
-inset:0;
-background:radial-gradient(circle at center,#3b0000 0%,#000 70%);
-z-index:-2;
+/* BACKGROUNDS */
+.bg {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at center, #2a0000 0%, #050000 100%);
+    z-index: -3;
 }
 
-/* FOG */
-.fog{
-position:fixed;
-inset:0;
-background:url('https://i.imgur.com/3ZQ3ZQZ.png');
-opacity:.04;
-animation:move 30s linear infinite;
-z-index:-1;
+.fog {
+    position: fixed;
+    inset: 0;
+    background: url('https://i.imgur.com/3ZQ3ZQZ.png');
+    opacity: .03;
+    animation: moveFog 40s linear infinite;
+    z-index: -2;
 }
 
-@keyframes move{
-from{transform:translateX(0)}
-to{transform:translateX(-300px)}
+@keyframes moveFog {
+    from { transform: translateX(0); }
+    to { transform: translateX(-500px); }
 }
 
-/* LOGIN */
-.login{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-width:340px;
-padding:35px;
-background:rgba(0,0,0,.75);
-border-radius:24px;
-border:1px solid rgba(255,255,255,.1);
-backdrop-filter:blur(12px);
-text-align:center;
-box-shadow:0 0 80px rgba(255,0,0,.25);
+/* NETFLIX CINEMATIC INTRO */
+#netflix-intro {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
 }
 
-.login h1{
-font-family:'Cinzel';
-color:#ff2b2b;
+.netflix-text {
+    font-family: 'Cinzel', serif;
+    font-size: 7rem;
+    font-weight: 800;
+    color: #e50914;
+    letter-spacing: 4px;
+    animation: zoomOut 3.5s forwards ease-in-out;
+    text-shadow: 0 0 40px rgba(229, 9, 20, 0.6);
 }
 
-input{
-width:100%;
-padding:14px;
-margin:15px 0;
-border:none;
-border-radius:12px;
-background:#120707;
-color:white;
-outline:none;
+@keyframes zoomOut {
+    0% { transform: scale(0.6); filter: blur(10px); opacity: 0; }
+    20% { transform: scale(1); filter: blur(0); opacity: 1; }
+    60% { transform: scale(1.1); filter: blur(0); opacity: 1; box-shadow: none; }
+    100% { transform: scale(3.5); filter: blur(15px); opacity: 0; }
 }
 
-input::placeholder{
-color:rgba(255,255,255,.5);
+/* LOGIN BOX */
+.login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    padding: 40px;
+    background: rgba(15, 2, 2, 0.65);
+    border-radius: 28px;
+    border: 1px solid rgba(255, 43, 43, 0.15);
+    backdrop-filter: blur(20px);
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 60px rgba(235, 9, 20, 0.15);
+    transition: all 0.8s ease;
 }
 
-button{
-width:100%;
-padding:14px;
-border:none;
-border-radius:12px;
-background:#7a0000;
-color:white;
-cursor:pointer;
-transition:.3s;
+.login-container h1 {
+    font-family: 'Cinzel', serif;
+    color: #ff3333;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255, 51, 51, 0.4);
 }
 
-button:hover{
-background:#ff0000;
-transform:scale(1.03);
+.login-container p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 25px;
 }
 
-/* MAIN */
-#main{
-display:none;
-height:100vh;
-overflow-y:auto;
-padding:60px 20px;
+input {
+    width: 100%;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    outline: none;
+    text-align: center;
+    font-size: 1rem;
+    transition: 0.3s;
 }
 
-.letter{
-max-width:900px;
-margin:auto;
-padding:50px;
-border-radius:30px;
-background:rgba(10,0,0,.75);
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(14px);
-box-shadow:0 0 120px rgba(255,0,0,.25);
-animation:open 2s ease;
+input:focus {
+    border-color: #ff3333;
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.2);
 }
 
-@keyframes open{
-from{opacity:0;transform:scale(.9);filter:blur(10px)}
-to{opacity:1;transform:scale(1);filter:blur(0)}
+button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #bd0812 0%, #e50914 100%);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.3);
 }
 
-.title{
-font-family:'Cinzel';
-font-size:3rem;
-text-align:center;
-color:#ff3b3b;
-margin-bottom:25px;
-text-shadow:0 0 30px rgba(255,0,0,.4);
+button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.5);
+}
+
+/* MAIN CONTENT */
+#main {
+    display: none;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 80px 20px;
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+
+.letter {
+    max-width: 750px;
+    margin: auto;
+    padding: 60px 40px;
+    border-radius: 35px;
+    background: rgba(10, 1, 1, 0.8);
+    border: 1px solid rgba(255, 51, 51, 0.12);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 30px 100px rgba(0,0,0,0.8), 0 0 100px rgba(255, 0, 0, 0.15);
+    text-align: center;
+}
+
+.title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ff3b3b;
+    margin-bottom: 40px;
+    text-shadow: 0 0 35px rgba(255, 59, 59, 0.5);
 }
 
 /* GALLERY */
-.gallery{
-display:flex;
-gap:12px;
-justify-content:center;
-flex-wrap:wrap;
-margin-bottom:30px;
+.gallery {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
 }
 
-.gallery img{
-width:180px;
-height:220px;
-object-fit:cover;
-border-radius:18px;
-border:1px solid rgba(255,255,255,.15);
-box-shadow:0 0 40px rgba(255,0,0,.3);
-transition:.4s;
+.gallery img {
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-.gallery img:hover{
-transform:scale(1.08);
-filter:brightness(1.2);
+.gallery img:hover {
+    transform: translateY(-10px) scale(1.05) rotate(1deg);
+    border-color: rgba(255, 59, 59, 0.5);
+    box-shadow: 0 20px 5px rgba(255, 0, 0, 0.15);
 }
 
-/* TEXT */
-.text{
-font-size:1.2rem;
-line-height:2.7;
-text-shadow:0 0 10px rgba(255,0,0,.2);
+/* TEXT WITH TYPING EFFECT */
+.text {
+    font-size: 1.35rem;
+    line-height: 2.5;
+    color: #f0f0f0;
+    margin: 30px 0;
+    font-weight: 300;
+    min-height: 200px;
 }
 
-/* MUSIC */
-.music{
-margin-top:40px;
-text-align:center;
+/* MUSIC PLAYER */
+.music {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
 }
 
-iframe{
-width:100%;
-max-width:600px;
-height:166px;
-border-radius:16px;
-box-shadow:0 0 40px rgba(255,0,0,.25);
-border:none;
+iframe {
+    width: 100%;
+    max-width: 500px;
+    height: 120px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.05);
 }
 
-/* BLOOD */
-.blood{
-position:fixed;
-top:-20px;
-width:2px;
-height:120px;
-background:linear-gradient(to bottom,#ff0000,transparent);
-animation:fall linear infinite;
-opacity:.35;
+/* PARTICLES EFFECT */
+.particle {
+    position: fixed;
+    background: radial-gradient(circle, #ff1a1a 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: -1;
+    animation: floatUp linear infinite;
 }
 
-@keyframes fall{
-to{transform:translateY(120vh)}
+@keyframes floatUp {
+    0% { transform: translateY(105vh) translateX(0) scale(0); opacity: 0; }
+    50% { opacity: 0.6; }
+    100% { transform: translateY(-10vh) translateX(50px) scale(1); opacity: 0; }
 }
 </style>
 </head>
@@ -195,69 +243,124 @@ to{transform:translateY(120vh)}
 <div class="bg"></div>
 <div class="fog"></div>
 
-<!-- LOGIN -->
-<div class="login" id="login">
-<h1>Niyayesh 🥹🫂💕</h1>
-<p>Only love knows the password</p>
-
-<input id="pass" type="password" placeholder="type password...">
-<button onclick="enter()">Enter</button>
+<div id="netflix-intro">
+    <div class="netflix-text">N</div>
 </div>
 
-<!-- MAIN -->
+<div class="login-container" id="login">
+    <h1>Niyayesh 🥹🫂💕</h1>
+    <p>Only love knows the password</p>
+    <input id="pass" type="password" placeholder="رمز ورود را وارد کن...">
+    <button onclick="enter()">ورود به قلب من</button>
+</div>
+
 <div id="main">
-<div class="letter">
+    <div class="letter">
+        <div class="title">For Niyayesh 🥹🫂💕</div>
 
-<div class="title">For Niyayesh 🥹🫂💕</div>
+        <div class="gallery">
+            <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="Memory 1">
+            <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2">
+        </div>
 
-<div class="gallery">
-<img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png">
-<img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png">
-</div>
+        <div class="text" id="typed-text"></div>
 
-<div class="text">
-نیایش…<br><br>
-
-تو فقط عشق من نیستی.<br>
-تو دلیل نفس کشیدن منی.<br><br>
-
-اگر دنیا هزار بار دیگر ساخته شود…<br>
-باز هم تو را انتخاب می‌کنم.<br><br>
-
-تو خانه‌ی منی… همیشه.
-</div>
-
-<div class="music">
-<iframe 
-src="https://www.youtube.com/embed/GCdwKhTtNNw?autoplay=1&mute=1"
-allow="autoplay">
-</iframe>
-</div>
-
-</div>
+        <div class="music" id="music-container"></div>
+    </div>
 </div>
 
 <script>
+// متن عاشقانه برای افکت تایپ شدن
+const loveLetter = `نیایش…\n\nتو فقط عشق من نیستی.\nتو دلیل نفس کشیدن منی.\n\nاگر دنیا هزار بار دیگر ساخته شود…\nباز هم تو را انتخاب می‌کنم.\n\nتو خانه‌ی منی… همیشه. ❤️`;
+
 function enter(){
-let p=document.getElementById("pass").value;
+    let p = document.getElementById("pass").value;
 
-if(p==="mobinloveniyayesh"){
+    if(p === "mobinloveniyayesh"){
+        // مخفی کردن باکس لاگین
+        document.getElementById("login").style.display = "none";
+        
+        // فعال کردن افکت صوتی تپش قلب/سینمایی (با استفاده از Audio API مرورگر بدون نیاز به فایل خارجی)
+        playCinematicSound();
 
-document.getElementById("login").style.display="none";
-document.getElementById("main").style.display="block";
+        // نشان دادن اینتروی نتفلیکسی
+        const intro = document.getElementById("netflix-intro");
+        intro.style.display = "flex";
 
-/* blood */
-for(let i=0;i<50;i++){
-let b=document.createElement("div");
-b.className="blood";
-b.style.left=Math.random()*100+"vw";
-b.style.animationDuration=(2+Math.random()*4)+"s";
-document.body.appendChild(b);
+        // بعد از اتمام انیمیشن نتفلیکس (3.5 ثانیه)
+        setTimeout(() => {
+            intro.style.fadeOut = "all 0.5s";
+            intro.style.display = "none";
+            
+            // نمایش صفحه اصلی با افکت نرم
+            const mainContent = document.getElementById("main");
+            mainContent.style.display = "block";
+            setTimeout(() => { mainContent.style.opacity = "1"; }, 50);
+            
+            // شروع افکت ذرات معلق سرخ
+            createParticles();
+            
+            // شروع تایپ شدن متن عاشقانه
+            typeWriter(loveLetter, 0, "typed-text");
+            
+            // لود کردن موزیک یوتیوب همراه با صدا (چون کاربر کلیک کرده، مرورگر اجازه پخش صدا می‌دهد)
+            document.getElementById("music-container").innerHTML = `
+                <iframe src="https://www.youtube.com/embed/GCdwKhTtNNw?autoplay=1" allow="autoplay; encrypted-media"></iframe>
+            `;
+            
+        }, 3400);
+
+    } else {
+        alert("رمز اشتباه است... دوباره تلاش کن عشق من");
+    }
 }
 
-}else{
-alert("Wrong password...");
+// تابع افکت تایپ شدن متن
+function typeWriter(text, i, elementId) {
+    if (i < text.length) {
+        let char = text.charAt(i);
+        if(char === "\n") {
+            document.getElementById(elementId).innerHTML += "<br>";
+        } else {
+            document.getElementById(elementId).innerHTML += char;
+        }
+        setTimeout(() => { typeWriter(text, i + 1, elementId); }, 75);
+    }
 }
+
+// تابع تولید ذرات جادویی سرخ رنگ متحرک در پس‌زمینه
+function createParticles() {
+    for(let i = 0; i < 40; i++) {
+        let p = document.createElement("div");
+        p.className = "particle";
+        let size = Math.random() * 6 + 2;
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = (Math.random() * 6 + 4) + "s";
+        p.style.animationDelay = Math.random() * 5 + "s";
+        document.body.appendChild(p);
+    }
+}
+
+// تولید یک صدای سینمایی ساب‌بیس الکترونیکی فرکانس پایین (بدون نیاز به فایل صوتی خارجی) برای افکت ورود
+function playCinematicSound() {
+    try {
+        let context = new (window.AudioContext || window.webkitAudioContext)();
+        let osc = context.createOscillator();
+        let gain = context.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(60, context.currentTime); 
+        osc.frequency.exponentialRampToValueAtTime(20, context.currentTime + 2.5);
+        gain.gain.setValueAtTime(0.4, context.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, context.currentTime + 2.5);
+        osc.connect(gain);
+        gain.connect(context.destination);
+        osc.start();
+        osc.stop(context.currentTime + 2.5);
+    } catch(e) {
+        console.log("Audio couldn't play automatically");
+    }
 }
 </script>
 
