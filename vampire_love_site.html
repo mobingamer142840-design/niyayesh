@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobin & Niyayesh</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Vazirmatn:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Vazirmatn',sans-serif;
+background:#050505;
+overflow:hidden;
+color:white;
+height:100vh;
+}
+
+video.bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:.18;
+z-index:-2;
+}
+
+.overlay{
+position:fixed;
+inset:0;
+background:radial-gradient(circle at center,#1a0000 0%,#000 70%);
+z-index:-1;
+}
+
+.login{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:340px;
+padding:35px;
+border:1px solid rgba(255,255,255,.15);
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(10px);
+border-radius:24px;
+text-align:center;
+box-shadow:0 0 40px rgba(255,0,0,.15);
+animation:fadeIn 2s ease;
+}
+
+.login h1{
+font-family:'Cinzel',serif;
+font-size:2.6rem;
+color:#b30000;
+margin-bottom:10px;
+}
+
+.login p{
+opacity:.75;
+margin-bottom:25px;
+}
+
+input{
+width:100%;
+padding:14px;
+border:none;
+outline:none;
+background:#120707;
+color:white;
+border-radius:14px;
+margin-bottom:18px;
+font-size:1rem;
+border:1px solid rgba(255,255,255,.1);
+}
+
+button{
+width:100%;
+padding:14px;
+border:none;
+border-radius:14px;
+background:#7a0000;
+color:white;
+font-size:1rem;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#b30000;
+transform:scale(1.03);
+}
+
+#main{
+display:none;
+overflow-y:auto;
+height:100vh;
+padding:60px 20px;
+}
+
+.letter{
+max-width:900px;
+margin:auto;
+background:rgba(10,0,0,.72);
+padding:50px;
+border-radius:30px;
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(12px);
+box-shadow:0 0 50px rgba(255,0,0,.18);
+position:relative;
+animation:bloodOpen 2s ease;
+}
+
+@keyframes bloodOpen{
+0%{
+opacity:0;
+transform:scale(.9);
+filter:blur(10px);
+}
+100%{
+opacity:1;
+transform:scale(1);
+filter:blur(0);
+}
+}
+
+.letter::before{
+content:"";
+position:absolute;
+inset:0;
+background:url('https://images.unsplash.com/photo-1518562180175-34a163b1a9a6?q=80&w=1200&auto=format&fit=crop');
+opacity:.05;
+border-radius:30px;
+}
+
+.title{
+font-family:'Cinzel',serif;
+font-size:3rem;
+color:#b30000;
+margin-bottom:35px;
+text-align:center;
+}
+
+.text{
+font-size:1.15rem;
+line-height:2.4;
+position:relative;
+z-index:2;
+}
+
+.quote{
+margin-top:40px;
+font-size:1.5rem;
+color:#ff5c5c;
+text-align:center;
+font-family:'Cinzel',serif;
+}
+
+.sign{
+margin-top:50px;
+text-align:left;
+font-size:1.2rem;
+color:#d8b0b0;
+}
+
+.music{
+margin-top:40px;
+text-align:center;
+}
+
+iframe{
+border-radius:20px;
+width:100%;
+max-width:600px;
+height:152px;
+border:none;
+}
+
+.blood{
+position:fixed;
+top:-20px;
+width:3px;
+height:120px;
+background:linear-gradient(to bottom,#ff0000,transparent);
+animation:drop linear infinite;
+opacity:.3;
+}
+
+@keyframes drop{
+from{transform:translateY(-120px);}
+to{transform:translateY(120vh);}
+}
+
+@keyframes fadeIn{
+from{opacity:0;transform:translate(-50%,-45%);}
+to{opacity:1;transform:translate(-50%,-50%);}
+}
+
+.footer{
+margin-top:50px;
+text-align:center;
+opacity:.5;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="login" id="loginBox">
+<h1>Niyayesh</h1>
+<p>Only love knows the password.</p>
+
+<input type="password" id="password" placeholder="Enter the secret password...">
+
+<button onclick="checkPassword()">Enter</button>
+</div>
+
+<div id="main">
+<div class="letter">
+
+<div class="title">For Niyayesh 🖤</div>
+
+<div class="text">
+نیایش عزیزِ من،
+<br><br>
+
+در دنیایی پر از آشوب، تو آرامش منی.
+در دنیایی پر از تاریکی، تو نور منی.
+تو فقط بخشی از زندگی من نیستی،
+تو دلیل واقعی بودن زندگی منی.
+
+<br><br>
+
+تو باعث شدی عشق واقعی را بفهمم…
+باعث شدی حتی سخت‌ترین شب‌ها هم قابل تحمل شوند.
+وقتی به تو فکر می‌کنم،
+دنیا برای چند لحظه قشنگ‌تر می‌شود.
+
+<br><br>
+
+اگر قرار باشد هزار بار دیگر زندگی کنم،
+باز هم قلبم تو را انتخاب می‌کند.
+همیشه.
+در هر دنیا.
+در هر زندگی.
+
+<br><br>
+
+ممنونم که خانه‌ی من شدی.
+جای امنم.
+و همیشگیِ من.
+
+<br><br>
+
+مهم نیست دنیا چقدر تغییر کند،
+قلب من همیشه برای تو خواهد تپید.
+
+<div class="quote">
+“Forever. Always. You and Me.”
+</div>
+
+<div class="sign">
+— From Mobin
+</div>
+
+<div class="music">
+<iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+</div>
+
+<div class="footer">
+Made with love by Mobin
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+function checkPassword(){
+const pass = document.getElementById("password").value;
+
+if(pass === "niyayesh14284@"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("main").style.display="block";
+
+for(let i=0;i<35;i++){
+let blood=document.createElement("div");
+blood.classList.add("blood");
+blood.style.left=Math.random()*100+"vw";
+blood.style.animationDuration=(Math.random()*3+3)+"s";
+document.body.appendChild(blood);
+}
+}else{
+alert("Wrong password...");
+}
+}
+</script>
+
+</body>
+</html>
