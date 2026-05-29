@@ -6,7 +6,7 @@
 <title>Mobin & Niyayesh</title>
 
 <!-- لود فونت‌های بسیار زیبا -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -229,13 +229,13 @@ button:hover {
     filter: brightness(1.1);
 }
 
-/* 6. TYPING TEXT */
+/* 6. TYPING TEXT (UPDATED: SMALLER & BOLD) */
 .text {
-    font-size: 1.5rem;
-    line-height: 2.8;
+    font-size: 1.25rem; /* یکم کوچیک‌تر شد */
+    font-weight: 700;   /* کاملاً بولد و جذاب شد */
+    line-height: 2.7;
     color: #f8f8f8;
     margin: 40px 0;
-    font-weight: 300;
     min-height: 350px;
     text-align: right;
     text-shadow: 0 2px 15px rgba(0,0,0,0.9);
@@ -343,7 +343,6 @@ iframe {
 </div>
 
 <script>
-// متن بسیار احساسی و زیبای تو
 const loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
 
 function enter(){
@@ -351,8 +350,6 @@ function enter(){
 
     if(p === "mobinloveniyayesh"){
         document.getElementById("login").style.display = "none";
-        
-        // پخش صدای جادویی و عاشقانه جدید
         playRomanticSound();
 
         const intro = document.getElementById("netflix-intro");
@@ -368,17 +365,15 @@ function enter(){
             
             createMagicParticles();
             
-            // شروع تایپ متن به محض ورود
             typeWriter(loveLetter, 0, "typed-text");
             
-        }, 4000); // زمان رو کمی بیشتر کردم تا صدای جادویی کامل شنیده بشه
+        }, 4000);
 
     } else {
         alert("رمز اشتباه است... دوباره تلاش کن عشق من");
     }
 }
 
-// تابع افکت تایپ احساسی
 function typeWriter(text, i, elementId) {
     if (i < text.length) {
         let char = text.charAt(i);
@@ -391,14 +386,12 @@ function typeWriter(text, i, elementId) {
         let speed = char === "." || char === "،" || char === "…" ? 450 : 65;
         setTimeout(() => { typeWriter(text, i + 1, elementId); }, speed);
     } else {
-        // نمایش اسپاتیفای بعد از اتمام متن
         setTimeout(() => {
             document.getElementById("music-container").classList.add("show");
         }, 800);
     }
 }
 
-// تولید هاله‌های نورانی معلق (خیلی رویایی‌تر از قبل)
 function createMagicParticles() {
     const colors = ['rgba(255, 77, 109, 0.6)', 'rgba(255, 26, 64, 0.4)', 'rgba(255, 179, 193, 0.5)'];
     for(let i = 0; i < 40; i++) {
@@ -416,35 +409,28 @@ function createMagicParticles() {
     }
 }
 
-// تولید صدای عاشقانه، گرم و جادویی (جایگزین صدای بم نتفلیکس)
 function playRomanticSound() {
     try {
         let ctx = new (window.AudioContext || window.webkitAudioContext)();
         let t = ctx.currentTime;
         
-        // تابعی برای ساخت آکورد نرم
         function playTone(freq, type, startTime, duration, vol) {
             let osc = ctx.createOscillator();
             let gain = ctx.createGain();
             osc.type = type;
             osc.frequency.value = freq;
-            
             gain.gain.setValueAtTime(0, startTime);
             gain.gain.linearRampToValueAtTime(vol, startTime + 0.5);
             gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
-            
             osc.connect(gain);
             gain.connect(ctx.destination);
             osc.start(startTime);
             osc.stop(startTime + duration);
         }
 
-        // یک آکورد گرم و ملایم (مثل صدای چنگ یا زنگوله نرم)
-        playTone(261.63, 'sine', t, 3.5, 0.4); // نُت دو
-        playTone(329.63, 'sine', t, 3.5, 0.4); // نُت می
-        playTone(392.00, 'sine', t, 3.5, 0.4); // نُت سل
-        
-        // یه صدای درخشان کوچیک با کمی تاخیر
+        playTone(261.63, 'sine', t, 3.5, 0.4); 
+        playTone(329.63, 'sine', t, 3.5, 0.4); 
+        playTone(392.00, 'sine', t, 3.5, 0.4); 
         playTone(523.25, 'triangle', t + 0.4, 4, 0.15); 
         playTone(659.25, 'triangle', t + 0.6, 4, 0.1); 
 
