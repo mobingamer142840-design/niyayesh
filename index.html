@@ -11,34 +11,49 @@
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
-font-family:'Vazirmatn',sans-serif;
+font-family:'Vazirmatn';
 background:#000;
-height:100vh;
 overflow:hidden;
 color:white;
+height:100vh;
 }
 
 /* 🌑 cinematic background */
 .bg{
 position:fixed;
 inset:0;
-background:radial-gradient(circle at center,#3a0000 0%,#000 70%);
-z-index:-2;
+background:radial-gradient(circle at center,#3b0000 0%,#000 70%);
+z-index:-3;
 }
 
-/* 🩸 floating fog */
+/* 🌫 fog */
 .fog{
 position:fixed;
 inset:0;
 background:url('https://i.imgur.com/3ZQ3ZQZ.png');
-opacity:.05;
-animation:moveFog 20s linear infinite;
-z-index:-1;
+opacity:.04;
+animation:move 25s linear infinite;
+z-index:-2;
 }
 
-@keyframes moveFog{
-0%{transform:translateX(0)}
-100%{transform:translateX(-200px)}
+@keyframes move{
+from{transform:translateX(0)}
+to{transform:translateX(-300px)}
+}
+
+/* 🩸 blood particles */
+.blood{
+position:fixed;
+top:-20px;
+width:2px;
+height:120px;
+background:linear-gradient(to bottom,#ff0000,transparent);
+opacity:.35;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{transform:translateY(120vh)}
 }
 
 /* 🔐 login */
@@ -54,24 +69,23 @@ border:1px solid rgba(255,255,255,.1);
 border-radius:24px;
 backdrop-filter:blur(12px);
 text-align:center;
-box-shadow:0 0 60px rgba(255,0,0,.2);
-animation:fadeIn 2s ease;
+box-shadow:0 0 80px rgba(255,0,0,.25);
 }
 
 .login h1{
 font-family:'Cinzel';
-color:#b30000;
+color:#ff2b2b;
 margin-bottom:10px;
 }
 
 input{
 width:100%;
 padding:14px;
+margin:15px 0;
 border:none;
 border-radius:12px;
 background:#120707;
 color:white;
-margin:15px 0;
 outline:none;
 }
 
@@ -87,7 +101,7 @@ transition:.3s;
 }
 
 button:hover{
-background:#b30000;
+background:#ff0000;
 transform:scale(1.03);
 }
 
@@ -99,6 +113,7 @@ overflow-y:auto;
 padding:60px 20px;
 }
 
+/* letter */
 .letter{
 max-width:900px;
 margin:auto;
@@ -107,26 +122,25 @@ border-radius:30px;
 background:rgba(10,0,0,.75);
 border:1px solid rgba(255,255,255,.08);
 backdrop-filter:blur(14px);
-box-shadow:0 0 80px rgba(255,0,0,.25);
+box-shadow:0 0 100px rgba(255,0,0,.25);
 animation:open 2s ease;
-position:relative;
 }
 
 @keyframes open{
-0%{opacity:0;transform:scale(.9);filter:blur(10px)}
-100%{opacity:1;transform:scale(1);filter:blur(0)}
+from{opacity:0;transform:scale(.9);filter:blur(10px)}
+to{opacity:1;transform:scale(1);filter:blur(0)}
 }
 
 .title{
 font-family:'Cinzel';
 font-size:3rem;
 text-align:center;
-color:#ff2b2b;
-text-shadow:0 0 25px rgba(255,0,0,.4);
-margin-bottom:20px;
+color:#ff3b3b;
+text-shadow:0 0 30px rgba(255,0,0,.4);
+margin-bottom:25px;
 }
 
-/* 🖤 gallery */
+/* gallery */
 .gallery{
 display:flex;
 gap:12px;
@@ -139,73 +153,63 @@ margin-bottom:30px;
 width:180px;
 height:220px;
 object-fit:cover;
-border-radius:16px;
+border-radius:18px;
 border:1px solid rgba(255,255,255,.15);
-box-shadow:0 0 25px rgba(255,0,0,.25);
+box-shadow:0 0 40px rgba(255,0,0,.3);
 transition:.4s;
-filter:brightness(.9) contrast(1.1);
 }
 
 .gallery img:hover{
 transform:scale(1.08) rotate(-1deg);
-filter:brightness(1.2) contrast(1.3);
-box-shadow:0 0 50px rgba(255,0,0,.5);
+filter:brightness(1.2);
 }
 
-/* ✍️ text */
+/* text typing */
 .text{
-font-size:1.15rem;
-line-height:2.6;
+font-size:1.2rem;
+line-height:2.7;
 text-shadow:0 0 10px rgba(255,0,0,.2);
+white-space:pre-line;
+min-height:200px;
 }
 
+/* quote */
 .quote{
 margin-top:40px;
 text-align:center;
-font-size:1.6rem;
+font-size:1.7rem;
 color:#ff6b6b;
 font-family:'Cinzel';
 }
 
-.sign{
-margin-top:40px;
-text-align:left;
-opacity:.8;
-}
-
-/* 🎵 music */
-.music{
-margin-top:40px;
+/* heart */
+.heart{
 text-align:center;
+font-size:2rem;
+animation:beat 1.2s infinite;
+margin-top:20px;
 }
 
-iframe{
-border-radius:16px;
-width:100%;
-max-width:600px;
-height:166px;
-box-shadow:0 0 40px rgba(255,0,0,.25);
+@keyframes beat{
+0%{transform:scale(1)}
+50%{transform:scale(1.3)}
+100%{transform:scale(1)}
 }
 
-/* 🩸 blood rain */
-.blood{
-position:fixed;
-top:-20px;
-width:2px;
-height:120px;
-background:linear-gradient(to bottom,#ff0000,transparent);
-animation:drop linear infinite;
-opacity:.4;
+/* final dedication */
+.end{
+margin-top:50px;
+text-align:center;
+line-height:2;
+opacity:.9;
 }
 
-@keyframes drop{
-to{transform:translateY(120vh)}
+.end h2{
+font-family:'Cinzel';
+color:#ff2b2b;
+margin-bottom:15px;
 }
 
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
-}
 </style>
 </head>
 
@@ -215,74 +219,80 @@ to{opacity:1}
 <div class="fog"></div>
 
 <!-- LOGIN -->
-<div class="login" id="loginBox">
+<div class="login" id="login">
 <h1>Niyayesh 🥹🫂💕</h1>
-<p>Only love knows the password</p>
+<p>Only love knows the password...</p>
 
-<input type="password" id="password" placeholder="Enter password...">
-<button onclick="enter()">Enter</button>
+<input type="password" id="pass">
+<button onclick="start()">Enter</button>
 </div>
 
 <!-- MAIN -->
 <div id="main">
+
 <div class="letter">
 
 <div class="title">For Niyayesh 🥹🫂💕</div>
 
-<!-- GALLERY -->
 <div class="gallery">
 <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png">
 <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png">
 </div>
 
-<div class="text">
-نیایش عزیزم…<br><br>
+<div class="text" id="type"></div>
 
-تو وارد زندگی من شدی مثل نوری در تاریکی مطلق.<br>
-نه فقط عشق… تو “پناه” منی.<br><br>
+<div class="quote">“Forever. Always. You and Me.”</div>
 
-اگر دنیا هزار بار دیگر ساخته شود…<br>
-باز هم قلب من تو را انتخاب می‌کند.<br><br>
+<div class="heart">🖤</div>
 
-تو آرامشی هستی که هیچ جنگی در دنیا نمی‌تواند از من بگیرد.<br>
-تو خانه‌ی منی…
-</div>
-
-<div class="quote">
-“Forever. Always. You and Me.”
-</div>
-
-<div class="sign">
-— Mobin
-</div>
-
-<!-- MUSIC -->
-<div class="music">
-<iframe 
-src="https://www.youtube.com/embed/GCdwKhTtNNw"
-allowfullscreen>
-</iframe>
+<div class="end">
+<h2>Dedicated to my love, Niyayesh</h2>
+<p>
+تقدیم به عشقم نیایش از طرف مبین<br><br>
+Dedicated to my love, Niyayesh, from Mobin
+</p>
 </div>
 
 </div>
 </div>
 
 <script>
-function enter(){
-let p=document.getElementById("password").value;
-
+function start(){
+let p=document.getElementById("pass").value;
 if(p==="niyayesh14284@"){
-document.getElementById("loginBox").style.display="none";
+document.getElementById("login").style.display="none";
 document.getElementById("main").style.display="block";
 
-/* blood rain */
-for(let i=0;i<45;i++){
+/* blood */
+for(let i=0;i<50;i++){
 let b=document.createElement("div");
-b.classList.add("blood");
+b.className="blood";
 b.style.left=Math.random()*100+"vw";
-b.style.animationDuration=(Math.random()*3+3)+"s";
+b.style.animationDuration=(2+Math.random()*4)+"s";
 document.body.appendChild(b);
 }
+
+/* typing effect */
+let text = `نیایش...
+تو برای من فقط عشق نیستی.
+
+تو آرامشی هستی که در تاریک‌ترین شب‌ها هم روشنم می‌کند.
+
+اگر هزار دنیا وجود داشته باشد،
+باز هم در همه آن‌ها تو را انتخاب می‌کنم.
+
+تو خانه‌ی منی...
+نفس منی...
+و دلیل ادامه دادن منی.`;
+
+let i=0;
+function type(){
+document.getElementById("type").innerHTML += text[i];
+i++;
+if(i<text.length) setTimeout(type,35);
+}
+type();
+
 }else{
 alert("Wrong password...");
 }
