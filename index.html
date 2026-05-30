@@ -90,6 +90,8 @@ body {
     background-size: 300% 300%;
     animation: glowBorder 6s ease infinite;
     box-shadow: 0 50px 110px rgba(0, 0, 0, 0.95);
+    width: 90%;
+    max-width: 386px;
 }
 
 @keyframes glowBorder {
@@ -99,7 +101,7 @@ body {
 }
 
 .login-container {
-    width: 380px;
+    width: 100%;
     padding: 50px 35px;
     background: rgba(5, 0, 2, 0.88);
     border-radius: 39px;
@@ -187,15 +189,15 @@ input:focus {
     box-shadow: 0 15px 35px rgba(255, 26, 64, 0.45);
 }
 
-/* FLOATING NAV DOCK (INITIALLY COMPLETELY INVISIBLE) */
+/* FLOATING NAV DOCK - RESPONSIVE & SCROLLABLE ON MOBILE */
 .navbar {
     position: fixed;
     top: -100px; 
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(15, 0, 2, 0.55);
+    background: rgba(15, 0, 2, 0.65);
     border: 1px solid rgba(255, 26, 64, 0.18);
-    padding: 6px 14px;
+    padding: 6px 10px;
     border-radius: 24px;
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
@@ -205,7 +207,16 @@ input:focus {
     opacity: 0;
     box-shadow: 0 30px 60px rgba(0,0,0,0.8);
     transition: top 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 1.5s cubic-bezier(0.15, 0.85, 0.35, 1);
+    
+    /* آپدیت برای موبایل: جلوگیری از بیرون زدن و قابلیت اسکرول افقی */
+    max-width: 95vw;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
+
+/* مخفی کردن اسکرول‌بار نوار برای زیبایی */
+.navbar::-webkit-scrollbar { display: none; }
 
 .navbar.show-nav { 
     top: 20px; 
@@ -215,17 +226,18 @@ input:focus {
 .navbar a {
     color: rgba(255, 255, 255, 0.55);
     text-decoration: none;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
     font-weight: 700;
     transition: 0.3s;
     padding: 7px 14px;
     border-radius: 18px;
+    flex-shrink: 0; /* جلوگیری از فشرده شدن بیش از حد متن */
 }
 
 .navbar a:hover, .navbar a.active {
     color: #ffffff;
-    background: rgba(255, 26, 64, 0.25);
-    box-shadow: 0 4px 12px rgba(255, 26, 64, 0.15);
+    background: rgba(255, 26, 64, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 26, 64, 0.2);
 }
 
 /* THE SECRET VAULT SYSTEM OVERLAY */
@@ -245,8 +257,9 @@ input:focus {
 }
 
 .secret-box {
-    width: 440px;
-    padding: 50px 40px;
+    width: 90%;
+    max-width: 440px;
+    padding: 40px 30px;
     background: rgba(20, 1, 3, 0.85);
     border-radius: 38px;
     border: 1px solid rgba(255, 26, 64, 0.4);
@@ -256,7 +269,7 @@ input:focus {
 .secret-title {
     font-family: 'Cinzel', serif;
     color: #ff1a40;
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-bottom: 25px;
     font-weight: 900;
     text-shadow: 0 0 20px rgba(255, 26, 64, 0.6);
@@ -264,9 +277,9 @@ input:focus {
 
 #secret-content {
     display: none;
-    margin-top: 35px;
-    font-size: 1.25rem;
-    line-height: 2.8;
+    margin-top: 30px;
+    font-size: 1.15rem;
+    line-height: 2.6;
     font-weight: 700;
     color: #ffffff;
     text-align: right;
@@ -280,7 +293,7 @@ input:focus {
     display: none;
     height: 100vh;
     overflow-y: auto;
-    padding: 110px 20px 80px 20px;
+    padding: 110px 15px 80px 15px;
     opacity: 0;
     transition: opacity 2.5s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
@@ -294,57 +307,56 @@ input:focus {
     margin: auto;
     display: flex;
     flex-direction: column;
-    gap: 100px;
+    gap: 80px;
 }
 
 /* PREMIUM GOTHIC GLASS BLOCKS */
 .web-section {
     background: rgba(20, 0, 3, 0.45);
     border: 1px solid rgba(255, 26, 64, 0.08);
-    border-radius: 40px;
-    padding: 65px 55px;
+    border-radius: 35px;
+    padding: 45px 30px;
     backdrop-filter: blur(45px);
     -webkit-backdrop-filter: blur(45px);
     box-shadow: 0 45px 95px rgba(0,0,0,0.85);
     transition: transform 0.8s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
-.web-section:hover { transform: scale(1.005); }
 
 .section-title {
     font-family: 'Cinzel', serif;
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     font-weight: 900;
     background: linear-gradient(135deg, #ffffff 40%, #ff1a40 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 45px;
+    margin-bottom: 35px;
     text-align: center;
     text-shadow: 0 10px 35px rgba(255, 26, 64, 0.15);
 }
 
 .title-main {
     font-family: 'Cinzel', serif;
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     font-weight: 900;
     color: #ffffff;
-    margin-bottom: 45px;
+    margin-bottom: 35px;
     text-shadow: 0 0 45px rgba(255, 26, 64, 0.5);
     text-align: center;
 }
 
 /* POSTER STYLE GALLERY DECORATIONS */
-.gallery { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-bottom: 45px; }
+.gallery { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px; }
 .gallery img {
-    width: 240px; height: 310px; object-fit: cover; border-radius: 24px;
+    width: 100%; max-width: 280px; height: 350px; object-fit: cover; border-radius: 20px;
     border: 1px solid rgba(255, 26, 64, 0.25); box-shadow: 0 25px 50px rgba(0,0,0,0.85);
-    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); filter: brightness(0.8);
+    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); filter: brightness(0.85);
 }
-.gallery img:hover { transform: translateY(-8px) scale(1.02); filter: brightness(1.05); border-color: #ff1a40; box-shadow: 0 25px 50px rgba(255,26,64,0.15); }
+.gallery img:hover { transform: translateY(-5px); filter: brightness(1.05); border-color: #ff1a40; box-shadow: 0 25px 50px rgba(255,26,64,0.25); }
 
 /* TEXT WRITER INTERFACE */
 .text {
-    font-size: 1.25rem; font-weight: 700; line-height: 2.8; color: #f5f5f7;
-    text-align: right; text-shadow: 0 2px 15px rgba(0,0,0,0.9); min-height: 200px;
+    font-size: 1.15rem; font-weight: 700; line-height: 2.6; color: #f5f5f7;
+    text-align: right; text-shadow: 0 2px 15px rgba(0,0,0,0.9); min-height: 150px;
 }
 
 /* TIMELINE SYSTEM */
@@ -352,49 +364,45 @@ input:focus {
     position: relative; padding-right: 20px;
     border-right: 2px solid rgba(255, 26, 64, 0.2); text-align: right;
 }
-.timeline-item { position: relative; margin-bottom: 45px; }
+.timeline-item { position: relative; margin-bottom: 40px; }
 .timeline-item::after {
     content: ''; position: absolute; width: 10px; height: 10px;
-    background: #ff1a40; top: 10px; right: -26px; border-radius: 50%;
+    background: #ff1a40; top: 8px; right: -26px; border-radius: 50%;
     box-shadow: 0 0 15px #ff1a40;
 }
-.timeline-date { font-weight: 900; color: #ffffff; font-size: 1.3rem; margin-bottom: 8px; }
-.timeline-content { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.9; }
+.timeline-date { font-weight: 900; color: #ffffff; font-size: 1.2rem; margin-bottom: 8px; }
+.timeline-content { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.8; }
 
 /* BIRTHDAY MATRIX */
-.dates-grid { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
+.dates-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
 .date-card {
     background: rgba(10, 0, 2, 0.3); border: 1px solid rgba(255, 26, 64, 0.15);
-    padding: 40px 30px; border-radius: 26px; width: 290px; text-align: center;
-    transition: 0.4s;
+    padding: 30px 20px; border-radius: 20px; width: 100%; max-width: 290px; text-align: center;
 }
-.date-card:hover { transform: translateY(-6px); border-color: #ff1a40; background: rgba(255, 26, 64, 0.03); }
-.date-card h3 { font-family: 'Cinzel', serif; font-size: 1.7rem; color: #fff; margin-bottom: 12px; font-weight: 900; }
-.date-card .bday { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; color: #ff1a40; text-shadow: 0 0 15px rgba(255,26,64,0.3); }
-.date-card p { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.7; }
+.date-card h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #fff; margin-bottom: 10px; font-weight: 900; }
+.date-card .bday { font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; color: #ff1a40; text-shadow: 0 0 15px rgba(255,26,64,0.3); }
+.date-card p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.7; }
 
 /* USER HUB INTERESTS */
-.interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 25px; }
+.interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
 .premium-card {
     background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 28px; padding: 35px; text-align: right;
-    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
+    border-radius: 24px; padding: 25px; text-align: right;
 }
-.premium-card:hover { transform: translateY(-6px); border-color: rgba(255, 26, 64, 0.3); background: rgba(20, 0, 3, 0.2); }
-.premium-card h4 { font-size: 1.5rem; color: #fff; margin-bottom: 12px; font-weight: 900; }
-.premium-card p { color: rgba(255,255,255,0.65); line-height: 1.85; font-size: 1rem; }
+.premium-card h4 { font-size: 1.3rem; color: #fff; margin-bottom: 10px; font-weight: 900; }
+.premium-card p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 0.95rem; }
 .badge {
-    font-family: 'Cinzel', serif; display: inline-block; padding: 4px 12px;
-    background: #ff1a40; color: #fff; font-weight: 700; border-radius: 8px;
-    margin-bottom: 18px; font-size: 0.7rem; letter-spacing: 1px;
+    font-family: 'Cinzel', serif; display: inline-block; padding: 4px 10px;
+    background: #ff1a40; color: #fff; font-weight: 700; border-radius: 6px;
+    margin-bottom: 15px; font-size: 0.65rem; letter-spacing: 1px;
 }
 .color-preview { display: flex; gap: 8px; margin-top: 15px; }
-.color-circle { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); }
+.color-circle { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); }
 
 /* EXPERIMENTAL PHOTO ALBUM */
-.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; }
+.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
 .album-item {
-    position: relative; height: 230px; border-radius: 22px; overflow: hidden;
+    position: relative; height: 200px; border-radius: 18px; overflow: hidden;
     border: 1px solid rgba(255, 26, 64, 0.15); background: #000;
     display: flex; justify-content: center; align-items: center;
 }
@@ -406,19 +414,28 @@ input:focus {
     backdrop-filter: blur(4px);
 }
 .album-item:hover .album-overlay { opacity: 1; }
-.album-overlay span { font-weight: 700; font-size: 1rem; color: #fff; }
+.album-overlay span { font-weight: 700; font-size: 0.9rem; color: #fff; }
 
 /* EMBED SYSTEMS */
 .music { margin-top: 25px; display: flex; justify-content: center; opacity: 0; transform: translateY(20px); transition: all 2s cubic-bezier(0.15, 0.85, 0.35, 1); }
 .music.show { opacity: 1; transform: translateY(0); }
-iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-shadow: 0 25px 60px rgba(0,0,0,0.85); }
+iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-shadow: 0 25px 60px rgba(0,0,0,0.85); }
 
 .creator {
-    margin: 50px 0 10px 0; font-family: 'Cinzel', serif; font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.15); letter-spacing: 5px; text-transform: uppercase;
-    text-align: center; transition: 0.4s; font-weight: 700;
+    margin: 40px 0 10px 0; font-family: 'Cinzel', serif; font-size: 1rem;
+    color: rgba(255, 255, 255, 0.2); letter-spacing: 4px; text-transform: uppercase;
+    text-align: center; font-weight: 700;
 }
-.creator:hover { color: #ff1a40; text-shadow: 0 0 20px rgba(255, 26, 64, 0.6); }
+
+/* RESPONSIVE MEDIA QUERIES FOR MOBILE */
+@media (max-width: 600px) {
+    .navbar { padding: 5px 8px; border-radius: 20px; gap: 4px; }
+    .navbar a { font-size: 0.75rem; padding: 6px 12px; }
+    .web-section { padding: 35px 20px; }
+    .title-main { font-size: 2.2rem; }
+    .section-title { font-size: 1.8rem; }
+    .text { font-size: 1.05rem; }
+}
 
 /* DYNAMIC CRIMSON PARTICLES */
 .particle { position: fixed; border-radius: 50%; pointer-events: none; z-index: -1; animation: floatUp ease-in infinite; }
@@ -455,7 +472,7 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
 <div id="secret-modal">
     <div class="secret-box">
         <div class="secret-title">🔒 THE VAULT</div>
-        <input id="secret-pass" type="password" placeholder="رمز بخش رازها را وارد کن..." style="margin-bottom:25px;">
+        <input id="secret-pass" type="password" placeholder="رمز بخش رازها را وارد کن..." style="margin-bottom:20px;">
         <button class="login-btn" onclick="checkSecret()">رمزگشایی رازها</button>
         
         <div id="secret-content">
@@ -464,7 +481,7 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
             تو فرشته‌ منی منم فرشته‌ی تو :)
         </div>
         
-        <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:25px; cursor:pointer; font-weight:700; font-size:0.9rem;">بستن صندوقچه</button>
+        <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:20px; cursor:pointer; font-weight:700; font-size:0.9rem;">بستن صندوقچه</button>
     </div>
 </div>
 
@@ -625,7 +642,6 @@ function typeWriter(text, i, elementId) {
         let speed = char === "." || char === "،" || char === "…" ? 400 : 55;
         setTimeout(() => { typeWriter(text, i + 1, elementId); }, speed);
     } else {
-        // دقیقا پس از اتمام کامل متن نامه، منوی بالا به آرامی پدیدار خواهد شد
         setTimeout(() => {
             document.getElementById("music-container").classList.add("show");
             document.getElementById("navbar").classList.add("show-nav"); 
@@ -719,7 +735,7 @@ function playRomanticSound() {
         }
 
         playTone(261.63, 'sine', t, 3.2, 0.4); 
-        playTone(311.13, 'sine', t, 3.2, 0.4); // تم گوتیک مینور ملایم
+        playTone(311.13, 'sine', t, 3.2, 0.4); 
         playTone(392.00, 'sine', t, 3.2, 0.4); 
         playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); 
     } catch(e) {}
