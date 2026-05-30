@@ -66,6 +66,54 @@ body {
 }
 .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
 
+/* --- NEW: Oracle Styling --- */
+.oracle-container { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; padding: 20px; }
+.magic-orb {
+    width: 140px; height: 140px; border-radius: 50%; cursor: pointer;
+    background: radial-gradient(circle at 30% 30%, #ff8da1, #ff1a40, #4a0000);
+    box-shadow: 0 0 30px #ff1a40, inset 0 0 20px rgba(255,255,255,0.5);
+    animation: floatOrb 3s ease-in-out infinite; transition: all 0.3s;
+}
+.magic-orb:hover { filter: brightness(1.2); }
+#oracle-quote-box { min-height: 80px; width: 100%; max-width: 500px; }
+#oracle-quote {
+    color: #fff; font-size: 1.2rem; line-height: 1.8; text-align: center;
+    font-weight: bold; opacity: 0; transition: opacity 0.8s ease; text-shadow: 0 0 15px #ff1a40;
+}
+@keyframes floatOrb {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* --- NEW: Stars Canvas Styling --- */
+.stars-canvas-container {
+    width: 100%; height: 300px; border-radius: 25px; overflow: hidden;
+    border: 1px solid rgba(255,26,64,0.3); position: relative; background: #050002;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8) inset;
+}
+#starsCanvas { display: block; width: 100%; height: 100%; cursor: crosshair; }
+
+/* --- NEW: Global Click Hearts --- */
+.click-heart {
+    position: fixed; font-size: 1.6rem; color: #ff1a40; pointer-events: none;
+    animation: floatUpHeart 1.2s ease-out forwards; z-index: 999999;
+    text-shadow: 0 0 15px #ff1a40; transform: translate(-50%, -50%);
+}
+@keyframes floatUpHeart {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -150px) scale(1.5); opacity: 0; }
+}
+
+/* --- NEW: Voice Section --- */
+.voice-container { display: flex; flex-direction: column; align-items: center; gap: 25px; background: rgba(0,0,0,0.4); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); }
+.play-voice-btn { padding: 15px 35px; border-radius: 30px; border: 1px solid #ff1a40; background: rgba(255,26,64,0.1); color: #fff; font-weight: bold; font-size: 1.1rem; cursor: pointer; transition: 0.3s; box-shadow: 0 0 20px rgba(255,26,64,0.2); }
+.play-voice-btn:hover { background: #ff1a40; box-shadow: 0 0 30px rgba(255,26,64,0.6); }
+.soundwave { display: flex; align-items: center; gap: 6px; height: 50px; }
+.soundwave .bar { width: 6px; background: #ff1a40; border-radius: 5px; animation: bounceBar 1s infinite alternate; animation-play-state: paused; box-shadow: 0 0 10px #ff1a40; }
+.soundwave .bar:nth-child(odd) { animation-duration: 0.7s; }
+.soundwave .bar:nth-child(3n) { animation-duration: 1.2s; }
+@keyframes bounceBar { 0% { height: 5px; } 100% { height: 100%; } }
+
 /* --- Arcade Game UI --- */
 .game-arcade-cabinet {
     width: 100%; max-width: 850px; margin: 0 auto; background: rgba(8, 2, 3, 0.9);
@@ -88,7 +136,7 @@ body {
 }
 .arcade-screen-container {
     position: relative; width: 100%; height: 380px; background: #020001; overflow: hidden;
-    transition: transform 0.05s ease, filter 0.1s ease; /* برای افکت لرزش دوربین */
+    transition: transform 0.05s ease, filter 0.1s ease;
 }
 #tekkenCanvas { display: block; width: 100%; height: 100%; }
 .crt-scanlines {
