@@ -79,7 +79,7 @@ body {
     100% { transform: scale(6.5); filter: blur(40px); opacity: 0; }
 }
 
-/* PREMIUM GLOWING LOGIN (iOS 26 GLASSMOPHISM) */
+/* HIGH-END LUXURY LOGIN BOX WITH AURORA GLOW */
 .login-wrapper {
     position: absolute;
     top: 50%;
@@ -87,10 +87,10 @@ body {
     transform: translate(-50%, -50%);
     padding: 3px;
     border-radius: 42px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,77,109,0.2), rgba(2,17,36,0.3), rgba(255,255,255,0.05));
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,77,109,0.25), rgba(2,17,36,0.3), rgba(255,255,255,0.05));
     background-size: 300% 300%;
-    animation: glowBorder 8s ease infinite;
-    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.9);
+    animation: glowBorder 6s ease infinite;
+    box-shadow: 0 50px 110px rgba(0, 0, 0, 0.95);
 }
 
 @keyframes glowBorder {
@@ -101,31 +101,52 @@ body {
 
 .login-container {
     width: 380px;
-    padding: 55px 35px;
-    background: rgba(5, 5, 10, 0.75);
+    padding: 50px 35px;
+    background: rgba(4, 4, 8, 0.82);
     border-radius: 39px;
-    backdrop-filter: blur(50px);
-    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(55px);
+    -webkit-backdrop-filter: blur(55px);
     text-align: center;
+}
+
+/* ROMANTIC LIVING EMOJIS & SHINE TITLE */
+.login-emojis {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    display: inline-block;
+    animation: heartBeat 1.8s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
+    filter: drop-shadow(0 0 15px rgba(255, 77, 109, 0.6));
+}
+
+@keyframes heartBeat {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.12); }
+    60% { transform: scale(1); }
 }
 
 .login-container h1 {
     font-family: 'Cinzel', serif;
     color: #fff;
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 900;
-    margin-bottom: 12px;
-    background: linear-gradient(180deg, #ffffff, #ffccd5);
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #ffffff, #ffccd5, #ffffff);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: textShine 4s linear infinite;
+}
+
+@keyframes textShine {
+    to { background-position: 200% center; }
 }
 
 .login-container p {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.35);
     margin-bottom: 40px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
 }
 
 .input-group {
@@ -136,21 +157,21 @@ body {
 input {
     width: 100%;
     padding: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.02);
     color: white;
     outline: none;
     text-align: center;
     font-size: 1.05rem;
-    letter-spacing: 2px;
-    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
+    letter-spacing: 2.5px;
+    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
 input:focus {
-    border-color: rgba(255, 77, 109, 0.5);
-    background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 25px rgba(255, 77, 109, 0.15);
+    border-color: rgba(255, 77, 109, 0.6);
+    background: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 30px rgba(255, 77, 109, 0.2);
     transform: scale(1.01);
 }
 
@@ -159,29 +180,29 @@ input:focus {
     padding: 18px;
     border: none;
     border-radius: 20px;
-    background: linear-gradient(90deg, #ffffff, #f0f0f0);
+    background: linear-gradient(90deg, #ffffff, #f2f2f5);
     color: #000000;
     font-size: 1.1rem;
     font-weight: 900;
     cursor: pointer;
     transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
-    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.08);
 }
 
 .login-btn:hover {
     transform: translateY(-3px);
     background: #ffffff;
-    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.3);
+    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.35);
 }
 
-/* ULTRA-SLEEK MINI DOCK NAVBAR (iOS 26 COMPACT) */
+/* ULTRA-SLEEK COMPACT NAV DOCK (HIDDEN INITIAL STATE) */
 .navbar {
     position: fixed;
-    top: -80px;
+    top: -100px; /* شروع کاملاً از خارج صفحه برای محو بودن مطلق */
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(10, 10, 15, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(10, 10, 15, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 6px 12px;
     border-radius: 24px;
     backdrop-filter: blur(40px);
@@ -189,11 +210,16 @@ input:focus {
     display: flex;
     gap: 6px;
     z-index: 1000;
+    opacity: 0; /* کاملاً شفاف در شروع */
     box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 10px rgba(255,255,255,0.03);
-    transition: top 1.2s cubic-bezier(0.15, 0.85, 0.35, 1);
+    transition: top 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 1.5s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
-.navbar.show { top: 20px; }
+/* وقتی کلاس active-nav فعال بشه، خیلی نرم میاد روی صفحه */
+.navbar.show-nav { 
+    top: 20px; 
+    opacity: 1;
+}
 
 .navbar a {
     color: rgba(255, 255, 255, 0.55);
@@ -377,10 +403,11 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
     <div class="netflix-text">N</div>
 </div>
 
-<!-- LUXURY GLOWING LOGIN WRAPPER -->
+<!-- LUXURY LIVING LOGIN WRAPPER -->
 <div class="login-wrapper" id="login-zone">
     <div class="login-container">
-        <h1>Niyayesh 🥹</h1>
+        <div class="login-emojis">💕🫂</div>
+        <h1>Niyayesh</h1>
         <p>Only love knows the password</p>
         <div class="input-group">
             <input id="pass" type="password" placeholder="رمز ورود را وارد کن...">
@@ -389,7 +416,7 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
     </div>
 </div>
 
-<!-- SLIM FLOATING DOCK NAVBAR -->
+<!-- FLOATING DOCK NAVBAR (COMPACT & INITIALLY INVISIBLE) -->
 <div class="navbar" id="navbar">
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
     <a href="#story-sec">داستان عشق ما</a>
@@ -555,9 +582,10 @@ function typeWriter(text, i, elementId) {
         let speed = char === "." || char === "،" || char === "…" ? 400 : 55;
         setTimeout(() => { typeWriter(text, i + 1, elementId); }, speed);
     } else {
+        // دقیقاً پس از اتمام کامل متن نامه، منو ظاهر می‌شود!
         setTimeout(() => {
             document.getElementById("music-container").classList.add("show");
-            document.getElementById("navbar").classList.add("show");
+            document.getElementById("navbar").classList.add("show-nav"); // نوار بالا خیلی روون میاد داخل صفحه
             enableScrollSpy();
         }, 600);
     }
