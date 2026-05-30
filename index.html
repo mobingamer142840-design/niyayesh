@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mobin & Niyayesh | Eternal Gothic Universe</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Lalezar&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
@@ -17,22 +17,19 @@
 
 <div class="bg"></div>
 <div class="fog"></div>
-<div class="vintage-overlay"></div>
-<div class="vignette"></div>
-
-<div id="netflix-intro">
+<div id="particles-container"></div> <div id="netflix-intro">
     <div class="netflix-text">N</div>
 </div>
 
 <div class="login-wrapper" id="login-zone">
     <div class="login-container">
-        <div class="login-emojis">💕🫂</div>
+        <div class="login-emojis">🖤🦇🩸</div>
         <h1>Niyayesh</h1>
-        <p>A Vampire Diaries Universe</p>
+        <p>Welcome to Mystic Falls</p>
         <div class="input-group">
-            <input id="pass" type="password" placeholder="رمز ورود را وارد کن...">
+            <input id="pass" type="password" placeholder="رمز ورود به قلب تاریکی...">
         </div>
-        <button class="login-btn" onclick="enter()">ورود به دنیای ما</button>
+        <button class="login-btn" onclick="enter()">ورود به دنیای جاودانه ما</button>
     </div>
 </div>
 
@@ -41,50 +38,52 @@
     <div class="portal-dimension" id="portal-dim">
         <div class="portal-quote" id="pt-q">"He's her first love. I intend to be her last."</div>
         <div class="portal-subtext" id="pt-st">تو اتمسفر جاودانه‌ی ومپایر دایریز غرق شدیم... جایی که زمان می‌ایسته و فقط من و تو می‌مونیم. این دریچه‌ای به تمام رازها و احساسات بی‌پایان ماست نیایشم. 🩸🖤</div>
-        <button class="close-portal-btn" id="pt-btn" onclick="closePortal()">بازگشت به واقعیت</button>
+        <button class="close-portal-btn" id="pt-btn" onclick="closePortal()">بازگشت به دنیای فانی</button>
     </div>
 </div>
 
 <div id="admin-save-bar">
-    <span>✍️ حالت ادیتور فعال است. تغییرات متون را اعمال کنید.</span>
-    <button class="save-btn" onclick="saveWebsiteTexts()">ذخیره کل تغییرات</button>
+    <span>✍️ ادیتور خونین فعال است.</span>
+    <button class="save-btn" onclick="saveWebsiteTexts()">ثبت تغییرات در ابدیت</button>
 </div>
 
 <div id="secret-modal">
     <div class="secret-box">
-        <div class="secret-title">🔒 THE VAULT</div>
-        <input id="secret-pass" type="password" placeholder="رمز بخش رازها را وارد کن..." style="margin-bottom:20px;">
-        <button class="login-btn" onclick="checkSecret()">رمزگشایی رازها</button>
+        <div class="secret-title">🔒 THE VAULT OF SECRETS</div>
+        <input id="secret-pass" type="password" placeholder="رمز صندوقچه طلسم‌شده..." style="margin-bottom:20px;">
+        <button class="login-btn" onclick="checkSecret()">باطل کردن طلسم</button>
         <div id="secret-content">
             تنها راز من تویی نیایشم تو بودی که تو سختی ها کنارم بودی 💕🫂<br>
             عاشقتم دخترم و همیشه کنارتم 🫠🫂💕<br>
             تو فرشته‌ منی منم فرشته‌ی تو :)
         </div>
-        <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:20px; cursor:pointer; font-weight:700; font-size:0.9rem;">بستن صندوقچه</button>
+        <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:20px; cursor:pointer; font-weight:700; font-size:1rem; font-family:'Lalezar';">مهر و موم مجدد</button>
     </div>
 </div>
 
 <div class="navbar" id="navbar">
-    <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
-    <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
-    <a href="#tarot-sec">🃏 کارت‌های سرنوشت</a>
-    <a href="#countdown-sec">⏳ ماه خونین</a>
-    <a href="#story-sec">داستان عشق ما</a>
-    <a href="#dates-sec">تاریخ‌ها</a>
-    <a href="#mobin-sec">دنیای Mobin</a>
-    <a href="#niyayesh-sec">دنیای Niyayesh</a>
-    <a href="#gallery-sec">آلبوم عکسامون</a>
-    <a href="#feed-sec">فید خاطرات</a>
-    <a href="#tvd-sec">سینما</a>
-    <a href="javascript:void(0)" onclick="openPortal()" style="color:#ff1a40; font-weight:900; animation: heartBeat 2s infinite;">🌀 پورتال ومپایر</a>
-    <a href="javascript:void(0)" onclick="openSecret()">🔒 رازها</a>
+    <a href="#letter-sec" id="nav-letter" class="active">نامه خونین</a>
+    <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات فرشته</a>
+    <a href="#vow-sec">🩸 پیمان ابدی</a>
+    <a href="#tarot-sec">🃏 سرنوشت</a>
+    <a href="#pulse-sec">🫀 تپش مشترک</a>
+    <a href="#countdown-sec">⏳ ماه کامل</a>
+    <a href="#story-sec">افسانه ما</a>
+    <a href="#dates-sec">تولد عشق</a>
+    <a href="#mobin-sec">قلمرو Mobin</a>
+    <a href="#niyayesh-sec">قلمرو Niyayesh</a>
+    <a href="#gallery-sec">قاب خاطرات</a>
+    <a href="#feed-sec">خاطرات روزانه</a>
+    <a href="#tvd-sec">سینمای تاریک</a>
+    <a href="javascript:void(0)" onclick="openPortal()" style="color:#ff1a40; font-weight:900; animation: heartBeat 2s infinite;">🌀 پورتال</a>
+    <a href="javascript:void(0)" onclick="openSecret()">🔒 راز مگو</a>
 </div>
 
-<div id="main" class="main-jitter-wrapper">
+<div id="main">
     <div class="container">
         
         <div class="web-section reveal" id="letter-sec">
-            <div class="title-main" id="txt-main-title" data-key="main_title">For Niyayesh 🥹🫂💕</div>
+            <div class="title-main" id="txt-main-title" data-key="main_title">MY ETERNAL LOVE 🥹🫂💕</div>
             <div class="gallery">
                 <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="Memory 1">
                 <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2">
@@ -93,12 +92,12 @@
         </div>
 
         <div class="web-section reveal" id="game-sec">
-            <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION 🩸</div>
+            <div class="section-title">مأموریت نجات نیایش | VAMPIRE CRUSADE 🩸</div>
             <div class="game-arcade-cabinet">
-                <div id="game-overlay" style="position: absolute; inset:0; background:rgba(10,1,2,0.92); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:8px;">
-                    <div class="section-title" style="font-size:2rem; margin-bottom:10px; text-shadow: 0 0 10px #ff1a40;">Vampire Fighting Arena</div>
-                    <div style="color:#aaa; font-size:0.95rem; margin-bottom: 20px;" id="score-display">در نقش ومپایر با شمشیر نئونی حریفان را نابود کن!</div>
-                    <button class="login-btn" onclick="startArcadeGame()" style="width:auto; padding:12px 35px; box-shadow: 0 0 15px rgba(255,26,64,0.4);">شروع مبارزه حماسی</button>
+                <div id="game-overlay" style="position: absolute; inset:0; background:rgba(5,0,1,0.95); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10;">
+                    <div class="arcade-neon-title">BLOOD ARENA</div>
+                    <div style="color:#ccc; font-size:1.1rem; margin-bottom: 25px; font-family:'Vazirmatn';" id="score-display">با شمشیر نئونی تاریکی را بشکاف و به نیایش برس!</div>
+                    <button class="arcade-start-btn" onclick="startArcadeGame()">شروع حماسه</button>
                 </div>
                 
                 <div class="arcade-hud">
@@ -112,17 +111,37 @@
                     <div class="crt-scanlines"></div>
                 </div>
 
-                <div class="arcade-controls" style="gap: 10px; padding: 10px;">
-                    <button class="arcade-btn" id="btn-left" style="padding: 10px 20px;">⬅️ عقب</button>
-                    <button class="arcade-btn" id="btn-attack" style="background: rgba(255, 26, 64, 0.2); border-color:#ff1a40; flex:1; font-weight: bold; text-shadow: 0 0 5px #ff1a40;">ATTACK / ضربه شمشیر ⚔️</button>
-                    <button class="arcade-btn" id="btn-right" style="padding: 10px 20px;">جلو ➡️</button>
+                <div class="arcade-controls">
+                    <button class="arcade-btn move-btn" id="btn-left">⬅️ DEFEND</button>
+                    <button class="arcade-btn attack-btn" id="btn-attack">SLAUGHTER ⚔️</button>
+                    <button class="arcade-btn move-btn" id="btn-right">CHARGE ➡️</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="web-section reveal" id="vow-sec">
+            <div class="section-title">THE BLOOD VOW | پیمان جاودانگی</div>
+            <div class="vow-container">
+                <div class="vow-paper">
+                    <div class="vow-icon">📜</div>
+                    <p data-key="blood_vow_text">من، مبین، در برابر تمام کهکشان‌ها و تاریکی‌ها سوگند یاد می‌کنم که تا آخرین قطره خون و تا آخرین تپش قلب، محافظ، عاشق و دیوانه‌ی تو، نیایش، باقی بمانم. هیچ نیرویی در این جهان فانی نمی‌تواند روح‌های ما را از هم جدا کند.</p>
+                    <div class="signatures">
+                        <div class="sign-box">
+                            <span class="sign-name">Mobin</span>
+                            <span class="sign-title">The Protector</span>
+                        </div>
+                        <div class="sign-box">
+                            <span class="sign-name">Niyayesh</span>
+                            <span class="sign-title">The Queen</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="web-section reveal" id="tarot-sec">
-            <div class="section-title">کارت‌های سرنوشت ما 🃏</div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها را لمس کن تا رازهای قلبم را بخوانی...</p>
+            <div class="section-title">CARDS OF DESTINY | کارت‌های سرنوشت 🃏</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 35px; font-family:'Lalezar'; font-size:1.2rem;">کارت‌ها را لمس کن تا آینده‌ی تاریک و زیبایمان را ببینی...</p>
             <div class="tarot-grid">
                 <div class="tarot-card" onclick="this.classList.toggle('flipped')">
                     <div class="tarot-inner">
@@ -132,7 +151,7 @@
                 </div>
                 <div class="tarot-card" onclick="this.classList.toggle('flipped')">
                     <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design" style="color:#ff1a40; text-shadow: 0 0 10px #ff1a40;">II</div></div>
+                        <div class="tarot-front"><div class="tarot-design glow-text">II</div></div>
                         <div class="tarot-back"><p>چون هیچکس تو دنیا به اندازه تو، دیوونه‌بازی‌ها و رویاهای بزرگ منو نمی‌فهمه. 🖤</p></div>
                     </div>
                 </div>
@@ -145,9 +164,18 @@
             </div>
         </div>
 
+        <div class="web-section reveal" id="pulse-sec">
+            <div class="section-title">SOULMATE RESONANCE | فرکانس قلب ما</div>
+            <div class="pulse-container">
+                <div class="heart-icon">🫀</div>
+                <div class="ecg-line"></div>
+                <p data-key="pulse_desc">قلب‌های ما در یک فرکانس واحد می‌تپد. حتی اگر فرسنگ‌ها دور باشیم، ریتم زندگیِ من با نفس‌های تو تنظیم شده است.</p>
+            </div>
+        </div>
+
         <div class="web-section reveal" id="countdown-sec">
-            <div class="section-title">زمان تا جاودانگی ⏳</div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">شمارش معکوس تا تولد فرشته‌ی روی زمین (۱۵ شهریور)</p>
+            <div class="section-title">COUNTDOWN TO ETERNITY | زمان تا جاودانگی ⏳</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 30px; font-family:'Lalezar'; font-size:1.2rem;">شمارش معکوس تا تولد فرشته‌ی روی زمین (۱۵ شهریور)</p>
             <div class="countdown-container">
                 <div class="time-box"><span id="cd-days">00</span><div class="time-label">روز</div></div>
                 <div class="time-box"><span id="cd-hours">00</span><div class="time-label">ساعت</div></div>
@@ -157,7 +185,7 @@
         </div>
 
         <div class="web-section reveal" id="story-sec">
-            <div class="section-title" data-key="story_title">داستان عشق ما</div>
+            <div class="section-title" data-key="story_title">OUR LEGEND | افسانه عشق ما</div>
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-date" data-key="timeline_d1">روزی که قلبت مال من شد</div>
@@ -171,14 +199,14 @@
         </div>
 
         <div class="web-section reveal" id="dates-sec">
-            <div class="section-title" data-key="dates_title">تاریخ‌های متولد شدنِ عشق</div>
+            <div class="section-title" data-key="dates_title">SACRED DATES | تاریخ‌های مقدس</div>
             <div class="dates-grid">
-                <div class="date-card">
+                <div class="date-card mobin-card">
                     <h3>Mobin</h3>
                     <div class="bday" data-key="mobin_bday">۲۵ اسفند ۱۳۸۷</div>
                     <p data-key="mobin_bday_desc">روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم و تموم زندگیمو به پاش بریزم.</p>
                 </div>
-                <div class="date-card">
+                <div class="date-card niyayesh-card">
                     <h3>Niyayesh</h3>
                     <div class="bday" data-key="niyayesh_bday">۱۵ شهریور ۱۳۸۹</div>
                     <p data-key="niyayesh_bday_desc">باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد تا بشه دلیل نفس کشیدنم.</p>
@@ -187,65 +215,65 @@
         </div>
 
         <div class="web-section reveal" id="mobin-sec">
-            <div class="section-title" data-key="mobin_sec_title">دنیای مبین و علایقش</div>
+            <div class="section-title" data-key="mobin_sec_title">MOBIN'S REALM | دنیای تاریک من</div>
             <div class="interests-grid">
                 <div class="premium-card">
                     <div class="badge">MY DREAM CAR</div>
                     <h4 data-key="mobin_car_title">Porsche Boxster</h4>
-                    <p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین و قشنگ‌ترین هدفم تو زندگی اینه که یه روز با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! تو صندلی کناریِ منی، برای همیشه.</p>
+                    <p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین هدفم تو زندگی اینه که با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! صندلی کناری فقط مال توئه.</p>
                 </div>
                 <div class="premium-card">
-                    <div class="badge">FAVORITE COLORS</div>
+                    <div class="badge">DARK AURA</div>
                     <h4 data-key="mobin_color_title">رنگ‌های مورد علاقه</h4>
-                    <p data-key="mobin_color_desc">ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
+                    <p data-key="mobin_color_desc">مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
                     <div class="color-preview">
-                        <div class="color-circle" style="background: #000000;"></div>
-                        <div class="color-circle" style="background: #0a192f;"></div>
+                        <div class="color-circle" style="background: #000000; box-shadow:0 0 10px #fff;"></div>
+                        <div class="color-circle" style="background: #0a192f; box-shadow:0 0 10px #0a192f;"></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="web-section reveal" id="niyayesh-sec">
-            <div class="section-title" data-key="niyayesh_sec_title">دنیای نیایش و علایقش</div>
+            <div class="section-title" data-key="niyayesh_sec_title">NIYAYESH'S REALM | قلمرو ملکه</div>
             <div class="interests-grid">
-                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
-                    <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
+                <div class="premium-card tvd-card">
+                    <div class="badge tvd-badge">FAVORITE SERIES</div>
                     <h4 data-key="niyayesh_series_title">The Vampire Diaries</h4>
-                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
+                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که برای تو ساختم.</p>
                 </div>
-                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
-                    <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
+                <div class="premium-card angel-card">
+                    <div class="badge angel-badge">THE ONLY ONE</div>
                     <h4 data-key="niyayesh_only_title">بهترین دختر این دنیا</h4>
-                    <p data-key="niyayesh_only_desc">فقط می‌خوام اینو بدونی که بین کل آدمای این سیاره، تو تک‌دونه‌ترین و قشنگ‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار دنیای منی نیایشم.</p>
+                    <p data-key="niyayesh_only_desc">بین کل آدمای این سیاره، تو تک‌دونه‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار منی.</p>
                 </div>
             </div>
         </div>
 
         <div class="web-section reveal" id="gallery-sec">
-            <div class="section-title" data-key="gallery_sec_title">آلبوم خاطرات تصویری</div>
+            <div class="section-title" data-key="gallery_sec_title">VAULT OF MEMORIES | آلبوم خاطرات</div>
             <div class="album-grid">
                 <div class="album-item">
                     <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png">
-                    <div class="album-overlay"><span>خاطره اول ❤️</span></div>
+                    <div class="album-overlay"><span>آغاز داستان 🩸</span></div>
                 </div>
                 <div class="album-item">
                     <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png">
-                    <div class="album-overlay"><span>خاطره دوم 🔐</span></div>
+                    <div class="album-overlay"><span>لبخند ابدی 🖤</span></div>
                 </div>
-                <div class="album-item">
-                    <div style="color: rgba(255,26,64,0.25); font-size: 2.5rem; font-weight: 300;">+</div>
-                    <div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div>
+                <div class="album-item add-memory">
+                    <div class="plus-icon">+</div>
+                    <div class="album-overlay"><span>جای عکس بعدی... ✨</span></div>
                 </div>
             </div>
         </div>
 
         <div class="web-section reveal" id="feed-sec">
-            <div class="section-title" data-key="feed_sec_title">دفترچه خاطرات ابدی ما</div>
+            <div class="section-title" data-key="feed_sec_title">DIARY OF THE IMMORTALS | دفترچه خاطرات</div>
             <div class="memory-feed">
                 <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()">
-                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span>
-                    ثبت یک خاطره جدید (لمس کن)
+                    <span style="font-size: 2.5rem; display: block; margin-bottom: 15px; text-shadow:0 0 15px #ff1a40;">📸</span>
+                    ثبت یک خاطره جدید در تاریخ (لمس کن)
                 </div>
                 <input type="file" id="file-input" style="display:none" accept="image/*,video/*" onchange="handleFileUpload(event)">
                 <div id="posts-area"></div>
@@ -253,8 +281,8 @@
         </div>
 
         <div class="web-section reveal" id="tvd-sec">
-            <div class="section-title" data-key="tvd_sec_title">The Vampire Diaries Cinema</div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 25px;" data-key="tvd_sec_desc">مخصوص تو که عاشق این دنیایی... 🩸🦇</p>
+            <div class="section-title" data-key="tvd_sec_title">MYSTIC FALLS CINEMA</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 30px; font-family:'Lalezar'; font-size:1.1rem;" data-key="tvd_sec_desc">مخصوص تو که عاشق این دنیایی... خون‌آشامِ من 🩸🦇</p>
             <div class="cinema-grid">
                 <div class="video-wrapper">
                     <iframe id="tvd-iframe" src="https://www.youtube.com/embed/aEzaN0eI6kU" allowfullscreen></iframe>
@@ -270,7 +298,7 @@
             <div class="vinyl-record"></div>
         </div>
 
-        <div class="creator">Created by Mobin with Endless Love</div>
+        <div class="creator">Forged in Darkness, Created by Mobin with Endless Love</div>
     </div>
 </div>
 
@@ -278,7 +306,7 @@
 
 <script>
 let isAdmin = false;
-let loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
+let loveLetter = `نیایش عزیزم، ملکه تاریکی و روشناییِ من...\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره. تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه تو کلمات گنجوند.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه معجزه‌ست که قدرشو با تک‌تک نفس‌هام می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم، زیباتر از قاصدک :)\n\nدوست دارم، تا ابد مال منی...\n\nباعشق 🫂💕\nMobin`;
 
 function enter(){
     let p = document.getElementById("pass").value;
@@ -299,13 +327,13 @@ function enter(){
             setTimeout(() => { 
                 mainContent.style.opacity = "1"; 
                 if(isAdmin) { enableEditableMode(); }
-                revealOnScroll(); // فعال‌سازی افکت‌های اسکرول
+                revealOnScroll(); 
             }, 100);
-            createCrimsonParticles();
+            startGothicParticles(); // اجرای پارتیکل‌های خونین
             typeWriter(loveLetter, 0, "typed-text");
             loadFeed(); 
         }, 3800);
-    } else { alert("رمز ورود اشتباه است... دوباره تلاش کن عشق من"); }
+    } else { alert("طلسم اشتباه است... قلب تاریکی تو را نمی‌پذیرد!"); }
 }
 
 function typeWriter(text, i, elementId) {
@@ -325,11 +353,10 @@ function finishTypewriter() {
     setTimeout(() => {
         document.getElementById("music-container").classList.add("show");
         document.getElementById("navbar").classList.add("show-nav"); 
-        document.getElementById("vinyl-player").style.display = "block"; // نمایش گرامافون
+        document.getElementById("vinyl-player").style.display = "block"; 
     }, 600);
 }
 
-// --- توابع رابط کاربری ---
 function openSecret() {
     const modal = document.getElementById("secret-modal");
     modal.style.display = "flex";
@@ -353,38 +380,35 @@ function checkSecret() {
     } else { alert("رمز صندوقچه اشتباه است... رازها محافظت شده هستند!"); }
 }
 
-// --- افکت‌های بصری و صوتی ---
-function createCrimsonParticles() {
-    const colors = ['rgba(255, 26, 64, 0.3)', 'rgba(139, 0, 0, 0.25)', 'rgba(255, 255, 255, 0.15)'];
-    for(let i = 0; i < 40; i++) {
+// سیستم پارتیکل جدید و تمیز (خاکستر و خون معلق)
+function startGothicParticles() {
+    const container = document.getElementById("particles-container");
+    const particleCount = 35;
+    for(let i = 0; i < particleCount; i++) {
         let p = document.createElement("div");
-        p.className = "particle";
-        let size = Math.random() * 5 + 3;
+        p.className = "floating-ember";
+        let size = Math.random() * 4 + 2;
         p.style.width = size + "px"; p.style.height = size + "px";
         p.style.left = Math.random() * 100 + "vw";
-        p.style.boxShadow = `0 0 ${Math.random() * 15 + 10}px ${colors[Math.floor(Math.random() * colors.length)]}`;
-        p.style.background = '#ff1a40';
-        p.style.animationDuration = (Math.random() * 9 + 5) + "s";
-        p.style.animationDelay = Math.random() * 3 + "s";
-        document.body.appendChild(p);
+        p.style.bottom = "-10px";
+        p.style.animationDuration = (Math.random() * 10 + 5) + "s";
+        p.style.animationDelay = (Math.random() * 5) + "s";
+        container.appendChild(p);
     }
 }
+
 function playRomanticSound() { try { let ctx = new (window.AudioContext || window.webkitAudioContext)(); let t = ctx.currentTime; function playTone(freq, type, startTime, duration, vol) { let osc = ctx.createOscillator(); let gain = ctx.createGain(); osc.type = type; osc.frequency.value = freq; gain.gain.setValueAtTime(0, startTime); gain.gain.linearRampToValueAtTime(vol, startTime + 0.4); gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration); osc.connect(gain); gain.connect(ctx.destination); osc.start(startTime); osc.stop(startTime + duration); } playTone(261.63, 'sine', t, 3.2, 0.4); playTone(311.13, 'sine', t, 3.2, 0.4); playTone(392.00, 'sine', t, 3.2, 0.4); playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); } catch(e) {} }
 
-// --- انیمیشن اسکرول ---
 function revealOnScroll() {
     const reveals = document.querySelectorAll('.reveal');
     for (let i = 0; i < reveals.length; i++) {
         const windowHeight = window.innerHeight;
         const elementTop = reveals[i].getBoundingClientRect().top;
-        if (elementTop < windowHeight - 80) {
-            reveals[i].classList.add('active');
-        }
+        if (elementTop < windowHeight - 100) { reveals[i].classList.add('active'); }
     }
 }
 window.addEventListener('scroll', revealOnScroll);
 
-// --- تایمر ماه خونین ---
 const targetDate = new Date("Sep 15, 2026 00:00:00").getTime(); 
 function updateCountdown() {
     const now = new Date().getTime();
@@ -401,27 +425,21 @@ function updateCountdown() {
 }
 setInterval(updateCountdown, 1000);
 
-function enableEditableMode() {
-    document.querySelectorAll('[data-key]').forEach(el => { el.setAttribute('contenteditable', 'true'); });
-}
+function enableEditableMode() { document.querySelectorAll('[data-key]').forEach(el => { el.setAttribute('contenteditable', 'true'); }); }
 
-// --- پورتال ومپایر ---
 let vortexAnimation;
 function openPortal() {
     const portal = document.getElementById("vampire-portal");
     const vCanvas = document.getElementById("vortexCanvas");
     const dim = document.getElementById("portal-dim");
-    const q = document.getElementById("pt-q");
-    const st = document.getElementById("pt-st");
-    const btn = document.getElementById("pt-btn");
     portal.style.display = "flex";
     startVortexCanvas();
     setTimeout(() => { vCanvas.style.opacity = "1"; }, 100);
     setTimeout(() => {
         dim.style.opacity = "1";
-        q.style.opacity = "1"; q.style.transform = "translateY(0) scale(1)";
-        st.style.opacity = "1"; st.style.transform = "translateY(0)";
-        btn.style.opacity = "1";
+        document.getElementById("pt-q").style.opacity = "1"; document.getElementById("pt-q").style.transform = "translateY(0) scale(1)";
+        document.getElementById("pt-st").style.opacity = "1"; document.getElementById("pt-st").style.transform = "translateY(0)";
+        document.getElementById("pt-btn").style.opacity = "1";
     }, 2000);
 }
 
@@ -462,7 +480,7 @@ function startVortexCanvas() {
     drawVortex();
 }
 
-// --- Firebase Config ---
+// دیتابیس همون قبلیه، دست نخورده
 const firebaseConfig = {
     apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
     authDomain: "niyayesh-universe.firebaseapp.com",
@@ -471,7 +489,6 @@ const firebaseConfig = {
     messagingSenderId: "675804346928",
     appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
 };
-
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
@@ -490,16 +507,6 @@ db.collection("website_data").doc("texts").onSnapshot((doc) => {
     }
 });
 
-db.collection("website_data").doc("config").get().then((doc) => {
-    if (doc.exists) {
-        const data = doc.data();
-        if(data.tvd_video_url) {
-            const tvdFrame = document.getElementById("tvd-iframe");
-            if(tvdFrame) tvdFrame.src = data.tvd_video_url;
-        }
-    }
-});
-
 function saveWebsiteTexts() {
     if(!isAdmin) return;
     const updatedTexts = {};
@@ -510,41 +517,37 @@ function saveWebsiteTexts() {
         updatedTexts[key] = content;
     });
     db.collection("website_data").doc("texts").set(updatedTexts, { merge: true })
-    .then(() => { alert("تغییرات با موفقیت برای نیایش اعمال شد! ❤️"); })
-    .catch(err => { console.error(err); alert("خطا در ذخیره."); });
+    .then(() => { alert("پیمان ابدی با موفقیت آپدیت شد! 🩸"); })
+    .catch(err => { console.error(err); alert("خطا در ثبت جادو."); });
 }
 
 function triggerUpload() { if(isAdmin) { document.getElementById('file-input').click(); } }
 
 async function handleFileUpload(event) {
     const file = event.target.files[0]; if(!file) return;
-    const memoryText = prompt("یه متن قشنگ برای این خاطره بنویس:"); if(memoryText === null) return;
+    const memoryText = prompt("یه کپشن دارک و عاشقانه بنویس:"); if(memoryText === null) return;
     const uploadBox = document.getElementById("upload-box");
-    uploadBox.innerHTML = "⏳ در حال آپلود..."; uploadBox.style.pointerEvents = "none";
+    uploadBox.innerHTML = "⏳ در حال ثبت در تاریخ..."; uploadBox.style.pointerEvents = "none";
     const isVideo = file.type.startsWith('video');
     const storageRef = storage.ref('memories/' + Date.now() + '_' + file.name);
     try {
         const snapshot = await storageRef.put(file);
         const downloadURL = await snapshot.ref.getDownloadURL();
         await db.collection("memories").add({ url: downloadURL, text: memoryText, type: isVideo ? 'video' : 'image', timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-        alert("خاطره ثبت شد!");
-        uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید`;
+        alert("خاطره جاودانه شد!");
+        uploadBox.innerHTML = `<span style="font-size: 2.5rem; display: block; margin-bottom: 15px;">📸</span> ثبت یک خاطره جدید`;
         uploadBox.style.pointerEvents = "auto";
-    } catch (error) {
-        console.error(error); alert("خطا در آپلود.");
-        uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید`;
-        uploadBox.style.pointerEvents = "auto";
-    }
+    } catch (error) { console.error(error); uploadBox.style.pointerEvents = "auto"; }
 }
 
 function loadFeed() {
     db.collection("memories").orderBy("timestamp", "desc").onSnapshot(snapshot => {
         const postsArea = document.getElementById('posts-area'); postsArea.innerHTML = '';
-        if(snapshot.empty) { postsArea.innerHTML = `<p style="text-align:center; color:gray;">خاطره‌ای نیست.</p>`; return; }
+        if(snapshot.empty) { postsArea.innerHTML = `<p style="text-align:center; color:#666; font-family:'Lalezar'; font-size:1.2rem;">هنوز رازی در این دفتر نوشته نشده...</p>`; return; }
         snapshot.forEach(doc => {
             const data = doc.data();
             let mediaHtml = data.type === 'video' ? `<video src="${data.url}" class="post-video" controls></video>` : `<img src="${data.url}" class="post-img">`;
-            postsArea.innerHTML += `<div class="post-card"><div class="post-header"><div class="avatar">M</div><div><div style="font-weight: 700;">Mobin</div><div style="font-size: 0.75rem; color: #ff1a40;">عاشق‌ترین پسر دنیا</div></div></div>${mediaHtml}<div class="post-content">${data.text}</div></div>`;
+            postsArea.innerHTML += `<div class="post-card"><div class="post-header"><div class="avatar">M</div><div><div style="font-weight: 900; font-family:'Cinzel Decorative';">Mobin</div><div style="font-size: 0.85rem; color: #ff1a40; font-family:'Lalezar';">The Protector</div></div></div>${mediaHtml}<div class="post-content">${data.text}</div></div>`;
         });
     });
 }
