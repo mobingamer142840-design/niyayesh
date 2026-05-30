@@ -66,7 +66,10 @@
 
 <div class="navbar" id="navbar">
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
+    <a href="#oracle-sec">🔮 گوی عشق</a>
+    <a href="#stars-sec">✨ آسمان ما</a>
     <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
+    <a href="#voice-sec">🎤 صدای قلبم</a>
     <a href="#tarot-sec">🃏 کارت‌های سرنوشت</a>
     <a href="#countdown-sec">⏳ ماه خونین</a>
     <a href="#story-sec">داستان عشق ما</a>
@@ -90,6 +93,25 @@
                 <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2">
             </div>
             <div class="text" id="typed-text" data-key="love_letter"></div>
+        </div>
+
+        <div class="web-section reveal" id="oracle-sec">
+            <div class="section-title">گوی پیشگویی احساسات 🔮</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">گوی رو لمس کن تا یه پیغام مخفی از قلب من برات ظاهر بشه...</p>
+            <div class="oracle-container">
+                <div class="magic-orb" onclick="revealQuote()"></div>
+                <div id="oracle-quote-box">
+                    <p id="oracle-quote"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="web-section reveal" id="stars-sec">
+            <div class="section-title">آسمان شبِ ما ✨</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">انگشتت رو روی این کهکشان بکش تا ستاره‌ها به هم وصل بشن و صورت فلکی عشق ما رو بسازن...</p>
+            <div class="stars-canvas-container">
+                <canvas id="starsCanvas"></canvas>
+            </div>
         </div>
 
         <div class="web-section reveal" id="game-sec">
@@ -116,6 +138,20 @@
                     <button class="arcade-btn" id="btn-left" style="padding: 10px 20px;">⬅️ عقب</button>
                     <button class="arcade-btn" id="btn-attack" style="background: rgba(255, 26, 64, 0.2); border-color:#ff1a40; flex:1; font-weight: bold; text-shadow: 0 0 5px #ff1a40;">ATTACK / ضربه شمشیر ⚔️</button>
                     <button class="arcade-btn" id="btn-right" style="padding: 10px 20px;">جلو ➡️</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="web-section reveal" id="voice-sec">
+            <div class="section-title">آوای قلب من 🎤</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">صدای من وقتی اسم تو رو میاره...</p>
+            <div class="voice-container">
+                <button class="play-voice-btn" onclick="playMockVoice(this)">▶ پخش صدا</button>
+                <div class="soundwave">
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
                 </div>
             </div>
         </div>
@@ -270,7 +306,7 @@
             <div class="vinyl-record"></div>
         </div>
 
-        <div class="creator">Created by Mobin with Endless Love</div>
+        <div class="creator">Created by Mobin with Endless Love for Niyayesh ❤️🦇</div>
     </div>
 </div>
 
@@ -300,6 +336,7 @@ function enter(){
                 mainContent.style.opacity = "1"; 
                 if(isAdmin) { enableEditableMode(); }
                 revealOnScroll(); // فعال‌سازی افکت‌های اسکرول
+                initStarsCanvas(); // اجرای ستاره ها
             }, 100);
             createCrimsonParticles();
             typeWriter(loveLetter, 0, "typed-text");
@@ -327,6 +364,167 @@ function finishTypewriter() {
         document.getElementById("navbar").classList.add("show-nav"); 
         document.getElementById("vinyl-player").style.display = "block"; // نمایش گرامافون
     }, 600);
+}
+
+// --- توابع جدید: افکت کلیک قلب در تمام صفحه ---
+document.addEventListener('click', function(e) {
+    // جلوگیری از تداخل با بازی و دکمه ها
+    if(e.target.closest('.arcade-controls') || e.target.closest('.magic-orb') || e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) return;
+    
+    const heart = document.createElement('div');
+    heart.innerHTML = '❤️';
+    heart.className = 'click-heart';
+    heart.style.left = (e.clientX - 10) + 'px';
+    heart.style.top = (e.clientY - 10) + 'px';
+    document.body.appendChild(heart);
+    
+    setTimeout(() => heart.remove(), 1200);
+});
+
+// --- توابع جدید: گوی جادویی ---
+const romanticQuotes = [
+    "نیایش، تو همون معجزه‌ای هستی که خدا برای آرامش من فرستاده. ✨",
+    "حتی اگه هزار بار دیگه به دنیا بیام، باز هم تو رو پیدا میکنم تا عاشقت بشم. 🩸",
+    "تاریکیِ دنیای من فقط با نورِ چشمای تو روشن میشه. 🖤",
+    "برای من، تمام دنیا تو یه کلمه خلاصه میشه: تو. 🫂",
+    "عشق ما مثل ومپایرها جاودانه‌ست، تا ابد و یک روز. 🦇",
+    "صدای خنده‌هات قشنگ‌ترین موسیقی دنیاست برای گوش‌های من. 🎶",
+    "تو همون رویایی هستی که وقتی بیدار میشم، می‌بینم واقعیتی. 💕"
+];
+
+function revealQuote() {
+    const quoteEl = document.getElementById('oracle-quote');
+    const orb = document.querySelector('.magic-orb');
+    
+    orb.style.animation = 'none';
+    orb.style.transform = 'scale(0.85)';
+    orb.style.boxShadow = '0 0 100px #ff1a40, inset 0 0 50px rgba(255,255,255,1)';
+    
+    setTimeout(() => {
+        orb.style.transform = 'scale(1)';
+        orb.style.animation = 'floatOrb 3s ease-in-out infinite';
+        orb.style.boxShadow = '0 0 30px #ff1a40, inset 0 0 20px rgba(255,255,255,0.5)';
+        
+        const randomQuote = romanticQuotes[Math.floor(Math.random() * romanticQuotes.length)];
+        quoteEl.style.opacity = 0;
+        
+        setTimeout(() => {
+            quoteEl.innerText = randomQuote;
+            quoteEl.style.opacity = 1;
+        }, 400);
+    }, 300);
+}
+
+// --- توابع جدید: بوم ستاره‌ها ---
+function initStarsCanvas() {
+    const canvas = document.getElementById('starsCanvas');
+    if(!canvas) return;
+    const ctx = canvas.getContext('2d');
+    
+    function resize() {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = 300;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    let stars = [];
+    const numStars = 60;
+    let mouse = { x: -1000, y: -1000 };
+
+    for(let i=0; i<numStars; i++){
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            radius: Math.random() * 2
+        });
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+    
+    canvas.addEventListener('mouseleave', () => { mouse.x = -1000; mouse.y = -1000; });
+    canvas.addEventListener('touchmove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+    });
+
+    function drawStars() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // آپدیت و رسم ستاره‌ها
+        for(let i=0; i<numStars; i++) {
+            let s = stars[i];
+            s.x += s.vx; s.y += s.vy;
+            if(s.x < 0 || s.x > canvas.width) s.vx *= -1;
+            if(s.y < 0 || s.y > canvas.height) s.vy *= -1;
+            
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.radius, 0, Math.PI*2);
+            ctx.fillStyle = '#ffccd5';
+            ctx.fill();
+        }
+
+        // کشیدن خط بین ستاره‌ها و موس
+        for(let i=0; i<numStars; i++) {
+            let s1 = stars[i];
+            
+            // فاصله با موس
+            let dxMouse = mouse.x - s1.x;
+            let dyMouse = mouse.y - s1.y;
+            let distMouse = Math.sqrt(dxMouse*dxMouse + dyMouse*dyMouse);
+            
+            if(distMouse < 120) {
+                ctx.beginPath();
+                ctx.moveTo(s1.x, s1.y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.strokeStyle = `rgba(255, 26, 64, ${1 - distMouse/120})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // فاصله با بقیه ستاره‌ها
+            for(let j=i+1; j<numStars; j++) {
+                let s2 = stars[j];
+                let dx = s1.x - s2.x;
+                let dy = s1.y - s2.y;
+                let dist = Math.sqrt(dx*dx + dy*dy);
+                
+                if(dist < 70) {
+                    ctx.beginPath();
+                    ctx.moveTo(s1.x, s1.y);
+                    ctx.lineTo(s2.x, s2.y);
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - dist/350})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(drawStars);
+    }
+    drawStars();
+}
+
+// --- تابع اکولایزر صوتی دکوری ---
+function playMockVoice(btn) {
+    const bars = document.querySelectorAll('.soundwave .bar');
+    if (btn.innerText === "▶ پخش صدا") {
+        btn.innerText = "⏸ در حال پخش قلب من...";
+        btn.style.background = "#ff1a40";
+        bars.forEach(bar => bar.style.animationPlayState = 'running');
+        // اینجا میتونی بعدا واقعاً یک Audio رو پلی کنی
+        setTimeout(() => {
+            btn.innerText = "▶ پخش مجدد";
+            btn.style.background = "rgba(255,26,64,0.1)";
+            bars.forEach(bar => bar.style.animationPlayState = 'paused');
+        }, 10000); // 10 ثانیه به صورت دکوری
+    }
 }
 
 // --- توابع رابط کاربری ---
