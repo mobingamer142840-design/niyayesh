@@ -1,618 +1,26 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobin & Niyayesh | Eternal Gothic Universe</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobin & Niyayesh | Eternal Gothic Universe</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 
-<!-- کتابخانه‌های فایربیس -->
-<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
-
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-body {
-    font-family: 'Vazirmatn', sans-serif;
-    background: #000000;
-    overflow: hidden;
-    height: 100vh;
-    color: white;
-    user-select: none;
-}
-
-.bg {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at 15% 25%, #2a0105 0%, #000000 60%), 
-                radial-gradient(circle at 85% 75%, #140003 0%, #000000 100%);
-    background-size: 140% 140%;
-    animation: gothicGradient 12s ease-in-out infinite alternate;
-    z-index: -3;
-}
-
-@keyframes gothicGradient {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-}
-
-.fog {
-    position: fixed;
-    inset: 0;
-    background: url('https://i.imgur.com/3ZQ3ZQZ.png');
-    opacity: 0.04;
-    animation: moveFog 90s linear infinite;
-    z-index: -2;
-    pointer-events: none;
-}
-
-@keyframes moveFog {
-    from { transform: translateX(0); }
-    to { transform: translateX(-500px); }
-}
-
-#netflix-intro {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    z-index: 9999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-}
-
-.netflix-text {
-    font-family: 'Cinzel', serif;
-    font-size: 11rem;
-    font-weight: 900;
-    color: #ff1a40;
-    opacity: 0;
-    animation: romanticZoom 3.8s forwards cubic-bezier(0.15, 0.85, 0.35, 1);
-    text-shadow: 0 0 80px rgba(255, 26, 64, 0.95), 0 0 30px rgba(255, 255, 255, 0.3);
-}
-
-@keyframes romanticZoom {
-    0% { transform: scale(0.4); filter: blur(30px); opacity: 0; }
-    30% { transform: scale(1); filter: blur(0); opacity: 1; }
-    70% { transform: scale(1.03); filter: blur(0); opacity: 1; }
-    100% { transform: scale(6.5); filter: blur(40px); opacity: 0; }
-}
-
-.login-wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 3px;
-    border-radius: 42px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(139,0,0,0.45), rgba(0,0,0,0.9), rgba(255,26,64,0.25));
-    background-size: 300% 300%;
-    animation: glowBorder 6s ease infinite;
-    box-shadow: 0 50px 110px rgba(0, 0, 0, 0.95);
-    width: 90%;
-    max-width: 386px;
-}
-
-@keyframes glowBorder {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.login-container {
-    width: 100%;
-    padding: 50px 35px;
-    background: rgba(5, 0, 2, 0.88);
-    border-radius: 39px;
-    backdrop-filter: blur(55px);
-    -webkit-backdrop-filter: blur(55px);
-    text-align: center;
-}
-
-.login-emojis {
-    font-size: 2.8rem;
-    margin-bottom: 12px;
-    display: inline-block;
-    animation: heartBeat 1.8s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
-    filter: drop-shadow(0 0 15px rgba(255, 26, 64, 0.7));
-}
-
-@keyframes heartBeat {
-    0% { transform: scale(1); }
-    30% { transform: scale(1.15); }
-    60% { transform: scale(1); }
-}
-
-.login-container h1 {
-    font-family: 'Cinzel', serif;
-    color: #fff;
-    font-size: 3.2rem;
-    font-weight: 900;
-    margin-bottom: 15px;
-    background: linear-gradient(90deg, #ffffff, #ff1a40, #ffffff);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textShine 4s linear infinite;
-}
-
-@keyframes textShine {
-    to { background-position: 200% center; }
-}
-
-.login-container p {
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.3);
-    margin-bottom: 40px;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-}
-
-.input-group { margin-bottom: 25px; }
-
-input {
-    width: 100%;
-    padding: 18px;
-    border: 1px solid rgba(255, 26, 64, 0.15);
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.03);
-    color: white;
-    outline: none;
-    text-align: center;
-    font-size: 1.05rem;
-    letter-spacing: 2.5px;
-    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1);
-}
-
-input:focus {
-    border-color: rgba(255, 26, 64, 0.6);
-    background: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 30px rgba(255, 26, 64, 0.25);
-    transform: scale(1.01);
-}
-
-.login-btn {
-    width: 100%;
-    padding: 18px;
-    border: none;
-    border-radius: 20px;
-    background: linear-gradient(90deg, #8b0000, #ff1a40);
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 900;
-    cursor: pointer;
-    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
-    box-shadow: 0 10px 25px rgba(255, 26, 64, 0.2);
-}
-
-.login-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(255, 26, 64, 0.45);
-}
-
-.navbar {
-    position: fixed;
-    top: -100px; 
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(15, 0, 2, 0.65);
-    border: 1px solid rgba(255, 26, 64, 0.18);
-    padding: 6px 10px;
-    border-radius: 24px;
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    display: flex;
-    gap: 6px;
-    z-index: 1000;
-    opacity: 0;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-    transition: top 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 1.5s cubic-bezier(0.15, 0.85, 0.35, 1);
-    max-width: 95vw;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-}
-
-.navbar::-webkit-scrollbar { display: none; }
-.navbar.show-nav { top: 20px; opacity: 1; }
-
-.navbar a {
-    color: rgba(255, 255, 255, 0.55);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 700;
-    transition: 0.3s;
-    padding: 7px 14px;
-    border-radius: 18px;
-    flex-shrink: 0;
-}
-
-.navbar a:hover, .navbar a.active {
-    color: #ffffff;
-    background: rgba(255, 26, 64, 0.3);
-    box-shadow: 0 4px 12px rgba(255, 26, 64, 0.2);
-}
-
-#secret-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
-    z-index: 2000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.6s cubic-bezier(0.15, 0.85, 0.35, 1);
-}
-
-.secret-box {
-    width: 90%;
-    max-width: 440px;
-    padding: 40px 30px;
-    background: rgba(20, 1, 3, 0.85);
-    border-radius: 38px;
-    border: 1px solid rgba(255, 26, 64, 0.4);
-    box-shadow: 0 40px 90px rgba(255, 26, 64, 0.15);
-}
-
-.secret-title {
-    font-family: 'Cinzel', serif;
-    color: #ff1a40;
-    font-size: 2rem;
-    margin-bottom: 25px;
-    font-weight: 900;
-    text-shadow: 0 0 20px rgba(255, 26, 64, 0.6);
-}
-
-#secret-content {
-    display: none;
-    margin-top: 30px;
-    font-size: 1.15rem;
-    line-height: 2.6;
-    font-weight: 700;
-    color: #ffffff;
-    text-align: right;
-    border-top: 1px solid rgba(255, 26, 64, 0.2);
-    padding-top: 25px;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-}
-
-#main {
-    display: none;
-    height: 100vh;
-    overflow-y: auto;
-    padding: 110px 15px 80px 15px;
-    opacity: 0;
-    transition: opacity 2.5s cubic-bezier(0.15, 0.85, 0.35, 1);
-}
-
-#main::-webkit-scrollbar { width: 4px; }
-#main::-webkit-scrollbar-track { background: transparent; }
-#main::-webkit-scrollbar-thumb { background: rgba(255, 26, 64, 0.3); border-radius: 10px; }
-
-.container {
-    max-width: 920px;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
-}
-
-.web-section {
-    background: rgba(20, 0, 3, 0.45);
-    border: 1px solid rgba(255, 26, 64, 0.08);
-    border-radius: 35px;
-    padding: 45px 30px;
-    backdrop-filter: blur(45px);
-    -webkit-backdrop-filter: blur(45px);
-    box-shadow: 0 45px 95px rgba(0,0,0,0.85);
-    transition: transform 0.8s cubic-bezier(0.15, 0.85, 0.35, 1);
-}
-
-.section-title {
-    font-family: 'Cinzel', serif;
-    font-size: 2.2rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, #ffffff 40%, #ff1a40 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 35px;
-    text-align: center;
-    text-shadow: 0 10px 35px rgba(255, 26, 64, 0.15);
-}
-
-.title-main {
-    font-family: 'Cinzel', serif;
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: #ffffff;
-    margin-bottom: 35px;
-    text-shadow: 0 0 45px rgba(255, 26, 64, 0.5);
-    text-align: center;
-}
-
-.gallery { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px; }
-.gallery img {
-    width: 100%; max-width: 280px; height: 350px; object-fit: cover; border-radius: 20px;
-    border: 1px solid rgba(255, 26, 64, 0.25); box-shadow: 0 25px 50px rgba(0,0,0,0.85);
-    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); filter: brightness(0.85);
-}
-.gallery img:hover { transform: translateY(-5px); filter: brightness(1.05); border-color: #ff1a40; box-shadow: 0 25px 50px rgba(255,26,64,0.25); }
-
-.text {
-    font-size: 1.15rem; font-weight: 700; line-height: 2.6; color: #f5f5f7;
-    text-align: right; text-shadow: 0 2px 15px rgba(0,0,0,0.9); min-height: 150px;
-}
-
-.timeline {
-    position: relative; padding-right: 20px;
-    border-right: 2px solid rgba(255, 26, 64, 0.2); text-align: right;
-}
-.timeline-item { position: relative; margin-bottom: 40px; }
-.timeline-item::after {
-    content: ''; position: absolute; width: 10px; height: 10px;
-    background: #ff1a40; top: 8px; right: -26px; border-radius: 50%;
-    box-shadow: 0 0 15px #ff1a40;
-}
-.timeline-date { font-weight: 900; color: #ffffff; font-size: 1.2rem; margin-bottom: 8px; }
-.timeline-content { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.8; }
-
-.dates-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.date-card {
-    background: rgba(10, 0, 2, 0.3); border: 1px solid rgba(255, 26, 64, 0.15);
-    padding: 30px 20px; border-radius: 20px; width: 100%; max-width: 290px; text-align: center;
-}
-.date-card h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #fff; margin-bottom: 10px; font-weight: 900; }
-.date-card .bday { font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; color: #ff1a40; text-shadow: 0 0 15px rgba(255,26,64,0.3); }
-.date-card p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.7; }
-
-.interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-.premium-card {
-    background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 24px; padding: 25px; text-align: right;
-}
-.premium-card h4 { font-size: 1.3rem; color: #fff; margin-bottom: 10px; font-weight: 900; }
-.premium-card p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 0.95rem; }
-.badge {
-    font-family: 'Cinzel', serif; display: inline-block; padding: 4px 10px;
-    background: #ff1a40; color: #fff; font-weight: 700; border-radius: 6px;
-    margin-bottom: 15px; font-size: 0.65rem; letter-spacing: 1px;
-}
-.color-preview { display: flex; gap: 8px; margin-top: 15px; }
-.color-circle { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); }
-
-.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
-.album-item {
-    position: relative; height: 200px; border-radius: 18px; overflow: hidden;
-    border: 1px solid rgba(255, 26, 64, 0.15); background: #000;
-    display: flex; justify-content: center; align-items: center;
-}
-.album-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-.album-item:hover img { transform: scale(1.06); filter: blur(3px); }
-.album-overlay {
-    position: absolute; inset: 0; background: rgba(0, 0, 0, 0.7);
-    display: flex; justify-content: center; align-items: center; opacity: 0; transition: 0.3s;
-    backdrop-filter: blur(4px);
-}
-.album-item:hover .album-overlay { opacity: 1; }
-.album-overlay span { font-weight: 700; font-size: 0.9rem; color: #fff; }
-
-.music { margin-top: 25px; display: flex; justify-content: center; opacity: 0; transform: translateY(20px); transition: all 2s cubic-bezier(0.15, 0.85, 0.35, 1); }
-.music.show { opacity: 1; transform: translateY(0); }
-iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-shadow: 0 25px 60px rgba(0,0,0,0.85); }
-
-/* FEED STYLES */
-.memory-feed { display: flex; flex-direction: column; gap: 30px; }
-.upload-box { 
-    background: rgba(0,0,0,0.5); border: 2px dashed rgba(255,26,64,0.3); 
-    border-radius: 20px; padding: 30px; text-align: center; cursor: pointer; transition: 0.3s; 
-}
-.upload-box:hover { border-color: #ff1a40; background: rgba(255,26,64,0.05); }
-.post-card { 
-    background: rgba(10,0,2,0.6); border: 1px solid rgba(255,255,255,0.05); 
-    border-radius: 25px; overflow: hidden; 
-}
-.post-header { 
-    padding: 15px 20px; display: flex; align-items: center; gap: 15px; 
-    border-bottom: 1px solid rgba(255,255,255,0.05); 
-}
-.avatar { 
-    width: 45px; height: 45px; border-radius: 50%; background: #ff1a40; 
-    display: flex; justify-content: center; align-items: center; 
-    font-weight: bold; font-family: 'Cinzel'; 
-}
-.post-img { width: 100%; max-height: 500px; object-fit: cover; }
-.post-video { width: 100%; max-height: 500px; background: #000; outline: none; }
-.post-content { 
-    padding: 20px; text-align: right; line-height: 1.8; color: #ddd; font-size: 0.95rem; 
-}
-
-.cinema-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-.video-wrapper { 
-    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; 
-    border-radius: 20px; border: 1px solid rgba(255,26,64,0.3); 
-}
-.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-
-/* 🌀 پورتال آپدیت شده (گرداب خون‌آشامی خفن‌تر) */
-#vampire-portal {
-    position: fixed;
-    inset: 0;
-    background: #000;
-    z-index: 10000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-.vortex-canvas {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10001;
-    opacity: 0;
-    transition: opacity 2s;
-}
-.portal-dimension {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.8) 70%, #000 100%);
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 30px;
-    transition: opacity 2s ease;
-    z-index: 10002;
-}
-.portal-quote {
-    font-family: 'Cinzel', serif;
-    font-size: 2.8rem;
-    color: #ff1a40;
-    font-weight: 900;
-    text-shadow: 0 0 45px rgba(255,26,64,1);
-    margin-bottom: 25px;
-    transform: translateY(30px) scale(0.8);
-    opacity: 0;
-    transition: all 1.5s cubic-bezier(0.15, 0.85, 0.35, 1) 0.5s;
-}
-.portal-subtext {
-    font-size: 1.3rem;
-    line-height: 2.2;
-    color: #ffffff;
-    max-width: 650px;
-    text-shadow: 0 0 20px rgba(255,255,255,0.6);
-    transform: translateY(30px);
-    opacity: 0;
-    transition: all 1.5s ease 1s;
-    font-weight: 700;
-}
-.close-portal-btn {
-    margin-top: 40px;
-    padding: 15px 40px;
-    border: 2px solid #ff1a40;
-    background: rgba(255,26,64,0.15);
-    color: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1rem;
-    opacity: 0;
-    transition: opacity 1.5s ease 1.5s, background 0.3s, transform 0.3s, box-shadow 0.3s;
-}
-.close-portal-btn:hover { background: #ff1a40; transform: scale(1.1); box-shadow: 0 0 35px #ff1a40; }
-
-/* 🎮 استایل‌های بازی ومپایر */
-.game-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    background: #050000;
-    border: 2px solid #ff1a40;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 0 50px rgba(255, 26, 64, 0.3);
-}
-#gameCanvas {
-    display: block;
-    width: 100%;
-    height: 350px;
-    background: url('https://i.imgur.com/3ZQ3ZQZ.png') #0a0002;
-    background-size: cover;
-    background-blend-mode: multiply;
-}
-.game-ui {
-    position: absolute;
-    top: 15px; left: 15px; right: 15px;
-    display: flex;
-    justify-content: space-between;
-    font-family: 'Cinzel', serif;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 10px #ff1a40;
-    pointer-events: none;
-}
-.game-controls {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    padding: 15px;
-    background: #110002;
-    border-top: 1px solid rgba(255,26,64,0.3);
-}
-.game-btn {
-    padding: 15px 25px;
-    background: rgba(255,26,64,0.1);
-    border: 1px solid #ff1a40;
-    color: white;
-    border-radius: 12px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    user-select: none;
-    font-weight: bold;
-}
-.game-btn:active { background: #ff1a40; transform: scale(0.95); }
-.game-btn.attack { background: rgba(139,0,0,0.5); width: 100px; }
-#game-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-}
-.game-title { color: #ff1a40; font-family: 'Cinzel'; font-size: 2rem; margin-bottom: 10px; text-shadow: 0 0 20px #ff1a40; }
-.start-game-btn { padding: 10px 30px; background: #ff1a40; border: none; color: #fff; border-radius: 20px; font-weight: bold; cursor: pointer; margin-top: 15px;}
-
-/* 🛠️ استایل دکمه ذخیره ادمین */
-#admin-save-bar {
-    position: fixed;
-    bottom: 25px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(139, 0, 0, 0.9);
-    border: 2px solid #ff1a40;
-    padding: 15px 35px;
-    border-radius: 50px;
-    box-shadow: 0 20px 50px rgba(255,26,64,0.4);
-    z-index: 9999;
-    display: none;
-    align-items: center;
-    gap: 15px;
-}
-#admin-save-bar span { font-weight: bold; font-size: 0.95rem; color: #fff; }
-.save-btn {
-    background: #fff; color: #8b0000; padding: 8px 20px; border: none;
-    border-radius: 25px; font-weight: 900; cursor: pointer; transition: 0.3s;
-}
-.save-btn:hover { background: #000; color: #fff; transform: translateY(-2px); }
-
-[contenteditable="true"] {
-    outline: 2px dashed rgba(255, 26, 64, 0.5) !important;
-    background: rgba(255, 26, 64, 0.05) !important;
-    padding: 4px;
-    border-radius: 8px;
-    user-select: text !important;
-}
-</style>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
 </head>
 
 <body>
 
 <div class="bg"></div>
 <div class="fog"></div>
+
+<div class="vintage-overlay"></div>
+<div class="vignette"></div>
 
 <div id="netflix-intro">
     <div class="netflix-text">N</div>
@@ -630,7 +38,6 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
     </div>
 </div>
 
-<!-- 🌀 گرداب خفن ومپایر دایریز -->
 <div id="vampire-portal">
     <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
     <div class="portal-dimension" id="portal-dim">
@@ -640,7 +47,6 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
     </div>
 </div>
 
-<!-- 🛠️ نوار شناور ذخیره تغییرات ادمین -->
 <div id="admin-save-bar">
     <span>✍️ حالت ادیتور فعال است. تغییرات متون را اعمال کنید.</span>
     <button class="save-btn" onclick="saveWebsiteTexts()">ذخیره کل تغییرات</button>
@@ -651,20 +57,18 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
         <div class="secret-title">🔒 THE VAULT</div>
         <input id="secret-pass" type="password" placeholder="رمز بخش رازها را وارد کن..." style="margin-bottom:20px;">
         <button class="login-btn" onclick="checkSecret()">رمزگشایی رازها</button>
-        
         <div id="secret-content">
             تنها راز من تویی نیایشم تو بودی که تو سختی ها کنارم بودی 💕🫂<br>
             عاشقتم دخترم و همیشه کنارتم 🫠🫂💕<br>
             تو فرشته‌ منی منم فرشته‌ی تو :)
         </div>
-        
         <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:20px; cursor:pointer; font-weight:700; font-size:0.9rem;">بستن صندوقچه</button>
     </div>
 </div>
 
 <div class="navbar" id="navbar">
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
-    <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
+    <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش (تکن رترو)</a>
     <a href="#story-sec">داستان عشق ما</a>
     <a href="#dates-sec">تاریخ‌ها</a>
     <a href="#mobin-sec">دنیای Mobin</a>
@@ -676,7 +80,7 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
     <a href="javascript:void(0)" onclick="openSecret()">🔒 رازها</a>
 </div>
 
-<div id="main">
+<div id="main" class="main-jitter-wrapper">
     <div class="container">
         
         <div class="web-section" id="letter-sec">
@@ -688,28 +92,33 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
             <div class="text" id="typed-text" data-key="love_letter"></div>
         </div>
 
-        <!-- 🎮 بخش مینی‌گیم -->
         <div class="web-section" id="game-sec">
-            <div class="section-title">مأموریت نجات نیایش 🩸</div>
-            <p style="text-align: center; color: #ddd; margin-bottom: 20px;">من (مبین) به عنوان یک ومپایر، از بین تاریکی‌ها میام تا هر کسی که سر راهمه رو نابود کنم و تو رو تو بغلم بگیرم!</p>
+            <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION 🩸</div>
             
-            <div class="game-container">
+            <div class="game-arcade-cabinet">
                 <div id="game-overlay">
-                    <div class="game-title">Vampire's Rescue</div>
-                    <div style="color:#aaa; font-size:0.9rem;">برای نابودی دشمنان ضربه بزن و به نیایش برس</div>
-                    <button class="start-game-btn" onclick="startGame()">شروع نبرد</button>
+                    <div class="game-title">Vampire Fighting Arena</div>
+                    <div style="color:#aaa; font-size:0.95rem; margin-bottom: 10px;">در نقش ومپایر با سبک فایتینگ رترو حریفان را در هم بکوب!</div>
+                    <button class="start-game-btn" onclick="startArcadeGame()">شروع مبارزه حماسی</button>
                 </div>
-                <div class="game-ui">
-                    <span id="score-display">دشمنان نابود شده: 0 / 15</span>
-                    <span style="color: #ffb6c1;">هدف: آغوش نیایش ❤️</span>
+                
+                <div class="arcade-hud">
+                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p1-health"></div></div>
+                    <div class="tekken-timer" id="arcade-timer-ui">99</div>
+                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p2-health"></div></div>
                 </div>
-                <canvas id="gameCanvas" width="800" height="350"></canvas>
-                <div class="game-controls">
-                    <button class="game-btn" id="btn-left">⬅️</button>
-                    <button class="game-btn attack" id="btn-attack">مشت / Slash</button>
-                    <button class="game-btn" id="btn-right">➡️</button>
+
+                <div class="arcade-screen-container">
+                    <canvas id="tekkenCanvas"></canvas>
+                    <div class="crt-scanlines"></div> </div>
+
+                <div class="arcade-controls">
+                    <button class="arcade-btn" id="btn-left">⬅️ عقب</button>
+                    <button class="arcade-btn" id="btn-attack" style="background: rgba(139,0,0,0.4); border-color:#ff1a40;">ATTACK / مشت ومپایری 👊</button>
+                    <button class="arcade-btn" id="btn-right">جلو ➡️</button>
                 </div>
             </div>
+            <div style="text-align:center; color:rgba(255,255,255,0.4); font-size:0.85rem; margin-top:12px;">راهنمای کیبورد: حرکت با کلیدهای جهت‌نما <b>(Left/Right)</b> و زدن ضربه زنجیره‌ای با کلید <b>Space</b></div>
         </div>
 
         <div class="web-section" id="story-sec">
@@ -768,7 +177,7 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
                 <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
                     <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
                     <h4 data-key="niyayesh_series_title">The Vampire Diaries</h4>
-                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
+                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، fانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
                 </div>
                 <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
                     <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
@@ -826,7 +235,8 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
     </div>
 </div>
 
-<!-- اسکریپت‌های لاگین، افکت‌ها و فایربیس -->
+<script src="game.js"></script>
+
 <script>
 let isAdmin = false;
 let loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
@@ -901,7 +311,6 @@ function checkSecret() {
     } else { alert("رمز صندوقچه اشتباه است... رازها محافظت شده هستند!"); }
 }
 
-// تولید افکت‌های ذرات پس‌زمینه سایت
 function createCrimsonParticles() {
     const colors = ['rgba(255, 26, 64, 0.3)', 'rgba(139, 0, 0, 0.25)', 'rgba(255, 255, 255, 0.15)'];
     for(let i = 0; i < 40; i++) {
@@ -919,14 +328,10 @@ function createCrimsonParticles() {
 }
 function playRomanticSound() { try { let ctx = new (window.AudioContext || window.webkitAudioContext)(); let t = ctx.currentTime; function playTone(freq, type, startTime, duration, vol) { let osc = ctx.createOscillator(); let gain = ctx.createGain(); osc.type = type; osc.frequency.value = freq; gain.gain.setValueAtTime(0, startTime); gain.gain.linearRampToValueAtTime(vol, startTime + 0.4); gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration); osc.connect(gain); gain.connect(ctx.destination); osc.start(startTime); osc.stop(startTime + duration); } playTone(261.63, 'sine', t, 3.2, 0.4); playTone(311.13, 'sine', t, 3.2, 0.4); playTone(392.00, 'sine', t, 3.2, 0.4); playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); } catch(e) {} }
 
-// فعالسازی حالت ویرایش ادمین
 function enableEditableMode() {
     document.querySelectorAll('[data-key]').forEach(el => { el.setAttribute('contenteditable', 'true'); });
 }
 
-// ------------------------------------------
-// 🌀 منطق گرداب و پورتال با Canvas
-// ------------------------------------------
 let vortexAnimation;
 function openPortal() {
     const portal = document.getElementById("vampire-portal");
@@ -935,13 +340,9 @@ function openPortal() {
     const q = document.getElementById("pt-q");
     const st = document.getElementById("pt-st");
     const btn = document.getElementById("pt-btn");
-
     portal.style.display = "flex";
-    
-    // اجرای انیمیشن گرداب کانواس
     startVortexCanvas();
     setTimeout(() => { vCanvas.style.opacity = "1"; }, 100);
-
     setTimeout(() => {
         dim.style.opacity = "1";
         q.style.opacity = "1"; q.style.transform = "translateY(0) scale(1)";
@@ -954,22 +355,14 @@ function closePortal() {
     const portal = document.getElementById("vampire-portal");
     const dim = document.getElementById("portal-dim");
     const vCanvas = document.getElementById("vortexCanvas");
-    
-    dim.style.opacity = "0";
-    vCanvas.style.opacity = "0";
-    
-    setTimeout(() => {
-        portal.style.display = "none";
-        cancelAnimationFrame(vortexAnimation); // توقف رندر برای پرفورمنس
-    }, 1500);
+    dim.style.opacity = "0"; vCanvas.style.opacity = "0";
+    setTimeout(() => { portal.style.display = "none"; cancelAnimationFrame(vortexAnimation); }, 1500);
 }
 
 function startVortexCanvas() {
     const canvas = document.getElementById('vortexCanvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
     let particles = [];
     for(let i=0; i<300; i++) {
         particles.push({
@@ -980,329 +373,107 @@ function startVortexCanvas() {
             color: Math.random() > 0.5 ? '#ff1a40' : '#4a0000'
         });
     }
-
-    let centerX = canvas.width / 2;
-    let centerY = canvas.height / 2;
-
+    let centerX = canvas.width / 2; let centerY = canvas.height / 2;
     function drawVortex() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.15)"; // کشش و تاری
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+        ctx.fillStyle = "rgba(0, 0, 0, 0.15)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
         particles.forEach(p => {
-            p.angle += p.speed;
-            p.radius -= p.radius * 0.015; // مکش به داخل
-
-            if(p.radius < 5) {
-                p.radius = Math.max(canvas.width, canvas.height); // ریست ذرات
-            }
-
-            let x = centerX + Math.cos(p.angle) * p.radius;
-            let y = centerY + Math.sin(p.angle) * p.radius;
-
-            ctx.beginPath();
-            ctx.arc(x, y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = p.color;
-            ctx.fill();
+            p.angle += p.speed; p.radius -= p.radius * 0.015;
+            if(p.radius < 5) { p.radius = Math.max(canvas.width, canvas.height); }
+            let x = centerX + Math.cos(p.angle) * p.radius; let y = centerY + Math.sin(p.angle) * p.radius;
+            ctx.beginPath(); ctx.arc(x, y, p.size, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.shadowBlur = 15; ctx.shadowColor = p.color; ctx.fill();
         });
-
-        // کشیدن مرکز سیاهچاله
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, 50, 0, Math.PI * 2);
-        ctx.fillStyle = "#000";
-        ctx.shadowBlur = 100;
-        ctx.shadowColor = "#ff1a40";
-        ctx.fill();
-
+        ctx.beginPath(); ctx.arc(centerX, centerY, 50, 0, Math.PI * 2); ctx.fillStyle = "#000"; ctx.shadowBlur = 100; ctx.shadowColor = "#ff1a40"; ctx.fill();
         vortexAnimation = requestAnimationFrame(drawVortex);
     }
     drawVortex();
 }
 
-// ------------------------------------------
-// 🎮 منطق مینی‌گیم نجات نیایش (Vampire Game)
-// ------------------------------------------
-const gameCanvas = document.getElementById("gameCanvas");
-const ctx = gameCanvas.getContext("2d");
-let isPlaying = false;
-let gameLoopId;
-
-const player = { x: 50, y: 200, width: 40, height: 60, speed: 5, color: '#ff1a40', attacking: false, attackTimer: 0 };
-const niyayesh = { x: 720, y: 200, width: 40, height: 60, color: '#ffb6c1' };
-let enemies = [];
-let score = 0;
-const targetScore = 15;
-let gameWon = false;
-
-// کنترل‌ها
-let keys = { ArrowLeft: false, ArrowRight: false, Space: false };
-
-window.addEventListener('keydown', e => {
-    if(e.code === 'ArrowLeft') keys.ArrowLeft = true;
-    if(e.code === 'ArrowRight') keys.ArrowRight = true;
-    if(e.code === 'Space') { keys.Space = true; attack(); }
-});
-window.addEventListener('keyup', e => {
-    if(e.code === 'ArrowLeft') keys.ArrowLeft = false;
-    if(e.code === 'ArrowRight') keys.ArrowRight = false;
-    if(e.code === 'Space') keys.Space = false;
-});
-
-// تاچ اسکرین
-document.getElementById('btn-left').addEventListener('touchstart', (e)=>{ e.preventDefault(); keys.ArrowLeft = true; });
-document.getElementById('btn-left').addEventListener('touchend', (e)=>{ e.preventDefault(); keys.ArrowLeft = false; });
-document.getElementById('btn-right').addEventListener('touchstart', (e)=>{ e.preventDefault(); keys.ArrowRight = true; });
-document.getElementById('btn-right').addEventListener('touchend', (e)=>{ e.preventDefault(); keys.ArrowRight = false; });
-document.getElementById('btn-attack').addEventListener('touchstart', (e)=>{ e.preventDefault(); attack(); });
-
-// ماوس برای دکمه‌ها
-document.getElementById('btn-left').onmousedown = () => keys.ArrowLeft = true;
-document.getElementById('btn-left').onmouseup = () => keys.ArrowLeft = false;
-document.getElementById('btn-left').onmouseleave = () => keys.ArrowLeft = false;
-document.getElementById('btn-right').onmousedown = () => keys.ArrowRight = true;
-document.getElementById('btn-right').onmouseup = () => keys.ArrowRight = false;
-document.getElementById('btn-right').onmouseleave = () => keys.ArrowRight = false;
-document.getElementById('btn-attack').onmousedown = () => attack();
-
-function attack() {
-    if(!isPlaying || gameWon || player.attacking) return;
-    player.attacking = true;
-    player.attackTimer = 15; // مدت زمان انیمیشن حمله
-    
-    // بررسی برخورد ضربه با دشمن
-    const attackRange = { x: player.x + player.width, y: player.y, width: 60, height: 60 };
-    for(let i = enemies.length - 1; i >= 0; i--) {
-        let e = enemies[i];
-        if(attackRange.x < e.x + e.width && attackRange.x + attackRange.width > e.x &&
-           attackRange.y < e.y + e.height && attackRange.y + attackRange.height > e.y) {
-            enemies.splice(i, 1);
-            score++;
-            document.getElementById('score-display').innerText = `دشمنان نابود شده: ${score} / ${targetScore}`;
-            
-            if(score >= targetScore) {
-                triggerWin();
-            }
-        }
-    }
-}
-
-function spawnEnemy() {
-    if(!isPlaying || gameWon) return;
-    enemies.push({ x: 800, y: 200, width: 40, height: 60, speed: 2 + Math.random()*2 });
-    setTimeout(spawnEnemy, Math.random() * 1500 + 500);
-}
-
-function triggerWin() {
-    gameWon = true;
-    enemies = [];
-    document.getElementById('score-display').innerText = "مسیر امن شد! به نیایش برس...";
-}
-
-function updateGame() {
-    if(!isPlaying) return;
-
-    if(!gameWon) {
-        if(keys.ArrowLeft && player.x > 0) player.x -= player.speed;
-        if(keys.ArrowRight && player.x < 600) player.x += player.speed;
-
-        enemies.forEach(e => {
-            e.x -= e.speed;
-            // اگر دشمن رسید به بازیکن (فقط هلش میده عقب)
-            if(e.x < player.x + player.width && e.x + e.width > player.x) {
-                player.x -= 10;
-                e.x += 20;
-            }
-        });
-    } else {
-        // حرکت خودکار به سمت نیایش برای پایان رمانتیک
-        if(player.x < niyayesh.x - player.width + 10) {
-            player.x += 2;
-        } else {
-            // پایان رسیدن
-            isPlaying = false;
-            document.getElementById('game-overlay').style.display = "flex";
-            document.getElementById('game-overlay').innerHTML = `
-                <div style="font-size: 5rem;">👩‍❤️‍💋‍👨</div>
-                <div class="game-title" style="margin-top:20px;">تا ابد مال هم...</div>
-                <div style="color:#fff;">تو تونستی فرشته‌ت رو نجات بدی! 🩸❤️</div>
-                <button class="start-game-btn" onclick="startGame()">تکرار نبرد</button>
-            `;
-        }
-    }
-
-    if(player.attacking) {
-        player.attackTimer--;
-        if(player.attackTimer <= 0) player.attacking = false;
-    }
-}
-
-function drawGame() {
-    ctx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
-
-    // خط زمین
-    ctx.fillStyle = "rgba(255,26,64,0.2)";
-    ctx.fillRect(0, 260, gameCanvas.width, 90);
-
-    // کشیدن نیایش (سمت راست - هدف)
-    if(score >= targetScore || gameWon) {
-        ctx.fillStyle = niyayesh.color;
-        ctx.shadowColor = "#ffb6c1";
-        ctx.shadowBlur = 20;
-        ctx.fillRect(niyayesh.x, niyayesh.y, niyayesh.width, niyayesh.height);
-        ctx.fillStyle = "#fff";
-        ctx.font = "16px Vazirmatn";
-        ctx.fillText("Niyayesh", niyayesh.x - 10, niyayesh.y - 15);
-        ctx.shadowBlur = 0;
-    }
-
-    // کشیدن بازیکن (ومپایر)
-    ctx.fillStyle = player.color;
-    ctx.fillRect(player.x, player.y, player.width, player.height);
-    // چشم‌های قرمز ومپایر
-    ctx.fillStyle = "#fff"; ctx.fillRect(player.x + 25, player.y + 10, 5, 5);
-    
-    // افکت شمشیر/حمله
-    if(player.attacking) {
-        ctx.fillStyle = "rgba(255, 0, 0, 0.7)";
-        ctx.beginPath();
-        ctx.arc(player.x + 40, player.y + 30, 40, -Math.PI/2, Math.PI/2);
-        ctx.fill();
-    }
-
-    // کشیدن دشمنان
-    ctx.fillStyle = "#444";
-    enemies.forEach(e => {
-        ctx.fillRect(e.x, e.y, e.width, e.height);
-        ctx.fillStyle = "#ff1a40"; ctx.fillRect(e.x + 5, e.y + 10, 5, 5); // چشم دشمن
-        ctx.fillStyle = "#444";
-    });
-}
-
-function gameLoop() {
-    updateGame();
-    drawGame();
-    if(isPlaying || gameWon) {
-        gameLoopId = requestAnimationFrame(gameLoop);
-    }
-}
-
-function startGame() {
-    document.getElementById('game-overlay').style.display = "none";
-    player.x = 50;
-    score = 0;
-    enemies = [];
-    gameWon = false;
-    isPlaying = true;
-    document.getElementById('score-display').innerText = `دشمنان نابود شده: 0 / ${targetScore}`;
-    spawnEnemy();
-    gameLoop();
-}
-
-// ------------------------------------------
-// 🔥 اسکریپت فایربیس و مدیریت دیتابیس
-// ------------------------------------------
-  const firebaseConfig = {
+// --- بخش فایربیس کانفیگ شما ---
+const firebaseConfig = {
     apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
     authDomain: "niyayesh-universe.firebaseapp.com",
     projectId: "niyayesh-universe",
     storageBucket: "niyayesh-universe.firebasestorage.app",
     messagingSenderId: "675804346928",
     appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
-  };
+};
 
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-  const storage = firebase.storage();
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const storage = firebase.storage();
 
-  db.collection("website_data").doc("texts").onSnapshot((doc) => {
-      if (doc.exists) {
-          const data = doc.data();
-          if(data.love_letter) { loveLetter = data.love_letter; }
-          document.querySelectorAll('[data-key]').forEach(el => {
-              const key = el.getAttribute('data-key');
-              if(data[key] !== undefined) {
-                  if(key === "love_letter" && document.getElementById("main").style.display !== "block") { return; }
-                  el.innerHTML = data[key];
-              }
-          });
-      }
-  });
+db.collection("website_data").doc("texts").onSnapshot((doc) => {
+    if (doc.exists) {
+        const data = doc.data();
+        if(data.love_letter) { loveLetter = data.love_letter; }
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if(data[key] !== undefined) {
+                if(key === "love_letter" && document.getElementById("main").style.display !== "block") { return; }
+                el.innerHTML = data[key];
+            }
+        });
+    }
+});
 
-  db.collection("website_data").doc("config").get().then((doc) => {
-      if (doc.exists) {
-          const data = doc.data();
-          if(data.tvd_video_url) {
-              const tvdFrame = document.getElementById("tvd-iframe");
-              if(tvdFrame) tvdFrame.src = data.tvd_video_url;
-          }
-      }
-  });
+db.collection("website_data").doc("config").get().then((doc) => {
+    if (doc.exists) {
+        const data = doc.data();
+        if(data.tvd_video_url) {
+            const tvdFrame = document.getElementById("tvd-iframe");
+            if(tvdFrame) tvdFrame.src = data.tvd_video_url;
+        }
+    }
+});
 
-  function saveWebsiteTexts() {
-      if(!isAdmin) return;
-      const updatedTexts = {};
-      document.querySelectorAll('[data-key]').forEach(el => {
-          const key = el.getAttribute('data-key');
-          let content = el.innerHTML;
-          if(key === "love_letter") { content = el.innerHTML.replace(/<br\s*\/?>/gi, "\n"); }
-          updatedTexts[key] = content;
-      });
+function saveWebsiteTexts() {
+    if(!isAdmin) return;
+    const updatedTexts = {};
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        let content = el.innerHTML;
+        if(key === "love_letter") { content = el.innerHTML.replace(/<br\s*\/?>/gi, "\n"); }
+        updatedTexts[key] = content;
+    });
+    db.collection("website_data").doc("texts").set(updatedTexts, { merge: true })
+    .then(() => { alert("تغییرات با موفقیت برای نیایش اعمال شد! ❤️"); })
+    .catch(err => { console.error(err); alert("خطا در ذخیره."); });
+}
 
-      db.collection("website_data").doc("texts").set(updatedTexts, { merge: true })
-      .then(() => { alert("تمام تغییرات متون با موفقیت ذخیره شد و برای نیایش اعمال شد! ❤️"); })
-      .catch(err => { console.error(err); alert("خطا در ذخیره اطلاعات."); });
-  }
+function triggerUpload() { if(isAdmin) { document.getElementById('file-input').click(); } }
 
-  function triggerUpload() { if(isAdmin) { document.getElementById('file-input').click(); } }
+async function handleFileUpload(event) {
+    const file = event.target.files[0]; if(!file) return;
+    const memoryText = prompt("یه متن قشنگ برای این خاطره بنویس:"); if(memoryText === null) return;
+    const uploadBox = document.getElementById("upload-box");
+    uploadBox.innerHTML = "⏳ در حال آپلود..."; uploadBox.style.pointerEvents = "none";
+    const isVideo = file.type.startsWith('video');
+    const storageRef = storage.ref('memories/' + Date.now() + '_' + file.name);
+    try {
+        const snapshot = await storageRef.put(file);
+        const downloadURL = await snapshot.ref.getDownloadURL();
+        await db.collection("memories").add({ url: downloadURL, text: memoryText, type: isVideo ? 'video' : 'image', timestamp: firebase.firestore.FieldValue.serverTimestamp() });
+        alert("خاطره ثبت شد!");
+        uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید`;
+        uploadBox.style.pointerEvents = "auto";
+    } catch (error) {
+        console.error(error); alert("خطا در آپلود.");
+        uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید`;
+        uploadBox.style.pointerEvents = "auto";
+    }
+}
 
-  async function handleFileUpload(event) {
-      const file = event.target.files[0];
-      if(!file) return;
-      const memoryText = prompt("یه متن قشنگ برای این خاطره بنویس:");
-      if(memoryText === null) return;
-
-      const uploadBox = document.getElementById("upload-box");
-      uploadBox.innerHTML = "⏳ در حال آپلود..."; uploadBox.style.pointerEvents = "none";
-
-      const isVideo = file.type.startsWith('video');
-      const storageRef = storage.ref('memories/' + Date.now() + '_' + file.name);
-
-      try {
-          const snapshot = await storageRef.put(file);
-          const downloadURL = await snapshot.ref.getDownloadURL();
-          await db.collection("memories").add({
-              url: downloadURL, text: memoryText, type: isVideo ? 'video' : 'image', timestamp: firebase.firestore.FieldValue.serverTimestamp()
-          });
-          alert("خاطره‌ی قشنگت با موفقیت ثبت شد!");
-          uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید (لمس کن)`;
-          uploadBox.style.pointerEvents = "auto";
-      } catch (error) {
-          console.error(error); alert("متاسفانه در آپلود مشکلی پیش اومد.");
-          uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید (لمس کن)`;
-          uploadBox.style.pointerEvents = "auto";
-      }
-  }
-
-  function loadFeed() {
-      db.collection("memories").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-          const postsArea = document.getElementById('posts-area');
-          postsArea.innerHTML = '';
-          if(snapshot.empty) {
-              postsArea.innerHTML = `<p style="text-align:center; color:gray;">هنوز خاطره‌ای ثبت نشده. اولین خاطره رو بساز!</p>`; return;
-          }
-          snapshot.forEach(doc => {
-              const data = doc.data();
-              let mediaHtml = data.type === 'video' ? `<video src="${data.url}" class="post-video" controls></video>` : `<img src="${data.url}" class="post-img" alt="Memory">`;
-              postsArea.innerHTML += `
-              <div class="post-card">
-                  <div class="post-header"><div class="avatar">M</div><div><div style="font-weight: 700;">Mobin</div><div style="font-size: 0.75rem; color: #ff1a40;">عاشق‌ترین پسر دنیا</div></div></div>
-                  ${mediaHtml}
-                  <div class="post-content">${data.text}</div>
-              </div>`;
-          });
-      });
-  }
+function loadFeed() {
+    db.collection("memories").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+        const postsArea = document.getElementById('posts-area'); postsArea.innerHTML = '';
+        if(snapshot.empty) { postsArea.innerHTML = `<p style="text-align:center; color:gray;">خاطره‌ای نیست.</p>`; return; }
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            let mediaHtml = data.type === 'video' ? `<video src="${data.url}" class="post-video" controls></video>` : `<img src="${data.url}" class="post-img">`;
+            postsArea.innerHTML += `<div class="post-card"><div class="post-header"><div class="avatar">M</div><div><div style="font-weight: 700;">Mobin</div><div style="font-size: 0.75rem; color: #ff1a40;">عاشق‌ترین پسر دنیا</div></div></div>${mediaHtml}<div class="post-content">${data.text}</div></div>`;
+        });
+    });
+}
 </script>
 
 </body>
