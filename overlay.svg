@@ -1,6 +1,34 @@
-<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <filter id="noiseFilter">
-    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/>
-  </filter>
-  <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
-</svg>
+/* 🎬 افکت سینمایی و اتمسفریک جدید (الهام گرفته از رفرنس‌های وب فشن) */
+.vintage-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* ترکیب یک وینیت عمیق دور صفحه و خطوط افقی فوق‌العاده ریز */
+    background: radial-gradient(circle, transparent 35%, rgba(3, 0, 1, 0.92) 95%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%);
+    background-size: 100% 100%, 100% 3px; /* خطوط بسیار ریز ۳ پیکسلی */
+    pointer-events: none; /* برای اینکه مانع کلیک روی دکمه‌های سایت نشود */
+    z-index: 9999;
+    opacity: 0.85;
+    
+    /* اضافه کردن انیمیشن پرپر زدن بسیار ملایم سینمایی */
+    animation: cinematicFlicker 0.15s infinite;
+}
+
+/* انیمیشن گلیچ و نوسان نور فرکانس پایین برای زنده کردن اتمسفر ومپایری */
+@keyframes cinematicFlicker {
+    0% { opacity: 0.83; }
+    50% { opacity: 0.86; }
+    100% { opacity: 0.83; }
+}
+
+/* نوار سایه پایینی برای عمق دادن به اسکرول سایت */
+.vignette {
+    position: fixed;
+    inset: 0;
+    box-shadow: inset 0 0 120px rgba(0,0,0,0.95);
+    pointer-events: none;
+    z-index: 9998;
+}
