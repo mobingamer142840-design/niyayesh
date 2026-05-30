@@ -233,6 +233,24 @@ body.dark-mode #theme-toggle {
 html { background: #080003; transition: background 0.5s ease; }
 body { background-attachment: fixed; } /* این خط باعث میشه بک‌گراند به کل صفحه بچسبه */
 
+        /* فیکس کردن ارتفاع و حاشیه‌های سافاری */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh; /* این خط معجزه می‌کنه و مشکل سافاری رو حل می‌کنه */
+    overflow-x: hidden;
+    background-color: var(--milky-white, #fff); /* رنگ پایه لایت */
+    transition: background-color 0.5s ease;
+}
+
+/* رفع باگ background-attachment تو سافاری */
+body {
+    position: relative;
+    background-attachment: scroll !important; 
+}
+
 /* تغییر متغیرهای پایه به رنگ‌های دارک و جذاب */
 body.dark-mode {
     --milky-white: #080003; 
@@ -911,69 +929,138 @@ function updateGame() {
     }
 }
 
-function drawGame() {
-    // بک‌گراند دارک
-    gCtx.fillStyle = '#0a0002';
-    gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
+/* ==========================================
+   MINI GAME LOGIC: FIGHT FOR NIYAYESH ⚔️🩸
+   ========================================== */
+document.addEventListener("DOMContentLoaded", function() {
+    const gCanvas = document.getElementById('love-game-canvas');
+    if (!gCanvas) return; // اگر تو صفحه‌ای باشیم که بازی نیست، ارور نده
+    
+    const gCtx = gCanvas.getContext('2d');
 
-    // رسم نیایش (وقتی دشمنان مردن)
-    if(niyayesh.active && !gameWon) {
-        gCtx.font = "30px Arial";
-        gCtx.textAlign = "center";
-        gCtx.fillText("💕", niyayesh.x, niyayesh.y + 10);
-        gCtx.shadowBlur = 20; gCtx.shadowColor = "#ffb3c6";
+    let player = { x: 50, y: 200, size: 20, speed: 5, color: '#fff', isAttacking: false };
+    let enemies = [];
+    let niyayesh = { x: 500, y: 200, size: 25, active: false };
+    let keys = {};
+    let gameLoopId;
+    let gameWon = false;
+
+    function initEnemies() {
+        enemies = [];
+        for(let i=0; i<5; i++) {
+            enemies.push({
+                x: 200 + Math.random() * 300,
+                y: 50 + Math.random() * 300,
+                size: 20, speed: 1 + Math.random() * 1.5,
+                hp: 3, alive: true
+            });
+        }
     }
 
-    gCtx.shadowBlur = 0; // ریست افکت
+    window.addEventListener('keydown', e => { keys[e.code] = true; });
+    window.addEventListener('keyup', e => { keys[e.code] = false; });
 
-    // رسم دشمنان
-    enemies.forEach(en => {
-        if(en.alive) {
-            gCtx.fillStyle = '#ff0a54'; // رنگ خون نئونی
-            gCtx.shadowBlur = 15; gCtx.shadowColor = '#ff0a54';
-            gCtx.beginPath();
-            gCtx.arc(en.x, en.y, en.size, 0, Math.PI*2);
-            gCtx.fill();
+    window.addEventListener('keydown', e => {
+        if(e.code === 'Space' && !player.isAttacking && !gameWon) {
+            player.isAttacking = true;
+            enemies.forEach(en => {
+                if(en.alive) {
+                    let dx = en.x - player.x; let dy = en.y - player.y;
+                    let dist = Math.sqrt(dx*dx + dy*dy);
+                    if(dist < 60) { en.hp -= 1; if(en.hp <= 0) en.alive = false; }
+                }
+            });
+            setTimeout(() => player.isAttacking = false, 200);
         }
     });
 
-    // رسم پلیر (مبین)
-    gCtx.fillStyle = player.isAttacking ? '#ffffff' : '#8a0024';
-    gCtx.shadowBlur = 20; gCtx.shadowColor = player.isAttacking ? '#ffffff' : '#8a0024';
-    gCtx.beginPath();
-    gCtx.arc(player.x, player.y, player.size, 0, Math.PI*2);
-    gCtx.fill();
+    function updateGame() {
+        if(gameWon) return;
 
-    // رسم افکت حمله
-    if(player.isAttacking) {
-        gCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-        gCtx.lineWidth = 3;
-        gCtx.beginPath();
-        gCtx.arc(player.x, player.y, player.size + 30, 0, Math.PI*2);
-        gCtx.stroke();
+        if(keys['ArrowUp'] && player.y > player.size) player.y -= player.speed;
+        if(keys['ArrowDown'] && player.y < gCanvas.height - player.size) player.y += player.speed;
+        if(keys['ArrowLeft'] && player.x > player.size) player.x -= player.speed;
+        if(keys['ArrowRight'] && player.x < gCanvas.width - player.size) player.x += player.speed;
+
+        let allDead = true;
+        enemies.forEach(en => {
+            if(en.alive) {
+                allDead = false;
+                if(en.x > player.x) en.x -= en.speed * 0.5;
+                if(en.x < player.x) en.x += en.speed * 0.5;
+                if(en.y > player.y) en.y -= en.speed * 0.5;
+                if(en.y < player.y) en.y += en.speed * 0.5;
+            }
+        });
+
+        if(allDead) niyayesh.active = true;
+
+        if(niyayesh.active) {
+            let dx = niyayesh.x - player.x; let dy = niyayesh.y - player.y;
+            if(Math.sqrt(dx*dx + dy*dy) < 30) {
+                gameWon = true;
+                document.getElementById('game-win-screen').style.display = 'flex';
+            }
+        }
     }
-    
-    gCtx.shadowBlur = 0; // ریست افکت
-}
 
-function runGame() {
-    updateGame();
-    drawGame();
-    gameLoopId = requestAnimationFrame(runGame);
-}
+    function drawGame() {
+        gCtx.fillStyle = '#0a0002';
+        gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height);
 
-function resetGame() {
-    player.x = 50; player.y = 200;
-    niyayesh.active = false;
-    gameWon = false;
-    document.getElementById('game-win-screen').style.display = 'none';
+        if(niyayesh.active && !gameWon) {
+            gCtx.font = "30px Arial";
+            gCtx.textAlign = "center";
+            gCtx.fillText("💕", niyayesh.x, niyayesh.y + 10);
+            gCtx.shadowBlur = 20; gCtx.shadowColor = "#ffb3c6";
+        }
+
+        gCtx.shadowBlur = 0;
+
+        enemies.forEach(en => {
+            if(en.alive) {
+                gCtx.fillStyle = '#ff0a54';
+                gCtx.shadowBlur = 15; gCtx.shadowColor = '#ff0a54';
+                gCtx.beginPath();
+                gCtx.arc(en.x, en.y, en.size, 0, Math.PI*2);
+                gCtx.fill();
+            }
+        });
+
+        gCtx.fillStyle = player.isAttacking ? '#ffffff' : '#8a0024';
+        gCtx.shadowBlur = 20; gCtx.shadowColor = player.isAttacking ? '#ffffff' : '#8a0024';
+        gCtx.beginPath();
+        gCtx.arc(player.x, player.y, player.size, 0, Math.PI*2);
+        gCtx.fill();
+
+        if(player.isAttacking) {
+            gCtx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+            gCtx.lineWidth = 3;
+            gCtx.beginPath();
+            gCtx.arc(player.x, player.y, player.size + 30, 0, Math.PI*2);
+            gCtx.stroke();
+        }
+        
+        gCtx.shadowBlur = 0;
+    }
+
+    function runGame() {
+        updateGame();
+        drawGame();
+        gameLoopId = requestAnimationFrame(runGame);
+    }
+
+    window.resetGame = function() {
+        player.x = 50; player.y = 200;
+        niyayesh.active = false;
+        gameWon = false;
+        document.getElementById('game-win-screen').style.display = 'none';
+        initEnemies();
+    }
+
     initEnemies();
-}
-
-// شروع بازی وقتی صفحه لود میشه
-initEnemies();
-runGame();
-
+    runGame();
+});
 
 </script>
 </body>
