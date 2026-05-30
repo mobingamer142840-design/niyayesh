@@ -9,10 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
     canvas.width = 800;
     canvas.height = 350;
 
-    const player = { x: 80, y: 200, width: 30, height: 90, speed: 6, color: '#ff1a40', attacking: false, attackTimer: 0, health: 100 };
+    const player = { x: 80, y: 200, width: 35, height: 95, speed: 7, color: '#ff1a40', attacking: false, attackTimer: 0, health: 100 };
     const niyayesh = { x: 720, y: 200, width: 30, height: 90, color: '#ffb6c1' };
     let enemies = [];
     let bloodParticles = []; 
+    let dashParticles = [];
     let score = 0;
     const targetScore = 15;
     let gameWon = false;
@@ -37,22 +38,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnAttack = document.getElementById('btn-attack');
 
     if(btnLeft) {
+        btnLeft.addEventListener('mousedown', ()=> keys.ArrowLeft = true);
+        btnLeft.addEventListener('mouseup', ()=> keys.ArrowLeft = false);
         btnLeft.addEventListener('touchstart', (e)=>{ e.preventDefault(); keys.ArrowLeft = true; });
         btnLeft.addEventListener('touchend', (e)=>{ e.preventDefault(); keys.ArrowLeft = false; });
     }
     if(btnRight) {
+        btnRight.addEventListener('mousedown', ()=> keys.ArrowRight = true);
+        btnRight.addEventListener('mouseup', ()=> keys.ArrowRight = false);
         btnRight.addEventListener('touchstart', (e)=>{ e.preventDefault(); keys.ArrowRight = true; });
         btnRight.addEventListener('touchend', (e)=>{ e.preventDefault(); keys.ArrowRight = false; });
     }
     if(btnAttack) {
+        btnAttack.addEventListener('mousedown', triggerArcadeAttack);
         btnAttack.addEventListener('touchstart', (e)=>{ e.preventDefault(); triggerArcadeAttack(); });
-        btnAttack.addEventListener('click', (e)=>{ triggerArcadeAttack(); }); // برای کلیک با موس
     }
 
     function createBloodSplatter(x, y) {
         for(let i=0; i<20; i++) {
             bloodParticles.push({
-                x: x, y: y + 20,
+                x: x + 15, y: y + 30,
                 vx: (Math.random() - 0.5) * 12,
                 vy: (Math.random() - 1) * 10,
                 life: 1.0,
@@ -64,9 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function triggerArcadeAttack() {
         if(!isPlaying || gameWon || player.attacking) return;
         player.attacking = true;
-        player.attackTimer = 14; 
+        player.attackTimer = 15; 
         
-        const hitZone = { x: player.x + player.width, y: player.y, width: 80, height: player.height };
+        const hitZone = { x: player.x + player.width, y: player.y - 20, width: 85, height: player.height + 40 };
         
         for(let i = enemies.length - 1; i >= 0; i--) {
             let e = enemies[i];
@@ -78,16 +83,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 score++;
                 
                 const scoreDisp = document.getElementById('score-display');
-                if(scoreDisp) scoreDisp.innerText = `موانع نابود شده: ${score} / ${targetScore}`;
+                if(scoreDisp) scoreDisp.innerText = `دشمنان نابود شده: ${score} / ${targetScore}`;
                 
-                let currentEnemyHealth = Math.max(0, 100 - (score * 6.7));
+                let currentEnemyHealth = Math.max(0, 100 - (score * (100/targetScore)));
                 const p2Health = document.getElementById('p2-health');
                 if(p2Health) p2Health.style.width = currentEnemyHealth + '%';
 
                 if(score >= targetScore) {
                     gameWon = true;
                     enemies = [];
-                    if(scoreDisp) scoreDisp.innerText = "مسیر امن شد! به سمت نیایش حرکت کن...";
+                    if(scoreDisp) scoreDisp.innerText = "مسیر امن شد! به آغوش نیایش برو...";
                 }
             }
         }
@@ -95,42 +100,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function spawnArcadeEnemies() {
         if(!isPlaying || gameWon) return;
-        enemies.push({ x: 850, y: 200, width: 30, height: 90, speed: 2.5 + Math.random() * 2.5 });
+        enemies.push({ x: 850, y: 200, width: 35, height: 95, speed: 2.5 + Math.random() * 3 });
         setTimeout(spawnArcadeEnemies, Math.random() * 1000 + 500);
-    }
-
-    function screenShake() {
-        const screen = document.getElementById('arcade-screen');
-        if(!screen) return;
-        screen.style.transform = `translate(${Math.random()*10 - 5}px, ${Math.random()*10 - 5}px)`;
-        screen.style.filter = "saturate(200%) brightness(1.3)";
-        setTimeout(() => {
-            screen.style.transform = "translate(0, 0)";
-            screen.style.filter = "none";
-        }, 100);
     }
 
     function updateArcadePhysics() {
         if(!isPlaying) return;
 
         if(!gameWon) {
-            if(keys.ArrowLeft && player.x > 0) player.x -= player.speed;
-            if(keys.ArrowRight && player.x < 650) player.x += player.speed;
+            if(keys.ArrowLeft && player.x > 0) { player.x -= player.speed; dashParticles.push({x: player.x+player.width, y: player.y+80, life: 1}); }
+            if(keys.ArrowRight && player.x < 650) { player.x += player.speed; dashParticles.push({x: player.x, y: player.y+80, life: 1}); }
 
             enemies.forEach(e => {
                 e.x -= e.speed;
                 if(e.x < player.x + player.width && e.x + e.width > player.x) {
-                    player.x = Math.max(0, player.x - 30);
-                    e.x += 30;
-                    player.health = Math.max(0, player.health - 6);
+                    player.x = Math.max(0, player.x - 40);
+                    e.x += 40;
+                    player.health = Math.max(0, player.health - 10);
                     const p1Health = document.getElementById('p1-health');
                     if(p1Health) p1Health.style.width = player.health + '%';
-                    screenShake(); 
+                    
+                    document.getElementById('arcade-screen').style.filter = "saturate(300%) contrast(1.5) hue-rotate(-20deg)";
+                    setTimeout(()=> { document.getElementById('arcade-screen').style.filter = "none"; }, 150);
                 }
             });
         } else {
-            if(player.x < niyayesh.x - player.width + 5) {
-                player.x += 4;
+            if(player.x < niyayesh.x - player.width + 10) {
+                player.x += 3;
             } else {
                 isPlaying = false;
                 clearInterval(timerInterval);
@@ -139,9 +135,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     gameOverlay.style.display = "flex";
                     gameOverlay.innerHTML = `
                         <div style="font-size: 4rem; filter: drop-shadow(0 0 20px #ff1a40);">👩‍❤️‍💋‍👨</div>
-                        <div class="section-title" style="margin-top:15px; font-size:1.6rem; font-family:'Lalezar'; text-shadow: 0 0 10px #ff1a40;">تا ابد در آغوش هم...</div>
-                        <div style="color:#fff; font-weight:bold; font-size:1rem; margin-bottom:20px; text-align:center;">مبین با موفقیت تمام موانع رو نابود کرد و به نیایش رسید! ❤️</div>
-                        <button class="login-btn glow-btn" onclick="startArcadeGame()" style="width:auto; padding:10px 30px; font-size:0.9rem;">نبرد مجدد</button>
+                        <div class="game-title" style="margin-top:15px;">تا ابد در آغوش هم...</div>
+                        <div style="color:#ddd; margin-bottom:20px;">مبین موانع رو نابود کرد و به نیایش رسید! ❤️🩸</div>
+                        <button class="login-btn game-start-btn" onclick="startArcadeGame()">نبرد مجدد</button>
                     `;
                 }
             }
@@ -154,43 +150,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for(let i = bloodParticles.length - 1; i >= 0; i--) {
             let p = bloodParticles[i];
-            p.x += p.vx;
-            p.y += p.vy;
-            p.vy += 0.6; // جاذبه
-            p.life -= 0.04;
+            p.x += p.vx; p.y += p.vy; p.vy += 0.6; p.life -= 0.04;
             if(p.life <= 0) bloodParticles.splice(i, 1);
+        }
+        for(let i = dashParticles.length - 1; i >= 0; i--) {
+            let d = dashParticles[i];
+            d.life -= 0.1;
+            if(d.life <= 0) dashParticles.splice(i, 1);
         }
     }
 
     function drawCharacter(charObj, type) {
         ctx.save();
         if (type === 'player') {
-            ctx.shadowColor = '#ff1a40'; ctx.shadowBlur = 15; ctx.fillStyle = '#ff1a40';
-            ctx.fillRect(charObj.x, charObj.y + 20, charObj.width, charObj.height - 20);
+            ctx.shadowColor = '#ff1a40'; ctx.shadowBlur = 20; ctx.fillStyle = '#ff1a40';
+            ctx.fillRect(charObj.x, charObj.y + 15, charObj.width, charObj.height - 15);
             ctx.fillStyle = '#ffccd5'; ctx.fillRect(charObj.x + 5, charObj.y, charObj.width - 10, 20);
             
-            ctx.shadowColor = '#ff1a40'; ctx.strokeStyle = '#fff'; ctx.lineWidth = 4;
+            ctx.strokeStyle = '#fff'; ctx.lineWidth = 5; ctx.lineCap = "round";
             ctx.beginPath();
             if (charObj.attacking) {
-                ctx.moveTo(charObj.x + charObj.width, charObj.y + 40);
-                ctx.lineTo(charObj.x + charObj.width + 65, charObj.y + 10);
+                ctx.moveTo(charObj.x + charObj.width, charObj.y + 35);
+                ctx.lineTo(charObj.x + charObj.width + 65, charObj.y + 5);
             } else {
                 ctx.moveTo(charObj.x, charObj.y + 35);
-                ctx.lineTo(charObj.x - 15, charObj.y + 5);
+                ctx.lineTo(charObj.x - 10, charObj.y + 15);
             }
             ctx.stroke();
 
         } else if (type === 'niyayesh') {
-            ctx.shadowColor = '#ffb6c1'; ctx.shadowBlur = 18; ctx.fillStyle = '#ffb6c1';
-            ctx.fillRect(charObj.x, charObj.y + 20, charObj.width, charObj.height - 20);
+            ctx.shadowColor = '#ffb6c1'; ctx.shadowBlur = 25; ctx.fillStyle = '#ffb6c1';
+            ctx.fillRect(charObj.x, charObj.y + 15, charObj.width, charObj.height - 15);
             ctx.fillStyle = '#ffe5ec'; ctx.fillRect(charObj.x + 5, charObj.y, charObj.width - 10, 20);
-            ctx.fillStyle = '#111'; ctx.fillRect(charObj.x + 3, charObj.y, 6, 40); // موها
+            ctx.fillStyle = '#111'; ctx.fillRect(charObj.x + 3, charObj.y, 8, 45); // موها
 
         } else if (type === 'enemy') {
-            ctx.shadowColor = '#8b0000'; ctx.shadowBlur = 10; ctx.fillStyle = '#1c1c1c';
-            ctx.fillRect(charObj.x, charObj.y + 20, charObj.width, charObj.height - 20);
-            ctx.fillStyle = '#2d2d2d'; ctx.fillRect(charObj.x + 4, charObj.y, charObj.width - 8, 20);
-            ctx.fillStyle = '#ff1a40'; ctx.fillRect(charObj.x + 6, charObj.y + 6, 4, 4); // چشم قرمز
+            ctx.shadowColor = '#8b0000'; ctx.shadowBlur = 15; ctx.fillStyle = '#1a1a1a';
+            ctx.fillRect(charObj.x, charObj.y + 15, charObj.width, charObj.height - 15);
+            ctx.fillStyle = '#333'; ctx.fillRect(charObj.x + 5, charObj.y, charObj.width - 10, 20);
+            ctx.fillStyle = '#ff1a40'; ctx.beginPath(); ctx.arc(charObj.x + 10, charObj.y + 10, 3, 0, Math.PI*2); ctx.fill(); // چشم قرمز
         }
         ctx.restore();
     }
@@ -198,34 +196,39 @@ document.addEventListener("DOMContentLoaded", () => {
     function drawArcadeFrame() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // بک‌گراند تاریک
         let bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        bgGrad.addColorStop(0, '#0a0002'); bgGrad.addColorStop(1, '#000000');
+        bgGrad.addColorStop(0, '#050001'); bgGrad.addColorStop(1, '#110003');
         ctx.fillStyle = bgGrad; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         // زمین بازی
-        ctx.fillStyle = "#110203"; ctx.fillRect(0, 290, canvas.width, 60);
-        ctx.fillStyle = "#ff1a40"; ctx.fillRect(0, 290, canvas.width, 2); 
+        ctx.fillStyle = "#0a0002"; ctx.fillRect(0, 290, canvas.width, 60);
+        ctx.fillStyle = "rgba(255, 26, 64, 0.5)"; ctx.fillRect(0, 290, canvas.width, 3); 
 
         if(score >= targetScore || gameWon) drawCharacter(niyayesh, 'niyayesh');
         drawCharacter(player, 'player');
 
-        // افکت شمشیر
+        // افکت شمشیر زدن (Swoosh)
         if(player.attacking) {
             ctx.save();
             ctx.shadowColor = "#ff1a40"; ctx.shadowBlur = 30;
-            ctx.fillStyle = "rgba(255, 26, 64, 0.45)";
+            ctx.fillStyle = "rgba(255, 26, 64, 0.6)";
             ctx.beginPath();
-            ctx.arc(player.x + player.width + 20, player.y + 40, 55, -Math.PI/2.5, Math.PI/2.5);
+            ctx.arc(player.x + player.width + 10, player.y + 40, 55, -Math.PI/2, Math.PI/4);
+            ctx.lineTo(player.x + player.width, player.y + 40);
             ctx.fill();
             ctx.restore();
         }
 
         enemies.forEach(e => drawCharacter(e, 'enemy'));
 
+        dashParticles.forEach(d => {
+            ctx.fillStyle = `rgba(255, 255, 255, ${d.life * 0.5})`;
+            ctx.fillRect(d.x, d.y, 10, 3);
+        });
+
         bloodParticles.forEach(p => {
             ctx.save();
-            ctx.globalAlpha = Math.max(0, p.life);
+            ctx.globalAlpha = p.life;
             ctx.fillStyle = '#ff1a40';
             ctx.shadowColor = '#ff1a40';
             ctx.shadowBlur = 8;
@@ -252,6 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
         score = 0;
         enemies = [];
         bloodParticles = [];
+        dashParticles = [];
         gameWon = false;
         isPlaying = true;
         gameTimer = 99;
@@ -263,13 +267,15 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if(p1Health) p1Health.style.width = '100%';
         if(p2Health) p2Health.style.width = '100%';
-        if(scoreDisp) scoreDisp.innerText = `موانع نابود شده: 0 / ${targetScore}`;
+        if(scoreDisp) scoreDisp.innerText = `دشمنان نابود شده: 0 / ${targetScore}`;
         
         clearInterval(timerInterval);
         timerInterval = setInterval(() => {
             if(gameTimer > 0 && isPlaying) {
                 gameTimer--;
                 if(timerUi) timerUi.innerText = gameTimer;
+            } else if (gameTimer <= 0) {
+                isPlaying = false; // Time out
             }
         }, 1000);
 
