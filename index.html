@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobin & Niyayesh | Eternal Universe</title>
+<title>Mobin & Niyayesh | Eternal Gothic Universe</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
 
@@ -13,7 +13,8 @@
 body {
     font-family: 'Vazirmatn', sans-serif;
     background: #000000;
-    overflow-x: hidden;
+    overflow: hidden;
+    height: 100vh;
     color: white;
     user-select: none;
 }
@@ -67,7 +68,7 @@ body {
     color: #ff1a40;
     opacity: 0;
     animation: romanticZoom 3.8s forwards cubic-bezier(0.15, 0.85, 0.35, 1);
-    text-shadow: 0 0 80px rgba(255, 26, 64, 0.95);
+    text-shadow: 0 0 80px rgba(255, 26, 64, 0.95), 0 0 30px rgba(255, 255, 255, 0.3);
 }
 
 @keyframes romanticZoom {
@@ -79,7 +80,7 @@ body {
 
 /* LUXURY GLOWING LOGIN BOX */
 .login-wrapper {
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -91,7 +92,6 @@ body {
     box-shadow: 0 50px 110px rgba(0, 0, 0, 0.95);
     width: 90%;
     max-width: 386px;
-    z-index: 5000;
 }
 
 @keyframes glowBorder {
@@ -137,11 +137,19 @@ body {
     animation: textShine 4s linear infinite;
 }
 
-.input-group {
-    margin-bottom: 25px; /* رفع مشکل فاصله */
+@keyframes textShine {
+    to { background-position: 200% center; }
 }
 
-input[type="password"], input[type="text"] {
+.login-container p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+input {
     width: 100%;
     padding: 18px;
     border: 1px solid rgba(255, 26, 64, 0.15);
@@ -152,10 +160,10 @@ input[type="password"], input[type="text"] {
     text-align: center;
     font-size: 1.05rem;
     letter-spacing: 2.5px;
-    transition: 0.5s;
+    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
-input[type="password"]:focus, input[type="text"]:focus {
+input:focus {
     border-color: rgba(255, 26, 64, 0.6);
     background: rgba(0, 0, 0, 0.8);
     box-shadow: 0 0 30px rgba(255, 26, 64, 0.25);
@@ -172,7 +180,7 @@ input[type="password"]:focus, input[type="text"]:focus {
     font-size: 1.1rem;
     font-weight: 900;
     cursor: pointer;
-    transition: 0.4s;
+    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
     box-shadow: 0 10px 25px rgba(255, 26, 64, 0.2);
 }
 
@@ -181,7 +189,7 @@ input[type="password"]:focus, input[type="text"]:focus {
     box-shadow: 0 15px 35px rgba(255, 26, 64, 0.45);
 }
 
-/* FLOATING NAV DOCK */
+/* FLOATING NAV DOCK - RESPONSIVE & SCROLLABLE ON MOBILE */
 .navbar {
     position: fixed;
     top: -100px; 
@@ -198,14 +206,22 @@ input[type="password"]:focus, input[type="text"]:focus {
     z-index: 1000;
     opacity: 0;
     box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-    transition: top 1.5s ease, opacity 1.5s ease;
+    transition: top 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 1.5s cubic-bezier(0.15, 0.85, 0.35, 1);
+    
+    /* آپدیت برای موبایل: جلوگیری از بیرون زدن و قابلیت اسکرول افقی */
     max-width: 95vw;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
+
+/* مخفی کردن اسکرول‌بار نوار برای زیبایی */
 .navbar::-webkit-scrollbar { display: none; }
-.navbar.show-nav { top: 20px; opacity: 1; }
+
+.navbar.show-nav { 
+    top: 20px; 
+    opacity: 1;
+}
 
 .navbar a {
     color: rgba(255, 255, 255, 0.55);
@@ -215,10 +231,61 @@ input[type="password"]:focus, input[type="text"]:focus {
     transition: 0.3s;
     padding: 7px 14px;
     border-radius: 18px;
-    flex-shrink: 0;
+    flex-shrink: 0; /* جلوگیری از فشرده شدن بیش از حد متن */
 }
+
 .navbar a:hover, .navbar a.active {
-    color: #ffffff; background: rgba(255, 26, 64, 0.3);
+    color: #ffffff;
+    background: rgba(255, 26, 64, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 26, 64, 0.2);
+}
+
+/* THE SECRET VAULT SYSTEM OVERLAY */
+#secret-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.15, 0.85, 0.35, 1);
+}
+
+.secret-box {
+    width: 90%;
+    max-width: 440px;
+    padding: 40px 30px;
+    background: rgba(20, 1, 3, 0.85);
+    border-radius: 38px;
+    border: 1px solid rgba(255, 26, 64, 0.4);
+    box-shadow: 0 40px 90px rgba(255, 26, 64, 0.15);
+}
+
+.secret-title {
+    font-family: 'Cinzel', serif;
+    color: #ff1a40;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(255, 26, 64, 0.6);
+}
+
+#secret-content {
+    display: none;
+    margin-top: 30px;
+    font-size: 1.15rem;
+    line-height: 2.6;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: right;
+    border-top: 1px solid rgba(255, 26, 64, 0.2);
+    padding-top: 25px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 /* MAIN SYSTEM FRAME */
@@ -228,7 +295,7 @@ input[type="password"]:focus, input[type="text"]:focus {
     overflow-y: auto;
     padding: 110px 15px 80px 15px;
     opacity: 0;
-    transition: opacity 2.5s;
+    transition: opacity 2.5s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
 #main::-webkit-scrollbar { width: 4px; }
@@ -243,7 +310,7 @@ input[type="password"]:focus, input[type="text"]:focus {
     gap: 80px;
 }
 
-/* BLOCKS */
+/* PREMIUM GOTHIC GLASS BLOCKS */
 .web-section {
     background: rgba(20, 0, 3, 0.45);
     border: 1px solid rgba(255, 26, 64, 0.08);
@@ -252,6 +319,7 @@ input[type="password"]:focus, input[type="text"]:focus {
     backdrop-filter: blur(45px);
     -webkit-backdrop-filter: blur(45px);
     box-shadow: 0 45px 95px rgba(0,0,0,0.85);
+    transition: transform 0.8s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
 .section-title {
@@ -263,82 +331,119 @@ input[type="password"]:focus, input[type="text"]:focus {
     -webkit-text-fill-color: transparent;
     margin-bottom: 35px;
     text-align: center;
+    text-shadow: 0 10px 35px rgba(255, 26, 64, 0.15);
 }
 
-/* INSTAGRAM STYLE FEED (TIME CAPSULE) */
-.feed-creator {
-    background: rgba(0,0,0,0.5);
-    border-radius: 20px;
-    padding: 20px;
-    border: 1px solid rgba(255,26,64,0.2);
-    margin-bottom: 30px;
-}
-.feed-creator textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    color: white;
-    font-family: 'Vazirmatn', sans-serif;
-    resize: none;
-    outline: none;
-    font-size: 1rem;
-    margin-bottom: 10px;
-    height: 60px;
-}
-.feed-creator .actions { display: flex; justify-content: space-between; align-items: center; }
-.btn-upload {
-    background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; font-size: 0.8rem; cursor: pointer; color: white; border: 1px solid rgba(255,255,255,0.2);
-}
-.btn-post {
-    background: #ff1a40; padding: 8px 20px; border-radius: 12px; font-weight: bold; cursor: pointer; color: white; border: none;
+.title-main {
+    font-family: 'Cinzel', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 35px;
+    text-shadow: 0 0 45px rgba(255, 26, 64, 0.5);
+    text-align: center;
 }
 
-.post-card {
-    background: rgba(10,0,2,0.6);
-    border-radius: 20px;
-    border: 1px solid rgba(255,26,64,0.1);
-    padding: 20px;
-    margin-bottom: 20px;
+/* POSTER STYLE GALLERY DECORATIONS */
+.gallery { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 35px; }
+.gallery img {
+    width: 100%; max-width: 280px; height: 350px; object-fit: cover; border-radius: 20px;
+    border: 1px solid rgba(255, 26, 64, 0.25); box-shadow: 0 25px 50px rgba(0,0,0,0.85);
+    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); filter: brightness(0.85);
 }
-.post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-.post-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(45deg, #ff1a40, #000); }
-.post-meta h5 { font-size: 1rem; color: #fff; }
-.post-meta span { font-size: 0.7rem; color: rgba(255,255,255,0.4); }
-.post-content { font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.8); }
+.gallery img:hover { transform: translateY(-5px); filter: brightness(1.05); border-color: #ff1a40; box-shadow: 0 25px 50px rgba(255,26,64,0.25); }
 
-/* FORZA GARAGE */
-.garage-container { text-align: center; }
-.car-preview {
-    width: 100%; height: 200px;
-    background: url('https://i.imgur.com/GQq30Yd.png') center/contain no-repeat; /* Mockup car */
-    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
-    margin-bottom: 20px;
-    transition: filter 0.5s;
-    /* Simulated color change via hue-rotate for demo */
+/* TEXT WRITER INTERFACE */
+.text {
+    font-size: 1.15rem; font-weight: 700; line-height: 2.6; color: #f5f5f7;
+    text-align: right; text-shadow: 0 2px 15px rgba(0,0,0,0.9); min-height: 150px;
 }
-.color-picker { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
-.color-btn {
-    width: 35px; height: 35px; border-radius: 50%; cursor: pointer; border: 2px solid rgba(255,255,255,0.2); transition: 0.3s;
-}
-.color-btn:hover { transform: scale(1.2); }
 
-/* TVD CINEMA */
-.cinema-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-.video-card {
-    background: #000; border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,26,64,0.2);
-    position: relative;
+/* TIMELINE SYSTEM */
+.timeline {
+    position: relative; padding-right: 20px;
+    border-right: 2px solid rgba(255, 26, 64, 0.2); text-align: right;
 }
-.video-card img { width: 100%; height: 200px; object-fit: cover; opacity: 0.7; }
-.video-card .play-btn {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    font-size: 3rem; color: #ff1a40; text-shadow: 0 0 20px rgba(0,0,0,0.9);
+.timeline-item { position: relative; margin-bottom: 40px; }
+.timeline-item::after {
+    content: ''; position: absolute; width: 10px; height: 10px;
+    background: #ff1a40; top: 8px; right: -26px; border-radius: 50%;
+    box-shadow: 0 0 15px #ff1a40;
 }
-.video-card p { padding: 15px; font-size: 0.9rem; text-align: center; font-family: 'Cinzel', serif; }
+.timeline-date { font-weight: 900; color: #ffffff; font-size: 1.2rem; margin-bottom: 8px; }
+.timeline-content { color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.8; }
 
-/* Responsive adjustments */
+/* BIRTHDAY MATRIX */
+.dates-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+.date-card {
+    background: rgba(10, 0, 2, 0.3); border: 1px solid rgba(255, 26, 64, 0.15);
+    padding: 30px 20px; border-radius: 20px; width: 100%; max-width: 290px; text-align: center;
+}
+.date-card h3 { font-family: 'Cinzel', serif; font-size: 1.5rem; color: #fff; margin-bottom: 10px; font-weight: 900; }
+.date-card .bday { font-size: 1.3rem; font-weight: 900; margin-bottom: 10px; color: #ff1a40; text-shadow: 0 0 15px rgba(255,26,64,0.3); }
+.date-card p { color: rgba(255,255,255,0.6); font-size: 0.95rem; line-height: 1.7; }
+
+/* USER HUB INTERESTS */
+.interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.premium-card {
+    background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 24px; padding: 25px; text-align: right;
+}
+.premium-card h4 { font-size: 1.3rem; color: #fff; margin-bottom: 10px; font-weight: 900; }
+.premium-card p { color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 0.95rem; }
+.badge {
+    font-family: 'Cinzel', serif; display: inline-block; padding: 4px 10px;
+    background: #ff1a40; color: #fff; font-weight: 700; border-radius: 6px;
+    margin-bottom: 15px; font-size: 0.65rem; letter-spacing: 1px;
+}
+.color-preview { display: flex; gap: 8px; margin-top: 15px; }
+.color-circle { width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); }
+
+/* EXPERIMENTAL PHOTO ALBUM */
+.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+.album-item {
+    position: relative; height: 200px; border-radius: 18px; overflow: hidden;
+    border: 1px solid rgba(255, 26, 64, 0.15); background: #000;
+    display: flex; justify-content: center; align-items: center;
+}
+.album-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.album-item:hover img { transform: scale(1.06); filter: blur(3px); }
+.album-overlay {
+    position: absolute; inset: 0; background: rgba(0, 0, 0, 0.7);
+    display: flex; justify-content: center; align-items: center; opacity: 0; transition: 0.3s;
+    backdrop-filter: blur(4px);
+}
+.album-item:hover .album-overlay { opacity: 1; }
+.album-overlay span { font-weight: 700; font-size: 0.9rem; color: #fff; }
+
+/* EMBED SYSTEMS */
+.music { margin-top: 25px; display: flex; justify-content: center; opacity: 0; transform: translateY(20px); transition: all 2s cubic-bezier(0.15, 0.85, 0.35, 1); }
+.music.show { opacity: 1; transform: translateY(0); }
+iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-shadow: 0 25px 60px rgba(0,0,0,0.85); }
+
+.creator {
+    margin: 40px 0 10px 0; font-family: 'Cinzel', serif; font-size: 1rem;
+    color: rgba(255, 255, 255, 0.2); letter-spacing: 4px; text-transform: uppercase;
+    text-align: center; font-weight: 700;
+}
+
+/* RESPONSIVE MEDIA QUERIES FOR MOBILE */
 @media (max-width: 600px) {
-    .web-section { padding: 30px 15px; }
+    .navbar { padding: 5px 8px; border-radius: 20px; gap: 4px; }
+    .navbar a { font-size: 0.75rem; padding: 6px 12px; }
+    .web-section { padding: 35px 20px; }
+    .title-main { font-size: 2.2rem; }
     .section-title { font-size: 1.8rem; }
+    .text { font-size: 1.05rem; }
+}
+
+/* DYNAMIC CRIMSON PARTICLES */
+.particle { position: fixed; border-radius: 50%; pointer-events: none; z-index: -1; animation: floatUp ease-in infinite; }
+@keyframes floatUp {
+    0% { transform: translateY(110vh) translateX(0) scale(0); opacity: 0; }
+    30% { opacity: 0.4; }
+    75% { opacity: 0.4; }
+    100% { transform: translateY(-10vh) translateX(60px) scale(1.3); opacity: 0; }
 }
 </style>
 </head>
@@ -348,7 +453,9 @@ input[type="password"]:focus, input[type="text"]:focus {
 <div class="bg"></div>
 <div class="fog"></div>
 
-<div id="netflix-intro"><div class="netflix-text">N</div></div>
+<div id="netflix-intro">
+    <div class="netflix-text">N</div>
+</div>
 
 <div class="login-wrapper" id="login-zone">
     <div class="login-container">
@@ -362,168 +469,276 @@ input[type="password"]:focus, input[type="text"]:focus {
     </div>
 </div>
 
+<div id="secret-modal">
+    <div class="secret-box">
+        <div class="secret-title">🔒 THE VAULT</div>
+        <input id="secret-pass" type="password" placeholder="رمز بخش رازها را وارد کن..." style="margin-bottom:20px;">
+        <button class="login-btn" onclick="checkSecret()">رمزگشایی رازها</button>
+        
+        <div id="secret-content">
+            تنها راز من تویی نیایشم تو بودی که تو سختی ها کنارم بودی 💕🫂<br>
+            عاشقتم دخترم و همیشه کنارتم 🫠🫂💕<br>
+            تو فرشته‌ منی منم فرشته‌ی تو :)
+        </div>
+        
+        <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:20px; cursor:pointer; font-weight:700; font-size:0.9rem;">بستن صندوقچه</button>
+    </div>
+</div>
+
 <div class="navbar" id="navbar">
-    <a href="#letter-sec" class="active">نامه عاشقانه</a>
-    <a href="#feed-sec">تایم‌لاین خاطرات</a>
-    <a href="#garage-sec">گاراژ Mobin</a>
-    <a href="#cinema-sec">سینمای Niyayesh</a>
+    <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
+    <a href="#story-sec">داستان عشق ما</a>
+    <a href="#dates-sec">تاریخ‌ها</a>
+    <a href="#mobin-sec">دنیای Mobin</a>
+    <a href="#niyayesh-sec">دنیای Niyayesh</a>
+    <a href="#gallery-sec">آلبوم عکسامون</a>
+    <a href="javascript:void(0)" onclick="openSecret()" style="color:#ff1a40; font-weight:900;">🔒 رازها</a>
 </div>
 
 <div id="main">
     <div class="container">
         
         <div class="web-section" id="letter-sec">
-            <div class="section-title">For Niyayesh 🥹🫂💕</div>
-            <div style="font-size: 1.15rem; font-weight: 700; line-height: 2.6; text-align: right;" id="typed-text"></div>
+            <div class="title-main">For Niyayesh 🥹🫂💕</div>
+            <div class="gallery">
+                <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="Memory 1">
+                <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2">
+            </div>
+            <div class="text" id="typed-text"></div>
         </div>
 
-        <div class="web-section" id="feed-sec">
-            <div class="section-title">دفترچه خاطرات ابدی ما</div>
-            <p style="text-align:center; color:rgba(255,255,255,0.5); font-size:0.8rem; margin-bottom: 20px;">
-                (نسخه تستی با حافظه مرورگر - در آینده متصل به دیتابیس ابری خواهد شد)
-            </p>
-            
-            <div class="feed-creator">
-                <textarea id="postText" placeholder="امروز چه خاطره‌ای ساختیم؟ اینجا بنویس..."></textarea>
-                <div class="actions">
-                    <button class="btn-upload">📷 افزودن عکس/ویدیو (بزودی)</button>
-                    <button class="btn-post" onclick="addPost()">ثبت در تاریخ</button>
+        <div class="web-section" id="story-sec">
+            <div class="section-title">داستان عشق ما</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">روزی که قلبت مال من شد</div>
+                    <div class="timeline-content">اینجا آغاز فصل جدید زندگی من بود. روزی که نگاهت مسیر سرنوشتم رو عوض کرد و شدی تمام دنیای من...</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">خاطره مشترک بعدی ما</div>
+                    <div class="timeline-content">محل قرار دادن خاطرات قشنگی که در آینده قراره کلمه به کلمه با هم بسازیمش و اینجا بنویسیم... 🔐</div>
                 </div>
             </div>
+        </div>
 
-            <div id="posts-container">
-                <div class="post-card">
-                    <div class="post-header">
-                        <div class="post-avatar"></div>
-                        <div class="post-meta">
-                            <h5>Mobin</h5>
-                            <span>تاریخ: همین الان</span>
-                        </div>
+        <div class="web-section" id="dates-sec">
+            <div class="section-title">تاریخ‌های متولد شدنِ عشق</div>
+            <div class="dates-grid">
+                <div class="date-card">
+                    <h3>Mobin</h3>
+                    <div class="bday">۲۵ اسفند ۱۳۸۷</div>
+                    <p>روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم و تموم زندگیمو به پاش بریزم.</p>
+                </div>
+                <div class="date-card">
+                    <h3>Niyayesh</h3>
+                    <div class="bday">۱۵ شهریور ۱۳۸۹</div>
+                    <p>باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد تا بشه دلیل نفس کشیدنم.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="web-section" id="mobin-sec">
+            <div class="section-title">دنیای مبین و علایقش</div>
+            <div class="interests-grid">
+                <div class="premium-card">
+                    <div class="badge">MY DREAM CAR</div>
+                    <h4>Porsche Boxster</h4>
+                    <p>عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین و قشنگ‌ترین هدفم تو زندگی اینه که یه روز با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! تو صندلی کناریِ منی، برای همیشه.</p>
+                </div>
+                <div class="premium-card">
+                    <div class="badge">FAVORITE COLORS</div>
+                    <h4>رنگ‌های مورد علاقه</h4>
+                    <p>ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
+                    <div class="color-preview">
+                        <div class="color-circle" style="background: #000000;"></div>
+                        <div class="color-circle" style="background: #0a192f;"></div>
                     </div>
-                    <div class="post-content">
-                        این اولین پست در دنیای ابدی ماست. جایی که قراره از امروز تا روز عروسی و بزرگ شدن بچه‌هامون رو توش ثبت کنیم. ♾️❤️
-                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="web-section" id="garage-sec">
-            <div class="section-title">Mobin's Forza Garage</div>
-            <div class="garage-container">
-                <div class="car-preview" id="car-img"></div>
-                <h3 style="font-family:'Cinzel'; margin-top: 10px;">Porsche Boxster Customizer</h3>
-                <p style="color:rgba(255,255,255,0.5); font-size:0.9rem;">رنگ ماشین رویاییمون رو انتخاب کن:</p>
-                <div class="color-picker">
-                    <div class="color-btn" style="background: #e60000;" onclick="changeCarColor(0)"></div>
-                    <div class="color-btn" style="background: #000000;" onclick="changeCarColor(100)"></div>
-                    <div class="color-btn" style="background: #0044cc;" onclick="changeCarColor(220)"></div>
-                    <div class="color-btn" style="background: #ffffff;" onclick="changeCarColor(500)"></div>
+        <div class="web-section" id="niyayesh-sec">
+            <div class="section-title">دنیای نیایش و علایقش</div>
+            <div class="interests-grid">
+                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
+                    <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
+                    <h4>The Vampire Diaries</h4>
+                    <p>عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
+                </div>
+                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
+                    <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
+                    <h4>بهترین دختر این دنیا</h4>
+                    <p>فقط می‌خوام اینو بدونی که بین کل آدمای این سیاره، تو تک‌دونه‌ترین و قشنگ‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار دنیای منی نیایشم.</p>
                 </div>
             </div>
         </div>
 
-        <div class="web-section" id="cinema-sec">
-            <div class="section-title">TVD Cinema for Niyayesh</div>
-            <div class="cinema-grid">
-                <div class="video-card">
-                    <img src="https://i.ibb.co/3WJm8tY/tvd-poster.jpg" alt="TVD Scene">
-                    <div class="play-btn">▶</div>
-                    <p>Damon & Elena - Best Moments</p>
+        <div class="web-section" id="gallery-sec">
+            <div class="section-title">آلبوم خاطرات تصویری</div>
+            <div class="album-grid">
+                <div class="album-item">
+                    <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png">
+                    <div class="album-overlay"><span>خاطره اول ❤️</span></div>
                 </div>
-                <div class="video-card">
-                    <img src="https://i.ibb.co/L9z5zNn/tvd2.jpg" alt="TVD Quote">
-                    <p style="color:#ff1a40; font-size: 1.2rem; line-height:1.6;">"You want a love that consumes you. You want passion, and adventure, and even a little danger."</p>
+                <div class="album-item">
+                    <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png">
+                    <div class="album-overlay"><span>خاطره دوم 🔐</span></div>
+                </div>
+                <div class="album-item">
+                    <div style="color: rgba(255,26,64,0.25); font-size: 2.5rem; font-weight: 300;">+</div>
+                    <div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div>
                 </div>
             </div>
         </div>
 
+        <div class="music" id="music-container">
+            <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+
+        <div class="creator">Created by Mobin</div>
     </div>
 </div>
 
 <script>
-const loveLetter = `نیایش عزیزم،\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی.\nباعشق 🫂💕🥹\nMobin`;
+const loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
 
 function enter(){
     let p = document.getElementById("pass").value;
-    if(p === "mobinloveniyayesh" || p === "1"){ // رمز 1 برای تست سریع خودت
+
+    if(p === "mobinloveniyayesh"){
         document.getElementById("login-zone").style.display = "none";
-        
+        playRomanticSound();
+
         const intro = document.getElementById("netflix-intro");
         intro.style.display = "flex";
 
         setTimeout(() => {
             intro.style.display = "none";
-            document.getElementById("main").style.display = "block";
-            setTimeout(() => { document.getElementById("main").style.opacity = "1"; }, 100);
-            document.getElementById("navbar").classList.add("show-nav"); 
+            
+            const mainContent = document.getElementById("main");
+            mainContent.style.display = "block";
+            
+            setTimeout(() => { mainContent.style.opacity = "1"; }, 100);
+            
+            createCrimsonParticles();
             typeWriter(loveLetter, 0, "typed-text");
-            loadPosts(); // لود کردن پست های ذخیره شده
-        }, 2000); // زمان رو کم کردم که تو تست خسته نشی
+            
+        }, 3800);
+
     } else {
-        alert("رمز ورود اشتباه است...");
+        alert("رمز ورود اشتباه است... دوباره تلاش کن عشق من");
     }
 }
 
 function typeWriter(text, i, elementId) {
     if (i < text.length) {
         let char = text.charAt(i);
-        document.getElementById(elementId).innerHTML += (char === "\n") ? "<br>" : char;
-        setTimeout(() => { typeWriter(text, i + 1, elementId); }, 40);
+        if(char === "\n") {
+            document.getElementById(elementId).innerHTML += "<br>";
+        } else {
+            document.getElementById(elementId).innerHTML += char;
+        }
+        
+        let speed = char === "." || char === "،" || char === "…" ? 400 : 55;
+        setTimeout(() => { typeWriter(text, i + 1, elementId); }, speed);
+    } else {
+        setTimeout(() => {
+            document.getElementById("music-container").classList.add("show");
+            document.getElementById("navbar").classList.add("show-nav"); 
+            enableScrollSpy();
+        }, 600);
     }
 }
 
-/* CAR CUSTOMIZER LOGIC */
-function changeCarColor(hue) {
-    // از فیلتر رنگ برای تغییر رنگ ماشین استفاده میکنیم (سیمولیشن)
-    const car = document.getElementById('car-img');
-    if(hue === 100) { car.style.filter = "brightness(0.2) drop-shadow(0 20px 30px rgba(0,0,0,0.8))"; }
-    else if(hue === 500) { car.style.filter = "brightness(2) drop-shadow(0 20px 30px rgba(255,255,255,0.2))"; }
-    else { car.style.filter = `hue-rotate(${hue}deg) drop-shadow(0 20px 30px rgba(0,0,0,0.8))`; }
+/* SECRET BOX ACTIONS */
+function openSecret() {
+    const modal = document.getElementById("secret-modal");
+    modal.style.display = "flex";
+    setTimeout(() => { modal.style.opacity = "1"; }, 10);
 }
 
-/* LOCAL STORAGE POST SYSTEM */
-function addPost() {
-    const text = document.getElementById("postText").value;
-    if(!text) return;
-    
-    let posts = JSON.parse(localStorage.getItem('mobin_posts')) || [];
-    const date = new Date().toLocaleDateString('fa-IR');
-    
-    posts.unshift({ text: text, date: date }); // اضافه به اول لیست
-    localStorage.setItem('mobin_posts', JSON.stringify(posts));
-    
-    document.getElementById("postText").value = "";
-    loadPosts();
+function closeSecret() {
+    const modal = document.getElementById("secret-modal");
+    modal.style.opacity = "0";
+    setTimeout(() => { 
+        modal.style.display = "none"; 
+        document.getElementById("secret-pass").value = "";
+        document.getElementById("secret-content").style.display = "none";
+    }, 600);
 }
 
-function loadPosts() {
-    let posts = JSON.parse(localStorage.getItem('mobin_posts')) || [];
-    const container = document.getElementById("posts-container");
-    
-    // حفظ پست اول پیش‌فرض
-    let html = `
-        <div class="post-card">
-            <div class="post-header">
-                <div class="post-avatar"></div>
-                <div class="post-meta"><h5>Mobin</h5><span>تاریخ: همین الان</span></div>
-            </div>
-            <div class="post-content">این اولین پست در دنیای ابدی ماست... ♾️❤️</div>
-        </div>
-    `;
+function checkSecret() {
+    let p = document.getElementById("secret-pass").value;
+    if(p === "niyayeshlovemobin") {
+        const content = document.getElementById("secret-content");
+        content.style.display = "block";
+        content.style.animation = "fadeIn 1.5s forwards";
+    } else {
+        alert("رمز صندوقچه اشتباه است... رازها محافظت شده هستند!");
+    }
+}
 
-    posts.forEach(p => {
-        html = `
-        <div class="post-card">
-            <div class="post-header">
-                <div class="post-avatar"></div>
-                <div class="post-meta"><h5>Mobin & Niyayesh</h5><span>تاریخ: ${p.date}</span></div>
-            </div>
-            <div class="post-content">${p.text}</div>
-        </div>
-        ` + html;
-    });
+function enableScrollSpy() {
+    const sections = document.querySelectorAll(".web-section");
+    const navLinks = document.querySelectorAll(".navbar a");
+    const mainDiv = document.getElementById("main");
 
-    container.innerHTML = html;
+    mainDiv.onscroll = () => {
+        let scrollPos = mainDiv.scrollTop + 180;
+        sections.forEach(sec => {
+            if (scrollPos >= sec.offsetTop && scrollPos < (sec.offsetTop + sec.offsetHeight)) {
+                navLinks.forEach(link => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href") === "#" + sec.id) {
+                        link.classList.add("active");
+                    }
+                });
+            }
+        });
+    };
+}
+
+function createCrimsonParticles() {
+    const colors = ['rgba(255, 26, 64, 0.3)', 'rgba(139, 0, 0, 0.25)', 'rgba(255, 255, 255, 0.15)'];
+    for(let i = 0; i < 40; i++) {
+        let p = document.createElement("div");
+        p.className = "particle";
+        let size = Math.random() * 5 + 3;
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.boxShadow = `0 0 ${Math.random() * 15 + 10}px ${colors[Math.floor(Math.random() * colors.length)]}`;
+        p.style.background = '#ff1a40';
+        p.style.animationDuration = (Math.random() * 9 + 5) + "s";
+        p.style.animationDelay = Math.random() * 3 + "s";
+        document.body.appendChild(p);
+    }
+}
+
+function playRomanticSound() {
+    try {
+        let ctx = new (window.AudioContext || window.webkitAudioContext)();
+        let t = ctx.currentTime;
+        
+        function playTone(freq, type, startTime, duration, vol) {
+            let osc = ctx.createOscillator();
+            let gain = ctx.createGain();
+            osc.type = type;
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(vol, startTime + 0.4);
+            gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+        }
+
+        playTone(261.63, 'sine', t, 3.2, 0.4); 
+        playTone(311.13, 'sine', t, 3.2, 0.4); 
+        playTone(392.00, 'sine', t, 3.2, 0.4); 
+        playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); 
+    } catch(e) {}
 }
 </script>
 
