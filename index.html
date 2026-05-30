@@ -1,42 +1,65 @@
-<!-- اضافه کردن کتابخانه‌های فایربیس به صورت ساده -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobin & Niyayesh | Eternal Gothic Universe</title>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 
+<style>
+/* استایل‌های قبلی تو (همون که داشتیم) */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Vazirmatn', sans-serif; background: #000; color: white; }
+.web-section { padding: 45px 30px; border-bottom: 1px solid #333; }
+.car-display { width: 100%; max-width: 600px; border-radius: 20px; transition: 0.3s; }
+.video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; }
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+</style>
+</head>
+
+<body>
+
+<div id="main">
+    <div class="container">
+        <div class="web-section" id="tvd-sec">
+            <h2>The Vampire Diaries Cinema</h2>
+            <div class="video-wrapper">
+                <iframe src="" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div class="web-section" id="forza-sec">
+            <h2>گاراژ رویایی مبین</h2>
+            <img id="porsche" class="car-display" src="" alt="Porsche">
+        </div>
+    </div>
+</div>
+
 <script>
+  // تنظیمات فایربیس
   const firebaseConfig = {
     apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
     authDomain: "niyayesh-universe.firebaseapp.com",
     projectId: "niyayesh-universe",
     storageBucket: "niyayesh-universe.firebasestorage.app",
     messagingSenderId: "675804346928",
-    appId: "1:675804346928:web:8e8c33f7a26d2824340bf5",
-    measurementId: "G-5X7BKVZBNN"
+    appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
   };
-
-  // مقداردهی اولیه
+  
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // تابع برای خواندن داده‌ها
-  async function loadData() {
-    try {
-      const doc = await db.collection("website_data").doc("config").get();
+  // لود هوشمند داده‌ها از دیتابیس
+  db.collection("website_data").doc("config").get().then((doc) => {
       if (doc.exists) {
-        const data = doc.data();
-        // اعمال تغییرات
-        if(document.querySelector("#tvd-sec iframe")) {
-            document.querySelector("#tvd-sec iframe").src = data.tvd_video_url;
-        }
-        if(document.getElementById("porsche")) {
-            document.getElementById("porsche").src = data.porsche_image_url;
-        }
-        console.log("داده‌ها با موفقیت لود شدند!");
+          const data = doc.data();
+          // ست کردن لینک‌ها
+          if(data.tvd_video_url) document.querySelector("#tvd-sec iframe").src = data.tvd_video_url;
+          if(data.porsche_image_url) document.getElementById("porsche").src = data.porsche_image_url;
       }
-    } catch (e) {
-      console.error("خطا در خواندن داده: ", e);
-    }
-  }
-
-  // اجرای تابع
-  window.onload = loadData;
+  }).catch((e) => console.error("خطا در دریافت داده‌ها: ", e));
 </script>
+
+</body>
+</html>
