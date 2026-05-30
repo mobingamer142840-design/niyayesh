@@ -233,15 +233,24 @@ body.dark-mode #theme-toggle {
 html { background: #080003; transition: background 0.5s ease; }
 body { background-attachment: fixed; } /* این خط باعث میشه بک‌گراند به کل صفحه بچسبه */
 
-        /* فیکس کردن ارتفاع و حاشیه‌های سافاری */
-html, body {
+/* ==========================================
+   فیکس قطعی بالا و پایین سافاری 
+   ========================================== */
+html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    /* ترفند اصلی: html باید شفاف باشه تا مرورگر مجبور بشه رنگ دارکِ بادی رو به کل صفحه (حتی پایین سافاری) بکشه */
+    background: transparent !important; 
+}
+
+body {
     margin: 0;
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    min-height: 100dvh; /* این خط معجزه می‌کنه و مشکل سافاری رو حل می‌کنه */
-    overflow-x: hidden;
-    background-color: var(--milky-white, #fff); /* رنگ پایه لایت */
+    min-height: -webkit-fill-available; /* معجزه برای ارتفاع سافاری */
+    background-color: var(--milky-white, #ffffff);
     transition: background-color 0.5s ease;
 }
 
