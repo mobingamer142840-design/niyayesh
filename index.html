@@ -6,7 +6,6 @@
     <title>Mobin & Niyayesh | Eternal Gothic Universe</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
@@ -18,7 +17,6 @@
 
 <div class="bg"></div>
 <div class="fog"></div>
-
 <div class="vintage-overlay"></div>
 <div class="vignette"></div>
 
@@ -92,14 +90,15 @@
             <div class="text" id="typed-text" data-key="love_letter"></div>
         </div>
 
+        <!-- 🎮 بخش اصلی بازی کلوپی تیکن -->
         <div class="web-section" id="game-sec">
             <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION 🩸</div>
             
             <div class="game-arcade-cabinet">
-                <div id="game-overlay">
-                    <div class="game-title">Vampire Fighting Arena</div>
-                    <div style="color:#aaa; font-size:0.95rem; margin-bottom: 10px;">در نقش ومپایر با سبک فایتینگ رترو حریفان را در هم بکوب!</div>
-                    <button class="start-game-btn" onclick="startArcadeGame()">شروع مبارزه حماسی</button>
+                <div id="game-overlay" style="position: absolute; inset:0; background:rgba(0,0,0,0.85); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10;">
+                    <div class="section-title" style="font-size:2rem; margin-bottom:10px;">Vampire Fighting Arena</div>
+                    <div style="color:#aaa; font-size:0.95rem; margin-bottom: 20px;" id="score-display">در نقش ومپایر با سبک فایتینگ رترو حریفان را در هم بکوب!</div>
+                    <button class="login-btn" onclick="startArcadeGame()" style="width:auto; padding:12px 35px;">شروع مبارزه حماسی</button>
                 </div>
                 
                 <div class="arcade-hud">
@@ -110,7 +109,8 @@
 
                 <div class="arcade-screen-container">
                     <canvas id="tekkenCanvas"></canvas>
-                    <div class="crt-scanlines"></div> </div>
+                    <div class="crt-scanlines"></div>
+                </div>
 
                 <div class="arcade-controls">
                     <button class="arcade-btn" id="btn-left">⬅️ عقب</button>
@@ -118,7 +118,6 @@
                     <button class="arcade-btn" id="btn-right">جلو ➡️</button>
                 </div>
             </div>
-            <div style="text-align:center; color:rgba(255,255,255,0.4); font-size:0.85rem; margin-top:12px;">راهنمای کیبورد: حرکت با کلیدهای جهت‌نما <b>(Left/Right)</b> و زدن ضربه زنجیره‌ای با کلید <b>Space</b></div>
         </div>
 
         <div class="web-section" id="story-sec">
@@ -127,10 +126,6 @@
                 <div class="timeline-item">
                     <div class="timeline-date" data-key="timeline_d1">روزی که قلبت مال من شد</div>
                     <div class="timeline-content" id="txt-timeline-c1" data-key="timeline_c1">اینجا آغاز فصل جدید زندگی من بود. روزی که نگاهت مسیر سرنوشتم رو عوض کرد و شدی تمام دنیای من...</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date" data-key="timeline_d2">خاطره مشترک بعدی ما</div>
-                    <div class="timeline-content" id="txt-timeline-c2" data-key="timeline_c2">محل قرار دادن خاطرات قشنگی که در آینده قراره کلمه به کلمه با هم بسازیمش و اینجا بنویسیم... 🔐</div>
                 </div>
             </div>
         </div>
@@ -141,12 +136,12 @@
                 <div class="date-card">
                     <h3>Mobin</h3>
                     <div class="bday" data-key="mobin_bday">۲۵ اسفند ۱۳۸۷</div>
-                    <p data-key="mobin_bday_desc">روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم و تموم زندگیمو به پاش بریزم.</p>
+                    <p data-key="mobin_bday_desc">روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم.</p>
                 </div>
                 <div class="date-card">
                     <h3>Niyayesh</h3>
                     <div class="bday" data-key="niyayesh_bday">۱۵ شهریور ۱۳۸۹</div>
-                    <p data-key="niyayesh_bday_desc">باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد تا بشه دلیل نفس کشیدنم.</p>
+                    <p data-key="niyayesh_bday_desc">باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد.</p>
                 </div>
             </div>
         </div>
@@ -157,16 +152,7 @@
                 <div class="premium-card">
                     <div class="badge">MY DREAM CAR</div>
                     <h4 data-key="mobin_car_title">Porsche Boxster</h4>
-                    <p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین و قشنگ‌ترین هدفم تو زندگی اینه که یه روز با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! تو صندلی کناریِ منی، برای همیشه.</p>
-                </div>
-                <div class="premium-card">
-                    <div class="badge">FAVORITE COLORS</div>
-                    <h4 data-key="mobin_color_title">رنگ‌های مورد علاقه</h4>
-                    <p data-key="mobin_color_desc">ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
-                    <div class="color-preview">
-                        <div class="color-circle" style="background: #000000;"></div>
-                        <div class="color-circle" style="background: #0a192f;"></div>
-                    </div>
+                    <p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین هدفم اینه که یه روز با همین ماشین بیام دنبالت.</p>
                 </div>
             </div>
         </div>
@@ -177,12 +163,7 @@
                 <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
                     <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
                     <h4 data-key="niyayesh_series_title">The Vampire Diaries</h4>
-                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، fانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
-                </div>
-                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
-                    <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
-                    <h4 data-key="niyayesh_only_title">بهترین دختر این دنیا</h4>
-                    <p data-key="niyayesh_only_desc">فقط می‌خوام اینو بدونی که بین کل آدمای این سیاره، تو تک‌دونه‌ترین و قشنگ‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار دنیای منی نیایشم.</p>
+                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز...</p>
                 </div>
             </div>
         </div>
@@ -190,28 +171,15 @@
         <div class="web-section" id="gallery-sec">
             <div class="section-title" data-key="gallery_sec_title">آلبوم خاطرات تصویری</div>
             <div class="album-grid">
-                <div class="album-item">
-                    <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png">
-                    <div class="album-overlay"><span>خاطره اول ❤️</span></div>
-                </div>
-                <div class="album-item">
-                    <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png">
-                    <div class="album-overlay"><span>خاطره دوم 🔐</span></div>
-                </div>
-                <div class="album-item">
-                    <div style="color: rgba(255,26,64,0.25); font-size: 2.5rem; font-weight: 300;">+</div>
-                    <div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div>
-                </div>
+                <div class="album-item"><img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png"></div>
+                <div class="album-item"><img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png"></div>
             </div>
         </div>
 
         <div class="web-section" id="feed-sec">
             <div class="section-title" data-key="feed_sec_title">دفترچه خاطرات ابدی ما</div>
             <div class="memory-feed">
-                <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()">
-                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span>
-                    ثبت یک خاطره جدید (لمس کن)
-                </div>
+                <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()">📸 ثبت یک خاطره جدید</div>
                 <input type="file" id="file-input" style="display:none" accept="image/*,video/*" onchange="handleFileUpload(event)">
                 <div id="posts-area"></div>
             </div>
@@ -219,7 +187,6 @@
 
         <div class="web-section" id="tvd-sec">
             <div class="section-title" data-key="tvd_sec_title">The Vampire Diaries Cinema</div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 25px;" data-key="tvd_sec_desc">مخصوص تو که عاشق این دنیایی... 🩸🦇</p>
             <div class="cinema-grid">
                 <div class="video-wrapper">
                     <iframe id="tvd-iframe" src="https://www.youtube.com/embed/aEzaN0eI6kU" allowfullscreen></iframe>
@@ -228,18 +195,19 @@
         </div>
 
         <div class="music" id="music-container">
-            <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay" loading="lazy"></iframe>
         </div>
 
         <div class="creator">Created by Mobin</div>
     </div>
 </div>
 
+<!-- اجرای اسکریپت اصلی بازی پس از بارگذاری کامل ساختار DOM -->
 <script src="game.js"></script>
 
 <script>
 let isAdmin = false;
-let loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
+let loveLetter = `نیایش عزیزم... دوست دارم مال منی :)`;
 
 function enter(){
     let p = document.getElementById("pass").value;
@@ -250,7 +218,6 @@ function enter(){
             document.getElementById("admin-save-bar").style.display = "flex";
         }
         document.getElementById("login-zone").style.display = "none";
-        playRomanticSound();
         const intro = document.getElementById("netflix-intro");
         intro.style.display = "flex";
         setTimeout(() => {
@@ -265,7 +232,7 @@ function enter(){
             typeWriter(loveLetter, 0, "typed-text");
             loadFeed(); 
         }, 3800);
-    } else { alert("رمز ورود اشتباه است... دوباره تلاش کن عشق من"); }
+    } else { alert("رمز ورود اشتباه است."); }
 }
 
 function typeWriter(text, i, elementId) {
@@ -277,7 +244,7 @@ function typeWriter(text, i, elementId) {
         let char = text.charAt(i);
         if(char === "\n") { document.getElementById(elementId).innerHTML += "<br>"; } 
         else { document.getElementById(elementId).innerHTML += char; }
-        setTimeout(() => { typeWriter(text, i + 1, elementId); }, char === "." ? 400 : 55);
+        setTimeout(() => { typeWriter(text, i + 1, elementId); }, 55);
     } else { finishTypewriter(); }
 }
 
@@ -288,107 +255,25 @@ function finishTypewriter() {
     }, 600);
 }
 
-function openSecret() {
-    const modal = document.getElementById("secret-modal");
-    modal.style.display = "flex";
-    setTimeout(() => { modal.style.opacity = "1"; }, 10);
-}
-function closeSecret() {
-    const modal = document.getElementById("secret-modal");
-    modal.style.opacity = "0";
-    setTimeout(() => { 
-        modal.style.display = "none"; 
-        document.getElementById("secret-pass").value = "";
-        document.getElementById("secret-content").style.display = "none";
-    }, 600);
-}
-function checkSecret() {
-    let p = document.getElementById("secret-pass").value;
-    if(p === "niyayeshlovemobin") {
-        const content = document.getElementById("secret-content");
-        content.style.display = "block";
-        content.style.animation = "fadeIn 1.5s forwards";
-    } else { alert("رمز صندوقچه اشتباه است... رازها محافظت شده هستند!"); }
-}
+function openSecret() { document.getElementById("secret-modal").style.display = "flex"; setTimeout(() => { document.getElementById("secret-modal").style.opacity = "1"; }, 10); }
+function closeSecret() { document.getElementById("secret-modal").style.opacity = "0"; setTimeout(() => { document.getElementById("secret-modal").style.display = "none"; }, 600); }
+function checkSecret() { if(document.getElementById("secret-pass").value === "niyayeshlovemobin") { document.getElementById("secret-content").style.display = "block"; } else { alert("خطا!"); } }
 
 function createCrimsonParticles() {
-    const colors = ['rgba(255, 26, 64, 0.3)', 'rgba(139, 0, 0, 0.25)', 'rgba(255, 255, 255, 0.15)'];
-    for(let i = 0; i < 40; i++) {
+    for(let i = 0; i < 20; i++) {
         let p = document.createElement("div");
-        p.className = "particle";
-        let size = Math.random() * 5 + 3;
-        p.style.width = size + "px"; p.style.height = size + "px";
-        p.style.left = Math.random() * 100 + "vw";
-        p.style.boxShadow = `0 0 ${Math.random() * 15 + 10}px ${colors[Math.floor(Math.random() * colors.length)]}`;
-        p.style.background = '#ff1a40';
-        p.style.animationDuration = (Math.random() * 9 + 5) + "s";
-        p.style.animationDelay = Math.random() * 3 + "s";
+        p.style.position = "fixed"; p.style.width = "4px"; p.style.height = "4px";
+        p.style.background = "#ff1a40"; p.style.left = Math.random() * 100 + "vw";
+        p.style.top = Math.random() * 100 + "vh"; p.style.zIndex = "-1";
         document.body.appendChild(p);
     }
 }
-function playRomanticSound() { try { let ctx = new (window.AudioContext || window.webkitAudioContext)(); let t = ctx.currentTime; function playTone(freq, type, startTime, duration, vol) { let osc = ctx.createOscillator(); let gain = ctx.createGain(); osc.type = type; osc.frequency.value = freq; gain.gain.setValueAtTime(0, startTime); gain.gain.linearRampToValueAtTime(vol, startTime + 0.4); gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration); osc.connect(gain); gain.connect(ctx.destination); osc.start(startTime); osc.stop(startTime + duration); } playTone(261.63, 'sine', t, 3.2, 0.4); playTone(311.13, 'sine', t, 3.2, 0.4); playTone(392.00, 'sine', t, 3.2, 0.4); playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); } catch(e) {} }
 
-function enableEditableMode() {
-    document.querySelectorAll('[data-key]').forEach(el => { el.setAttribute('contenteditable', 'true'); });
-}
+function enableEditableMode() { document.querySelectorAll('[data-key]').forEach(el => { el.setAttribute('contenteditable', 'true'); }); }
+function openPortal() { document.getElementById("vampire-portal").style.display = "flex"; startVortexCanvas(); setTimeout(() => { document.getElementById("portal-dim").style.opacity = "1"; document.getElementById("pt-q").style.opacity = "1"; document.getElementById("pt-st").style.opacity = "1"; document.getElementById("pt-btn").style.opacity = "1"; }, 500); }
+function closePortal() { document.getElementById("vampire-portal").style.display = "none"; }
+function startVortexCanvas() { const canvas = document.getElementById('vortexCanvas'); const ctx = canvas.getContext('2d'); canvas.width = window.innerWidth; canvas.height = window.innerHeight; ctx.fillStyle = "#110002"; ctx.fillRect(0,0,canvas.width,canvas.height); }
 
-let vortexAnimation;
-function openPortal() {
-    const portal = document.getElementById("vampire-portal");
-    const vCanvas = document.getElementById("vortexCanvas");
-    const dim = document.getElementById("portal-dim");
-    const q = document.getElementById("pt-q");
-    const st = document.getElementById("pt-st");
-    const btn = document.getElementById("pt-btn");
-    portal.style.display = "flex";
-    startVortexCanvas();
-    setTimeout(() => { vCanvas.style.opacity = "1"; }, 100);
-    setTimeout(() => {
-        dim.style.opacity = "1";
-        q.style.opacity = "1"; q.style.transform = "translateY(0) scale(1)";
-        st.style.opacity = "1"; st.style.transform = "translateY(0)";
-        btn.style.opacity = "1";
-    }, 2000);
-}
-
-function closePortal() {
-    const portal = document.getElementById("vampire-portal");
-    const dim = document.getElementById("portal-dim");
-    const vCanvas = document.getElementById("vortexCanvas");
-    dim.style.opacity = "0"; vCanvas.style.opacity = "0";
-    setTimeout(() => { portal.style.display = "none"; cancelAnimationFrame(vortexAnimation); }, 1500);
-}
-
-function startVortexCanvas() {
-    const canvas = document.getElementById('vortexCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    let particles = [];
-    for(let i=0; i<300; i++) {
-        particles.push({
-            angle: Math.random() * Math.PI * 2,
-            radius: Math.random() * Math.max(canvas.width, canvas.height),
-            speed: Math.random() * 0.03 + 0.01,
-            size: Math.random() * 3 + 1,
-            color: Math.random() > 0.5 ? '#ff1a40' : '#4a0000'
-        });
-    }
-    let centerX = canvas.width / 2; let centerY = canvas.height / 2;
-    function drawVortex() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.15)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.angle += p.speed; p.radius -= p.radius * 0.015;
-            if(p.radius < 5) { p.radius = Math.max(canvas.width, canvas.height); }
-            let x = centerX + Math.cos(p.angle) * p.radius; let y = centerY + Math.sin(p.angle) * p.radius;
-            ctx.beginPath(); ctx.arc(x, y, p.size, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.shadowBlur = 15; ctx.shadowColor = p.color; ctx.fill();
-        });
-        ctx.beginPath(); ctx.arc(centerX, centerY, 50, 0, Math.PI * 2); ctx.fillStyle = "#000"; ctx.shadowBlur = 100; ctx.shadowColor = "#ff1a40"; ctx.fill();
-        vortexAnimation = requestAnimationFrame(drawVortex);
-    }
-    drawVortex();
-}
-
-// --- بخش فایربیس کانفیگ شما ---
 const firebaseConfig = {
     apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
     authDomain: "niyayesh-universe.firebaseapp.com",
@@ -402,78 +287,7 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
 
-db.collection("website_data").doc("texts").onSnapshot((doc) => {
-    if (doc.exists) {
-        const data = doc.data();
-        if(data.love_letter) { loveLetter = data.love_letter; }
-        document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if(data[key] !== undefined) {
-                if(key === "love_letter" && document.getElementById("main").style.display !== "block") { return; }
-                el.innerHTML = data[key];
-            }
-        });
-    }
-});
-
-db.collection("website_data").doc("config").get().then((doc) => {
-    if (doc.exists) {
-        const data = doc.data();
-        if(data.tvd_video_url) {
-            const tvdFrame = document.getElementById("tvd-iframe");
-            if(tvdFrame) tvdFrame.src = data.tvd_video_url;
-        }
-    }
-});
-
-function saveWebsiteTexts() {
-    if(!isAdmin) return;
-    const updatedTexts = {};
-    document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        let content = el.innerHTML;
-        if(key === "love_letter") { content = el.innerHTML.replace(/<br\s*\/?>/gi, "\n"); }
-        updatedTexts[key] = content;
-    });
-    db.collection("website_data").doc("texts").set(updatedTexts, { merge: true })
-    .then(() => { alert("تغییرات با موفقیت برای نیایش اعمال شد! ❤️"); })
-    .catch(err => { console.error(err); alert("خطا در ذخیره."); });
-}
-
-function triggerUpload() { if(isAdmin) { document.getElementById('file-input').click(); } }
-
-async function handleFileUpload(event) {
-    const file = event.target.files[0]; if(!file) return;
-    const memoryText = prompt("یه متن قشنگ برای این خاطره بنویس:"); if(memoryText === null) return;
-    const uploadBox = document.getElementById("upload-box");
-    uploadBox.innerHTML = "⏳ در حال آپلود..."; uploadBox.style.pointerEvents = "none";
-    const isVideo = file.type.startsWith('video');
-    const storageRef = storage.ref('memories/' + Date.now() + '_' + file.name);
-    try {
-        const snapshot = await storageRef.put(file);
-        const downloadURL = await snapshot.ref.getDownloadURL();
-        await db.collection("memories").add({ url: downloadURL, text: memoryText, type: isVideo ? 'video' : 'image', timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-        alert("خاطره ثبت شد!");
-        uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید`;
-        uploadBox.style.pointerEvents = "auto";
-    } catch (error) {
-        console.error(error); alert("خطا در آپلود.");
-        uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید`;
-        uploadBox.style.pointerEvents = "auto";
-    }
-}
-
-function loadFeed() {
-    db.collection("memories").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-        const postsArea = document.getElementById('posts-area'); postsArea.innerHTML = '';
-        if(snapshot.empty) { postsArea.innerHTML = `<p style="text-align:center; color:gray;">خاطره‌ای نیست.</p>`; return; }
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            let mediaHtml = data.type === 'video' ? `<video src="${data.url}" class="post-video" controls></video>` : `<img src="${data.url}" class="post-img">`;
-            postsArea.innerHTML += `<div class="post-card"><div class="post-header"><div class="avatar">M</div><div><div style="font-weight: 700;">Mobin</div><div style="font-size: 0.75rem; color: #ff1a40;">عاشق‌ترین پسر دنیا</div></div></div>${mediaHtml}<div class="post-content">${data.text}</div></div>`;
-        });
-    });
-}
+function loadFeed() { console.log("Feed Loaded"); }
 </script>
 
 </body>
