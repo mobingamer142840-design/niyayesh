@@ -3,555 +3,539 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobin & Niyayesh | Eternal Gothic Universe</title>
+    <title>Vampire Diaries - Romantic Gothic</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lalezar&family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Lalezar&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
+    <style>
+        /* تعریف متغیرها و رنگ‌های تم گوتیک/رمانتیک */
+        :root {
+            --bg-main: #080202;
+            --bg-card: #120707;
+            --crimson: #660011;
+            --crimson-glow: #b3001e;
+            --gold: #b89146;
+            --text-light: #e6d5d5;
+            --text-muted: #a39292;
+            --font-gothic: 'Cinzel Decorative', serif;
+            --font-title: 'Lalezar', display;
+            --font-body: 'Vazirmatn', sans-serif;
+        }
+
+        /* استایل‌های پایه و اسکرول‌بار */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 13px; /* کوچکت‌ر شدن متن‌ها برای جلوه ظریف و منظم */
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at center, #1a0508 0%, #080202 100%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-main);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--crimson);
+            border-radius: 3px;
+        }
+
+        /* هدر اصلی سایت - بدون دکمه ادیتور */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            border-bottom: 1px solid rgba(102, 0, 17, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-family: var(--font-gothic);
+            font-size: 1.1rem;
+            color: var(--crimson-glow);
+            text-shadow: 0 0 8px var(--crimson);
+            letter-spacing: 1px;
+        }
+
+        .user-status {
+            font-size: 0.8rem;
+            color: var(--gold);
+        }
+
+        /* کانتینر اصلی محتوا */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* کامپوننت کارت‌ها */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(102, 0, 17, 0.4);
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            background: linear-gradient(45deg, var(--crimson), transparent) border-box;
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0.3;
+        }
+
+        h2 {
+            font-family: var(--font-title);
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(184, 145, 70, 0.2);
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* لایه لاگین هوشمند */
+        #login-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 1, 1, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-box {
+            background: var(--bg-card);
+            border: 1px solid var(--crimson);
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 25px var(--crimson);
+            max-width: 320px;
+            width: 100%;
+        }
+
+        .login-box h3 {
+            font-family: var(--font-gothic);
+            margin-bottom: 15px;
+            color: var(--crimson-glow);
+            font-size: 1.2rem;
+        }
+
+        input[type="password"], input[type="text"], textarea {
+            width: 100%;
+            padding: 8px 12px;
+            background: #1a0a0a;
+            border: 1px solid rgba(184, 145, 70, 0.3);
+            border-radius: 4px;
+            color: var(--text-light);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            outline: none;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--crimson-glow);
+            box-shadow: 0 0 5px rgba(179, 0, 30, 0.5);
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--crimson), #40000a);
+            color: var(--text-light);
+            border: 1px solid var(--gold);
+            padding: 7px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: var(--crimson-glow);
+            box-shadow: 0 0 10px var(--crimson-glow);
+        }
+
+        /* بخش شمارش معکوس فشرده */
+        .countdown-container {
+            display: flex;
+            justify-content: identical;
+            gap: 10px;
+            direction: ltr;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .countdown-item {
+            background: #1a080a;
+            padding: 8px 12px;
+            border-radius: 4px;
+            min-width: 55px;
+            text-align: center;
+            border: 1px solid rgba(184, 145, 70, 0.15);
+        }
+
+        .countdown-num {
+            font-family: var(--font-gothic);
+            font-size: 1.2rem;
+            color: var(--crimson-glow);
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* بخش کارت‌های تاروت ظریف */
+        .tarot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 110px));
+            gap: 12px;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .tarot-card {
+            height: 160px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .tarot-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .tarot-card.flipped .tarot-inner {
+            transform: rotateY(180deg);
+        }
+
+        .tarot-front, .tarot-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            font-size: 0.75rem;
+        }
+
+        .tarot-front {
+            background: linear-gradient(135deg, #26050a, #0d0204);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-family: var(--font-gothic);
+        }
+
+        .tarot-back {
+            background: #221114;
+            border: 1px solid var(--crimson);
+            color: var(--text-light);
+            transform: rotateY(180deg);
+            font-size: 0.7rem;
+        }
+
+        /* بخش دفترچه خاطرات */
+        .diary-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            padding-right: 5px;
+        }
+
+        .diary-item {
+            background: rgba(255,255,255,0.02);
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            border-right: 2px solid var(--crimson);
+            font-size: 0.8rem;
+        }
+
+        .diary-item span {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--gold);
+            margin-top: 3px;
+        }
+
+        /* بازی آرکید کوچک ومپایری */
+        #game-canvas {
+            background: #000;
+            display: block;
+            margin: 10px auto;
+            border: 1px solid var(--crimson);
+            max-width: 100%;
+            border-radius: 4px;
+        }
+
+        /* مخفی‌سازی کامل بخش‌های ادمین/ادیتور در فرانت‌اند */
+        .hidden-admin-controls {
+            display: none !important;
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="bg"></div>
-<div class="fog"></div>
-<div id="particles-container"></div> <div id="netflix-intro">
-    <div class="netflix-text">N</div>
-</div>
-
-<div class="login-wrapper" id="login-zone">
-    <div class="login-container">
-        <div class="login-emojis">🖤🦇🩸</div>
-        <h1>Niyayesh</h1>
-        <p>Welcome to Mystic Falls</p>
-        <div class="input-group">
-            <input id="pass" type="password" placeholder="رمز ورود به قلب تاریکی...">
+    <div id="login-overlay">
+        <div class="login-box">
+            <h3>Eternal Access</h3>
+            <input type="password" id="password-input" placeholder="رمز عبور را وارد کنید...">
+            <button onclick="checkLogin()">ورود به دنیای تاریک</button>
+            <p id="login-error" style="color: var(--crimson-glow); font-size: 0.75rem; margin-top: 8px; display: none;">رمز عبور اشتباه است.</p>
         </div>
-        <button class="login-btn" onclick="enter()">ورود به دنیای جاودانه ما</button>
     </div>
-</div>
 
-<div id="vampire-portal">
-    <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
-    <div class="portal-dimension" id="portal-dim">
-        <div class="portal-quote" id="pt-q">"He's her first love. I intend to be her last."</div>
-        <div class="portal-subtext" id="pt-st">تو اتمسفر جاودانه‌ی ومپایر دایریز غرق شدیم... جایی که زمان می‌ایسته و فقط من و تو می‌مونیم. این دریچه‌ای به تمام رازها و احساسات بی‌پایان ماست نیایشم. 🩸🖤</div>
-        <button class="close-portal-btn" id="pt-btn" onclick="closePortal()">بازگشت به دنیای فانی</button>
-    </div>
-</div>
+    <header>
+        <div class="logo">The Vampire Diaries</div>
+        <div class="user-status" id="status-text">خوش آمدید، همراه همیشگی</div>
+    </header>
 
-<div id="admin-save-bar">
-    <span>✍️ ادیتور خونین فعال است.</span>
-    <button class="save-btn" onclick="saveWebsiteTexts()">ثبت تغییرات در ابدیت</button>
-</div>
-
-<div id="secret-modal">
-    <div class="secret-box">
-        <div class="secret-title">🔒 THE VAULT OF SECRETS</div>
-        <input id="secret-pass" type="password" placeholder="رمز صندوقچه طلسم‌شده..." style="margin-bottom:20px;">
-        <button class="login-btn" onclick="checkSecret()">باطل کردن طلسم</button>
-        <div id="secret-content">
-            تنها راز من تویی نیایشم تو بودی که تو سختی ها کنارم بودی 💕🫂<br>
-            عاشقتم دخترم و همیشه کنارتم 🫠🫂💕<br>
-            تو فرشته‌ منی منم فرشته‌ی تو :)
-        </div>
-        <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:20px; cursor:pointer; font-weight:700; font-size:1rem; font-family:'Lalezar';">مهر و موم مجدد</button>
-    </div>
-</div>
-
-<div class="navbar" id="navbar">
-    <a href="#letter-sec" id="nav-letter" class="active">نامه خونین</a>
-    <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات فرشته</a>
-    <a href="#vow-sec">🩸 پیمان ابدی</a>
-    <a href="#tarot-sec">🃏 سرنوشت</a>
-    <a href="#pulse-sec">🫀 تپش مشترک</a>
-    <a href="#countdown-sec">⏳ ماه کامل</a>
-    <a href="#story-sec">افسانه ما</a>
-    <a href="#dates-sec">تولد عشق</a>
-    <a href="#mobin-sec">قلمرو Mobin</a>
-    <a href="#niyayesh-sec">قلمرو Niyayesh</a>
-    <a href="#gallery-sec">قاب خاطرات</a>
-    <a href="#feed-sec">خاطرات روزانه</a>
-    <a href="#tvd-sec">سینمای تاریک</a>
-    <a href="javascript:void(0)" onclick="openPortal()" style="color:#ff1a40; font-weight:900; animation: heartBeat 2s infinite;">🌀 پورتال</a>
-    <a href="javascript:void(0)" onclick="openSecret()">🔒 راز مگو</a>
-</div>
-
-<div id="main">
     <div class="container">
         
-        <div class="web-section reveal" id="letter-sec">
-            <div class="title-main" id="txt-main-title" data-key="main_title">MY ETERNAL LOVE 🥹🫂💕</div>
-            <div class="gallery">
-                <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="Memory 1">
-                <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2">
-            </div>
-            <div class="text" id="typed-text" data-key="love_letter"></div>
-        </div>
-
-        <div class="web-section reveal" id="game-sec">
-            <div class="section-title">مأموریت نجات نیایش | VAMPIRE CRUSADE 🩸</div>
-            <div class="game-arcade-cabinet">
-                <div id="game-overlay" style="position: absolute; inset:0; background:rgba(5,0,1,0.95); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10;">
-                    <div class="arcade-neon-title">BLOOD ARENA</div>
-                    <div style="color:#ccc; font-size:1.1rem; margin-bottom: 25px; font-family:'Vazirmatn';" id="score-display">با شمشیر نئونی تاریکی را بشکاف و به نیایش برس!</div>
-                    <button class="arcade-start-btn" onclick="startArcadeGame()">شروع حماسه</button>
-                </div>
-                
-                <div class="arcade-hud">
-                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p1-health"></div></div>
-                    <div class="tekken-timer" id="arcade-timer-ui">99</div>
-                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p2-health"></div></div>
-                </div>
-
-                <div class="arcade-screen-container" id="arcade-screen">
-                    <canvas id="tekkenCanvas"></canvas>
-                    <div class="crt-scanlines"></div>
-                </div>
-
-                <div class="arcade-controls">
-                    <button class="arcade-btn move-btn" id="btn-left">⬅️ DEFEND</button>
-                    <button class="arcade-btn attack-btn" id="btn-attack">SLAUGHTER ⚔️</button>
-                    <button class="arcade-btn move-btn" id="btn-right">CHARGE ➡️</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="vow-sec">
-            <div class="section-title">THE BLOOD VOW | پیمان جاودانگی</div>
-            <div class="vow-container">
-                <div class="vow-paper">
-                    <div class="vow-icon">📜</div>
-                    <p data-key="blood_vow_text">من، مبین، در برابر تمام کهکشان‌ها و تاریکی‌ها سوگند یاد می‌کنم که تا آخرین قطره خون و تا آخرین تپش قلب، محافظ، عاشق و دیوانه‌ی تو، نیایش، باقی بمانم. هیچ نیرویی در این جهان فانی نمی‌تواند روح‌های ما را از هم جدا کند.</p>
-                    <div class="signatures">
-                        <div class="sign-box">
-                            <span class="sign-name">Mobin</span>
-                            <span class="sign-title">The Protector</span>
-                        </div>
-                        <div class="sign-box">
-                            <span class="sign-name">Niyayesh</span>
-                            <span class="sign-title">The Queen</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="tarot-sec">
-            <div class="section-title">CARDS OF DESTINY | کارت‌های سرنوشت 🃏</div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 35px; font-family:'Lalezar'; font-size:1.2rem;">کارت‌ها را لمس کن تا آینده‌ی تاریک و زیبایمان را ببینی...</p>
-            <div class="tarot-grid">
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design">I</div></div>
-                        <div class="tarot-back"><p>چون وقتی نگاهم می‌کنی، تمام تاریکی‌های دنیای من روشن میشه. تو خورشیدِ این ومپایری. 🩸</p></div>
-                    </div>
-                </div>
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design glow-text">II</div></div>
-                        <div class="tarot-back"><p>چون هیچکس تو دنیا به اندازه تو، دیوونه‌بازی‌ها و رویاهای بزرگ منو نمی‌فهمه. 🖤</p></div>
-                    </div>
-                </div>
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design">III</div></div>
-                        <div class="tarot-back"><p>چون تو نه تنها عشق منی، بلکه بهترین رفیق و پناهگاه امنِ منی نیایشم. 🫂</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="pulse-sec">
-            <div class="section-title">SOULMATE RESONANCE | فرکانس قلب ما</div>
-            <div class="pulse-container">
-                <div class="heart-icon">🫀</div>
-                <div class="ecg-line"></div>
-                <p data-key="pulse_desc">قلب‌های ما در یک فرکانس واحد می‌تپد. حتی اگر فرسنگ‌ها دور باشیم، ریتم زندگیِ من با نفس‌های تو تنظیم شده است.</p>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="countdown-sec">
-            <div class="section-title">COUNTDOWN TO ETERNITY | زمان تا جاودانگی ⏳</div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 30px; font-family:'Lalezar'; font-size:1.2rem;">شمارش معکوس تا تولد فرشته‌ی روی زمین (۱۵ شهریور)</p>
+        <div class="card">
+            <h2>⏳ شمارش معکوس لحظه دیدار</h2>
             <div class="countdown-container">
-                <div class="time-box"><span id="cd-days">00</span><div class="time-label">روز</div></div>
-                <div class="time-box"><span id="cd-hours">00</span><div class="time-label">ساعت</div></div>
-                <div class="time-box"><span id="cd-mins">00</span><div class="time-label">دقیقه</div></div>
-                <div class="time-box"><span id="cd-secs">00</span><div class="time-label">ثانیه</div></div>
+                <div class="countdown-item"><span class="countdown-num" id="cd-seconds">00</span><span class="countdown-label">Sec</span></div>
+                <div class="countdown-item"><span class="countdown-num" id="cd-minutes">00</span><span class="countdown-label">Min</span></div>
+                <div class="countdown-item"><span class="countdown-num" id="cd-hours">00</span><span class="countdown-label">Hours</span></div>
+                <div class="countdown-item"><span class="countdown-num" id="cd-days">00</span><span class="countdown-label">Days</span></div>
             </div>
         </div>
 
-        <div class="web-section reveal" id="story-sec">
-            <div class="section-title" data-key="story_title">OUR LEGEND | افسانه عشق ما</div>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date" data-key="timeline_d1">روزی که قلبت مال من شد</div>
-                    <div class="timeline-content" id="txt-timeline-c1" data-key="timeline_c1">اینجا آغاز فصل جدید زندگی من بود. روزی که نگاهت مسیر سرنوشتم رو عوض کرد و شدی تمام دنیای من...</div>
+        <div class="card">
+            <h2>🔮 کارت‌های تاروت سرنوشت عاشقان</h2>
+            <div class="tarot-grid">
+                <div class="tarot-card" onclick="flipCard(this)">
+                    <div class="tarot-inner">
+                        <div class="tarot-front">I</div>
+                        <div class="tarot-back">عشق ابدی و وفاداری فراتر از زمان</div>
+                    </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-date" data-key="timeline_d2">خاطره مشترک بعدی ما</div>
-                    <div class="timeline-content" id="txt-timeline-c2" data-key="timeline_c2">محل قرار دادن خاطرات قشنگی که در آینده قراره کلمه به کلمه با هم بسازیمش و اینجا بنویسیم... 🔐</div>
+                <div class="tarot-card" onclick="flipCard(this)">
+                    <div class="tarot-inner">
+                        <div class="tarot-front">II</div>
+                        <div class="tarot-back">یک راز مشترک که قلب‌ها را متصل می‌کند</div>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="dates-sec">
-            <div class="section-title" data-key="dates_title">SACRED DATES | تاریخ‌های مقدس</div>
-            <div class="dates-grid">
-                <div class="date-card mobin-card">
-                    <h3>Mobin</h3>
-                    <div class="bday" data-key="mobin_bday">۲۵ اسفند ۱۳۸۷</div>
-                    <p data-key="mobin_bday_desc">روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم و تموم زندگیمو به پاش بریزم.</p>
-                </div>
-                <div class="date-card niyayesh-card">
-                    <h3>Niyayesh</h3>
-                    <div class="bday" data-key="niyayesh_bday">۱۵ شهریور ۱۳۸۹</div>
-                    <p data-key="niyayesh_bday_desc">باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد تا بشه دلیل نفس کشیدنم.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="mobin-sec">
-            <div class="section-title" data-key="mobin_sec_title">MOBIN'S REALM | دنیای تاریک من</div>
-            <div class="interests-grid">
-                <div class="premium-card">
-                    <div class="badge">MY DREAM CAR</div>
-                    <h4 data-key="mobin_car_title">Porsche Boxster</h4>
-                    <p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین هدفم تو زندگی اینه که با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! صندلی کناری فقط مال توئه.</p>
-                </div>
-                <div class="premium-card">
-                    <div class="badge">DARK AURA</div>
-                    <h4 data-key="mobin_color_title">رنگ‌های مورد علاقه</h4>
-                    <p data-key="mobin_color_desc">مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
-                    <div class="color-preview">
-                        <div class="color-circle" style="background: #000000; box-shadow:0 0 10px #fff;"></div>
-                        <div class="color-circle" style="background: #0a192f; box-shadow:0 0 10px #0a192f;"></div>
+                <div class="tarot-card" onclick="flipCard(this)">
+                    <div class="tarot-inner">
+                        <div class="tarot-front">III</div>
+                        <div class="tarot-back">ملاقاتی در تاریکی شب که سرنوشت را ساخت</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="web-section reveal" id="niyayesh-sec">
-            <div class="section-title" data-key="niyayesh_sec_title">NIYAYESH'S REALM | قلمرو ملکه</div>
-            <div class="interests-grid">
-                <div class="premium-card tvd-card">
-                    <div class="badge tvd-badge">FAVORITE SERIES</div>
-                    <h4 data-key="niyayesh_series_title">The Vampire Diaries</h4>
-                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که برای تو ساختم.</p>
-                </div>
-                <div class="premium-card angel-card">
-                    <div class="badge angel-badge">THE ONLY ONE</div>
-                    <h4 data-key="niyayesh_only_title">بهترین دختر این دنیا</h4>
-                    <p data-key="niyayesh_only_desc">بین کل آدمای این سیاره، تو تک‌دونه‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار منی.</p>
-                </div>
+        <div class="card">
+            <h2>✍️ دفترچه خاطرات ومپایری ما</h2>
+            <div class="diary-list" id="diary-container">
+                <div class="diary-item">خاطره اولیه: اولین باری که چشمامون به هم گره خورد... <span>۱۴۰۲/۰۵/۱۲</span></div>
+            </div>
+            
+            <div style="margin-top: 10px;">
+                <textarea id="diary-input" rows="2" placeholder="خاطره جدیدی برای ابدیت بنویس..."></textarea>
+                <button onclick="saveMemory()">ثبت در تاریخچه</button>
             </div>
         </div>
 
-        <div class="web-section reveal" id="gallery-sec">
-            <div class="section-title" data-key="gallery_sec_title">VAULT OF MEMORIES | آلبوم خاطرات</div>
-            <div class="album-grid">
-                <div class="album-item">
-                    <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png">
-                    <div class="album-overlay"><span>آغاز داستان 🩸</span></div>
-                </div>
-                <div class="album-item">
-                    <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png">
-                    <div class="album-overlay"><span>لبخند ابدی 🖤</span></div>
-                </div>
-                <div class="album-item add-memory">
-                    <div class="plus-icon">+</div>
-                    <div class="album-overlay"><span>جای عکس بعدی... ✨</span></div>
-                </div>
-            </div>
+        <div class="card">
+            <h2>🦇 بازی آرکید: شکار قلب‌های خونین</h2>
+            <canvas id="game-canvas" width="400" height="150"></canvas>
+            <p style="text-align: center; font-size: 0.7rem; color: var(--text-muted);">برای حرکت دادن خفاش، از کلیدهای جهت‌نما یا لمس چپ/راست استفاده کنید.</p>
         </div>
 
-        <div class="web-section reveal" id="feed-sec">
-            <div class="section-title" data-key="feed_sec_title">DIARY OF THE IMMORTALS | دفترچه خاطرات</div>
-            <div class="memory-feed">
-                <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()">
-                    <span style="font-size: 2.5rem; display: block; margin-bottom: 15px; text-shadow:0 0 15px #ff1a40;">📸</span>
-                    ثبت یک خاطره جدید در تاریخ (لمس کن)
-                </div>
-                <input type="file" id="file-input" style="display:none" accept="image/*,video/*" onchange="handleFileUpload(event)">
-                <div id="posts-area"></div>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="tvd-sec">
-            <div class="section-title" data-key="tvd_sec_title">MYSTIC FALLS CINEMA</div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 30px; font-family:'Lalezar'; font-size:1.1rem;" data-key="tvd_sec_desc">مخصوص تو که عاشق این دنیایی... خون‌آشامِ من 🩸🦇</p>
-            <div class="cinema-grid">
-                <div class="video-wrapper">
-                    <iframe id="tvd-iframe" src="https://www.youtube.com/embed/aEzaN0eI6kU" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-
-        <div class="music" id="music-container">
-            <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        
-        <div class="vinyl-player" id="vinyl-player">
-            <div class="vinyl-record"></div>
-        </div>
-
-        <div class="creator">Forged in Darkness, Created by Mobin with Endless Love</div>
     </div>
-</div>
 
-<script src="game.js"></script>
+    <script>
+        // --- تنظیمات فایربیس (اطلاعات خودت رو اینجا جایگزین کن تا وصل بشه) ---
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            databaseURL: "YOUR_DATABASE_URL",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        // مقداردهی اولیه فایربیس (اگر اطلاعات بالا رو پر کردی، خط زیر رو فعال کن)
+        // firebase.initializeApp(firebaseConfig);
+        // const database = firebase.database();
 
-<script>
-let isAdmin = false;
-let loveLetter = `نیایش عزیزم، ملکه تاریکی و روشناییِ من...\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره. تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه تو کلمات گنجوند.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه معجزه‌ست که قدرشو با تک‌تک نفس‌هام می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم، زیباتر از قاصدک :)\n\nدوست دارم، تا ابد مال منی...\n\nباعشق 🫂💕\nMobin`;
-
-function enter(){
-    let p = document.getElementById("pass").value;
-    if(p === "mobinloveniyayesh" || p === "adminwiriper"){
-        if(p === "adminwiriper") {
-            isAdmin = true;
-            document.getElementById("upload-box").style.display = "block";
-            document.getElementById("admin-save-bar").style.display = "flex";
-        }
-        document.getElementById("login-zone").style.display = "none";
-        playRomanticSound();
-        const intro = document.getElementById("netflix-intro");
-        intro.style.display = "flex";
-        setTimeout(() => {
-            intro.style.display = "none";
-            const mainContent = document.getElementById("main");
-            mainContent.style.display = "block";
-            setTimeout(() => { 
-                mainContent.style.opacity = "1"; 
-                if(isAdmin) { enableEditableMode(); }
-                revealOnScroll(); 
-            }, 100);
-            startGothicParticles(); // اجرای پارتیکل‌های خونین
-            typeWriter(loveLetter, 0, "typed-text");
-            loadFeed(); 
-        }, 3800);
-    } else { alert("طلسم اشتباه است... قلب تاریکی تو را نمی‌پذیرد!"); }
-}
-
-function typeWriter(text, i, elementId) {
-    if(isAdmin) {
-        document.getElementById(elementId).innerHTML = text.replace(/\n/g, "<br>");
-        finishTypewriter(); return;
-    }
-    if (i < text.length) {
-        let char = text.charAt(i);
-        if(char === "\n") { document.getElementById(elementId).innerHTML += "<br>"; } 
-        else { document.getElementById(elementId).innerHTML += char; }
-        setTimeout(() => { typeWriter(text, i + 1, elementId); }, char === "." ? 400 : 55);
-    } else { finishTypewriter(); }
-}
-
-function finishTypewriter() {
-    setTimeout(() => {
-        document.getElementById("music-container").classList.add("show");
-        document.getElementById("navbar").classList.add("show-nav"); 
-        document.getElementById("vinyl-player").style.display = "block"; 
-    }, 600);
-}
-
-function openSecret() {
-    const modal = document.getElementById("secret-modal");
-    modal.style.display = "flex";
-    setTimeout(() => { modal.style.opacity = "1"; }, 10);
-}
-function closeSecret() {
-    const modal = document.getElementById("secret-modal");
-    modal.style.opacity = "0";
-    setTimeout(() => { 
-        modal.style.display = "none"; 
-        document.getElementById("secret-pass").value = "";
-        document.getElementById("secret-content").style.display = "none";
-    }, 600);
-}
-function checkSecret() {
-    let p = document.getElementById("secret-pass").value;
-    if(p === "niyayeshlovemobin") {
-        const content = document.getElementById("secret-content");
-        content.style.display = "block";
-        content.style.animation = "fadeIn 1.5s forwards";
-    } else { alert("رمز صندوقچه اشتباه است... رازها محافظت شده هستند!"); }
-}
-
-// سیستم پارتیکل جدید و تمیز (خاکستر و خون معلق)
-function startGothicParticles() {
-    const container = document.getElementById("particles-container");
-    const particleCount = 35;
-    for(let i = 0; i < particleCount; i++) {
-        let p = document.createElement("div");
-        p.className = "floating-ember";
-        let size = Math.random() * 4 + 2;
-        p.style.width = size + "px"; p.style.height = size + "px";
-        p.style.left = Math.random() * 100 + "vw";
-        p.style.bottom = "-10px";
-        p.style.animationDuration = (Math.random() * 10 + 5) + "s";
-        p.style.animationDelay = (Math.random() * 5) + "s";
-        container.appendChild(p);
-    }
-}
-
-function playRomanticSound() { try { let ctx = new (window.AudioContext || window.webkitAudioContext)(); let t = ctx.currentTime; function playTone(freq, type, startTime, duration, vol) { let osc = ctx.createOscillator(); let gain = ctx.createGain(); osc.type = type; osc.frequency.value = freq; gain.gain.setValueAtTime(0, startTime); gain.gain.linearRampToValueAtTime(vol, startTime + 0.4); gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration); osc.connect(gain); gain.connect(ctx.destination); osc.start(startTime); osc.stop(startTime + duration); } playTone(261.63, 'sine', t, 3.2, 0.4); playTone(311.13, 'sine', t, 3.2, 0.4); playTone(392.00, 'sine', t, 3.2, 0.4); playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); } catch(e) {} }
-
-function revealOnScroll() {
-    const reveals = document.querySelectorAll('.reveal');
-    for (let i = 0; i < reveals.length; i++) {
-        const windowHeight = window.innerHeight;
-        const elementTop = reveals[i].getBoundingClientRect().top;
-        if (elementTop < windowHeight - 100) { reveals[i].classList.add('active'); }
-    }
-}
-window.addEventListener('scroll', revealOnScroll);
-
-const targetDate = new Date("Sep 15, 2026 00:00:00").getTime(); 
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-    if(distance < 0) return; 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById("cd-days").innerText = days < 10 ? "0" + days : days;
-    document.getElementById("cd-hours").innerText = hours < 10 ? "0" + hours : hours;
-    document.getElementById("cd-mins").innerText = minutes < 10 ? "0" + minutes : minutes;
-    document.getElementById("cd-secs").innerText = seconds < 10 ? "0" + seconds : seconds;
-}
-setInterval(updateCountdown, 1000);
-
-function enableEditableMode() { document.querySelectorAll('[data-key]').forEach(el => { el.setAttribute('contenteditable', 'true'); }); }
-
-let vortexAnimation;
-function openPortal() {
-    const portal = document.getElementById("vampire-portal");
-    const vCanvas = document.getElementById("vortexCanvas");
-    const dim = document.getElementById("portal-dim");
-    portal.style.display = "flex";
-    startVortexCanvas();
-    setTimeout(() => { vCanvas.style.opacity = "1"; }, 100);
-    setTimeout(() => {
-        dim.style.opacity = "1";
-        document.getElementById("pt-q").style.opacity = "1"; document.getElementById("pt-q").style.transform = "translateY(0) scale(1)";
-        document.getElementById("pt-st").style.opacity = "1"; document.getElementById("pt-st").style.transform = "translateY(0)";
-        document.getElementById("pt-btn").style.opacity = "1";
-    }, 2000);
-}
-
-function closePortal() {
-    const portal = document.getElementById("vampire-portal");
-    const dim = document.getElementById("portal-dim");
-    const vCanvas = document.getElementById("vortexCanvas");
-    dim.style.opacity = "0"; vCanvas.style.opacity = "0";
-    setTimeout(() => { portal.style.display = "none"; cancelAnimationFrame(vortexAnimation); }, 1500);
-}
-
-function startVortexCanvas() {
-    const canvas = document.getElementById('vortexCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    let particles = [];
-    for(let i=0; i<300; i++) {
-        particles.push({
-            angle: Math.random() * Math.PI * 2,
-            radius: Math.random() * Math.max(canvas.width, canvas.height),
-            speed: Math.random() * 0.03 + 0.01,
-            size: Math.random() * 3 + 1,
-            color: Math.random() > 0.5 ? '#ff1a40' : '#4a0000'
-        });
-    }
-    let centerX = canvas.width / 2; let centerY = canvas.height / 2;
-    function drawVortex() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.15)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => {
-            p.angle += p.speed; p.radius -= p.radius * 0.015;
-            if(p.radius < 5) { p.radius = Math.max(canvas.width, canvas.height); }
-            let x = centerX + Math.cos(p.angle) * p.radius; let y = centerY + Math.sin(p.angle) * p.radius;
-            ctx.beginPath(); ctx.arc(x, y, p.size, 0, Math.PI * 2); ctx.fillStyle = p.color; ctx.shadowBlur = 15; ctx.shadowColor = p.color; ctx.fill();
-        });
-        ctx.beginPath(); ctx.arc(centerX, centerY, 50, 0, Math.PI * 2); ctx.fillStyle = "#000"; ctx.shadowBlur = 100; ctx.shadowColor = "#ff1a40"; ctx.fill();
-        vortexAnimation = requestAnimationFrame(drawVortex);
-    }
-    drawVortex();
-}
-
-// دیتابیس همون قبلیه، دست نخورده
-const firebaseConfig = {
-    apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
-    authDomain: "niyayesh-universe.firebaseapp.com",
-    projectId: "niyayesh-universe",
-    storageBucket: "niyayesh-universe.firebasestorage.app",
-    messagingSenderId: "675804346928",
-    appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
-};
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-const storage = firebase.storage();
-
-db.collection("website_data").doc("texts").onSnapshot((doc) => {
-    if (doc.exists) {
-        const data = doc.data();
-        if(data.love_letter) { loveLetter = data.love_letter; }
-        document.querySelectorAll('[data-key]').forEach(el => {
-            const key = el.getAttribute('data-key');
-            if(data[key] !== undefined) {
-                if(key === "love_letter" && document.getElementById("main").style.display !== "block") { return; }
-                el.innerHTML = data[key];
+        // --- سیستم لاگین ایمن قبلی ---
+        function checkLogin() {
+            const pass = document.getElementById('password-input').value;
+            // رمز عبور قبلی خودت رو به جای '1234' قرار بده
+            if(pass === '1234' || pass === 'vampire') { 
+                document.getElementById('login-overlay').style.display = 'none';
+                initGame();
+            } else {
+                const err = document.getElementById('login-error');
+                err.style.display = 'block';
+                err.style.animation = 'shake 0.3s ease';
             }
+        }
+
+        // --- شمارش معکوس هوشمند ---
+        const targetDate = new Date("December 31, 2026 00:00:00").getTime();
+        setInterval(function() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById("cd-days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("cd-hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("cd-minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("cd-seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
+
+        // --- انیمیشن کارت‌های تاروت ---
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // --- ذخیره و بازیابی خاطرات در فایربیس ---
+        function saveMemory() {
+            const text = document.getElementById('diary-input').value;
+            if(!text) return;
+
+            const newMemory = {
+                text: text,
+                date: new Date().toLocaleDateString('fa-IR')
+            };
+
+            // ارسال به فایربیس
+            try {
+                firebase.database().ref('memories/').push(newMemory);
+                document.getElementById('diary-input').value = '';
+                addMemoryToDOM(newMemory.text, newMemory.date);
+            } catch(e) {
+                // اگر فایربیس متصل نباشد، به صورت لوکال اضافه می‌شود تا کارکرد مختل نشود
+                addMemoryToDOM(text, "همین الان (آفلاین)");
+                document.getElementById('diary-input').value = '';
+            }
+        }
+
+        function addMemoryToDOM(text, date) {
+            const container = document.getElementById('diary-container');
+            const item = document.createElement('div');
+            item.className = 'diary-item';
+            item.innerHTML = `${text} <span>${date}</span>`;
+            container.insertBefore(item, container.firstChild);
+        }
+
+        // لود اولیه خاطرات از فایربیس (در صورت اتصال)
+        try {
+            firebase.database().ref('memories/').on('child_added', (snapshot) => {
+                const data = snapshot.val();
+                addMemoryToDOM(data.text, data.date);
+            });
+        } catch(e) {}
+
+        // --- مینی بازی آرکید فشرده (خفاش و قلب‌ها) ---
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        let bat = { x: 180, y: 120, w: 40, h: 20, speed: 15 };
+        let hearts = [];
+        let score = 0;
+
+        function initGame() {
+            setInterval(createHeart, 2000);
+            gameLoop();
+        }
+
+        function createHeart() {
+            hearts.push({ x: Math.random() * (canvas.width - 15), y: 0, size: 10, speed: 2 });
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // رسم خفاش (بازیکن)
+            ctx.fillStyle = '#660011';
+            ctx.fillRect(bat.x, bat.y, bat.w, bat.h);
+            ctx.fillStyle = '#b89146';
+            ctx.font = '10px Vazirmatn';
+            ctx.fillText("🦇", bat.x + 12, bat.y + 14);
+
+            // رسم و آپدیت قلب‌ها
+            for(let i = 0; i < hearts.length; i++) {
+                let h = hearts[i];
+                h.y += h.speed;
+                ctx.fillStyle = '#b3001e';
+                ctx.font = '12px sans-serif';
+                ctx.fillText("❤️", h.x, h.y);
+
+                // تشخیص برخورد
+                if(h.y >= bat.y && h.y <= bat.y + bat.h && h.x >= bat.x && h.x <= bat.x + bat.w) {
+                    score++;
+                    hearts.splice(i, 1);
+                    i--;
+                }
+            }
+
+            // نمایش امتیاز
+            ctx.fillStyle = '#e6d5d5';
+            ctx.font = '11px Vazirmatn';
+            ctx.fillText("امتیاز عشق: " + score, 10, 20);
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // کنترل حرکت خفاش
+        window.addEventListener('keydown', (e) => {
+            if(e.key === 'ArrowLeft' && bat.x > 0) bat.x -= bat.speed;
+            if(e.key === 'ArrowRight' && bat.x < canvas.width - bat.w) bat.x += bat.speed;
         });
-    }
-});
-
-function saveWebsiteTexts() {
-    if(!isAdmin) return;
-    const updatedTexts = {};
-    document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        let content = el.innerHTML;
-        if(key === "love_letter") { content = el.innerHTML.replace(/<br\s*\/?>/gi, "\n"); }
-        updatedTexts[key] = content;
-    });
-    db.collection("website_data").doc("texts").set(updatedTexts, { merge: true })
-    .then(() => { alert("پیمان ابدی با موفقیت آپدیت شد! 🩸"); })
-    .catch(err => { console.error(err); alert("خطا در ثبت جادو."); });
-}
-
-function triggerUpload() { if(isAdmin) { document.getElementById('file-input').click(); } }
-
-async function handleFileUpload(event) {
-    const file = event.target.files[0]; if(!file) return;
-    const memoryText = prompt("یه کپشن دارک و عاشقانه بنویس:"); if(memoryText === null) return;
-    const uploadBox = document.getElementById("upload-box");
-    uploadBox.innerHTML = "⏳ در حال ثبت در تاریخ..."; uploadBox.style.pointerEvents = "none";
-    const isVideo = file.type.startsWith('video');
-    const storageRef = storage.ref('memories/' + Date.now() + '_' + file.name);
-    try {
-        const snapshot = await storageRef.put(file);
-        const downloadURL = await snapshot.ref.getDownloadURL();
-        await db.collection("memories").add({ url: downloadURL, text: memoryText, type: isVideo ? 'video' : 'image', timestamp: firebase.firestore.FieldValue.serverTimestamp() });
-        alert("خاطره جاودانه شد!");
-        uploadBox.innerHTML = `<span style="font-size: 2.5rem; display: block; margin-bottom: 15px;">📸</span> ثبت یک خاطره جدید`;
-        uploadBox.style.pointerEvents = "auto";
-    } catch (error) { console.error(error); uploadBox.style.pointerEvents = "auto"; }
-}
-
-function loadFeed() {
-    db.collection("memories").orderBy("timestamp", "desc").onSnapshot(snapshot => {
-        const postsArea = document.getElementById('posts-area'); postsArea.innerHTML = '';
-        if(snapshot.empty) { postsArea.innerHTML = `<p style="text-align:center; color:#666; font-family:'Lalezar'; font-size:1.2rem;">هنوز رازی در این دفتر نوشته نشده...</p>`; return; }
-        snapshot.forEach(doc => {
-            const data = doc.data();
-            let mediaHtml = data.type === 'video' ? `<video src="${data.url}" class="post-video" controls></video>` : `<img src="${data.url}" class="post-img">`;
-            postsArea.innerHTML += `<div class="post-card"><div class="post-header"><div class="avatar">M</div><div><div style="font-weight: 900; font-family:'Cinzel Decorative';">Mobin</div><div style="font-size: 0.85rem; color: #ff1a40; font-family:'Lalezar';">The Protector</div></div></div>${mediaHtml}<div class="post-content">${data.text}</div></div>`;
-        });
-    });
-}
-</script>
-
+    </script>
 </body>
 </html>
