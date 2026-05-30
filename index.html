@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mobin & Niyayesh | iOS 26 Premium Universe</title>
 
+<!-- لود فونت‌های لوکس و سنگین -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -19,14 +20,14 @@ body {
     user-select: none;
 }
 
-/* iOS 26 HIGH-END GRAPHICS BACKGROUND */
+/* iOS 26 AMBIENT GRAPHICS BACKGROUND */
 .bg {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at 20% 30%, #150005 0%, #000000 50%), 
-                radial-gradient(circle at 80% 80%, #020a17 0%, #000000 100%);
-    background-size: 150% 150%;
-    animation: iOSGradient 20s ease-in-out infinite alternate;
+    background: radial-gradient(circle at 10% 20%, #1c000b 0%, #000000 60%), 
+                radial-gradient(circle at 90% 80%, #021124 0%, #000000 100%);
+    background-size: 140% 140%;
+    animation: iOSGradient 15s ease-in-out infinite alternate;
     z-index: -3;
 }
 
@@ -39,18 +40,18 @@ body {
     position: fixed;
     inset: 0;
     background: url('https://i.imgur.com/3ZQ3ZQZ.png');
-    opacity: 0.04;
-    animation: moveFog 90s linear infinite;
+    opacity: 0.03;
+    animation: moveFog 80s linear infinite;
     z-index: -2;
     pointer-events: none;
 }
 
 @keyframes moveFog {
-    from { transform: translateX(0) scale(1); }
-    to { transform: translateX(-500px) scale(1); }
+    from { transform: translateX(0); }
+    to { transform: translateX(-500px); }
 }
 
-/* ROMANTIC NETFLIX INTRO */
+/* LUXURY NETFLIX INTRO */
 #netflix-intro {
     position: fixed;
     inset: 0;
@@ -63,285 +64,305 @@ body {
 
 .netflix-text {
     font-family: 'Cinzel', serif;
-    font-size: 10rem;
+    font-size: 11rem;
     font-weight: 900;
     color: #ff1a40;
-    letter-spacing: 5px;
     opacity: 0;
-    animation: romanticZoom 4s forwards cubic-bezier(0.16, 1, 0.3, 1);
-    text-shadow: 0 0 70px rgba(255, 26, 64, 0.9), 0 0 20px rgba(255, 255, 255, 0.3);
+    animation: romanticZoom 3.8s forwards cubic-bezier(0.15, 0.85, 0.35, 1);
+    text-shadow: 0 0 80px rgba(255, 26, 64, 0.95), 0 0 30px rgba(255, 255, 255, 0.3);
 }
 
 @keyframes romanticZoom {
-    0% { transform: scale(0.5); filter: blur(25px); opacity: 0; }
-    25% { transform: scale(1); filter: blur(0); opacity: 1; }
-    65% { transform: scale(1.02); filter: blur(0); opacity: 1; }
-    100% { transform: scale(6); filter: blur(35px); opacity: 0; }
+    0% { transform: scale(0.4); filter: blur(30px); opacity: 0; }
+    30% { transform: scale(1); filter: blur(0); opacity: 1; }
+    70% { transform: scale(1.03); filter: blur(0); opacity: 1; }
+    100% { transform: scale(6.5); filter: blur(40px); opacity: 0; }
 }
 
-/* LOGIN BOX (iOS GLASSY INTERFACE) */
-.login-container {
+/* PREMIUM GLOWING LOGIN (iOS 26 GLASSMOPHISM) */
+.login-wrapper {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 390px;
-    padding: 60px 40px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
+    padding: 3px;
+    border-radius: 42px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,77,109,0.2), rgba(2,17,36,0.3), rgba(255,255,255,0.05));
+    background-size: 300% 300%;
+    animation: glowBorder 8s ease infinite;
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.9);
+}
+
+@keyframes glowBorder {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.login-container {
+    width: 380px;
+    padding: 55px 35px;
+    background: rgba(5, 5, 10, 0.75);
+    border-radius: 39px;
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
     text-align: center;
-    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.05);
 }
 
 .login-container h1 {
     font-family: 'Cinzel', serif;
     color: #fff;
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-weight: 900;
-    margin-bottom: 15px;
-    text-shadow: 0 0 40px rgba(255, 255, 255, 0.5);
+    margin-bottom: 12px;
+    background: linear-gradient(180deg, #ffffff, #ffccd5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .login-container p {
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 45px;
-    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
 }
 
 input {
     width: 100%;
-    padding: 20px;
-    margin-bottom: 30px;
+    padding: 18px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.03);
     color: white;
     outline: none;
     text-align: center;
-    font-size: 1.1rem;
-    letter-spacing: 3px;
-    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    font-size: 1.05rem;
+    letter-spacing: 2px;
+    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
 input:focus {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 77, 109, 0.5);
     background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(255, 77, 109, 0.15);
+    transform: scale(1.01);
 }
 
-button {
+.login-btn {
     width: 100%;
-    padding: 20px;
+    padding: 18px;
     border: none;
     border-radius: 20px;
-    background: #ffffff;
+    background: linear-gradient(90deg, #ffffff, #f0f0f0);
     color: #000000;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.1rem;
+    font-weight: 900;
     cursor: pointer;
-    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.1);
 }
 
-button:hover {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.3);
+.login-btn:hover {
+    transform: translateY(-3px);
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.3);
 }
 
-/* iOS FLOATING NAV DOCK */
+/* ULTRA-SLEEK MINI DOCK NAVBAR (iOS 26 COMPACT) */
 .navbar {
     position: fixed;
-    top: -100px;
+    top: -80px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px 25px;
-    border-radius: 35px;
-    backdrop-filter: blur(35px);
-    -webkit-backdrop-filter: blur(35px);
+    background: rgba(10, 10, 15, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    padding: 6px 12px;
+    border-radius: 24px;
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
     display: flex;
-    gap: 15px;
+    gap: 6px;
     z-index: 1000;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4), inset 0 0 15px rgba(255,255,255,0.02);
-    transition: top 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 10px rgba(255,255,255,0.03);
+    transition: top 1.2s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
-.navbar.show { top: 30px; }
+.navbar.show { top: 20px; }
 
 .navbar a {
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.55);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     font-weight: 700;
-    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    padding: 8px 18px;
-    border-radius: 22px;
+    transition: 0.3s cubic-bezier(0.15, 0.85, 0.35, 1);
+    padding: 7px 14px;
+    border-radius: 18px;
 }
 
 .navbar a:hover, .navbar a.active {
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 5px 15px rgba(255,255,255,0.05);
+    background: rgba(255, 255, 255, 0.09);
+    box-shadow: 0 4px 12px rgba(255,255,255,0.05);
 }
 
-/* MAIN CONTENT AND SCROLL */
+/* SYSTEM FRAME */
 #main {
     display: none;
     height: 100vh;
     overflow-y: auto;
-    padding: 140px 20px 80px 20px;
+    padding: 110px 20px 80px 20px;
     opacity: 0;
-    transition: opacity 3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 2.5s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
 #main::-webkit-scrollbar { width: 4px; }
 #main::-webkit-scrollbar-track { background: transparent; }
-#main::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 10px; }
+#main::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 10px; }
 
 .container {
-    max-width: 950px;
+    max-width: 920px;
     margin: auto;
     display: flex;
     flex-direction: column;
-    gap: 120px;
+    gap: 100px;
 }
 
-/* iOS FLAWLESS GLASS SECTIONS */
+/* PREMIUM GLASS SECTIONS */
 .web-section {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 45px;
-    padding: 70px 60px;
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    box-shadow: 0 40px 90px rgba(0,0,0,0.7), inset 0 0 30px rgba(255,255,255,0.02);
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 40px;
+    padding: 65px 55px;
+    backdrop-filter: blur(45px);
+    -webkit-backdrop-filter: blur(45px);
+    box-shadow: 0 45px 95px rgba(0,0,0,0.75), inset 0 0 25px rgba(255,255,255,0.01);
+    transition: transform 0.8s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
+.web-section:hover { transform: scale(1.005); }
 
-/* HIGH-EMPHASIS TITLES (ULTRA BOLD & GRADIENT) */
+/* ULTRA BOLD & LIGHTING TITLES */
 .section-title {
-    font-size: 2.8rem;
+    font-size: 2.6rem;
     font-weight: 900;
-    letter-spacing: -1px;
-    background: linear-gradient(135deg, #ffffff 30%, #ff4d6d 100%);
+    background: linear-gradient(135deg, #ffffff 40%, #ff4d6d 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 50px;
+    margin-bottom: 45px;
     text-align: center;
-    text-shadow: 0 10px 40px rgba(255, 77, 109, 0.15);
+    text-shadow: 0 10px 35px rgba(255, 77, 109, 0.12);
 }
 
 .title-main {
     font-family: 'Cinzel', serif;
-    font-size: 3.8rem;
+    font-size: 3.5rem;
     font-weight: 900;
     color: #ffffff;
-    margin-bottom: 50px;
-    text-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+    margin-bottom: 45px;
+    text-shadow: 0 0 45px rgba(255, 255, 255, 0.35);
     text-align: center;
 }
 
-/* GALLERY EFFECTS */
-.gallery { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; margin-bottom: 50px; }
+/* GALLERY DECORATIONS */
+.gallery { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-bottom: 45px; }
 .gallery img {
-    width: 250px; height: 320px; object-fit: cover; border-radius: 28px;
-    border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-    transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); filter: brightness(0.85);
+    width: 240px; height: 310px; object-fit: cover; border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 25px 50px rgba(0,0,0,0.75);
+    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); filter: brightness(0.85);
 }
-.gallery img:hover { transform: translateY(-12px) scale(1.02); filter: brightness(1.1); border-color: rgba(255,255,255,0.4); }
+.gallery img:hover { transform: translateY(-8px) scale(1.02); filter: brightness(1.05); border-color: rgba(255,255,255,0.35); }
 
-/* LETTER BODY TEXT */
+/* TEXT SYSTEM */
 .text {
-    font-size: 1.25rem; font-weight: 700; line-height: 2.8; color: #fdfdfd;
-    text-align: right; text-shadow: 0 2px 20px rgba(0,0,0,0.9); min-height: 200px;
+    font-size: 1.25rem; font-weight: 700; line-height: 2.8; color: #f5f5f7;
+    text-align: right; text-shadow: 0 2px 15px rgba(0,0,0,0.8); min-height: 200px;
 }
 
-/* TIMELINE ROAD */
+/* TIMELINE */
 .timeline {
-    position: relative; max-width: 100%; margin: 0 auto; padding-right: 25px;
-    border-right: 1px solid rgba(255, 255, 255, 0.15); text-align: right;
+    position: relative; padding-right: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.12); text-align: right;
 }
-.timeline-item { position: relative; margin-bottom: 50px; }
+.timeline-item { position: relative; margin-bottom: 45px; }
 .timeline-item::after {
-    content: ''; position: absolute; width: 10px; height: 10px;
-    background: #fff; top: 10px; right: -31px; border-radius: 50%;
-    box-shadow: 0 0 15px #fff;
+    content: ''; position: absolute; width: 8px; height: 8px;
+    background: #fff; top: 10px; right: -25px; border-radius: 50%;
+    box-shadow: 0 0 12px #fff;
 }
-.timeline-date { font-weight: 900; color: #ffffff; font-size: 1.3rem; margin-bottom: 8px; }
-.timeline-content { color: rgba(255,255,255,0.7); font-size: 1.1rem; line-height: 1.9; font-weight: 400; }
+.timeline-date { font-weight: 900; color: #ffffff; font-size: 1.25rem; margin-bottom: 6px; }
+.timeline-content { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.9; font-weight: 400; }
 
-/* BIRTHDAY CELEBRATION DATES */
-.dates-grid { display: flex; gap: 30px; justify-content: center; flex-wrap: wrap; }
+/* BIRTHDAY CARDS */
+.dates-grid { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
 .date-card {
-    background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255,255,255,0.08);
-    padding: 45px 35px; border-radius: 30px; width: 300px; text-align: center;
-    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255,255,255,0.05);
+    padding: 40px 30px; border-radius: 26px; width: 290px; text-align: center;
+    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
-.date-card:hover { transform: translateY(-10px); border-color: rgba(255,255,255,0.3); background: rgba(255, 255, 255, 0.05); }
-.date-card h3 { font-family: 'Cinzel', serif; font-size: 1.8rem; color: #fff; margin-bottom: 15px; font-weight: 900; }
-.date-card .bday { font-size: 1.6rem; font-weight: 900; margin-bottom: 15px; color: #ff4d6d; text-shadow: 0 0 15px rgba(255,77,109,0.3); }
-.date-card p { color: rgba(255,255,255,0.6); font-size: 1rem; line-height: 1.7; }
+.date-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.25); background: rgba(255, 255, 255, 0.03); }
+.date-card h3 { font-family: 'Cinzel', serif; font-size: 1.7rem; color: #fff; margin-bottom: 12px; font-weight: 900; }
+.date-card .bday { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; color: #ff4d6d; text-shadow: 0 0 15px rgba(255,77,109,0.25); }
+.date-card p { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.7; }
 
-/* INTERESTS HUB (SPLIT GRID DESIGN) */
-.interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+/* HUB GRID */
+.interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 25px; }
 .premium-card {
-    background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.07);
-    border-radius: 32px; padding: 40px; text-align: right;
-    transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(255, 255, 255, 0.005); border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 28px; padding: 35px; text-align: right;
+    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
-.premium-card:hover { transform: translateY(-8px); border-color: rgba(255,255,255,0.25); background: rgba(255, 255, 255, 0.03); }
-.premium-card h4 { font-size: 1.6rem; color: #fff; margin-bottom: 15px; font-weight: 900; }
-.premium-card p { color: rgba(255,255,255,0.7); line-height: 1.9; font-size: 1.05rem; }
+.premium-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.2); background: rgba(255, 255, 255, 0.02); }
+.premium-card h4 { font-size: 1.5rem; color: #fff; margin-bottom: 12px; font-weight: 900; }
+.premium-card p { color: rgba(255,255,255,0.65); line-height: 1.85; font-size: 1rem; }
 .badge {
-    font-family: 'Cinzel', serif; display: inline-block; padding: 5px 14px;
-    background: rgba(255,255,255,0.1); color: #fff; font-weight: 700; border-radius: 10px;
-    margin-bottom: 20px; font-size: 0.75rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.1);
+    font-family: 'Cinzel', serif; display: inline-block; padding: 4px 12px;
+    background: rgba(255,255,255,0.08); color: #fff; font-weight: 700; border-radius: 8px;
+    margin-bottom: 18px; font-size: 0.7rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.08);
 }
-/* تم اختصاصی رنگ‌های مبین */
-.color-preview { display: flex; gap: 10px; margin-top: 15px; }
-.color-circle { width: 30px; height: 30px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.4); }
+.color-preview { display: flex; gap: 8px; margin-top: 15px; }
+.color-circle { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); }
 
-/* FUTURE REPOSITORIES (ALBUM) */
-.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
+/* ALBUM GRID */
+.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; }
 .album-item {
-    position: relative; height: 240px; border-radius: 24px; overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.08); background: #000;
+    position: relative; height: 230px; border-radius: 22px; overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05); background: #000;
     display: flex; justify-content: center; align-items: center;
 }
-.album-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-.album-item:hover img { transform: scale(1.08); filter: blur(3px); }
+.album-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); }
+.album-item:hover img { transform: scale(1.06); filter: blur(3px); }
 .album-overlay {
-    position: absolute; inset: 0; background: rgba(0, 0, 0, 0.6);
-    display: flex; justify-content: center; align-items: center; opacity: 0; transition: 0.4s;
-    backdrop-filter: blur(5px);
+    position: absolute; inset: 0; background: rgba(0, 0, 0, 0.65);
+    display: flex; justify-content: center; align-items: center; opacity: 0; transition: 0.3s;
+    backdrop-filter: blur(4px);
 }
 .album-item:hover .album-overlay { opacity: 1; }
-.album-overlay span { font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px; }
+.album-overlay span { font-weight: 700; font-size: 1rem; }
 
-/* EXTRA COMPONENTS */
-.music { margin-top: 30px; display: flex; justify-content: center; opacity: 0; transform: translateY(30px); transition: all 2.5s cubic-bezier(0.16, 1, 0.3, 1); }
+/* EMBEDS */
+.music { margin-top: 25px; display: flex; justify-content: center; opacity: 0; transform: translateY(20px); transition: all 2s cubic-bezier(0.15, 0.85, 0.35, 1); }
 .music.show { opacity: 1; transform: translateY(0); }
-iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-shadow: 0 30px 70px rgba(0,0,0,0.8); }
+iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-shadow: 0 25px 60px rgba(0,0,0,0.75); }
 
 .creator {
-    margin: 60px 0 10px 0; font-family: 'Cinzel', serif; font-size: 1.3rem;
-    color: rgba(255, 255, 255, 0.2); letter-spacing: 6px; text-transform: uppercase;
-    text-align: center; transition: 0.5s; font-weight: 700;
+    margin: 50px 0 10px 0; font-family: 'Cinzel', serif; font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.15); letter-spacing: 5px; text-transform: uppercase;
+    text-align: center; transition: 0.4s; font-weight: 700;
 }
-.creator:hover { color: #ffffff; text-shadow: 0 0 25px rgba(255, 255, 255, 0.5); }
+.creator:hover { color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.4); }
 
-/* FLOATING LIGHT FIELD */
+/* PARTICLES */
 .particle { position: fixed; border-radius: 50%; pointer-events: none; z-index: -1; animation: floatUp ease-in infinite; }
 @keyframes floatUp {
     0% { transform: translateY(110vh) translateX(0) scale(0); opacity: 0; }
-    35% { opacity: 0.4; }
-    75% { opacity: 0.4; }
-    100% { transform: translateY(-10vh) translateX(80px) scale(1.3); opacity: 0; }
+    30% { opacity: 0.35; }
+    75% { opacity: 0.35; }
+    100% { transform: translateY(-10vh) translateX(60px) scale(1.2); opacity: 0; }
 }
 </style>
 </head>
@@ -351,29 +372,38 @@ iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-s
 <div class="bg"></div>
 <div class="fog"></div>
 
+<!-- NETFLIX INTRO SCREEN -->
 <div id="netflix-intro">
     <div class="netflix-text">N</div>
 </div>
 
-<div class="login-container" id="login">
-    <h1>Niyayesh 🥹</h1>
-    <p>Only love knows the password</p>
-    <input id="pass" type="password" placeholder="رمز ورود را وارد کن...">
-    <button onclick="enter()">ورود به دنیای ما</button>
+<!-- LUXURY GLOWING LOGIN WRAPPER -->
+<div class="login-wrapper" id="login-zone">
+    <div class="login-container">
+        <h1>Niyayesh 🥹</h1>
+        <p>Only love knows the password</p>
+        <div class="input-group">
+            <input id="pass" type="password" placeholder="رمز ورود را وارد کن...">
+        </div>
+        <button class="login-btn" onclick="enter()">ورود به دنیای ما</button>
+    </div>
 </div>
 
+<!-- SLIM FLOATING DOCK NAVBAR -->
 <div class="navbar" id="navbar">
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
     <a href="#story-sec">داستان عشق ما</a>
-    <a href="#dates-sec">تاریخ‌های خاص</a>
+    <a href="#dates-sec">تاریخ‌ها</a>
     <a href="#mobin-sec">دنیای Mobin</a>
     <a href="#niyayesh-sec">دنیای Niyayesh</a>
     <a href="#gallery-sec">آلبوم عکسامون</a>
 </div>
 
+<!-- MAIN SYSTEM -->
 <div id="main">
     <div class="container">
         
+        <!-- SECTION 1: THE LETTER -->
         <div class="web-section" id="letter-sec">
             <div class="title-main">For Niyayesh 🥹🫂💕</div>
             <div class="gallery">
@@ -383,6 +413,7 @@ iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-s
             <div class="text" id="typed-text"></div>
         </div>
 
+        <!-- SECTION 2: OUR STORY -->
         <div class="web-section" id="story-sec">
             <div class="section-title">داستان عشق ما</div>
             <div class="timeline">
@@ -397,6 +428,7 @@ iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-s
             </div>
         </div>
 
+        <!-- SECTION 3: BIRTHDAYS -->
         <div class="web-section" id="dates-sec">
             <div class="section-title">تاریخ‌های متولد شدنِ عشق</div>
             <div class="dates-grid">
@@ -413,6 +445,7 @@ iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-s
             </div>
         </div>
 
+        <!-- SECTION 4: MOBIN'S WORLD -->
         <div class="web-section" id="mobin-sec">
             <div class="section-title">دنیای مبین و علایقش</div>
             <div class="interests-grid">
@@ -424,7 +457,7 @@ iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-s
                 <div class="premium-card">
                     <div class="badge">FAVORITE COLORS</div>
                     <h4>رنگ‌های مورد علاقه</h4>
-                    <p>ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بههم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
+                    <p>ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
                     <div class="color-preview">
                         <div class="color-circle" style="background: #000000;"></div>
                         <div class="color-circle" style="background: #0a192f;"></div>
@@ -433,6 +466,7 @@ iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-s
             </div>
         </div>
 
+        <!-- SECTION 5: NIYAYESH'S WORLD -->
         <div class="web-section" id="niyayesh-sec">
             <div class="section-title">دنیای نیایش و علایقش</div>
             <div class="interests-grid">
@@ -449,6 +483,7 @@ iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-s
             </div>
         </div>
 
+        <!-- SECTION 6: PHOTO ALBUM -->
         <div class="web-section" id="gallery-sec">
             <div class="section-title">آلبوم خاطرات تصویری</div>
             <div class="album-grid">
@@ -461,16 +496,18 @@ iframe { width: 100%; max-width: 680px; border-radius: 24px; border: none; box-s
                     <div class="album-overlay"><span>خاطره دوم 🔐</span></div>
                 </div>
                 <div class="album-item">
-                    <div style="color: rgba(255,255,255,0.2); font-size: 3rem; font-weight: 300;">+</div>
+                    <div style="color: rgba(255,255,255,0.15); font-size: 2.5rem; font-weight: 300;">+</div>
                     <div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div>
                 </div>
             </div>
         </div>
 
+        <!-- SPOTIFY PLAYER -->
         <div class="music" id="music-container">
             <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
 
+        <!-- SIGNATURE -->
         <div class="creator">Created by Mobin</div>
     </div>
 </div>
@@ -482,7 +519,7 @@ function enter(){
     let p = document.getElementById("pass").value;
 
     if(p === "mobinloveniyayesh"){
-        document.getElementById("login").style.display = "none";
+        document.getElementById("login-zone").style.display = "none";
         playRomanticSound();
 
         const intro = document.getElementById("netflix-intro");
@@ -499,7 +536,7 @@ function enter(){
             createMagicParticles();
             typeWriter(loveLetter, 0, "typed-text");
             
-        }, 4000);
+        }, 3800);
 
     } else {
         alert("رمز اشتباه است... دوباره تلاش کن عشق من");
@@ -515,14 +552,14 @@ function typeWriter(text, i, elementId) {
             document.getElementById(elementId).innerHTML += char;
         }
         
-        let speed = char === "." || char === "،" || char === "…" ? 450 : 65;
+        let speed = char === "." || char === "،" || char === "…" ? 400 : 55;
         setTimeout(() => { typeWriter(text, i + 1, elementId); }, speed);
     } else {
         setTimeout(() => {
             document.getElementById("music-container").classList.add("show");
             document.getElementById("navbar").classList.add("show");
             enableScrollSpy();
-        }, 800);
+        }, 600);
     }
 }
 
@@ -532,7 +569,7 @@ function enableScrollSpy() {
     const mainDiv = document.getElementById("main");
 
     mainDiv.onscroll = () => {
-        let scrollPos = mainDiv.scrollTop + 220;
+        let scrollPos = mainDiv.scrollTop + 180;
         sections.forEach(sec => {
             if (scrollPos >= sec.offsetTop && scrollPos < (sec.offsetTop + sec.offsetHeight)) {
                 navLinks.forEach(link => {
@@ -547,18 +584,18 @@ function enableScrollSpy() {
 }
 
 function createMagicParticles() {
-    const colors = ['rgba(255, 255, 255, 0.3)', 'rgba(255, 77, 109, 0.3)', 'rgba(10, 25, 47, 0.4)'];
-    for(let i = 0; i < 40; i++) {
+    const colors = ['rgba(255, 255, 255, 0.25)', 'rgba(255, 77, 109, 0.25)', 'rgba(2, 17, 36, 0.3)'];
+    for(let i = 0; i < 35; i++) {
         let p = document.createElement("div");
         p.className = "particle";
-        let size = Math.random() * 6 + 3;
+        let size = Math.random() * 5 + 3;
         p.style.width = size + "px";
         p.style.height = size + "px";
         p.style.left = Math.random() * 100 + "vw";
-        p.style.boxShadow = `0 0 ${Math.random() * 20 + 10}px ${colors[Math.floor(Math.random() * colors.length)]}`;
+        p.style.boxShadow = `0 0 ${Math.random() * 15 + 10}px ${colors[Math.floor(Math.random() * colors.length)]}`;
         p.style.background = '#fff';
-        p.style.animationDuration = (Math.random() * 12 + 7) + "s";
-        p.style.animationDelay = Math.random() * 4 + "s";
+        p.style.animationDuration = (Math.random() * 10 + 6) + "s";
+        p.style.animationDelay = Math.random() * 3 + "s";
         document.body.appendChild(p);
     }
 }
@@ -574,7 +611,7 @@ function playRomanticSound() {
             osc.type = type;
             osc.frequency.value = freq;
             gain.gain.setValueAtTime(0, startTime);
-            gain.gain.linearRampToValueAtTime(vol, startTime + 0.5);
+            gain.gain.linearRampToValueAtTime(vol, startTime + 0.4);
             gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
             osc.connect(gain);
             gain.connect(ctx.destination);
@@ -582,15 +619,11 @@ function playRomanticSound() {
             osc.stop(startTime + duration);
         }
 
-        playTone(261.63, 'sine', t, 3.5, 0.4); 
-        playTone(329.63, 'sine', t, 3.5, 0.4); 
-        playTone(392.00, 'sine', t, 3.5, 0.4); 
-        playTone(523.25, 'triangle', t + 0.4, 4, 0.15); 
-        playTone(659.25, 'triangle', t + 0.6, 4, 0.1); 
-
-    } catch(e) {
-        console.log("Audio Error");
-    }
+        playTone(261.63, 'sine', t, 3.2, 0.4); 
+        playTone(329.63, 'sine', t, 3.2, 0.4); 
+        playTone(392.00, 'sine', t, 3.2, 0.4); 
+        playTone(523.25, 'triangle', t + 0.3, 3.5, 0.15); 
+    } catch(e) {}
 }
 </script>
 
