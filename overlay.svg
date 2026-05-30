@@ -1,20 +1,24 @@
-/* جایگزین مدرن و بدون ارور برای overlay.svg */
-.cinematic-texture {
+/* 🎬 جایگزین فوق‌پایدار و پیشرفته برای overlay.svg بدون ارور رندرینگ */
+.vintage-overlay {
     position: fixed;
-    inset: 0;
-    /* ساخت پترن خط‌خطی دیجیتالی مینی‌مال با کد مچ شده به رفرنس‌ها */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3) 50%, transparent 50%);
-    background-size: 100% 4px;
-    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 9999;
-    opacity: 0.35;
+    pointer-events: none; /* قفل نشدن کلیک‌های سایت */
+    opacity: 0.28; /* میزان شدت بافت خطوط روی سایت */
+    
+    /* تزریق مستقیم کد استاندارد SVG به صورت دیتا-آدرس بدون نیاز به فایل خارجی */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath d='M0 0h4v2H0z' fill='%23000000' fill-opacity='.5'/%3E%3C/svg%3E");
+    background-size: 4px 4px;
 }
 
-/* ایجاد هاله عمیق تاریک ومپایری دور صفحه */
-.cinematic-vignette {
+/* هاله تاریک سینمایی دور صفحه (Vignette) برای مچ شدن با رفرنس‌های لوکس */
+.vignette-effect {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle, transparent 40%, #030001 95%);
-    pointer-events: none;
     z-index: 9998;
+    pointer-events: none;
+    background: radial-gradient(circle, transparent 35%, rgba(5, 0, 1, 0.95) 100%);
 }
