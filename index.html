@@ -1,25 +1,34 @@
-<!-- بخش گاراژ در HTML -->
-<div class="web-section" id="forza-sec">
-    <h2>گاراژ رویایی مبین</h2>
-    <!-- دقت کن: این بار به جای id، از class استفاده می‌کنیم برای اطمینان -->
-    <img id="porsche" src="" alt="Porsche" style="width: 100%; max-width: 600px; display: block; border-radius: 20px;">
-</div>
-
 <script>
-  // ... (همون کد قبلی تنظیمات فایربیس و اینیشیالایز) ...
-
-  const db = firebase.firestore();
+  // ۱. اتصال به فایربیس
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
+    authDomain: "niyayesh-universe.firebaseapp.com",
+    projectId: "niyayesh-universe",
+    storageBucket: "niyayesh-universe.firebasestorage.app",
+    messagingSenderId: "675804346928",
+    appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
+  };
   
-  db.collection("website_data").doc("config").get().then((doc) => {
-      if (doc.exists) {
-          const data = doc.data();
-          const img = document.getElementById("porsche");
-          if(img && data.porsche_image_url) {
-              img.src = data.porsche_image_url;
-              console.log("عکس با موفقیت ست شد:", data.porsche_image_url);
-          }
-      } else {
-          console.log("داکیومنت پیدا نشد!");
-      }
-  }).catch((e) => console.error("ارور نهایی: ", e));
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // ۲. تست اتصال و خواندن داده
+  console.log("در حال تلاش برای اتصال به فایربیس...");
+
+  db.collection("website_data").doc("config").get()
+    .then((doc) => {
+        if (doc.exists) {
+            console.log("اتصال موفق بود! داده‌ها اینا هستن:", doc.data());
+            const data = doc.data();
+            
+            // جایگذاری لینک‌ها در صفحه
+            if(data.tvd_video_url) document.querySelector("#tvd-sec iframe").src = data.tvd_video_url;
+            if(data.porsche_image_url) document.getElementById("porsche").src = data.porsche_image_url;
+        } else {
+            console.error("اتصال برقراره، ولی داکیومنت 'config' توی کالکشن 'website_data' پیدا نشد! چک کن که درست ذخیره‌ش کرده باشی.");
+        }
+    })
+    .catch((error) => {
+        console.error("اتصال به دیتابیس شکست خورد! دلیلش اینه:", error);
+    });
 </script>
