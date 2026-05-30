@@ -211,9 +211,61 @@
         .music.show { opacity: 1; transform: translateY(0); }
         iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; }
         .creator { text-align: center; padding: 20px; color: #a57d84; font-size: 0.9rem; font-weight: bold; }
+
+        /* ==========================================
+   DARK MODE (SENSUAL & INTIMATE VIBE 🍷🖤)
+   ========================================== */
+/* دکمه تغییر تم */
+#theme-toggle {
+    position: fixed; top: 20px; right: 20px;
+    background: rgba(255, 255, 255, 0.8); border: 1px solid var(--glass-border);
+    border-radius: 50%; width: 45px; height: 45px; font-size: 1.4rem;
+    cursor: pointer; z-index: 9999; backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(255, 182, 193, 0.5); transition: all 0.5s ease;
+}
+
+body.dark-mode #theme-toggle {
+    background: rgba(10, 0, 5, 0.8); border-color: #ff0a54;
+    box-shadow: 0 5px 20px rgba(255, 10, 84, 0.6);
+}
+
+/* تغییر متغیرهای پایه به رنگ‌های دارک و جذاب */
+body.dark-mode {
+    --milky-white: #080003; /* مشکی خیلی عمیق با تناژ قرمز */
+    --soft-pink: #140006; /* شرابی خیلی تاریک */
+    --rose-pink: #1c0008; 
+    --love-red: #ff0a54; /* قرمز نئونی خفن */
+    --text-dark: #ffe4e1; /* رنگ متن تو حالت دارک */
+    --glass-bg: rgba(15, 0, 5, 0.75); /* شیشه‌ی دودی/قرمز */
+    --glass-border: rgba(255, 10, 84, 0.3);
+}
+
+/* تغییر پس‌زمینه و موج‌ها */
+body.dark-mode .bg {
+    background: radial-gradient(circle at 15% 25%, rgba(255, 10, 84, 0.15) 0%, transparent 60%), 
+                radial-gradient(circle at 85% 75%, rgba(138, 0, 36, 0.2) 0%, transparent 100%);
+}
+body.dark-mode .wave-container .shape-fill { fill: #0a0002; opacity: 1; }
+body.dark-mode .wave-container .shape-fill-2 { fill: #ff0a54; opacity: 0.15; }
+
+/* جذاب‌تر کردن گوی و کارت‌ها تو تاریکی */
+body.dark-mode .magic-orb {
+    background: radial-gradient(circle at 30% 30%, #ff0a54, #8a0024 50%, #080003 90%);
+    box-shadow: 0 15px 40px rgba(255, 10, 84, 0.6), inset -15px -15px 25px rgba(0,0,0,0.8), inset 10px 10px 20px rgba(255, 10, 84, 0.8);
+}
+body.dark-mode .tarot-front, body.dark-mode .tarot-back, body.dark-mode .login-container {
+    background: rgba(15, 0, 5, 0.85); box-shadow: 0 15px 35px rgba(255, 10, 84, 0.25);
+}
+body.dark-mode input { background: rgba(0, 0, 0, 0.6); color: #fff; }
+body.dark-mode .navbar { background: rgba(10, 0, 5, 0.85); box-shadow: 0 15px 35px rgba(255, 10, 84, 0.3); }
+body.dark-mode .navbar a { color: #ffe4e1; }
+body.dark-mode .login-wrapper { background: linear-gradient(135deg, #2a000d, #ff0a54, #080003); }
+
     </style>
 </head>
 <body>
+
+    <button id="theme-toggle" class="emoji" onclick="toggleTheme()">🌙</button>
 
 <div class="bg"></div>
 <div class="wave-container">
@@ -707,6 +759,22 @@ function loadFeed() {
         });
     });
 }
+    // سیستم تغییر تم دارک و لایت
+function toggleTheme() {
+    const body = document.body;
+    const btn = document.getElementById("theme-toggle");
+    
+    // سوییچ کردن کلاس دارک مود
+    body.classList.toggle("dark-mode");
+    
+    // تغییر آیکون بر اساس حالت فعلی
+    if (body.classList.contains("dark-mode")) {
+        btn.innerHTML = "🍷"; // وایب دارک و رمانتیک شبانه
+    } else {
+        btn.innerHTML = "🌙"; // وایب لایت و جزیره
+    }
+}
+
 </script>
 </body>
 </html>
