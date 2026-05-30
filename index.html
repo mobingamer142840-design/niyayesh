@@ -6,7 +6,6 @@
     <title>Mobin & Niyayesh | Eternal Gothic Universe</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="style.css">
 
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
@@ -18,7 +17,6 @@
 
 <div class="bg"></div>
 <div class="fog"></div>
-
 <div class="vintage-overlay"></div>
 <div class="vignette"></div>
 
@@ -68,7 +66,9 @@
 
 <div class="navbar" id="navbar">
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
-    <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش (تکن رترو)</a>
+    <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
+    <a href="#tarot-sec">🃏 کارت‌های سرنوشت</a>
+    <a href="#countdown-sec">⏳ ماه خونین</a>
     <a href="#story-sec">داستان عشق ما</a>
     <a href="#dates-sec">تاریخ‌ها</a>
     <a href="#mobin-sec">دنیای Mobin</a>
@@ -83,7 +83,7 @@
 <div id="main" class="main-jitter-wrapper">
     <div class="container">
         
-        <div class="web-section" id="letter-sec">
+        <div class="web-section reveal" id="letter-sec">
             <div class="title-main" id="txt-main-title" data-key="main_title">For Niyayesh 🥹🫂💕</div>
             <div class="gallery">
                 <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="Memory 1">
@@ -91,36 +91,72 @@
             </div>
             <div class="text" id="typed-text" data-key="love_letter"></div>
         </div>
-<div class="web-section" id="game-sec">
-    <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION 🩸</div>
-    
-    <div class="game-arcade-cabinet">
-        <div id="game-overlay" style="position: absolute; inset:0; background:rgba(10,1,2,0.92); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:8px;">
-            <div class="section-title" style="font-size:2rem; margin-bottom:10px; text-shadow: 0 0 10px #ff1a40;">Vampire Fighting Arena</div>
-            <div style="color:#aaa; font-size:0.95rem; margin-bottom: 20px;" id="score-display">در نقش ومپایر با شمشیر نئونی حریفان را نابود کن!</div>
-            <button class="login-btn" onclick="startArcadeGame()" style="width:auto; padding:12px 35px; box-shadow: 0 0 15px rgba(255,26,64,0.4);">شروع مبارزه حماسی</button>
-        </div>
-        
-        <div class="arcade-hud">
-            <div class="tekken-health-bar"><div class="tekken-health-fill" id="p1-health"></div></div>
-            <div class="tekken-timer" id="arcade-timer-ui">99</div>
-            <div class="tekken-health-bar"><div class="tekken-health-fill" id="p2-health"></div></div>
+
+        <div class="web-section reveal" id="game-sec">
+            <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION 🩸</div>
+            <div class="game-arcade-cabinet">
+                <div id="game-overlay" style="position: absolute; inset:0; background:rgba(10,1,2,0.92); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:8px;">
+                    <div class="section-title" style="font-size:2rem; margin-bottom:10px; text-shadow: 0 0 10px #ff1a40;">Vampire Fighting Arena</div>
+                    <div style="color:#aaa; font-size:0.95rem; margin-bottom: 20px;" id="score-display">در نقش ومپایر با شمشیر نئونی حریفان را نابود کن!</div>
+                    <button class="login-btn" onclick="startArcadeGame()" style="width:auto; padding:12px 35px; box-shadow: 0 0 15px rgba(255,26,64,0.4);">شروع مبارزه حماسی</button>
+                </div>
+                
+                <div class="arcade-hud">
+                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p1-health"></div></div>
+                    <div class="tekken-timer" id="arcade-timer-ui">99</div>
+                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p2-health"></div></div>
+                </div>
+
+                <div class="arcade-screen-container" id="arcade-screen">
+                    <canvas id="tekkenCanvas"></canvas>
+                    <div class="crt-scanlines"></div>
+                </div>
+
+                <div class="arcade-controls" style="gap: 10px; padding: 10px;">
+                    <button class="arcade-btn" id="btn-left" style="padding: 10px 20px;">⬅️ عقب</button>
+                    <button class="arcade-btn" id="btn-attack" style="background: rgba(255, 26, 64, 0.2); border-color:#ff1a40; flex:1; font-weight: bold; text-shadow: 0 0 5px #ff1a40;">ATTACK / ضربه شمشیر ⚔️</button>
+                    <button class="arcade-btn" id="btn-right" style="padding: 10px 20px;">جلو ➡️</button>
+                </div>
+            </div>
         </div>
 
-        <div class="arcade-screen-container">
-            <canvas id="tekkenCanvas"></canvas>
-            <div class="crt-scanlines"></div>
+        <div class="web-section reveal" id="tarot-sec">
+            <div class="section-title">کارت‌های سرنوشت ما 🃏</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها را لمس کن تا رازهای قلبم را بخوانی...</p>
+            <div class="tarot-grid">
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design">I</div></div>
+                        <div class="tarot-back"><p>چون وقتی نگاهم می‌کنی، تمام تاریکی‌های دنیای من روشن میشه. تو خورشیدِ این ومپایری. 🩸</p></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design" style="color:#ff1a40; text-shadow: 0 0 10px #ff1a40;">II</div></div>
+                        <div class="tarot-back"><p>چون هیچکس تو دنیا به اندازه تو، دیوونه‌بازی‌ها و رویاهای بزرگ منو نمی‌فهمه. 🖤</p></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design">III</div></div>
+                        <div class="tarot-back"><p>چون تو نه تنها عشق منی، بلکه بهترین رفیق و پناهگاه امنِ منی نیایشم. 🫂</p></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="arcade-controls" style="gap: 10px; padding: 10px;">
-            <button class="arcade-btn" id="btn-left" style="padding: 10px 20px;">⬅️ عقب</button>
-            <button class="arcade-btn" id="btn-attack" style="background: rgba(255, 26, 64, 0.2); border-color:#ff1a40; flex:1; font-weight: bold; text-shadow: 0 0 5px #ff1a40;">ATTACK / ضربه شمشیر ⚔️</button>
-            <button class="arcade-btn" id="btn-right" style="padding: 10px 20px;">جلو ➡️</button>
+        <div class="web-section reveal" id="countdown-sec">
+            <div class="section-title">زمان تا جاودانگی ⏳</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">شمارش معکوس تا تولد فرشته‌ی روی زمین (۱۵ شهریور)</p>
+            <div class="countdown-container">
+                <div class="time-box"><span id="cd-days">00</span><div class="time-label">روز</div></div>
+                <div class="time-box"><span id="cd-hours">00</span><div class="time-label">ساعت</div></div>
+                <div class="time-box"><span id="cd-mins">00</span><div class="time-label">دقیقه</div></div>
+                <div class="time-box"><span id="cd-secs">00</span><div class="time-label">ثانیه</div></div>
+            </div>
         </div>
-    </div>
-</div>
 
-<div class="web-section" id="story-sec">
+        <div class="web-section reveal" id="story-sec">
             <div class="section-title" data-key="story_title">داستان عشق ما</div>
             <div class="timeline">
                 <div class="timeline-item">
@@ -134,7 +170,7 @@
             </div>
         </div>
 
-        <div class="web-section" id="dates-sec">
+        <div class="web-section reveal" id="dates-sec">
             <div class="section-title" data-key="dates_title">تاریخ‌های متولد شدنِ عشق</div>
             <div class="dates-grid">
                 <div class="date-card">
@@ -150,7 +186,7 @@
             </div>
         </div>
 
-        <div class="web-section" id="mobin-sec">
+        <div class="web-section reveal" id="mobin-sec">
             <div class="section-title" data-key="mobin_sec_title">دنیای مبین و علایقش</div>
             <div class="interests-grid">
                 <div class="premium-card">
@@ -170,13 +206,13 @@
             </div>
         </div>
 
-        <div class="web-section" id="niyayesh-sec">
+        <div class="web-section reveal" id="niyayesh-sec">
             <div class="section-title" data-key="niyayesh_sec_title">دنیای نیایش و علایقش</div>
             <div class="interests-grid">
                 <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
                     <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
                     <h4 data-key="niyayesh_series_title">The Vampire Diaries</h4>
-                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، fانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
+                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
                 </div>
                 <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
                     <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
@@ -186,7 +222,7 @@
             </div>
         </div>
 
-        <div class="web-section" id="gallery-sec">
+        <div class="web-section reveal" id="gallery-sec">
             <div class="section-title" data-key="gallery_sec_title">آلبوم خاطرات تصویری</div>
             <div class="album-grid">
                 <div class="album-item">
@@ -204,7 +240,7 @@
             </div>
         </div>
 
-        <div class="web-section" id="feed-sec">
+        <div class="web-section reveal" id="feed-sec">
             <div class="section-title" data-key="feed_sec_title">دفترچه خاطرات ابدی ما</div>
             <div class="memory-feed">
                 <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()">
@@ -216,7 +252,7 @@
             </div>
         </div>
 
-        <div class="web-section" id="tvd-sec">
+        <div class="web-section reveal" id="tvd-sec">
             <div class="section-title" data-key="tvd_sec_title">The Vampire Diaries Cinema</div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;" data-key="tvd_sec_desc">مخصوص تو که عاشق این دنیایی... 🩸🦇</p>
             <div class="cinema-grid">
@@ -229,8 +265,12 @@
         <div class="music" id="music-container">
             <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
+        
+        <div class="vinyl-player" id="vinyl-player">
+            <div class="vinyl-record"></div>
+        </div>
 
-        <div class="creator">Created by Mobin</div>
+        <div class="creator">Created by Mobin with Endless Love</div>
     </div>
 </div>
 
@@ -259,6 +299,7 @@ function enter(){
             setTimeout(() => { 
                 mainContent.style.opacity = "1"; 
                 if(isAdmin) { enableEditableMode(); }
+                revealOnScroll(); // فعال‌سازی افکت‌های اسکرول
             }, 100);
             createCrimsonParticles();
             typeWriter(loveLetter, 0, "typed-text");
@@ -284,9 +325,11 @@ function finishTypewriter() {
     setTimeout(() => {
         document.getElementById("music-container").classList.add("show");
         document.getElementById("navbar").classList.add("show-nav"); 
+        document.getElementById("vinyl-player").style.display = "block"; // نمایش گرامافون
     }, 600);
 }
 
+// --- توابع رابط کاربری ---
 function openSecret() {
     const modal = document.getElementById("secret-modal");
     modal.style.display = "flex";
@@ -310,6 +353,7 @@ function checkSecret() {
     } else { alert("رمز صندوقچه اشتباه است... رازها محافظت شده هستند!"); }
 }
 
+// --- افکت‌های بصری و صوتی ---
 function createCrimsonParticles() {
     const colors = ['rgba(255, 26, 64, 0.3)', 'rgba(139, 0, 0, 0.25)', 'rgba(255, 255, 255, 0.15)'];
     for(let i = 0; i < 40; i++) {
@@ -327,10 +371,41 @@ function createCrimsonParticles() {
 }
 function playRomanticSound() { try { let ctx = new (window.AudioContext || window.webkitAudioContext)(); let t = ctx.currentTime; function playTone(freq, type, startTime, duration, vol) { let osc = ctx.createOscillator(); let gain = ctx.createGain(); osc.type = type; osc.frequency.value = freq; gain.gain.setValueAtTime(0, startTime); gain.gain.linearRampToValueAtTime(vol, startTime + 0.4); gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration); osc.connect(gain); gain.connect(ctx.destination); osc.start(startTime); osc.stop(startTime + duration); } playTone(261.63, 'sine', t, 3.2, 0.4); playTone(311.13, 'sine', t, 3.2, 0.4); playTone(392.00, 'sine', t, 3.2, 0.4); playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); } catch(e) {} }
 
+// --- انیمیشن اسکرول ---
+function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal');
+    for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        if (elementTop < windowHeight - 80) {
+            reveals[i].classList.add('active');
+        }
+    }
+}
+window.addEventListener('scroll', revealOnScroll);
+
+// --- تایمر ماه خونین ---
+const targetDate = new Date("Sep 15, 2026 00:00:00").getTime(); 
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    if(distance < 0) return; 
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("cd-days").innerText = days < 10 ? "0" + days : days;
+    document.getElementById("cd-hours").innerText = hours < 10 ? "0" + hours : hours;
+    document.getElementById("cd-mins").innerText = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("cd-secs").innerText = seconds < 10 ? "0" + seconds : seconds;
+}
+setInterval(updateCountdown, 1000);
+
 function enableEditableMode() {
     document.querySelectorAll('[data-key]').forEach(el => { el.setAttribute('contenteditable', 'true'); });
 }
 
+// --- پورتال ومپایر ---
 let vortexAnimation;
 function openPortal() {
     const portal = document.getElementById("vampire-portal");
@@ -387,7 +462,7 @@ function startVortexCanvas() {
     drawVortex();
 }
 
-// --- بخش فایربیس کانفیگ شما ---
+// --- Firebase Config ---
 const firebaseConfig = {
     apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
     authDomain: "niyayesh-universe.firebaseapp.com",
