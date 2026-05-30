@@ -1,17 +1,18 @@
-// دریافت المان‌های کانواس آرکید
-const canvas = document.getElementById("tekkenCanvas");
-if (canvas) {
+document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("tekkenCanvas");
+    if (!canvas) return;
+
     const ctx = canvas.getContext("2d");
     let isPlaying = false;
     let gameLoopId;
 
-    // ابعاد استاندارد نمایشگر آرکید
+    // ابعاد بوم بازی
     canvas.width = 800;
     canvas.height = 380;
 
-    // تعریف پلیر (مبین) و نیایش
-    const player = { x: 60, y: 180, width: 45, height: 140, speed: 6, color: '#ff1a40', attacking: false, attackTimer: 0, health: 100 };
-    const niyayesh = { x: 700, y: 180, width: 45, height: 140, color: '#ffb6c1' };
+    // کوچک‌تر کردن کاراکترها (عرض ۳۰ و ارتفاع ۹۰) برای ظرافت بیشتر و قرارگیری روی زمین (y: 230)
+    const player = { x: 80, y: 230, width: 30, height: 90, speed: 6, color: '#ff1a40', attacking: false, attackTimer: 0, health: 100 };
+    const niyayesh = { x: 720, y: 230, width: 30, height: 90, color: '#ffb6c1' };
     let enemies = [];
     let score = 0;
     const targetScore = 15;
@@ -21,7 +22,7 @@ if (canvas) {
 
     let keys = { ArrowLeft: false, ArrowRight: false, Space: false };
 
-    // گوش به زنگ کیبورد
+    // هندلرهای کیبورد
     window.addEventListener('keydown', e => {
         if(e.code === 'ArrowLeft') keys.ArrowLeft = true;
         if(e.code === 'ArrowRight') keys.ArrowRight = true;
@@ -33,31 +34,30 @@ if (canvas) {
         if(e.code === 'Space') keys.Space = false;
     });
 
-    // فعال‌سازی دکمه‌های تاچ برای موبایل (بدون خطا)
-    setTimeout(() => {
-        const btnLeft = document.getElementById('btn-left');
-        const btnRight = document.getElementById('btn-right');
-        const btnAttack = document.getElementById('btn-attack');
+    // هندلرهای تاچ موبایل
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
+    const btnAttack = document.getElementById('btn-attack');
 
-        if(btnLeft) {
-            btnLeft.addEventListener('touchstart', (e)=>{ e.preventDefault(); keys.ArrowLeft = true; });
-            btnLeft.addEventListener('touchend', (e)=>{ e.preventDefault(); keys.ArrowLeft = false; });
-        }
-        if(btnRight) {
-            btnRight.addEventListener('touchstart', (e)=>{ e.preventDefault(); keys.ArrowRight = true; });
-            btnRight.addEventListener('touchend', (e)=>{ e.preventDefault(); keys.ArrowRight = false; });
-        }
-        if(btnAttack) {
-            btnAttack.addEventListener('touchstart', (e)=>{ e.preventDefault(); triggerArcadeAttack(); });
-        }
-    }, 1000);
+    if(btnLeft) {
+        btnLeft.addEventListener('touchstart', (e)=>{ e.preventDefault(); keys.ArrowLeft = true; });
+        btnLeft.addEventListener('touchend', (e)=>{ e.preventDefault(); keys.ArrowLeft = false; });
+    }
+    if(btnRight) {
+        btnRight.addEventListener('touchstart', (e)=>{ e.preventDefault(); keys.ArrowRight = true; });
+        btnRight.addEventListener('touchend', (e)=>{ e.preventDefault(); keys.ArrowRight = false; });
+    }
+    if(btnAttack) {
+        btnAttack.addEventListener('touchstart', (e)=>{ e.preventDefault(); triggerArcadeAttack(); });
+    }
 
     function triggerArcadeAttack() {
         if(!isPlaying || gameWon || player.attacking) return;
         player.attacking = true;
-        player.attackTimer = 12; 
+        player.attackTimer = 10; 
         
-        const hitZone = { x: player.x + player.width, y: player.y, width: 65, height: player.height };
+        // محدوده اثر ضربه شمشیر مایل به جلو
+        const hitZone = { x: player.x + player.width, y: player.y, width: 60, height: player.height };
         for(let i = enemies.length - 1; i >= 0; i--) {
             let e = enemies[i];
             if(hitZone.x < e.x + e.width && hitZone.x + hitZone.width > e.x &&
@@ -83,8 +83,9 @@ if (canvas) {
 
     function spawnArcadeEnemies() {
         if(!isPlaying || gameWon) return;
-        enemies.push({ x: 850, y: 180, width: 45, height: 140, speed: 2.5 + Math.random() * 2 });
-        setTimeout(spawnArcadeEnemies, Math.random() * 1400 + 600);
+        // دشمنان هم اندازه ظریف و کوچک دارند
+        enemies.push({ x: 850, y: 230, width: 30, height: 90, speed: 2.2 + Math.random() * 2 });
+        setTimeout(spawnArcadeEnemies, Math.random() * 1300 + 700);
     }
 
     function updateArcadePhysics() {
@@ -92,21 +93,23 @@ if (canvas) {
 
         if(!gameWon) {
             if(keys.ArrowLeft && player.x > 0) player.x -= player.speed;
-            if(keys.ArrowRight && player.x < 550) player.x += player.speed;
+            if(keys.ArrowRight && player.x < 650) player.x += player.speed;
 
             enemies.forEach(e => {
                 e.x -= e.speed;
+                // تشخیص برخورد فیزیکی فایترها
                 if(e.x < player.x + player.width && e.x + e.width > player.x) {
-                    player.x = Math.max(0, player.x - 15);
-                    e.x += 15;
-                    player.health = Math.max(0, player.health - 4);
+                    player.x = Math.max(0, player.x - 20);
+                    e.x += 20;
+                    player.health = Math.max(0, player.health - 5);
                     const p1Health = document.getElementById('p1-health');
                     if(p1Health) p1Health.style.width = player.health + '%';
                 }
             });
         } else {
-            if(player.x < niyayesh.x - player.width + 10) {
-                player.x += 3;
+            // انیمیشن دویدن خودکار به سمت نیایش بعد برد
+            if(player.x < niyayesh.x - player.width + 5) {
+                player.x += 3.5;
             } else {
                 isPlaying = false;
                 clearInterval(timerInterval);
@@ -115,8 +118,8 @@ if (canvas) {
                     gameOverlay.style.display = "flex";
                     gameOverlay.innerHTML = `
                         <div style="font-size: 5.5rem; filter: drop-shadow(0 0 20px #ff1a40);">👩‍❤️‍💋‍👨</div>
-                        <div class="section-title" style="margin-top:20px; font-size:2rem;">تا ابد در آغوش هم...</div>
-                        <div style="color:#fff; font-weight:bold; font-size:1.1rem; margin-bottom:15px;">مبین با موفقیت تمام موانع رو نابود کرد و به نیایش رسید! ❤️🩸</div>
+                        <div class="section-title" style="margin-top:20px; font-size:2rem; text-shadow: 0 0 10px #ff1a40;">تا ابد در آغوش هم...</div>
+                        <div style="color:#fff; font-weight:bold; font-size:1.1rem; margin-bottom:15px; text-align:center; padding:0 15px;">مبین با موفقیت تمام موانع رو نابود کرد و به نیایش رسید! ❤️🩸</div>
                         <button class="login-btn" onclick="startArcadeGame()" style="width:auto; padding:10px 30px;">نبرد مجدد</button>
                     `;
                 }
@@ -129,46 +132,106 @@ if (canvas) {
         }
     }
 
+    // طراحی و افکت‌های گرافیکی پیشرفته کاراکترها روی کانواس
+    function drawCharacter(charObj, type) {
+        ctx.save();
+        
+        if (type === 'player') {
+            // افکت سایه درخشان نئون قرمز برای مبین
+            ctx.shadowColor = '#ff1a40';
+            ctx.shadowBlur = 15;
+            ctx.fillStyle = '#ff1a40';
+            // بدن اصلی (کت و شلوار گوتیک مدرن)
+            ctx.fillRect(charObj.x, charObj.y + 20, charObj.width, charObj.height - 20);
+            // سر
+            ctx.fillStyle = '#ffccd5';
+            ctx.fillRect(charObj.x + 5, charObj.y, charObj.width - 10, 20);
+            
+            // افکت شمشیر نئونی متصل به کاراکتر در حالت عادی یا حمله
+            ctx.shadowColor = '#ff1a40';
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            if (charObj.attacking) {
+                // شمشیر کشیده شده رو به جلو برای ضربه زدن
+                ctx.moveTo(charObj.x + charObj.width, charObj.y + 45);
+                ctx.lineTo(charObj.x + charObj.width + 45, charObj.y + 20);
+            } else {
+                // شمشیر غلاف شده پشت کمر
+                ctx.moveTo(charObj.x, charObj.y + 35);
+                ctx.lineTo(charObj.x - 15, charObj.y + 5);
+            }
+            ctx.stroke();
+
+        } else if (type === 'niyayesh') {
+            // افکت هاله صورتی ملایم برای نیایش
+            ctx.shadowColor = '#ffb6c1';
+            ctx.shadowBlur = 18;
+            ctx.fillStyle = '#ffb6c1';
+            // لباس بلند حریر
+            ctx.fillRect(charObj.x, charObj.y + 20, charObj.width, charObj.height - 20);
+            // سر کاراکتر نیایش
+            ctx.fillStyle = '#ffe5ec';
+            ctx.fillRect(charObj.x + 5, charObj.y, charObj.width - 10, 20);
+            // موهای بلند مشکی فانتزی
+            ctx.fillStyle = '#111';
+            ctx.fillRect(charObj.x + 3, charObj.y, 6, 40);
+
+        } else if (type === 'enemy') {
+            // دشمنان حالت سایه‌های تاریک با چشم‌های قرمز درخشان
+            ctx.shadowColor = '#8b0000';
+            ctx.shadowBlur = 10;
+            ctx.fillStyle = '#1c1c1c';
+            ctx.fillRect(charObj.x, charObj.y + 20, charObj.width, charObj.height - 20);
+            ctx.fillStyle = '#2d2d2d';
+            ctx.fillRect(charObj.x + 4, charObj.y, charObj.width - 8, 20);
+            // چشمان درخشان قرمز ومپایری دشمن
+            ctx.fillStyle = '#ff1a40';
+            ctx.fillRect(charObj.x + 6, charObj.y + 6, 4, 4);
+        }
+        
+        ctx.restore();
+    }
+
     function drawArcadeFrame() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        // بک‌گراند دارک اتمسفریک آرکید
         let bgGrad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        bgGrad.addColorStop(0, '#150103');
+        bgGrad.addColorStop(0, '#0d0102');
         bgGrad.addColorStop(1, '#000000');
         ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = "#220509";
+        // خط افق و زمین بازی (باند فایت کلوپی)
+        ctx.fillStyle = "#150305";
         ctx.fillRect(0, 320, canvas.width, 60);
         ctx.fillStyle = "#ff1a40";
-        ctx.fillRect(0, 320, canvas.width, 2);
+        ctx.fillRect(0, 320, canvas.width, 2); // نوار جداکننده نئونی قرمز زمین
 
+        // رندر کردن نیایش (فقط موقع برد یا نزدیک شدن به پایان)
         if(score >= targetScore || gameWon) {
-            ctx.fillStyle = niyayesh.color;
-            ctx.shadowColor = "#ffb6c1"; ctx.shadowBlur = 25;
-            ctx.fillRect(niyayesh.x, niyayesh.y, niyayesh.width, niyayesh.height);
-            ctx.shadowBlur = 0;
+            drawCharacter(niyayesh, 'niyayesh');
         }
 
-        ctx.fillStyle = player.color;
-        ctx.shadowColor = player.color; ctx.shadowBlur = 20;
-        ctx.fillRect(player.x, player.y, player.width, player.height);
-        ctx.shadowBlur = 0;
-        
-        ctx.fillStyle = "#fff"; ctx.fillRect(player.x + 30, player.y + 15, 6, 6);
+        // رندر کردن پلیر (مبین)
+        drawCharacter(player, 'player');
 
+        // افکت موج ضربه شمشیر هنگام اتک
         if(player.attacking) {
-            ctx.fillStyle = "rgba(255, 26, 64, 0.7)";
+            ctx.save();
+            ctx.shadowColor = "#ff1a40";
+            ctx.shadowBlur = 20;
+            ctx.fillStyle = "rgba(255, 26, 64, 0.35)";
             ctx.beginPath();
-            ctx.arc(player.x + player.width + 10, player.y + 50, 45, -Math.PI/2, Math.PI/2);
+            ctx.arc(player.x + player.width + 15, player.y + 40, 35, -Math.PI/3, Math.PI/3);
             ctx.fill();
+            ctx.restore();
         }
 
-        ctx.fillStyle = "#3a3a3a";
+        // رندر کردن تک‌تک دشمنان
         enemies.forEach(e => {
-            ctx.fillRect(e.x, e.y, e.width, e.height);
-            ctx.fillStyle = "#ff1a40"; ctx.fillRect(e.x + 8, e.y + 15, 5, 5);
-            ctx.fillStyle = "#3a3a3a";
+            drawCharacter(e, 'enemy');
         });
     }
 
@@ -183,7 +246,7 @@ if (canvas) {
     window.startArcadeGame = function() {
         const gameOverlay = document.getElementById('game-overlay');
         if(gameOverlay) gameOverlay.style.display = "none";
-        player.x = 60;
+        player.x = 80;
         player.health = 100;
         score = 0;
         enemies = [];
@@ -211,4 +274,4 @@ if (canvas) {
         spawnArcadeEnemies();
         loopArcade();
     }
-}
+});
