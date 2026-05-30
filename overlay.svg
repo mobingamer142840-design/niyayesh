@@ -1,12 +1,1 @@
-<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-  <!-- خطوط خش فیلم -->
-  <line x1="150" y1="0" x2="145" y2="600" stroke="white" stroke-width="0.8" opacity="0.15" />
-  <line x1="450" y1="0" x2="452" y2="600" stroke="white" stroke-width="0.5" opacity="0.1" />
-  <line x1="680" y1="0" x2="675" y2="600" stroke="white" stroke-width="1.2" opacity="0.12" />
-  
-  <!-- لکه‌های گرد و خاک و مو روی لنز -->
-  <circle cx="200" cy="150" r="1.5" fill="white" opacity="0.2"/>
-  <circle cx="550" cy="420" r="2" fill="white" opacity="0.15"/>
-  <path d="M 300,250 Q 305,255 302,260" stroke="white" stroke-width="0.8" fill="none" opacity="0.2"/>
-  <circle cx="120" cy="480" r="1" fill="white" opacity="0.25"/>
-</svg>
+
