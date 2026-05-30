@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mobin & Niyayesh | iOS 26 Premium Universe</title>
+<title>Mobin & Niyayesh | Eternal Gothic Universe</title>
 
-<!-- لود فونت‌های لوکس و سنگین -->
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
@@ -20,18 +19,18 @@ body {
     user-select: none;
 }
 
-/* iOS 26 AMBIENT GRAPHICS BACKGROUND */
+/* BACKGROUND ACCORDING TO THE POSTER */
 .bg {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at 10% 20%, #1c000b 0%, #000000 60%), 
-                radial-gradient(circle at 90% 80%, #021124 0%, #000000 100%);
+    background: radial-gradient(circle at 15% 25%, #2a0105 0%, #000000 60%), 
+                radial-gradient(circle at 85% 75%, #140003 0%, #000000 100%);
     background-size: 140% 140%;
-    animation: iOSGradient 15s ease-in-out infinite alternate;
+    animation: gothicGradient 12s ease-in-out infinite alternate;
     z-index: -3;
 }
 
-@keyframes iOSGradient {
+@keyframes gothicGradient {
     0% { background-position: 0% 0%; }
     100% { background-position: 100% 100%; }
 }
@@ -40,8 +39,8 @@ body {
     position: fixed;
     inset: 0;
     background: url('https://i.imgur.com/3ZQ3ZQZ.png');
-    opacity: 0.03;
-    animation: moveFog 80s linear infinite;
+    opacity: 0.04;
+    animation: moveFog 90s linear infinite;
     z-index: -2;
     pointer-events: none;
 }
@@ -51,7 +50,7 @@ body {
     to { transform: translateX(-500px); }
 }
 
-/* LUXURY NETFLIX INTRO */
+/* NETFLIX SYSTEM INTRO */
 #netflix-intro {
     position: fixed;
     inset: 0;
@@ -79,7 +78,7 @@ body {
     100% { transform: scale(6.5); filter: blur(40px); opacity: 0; }
 }
 
-/* HIGH-END LUXURY LOGIN BOX WITH AURORA GLOW */
+/* LUXURY GLOWING LOGIN BOX */
 .login-wrapper {
     position: absolute;
     top: 50%;
@@ -87,7 +86,7 @@ body {
     transform: translate(-50%, -50%);
     padding: 3px;
     border-radius: 42px;
-    background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,77,109,0.25), rgba(2,17,36,0.3), rgba(255,255,255,0.05));
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(139,0,0,0.45), rgba(0,0,0,0.9), rgba(255,26,64,0.25));
     background-size: 300% 300%;
     animation: glowBorder 6s ease infinite;
     box-shadow: 0 50px 110px rgba(0, 0, 0, 0.95);
@@ -102,25 +101,24 @@ body {
 .login-container {
     width: 380px;
     padding: 50px 35px;
-    background: rgba(4, 4, 8, 0.82);
+    background: rgba(5, 0, 2, 0.88);
     border-radius: 39px;
     backdrop-filter: blur(55px);
     -webkit-backdrop-filter: blur(55px);
     text-align: center;
 }
 
-/* ROMANTIC LIVING EMOJIS & SHINE TITLE */
 .login-emojis {
     font-size: 2.8rem;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: inline-block;
     animation: heartBeat 1.8s infinite cubic-bezier(0.25, 0.8, 0.25, 1);
-    filter: drop-shadow(0 0 15px rgba(255, 77, 109, 0.6));
+    filter: drop-shadow(0 0 15px rgba(255, 26, 64, 0.7));
 }
 
 @keyframes heartBeat {
     0% { transform: scale(1); }
-    30% { transform: scale(1.12); }
+    30% { transform: scale(1.15); }
     60% { transform: scale(1); }
 }
 
@@ -130,7 +128,7 @@ body {
     font-size: 3.2rem;
     font-weight: 900;
     margin-bottom: 15px;
-    background: linear-gradient(90deg, #ffffff, #ffccd5, #ffffff);
+    background: linear-gradient(90deg, #ffffff, #ff1a40, #ffffff);
     background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -142,24 +140,19 @@ body {
 }
 
 .login-container p {
-    font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
     margin-bottom: 40px;
     text-transform: uppercase;
-    letter-spacing: 2.5px;
-}
-
-.input-group {
-    position: relative;
-    margin-bottom: 30px;
+    letter-spacing: 3px;
 }
 
 input {
     width: 100%;
     padding: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 26, 64, 0.15);
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.03);
     color: white;
     outline: none;
     text-align: center;
@@ -169,9 +162,9 @@ input {
 }
 
 input:focus {
-    border-color: rgba(255, 77, 109, 0.6);
-    background: rgba(0, 0, 0, 0.7);
-    box-shadow: 0 0 30px rgba(255, 77, 109, 0.2);
+    border-color: rgba(255, 26, 64, 0.6);
+    background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0 0 30px rgba(255, 26, 64, 0.25);
     transform: scale(1.01);
 }
 
@@ -180,42 +173,40 @@ input:focus {
     padding: 18px;
     border: none;
     border-radius: 20px;
-    background: linear-gradient(90deg, #ffffff, #f2f2f5);
-    color: #000000;
+    background: linear-gradient(90deg, #8b0000, #ff1a40);
+    color: #ffffff;
     font-size: 1.1rem;
     font-weight: 900;
     cursor: pointer;
     transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
-    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 25px rgba(255, 26, 64, 0.2);
 }
 
 .login-btn:hover {
     transform: translateY(-3px);
-    background: #ffffff;
-    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.35);
+    box-shadow: 0 15px 35px rgba(255, 26, 64, 0.45);
 }
 
-/* ULTRA-SLEEK COMPACT NAV DOCK (HIDDEN INITIAL STATE) */
+/* FLOATING NAV DOCK (INITIALLY COMPLETELY INVISIBLE) */
 .navbar {
     position: fixed;
-    top: -100px; /* شروع کاملاً از خارج صفحه برای محو بودن مطلق */
+    top: -100px; 
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(10, 10, 15, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 6px 12px;
+    background: rgba(15, 0, 2, 0.55);
+    border: 1px solid rgba(255, 26, 64, 0.18);
+    padding: 6px 14px;
     border-radius: 24px;
     backdrop-filter: blur(40px);
     -webkit-backdrop-filter: blur(40px);
     display: flex;
     gap: 6px;
     z-index: 1000;
-    opacity: 0; /* کاملاً شفاف در شروع */
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 10px rgba(255,255,255,0.03);
+    opacity: 0;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8);
     transition: top 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 1.5s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 
-/* وقتی کلاس active-nav فعال بشه، خیلی نرم میاد روی صفحه */
 .navbar.show-nav { 
     top: 20px; 
     opacity: 1;
@@ -226,18 +217,65 @@ input:focus {
     text-decoration: none;
     font-size: 0.82rem;
     font-weight: 700;
-    transition: 0.3s cubic-bezier(0.15, 0.85, 0.35, 1);
+    transition: 0.3s;
     padding: 7px 14px;
     border-radius: 18px;
 }
 
 .navbar a:hover, .navbar a.active {
     color: #ffffff;
-    background: rgba(255, 255, 255, 0.09);
-    box-shadow: 0 4px 12px rgba(255,255,255,0.05);
+    background: rgba(255, 26, 64, 0.25);
+    box-shadow: 0 4px 12px rgba(255, 26, 64, 0.15);
 }
 
-/* SYSTEM FRAME */
+/* THE SECRET VAULT SYSTEM OVERLAY */
+#secret-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    z-index: 2000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.15, 0.85, 0.35, 1);
+}
+
+.secret-box {
+    width: 440px;
+    padding: 50px 40px;
+    background: rgba(20, 1, 3, 0.85);
+    border-radius: 38px;
+    border: 1px solid rgba(255, 26, 64, 0.4);
+    box-shadow: 0 40px 90px rgba(255, 26, 64, 0.15);
+}
+
+.secret-title {
+    font-family: 'Cinzel', serif;
+    color: #ff1a40;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    font-weight: 900;
+    text-shadow: 0 0 20px rgba(255, 26, 64, 0.6);
+}
+
+#secret-content {
+    display: none;
+    margin-top: 35px;
+    font-size: 1.25rem;
+    line-height: 2.8;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: right;
+    border-top: 1px solid rgba(255, 26, 64, 0.2);
+    padding-top: 25px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* MAIN SYSTEM FRAME */
 #main {
     display: none;
     height: 100vh;
@@ -249,7 +287,7 @@ input:focus {
 
 #main::-webkit-scrollbar { width: 4px; }
 #main::-webkit-scrollbar-track { background: transparent; }
-#main::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 10px; }
+#main::-webkit-scrollbar-thumb { background: rgba(255, 26, 64, 0.3); border-radius: 10px; }
 
 .container {
     max-width: 920px;
@@ -259,29 +297,29 @@ input:focus {
     gap: 100px;
 }
 
-/* PREMIUM GLASS SECTIONS */
+/* PREMIUM GOTHIC GLASS BLOCKS */
 .web-section {
-    background: rgba(255, 255, 255, 0.01);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(20, 0, 3, 0.45);
+    border: 1px solid rgba(255, 26, 64, 0.08);
     border-radius: 40px;
     padding: 65px 55px;
     backdrop-filter: blur(45px);
     -webkit-backdrop-filter: blur(45px);
-    box-shadow: 0 45px 95px rgba(0,0,0,0.75), inset 0 0 25px rgba(255,255,255,0.01);
+    box-shadow: 0 45px 95px rgba(0,0,0,0.85);
     transition: transform 0.8s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
 .web-section:hover { transform: scale(1.005); }
 
-/* ULTRA BOLD & LIGHTING TITLES */
 .section-title {
+    font-family: 'Cinzel', serif;
     font-size: 2.6rem;
     font-weight: 900;
-    background: linear-gradient(135deg, #ffffff 40%, #ff4d6d 100%);
+    background: linear-gradient(135deg, #ffffff 40%, #ff1a40 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 45px;
     text-align: center;
-    text-shadow: 0 10px 35px rgba(255, 77, 109, 0.12);
+    text-shadow: 0 10px 35px rgba(255, 26, 64, 0.15);
 }
 
 .title-main {
@@ -290,105 +328,105 @@ input:focus {
     font-weight: 900;
     color: #ffffff;
     margin-bottom: 45px;
-    text-shadow: 0 0 45px rgba(255, 255, 255, 0.35);
+    text-shadow: 0 0 45px rgba(255, 26, 64, 0.5);
     text-align: center;
 }
 
-/* GALLERY DECORATIONS */
+/* POSTER STYLE GALLERY DECORATIONS */
 .gallery { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-bottom: 45px; }
 .gallery img {
     width: 240px; height: 310px; object-fit: cover; border-radius: 24px;
-    border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: 0 25px 50px rgba(0,0,0,0.75);
-    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); filter: brightness(0.85);
+    border: 1px solid rgba(255, 26, 64, 0.25); box-shadow: 0 25px 50px rgba(0,0,0,0.85);
+    transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); filter: brightness(0.8);
 }
-.gallery img:hover { transform: translateY(-8px) scale(1.02); filter: brightness(1.05); border-color: rgba(255,255,255,0.35); }
+.gallery img:hover { transform: translateY(-8px) scale(1.02); filter: brightness(1.05); border-color: #ff1a40; box-shadow: 0 25px 50px rgba(255,26,64,0.15); }
 
-/* TEXT SYSTEM */
+/* TEXT WRITER INTERFACE */
 .text {
     font-size: 1.25rem; font-weight: 700; line-height: 2.8; color: #f5f5f7;
-    text-align: right; text-shadow: 0 2px 15px rgba(0,0,0,0.8); min-height: 200px;
+    text-align: right; text-shadow: 0 2px 15px rgba(0,0,0,0.9); min-height: 200px;
 }
 
-/* TIMELINE */
+/* TIMELINE SYSTEM */
 .timeline {
     position: relative; padding-right: 20px;
-    border-right: 1px solid rgba(255, 255, 255, 0.12); text-align: right;
+    border-right: 2px solid rgba(255, 26, 64, 0.2); text-align: right;
 }
 .timeline-item { position: relative; margin-bottom: 45px; }
 .timeline-item::after {
-    content: ''; position: absolute; width: 8px; height: 8px;
-    background: #fff; top: 10px; right: -25px; border-radius: 50%;
-    box-shadow: 0 0 12px #fff;
+    content: ''; position: absolute; width: 10px; height: 10px;
+    background: #ff1a40; top: 10px; right: -26px; border-radius: 50%;
+    box-shadow: 0 0 15px #ff1a40;
 }
-.timeline-date { font-weight: 900; color: #ffffff; font-size: 1.25rem; margin-bottom: 6px; }
-.timeline-content { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.9; font-weight: 400; }
+.timeline-date { font-weight: 900; color: #ffffff; font-size: 1.3rem; margin-bottom: 8px; }
+.timeline-content { color: rgba(255,255,255,0.65); font-size: 1.05rem; line-height: 1.9; }
 
-/* BIRTHDAY CARDS */
+/* BIRTHDAY MATRIX */
 .dates-grid { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; }
 .date-card {
-    background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255,255,255,0.05);
+    background: rgba(10, 0, 2, 0.3); border: 1px solid rgba(255, 26, 64, 0.15);
     padding: 40px 30px; border-radius: 26px; width: 290px; text-align: center;
-    transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
+    transition: 0.4s;
 }
-.date-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.25); background: rgba(255, 255, 255, 0.03); }
+.date-card:hover { transform: translateY(-6px); border-color: #ff1a40; background: rgba(255, 26, 64, 0.03); }
 .date-card h3 { font-family: 'Cinzel', serif; font-size: 1.7rem; color: #fff; margin-bottom: 12px; font-weight: 900; }
-.date-card .bday { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; color: #ff4d6d; text-shadow: 0 0 15px rgba(255,77,109,0.25); }
+.date-card .bday { font-size: 1.5rem; font-weight: 900; margin-bottom: 12px; color: #ff1a40; text-shadow: 0 0 15px rgba(255,26,64,0.3); }
 .date-card p { color: rgba(255,255,255,0.55); font-size: 0.95rem; line-height: 1.7; }
 
-/* HUB GRID */
+/* USER HUB INTERESTS */
 .interests-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 25px; }
 .premium-card {
-    background: rgba(255, 255, 255, 0.005); border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 28px; padding: 35px; text-align: right;
     transition: 0.4s cubic-bezier(0.15, 0.85, 0.35, 1);
 }
-.premium-card:hover { transform: translateY(-6px); border-color: rgba(255,255,255,0.2); background: rgba(255, 255, 255, 0.02); }
+.premium-card:hover { transform: translateY(-6px); border-color: rgba(255, 26, 64, 0.3); background: rgba(20, 0, 3, 0.2); }
 .premium-card h4 { font-size: 1.5rem; color: #fff; margin-bottom: 12px; font-weight: 900; }
 .premium-card p { color: rgba(255,255,255,0.65); line-height: 1.85; font-size: 1rem; }
 .badge {
     font-family: 'Cinzel', serif; display: inline-block; padding: 4px 12px;
-    background: rgba(255,255,255,0.08); color: #fff; font-weight: 700; border-radius: 8px;
-    margin-bottom: 18px; font-size: 0.7rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.08);
+    background: #ff1a40; color: #fff; font-weight: 700; border-radius: 8px;
+    margin-bottom: 18px; font-size: 0.7rem; letter-spacing: 1px;
 }
 .color-preview { display: flex; gap: 8px; margin-top: 15px; }
 .color-circle { width: 26px; height: 26px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.3); }
 
-/* ALBUM GRID */
+/* EXPERIMENTAL PHOTO ALBUM */
 .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; }
 .album-item {
     position: relative; height: 230px; border-radius: 22px; overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.05); background: #000;
+    border: 1px solid rgba(255, 26, 64, 0.15); background: #000;
     display: flex; justify-content: center; align-items: center;
 }
-.album-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s cubic-bezier(0.15, 0.85, 0.35, 1); }
+.album-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 .album-item:hover img { transform: scale(1.06); filter: blur(3px); }
 .album-overlay {
-    position: absolute; inset: 0; background: rgba(0, 0, 0, 0.65);
+    position: absolute; inset: 0; background: rgba(0, 0, 0, 0.7);
     display: flex; justify-content: center; align-items: center; opacity: 0; transition: 0.3s;
     backdrop-filter: blur(4px);
 }
 .album-item:hover .album-overlay { opacity: 1; }
-.album-overlay span { font-weight: 700; font-size: 1rem; }
+.album-overlay span { font-weight: 700; font-size: 1rem; color: #fff; }
 
-/* EMBEDS */
+/* EMBED SYSTEMS */
 .music { margin-top: 25px; display: flex; justify-content: center; opacity: 0; transform: translateY(20px); transition: all 2s cubic-bezier(0.15, 0.85, 0.35, 1); }
 .music.show { opacity: 1; transform: translateY(0); }
-iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-shadow: 0 25px 60px rgba(0,0,0,0.75); }
+iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-shadow: 0 25px 60px rgba(0,0,0,0.85); }
 
 .creator {
     margin: 50px 0 10px 0; font-family: 'Cinzel', serif; font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.15); letter-spacing: 5px; text-transform: uppercase;
     text-align: center; transition: 0.4s; font-weight: 700;
 }
-.creator:hover { color: #ffffff; text-shadow: 0 0 20px rgba(255, 255, 255, 0.4); }
+.creator:hover { color: #ff1a40; text-shadow: 0 0 20px rgba(255, 26, 64, 0.6); }
 
-/* PARTICLES */
+/* DYNAMIC CRIMSON PARTICLES */
 .particle { position: fixed; border-radius: 50%; pointer-events: none; z-index: -1; animation: floatUp ease-in infinite; }
 @keyframes floatUp {
     0% { transform: translateY(110vh) translateX(0) scale(0); opacity: 0; }
-    30% { opacity: 0.35; }
-    75% { opacity: 0.35; }
-    100% { transform: translateY(-10vh) translateX(60px) scale(1.2); opacity: 0; }
+    30% { opacity: 0.4; }
+    75% { opacity: 0.4; }
+    100% { transform: translateY(-10vh) translateX(60px) scale(1.3); opacity: 0; }
 }
 </style>
 </head>
@@ -398,17 +436,15 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
 <div class="bg"></div>
 <div class="fog"></div>
 
-<!-- NETFLIX INTRO SCREEN -->
 <div id="netflix-intro">
     <div class="netflix-text">N</div>
 </div>
 
-<!-- LUXURY LIVING LOGIN WRAPPER -->
 <div class="login-wrapper" id="login-zone">
     <div class="login-container">
         <div class="login-emojis">💕🫂</div>
         <h1>Niyayesh</h1>
-        <p>Only love knows the password</p>
+        <p>A Vampire Diaries Universe</p>
         <div class="input-group">
             <input id="pass" type="password" placeholder="رمز ورود را وارد کن...">
         </div>
@@ -416,7 +452,22 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
     </div>
 </div>
 
-<!-- FLOATING DOCK NAVBAR (COMPACT & INITIALLY INVISIBLE) -->
+<div id="secret-modal">
+    <div class="secret-box">
+        <div class="secret-title">🔒 THE VAULT</div>
+        <input id="secret-pass" type="password" placeholder="رمز بخش رازها را وارد کن..." style="margin-bottom:25px;">
+        <button class="login-btn" onclick="checkSecret()">رمزگشایی رازها</button>
+        
+        <div id="secret-content">
+            تنها راز من تویی نیایشم تو بودی که تو سختی ها کنارم بودی 💕🫂<br>
+            عاشقتم دخترم و همیشه کنارتم 🫠🫂💕<br>
+            تو فرشته‌ منی منم فرشته‌ی تو :)
+        </div>
+        
+        <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:25px; cursor:pointer; font-weight:700; font-size:0.9rem;">بستن صندوقچه</button>
+    </div>
+</div>
+
 <div class="navbar" id="navbar">
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
     <a href="#story-sec">داستان عشق ما</a>
@@ -424,13 +475,12 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
     <a href="#mobin-sec">دنیای Mobin</a>
     <a href="#niyayesh-sec">دنیای Niyayesh</a>
     <a href="#gallery-sec">آلبوم عکسامون</a>
+    <a href="javascript:void(0)" onclick="openSecret()" style="color:#ff1a40; font-weight:900;">🔒 رازها</a>
 </div>
 
-<!-- MAIN SYSTEM -->
 <div id="main">
     <div class="container">
         
-        <!-- SECTION 1: THE LETTER -->
         <div class="web-section" id="letter-sec">
             <div class="title-main">For Niyayesh 🥹🫂💕</div>
             <div class="gallery">
@@ -440,7 +490,6 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
             <div class="text" id="typed-text"></div>
         </div>
 
-        <!-- SECTION 2: OUR STORY -->
         <div class="web-section" id="story-sec">
             <div class="section-title">داستان عشق ما</div>
             <div class="timeline">
@@ -455,7 +504,6 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
             </div>
         </div>
 
-        <!-- SECTION 3: BIRTHDAYS -->
         <div class="web-section" id="dates-sec">
             <div class="section-title">تاریخ‌های متولد شدنِ عشق</div>
             <div class="dates-grid">
@@ -472,7 +520,6 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
             </div>
         </div>
 
-        <!-- SECTION 4: MOBIN'S WORLD -->
         <div class="web-section" id="mobin-sec">
             <div class="section-title">دنیای مبین و علایقش</div>
             <div class="interests-grid">
@@ -493,24 +540,22 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
             </div>
         </div>
 
-        <!-- SECTION 5: NIYAYESH'S WORLD -->
         <div class="web-section" id="niyayesh-sec">
             <div class="section-title">دنیای نیایش و علایقش</div>
             <div class="interests-grid">
-                <div class="premium-card" style="border-color: rgba(255, 77, 109, 0.2);">
-                    <div class="badge" style="background: rgba(255, 77, 109, 0.1); color: #ff4d6d;">FAVORITE SERIES</div>
+                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
+                    <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
                     <h4>The Vampire Diaries</h4>
                     <p>عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
                 </div>
-                <div class="premium-card" style="border-color: rgba(255, 215, 0, 0.2);">
-                    <div class="badge" style="background: rgba(255, 215, 0, 0.1); color: #ffd700;">THE ONLY ONE</div>
+                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
+                    <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
                     <h4>بهترین دختر این دنیا</h4>
                     <p>فقط می‌خوام اینو بدونی که بین کل آدمای این سیاره، تو تک‌دونه‌ترین و قشنگ‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار دنیای منی نیایشم.</p>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION 6: PHOTO ALBUM -->
         <div class="web-section" id="gallery-sec">
             <div class="section-title">آلبوم خاطرات تصویری</div>
             <div class="album-grid">
@@ -523,18 +568,16 @@ iframe { width: 100%; max-width: 650px; border-radius: 22px; border: none; box-s
                     <div class="album-overlay"><span>خاطره دوم 🔐</span></div>
                 </div>
                 <div class="album-item">
-                    <div style="color: rgba(255,255,255,0.15); font-size: 2.5rem; font-weight: 300;">+</div>
+                    <div style="color: rgba(255,26,64,0.25); font-size: 2.5rem; font-weight: 300;">+</div>
                     <div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- SPOTIFY PLAYER -->
         <div class="music" id="music-container">
             <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
 
-        <!-- SIGNATURE -->
         <div class="creator">Created by Mobin</div>
     </div>
 </div>
@@ -560,13 +603,13 @@ function enter(){
             
             setTimeout(() => { mainContent.style.opacity = "1"; }, 100);
             
-            createMagicParticles();
+            createCrimsonParticles();
             typeWriter(loveLetter, 0, "typed-text");
             
         }, 3800);
 
     } else {
-        alert("رمز اشتباه است... دوباره تلاش کن عشق من");
+        alert("رمز ورود اشتباه است... دوباره تلاش کن عشق من");
     }
 }
 
@@ -582,12 +625,40 @@ function typeWriter(text, i, elementId) {
         let speed = char === "." || char === "،" || char === "…" ? 400 : 55;
         setTimeout(() => { typeWriter(text, i + 1, elementId); }, speed);
     } else {
-        // دقیقاً پس از اتمام کامل متن نامه، منو ظاهر می‌شود!
+        // دقیقا پس از اتمام کامل متن نامه، منوی بالا به آرامی پدیدار خواهد شد
         setTimeout(() => {
             document.getElementById("music-container").classList.add("show");
-            document.getElementById("navbar").classList.add("show-nav"); // نوار بالا خیلی روون میاد داخل صفحه
+            document.getElementById("navbar").classList.add("show-nav"); 
             enableScrollSpy();
         }, 600);
+    }
+}
+
+/* SECRET BOX ACTIONS */
+function openSecret() {
+    const modal = document.getElementById("secret-modal");
+    modal.style.display = "flex";
+    setTimeout(() => { modal.style.opacity = "1"; }, 10);
+}
+
+function closeSecret() {
+    const modal = document.getElementById("secret-modal");
+    modal.style.opacity = "0";
+    setTimeout(() => { 
+        modal.style.display = "none"; 
+        document.getElementById("secret-pass").value = "";
+        document.getElementById("secret-content").style.display = "none";
+    }, 600);
+}
+
+function checkSecret() {
+    let p = document.getElementById("secret-pass").value;
+    if(p === "niyayeshlovemobin") {
+        const content = document.getElementById("secret-content");
+        content.style.display = "block";
+        content.style.animation = "fadeIn 1.5s forwards";
+    } else {
+        alert("رمز صندوقچه اشتباه است... رازها محافظت شده هستند!");
     }
 }
 
@@ -611,9 +682,9 @@ function enableScrollSpy() {
     };
 }
 
-function createMagicParticles() {
-    const colors = ['rgba(255, 255, 255, 0.25)', 'rgba(255, 77, 109, 0.25)', 'rgba(2, 17, 36, 0.3)'];
-    for(let i = 0; i < 35; i++) {
+function createCrimsonParticles() {
+    const colors = ['rgba(255, 26, 64, 0.3)', 'rgba(139, 0, 0, 0.25)', 'rgba(255, 255, 255, 0.15)'];
+    for(let i = 0; i < 40; i++) {
         let p = document.createElement("div");
         p.className = "particle";
         let size = Math.random() * 5 + 3;
@@ -621,8 +692,8 @@ function createMagicParticles() {
         p.style.height = size + "px";
         p.style.left = Math.random() * 100 + "vw";
         p.style.boxShadow = `0 0 ${Math.random() * 15 + 10}px ${colors[Math.floor(Math.random() * colors.length)]}`;
-        p.style.background = '#fff';
-        p.style.animationDuration = (Math.random() * 10 + 6) + "s";
+        p.style.background = '#ff1a40';
+        p.style.animationDuration = (Math.random() * 9 + 5) + "s";
         p.style.animationDelay = Math.random() * 3 + "s";
         document.body.appendChild(p);
     }
@@ -648,9 +719,9 @@ function playRomanticSound() {
         }
 
         playTone(261.63, 'sine', t, 3.2, 0.4); 
-        playTone(329.63, 'sine', t, 3.2, 0.4); 
+        playTone(311.13, 'sine', t, 3.2, 0.4); // تم گوتیک مینور ملایم
         playTone(392.00, 'sine', t, 3.2, 0.4); 
-        playTone(523.25, 'triangle', t + 0.3, 3.5, 0.15); 
+        playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); 
     } catch(e) {}
 }
 </script>
