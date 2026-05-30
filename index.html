@@ -149,6 +149,11 @@ body {
     letter-spacing: 3px;
 }
 
+/* اصلاح UI فاصله اینپوت و دکمه که خواسته بودی */
+.input-group {
+    margin-bottom: 25px; 
+}
+
 input {
     width: 100%;
     padding: 18px;
@@ -207,15 +212,12 @@ input:focus {
     opacity: 0;
     box-shadow: 0 30px 60px rgba(0,0,0,0.8);
     transition: top 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 1.5s cubic-bezier(0.15, 0.85, 0.35, 1);
-    
-    /* آپدیت برای موبایل: جلوگیری از بیرون زدن و قابلیت اسکرول افقی */
     max-width: 95vw;
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
 }
 
-/* مخفی کردن اسکرول‌بار نوار برای زیبایی */
 .navbar::-webkit-scrollbar { display: none; }
 
 .navbar.show-nav { 
@@ -231,7 +233,7 @@ input:focus {
     transition: 0.3s;
     padding: 7px 14px;
     border-radius: 18px;
-    flex-shrink: 0; /* جلوگیری از فشرده شدن بیش از حد متن */
+    flex-shrink: 0;
 }
 
 .navbar a:hover, .navbar a.active {
@@ -445,6 +447,58 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
     75% { opacity: 0.4; }
     100% { transform: translateY(-10vh) translateX(60px) scale(1.3); opacity: 0; }
 }
+
+/* ========================================================= */
+/* CSS های جدید اضافه شده برای توسعه (فید، گاراژ و سینما) */
+/* ========================================================= */
+
+/* INSTAGRAM FEED STYLE */
+.memory-feed { display: flex; flex-direction: column; gap: 30px; }
+.upload-box { 
+    background: rgba(0,0,0,0.5); border: 2px dashed rgba(255,26,64,0.3); 
+    border-radius: 20px; padding: 30px; text-align: center; cursor: pointer; transition: 0.3s; 
+}
+.upload-box:hover { border-color: #ff1a40; background: rgba(255,26,64,0.05); }
+.post-card { 
+    background: rgba(10,0,2,0.6); border: 1px solid rgba(255,255,255,0.05); 
+    border-radius: 25px; overflow: hidden; 
+}
+.post-header { 
+    padding: 15px 20px; display: flex; align-items: center; gap: 15px; 
+    border-bottom: 1px solid rgba(255,255,255,0.05); 
+}
+.avatar { 
+    width: 45px; height: 45px; border-radius: 50%; background: #ff1a40; 
+    display: flex; justify-content: center; align-items: center; 
+    font-weight: bold; font-family: 'Cinzel'; 
+}
+.post-img { width: 100%; max-height: 500px; object-fit: cover; }
+.post-content { 
+    padding: 20px; text-align: right; line-height: 1.8; color: #ddd; font-size: 0.95rem; 
+}
+.post-date { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 10px; }
+
+/* FORZA GARAGE */
+.forza-tuner { text-align: center; }
+.car-display { 
+    width: 100%; max-width: 600px; border-radius: 20px; 
+    transition: filter 0.5s; filter: hue-rotate(0deg); margin-bottom: 20px; 
+}
+.color-picker { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+.paint-btn { 
+    width: 40px; height: 40px; border-radius: 50%; 
+    border: 3px solid rgba(255,255,255,0.2); cursor: pointer; transition: 0.3s; 
+}
+.paint-btn:hover { transform: scale(1.1); border-color: #fff; }
+
+/* TVD CINEMA */
+.cinema-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.video-wrapper { 
+    position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; 
+    border-radius: 20px; border: 1px solid rgba(255,26,64,0.3); 
+}
+.video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
 </style>
 </head>
 
@@ -492,6 +546,9 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
     <a href="#mobin-sec">دنیای Mobin</a>
     <a href="#niyayesh-sec">دنیای Niyayesh</a>
     <a href="#gallery-sec">آلبوم عکسامون</a>
+    <a href="#feed-sec">فید خاطرات</a>
+    <a href="#tvd-sec">سینما</a>
+    <a href="#forza-sec">گاراژ</a>
     <a href="javascript:void(0)" onclick="openSecret()" style="color:#ff1a40; font-weight:900;">🔒 رازها</a>
 </div>
 
@@ -591,6 +648,58 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
             </div>
         </div>
 
+        <div class="web-section" id="feed-sec">
+            <div class="section-title">دفترچه خاطرات ابدی ما</div>
+            <div class="memory-feed">
+                
+                <div class="upload-box" onclick="alert('برای فعالسازی آپلود، باید دیتابیس در پنل فایربیس فعال شود.')">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span>
+                    ثبت یک خاطره جدید (عکس/ویدیو/متن)
+                </div>
+
+                <div class="post-card">
+                    <div class="post-header">
+                        <div class="avatar">M</div>
+                        <div>
+                            <div style="font-weight: 700;">Mobin</div>
+                            <div style="font-size: 0.75rem; color: #ff1a40;">عاشق‌ترین پسر دنیا</div>
+                        </div>
+                    </div>
+                    <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" class="post-img" alt="Memory">
+                    <div class="post-content">
+                        اینجا همون جاییه که قراره سالیان سال عکس‌ها، فیلم‌ها، مسافرت‌ها و حتی عکس‌های عروسیمون رو توش ثبت کنیم تا برای همیشه بمونه. 🫂💕
+                        <div class="post-date">خرداد ۱۴۰۳</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="web-section" id="tvd-sec">
+            <div class="section-title">The Vampire Diaries Cinema</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">مخصوص تو که عاشق این دنیایی... 🩸🦇</p>
+            <div class="cinema-grid">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/aEzaN0eI6kU" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="web-section" id="forza-sec">
+            <div class="section-title">گاراژ رویایی مبین</div>
+            <div class="forza-tuner">
+                <p style="color: #ddd; margin-bottom: 20px;">رنگ ماشین رویایی‌مون رو برای جاده‌های آینده تغییر بده! 🏎️💨</p>
+                <img id="porsche" class="car-display" src="https://purepng.com/public/uploads/large/purepng.com-porsche-caymanporscheporsche-caymancars-961524671408sh8k6.png" alt="Porsche">
+                
+                <div class="color-picker">
+                    <div class="paint-btn" style="background: #000;" onclick="changeCarColor(0)"></div>
+                    <div class="paint-btn" style="background: #ff1a40;" onclick="changeCarColor(320)"></div>
+                    <div class="paint-btn" style="background: #0a192f;" onclick="changeCarColor(200)"></div>
+                    <div class="paint-btn" style="background: #e2e2e2;" onclick="changeCarColor(50, 'brightness(1.5)')"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="music" id="music-container">
             <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
@@ -600,6 +709,10 @@ iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; box-s
 </div>
 
 <script>
+/* ==================================== */
+/* توابع اصلی که خودت نوشته بودی */
+/* ==================================== */
+
 const loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
 
 function enter(){
@@ -740,6 +853,40 @@ function playRomanticSound() {
         playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12); 
     } catch(e) {}
 }
+
+/* ==================================== */
+/* توابع جاوااسکریپت جدید */
+/* ==================================== */
+
+// تغییر رنگ ماشین در گاراژ
+function changeCarColor(hue, extra = '') {
+    const car = document.getElementById('porsche');
+    car.style.filter = `hue-rotate(${hue}deg) ${extra}`;
+}
+</script>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-analytics.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+  import { getStorage } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
+    authDomain: "niyayesh-universe.firebaseapp.com",
+    projectId: "niyayesh-universe",
+    storageBucket: "niyayesh-universe.firebasestorage.app",
+    messagingSenderId: "675804346928",
+    appId: "1:675804346928:web:8e8c33f7a26d2824340bf5",
+    measurementId: "G-5X7BKVZBNN"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+
+  console.log("پایگاه داده Firebase متصل شد!");
 </script>
 
 </body>
