@@ -212,8 +212,8 @@
         iframe { width: 100%; max-width: 650px; border-radius: 20px; border: none; }
         .creator { text-align: center; padding: 20px; color: #a57d84; font-size: 0.9rem; font-weight: bold; }
 
-        /* ==========================================
-   DARK MODE (SENSUAL & INTIMATE VIBE 🍷🖤)
+/* ==========================================
+   DARK MODE (SENSUAL & INTIMATE VIBE 🍷🖤🔥)
    ========================================== */
 /* دکمه تغییر تم */
 #theme-toggle {
@@ -229,18 +229,22 @@ body.dark-mode #theme-toggle {
     box-shadow: 0 5px 20px rgba(255, 10, 84, 0.6);
 }
 
+/* حل مشکل بالا و پایین صفحه (فیکس کردن بک‌گراند کل بادی) */
+html { background: #080003; transition: background 0.5s ease; }
+body { background-attachment: fixed; } /* این خط باعث میشه بک‌گراند به کل صفحه بچسبه */
+
 /* تغییر متغیرهای پایه به رنگ‌های دارک و جذاب */
 body.dark-mode {
-    --milky-white: #080003; /* مشکی خیلی عمیق با تناژ قرمز */
-    --soft-pink: #140006; /* شرابی خیلی تاریک */
+    --milky-white: #080003; 
+    --soft-pink: #140006; 
     --rose-pink: #1c0008; 
-    --love-red: #ff0a54; /* قرمز نئونی خفن */
-    --text-dark: #ffe4e1; /* رنگ متن تو حالت دارک */
-    --glass-bg: rgba(15, 0, 5, 0.75); /* شیشه‌ی دودی/قرمز */
+    --love-red: #ff0a54; /* قرمز نئونی */
+    --text-dark: #ffc4d4; /* صورتی/سفید ملایم برای خوانایی بهتر نوشته‌ها */
+    --glass-bg: rgba(15, 0, 5, 0.75); 
     --glass-border: rgba(255, 10, 84, 0.3);
 }
 
-/* تغییر پس‌زمینه و موج‌ها */
+/* تغییر پس‌زمینه و موج‌های پایین صفحه */
 body.dark-mode .bg {
     background: radial-gradient(circle at 15% 25%, rgba(255, 10, 84, 0.15) 0%, transparent 60%), 
                 radial-gradient(circle at 85% 75%, rgba(138, 0, 36, 0.2) 0%, transparent 100%);
@@ -248,18 +252,50 @@ body.dark-mode .bg {
 body.dark-mode .wave-container .shape-fill { fill: #0a0002; opacity: 1; }
 body.dark-mode .wave-container .shape-fill-2 { fill: #ff0a54; opacity: 0.15; }
 
-/* جذاب‌تر کردن گوی و کارت‌ها تو تاریکی */
+/* جذاب‌تر کردن گوی و نوبار تو تاریکی */
 body.dark-mode .magic-orb {
     background: radial-gradient(circle at 30% 30%, #ff0a54, #8a0024 50%, #080003 90%);
     box-shadow: 0 15px 40px rgba(255, 10, 84, 0.6), inset -15px -15px 25px rgba(0,0,0,0.8), inset 10px 10px 20px rgba(255, 10, 84, 0.8);
 }
-body.dark-mode .tarot-front, body.dark-mode .tarot-back, body.dark-mode .login-container {
-    background: rgba(15, 0, 5, 0.85); box-shadow: 0 15px 35px rgba(255, 10, 84, 0.25);
-}
-body.dark-mode input { background: rgba(0, 0, 0, 0.6); color: #fff; }
 body.dark-mode .navbar { background: rgba(10, 0, 5, 0.85); box-shadow: 0 15px 35px rgba(255, 10, 84, 0.3); }
 body.dark-mode .navbar a { color: #ffe4e1; }
 body.dark-mode .login-wrapper { background: linear-gradient(135deg, #2a000d, #ff0a54, #080003); }
+body.dark-mode input { background: rgba(0, 0, 0, 0.6); color: #fff; }
+
+/* 🔴 اعمال تم دارک روی تمام باکس‌های سفید جا مونده (تاریخ‌ها، روزشمار، خاطرات و...) */
+body.dark-mode .time-box,
+body.dark-mode .date-card,
+body.dark-mode .premium-card,
+body.dark-mode .post-card,
+body.dark-mode .tarot-front, 
+body.dark-mode .tarot-back,
+body.dark-mode .login-container,
+body.dark-mode #oracle-quote-box,
+body.dark-mode .secret-box,
+body.dark-mode #admin-save-bar,
+body.dark-mode .upload-box {
+    background: rgba(15, 0, 5, 0.85);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 30px rgba(255, 10, 84, 0.15);
+}
+
+body.dark-mode .post-header { border-bottom: 1px solid var(--glass-border); }
+body.dark-mode .upload-box:hover { background: rgba(255, 10, 84, 0.1); }
+body.dark-mode .badge { background: #8a0024; color: #ffe4e1; }
+body.dark-mode .video-wrapper { border-color: var(--love-red); box-shadow: 0 10px 30px rgba(255, 10, 84, 0.3); }
+
+/* نئونی کردن تیترها تو حالت دارک */
+body.dark-mode .section-title,
+body.dark-mode .title-main,
+body.dark-mode .tarot-design,
+body.dark-mode .date-card h3,
+body.dark-mode .premium-card h4 {
+    color: #ff0a54;
+    text-shadow: 0 0 15px rgba(255, 10, 84, 0.4);
+}
+
+body.dark-mode .date-card .bday { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+
 
     </style>
 </head>
