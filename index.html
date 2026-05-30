@@ -1,23 +1,42 @@
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-  import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+<!-- اضافه کردن کتابخانه‌های فایربیس به صورت ساده -->
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 
-  const firebaseConfig = { /* تنظیماتت اینجا باشه */ };
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
+    authDomain: "niyayesh-universe.firebaseapp.com",
+    projectId: "niyayesh-universe",
+    storageBucket: "niyayesh-universe.firebasestorage.app",
+    messagingSenderId: "675804346928",
+    appId: "1:675804346928:web:8e8c33f7a26d2824340bf5",
+    measurementId: "G-5X7BKVZBNN"
+  };
 
-  async function check() {
+  // مقداردهی اولیه
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // تابع برای خواندن داده‌ها
+  async function loadData() {
     try {
-      const docRef = doc(db, "website_data", "config");
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        alert("اتصال برقرار شد! داده‌ها: " + JSON.stringify(docSnap.data()));
-      } else {
-        alert("اتصال برقرار شد، ولی داکیومنت پیدا نشد! اسم کالکشن رو چک کن.");
+      const doc = await db.collection("website_data").doc("config").get();
+      if (doc.exists) {
+        const data = doc.data();
+        // اعمال تغییرات
+        if(document.querySelector("#tvd-sec iframe")) {
+            document.querySelector("#tvd-sec iframe").src = data.tvd_video_url;
+        }
+        if(document.getElementById("porsche")) {
+            document.getElementById("porsche").src = data.porsche_image_url;
+        }
+        console.log("داده‌ها با موفقیت لود شدند!");
       }
     } catch (e) {
-      alert("خطا در اتصال: " + e.message);
+      console.error("خطا در خواندن داده: ", e);
     }
   }
-  check();
+
+  // اجرای تابع
+  window.onload = loadData;
 </script>
