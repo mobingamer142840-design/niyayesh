@@ -91,37 +91,36 @@
             </div>
             <div class="text" id="typed-text" data-key="love_letter"></div>
         </div>
-
-        <div class="web-section" id="game-sec">
-            <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION 🩸</div>
-            
-            <div class="game-arcade-cabinet">
-                <div id="game-overlay">
-                    <div class="game-title">Vampire Fighting Arena</div>
-                    <div style="color:#aaa; font-size:0.95rem; margin-bottom: 10px;">در نقش ومپایر با سبک فایتینگ رترو حریفان را در هم بکوب!</div>
-                    <button class="start-game-btn" onclick="startArcadeGame()">شروع مبارزه حماسی</button>
-                </div>
-                
-                <div class="arcade-hud">
-                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p1-health"></div></div>
-                    <div class="tekken-timer" id="arcade-timer-ui">99</div>
-                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p2-health"></div></div>
-                </div>
-
-                <div class="arcade-screen-container">
-                    <canvas id="tekkenCanvas"></canvas>
-                    <div class="crt-scanlines"></div> </div>
-
-                <div class="arcade-controls">
-                    <button class="arcade-btn" id="btn-left">⬅️ عقب</button>
-                    <button class="arcade-btn" id="btn-attack" style="background: rgba(139,0,0,0.4); border-color:#ff1a40;">ATTACK / مشت ومپایری 👊</button>
-                    <button class="arcade-btn" id="btn-right">جلو ➡️</button>
-                </div>
-            </div>
-            <div style="text-align:center; color:rgba(255,255,255,0.4); font-size:0.85rem; margin-top:12px;">راهنمای کیبورد: حرکت با کلیدهای جهت‌نما <b>(Left/Right)</b> و زدن ضربه زنجیره‌ای با کلید <b>Space</b></div>
+<div class="web-section" id="game-sec">
+    <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION 🩸</div>
+    
+    <div class="game-arcade-cabinet">
+        <div id="game-overlay" style="position: absolute; inset:0; background:rgba(10,1,2,0.92); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:8px;">
+            <div class="section-title" style="font-size:2rem; margin-bottom:10px; text-shadow: 0 0 10px #ff1a40;">Vampire Fighting Arena</div>
+            <div style="color:#aaa; font-size:0.95rem; margin-bottom: 20px;" id="score-display">در نقش ومپایر با شمشیر نئونی حریفان را نابود کن!</div>
+            <button class="login-btn" onclick="startArcadeGame()" style="width:auto; padding:12px 35px; box-shadow: 0 0 15px rgba(255,26,64,0.4);">شروع مبارزه حماسی</button>
+        </div>
+        
+        <div class="arcade-hud">
+            <div class="tekken-health-bar"><div class="tekken-health-fill" id="p1-health"></div></div>
+            <div class="tekken-timer" id="arcade-timer-ui">99</div>
+            <div class="tekken-health-bar"><div class="tekken-health-fill" id="p2-health"></div></div>
         </div>
 
-        <div class="web-section" id="story-sec">
+        <div class="arcade-screen-container">
+            <canvas id="tekkenCanvas"></canvas>
+            <div class="crt-scanlines"></div>
+        </div>
+
+        <div class="arcade-controls" style="gap: 10px; padding: 10px;">
+            <button class="arcade-btn" id="btn-left" style="padding: 10px 20px;">⬅️ عقب</button>
+            <button class="arcade-btn" id="btn-attack" style="background: rgba(255, 26, 64, 0.2); border-color:#ff1a40; flex:1; font-weight: bold; text-shadow: 0 0 5px #ff1a40;">ATTACK / ضربه شمشیر ⚔️</button>
+            <button class="arcade-btn" id="btn-right" style="padding: 10px 20px;">جلو ➡️</button>
+        </div>
+    </div>
+</div>
+
+<div class="web-section" id="story-sec">
             <div class="section-title" data-key="story_title">داستان عشق ما</div>
             <div class="timeline">
                 <div class="timeline-item">
