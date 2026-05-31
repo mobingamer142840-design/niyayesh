@@ -1386,4 +1386,138 @@ input:focus {
     .netflix-text {
         animation: none !important;
     }
+    /* ======== V6.0.0 NEW STYLES ======== */
+
+/* Day/Night Indicator */
+.time-indicator {
+    position: fixed;
+    top: 20px; right: 20px;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0.5);
+    padding: 5px 15px;
+    border-radius: 20px;
+    z-index: 10000;
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+/* Day transition */
+body.day-transition .bg {
+    background: radial-gradient(circle at 15% 25%, #3a1a2e 0%, #1a1a2e 60%) !important;
+}
+body.full-day .bg {
+    background: radial-gradient(circle at 15% 25%, #d4af37 0%, #ffb347 60%) !important;
+}
+
+/* Memory Fragments */
+.fragments-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 800;
+}
+.memory-fragment {
+    position: absolute;
+    width: 8px; height: 8px;
+    background: radial-gradient(circle, #ffd700, transparent);
+    border-radius: 50%;
+    box-shadow: 0 0 15px #ffd700;
+    opacity: 0.7;
+    pointer-events: auto;
+    animation: floatFragment 20s linear infinite;
+}
+.memory-fragment:hover {
+    transform: scale(2);
+    box-shadow: 0 0 25px #fff;
+}
+.fragment-tooltip {
+    position: fixed;
+    background: rgba(0,0,0,0.85);
+    color: #ffd700;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -120%);
+    white-space: nowrap;
+}
+@keyframes floatFragment {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(-100vh) translateX(30px); }
+}
+
+/* Whispers */
+.whisper-layer { position: fixed; inset:0; pointer-events:none; z-index:900; }
+.whisper-text {
+    position: absolute;
+    color: rgba(255,255,255,0.2);
+    font-style: italic;
+    font-size: 1.2rem;
+    animation: fadeWhisper 4s forwards;
+    font-family: 'Cormorant Garamond', serif;
+}
+@keyframes fadeWhisper {
+    0% { opacity:0; transform: translateY(10px); }
+    15% { opacity:0.6; }
+    85% { opacity:0.6; }
+    100% { opacity:0; transform: translateY(-10px); }
+}
+
+/* Castle Tooltip */
+.castle-tooltip {
+    position: fixed;
+    background: rgba(20,0,3,0.9);
+    color: #ffd700;
+    border: 1px solid #ff1a40;
+    border-radius: 10px;
+    padding: 10px 20px;
+    max-width: 250px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 1000;
+    font-size: 0.9rem;
+}
+
+/* Ending Section */
+.sunrise-effect {
+    width: 100%; height: 150px;
+    background: linear-gradient(to top, #ffb347, #ffcc00, transparent);
+    margin-top: 40px;
+    border-radius: 20px;
+}
+
+/* Hidden Runes */
+.hidden-rune {
+    position: fixed;
+    width: 35px; height: 35px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30"><path d="M15 3 L25 27 L5 27 Z" fill="%23A88BFF" opacity="0.4"/><circle cx="15" cy="18" r="4" fill="%23C5283D"/></svg>') center/contain no-repeat;
+    opacity: 0.25;
+    cursor: pointer;
+    transition: all 0.5s;
+    z-index: 9000;
+}
+.hidden-rune:hover { opacity:1; filter: drop-shadow(0 0 15px #A88BFF); transform: scale(1.5); }
+
+/* Sound Button */
+.sound-btn {
+    position: fixed;
+    bottom: 30px; left: 30px;
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    background: rgba(11,15,26,0.7);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 1.5rem;
+    z-index: 1000;
+    cursor: pointer;
+    display: flex; align-items:center; justify-content:center;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+.sound-btn:hover { box-shadow: 0 0 25px #C5283D; }
 }
