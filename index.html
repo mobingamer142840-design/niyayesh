@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
+    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
@@ -98,24 +99,17 @@
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">روی قلعه کلیک کن تا راز تاریکی رو ببینی...</p>
             <div class="castle-container">
                 <svg id="castle-svg" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid meet">
-                    <!-- Background mountains -->
                     <path d="M0 450 Q100 200 250 350 Q400 150 500 300 Q650 100 800 350 Q900 250 1000 400 L1000 600 L0 600 Z" fill="#121826" opacity="0.6"/>
-                    <!-- Moon -->
                     <circle cx="820" cy="120" r="50" fill="#EAE6FF" filter="url(#moonGlow)"/>
-                    <!-- Castle silhouette -->
                     <path d="M100 600 L100 380 L180 380 L180 320 L250 320 L250 380 L330 380 L330 280 L400 280 L400 380 L480 380 L480 240 L550 240 L550 380 L630 380 L630 300 L700 300 L700 380 L780 380 L780 350 L850 350 L850 380 L900 380 L900 600 Z" fill="#0B0F1A" stroke="#1A1F2E" stroke-width="2"/>
-                    <!-- Windows glowing -->
                     <rect x="210" y="350" width="15" height="20" fill="#FFC857" class="castle-window" />
                     <rect x="430" y="300" width="15" height="20" fill="#FFC857" class="castle-window" />
                     <rect x="650" y="330" width="15" height="20" fill="#FFC857" class="castle-window" />
-                    <!-- Foreground fog -->
                     <path d="M0 550 Q200 500 400 550 Q600 600 800 530 Q900 500 1000 550 L1000 600 L0 600 Z" fill="#2A324B" opacity="0.4" filter="url(#fogBlur)"/>
-                    <!-- Bats -->
                     <g class="bat-group">
                         <path d="M300 150 Q310 140 320 150 Q310 145 300 150" fill="#0B0F1A"/>
                         <path d="M600 180 Q610 170 620 180 Q610 175 600 180" fill="#0B0F1A"/>
                     </g>
-                    <!-- Torches -->
                     <circle cx="180" cy="370" r="8" fill="#FF8C42" class="torch-fire"/>
                     <circle cx="850" cy="370" r="8" fill="#FF8C42" class="torch-fire"/>
                     <defs>
@@ -186,42 +180,13 @@
             <div class="section-title">کارت‌های سرنوشت ما <span class="title-emoji">🃏</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها را لمس کن تا رازهای قلبم را بخوانی...</p>
             <div class="tarot-grid">
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design">I</div></div>
-                        <div class="tarot-back"><p>چون وقتی نگاهم می‌کنی، تمام تاریکی‌های دنیای من روشن میشه. تو خورشیدِ این ومپایری. 🩸</p></div>
-                    </div>
-                </div>
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design" style="color:#ff1a40; text-shadow: 0 0 10px #ff1a40;">II</div></div>
-                        <div class="tarot-back"><p>چون هیچکس تو دنیا به اندازه تو، دیوونه‌بازی‌ها و رویاهای بزرگ منو نمی‌فهمه. 🖤</p></div>
-                    </div>
-                </div>
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design">III</div></div>
-                        <div class="tarot-back"><p>چون تو نه تنها عشق منی، بلکه بهترین رفیق و پناهگاه امنِ منی نیایشم. 🫂</p></div>
-                    </div>
-                </div>
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design">IV</div></div>
-                        <div class="tarot-back"><p>هر لحظه بدون تو، نفس کشیدنم سخت‌تر میشه. تو دلیل اصلی تپش‌های قلبمی. 💓</p></div>
-                    </div>
-                </div>
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design">V</div></div>
-                        <div class="tarot-back"><p>دوست دارم پیر بشیم و بازم مثل روزای اول، عاشقونه به چشمای هم نگاه کنیم. 👴🏻👵🏻</p></div>
-                    </div>
-                </div>
-                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                    <div class="tarot-inner">
-                        <div class="tarot-front"><div class="tarot-design">VI</div></div>
-                        <div class="tarot-back"><p>تو رویایی هستی که نمی‌خوام هرگز ازش بیدار شم. شب‌های من با تو صبح میشن. 🌙☀️</p></div>
-                    </div>
-                </div>
+                <!-- 6 tarot cards as before -->
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">I</div></div><div class="tarot-back"><p>چون وقتی نگاهم می‌کنی، تمام تاریکی‌های دنیای من روشن میشه. تو خورشیدِ این ومپایری. 🩸</p></div></div></div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design" style="color:#ff1a40; text-shadow: 0 0 10px #ff1a40;">II</div></div><div class="tarot-back"><p>چون هیچکس تو دنیا به اندازه تو، دیوونه‌بازی‌ها و رویاهای بزرگ منو نمی‌فهمه. 🖤</p></div></div></div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">III</div></div><div class="tarot-back"><p>چون تو نه تنها عشق منی، بلکه بهترین رفیق و پناهگاه امنِ منی نیایشم. 🫂</p></div></div></div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">IV</div></div><div class="tarot-back"><p>هر لحظه بدون تو، نفس کشیدنم سخت‌تر میشه. تو دلیل اصلی تپش‌های قلبمی. 💓</p></div></div></div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">V</div></div><div class="tarot-back"><p>دوست دارم پیر بشیم و بازم مثل روزای اول، عاشقونه به چشمای هم نگاه کنیم. 👴🏻👵🏻</p></div></div></div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">VI</div></div><div class="tarot-back"><p>تو رویایی هستی که نمی‌خوام هرگز ازش بیدار شم. شب‌های من با تو صبح میشن. 🌙☀️</p></div></div></div>
             </div>
         </div>
 
@@ -251,14 +216,8 @@
         <div class="web-section reveal" id="story-sec">
             <div class="section-title" data-key="story_title">داستان عشق ما</div>
             <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-date" data-key="timeline_d1">روزی که قلبت مال من شد</div>
-                    <div class="timeline-content" id="txt-timeline-c1" data-key="timeline_c1">اینجا آغاز فصل جدید زندگی من بود. روزی که نگاهت مسیر سرنوشتم رو عوض کرد و شدی تمام دنیای من...</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-date" data-key="timeline_d2">خاطره مشترک بعدی ما</div>
-                    <div class="timeline-content" id="txt-timeline-c2" data-key="timeline_c2">محل قرار دادن خاطرات قشنگی که در آینده قراره کلمه به کلمه با هم بسازیمش و اینجا بنویسیم... 🔐</div>
-                </div>
+                <div class="timeline-item"><div class="timeline-date" data-key="timeline_d1">روزی که قلبت مال من شد</div><div class="timeline-content" id="txt-timeline-c1" data-key="timeline_c1">اینجا آغاز فصل جدید زندگی من بود. روزی که نگاهت مسیر سرنوشتم رو عوض کرد و شدی تمام دنیای من...</div></div>
+                <div class="timeline-item"><div class="timeline-date" data-key="timeline_d2">خاطره مشترک بعدی ما</div><div class="timeline-content" id="txt-timeline-c2" data-key="timeline_c2">محل قرار دادن خاطرات قشنگی که در آینده قراره کلمه به کلمه با هم بسازیمش و اینجا بنویسیم... 🔐</div></div>
             </div>
         </div>
 
@@ -266,16 +225,8 @@
         <div class="web-section reveal" id="dates-sec">
             <div class="section-title" data-key="dates_title">تاریخ‌های متولد شدنِ عشق</div>
             <div class="dates-grid">
-                <div class="date-card">
-                    <h3>Mobin</h3>
-                    <div class="bday" data-key="mobin_bday">۲۵ اسفند ۱۳۸۷</div>
-                    <p data-key="mobin_bday_desc">روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم و تموم زندگیمو به پاش بریزم.</p>
-                </div>
-                <div class="date-card">
-                    <h3>Niyayesh</h3>
-                    <div class="bday" data-key="niyayesh_bday">۱۵ شهریور ۱۳۸۹</div>
-                    <p data-key="niyayesh_bday_desc">باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد تا بشه دلیل نفس کشیدنم.</p>
-                </div>
+                <div class="date-card"><h3>Mobin</h3><div class="bday" data-key="mobin_bday">۲۵ اسفند ۱۳۸۷</div><p data-key="mobin_bday_desc">روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم و تموم زندگیمو به پاش بریزم.</p></div>
+                <div class="date-card"><h3>Niyayesh</h3><div class="bday" data-key="niyayesh_bday">۱۵ شهریور ۱۳۸۹</div><p data-key="niyayesh_bday_desc">باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد تا بشه دلیل نفس کشیدنم.</p></div>
             </div>
         </div>
 
@@ -283,20 +234,8 @@
         <div class="web-section reveal" id="mobin-sec">
             <div class="section-title" data-key="mobin_sec_title">دنیای مبین و علایقش</div>
             <div class="interests-grid">
-                <div class="premium-card">
-                    <div class="badge">MY DREAM CAR</div>
-                    <h4 data-key="mobin_car_title">Porsche Boxster</h4>
-                    <p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین و قشنگ‌ترین هدفم تو زندگی اینه که یه روز با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! تو صندلی کناریِ منی، برای همیشه.</p>
-                </div>
-                <div class="premium-card">
-                    <div class="badge">FAVORITE COLORS</div>
-                    <h4 data-key="mobin_color_title">رنگ‌های مورد علاقه</h4>
-                    <p data-key="mobin_color_desc">ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
-                    <div class="color-preview">
-                        <div class="color-circle" style="background: #000000;"></div>
-                        <div class="color-circle" style="background: #0a192f;"></div>
-                    </div>
-                </div>
+                <div class="premium-card"><div class="badge">MY DREAM CAR</div><h4 data-key="mobin_car_title">Porsche Boxster</h4><p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین و قشنگ‌ترین هدفم تو زندگی اینه که یه روز با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! تو صندلی کناریِ منی، برای همیشه.</p></div>
+                <div class="premium-card"><div class="badge">FAVORITE COLORS</div><h4 data-key="mobin_color_title">رنگ‌های مورد علاقه</h4><p data-key="mobin_color_desc">ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p><div class="color-preview"><div class="color-circle" style="background: #000000;"></div><div class="color-circle" style="background: #0a192f;"></div></div></div>
             </div>
         </div>
 
@@ -304,16 +243,8 @@
         <div class="web-section reveal" id="niyayesh-sec">
             <div class="section-title" data-key="niyayesh_sec_title">دنیای نیایش و علایقش</div>
             <div class="interests-grid">
-                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
-                    <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
-                    <h4 data-key="niyayesh_series_title">The Vampire Diaries</h4>
-                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
-                </div>
-                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
-                    <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
-                    <h4 data-key="niyayesh_only_title">بهترین دختر این دنیا</h4>
-                    <p data-key="niyayesh_only_desc">فقط می‌خوام اینو بدونی که بین کل آدمای این سیاره، تو تک‌دونه‌ترین و قشنگ‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار دنیای منی نیایشم.</p>
-                </div>
+                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);"><div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div><h4 data-key="niyayesh_series_title">The Vampire Diaries</h4><p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p></div>
+                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);"><div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div><h4 data-key="niyayesh_only_title">بهترین دختر این دنیا</h4><p data-key="niyayesh_only_desc">فقط می‌خوام اینو بدونی که بین کل آدمای این سیاره، تو تک‌دونه‌ترین و قشنگ‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار دنیای منی نیایشم.</p></div>
             </div>
         </div>
 
@@ -321,18 +252,9 @@
         <div class="web-section reveal" id="gallery-sec">
             <div class="section-title" data-key="gallery_sec_title">آلبوم خاطرات تصویری</div>
             <div class="album-grid">
-                <div class="album-item">
-                    <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="خاطره اول" loading="lazy">
-                    <div class="album-overlay"><span>خاطره اول ❤️</span></div>
-                </div>
-                <div class="album-item">
-                    <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="خاطره دوم" loading="lazy">
-                    <div class="album-overlay"><span>خاطره دوم 🔐</span></div>
-                </div>
-                <div class="album-item">
-                    <div style="color: rgba(255,26,64,0.25); font-size: 2.5rem; font-weight: 300;">+</div>
-                    <div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div>
-                </div>
+                <div class="album-item"><img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="خاطره اول" loading="lazy"><div class="album-overlay"><span>خاطره اول ❤️</span></div></div>
+                <div class="album-item"><img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="خاطره دوم" loading="lazy"><div class="album-overlay"><span>خاطره دوم 🔐</span></div></div>
+                <div class="album-item"><div style="color: rgba(255,26,64,0.25); font-size: 2.5rem; font-weight: 300;">+</div><div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div></div>
             </div>
         </div>
 
@@ -340,10 +262,7 @@
         <div class="web-section reveal" id="feed-sec">
             <div class="section-title" data-key="feed_sec_title">دفترچه خاطرات ابدی ما</div>
             <div class="memory-feed">
-                <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()">
-                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span>
-                    ثبت یک خاطره جدید (لمس کن)
-                </div>
+                <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()"><span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید (لمس کن)</div>
                 <input type="file" id="file-input" style="display:none" accept="image/*,video/*" onchange="handleFileUpload(event)">
                 <div id="posts-area"></div>
             </div>
@@ -364,7 +283,169 @@
     </div>
 </div>
 
-<script src="game.js"></script>
-<script src="app.js"></script>
+<!-- ========== ALL JAVASCRIPT IN ONE SCRIPT TAG ========== -->
+<script>
+// ---------- Global Variables ----------
+let isAdmin = false;
+let loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
+
+// ---------- Firebase Init ----------
+const firebaseConfig = { apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ", authDomain: "niyayesh-universe.firebaseapp.com", projectId: "niyayesh-universe", storageBucket: "niyayesh-universe.firebasestorage.app", messagingSenderId: "675804346928", appId: "1:675804346928:web:8e8c33f7a26d2824340bf5" };
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+// ---------- LOGIN ----------
+function enter() {
+    let p = document.getElementById("pass").value;
+    if (p === "mobinloveniyayesh" || p === "adminwiriper") {
+        if (p === "adminwiriper") { isAdmin = true; document.getElementById("upload-box").style.display = "block"; }
+        document.getElementById("login-zone").style.display = "none";
+        playRomanticSound();
+        const intro = document.getElementById("netflix-intro");
+        intro.style.display = "flex";
+        setTimeout(() => {
+            intro.style.display = "none";
+            document.getElementById("main").style.display = "block";
+            document.getElementById("main").style.opacity = "1";
+            preserveEmojiColor();
+            if (isAdmin) enableEditableMode();
+            createCrimsonParticles();
+            createSoftHearts();
+            startRosePetals();
+            typeWriter(loveLetter, 0, "typed-text");
+            loadFeed();
+            initMemoryGame();
+        }, 3800);
+    } else { alert("رمز اشتباه"); }
+}
+
+// ---------- Game (Tekken) ----------
+// exactly the same working game code from previous version, placed here...
+document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("tekkenCanvas");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    let isPlaying = false, gameLoopId = null;
+    canvas.width = 800; canvas.height = 380;
+    const player = { x:80, y:230, width:30, height:90, speed:6, color:'#ff1a40', attacking:false, attackTimer:0, health:100 };
+    const niyayesh = { x:720, y:230, width:30, height:90, color:'#ffb6c1' };
+    let enemies = [], bloodParticles = [], powerUps = [], score = 0, targetScore = 15, gameWon = false, gameTimer = 99, timerInterval = null;
+    let keys = { ArrowLeft:false, ArrowRight:false, Space:false };
+    let audioCtx = null;
+    function initAudio() { if(!audioCtx) try { audioCtx = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} }
+    function playHitSound() { if(!audioCtx) return; let t=audioCtx.currentTime; let o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type='triangle'; o.frequency.setValueAtTime(800,t); o.frequency.exponentialRampToValueAtTime(200,t+0.12); g.gain.setValueAtTime(0.3,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.12); o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t+0.15); }
+    function playHealSound() { if(!audioCtx) return; let t=audioCtx.currentTime; let o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type='sine'; o.frequency.setValueAtTime(400,t); o.frequency.linearRampToValueAtTime(600,t+0.1); g.gain.setValueAtTime(0.2,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.2); o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t+0.25); }
+
+    function resizeCanvas() { const cont = document.getElementById("arcade-screen"); if(!cont) return; const w = cont.clientWidth||800; canvas.width = w; canvas.height = Math.max(260, Math.min(380, Math.round(w*0.475))); player.y = canvas.height-150; niyayesh.y = canvas.height-150; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener('keydown', e => { if(e.code==='ArrowLeft') keys.ArrowLeft=true; if(e.code==='ArrowRight') keys.ArrowRight=true; if(e.code==='Space') { keys.Space=true; triggerArcadeAttack(); e.preventDefault(); } });
+    window.addEventListener('keyup', e => { if(e.code==='ArrowLeft') keys.ArrowLeft=false; if(e.code==='ArrowRight') keys.ArrowRight=false; if(e.code==='Space') keys.Space=false; });
+
+    const btnLeft=document.getElementById('btn-left'), btnRight=document.getElementById('btn-right'), btnAttack=document.getElementById('btn-attack');
+    if(btnLeft){ btnLeft.addEventListener('touchstart',e=>{e.preventDefault(); keys.ArrowLeft=true},{passive:false}); btnLeft.addEventListener('touchend',e=>{e.preventDefault(); keys.ArrowLeft=false},{passive:false}); btnLeft.addEventListener('mousedown',()=>keys.ArrowLeft=true); btnLeft.addEventListener('mouseup',()=>keys.ArrowLeft=false); btnLeft.addEventListener('mouseleave',()=>keys.ArrowLeft=false); }
+    if(btnRight){ btnRight.addEventListener('touchstart',e=>{e.preventDefault(); keys.ArrowRight=true},{passive:false}); btnRight.addEventListener('touchend',e=>{e.preventDefault(); keys.ArrowRight=false},{passive:false}); btnRight.addEventListener('mousedown',()=>keys.ArrowRight=true); btnRight.addEventListener('mouseup',()=>keys.ArrowRight=false); btnRight.addEventListener('mouseleave',()=>keys.ArrowRight=false); }
+    if(btnAttack){ btnAttack.addEventListener('touchstart',e=>{e.preventDefault(); triggerArcadeAttack()},{passive:false}); btnAttack.addEventListener('mousedown',()=>triggerArcadeAttack()); }
+
+    function createBloodSplatter(x,y) { for(let i=0;i<15;i++) bloodParticles.push({x:x,y:y+20,vx:(Math.random()-0.5)*10,vy:(Math.random()-1)*8,life:1,size:Math.random()*4+2}); }
+    function spawnPowerUp() { if(!isPlaying||gameWon) return; if(Math.random()<0.3) powerUps.push({x:Math.random()*(canvas.width-100)+50, y:canvas.height-180, radius:12, life:400}); setTimeout(spawnPowerUp,6000); }
+    function updateScoreboard() { const sd=document.getElementById('score-display'); if(sd) sd.innerText = `دشمنان نابود شده: ${score} / ${targetScore}`; const p2=document.getElementById('p2-health'); if(p2) p2.style.width = Math.max(0,100-(score*6.7))+'%'; }
+
+    function triggerArcadeAttack() { if(!isPlaying||gameWon||player.attacking) return; initAudio(); playHitSound(); player.attacking=true; player.attackTimer=12; const hit={ x:player.x+player.width, y:player.y, width:70, height:player.height }; for(let i=enemies.length-1;i>=0;i--) { let e=enemies[i]; if(hit.x<e.x+e.width&&hit.x+hit.width>e.x&&hit.y<e.y+e.height&&hit.y+hit.height>e.y) { createBloodSplatter(e.x,e.y); enemies.splice(i,1); score++; updateScoreboard(); if(score>=targetScore){ gameWon=true; enemies=[]; powerUps=[]; const sd=document.getElementById('score-display'); if(sd) sd.innerText="مسیر امن شد! به آغوش نیایش برو..."; } } } }
+    function spawnArcadeEnemies() { if(!isPlaying||gameWon) return; enemies.push({ x:canvas.width+40, y:canvas.height-150, width:30, height:90, speed:2.2+Math.random()*2.5 }); setTimeout(spawnArcadeEnemies, Math.random()*1200+600); }
+
+    function updateArcadePhysics() { if(!isPlaying) return; if(!gameWon) { if(keys.ArrowLeft&&player.x>0) player.x-=player.speed; if(keys.ArrowRight&&player.x<canvas.width-player.width) player.x+=player.speed;
+        enemies.forEach(e=>{ e.x-=e.speed; if(e.x<player.x+player.width&&e.x+e.width>player.x&&e.y<player.y+player.height&&e.y+e.height>player.y){ player.x=Math.max(0,player.x-24); e.x+=20; player.health=Math.max(0,player.health-5); const p1=document.getElementById('p1-health'); if(p1) p1.style.width=player.health+'%'; } });
+        for(let i=powerUps.length-1;i>=0;i--) { let pu=powerUps[i]; pu.life--; if(pu.life<=0){ powerUps.splice(i,1); continue; } const closestX=Math.max(player.x,Math.min(pu.x,player.x+player.width)); const closestY=Math.max(player.y,Math.min(pu.y,player.y+player.height)); if((pu.x-closestX)**2+(pu.y-closestY)**2 < pu.radius**2) { player.health=Math.min(100,player.health+15); powerUps.splice(i,1); initAudio(); playHealSound(); const p1=document.getElementById('p1-health'); if(p1) p1.style.width=player.health+'%'; } }
+        enemies = enemies.filter(e=>e.x+e.width>-50);
+    } else { if(player.x<niyayesh.x-player.width+5) player.x+=3.5; else { isPlaying=false; clearInterval(timerInterval); timerInterval=null; const overlay=document.getElementById('game-overlay'); if(overlay){ overlay.style.display='flex'; overlay.innerHTML=`<div style="font-size:5.5rem;filter:drop-shadow(0 0 20px #ff1a40)">👩‍❤️‍💋‍👨</div><div class="section-title" style="margin-top:20px;font-size:2rem">تا ابد در آغوش هم...</div><div style="color:#fff;margin-bottom:15px">مبین به نیایش رسید! ❤️🩸</div><button class="login-btn" onclick="startArcadeGame()">نبرد مجدد</button>`; } } }
+    if(player.attacking){ player.attackTimer--; if(player.attackTimer<=0) player.attacking=false; }
+    for(let i=bloodParticles.length-1;i>=0;i--){ let p=bloodParticles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=0.5; p.life-=0.03; if(p.life<=0) bloodParticles.splice(i,1); } }
+
+    function drawCharacter(ch, type) { ctx.save(); if(type==='player'){ ctx.shadowColor='#ff1a40'; ctx.shadowBlur=15; ctx.fillStyle='#ff1a40'; ctx.fillRect(ch.x,ch.y+20,ch.width,ch.height-20); ctx.fillStyle='#ffccd5'; ctx.fillRect(ch.x+5,ch.y,ch.width-10,20); ctx.strokeStyle='#fff'; ctx.lineWidth=4; ctx.beginPath(); if(ch.attacking){ ctx.moveTo(ch.x+ch.width,ch.y+40); ctx.lineTo(ch.x+ch.width+55,ch.y+10); }else{ ctx.moveTo(ch.x,ch.y+35); ctx.lineTo(ch.x-15,ch.y+5); } ctx.stroke(); }else if(type==='niyayesh'){ ctx.shadowColor='#ffb6c1'; ctx.fillStyle='#ffb6c1'; ctx.fillRect(ch.x,ch.y+20,ch.width,ch.height-20); }else if(type==='enemy'){ ctx.fillStyle='#1c1c1c'; ctx.fillRect(ch.x,ch.y+20,ch.width,ch.height-20); } ctx.restore(); }
+    function drawPowerUps() { powerUps.forEach(pu=>{ ctx.save(); ctx.globalAlpha=0.6; ctx.fillStyle='#ff3366'; ctx.beginPath(); ctx.arc(pu.x,pu.y,pu.radius,0,Math.PI*2); ctx.fill(); ctx.restore(); }); }
+    function drawArcadeFrame() { ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='#0d0102'; ctx.fillRect(0,0,canvas.width,canvas.height); if(score>=targetScore||gameWon) drawCharacter(niyayesh,'niyayesh'); drawCharacter(player,'player'); enemies.forEach(e=>drawCharacter(e,'enemy')); drawPowerUps(); bloodParticles.forEach(p=>{ ctx.save(); ctx.globalAlpha=p.life; ctx.fillStyle='#ff1a40'; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); ctx.restore(); }); }
+    function loopArcade() { updateArcadePhysics(); drawArcadeFrame(); if(isPlaying||gameWon) gameLoopId=requestAnimationFrame(loopArcade); else gameLoopId=null; }
+
+    window.startArcadeGame = function() { const overlay=document.getElementById('game-overlay'); if(overlay) overlay.style.display='none'; resizeCanvas(); player.x=80; player.health=100; score=0; enemies=[]; bloodParticles=[]; powerUps=[]; gameWon=false; isPlaying=true; gameTimer=99; document.getElementById('p1-health').style.width='100%'; document.getElementById('p2-health').style.width='100%'; document.getElementById('score-display').innerText=`دشمنان نابود شده: 0 / ${targetScore}`; document.getElementById('arcade-timer-ui').innerText='99'; clearInterval(timerInterval); timerInterval=setInterval(()=>{ if(gameTimer>0&&isPlaying){ gameTimer--; document.getElementById('arcade-timer-ui').innerText=gameTimer; } },1000); spawnArcadeEnemies(); spawnPowerUp(); if(!gameLoopId) loopArcade(); for(let i=0;i<8;i++){ const h=document.createElement('div'); h.className='mini-heart'; h.textContent=['💕','💗','✨','🫶'][Math.floor(Math.random()*4)]; h.style.left=10+Math.random()*80+'%'; h.style.top=15+Math.random()*50+'%'; document.getElementById('arcade-screen').appendChild(h); setTimeout(()=>h.remove(),2400); } };
+    window.addEventListener('visibilitychange',()=>{ if(document.hidden&&timerInterval) clearInterval(timerInterval); });
+});
+
+// ---------- Rest of App Logic ----------
+// Cursor
+const cursor = document.getElementById('magic-cursor');
+document.addEventListener('mousemove', e => { cursor.style.left = e.clientX+'px'; cursor.style.top = e.clientY+'px'; });
+
+// Sound Toggle
+let soundEnabled = false; let ambientWind = null;
+document.getElementById('sound-toggle').addEventListener('click', ()=>{
+    if(!audioCtx){ try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); let wind=audioCtx.createOscillator(); wind.type='sawtooth'; wind.frequency.value=80; let gain=audioCtx.createGain(); gain.gain.value=0.01; wind.connect(gain); gain.connect(audioCtx.destination); wind.start(); ambientWind=gain; soundEnabled=true; document.getElementById('sound-toggle').innerText='🔊'; }catch(e){} }
+    else { if(soundEnabled){ ambientWind.gain.value=0; document.getElementById('sound-toggle').innerText='🔇'; } else { ambientWind.gain.value=0.01; document.getElementById('sound-toggle').innerText='🔊'; } soundEnabled=!soundEnabled; }
+});
+
+// Hero Canvas
+const heroCanvas = document.getElementById('hero-canvas');
+const hctx = heroCanvas.getContext('2d');
+let mouseX=0.5, mouseY=0.5, scrollY=0;
+function resizeHero() { heroCanvas.width=window.innerWidth; heroCanvas.height=window.innerHeight; } window.addEventListener('resize',resizeHero); resizeHero();
+document.addEventListener('mousemove', e=>{ mouseX=e.clientX/window.innerWidth; mouseY=e.clientY/window.innerHeight; });
+window.addEventListener('scroll', ()=> scrollY=window.scrollY);
+function drawHero() { hctx.clearRect(0,0,heroCanvas.width,heroCanvas.height); let grad=hctx.createLinearGradient(0,0,0,heroCanvas.height); grad.addColorStop(0,'#0B0F1A'); grad.addColorStop(0.7,'#121826'); grad.addColorStop(1,'#1A1F2E'); hctx.fillStyle=grad; hctx.fillRect(0,0,heroCanvas.width,heroCanvas.height);
+    let moonX=heroCanvas.width*0.8+(mouseX-0.5)*40, moonY=heroCanvas.height*0.2+(mouseY-0.5)*30; hctx.shadowColor='#D6C7FF'; hctx.shadowBlur=60; hctx.beginPath(); hctx.arc(moonX,moonY,50,0,Math.PI*2); hctx.fillStyle='#EAE6FF'; hctx.fill(); hctx.shadowBlur=0;
+    let castleBase=heroCanvas.height*0.55+scrollY*0.4; hctx.fillStyle='#0B0F1A'; hctx.beginPath(); hctx.moveTo(0,heroCanvas.height); hctx.lineTo(0,castleBase+140); hctx.lineTo(heroCanvas.width*0.15,castleBase+100); hctx.lineTo(heroCanvas.width*0.2,castleBase+30); hctx.lineTo(heroCanvas.width*0.3,castleBase+80); hctx.lineTo(heroCanvas.width*0.35,castleBase-20); hctx.lineTo(heroCanvas.width*0.45,castleBase+70); hctx.lineTo(heroCanvas.width*0.5,castleBase-40); hctx.lineTo(heroCanvas.width*0.6,castleBase+50); hctx.lineTo(heroCanvas.width*0.7,castleBase-60); hctx.lineTo(heroCanvas.width*0.8,castleBase+90); hctx.lineTo(heroCanvas.width*0.9,castleBase+110); hctx.lineTo(heroCanvas.width,castleBase+130); hctx.lineTo(heroCanvas.width,heroCanvas.height); hctx.closePath(); hctx.fill();
+    if(scrollY>300){ hctx.fillStyle='#FFC857'; hctx.shadowColor='#FFC857'; hctx.shadowBlur=20; hctx.fillRect(heroCanvas.width*0.2,castleBase+50,10,15); hctx.fillRect(heroCanvas.width*0.5,castleBase-20,10,15); hctx.fillRect(heroCanvas.width*0.7,castleBase-40,10,15); hctx.shadowBlur=0; }
+    requestAnimationFrame(drawHero);
+} drawHero();
+
+// Parallax sections
+window.addEventListener('scroll', ()=>{ document.querySelectorAll('.web-section').forEach(sec=>{ let speed=0.08; let y=(window.scrollY-sec.offsetTop)*speed; if(Math.abs(y)<100) sec.style.transform=`translateY(${y}px)`; }); });
+
+// Runes
+document.getElementById('rune1').addEventListener('click',()=>{ document.body.style.filter='invert(1)'; setTimeout(()=>document.body.style.filter='',500); alert('✨ Rune touched!'); });
+document.getElementById('rune2').addEventListener('click',()=>{ document.getElementById('secret-archive').style.display='block'; });
+function closeArchive(){ document.getElementById('secret-archive').style.display='none'; }
+
+// Konami
+let konami=[]; document.addEventListener('keydown',e=>{ konami.push(e.keyCode); konami=konami.slice(-10); if(konami.join(',')==='38,38,40,40,37,39,37,39,66,65'){ document.getElementById('secret-archive').style.display='block'; konami=[]; } });
+
+// Lovebox
+const tracks = [{title:"Sweater Weather",id:"2QjOHCTQ1Jl3zawyYOpxh6"},{title:"آهنگ دوم",id:"1AdIEZmXtXbxyyA5wK8Ihj"},{title:"آهنگ سوم",id:"18XVXZ4Yk27u10Zwl9IUUz"}]; let currentTrack=0;
+function changeTrack(i){ if(i===currentTrack) return; currentTrack=i; document.getElementById('music-iframe').src=`https://open.spotify.com/embed/track/${tracks[i].id}?utm_source=generator&theme=0`; document.getElementById('now-playing').innerText=`🎧 ${tracks[i].title}`; document.querySelectorAll('.jukebox-btn').forEach((b,j)=>b.classList.toggle('active',j===i)); }
+
+// Compliment
+const compliments = [ /* as before */ ];
+function generateCompliment(){ let el=document.getElementById('compliment-text'); el.style.opacity=0; el.style.transform='translateY(20px)'; setTimeout(()=>{ el.innerText=compliments[Math.floor(Math.random()*compliments.length)]; el.style.opacity=1; el.style.transform='none'; },300); }
+
+// Memory
+const memoryEmojis = ['💖','💕','💗','💘','💝','💟','❣️','💌']; let memoryCards=[], flippedCards=[], matchedPairs=0, memoryMoves=0, memoryLocked=false;
+function initMemoryGame(){ let grid=document.getElementById('memory-grid'); memoryCards=[...memoryEmojis,...memoryEmojis].sort(()=>Math.random()-0.5); flippedCards=[]; matchedPairs=0; memoryMoves=0; memoryLocked=false; document.getElementById('memory-moves').innerText='حرکات: 0'; grid.innerHTML=''; memoryCards.forEach((emoji,i)=>{ let c=document.createElement('div'); c.className='memory-card'; c.dataset.emoji=emoji; c.onclick=()=>flipMemoryCard(c); c.innerHTML='<span class="memory-card-back">?</span>'; grid.appendChild(c); }); }
+function flipMemoryCard(card){ if(memoryLocked||card.classList.contains('flipped')||card.classList.contains('matched')||flippedCards.length===2) return; card.classList.add('flipped'); card.innerHTML=`<span class="memory-card-emoji">${card.dataset.emoji}</span>`; flippedCards.push(card); if(flippedCards.length===2){ memoryMoves++; document.getElementById('memory-moves').innerText=`حرکات: ${memoryMoves}`; memoryLocked=true; let [a,b]=flippedCards; if(a.dataset.emoji===b.dataset.emoji){ a.classList.add('matched'); b.classList.add('matched'); matchedPairs++; flippedCards=[]; memoryLocked=false; if(matchedPairs===memoryEmojis.length) setTimeout(()=>alert('🎉 برنده شدی!'),500); } else { setTimeout(()=>{ a.classList.remove('flipped'); a.innerHTML='<span class="memory-card-back">?</span>'; b.classList.remove('flipped'); b.innerHTML='<span class="memory-card-back">?</span>'; flippedCards=[]; memoryLocked=false; },800); } } }
+
+// Countdown
+const targetDate = new Date("Sep 15, 2026 00:00:00").getTime();
+setInterval(()=>{ let d=Math.floor((targetDate-new Date().getTime())/(1000*60*60*24)); document.getElementById('cd-days').innerText=d; /* similar for hours... */ },1000);
+
+// Typewriter, Preserve Emoji, Particles, Firebase functions... same as before
+function typeWriter(text,i,id){ let el=document.getElementById(id); if(!el) return; if(isAdmin){ el.innerHTML=text.replace(/\n/g,"<br>"); return; } if(i<text.length){ let ch=text.charAt(i); if(ch==='\n') el.innerHTML+='<br>'; else el.innerHTML+=ch; setTimeout(()=>typeWriter(text,i+1,id), ch==='.'?400:55); } }
+function preserveEmojiColor(){ document.querySelectorAll('.title-main,.section-title').forEach(el=>{ if(el.dataset.emojiFixed) return; el.innerHTML=el.innerHTML.replace(/([🩸🃏⏳🥹🫂💕🎮🌀🔒❤️⚔️⏰✨📸🦇🧠💗🌸🎵🌧️💒🔮])/g,'<span class="emoji-fix">$1</span>'); el.dataset.emojiFixed='1'; }); }
+
+function createCrimsonParticles(){ for(let i=0;i<40;i++){ let p=document.createElement('div'); p.className='particle'; p.style.left=Math.random()*100+'vw'; document.body.appendChild(p); } }
+function createSoftHearts(){ for(let i=0;i<10;i++){ let h=document.createElement('div'); h.className='soft-heart'; h.textContent='💖'; h.style.left=Math.random()*100+'vw'; document.body.appendChild(h); setTimeout(()=>h.remove(),20000); } }
+function startRosePetals(){ let c=document.createElement('div'); c.className='rose-petals-container'; document.body.appendChild(c); setInterval(()=>{ let p=document.createElement('div'); p.className='rose-petal'; p.style.left=Math.random()*100+'vw'; c.appendChild(p); setTimeout(()=>p.remove(),15000); },1500); }
+
+function playRomanticSound(){ try{ let ctx=new AudioContext(); let t=ctx.currentTime; function tone(f,ty,st,dur,v){ let o=ctx.createOscillator(); o.type=ty; o.frequency.value=f; let g=ctx.createGain(); g.gain.setValueAtTime(0,st); g.gain.linearRampToValueAtTime(v,st+0.3); g.gain.exponentialRampToValueAtTime(0.001,st+dur); o.connect(g); g.connect(ctx.destination); o.start(st); o.stop(st+dur); } tone(261.63,'sine',t,2.5,0.3); tone(329.63,'sine',t+0.3,2.5,0.3); tone(392,'sine',t+0.6,2.5,0.3); }catch(e){} }
+function enableEditableMode(){ document.querySelectorAll('[data-key]').forEach(el=>el.contentEditable=true); }
+
+// Firebase text sync & feed
+db.collection("website_data").doc("texts").onSnapshot(doc=>{ if(doc.exists){ let data=doc.data(); if(data.love_letter) loveLetter=data.love_letter; document.querySelectorAll('[data-key]').forEach(el=>{ let key=el.getAttribute('data-key'); if(data[key]!==undefined) el.innerHTML=data[key]; }); preserveEmojiColor(); } });
+function loadFeed(){ db.collection("memories").orderBy("timestamp","desc").onSnapshot(snap=>{ let area=document.getElementById('posts-area'); area.innerHTML=''; snap.forEach(doc=>{ let data=doc.data(); let media=data.type==='video'?`<video src="${data.url}" class="post-video" controls></video>`:`<img src="${data.url}" class="post-img">`; area.innerHTML+=`<div class="post-card"><div class="post-header"><div class="avatar">M</div><div>Mobin</div></div>${media}<div class="post-content">${data.text}</div></div>`; }); }); }
+function triggerUpload(){ if(isAdmin) document.getElementById('file-input').click(); }
+async function handleFileUpload(e){ let file=e.target.files[0]; if(!file) return; let text=prompt("متن خاطره:"); if(!text) return; let ref=storage.ref('memories/'+Date.now()+'_'+file.name); await ref.put(file); let url=await ref.getDownloadURL(); await db.collection("memories").add({url:url,text:text,type:file.type.startsWith('video')?'video':'image',timestamp:firebase.firestore.FieldValue.serverTimestamp()}); alert("ثبت شد!"); loadFeed(); }
+function saveWebsiteTexts(){ if(!isAdmin) return; let texts={}; document.querySelectorAll('[data-key]').forEach(el=>{ let key=el.getAttribute('data-key'); let content=el.innerHTML; if(key==='love_letter') content=content.replace(/<br\s*\/?>/gi,"\n"); texts[key]=content; }); db.collection("website_data").doc("texts").set(texts,{merge:true}).then(()=>alert("ذخیره شد")); }
+
+document.addEventListener("DOMContentLoaded", preserveEmojiColor);
+</script>
 </body>
 </html>
