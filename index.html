@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Mobin & Niyayesh | Eternal Gothic Universe v5.1</title>
+    <title>Mobin & Niyayesh | Eternal Gothic Universe v5.2</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -71,7 +71,7 @@
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
     <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
     <a href="#memory-game-sec" style="color:#ff69b4;">🧠 حافظه</a>
-    <a href="#oracle-sec">🔮 فال عشق</a>
+    <a href="#castle-sec" style="color:#ffd700;">💒 قلعه عشق</a>
     <a href="#tarot-sec">🃏 کارت‌ها</a>
     <a href="#compliment-sec">🌸 بگو دوستم داری</a>
     <a href="#lovebox-sec" style="color:#ff1a40; font-weight:900;">🎵 Lovebox</a>
@@ -99,11 +99,11 @@
             <div class="text" id="typed-text" data-key="love_letter"></div>
         </div>
 
-        <!-- Lovebox (جایگزین جوک‌باکس) -->
-        <div class="web-section reveal" id="lovebox-sec">
+        <!-- Lovebox ساده و شیک -->
+        <div class="web-section reveal" id="lovebox-sec" style="background: none; border: none; padding: 10px 0; box-shadow: none; backdrop-filter: none; margin-bottom: 0;">
             <div class="section-title">Lovebox <span class="title-emoji">🎵</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">آهنگ‌هایی که روح ما رو نوازش میدن...</p>
-            <div class="music-jukebox">
+            <div class="music-jukebox" style="background: none; padding: 0;">
                 <div class="now-playing" id="now-playing">🎧 Sweater Weather</div>
                 <div class="spotify-embed" id="spotify-embed">
                     <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
@@ -113,6 +113,14 @@
                     <button class="jukebox-btn" onclick="changeTrack(1)">🎵 آهنگ دوم</button>
                     <button class="jukebox-btn" onclick="changeTrack(2)">🎵 آهنگ سوم</button>
                 </div>
+            </div>
+        </div>
+
+        <div class="web-section reveal" id="castle-sec">
+            <div class="section-title">قلعه عشق ما <span class="title-emoji">💒</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">روی قلعه کلیک کن تا پنجره‌های عشق روشن بشن...</p>
+            <div class="castle-container">
+                <canvas id="castleCanvas" width="400" height="300"></canvas>
             </div>
         </div>
 
@@ -151,18 +159,6 @@
             <div class="memory-controls">
                 <span id="memory-moves">حرکات: 0</span>
                 <button class="login-btn" onclick="initMemoryGame()" style="width:auto; padding:10px 30px;">شروع دوباره</button>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="oracle-sec">
-            <div class="section-title">فال عشق <span class="title-emoji">🔮</span></div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">دلت می‌خواد بدونی امروز عشقت چی بهت می‌گه؟</p>
-            <div class="oracle-container">
-                <div class="oracle-crystal" id="oracle-crystal" onclick="revealOracle()">
-                    <div class="crystal-glow"></div>
-                    <span>✨</span>
-                </div>
-                <div class="oracle-message" id="oracle-message"></div>
             </div>
         </div>
 
@@ -218,7 +214,6 @@
             </div>
         </div>
 
-        <!-- شمارشگر عشق (دیگه عدد نداره) -->
         <div class="web-section reveal" id="love-counter-sec">
             <div class="section-title">شمارشگر عشق <span class="title-emoji">💗</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">نمیشه با عدد گفت چقدر دوست دارم...</p>
@@ -355,7 +350,7 @@
 let isAdmin = false;
 let loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
 
-// --- Lovebox (Music Jukebox) ---
+// --- Lovebox ---
 const tracks = [
     { title: "Sweater Weather", id: "2QjOHCTQ1Jl3zawyYOpxh6" },
     { title: "آهنگ دوم", id: "1AdIEZmXtXbxyyA5wK8Ihj" },
@@ -373,7 +368,6 @@ function changeTrack(index) {
         btn.classList.toggle('active', i === index);
     });
 
-    // افکت قلب کوچولو
     const heart = document.createElement('span');
     heart.className = 'mini-heart';
     heart.textContent = '💖';
@@ -381,6 +375,125 @@ function changeTrack(index) {
     heart.style.top = (Math.random() * 40 + 30) + '%';
     document.getElementById('lovebox-sec').appendChild(heart);
     setTimeout(() => heart.remove(), 1500);
+}
+
+// --- قلعه پیکسلی ---
+const castleCanvas = document.getElementById('castleCanvas');
+const castleCtx = castleCanvas.getContext('2d');
+let castleLit = false;
+
+const castleGrid = [
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000100000000000000000100000000",
+    "0000000000000100000000000000000100000000",
+    "0000000033330100000000000000000133330000",
+    "0000000000330100000000000000000133000000",
+    "0000000000000100000000000000000100000000",
+    "0000001111111111110000001111111111110000",
+    "0000001000000000010000001000000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001004000000010000001004000000010000",
+    "0000001004000000010000001004000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001004000000010000001004000000010000",
+    "0000001004000000010000001004000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001111111111110000001111111111110000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888"
+];
+
+const colorMap = {
+    0: '#0a0a14', // sky
+    1: '#2a2a2a', // dark stone
+    2: '#4a4a4a', // light stone (unused for simplicity)
+    3: '#ff1a40', // red flag
+    4: '#111111', // window unlit
+    5: '#ffcc00', // window lit
+    6: '#1a1a1a', // gate
+    7: '#ff3366', // heart
+    8: '#1a1208'  // ground
+};
+
+function drawCastle(lit) {
+    const canvas = castleCanvas;
+    const ctx = castleCtx;
+    const w = canvas.width;
+    const h = canvas.height;
+    const pw = w / 40; // pixel width
+    const ph = h / 30;
+    ctx.clearRect(0, 0, w, h);
+    
+    // draw background
+    ctx.fillStyle = '#0a0a14';
+    ctx.fillRect(0, 0, w, h);
+    
+    for (let y = 0; y < 30; y++) {
+        const row = castleGrid[y];
+        for (let x = 0; x < 40; x++) {
+            let colorIndex = parseInt(row[x]);
+            if (colorIndex === 4 && lit) colorIndex = 5; // windows lit
+            if (colorIndex === 0) continue;
+            ctx.fillStyle = colorMap[colorIndex];
+            ctx.fillRect(x * pw, y * ph, pw, ph);
+        }
+    }
+    
+    // Gate detail
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(17 * pw, 18 * ph, 6 * pw, 6 * ph);
+    ctx.fillStyle = '#2a2a2a';
+    ctx.fillRect(17.5 * pw, 18.5 * ph, 5 * pw, 5 * ph);
+    
+    // Heart on flag
+    ctx.fillStyle = '#ff3366';
+    ctx.font = `${pw * 3}px serif`;
+    ctx.fillText('❤️', 6.5 * pw, 3 * ph);
+    ctx.fillText('❤️', 32.5 * pw, 3 * ph);
+}
+
+function resizeCastleCanvas() {
+    const container = document.querySelector('.castle-container');
+    if (!container) return;
+    const w = container.clientWidth;
+    castleCanvas.width = w;
+    castleCanvas.height = w * 0.75; // 4:3 ratio
+    drawCastle(castleLit);
+}
+
+window.addEventListener('resize', resizeCastleCanvas);
+castleCanvas.addEventListener('click', () => {
+    castleLit = !castleLit;
+    drawCastle(castleLit);
+    
+    // spawn hearts
+    const heartContainer = document.getElementById('castle-sec');
+    for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'mini-heart';
+        heart.textContent = ['💕', '💗', '✨', '❤️'][Math.floor(Math.random() * 4)];
+        heart.style.left = (Math.random() * 80 + 10) + '%';
+        heart.style.top = (Math.random() * 60 + 20) + '%';
+        heart.style.animationDelay = Math.random() * 0.5 + 's';
+        heartContainer.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+    }
+});
+
+function initCastle() {
+    resizeCastleCanvas();
 }
 
 // --- Compliment Generator ---
@@ -410,7 +523,7 @@ function generateCompliment() {
 
 function preserveEmojiColor() {
     const targets = document.querySelectorAll('.title-main, .section-title');
-    const emojiRegex = /([🩸🃏⏳🥹🫂💕🎮🌀🔒❤️⚔️⏰✨📸🦇🧠🔮💗🫙🌸🎵🌧️])/g;
+    const emojiRegex = /([🩸🃏⏳🥹🫂💕🎮🌀🔒❤️⚔️⏰✨📸🦇🧠💗🌸🎵🌧️💒])/g;
     targets.forEach(el => {
         if (!el || el.dataset.emojiFixed === "1") return;
         const original = el.innerHTML;
@@ -449,6 +562,7 @@ function enter(){
             typeWriter(loveLetter, 0, "typed-text");
             loadFeed();
             initMemoryGame();
+            initCastle();
         }, 3800);
     } else {
         alert("رمز ورود اشتباه است... دوباره تلاش کن عشق من");
@@ -544,35 +658,6 @@ function startRosePetals() {
         setTimeout(() => createPetal(), i * 400);
     }
     setInterval(createPetal, 1500);
-}
-
-const oracleMessages = [
-    "امروز قلب تو پر از نور و آرامشه... بذار عشقت بدرخشه ✨",
-    "او امروز بیشتر از همیشه به تو فکر می‌کنه... 💭❤️",
-    "ستاره‌ها امشب برای تو صف کشیدن تا برات آرزوهای قشنگ بیارن 🌟",
-    "در آغوش تو امن‌ترین جای دنیاست... 🫂💕",
-    "یه سورپرایز عاشقانه تو راهه... آماده باش! 🎁💝",
-    "نگاهت تموم دنیای منو روشن می‌کنه، پس همیشه به من نگاه کن 👀💖",
-    "عشق شما از جنس افسانه‌هاست... جاودانه و بی‌پایان 📜🩸",
-    "امروز روز خوبی برای گفتن دوستت دارم به کسی که عاشقشی 😘",
-    "قلب تو مثل یه شمع تو تاریکی می‌مونه... گرم و روشن 🕯️",
-    "فرشته‌ها به عشق شما غبطه می‌خورن... 👼💗"
-];
-function revealOracle() {
-    const msgEl = document.getElementById('oracle-message');
-    const crystal = document.getElementById('oracle-crystal');
-    const randomMsg = oracleMessages[Math.floor(Math.random() * oracleMessages.length)];
-    crystal.style.transform = 'scale(1.2)';
-    crystal.style.boxShadow = '0 0 50px rgba(255, 26, 64, 0.9)';
-    msgEl.style.opacity = '0';
-    msgEl.style.transform = 'translateY(20px)';
-    setTimeout(() => {
-        msgEl.innerText = randomMsg;
-        msgEl.style.opacity = '1';
-        msgEl.style.transform = 'translateY(0)';
-        crystal.style.transform = 'scale(1)';
-        crystal.style.boxShadow = '0 0 20px rgba(255, 26, 64, 0.4)';
-    }, 300);
 }
 
 const memoryEmojis = ['💖', '💕', '💗', '💘', '💝', '💟', '❣️', '💌'];
