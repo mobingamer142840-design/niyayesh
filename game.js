@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let enemies = [];
     let bloodParticles = [];
+    let powerUps = []; // پاور-آپ قلب
     let score = 0;
     const targetScore = 15;
     let gameWon = false;
@@ -38,6 +39,32 @@ document.addEventListener("DOMContentLoaded", () => {
     let timerInterval = null;
 
     let keys = { ArrowLeft: false, ArrowRight: false, Space: false };
+
+    // Web Audio API برای صدای ضربه
+    let audioCtx = null;
+    function initAudio() {
+        if (!audioCtx) {
+            try {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            } catch(e) {}
+        }
+    }
+
+    function playHitSound() {
+        if (!audioCtx) return;
+        const t = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(800, t);
+        osc.frequency.exponentialRampToValueAtTime(200, t + 0.12);
+        gain.gain.setValueAtTime(0.3, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(t);
+        osc.stop(t + 0.15);
+    }
 
     function resizeCanvas() {
         const container = document.getElementById("arcade-screen");
@@ -110,6 +137,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function spawnPowerUp() {
+        if (!isPlaying || gameWon) return;
+        // اسپاون پاور-آپ قلب (شانس ۳۰٪ هر ۶ ثانیه)
+        if (Math.random() < 0.3) {
+            powerUps.push({
+                x: Math.random() * (canvas.width - 100) + 50,
+                y: canvas.height - 180,
+                radius: 12,
+                life: 400 // حدود ۶-۷ ثانیه با 60fps
+            });
+        }
+        setTimeout(spawnPowerUp, 6000);
+    }
+
     function updateScoreboard() {
         const scoreDisp = document.getElementById('score-display');
         if (scoreDisp) scoreDisp.innerText = `دشمنان نابود شده: ${score} / ${targetScore}`;
@@ -124,6 +165,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function triggerArcadeAttack() {
         if (!isPlaying || gameWon || player.attacking) return;
 
+        initAudio();
+        playHitSound();
+        
         player.attacking = true;
         player.attackTimer = 12;
 
@@ -150,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (score >= targetScore) {
                     gameWon = true;
                     enemies = [];
+                    powerUps = [];
                     const scoreDisp = document.getElementById('score-display');
                     if (scoreDisp) scoreDisp.innerText = "مسیر امن شد! به آغوش نیایش برو...";
                 }
@@ -196,6 +241,28 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (p1Health) p1Health.style.width = player.health + '%';
                 }
             });
+
+            // برخورد با پاور-آپ‌ها
+            for (let i = powerUps.length - 1; i >= 0; i--) {
+                let pu = powerUps[i];
+                pu.life--;
+                if (pu.life <= 0) {
+                    powerUps.splice(i, 1);
+                    continue;
+                }
+                
+                // برخورد دایره به مستطیل (بازیکن)
+                const closestX = Math.max(player.x, Math.min(pu.x, player.x + player.width));
+                const closestY = Math.max(player.y, Math.min(pu.y, player.y + player.height));
+                const distX = pu.x - closestX;
+                const distY = pu.y - closestY;
+                if ((distX * distX + distY * distY) < pu.radius * pu.radius) {
+                    player.health = Math.min(100, player.health + 15);
+                    powerUps.splice(i, 1);
+                    const p1Health = document.getElementById('p1-health');
+                    if (p1Health) p1Health.style.width = player.health + '%';
+                }
+            }
 
             enemies = enemies.filter(e => e.x + e.width > -50);
         } else {
@@ -287,6 +354,27 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.restore();
     }
 
+    function drawPowerUps() {
+        powerUps.forEach(pu => {
+            const alpha = 0.6 + Math.sin(Date.now() * 0.008) * 0.4;
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            ctx.shadowColor = '#ff1a40';
+            ctx.shadowBlur = 15;
+            ctx.fillStyle = '#ff3366';
+            ctx.beginPath();
+            // رسم قلب با دو圆弧 و مثلث
+            const x = pu.x, y = pu.y, r = pu.radius;
+            ctx.moveTo(x, y + r * 0.4);
+            ctx.bezierCurveTo(x, y - r * 0.2, x - r, y - r * 0.2, x - r, y + r * 0.3);
+            ctx.bezierCurveTo(x - r, y + r * 0.8, x, y + r * 1.1, x, y + r * 1.3);
+            ctx.bezierCurveTo(x, y + r * 1.1, x + r, y + r * 0.8, x + r, y + r * 0.3);
+            ctx.bezierCurveTo(x + r, y - r * 0.2, x, y - r * 0.2, x, y + r * 0.4);
+            ctx.fill();
+            ctx.restore();
+        });
+    }
+
     function drawArcadeFrame() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -316,6 +404,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         enemies.forEach(e => drawCharacter(e, 'enemy'));
+        drawPowerUps();
 
         bloodParticles.forEach(p => {
             ctx.save();
@@ -368,6 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
         score = 0;
         enemies = [];
         bloodParticles = [];
+        powerUps = [];
         gameWon = false;
         isPlaying = true;
         gameTimer = 99;
@@ -391,6 +481,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
 
         spawnArcadeEnemies();
+        spawnPowerUp(); // شروع اسپاون پاور-آپ
         if (!gameLoopId) loopArcade();
 
         addTinyCelebration();
