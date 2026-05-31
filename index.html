@@ -6,337 +6,894 @@
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Mobin & Niyayesh | Eternal Gothic Universe v6.0.0</title>
+    <title>Mobin & Niyayesh | Eternal Gothic Universe v5.2</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
 </head>
+
 <body>
 
-<!-- Day/Night Indicator -->
-<div id="time-indicator" class="time-indicator">🌙 شب جادویی</div>
-
-<!-- Whispers Layer -->
-<div id="whisper-layer" class="whisper-layer"></div>
-
-<!-- Memory Fragments Layer -->
-<div id="fragments-layer" class="fragments-layer"></div>
-
-<!-- Hidden Runes -->
-<div class="hidden-rune" id="rune1" style="top:15%; left:8%;"></div>
-<div class="hidden-rune" id="rune2" style="top:70%; right:10%;"></div>
-<div class="hidden-rune" id="rune3" style="top:40%; left:50%;"></div>
-
-<!-- Original layers -->
 <div class="bg"></div>
 <div class="fog"></div>
 <div class="vintage-overlay"></div>
 <div class="vignette"></div>
 
-<div id="netflix-intro"><div class="netflix-text">N</div></div>
+<div id="netflix-intro">
+    <div class="netflix-text">N</div>
+</div>
 
 <div class="login-wrapper" id="login-zone">
-  <div class="login-container">
-    <div class="login-emojis">💕🫂</div>
-    <h1>Niyayesh</h1>
-    <p>A Vampire Diaries Universe</p>
-    <div class="input-group"><input id="pass" type="password" placeholder="رمز ورود را وارد کن..." autocomplete="current-password"></div>
-    <button class="login-btn" onclick="enter()">ورود به دنیای ما</button>
-  </div>
+    <div class="login-container">
+        <div class="login-emojis">💕🫂</div>
+        <h1>Niyayesh</h1>
+        <p>A Vampire Diaries Universe</p>
+        <div class="input-group">
+            <input id="pass" type="password" placeholder="رمز ورود را وارد کن..." autocomplete="current-password">
+        </div>
+        <button class="login-btn" onclick="enter()">ورود به دنیای ما</button>
+    </div>
 </div>
 
 <div id="vampire-portal">
-  <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
-  <div class="portal-dimension" id="portal-dim">
-    <div class="portal-quote" id="pt-q">"He's her first love. I intend to be her last."</div>
-    <div class="portal-subtext" id="pt-st">تو اتمسفر جاودانه‌ی ومپایر دایریز غرق شدیم... 🩸🖤</div>
-    <button class="close-portal-btn" id="pt-btn" onclick="closePortal()">بازگشت به واقعیت</button>
-  </div>
+    <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
+    <div class="portal-dimension" id="portal-dim">
+        <div class="portal-quote" id="pt-q">"He's her first love. I intend to be her last."</div>
+        <div class="portal-subtext" id="pt-st">تو اتمسفر جاودانه‌ی ومپایر دایریز غرق شدیم... جایی که زمان می‌ایسته و فقط من و تو می‌مونیم. این دریچه‌ای به تمام رازها و احساسات بی‌پایان ماست نیایشم. 🩸🖤</div>
+        <button class="close-portal-btn" id="pt-btn" onclick="closePortal()">بازگشت به واقعیت</button>
+    </div>
 </div>
 
 <div id="admin-save-bar">
-  <span>✍️ حالت ادیتور فعال است. تغییرات متون را اعمال کنید.</span>
-  <button class="save-btn" onclick="saveWebsiteTexts()">ذخیره کل تغییرات</button>
+    <span>✍️ حالت ادیتور فعال است. تغییرات متون را اعمال کنید.</span>
+    <button class="save-btn" onclick="saveWebsiteTexts()">ذخیره کل تغییرات</button>
 </div>
 
 <div id="secret-modal">
-  <div class="secret-box">
-    <div class="secret-title">🔒 THE VAULT</div>
-    <input id="secret-pass" type="password" placeholder="رمز بخش رازها را وارد کن..." style="margin-bottom:20px;">
-    <button class="login-btn" onclick="checkSecret()">رمزگشایی رازها</button>
-    <div id="secret-content">تنها راز من تویی نیایشم تو بودی که تو سختی ها کنارم بودی 💕🫂<br>عاشقتم دخترم و همیشه کنارتم 🫠🫂💕<br>تو فرشته‌ منی منم فرشته‌ی تو :)</div>
-    <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:20px; cursor:pointer; font-weight:700; font-size:0.9rem;">بستن صندوقچه</button>
-  </div>
+    <div class="secret-box">
+        <div class="secret-title">🔒 THE VAULT</div>
+        <input id="secret-pass" type="password" placeholder="رمز بخش رازها را وارد کن..." style="margin-bottom:20px;">
+        <button class="login-btn" onclick="checkSecret()">رمزگشایی رازها</button>
+        <div id="secret-content">
+            تنها راز من تویی نیایشم تو بودی که تو سختی ها کنارم بودی 💕🫂<br>
+            عاشقتم دخترم و همیشه کنارتم 🫠🫂💕<br>
+            تو فرشته‌ منی منم فرشته‌ی تو :)
+        </div>
+        <button onclick="closeSecret()" style="background:transparent; border:none; color:rgba(255,255,255,0.4); margin-top:20px; cursor:pointer; font-weight:700; font-size:0.9rem;">بستن صندوقچه</button>
+    </div>
 </div>
 
 <div class="navbar" id="navbar">
-  <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
-  <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
-  <a href="#memory-game-sec" style="color:#ff69b4;">🧠 حافظه</a>
-  <a href="#castle-sec" style="color:#ffd700;">💒 قلعه عشق</a>
-  <a href="#tarot-sec">🃏 کارت‌ها</a>
-  <a href="#compliment-sec">🌸 بگو دوستم داری</a>
-  <a href="#lovebox-sec" style="color:#ff1a40; font-weight:900;">🎵 Lovebox</a>
-  <a href="#countdown-sec">⏳ ماه خونین</a>
-  <a href="#story-sec">داستان ما</a>
-  <a href="#dates-sec">تاریخ‌ها</a>
-  <a href="#mobin-sec">دنیای Mobin</a>
-  <a href="#niyayesh-sec">دنیای Niyayesh</a>
-  <a href="#gallery-sec">آلبوم</a>
-  <a href="#feed-sec">فید</a>
-  <a href="#tvd-sec">سینما</a>
-  <a href="javascript:void(0)" onclick="openPortal()" style="color:#ff1a40; font-weight:900; animation: heartBeat 2s infinite;">🌀 پورتال</a>
-  <a href="javascript:void(0)" onclick="openSecret()">🔒 رازها</a>
+    <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
+    <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
+    <a href="#memory-game-sec" style="color:#ff69b4;">🧠 حافظه</a>
+    <a href="#castle-sec" style="color:#ffd700;">💒 قلعه عشق</a>
+    <a href="#tarot-sec">🃏 کارت‌ها</a>
+    <a href="#compliment-sec">🌸 بگو دوستم داری</a>
+    <a href="#lovebox-sec" style="color:#ff1a40; font-weight:900;">🎵 Lovebox</a>
+    <a href="#countdown-sec">⏳ ماه خونین</a>
+    <a href="#story-sec">داستان ما</a>
+    <a href="#dates-sec">تاریخ‌ها</a>
+    <a href="#mobin-sec">دنیای Mobin</a>
+    <a href="#niyayesh-sec">دنیای Niyayesh</a>
+    <a href="#gallery-sec">آلبوم</a>
+    <a href="#feed-sec">فید</a>
+    <a href="#tvd-sec">سینما</a>
+    <a href="javascript:void(0)" onclick="openPortal()" style="color:#ff1a40; font-weight:900; animation: heartBeat 2s infinite;">🌀 پورتال</a>
+    <a href="javascript:void(0)" onclick="openSecret()">🔒 رازها</a>
 </div>
 
 <div id="main" class="main-jitter-wrapper">
-  <div class="container">
+    <div class="container">
 
-    <!-- نامه عاشقانه -->
-    <div class="web-section reveal" id="letter-sec">
-      <div class="title-main" id="txt-main-title" data-key="main_title">For Niyayesh 🥹🫂💕</div>
-      <div class="gallery">
-        <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="Memory 1" loading="lazy">
-        <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2" loading="lazy">
-      </div>
-      <div class="text" id="typed-text" data-key="love_letter"></div>
-    </div>
-
-    <!-- Lovebox ساده و شیک -->
-    <div class="web-section reveal" id="lovebox-sec" style="background: none; border: none; padding: 10px 0; box-shadow: none; backdrop-filter: none; margin-bottom: 0;">
-      <div class="section-title">Lovebox <span class="title-emoji">🎵</span></div>
-      <p style="text-align: center; color: #aaa; margin-bottom: 25px;">آهنگ‌هایی که روح ما رو نوازش میدن...</p>
-      <div class="music-jukebox" style="background: none; padding: 0;">
-        <div class="now-playing" id="now-playing">🎧 Sweater Weather</div>
-        <div class="spotify-embed" id="spotify-embed">
-          <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-        <div class="music-controls">
-          <button class="jukebox-btn active" onclick="changeTrack(0)">🌧️ Sweater Weather</button>
-          <button class="jukebox-btn" onclick="changeTrack(1)">🎵 آهنگ دوم</button>
-          <button class="jukebox-btn" onclick="changeTrack(2)">🎵 آهنگ سوم</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- قلعه تعاملی -->
-    <div class="web-section reveal" id="castle-sec">
-      <div class="section-title">قلعه عشق ما <span class="title-emoji">💒</span></div>
-      <p style="text-align: center; color: #aaa; margin-bottom: 25px;">روی برج‌ها و دروازه کلیک کن تا رازهای قلبم رو بشنوی...</p>
-      <div class="castle-container" id="castle-interactive">
-        <canvas id="castleCanvas" width="400" height="300"></canvas>
-        <div class="castle-tooltip" id="castle-tooltip"></div>
-      </div>
-    </div>
-
-    <!-- بازی Tekken -->
-    <div class="web-section reveal" id="game-sec">
-      <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION <span class="title-emoji">🩸</span></div>
-      <div class="game-arcade-cabinet">
-        <div id="game-overlay" style="position: absolute; inset:0; background:rgba(10,1,2,0.92); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:8px;">
-          <div class="section-title" style="font-size:2rem; margin-bottom:10px; text-shadow: 0 0 10px #ff1a40;">Vampire Fighting Arena</div>
-          <div style="color:#aaa; font-size:0.95rem; margin-bottom: 20px;" id="score-display">در نقش ومپایر با شمشیر نئونی حریفان را نابود کن!</div>
-          <button class="login-btn" onclick="startArcadeGame()" style="width:auto; padding:12px 35px; box-shadow: 0 0 15px rgba(255,26,64,0.4);">شروع مبارزه حماسی</button>
+        <div class="web-section reveal" id="letter-sec">
+            <div class="title-main" id="txt-main-title" data-key="main_title">For Niyayesh 🥹🫂💕</div>
+            <div class="gallery">
+                <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="Memory 1" loading="lazy">
+                <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2" loading="lazy">
+            </div>
+            <div class="text" id="typed-text" data-key="love_letter"></div>
         </div>
 
-        <div class="arcade-hud">
-          <div class="tekken-health-bar"><div class="tekken-health-fill" id="p1-health"></div></div>
-          <div class="tekken-timer" id="arcade-timer-ui">99</div>
-          <div class="tekken-health-bar"><div class="tekken-health-fill" id="p2-health"></div></div>
+        <!-- Lovebox ساده و شیک -->
+        <div class="web-section reveal" id="lovebox-sec" style="background: none; border: none; padding: 10px 0; box-shadow: none; backdrop-filter: none; margin-bottom: 0;">
+            <div class="section-title">Lovebox <span class="title-emoji">🎵</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">آهنگ‌هایی که روح ما رو نوازش میدن...</p>
+            <div class="music-jukebox" style="background: none; padding: 0;">
+                <div class="now-playing" id="now-playing">🎧 Sweater Weather</div>
+                <div class="spotify-embed" id="spotify-embed">
+                    <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="music-controls">
+                    <button class="jukebox-btn active" onclick="changeTrack(0)">🌧️ Sweater Weather</button>
+                    <button class="jukebox-btn" onclick="changeTrack(1)">🎵 آهنگ دوم</button>
+                    <button class="jukebox-btn" onclick="changeTrack(2)">🎵 آهنگ سوم</button>
+                </div>
+            </div>
         </div>
 
-        <div class="arcade-screen-container" id="arcade-screen">
-          <canvas id="tekkenCanvas"></canvas>
-          <div class="crt-scanlines"></div>
+        <div class="web-section reveal" id="castle-sec">
+            <div class="section-title">قلعه عشق ما <span class="title-emoji">💒</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">روی قلعه کلیک کن تا پنجره‌های عشق روشن بشن...</p>
+            <div class="castle-container">
+                <canvas id="castleCanvas" width="400" height="300"></canvas>
+            </div>
         </div>
 
-        <div class="arcade-controls" style="gap: 10px; padding: 10px;">
-          <button class="arcade-btn" id="btn-left" style="padding: 10px 20px;">⬅️ عقب</button>
-          <button class="arcade-btn" id="btn-attack" style="background: rgba(255, 26, 64, 0.2); border-color:#ff1a40; flex:1; font-weight: bold; text-shadow: 0 0 5px #ff1a40;">ATTACK / ضربه شمشیر ⚔️</button>
-          <button class="arcade-btn" id="btn-right" style="padding: 10px 20px;">جلو ➡️</button>
+        <div class="web-section reveal" id="game-sec">
+            <div class="section-title">مأموریت نجات نیایش | TEKKEN EDITION <span class="title-emoji">🩸</span></div>
+            <div class="game-arcade-cabinet">
+                <div id="game-overlay" style="position: absolute; inset:0; background:rgba(10,1,2,0.92); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:10; border-radius:8px;">
+                    <div class="section-title" style="font-size:2rem; margin-bottom:10px; text-shadow: 0 0 10px #ff1a40;">Vampire Fighting Arena</div>
+                    <div style="color:#aaa; font-size:0.95rem; margin-bottom: 20px;" id="score-display">در نقش ومپایر با شمشیر نئونی حریفان را نابود کن!</div>
+                    <button class="login-btn" onclick="startArcadeGame()" style="width:auto; padding:12px 35px; box-shadow: 0 0 15px rgba(255,26,64,0.4);">شروع مبارزه حماسی</button>
+                </div>
+
+                <div class="arcade-hud">
+                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p1-health"></div></div>
+                    <div class="tekken-timer" id="arcade-timer-ui">99</div>
+                    <div class="tekken-health-bar"><div class="tekken-health-fill" id="p2-health"></div></div>
+                </div>
+
+                <div class="arcade-screen-container" id="arcade-screen">
+                    <canvas id="tekkenCanvas"></canvas>
+                    <div class="crt-scanlines"></div>
+                </div>
+
+                <div class="arcade-controls" style="gap: 10px; padding: 10px;">
+                    <button class="arcade-btn" id="btn-left" style="padding: 10px 20px;">⬅️ عقب</button>
+                    <button class="arcade-btn" id="btn-attack" style="background: rgba(255, 26, 64, 0.2); border-color:#ff1a40; flex:1; font-weight: bold; text-shadow: 0 0 5px #ff1a40;">ATTACK / ضربه شمشیر ⚔️</button>
+                    <button class="arcade-btn" id="btn-right" style="padding: 10px 20px;">جلو ➡️</button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Memory Game -->
-    <div class="web-section reveal" id="memory-game-sec">
-      <div class="section-title">بازی حافظه عاشقانه <span class="title-emoji">🧠</span></div>
-      <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها رو جفت کن تا قدرت حافظه‌ات رو نشون بدی!</p>
-      <div class="memory-grid" id="memory-grid"></div>
-      <div class="memory-controls">
-        <span id="memory-moves">حرکات: 0</span>
-        <button class="login-btn" onclick="initMemoryGame()" style="width:auto; padding:10px 30px;">شروع دوباره</button>
-      </div>
-    </div>
-
-    <!-- Compliment -->
-    <div class="web-section reveal" id="compliment-sec">
-      <div class="section-title">بگو دوستم داری <span class="title-emoji">🌸</span></div>
-      <p style="text-align: center; color: #aaa; margin-bottom: 25px;">یه جمله عاشقانه از قلب من... فقط کلیک کن!</p>
-      <div class="compliment-box">
-        <p class="compliment-text" id="compliment-text">💬</p>
-        <button class="login-btn" onclick="generateCompliment()" style="width:auto; padding:12px 30px; background: linear-gradient(90deg, #d63384, #ff1a40);">یه چیز قشنگ بگو</button>
-      </div>
-    </div>
-
-    <!-- Tarot -->
-    <div class="web-section reveal" id="tarot-sec">
-      <div class="section-title">کارت‌های سرنوشت ما <span class="title-emoji">🃏</span></div>
-      <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها را لمس کن تا رازهای قلبم را بخوانی...</p>
-      <div class="tarot-grid">
-        <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">I</div></div><div class="tarot-back"><p>چون وقتی نگاهم می‌کنی، تمام تاریکی‌های دنیای من روشن میشه. تو خورشیدِ این ومپایری. 🩸</p></div></div></div>
-        <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design" style="color:#ff1a40; text-shadow: 0 0 10px #ff1a40;">II</div></div><div class="tarot-back"><p>چون هیچکس تو دنیا به اندازه تو، دیوونه‌بازی‌ها و رویاهای بزرگ منو نمی‌فهمه. 🖤</p></div></div></div>
-        <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">III</div></div><div class="tarot-back"><p>چون تو نه تنها عشق منی، بلکه بهترین رفیق و پناهگاه امنِ منی نیایشم. 🫂</p></div></div></div>
-        <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">IV</div></div><div class="tarot-back"><p>هر لحظه بدون تو، نفس کشیدنم سخت‌تر میشه. تو دلیل اصلی تپش‌های قلبمی. 💓</p></div></div></div>
-        <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">V</div></div><div class="tarot-back"><p>دوست دارم پیر بشیم و بازم مثل روزای اول، عاشقونه به چشمای هم نگاه کنیم. 👴🏻👵🏻</p></div></div></div>
-        <div class="tarot-card" onclick="this.classList.toggle('flipped')"><div class="tarot-inner"><div class="tarot-front"><div class="tarot-design">VI</div></div><div class="tarot-back"><p>تو رویایی هستی که نمی‌خوام هرگز ازش بیدار شم. شب‌های من با تو صبح میشن. 🌙☀️</p></div></div></div>
-      </div>
-    </div>
-
-    <!-- عشق بی‌نهایت -->
-    <div class="web-section reveal" id="love-counter-sec">
-      <div class="section-title">شمارشگر عشق <span class="title-emoji">💗</span></div>
-      <p style="text-align: center; color: #aaa; margin-bottom: 25px;">نمیشه با عدد گفت چقدر دوست دارم...</p>
-      <div class="love-counter-display">
-        <div class="eternal-love-text">به تعداد نفس‌هایی که کشیدم، دوست دارم 💖</div>
-        <div class="eternal-love-sub">هر لحظه عشق ما بی‌نهایته...</div>
-      </div>
-    </div>
-
-    <!-- Countdown -->
-    <div class="web-section reveal" id="countdown-sec">
-      <div class="section-title">زمان تا جاودانگی <span class="title-emoji">⏳</span></div>
-      <p style="text-align: center; color: #aaa; margin-bottom: 25px;">شمارش معکوس تا تولد فرشته‌ی روی زمین (۱۵ شهریور)</p>
-      <div class="countdown-container">
-        <div class="time-box"><span id="cd-days">00</span><div class="time-label">روز</div></div>
-        <div class="time-box"><span id="cd-hours">00</span><div class="time-label">ساعت</div></div>
-        <div class="time-box"><span id="cd-mins">00</span><div class="time-label">دقیقه</div></div>
-        <div class="time-box"><span id="cd-secs">00</span><div class="time-label">ثانیه</div></div>
-      </div>
-    </div>
-
-    <!-- Story -->
-    <div class="web-section reveal" id="story-sec">
-      <div class="section-title" data-key="story_title">داستان عشق ما</div>
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-date" data-key="timeline_d1">روزی که قلبت مال من شد</div>
-          <div class="timeline-content" id="txt-timeline-c1" data-key="timeline_c1">اینجا آغاز فصل جدید زندگی من بود. روزی که نگاهت مسیر سرنوشتم رو عوض کرد و شدی تمام دنیای من...</div>
+        <div class="web-section reveal" id="memory-game-sec">
+            <div class="section-title">بازی حافظه عاشقانه <span class="title-emoji">🧠</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها رو جفت کن تا قدرت حافظه‌ات رو نشون بدی!</p>
+            <div class="memory-grid" id="memory-grid"></div>
+            <div class="memory-controls">
+                <span id="memory-moves">حرکات: 0</span>
+                <button class="login-btn" onclick="initMemoryGame()" style="width:auto; padding:10px 30px;">شروع دوباره</button>
+            </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-date" data-key="timeline_d2">خاطره مشترک بعدی ما</div>
-          <div class="timeline-content" id="txt-timeline-c2" data-key="timeline_c2">محل قرار دادن خاطرات قشنگی که در آینده قراره کلمه به کلمه با هم بسازیمش و اینجا بنویسیم... 🔐</div>
+
+        <div class="web-section reveal" id="compliment-sec">
+            <div class="section-title">بگو دوستم داری <span class="title-emoji">🌸</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">یه جمله عاشقانه از قلب من... فقط کلیک کن!</p>
+            <div class="compliment-box">
+                <p class="compliment-text" id="compliment-text">💬</p>
+                <button class="login-btn" onclick="generateCompliment()" style="width:auto; padding:12px 30px; background: linear-gradient(90deg, #d63384, #ff1a40);">یه چیز قشنگ بگو</button>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Dates -->
-    <div class="web-section reveal" id="dates-sec">
-      <div class="section-title" data-key="dates_title">تاریخ‌های متولد شدنِ عشق</div>
-      <div class="dates-grid">
-        <div class="date-card">
-          <h3>Mobin</h3>
-          <div class="bday" data-key="mobin_bday">۲۵ اسفند ۱۳۸۷</div>
-          <p data-key="mobin_bday_desc">روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم و تموم زندگیمو به پاش بریزم.</p>
+        <div class="web-section reveal" id="tarot-sec">
+            <div class="section-title">کارت‌های سرنوشت ما <span class="title-emoji">🃏</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها را لمس کن تا رازهای قلبم را بخوانی...</p>
+            <div class="tarot-grid">
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design">I</div></div>
+                        <div class="tarot-back"><p>چون وقتی نگاهم می‌کنی، تمام تاریکی‌های دنیای من روشن میشه. تو خورشیدِ این ومپایری. 🩸</p></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design" style="color:#ff1a40; text-shadow: 0 0 10px #ff1a40;">II</div></div>
+                        <div class="tarot-back"><p>چون هیچکس تو دنیا به اندازه تو، دیوونه‌بازی‌ها و رویاهای بزرگ منو نمی‌فهمه. 🖤</p></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design">III</div></div>
+                        <div class="tarot-back"><p>چون تو نه تنها عشق منی، بلکه بهترین رفیق و پناهگاه امنِ منی نیایشم. 🫂</p></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design">IV</div></div>
+                        <div class="tarot-back"><p>هر لحظه بدون تو، نفس کشیدنم سخت‌تر میشه. تو دلیل اصلی تپش‌های قلبمی. 💓</p></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design">V</div></div>
+                        <div class="tarot-back"><p>دوست دارم پیر بشیم و بازم مثل روزای اول، عاشقونه به چشمای هم نگاه کنیم. 👴🏻👵🏻</p></div>
+                    </div>
+                </div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design">VI</div></div>
+                        <div class="tarot-back"><p>تو رویایی هستی که نمی‌خوام هرگز ازش بیدار شم. شب‌های من با تو صبح میشن. 🌙☀️</p></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="date-card">
-          <h3>Niyayesh</h3>
-          <div class="bday" data-key="niyayesh_bday">۱۵ شهریور ۱۳۸۹</div>
-          <p data-key="niyayesh_bday_desc">باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد تا بشه دلیل نفس کشیدنم.</p>
+
+        <div class="web-section reveal" id="love-counter-sec">
+            <div class="section-title">شمارشگر عشق <span class="title-emoji">💗</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">نمیشه با عدد گفت چقدر دوست دارم...</p>
+            <div class="love-counter-display">
+                <div class="eternal-love-text">به تعداد نفس‌هایی که کشیدم، دوست دارم 💖</div>
+                <div class="eternal-love-sub">هر لحظه عشق ما بی‌نهایته...</div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Mobin Interests -->
-    <div class="web-section reveal" id="mobin-sec">
-      <div class="section-title" data-key="mobin_sec_title">دنیای مبین و علایقش</div>
-      <div class="interests-grid">
-        <div class="premium-card">
-          <div class="badge">MY DREAM CAR</div>
-          <h4 data-key="mobin_car_title">Porsche Boxster</h4>
-          <p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین و قشنگ‌ترین هدفم تو زندگی اینه که یه روز با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! تو صندلی کناریِ منی، برای همیشه.</p>
+        <div class="web-section reveal" id="countdown-sec">
+            <div class="section-title">زمان تا جاودانگی <span class="title-emoji">⏳</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">شمارش معکوس تا تولد فرشته‌ی روی زمین (۱۵ شهریور)</p>
+            <div class="countdown-container">
+                <div class="time-box"><span id="cd-days">00</span><div class="time-label">روز</div></div>
+                <div class="time-box"><span id="cd-hours">00</span><div class="time-label">ساعت</div></div>
+                <div class="time-box"><span id="cd-mins">00</span><div class="time-label">دقیقه</div></div>
+                <div class="time-box"><span id="cd-secs">00</span><div class="time-label">ثانیه</div></div>
+            </div>
         </div>
-        <div class="premium-card">
-          <div class="badge">FAVORITE COLORS</div>
-          <h4 data-key="mobin_color_title">رنگ‌های مورد علاقه</h4>
-          <p data-key="mobin_color_desc">ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
-          <div class="color-preview">
-            <div class="color-circle" style="background: #000000;"></div>
-            <div class="color-circle" style="background: #0a192f;"></div>
-          </div>
+
+        <div class="web-section reveal" id="story-sec">
+            <div class="section-title" data-key="story_title">داستان عشق ما</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date" data-key="timeline_d1">روزی که قلبت مال من شد</div>
+                    <div class="timeline-content" id="txt-timeline-c1" data-key="timeline_c1">اینجا آغاز فصل جدید زندگی من بود. روزی که نگاهت مسیر سرنوشتم رو عوض کرد و شدی تمام دنیای من...</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date" data-key="timeline_d2">خاطره مشترک بعدی ما</div>
+                    <div class="timeline-content" id="txt-timeline-c2" data-key="timeline_c2">محل قرار دادن خاطرات قشنگی که در آینده قراره کلمه به کلمه با هم بسازیمش و اینجا بنویسیم... 🔐</div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Niyayesh Interests -->
-    <div class="web-section reveal" id="niyayesh-sec">
-      <div class="section-title" data-key="niyayesh_sec_title">دنیای نیایش و علایقش</div>
-      <div class="interests-grid">
-        <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
-          <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
-          <h4 data-key="niyayesh_series_title">The Vampire Diaries</h4>
-          <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
+        <div class="web-section reveal" id="dates-sec">
+            <div class="section-title" data-key="dates_title">تاریخ‌های متولد شدنِ عشق</div>
+            <div class="dates-grid">
+                <div class="date-card">
+                    <h3>Mobin</h3>
+                    <div class="bday" data-key="mobin_bday">۲۵ اسفند ۱۳۸۷</div>
+                    <p data-key="mobin_bday_desc">روزی که به این دنیا اومدم تا سال‌ها بعد، فرشته‌ای مثل تو رو پیدا کنم و تموم زندگیمو به پاش بریزم.</p>
+                </div>
+                <div class="date-card">
+                    <h3>Niyayesh</h3>
+                    <div class="bday" data-key="niyayesh_bday">۱۵ شهریور ۱۳۸۹</div>
+                    <p data-key="niyayesh_bday_desc">باشکوه‌ترین روز تقویم برای من. روزی که خدا زیباترین هدیه‌اش رو به زمین فرستاد تا بشه دلیل نفس کشیدنم.</p>
+                </div>
+            </div>
         </div>
-        <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
-          <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
-          <h4 data-key="niyayesh_only_title">بهترین دختر این دنیا</h4>
-          <p data-key="niyayesh_only_desc">فقط می‌خوام اینو بدونی که بین کل آدمای این سیاره، تو تک‌دونه‌ترین و قشنگ‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار دنیای منی نیایشم.</p>
+
+        <div class="web-section reveal" id="mobin-sec">
+            <div class="section-title" data-key="mobin_sec_title">دنیای مبین و علایقش</div>
+            <div class="interests-grid">
+                <div class="premium-card">
+                    <div class="badge">MY DREAM CAR</div>
+                    <h4 data-key="mobin_car_title">Porsche Boxster</h4>
+                    <p data-key="mobin_car_desc">عاشق شتاب، هیجان و پورشه باکسترم؛ اما بزرگترین و قشنگ‌ترین هدفم تو زندگی اینه که یه روز با همین ماشین بیام دنبالت و با هم جاده‌ها رو متر کنیم! تو صندلی کناریِ منی، برای همیشه.</p>
+                </div>
+                <div class="premium-card">
+                    <div class="badge">FAVORITE COLORS</div>
+                    <h4 data-key="mobin_color_title">رنگ‌های مورد علاقه</h4>
+                    <p data-key="mobin_color_desc">ترکیب مشکی و آبی تیره؛ رنگ‌هایی که بهم حس عمق، قدرت و اصالت میدن. دقیقاً مثل اتمسفر سنگین و باکلاسی که دوست دارم همیشه دور و برمون باشه.</p>
+                    <div class="color-preview">
+                        <div class="color-circle" style="background: #000000;"></div>
+                        <div class="color-circle" style="background: #0a192f;"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- Gallery -->
-    <div class="web-section reveal" id="gallery-sec">
-      <div class="section-title" data-key="gallery_sec_title">آلبوم خاطرات تصویری</div>
-      <div class="album-grid">
-        <div class="album-item"><img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="خاطره اول" loading="lazy"><div class="album-overlay"><span>خاطره اول ❤️</span></div></div>
-        <div class="album-item"><img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="خاطره دوم" loading="lazy"><div class="album-overlay"><span>خاطره دوم 🔐</span></div></div>
-        <div class="album-item"><div style="color: rgba(255,26,64,0.25); font-size: 2.5rem; font-weight: 300;">+</div><div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div></div>
-      </div>
-    </div>
+        <div class="web-section reveal" id="niyayesh-sec">
+            <div class="section-title" data-key="niyayesh_sec_title">دنیای نیایش و علایقش</div>
+            <div class="interests-grid">
+                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.25);">
+                    <div class="badge" style="background: #ff1a40;">FAVORITE SERIES</div>
+                    <h4 data-key="niyayesh_series_title">The Vampire Diaries</h4>
+                    <p data-key="niyayesh_series_desc">عاشق اتمسفر دارک، فانتزی و پر از احساسِ ومپایر دایریز... دنیایی که توش وفاداری و عشق‌های ابدی حرف اول رو می‌زنن؛ درست مثل عشقی که من درون قلبم برای تو ساختم.</p>
+                </div>
+                <div class="premium-card" style="border-color: rgba(255, 26, 64, 0.2);">
+                    <div class="badge" style="background: rgba(255,255,255,0.15); color: #fff;">THE ONLY ONE</div>
+                    <h4 data-key="niyayesh_only_title">بهترین دختر این دنیا</h4>
+                    <p data-key="niyayesh_only_desc">فقط می‌خوام اینو بدونی که بین کل آدمای این سیاره، تو تک‌دونه‌ترین و قشنگ‌ترین خلقت خدایی. هیچ‌کس ظرافت قلب تو، مهربونی چشمات و حس نابی که بهم میدی رو نداره. تو شاهکار دنیای منی نیایشم.</p>
+                </div>
+            </div>
+        </div>
 
-    <!-- Feed -->
-    <div class="web-section reveal" id="feed-sec">
-      <div class="section-title" data-key="feed_sec_title">دفترچه خاطرات ابدی ما</div>
-      <div class="memory-feed">
-        <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()"><span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید (لمس کن)</div>
-        <input type="file" id="file-input" style="display:none" accept="image/*,video/*" onchange="handleFileUpload(event)">
-        <div id="posts-area"></div>
-      </div>
-    </div>
+        <div class="web-section reveal" id="gallery-sec">
+            <div class="section-title" data-key="gallery_sec_title">آلبوم خاطرات تصویری</div>
+            <div class="album-grid">
+                <div class="album-item">
+                    <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="خاطره اول" loading="lazy">
+                    <div class="album-overlay"><span>خاطره اول ❤️</span></div>
+                </div>
+                <div class="album-item">
+                    <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="خاطره دوم" loading="lazy">
+                    <div class="album-overlay"><span>خاطره دوم 🔐</span></div>
+                </div>
+                <div class="album-item">
+                    <div style="color: rgba(255,26,64,0.25); font-size: 2.5rem; font-weight: 300;">+</div>
+                    <div class="album-overlay"><span>جای عکس بعدی ما... ✨</span></div>
+                </div>
+            </div>
+        </div>
 
-    <!-- TVD Cinema -->
-    <div class="web-section reveal" id="tvd-sec">
-      <div class="section-title" data-key="tvd_sec_title">The Vampire Diaries Cinema</div>
-      <p style="text-align: center; color: #aaa; margin-bottom: 25px;" data-key="tvd_sec_desc">مخصوص تو که عاشق این دنیایی... 🩸🦇</p>
-      <div class="cinema-grid">
-        <div class="video-wrapper"><iframe id="tvd-iframe" src="https://www.youtube.com/embed/aEzaN0eI6kU" allowfullscreen loading="lazy"></iframe></div>
-      </div>
-    </div>
+        <div class="web-section reveal" id="feed-sec">
+            <div class="section-title" data-key="feed_sec_title">دفترچه خاطرات ابدی ما</div>
+            <div class="memory-feed">
+                <div id="upload-box" class="upload-box" style="display: none;" onclick="triggerUpload()">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span>
+                    ثبت یک خاطره جدید (لمس کن)
+                </div>
+                <input type="file" id="file-input" style="display:none" accept="image/*,video/*" onchange="handleFileUpload(event)">
+                <div id="posts-area"></div>
+            </div>
+        </div>
 
-    <!-- Ending Section (hidden until scroll end) -->
-    <div class="web-section reveal" id="ending-sec" style="display: none; text-align: center; padding: 80px 20px; background: transparent; border: none; box-shadow: none;">
-      <div class="section-title" style="font-size: 3rem;">تا ابد در کنار هم...</div>
-      <p style="color:#ffd700; font-size:1.5rem; max-width: 600px; margin: 0 auto;">این دنیا فقط برای تو ساخته شد، نیایش. هر ستاره، هر آجر قلعه، هر نت موسیقی، همه فریاد عشق من به توئه. 🖤</p>
-      <div class="sunrise-effect"></div>
-    </div>
+        <div class="web-section reveal" id="tvd-sec">
+            <div class="section-title" data-key="tvd_sec_title">The Vampire Diaries Cinema</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;" data-key="tvd_sec_desc">مخصوص تو که عاشق این دنیایی... 🩸🦇</p>
+            <div class="cinema-grid">
+                <div class="video-wrapper">
+                    <iframe id="tvd-iframe" src="https://www.youtube.com/embed/aEzaN0eI6kU" allowfullscreen loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
 
-    <div class="creator">Created by Mobin with Endless Love</div>
-  </div>
+        <div class="creator">Created by Mobin with Endless Love</div>
+    </div>
 </div>
 
-<!-- ========== ALL SCRIPTS ========== -->
+<script src="game.js"></script>
+
 <script>
-// ---------- GLOBAL ----------
 let isAdmin = false;
 let loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
 
-// ---------- FIREBASE ----------
+// --- Lovebox ---
+const tracks = [
+    { title: "Sweater Weather", id: "2QjOHCTQ1Jl3zawyYOpxh6" },
+    { title: "آهنگ دوم", id: "1AdIEZmXtXbxyyA5wK8Ihj" },
+    { title: "آهنگ سوم", id: "18XVXZ4Yk27u10Zwl9IUUz" }
+];
+let currentTrack = 0;
+function changeTrack(index) {
+    if (index === currentTrack) return;
+    currentTrack = index;
+    const iframe = document.getElementById('music-iframe');
+    const nowPlaying = document.getElementById('now-playing');
+    iframe.src = `https://open.spotify.com/embed/track/${tracks[index].id}?utm_source=generator&theme=0`;
+    nowPlaying.innerText = `🎧 ${tracks[index].title}`;
+    document.querySelectorAll('.jukebox-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+    });
+
+    const heart = document.createElement('span');
+    heart.className = 'mini-heart';
+    heart.textContent = '💖';
+    heart.style.left = (Math.random() * 80 + 10) + '%';
+    heart.style.top = (Math.random() * 40 + 30) + '%';
+    document.getElementById('lovebox-sec').appendChild(heart);
+    setTimeout(() => heart.remove(), 1500);
+}
+
+// --- قلعه پیکسلی ---
+const castleCanvas = document.getElementById('castleCanvas');
+const castleCtx = castleCanvas.getContext('2d');
+let castleLit = false;
+
+const castleGrid = [
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000100000000000000000100000000",
+    "0000000000000100000000000000000100000000",
+    "0000000033330100000000000000000133330000",
+    "0000000000330100000000000000000133000000",
+    "0000000000000100000000000000000100000000",
+    "0000001111111111110000001111111111110000",
+    "0000001000000000010000001000000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001004000000010000001004000000010000",
+    "0000001004000000010000001004000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001004000000010000001004000000010000",
+    "0000001004000000010000001004000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001000000000010000001000000000010000",
+    "0000001111111111110000001111111111110000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "0000000000000000000000000000000000000000",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888",
+    "8888888888888888888888888888888888888888"
+];
+
+const colorMap = {
+    0: '#0a0a14', // sky
+    1: '#2a2a2a', // dark stone
+    2: '#4a4a4a', // light stone (unused for simplicity)
+    3: '#ff1a40', // red flag
+    4: '#111111', // window unlit
+    5: '#ffcc00', // window lit
+    6: '#1a1a1a', // gate
+    7: '#ff3366', // heart
+    8: '#1a1208'  // ground
+};
+
+function drawCastle(lit) {
+    const canvas = castleCanvas;
+    const ctx = castleCtx;
+    const w = canvas.width;
+    const h = canvas.height;
+    const pw = w / 40; // pixel width
+    const ph = h / 30;
+    ctx.clearRect(0, 0, w, h);
+    
+    // draw background
+    ctx.fillStyle = '#0a0a14';
+    ctx.fillRect(0, 0, w, h);
+    
+    for (let y = 0; y < 30; y++) {
+        const row = castleGrid[y];
+        for (let x = 0; x < 40; x++) {
+            let colorIndex = parseInt(row[x]);
+            if (colorIndex === 4 && lit) colorIndex = 5; // windows lit
+            if (colorIndex === 0) continue;
+            ctx.fillStyle = colorMap[colorIndex];
+            ctx.fillRect(x * pw, y * ph, pw, ph);
+        }
+    }
+    
+    // Gate detail
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(17 * pw, 18 * ph, 6 * pw, 6 * ph);
+    ctx.fillStyle = '#2a2a2a';
+    ctx.fillRect(17.5 * pw, 18.5 * ph, 5 * pw, 5 * ph);
+    
+    // Heart on flag
+    ctx.fillStyle = '#ff3366';
+    ctx.font = `${pw * 3}px serif`;
+    ctx.fillText('❤️', 6.5 * pw, 3 * ph);
+    ctx.fillText('❤️', 32.5 * pw, 3 * ph);
+}
+
+function resizeCastleCanvas() {
+    const container = document.querySelector('.castle-container');
+    if (!container) return;
+    const w = container.clientWidth;
+    castleCanvas.width = w;
+    castleCanvas.height = w * 0.75; // 4:3 ratio
+    drawCastle(castleLit);
+}
+
+window.addEventListener('resize', resizeCastleCanvas);
+castleCanvas.addEventListener('click', () => {
+    castleLit = !castleLit;
+    drawCastle(castleLit);
+    
+    // spawn hearts
+    const heartContainer = document.getElementById('castle-sec');
+    for (let i = 0; i < 12; i++) {
+        const heart = document.createElement('span');
+        heart.className = 'mini-heart';
+        heart.textContent = ['💕', '💗', '✨', '❤️'][Math.floor(Math.random() * 4)];
+        heart.style.left = (Math.random() * 80 + 10) + '%';
+        heart.style.top = (Math.random() * 60 + 20) + '%';
+        heart.style.animationDelay = Math.random() * 0.5 + 's';
+        heartContainer.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+    }
+});
+
+function initCastle() {
+    resizeCastleCanvas();
+}
+
+// --- Compliment Generator ---
+const compliments = [
+    "تو برام مث یه آهنگ قشنگ می‌مونی که هرگز از گوش دادنش خسته نمیشم 🎶",
+    "وقتی هستی، دنیا حتی بدون رنگ هم قشنگه... 🌈",
+    "هر بار نگات می‌کنم، قلبم یه ضربان جا میندازه 💓",
+    "دوست دارم اندازه‌ی تموم ستاره‌های کهکشان، شاید هم بیشتر 🌌",
+    "تو تنها کسی هستی که می‌تونه با یه لبخند، روزمو بسازه 😊",
+    "عطر تنت قشنگ‌ترین ادکلن دنیاس برام 🌸",
+    "باهات حرف زدن یه جور آرامش خاص داره که هیچ جا پیدا نمیشه 🕊️",
+    "عشق تو، گرم‌ترین آتیشه تو سردترین زمستون ❄️🔥",
+    "می‌دونی چرا چشمات اینقدر قشنگه؟ چون قلب منو توش می‌بینم 👀💘",
+    "امروز هم مثل هر روز، اولین فکر و آخرین فکرم تویی ☀️🌙"
+];
+function generateCompliment() {
+    const el = document.getElementById('compliment-text');
+    const randomIndex = Math.floor(Math.random() * compliments.length);
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+        el.innerText = compliments[randomIndex];
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+    }, 300);
+}
+
+function preserveEmojiColor() {
+    const targets = document.querySelectorAll('.title-main, .section-title');
+    const emojiRegex = /([🩸🃏⏳🥹🫂💕🎮🌀🔒❤️⚔️⏰✨📸🦇🧠💗🌸🎵🌧️💒])/g;
+    targets.forEach(el => {
+        if (!el || el.dataset.emojiFixed === "1") return;
+        const original = el.innerHTML;
+        if (!original || original.indexOf('<span class="emoji-fix">') !== -1) return;
+        el.innerHTML = original.replace(emojiRegex, '<span class="emoji-fix">$1</span>');
+        el.dataset.emojiFixed = "1";
+    });
+}
+
+function enter(){
+    let p = document.getElementById("pass").value;
+    if(p === "mobinloveniyayesh" || p === "adminwiriper"){
+        if(p === "adminwiriper") {
+            isAdmin = true;
+            document.getElementById("upload-box").style.display = "block";
+            document.getElementById("admin-save-bar").style.display = "flex";
+        }
+        document.getElementById("login-zone").style.display = "none";
+        playRomanticSound();
+        const intro = document.getElementById("netflix-intro");
+        intro.style.display = "flex";
+        setTimeout(() => {
+            intro.style.display = "none";
+            const mainContent = document.getElementById("main");
+            mainContent.style.display = "block";
+            setTimeout(() => {
+                mainContent.style.opacity = "1";
+                preserveEmojiColor();
+                if(isAdmin) { enableEditableMode(); }
+                revealOnScroll();
+            }, 100);
+            createCrimsonParticles();
+            createSoftHearts();
+            startRosePetals();
+            startLanterns();
+            typeWriter(loveLetter, 0, "typed-text");
+            loadFeed();
+            initMemoryGame();
+            initCastle();
+        }, 3800);
+    } else {
+        alert("رمز ورود اشتباه است... دوباره تلاش کن عشق من");
+    }
+}
+
+function typeWriter(text, i, elementId) {
+    if(isAdmin) {
+        document.getElementById(elementId).innerHTML = text.replace(/\n/g, "<br>");
+        finishTypewriter();
+        return;
+    }
+    if (i < text.length) {
+        let char = text.charAt(i);
+        if(char === "\n") {
+            document.getElementById(elementId).innerHTML += "<br>";
+        } else {
+            document.getElementById(elementId).innerHTML += char;
+        }
+        setTimeout(() => { typeWriter(text, i + 1, elementId); }, char === "." ? 400 : 55);
+    } else {
+        finishTypewriter();
+    }
+}
+
+function finishTypewriter() {
+    setTimeout(() => {
+        document.getElementById("navbar").classList.add("show-nav");
+        preserveEmojiColor();
+    }, 600);
+}
+
+function openSecret() {
+    const modal = document.getElementById("secret-modal");
+    modal.style.display = "flex";
+    setTimeout(() => { modal.style.opacity = "1"; }, 10);
+}
+function closeSecret() {
+    const modal = document.getElementById("secret-modal");
+    modal.style.opacity = "0";
+    setTimeout(() => {
+        modal.style.display = "none";
+        document.getElementById("secret-pass").value = "";
+        document.getElementById("secret-content").style.display = "none";
+    }, 600);
+}
+function checkSecret() {
+    let p = document.getElementById("secret-pass").value;
+    if(p === "niyayeshlovemobin") {
+        const content = document.getElementById("secret-content");
+        content.style.display = "block";
+        content.style.animation = "fadeIn 1.5s forwards";
+    } else {
+        alert("رمز صندوقچه اشتباه است... رازها محافظت شده هستند!");
+    }
+}
+
+function startLanterns() {
+    const lanternContainer = document.createElement('div');
+    lanternContainer.className = 'lantern-container';
+    document.body.appendChild(lanternContainer);
+    function createLantern() {
+        const lantern = document.createElement('div');
+        lantern.className = 'lantern';
+        lantern.style.left = Math.random() * 100 + 'vw';
+        lantern.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        lantern.style.animationDelay = Math.random() * 5 + 's';
+        lantern.innerHTML = '🏮';
+        lanternContainer.appendChild(lantern);
+        setTimeout(() => lantern.remove(), 25000);
+    }
+    for (let i = 0; i < 10; i++) {
+        setTimeout(() => createLantern(), i * 700);
+    }
+    setInterval(createLantern, 8000);
+}
+
+function startRosePetals() {
+    const petalContainer = document.createElement('div');
+    petalContainer.className = 'rose-petals-container';
+    document.body.appendChild(petalContainer);
+    function createPetal() {
+        const petal = document.createElement('div');
+        petal.className = 'rose-petal';
+        petal.style.left = Math.random() * 100 + 'vw';
+        petal.style.animationDuration = (Math.random() * 5 + 8) + 's';
+        petal.style.opacity = Math.random() * 0.6 + 0.2;
+        petal.style.transform = `scale(${Math.random() * 0.6 + 0.6}) rotate(${Math.random() * 360}deg)`;
+        petalContainer.appendChild(petal);
+        setTimeout(() => petal.remove(), 15000);
+    }
+    for(let i = 0; i < 15; i++) {
+        setTimeout(() => createPetal(), i * 400);
+    }
+    setInterval(createPetal, 1500);
+}
+
+const memoryEmojis = ['💖', '💕', '💗', '💘', '💝', '💟', '❣️', '💌'];
+let memoryCards = [];
+let flippedCards = [];
+let matchedPairs = 0;
+let memoryMoves = 0;
+let memoryLocked = false;
+
+function initMemoryGame() {
+    const grid = document.getElementById('memory-grid');
+    const movesEl = document.getElementById('memory-moves');
+    memoryCards = [...memoryEmojis, ...memoryEmojis].sort(() => Math.random() - 0.5);
+    flippedCards = [];
+    matchedPairs = 0;
+    memoryMoves = 0;
+    memoryLocked = false;
+    movesEl.innerText = 'حرکات: 0';
+    grid.innerHTML = '';
+    memoryCards.forEach((emoji, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.index = index;
+        card.dataset.emoji = emoji;
+        card.onclick = () => flipMemoryCard(card);
+        card.innerHTML = '<span class="memory-card-back">?</span>';
+        grid.appendChild(card);
+    });
+}
+
+function flipMemoryCard(card) {
+    if (memoryLocked) return;
+    if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+    if (flippedCards.length === 2) return;
+    card.classList.add('flipped');
+    card.innerHTML = `<span class="memory-card-emoji">${card.dataset.emoji}</span>`;
+    flippedCards.push(card);
+    if (flippedCards.length === 2) {
+        memoryMoves++;
+        document.getElementById('memory-moves').innerText = `حرکات: ${memoryMoves}`;
+        memoryLocked = true;
+        const [card1, card2] = flippedCards;
+        if (card1.dataset.emoji === card2.dataset.emoji) {
+            card1.classList.add('matched');
+            card2.classList.add('matched');
+            matchedPairs++;
+            flippedCards = [];
+            memoryLocked = false;
+            if (matchedPairs === memoryEmojis.length) {
+                setTimeout(() => alert('🎉 آفرین! تو برنده شدی! 🧠❤️'), 500);
+            }
+        } else {
+            setTimeout(() => {
+                card1.classList.remove('flipped');
+                card1.innerHTML = '<span class="memory-card-back">?</span>';
+                card2.classList.remove('flipped');
+                card2.innerHTML = '<span class="memory-card-back">?</span>';
+                flippedCards = [];
+                memoryLocked = false;
+            }, 800);
+        }
+    }
+}
+
+function createCrimsonParticles() {
+    const colors = ['rgba(255, 26, 64, 0.3)', 'rgba(139, 0, 0, 0.25)', 'rgba(255, 255, 255, 0.15)'];
+    for(let i = 0; i < 40; i++) {
+        let p = document.createElement("div");
+        p.className = "particle";
+        let size = Math.random() * 5 + 3;
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.boxShadow = `0 0 ${Math.random() * 15 + 10}px ${colors[Math.floor(Math.random() * colors.length)]}`;
+        p.style.background = '#ff1a40';
+        p.style.animationDuration = (Math.random() * 9 + 5) + "s";
+        p.style.animationDelay = Math.random() * 3 + "s";
+        document.body.appendChild(p);
+    }
+}
+
+function createSoftHearts() {
+    for (let i = 0; i < 10; i++) {
+        const heart = document.createElement("div");
+        heart.className = "soft-heart";
+        heart.textContent = ["💖", "✨", "🫶", "💕"][Math.floor(Math.random() * 4)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.bottom = (-20 - Math.random() * 60) + "px";
+        heart.style.animationDuration = (10 + Math.random() * 8) + "s";
+        heart.style.animationDelay = (Math.random() * 2) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 20000);
+    }
+}
+
+function playRomanticSound() {
+    try {
+        let ctx = new (window.AudioContext || window.webkitAudioContext)();
+        let t = ctx.currentTime;
+        function playTone(freq, type, startTime, duration, vol) {
+            let osc = ctx.createOscillator();
+            let gain = ctx.createGain();
+            osc.type = type;
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0, startTime);
+            gain.gain.linearRampToValueAtTime(vol, startTime + 0.4);
+            gain.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(startTime);
+            osc.stop(startTime + duration);
+        }
+        playTone(261.63, 'sine', t, 3.2, 0.4);
+        playTone(311.13, 'sine', t, 3.2, 0.4);
+        playTone(392.00, 'sine', t, 3.2, 0.4);
+        playTone(466.16, 'triangle', t + 0.3, 3.5, 0.12);
+    } catch(e) {}
+}
+
+function revealOnScroll() {
+    const reveals = document.querySelectorAll('.reveal');
+    for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        if (elementTop < windowHeight - 80) {
+            reveals[i].classList.add('active');
+        }
+    }
+    document.querySelectorAll('.web-section[id]').forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top < window.innerHeight / 2 && top > -sec.offsetHeight / 2) {
+            document.querySelectorAll('.navbar a').forEach(a => a.classList.remove('active'));
+            const target = document.querySelector(`.navbar a[href="#${sec.id}"]`);
+            if (target) target.classList.add('active');
+        }
+    });
+}
+window.addEventListener('scroll', revealOnScroll);
+
+const targetDate = new Date("Sep 15, 2026 00:00:00").getTime();
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    if(distance < 0) return;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("cd-days").innerText = days < 10 ? "0" + days : days;
+    document.getElementById("cd-hours").innerText = hours < 10 ? "0" + hours : hours;
+    document.getElementById("cd-mins").innerText = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("cd-secs").innerText = seconds < 10 ? "0" + seconds : seconds;
+}
+setInterval(updateCountdown, 1000);
+
+function enableEditableMode() {
+    document.querySelectorAll('[data-key]').forEach(el => {
+        el.setAttribute('contenteditable', 'true');
+    });
+}
+
+let vortexAnimation;
+function openPortal() {
+    const portal = document.getElementById("vampire-portal");
+    const vCanvas = document.getElementById("vortexCanvas");
+    const dim = document.getElementById("portal-dim");
+    const q = document.getElementById("pt-q");
+    const st = document.getElementById("pt-st");
+    const btn = document.getElementById("pt-btn");
+    portal.style.display = "flex";
+    startVortexCanvas();
+    setTimeout(() => { vCanvas.style.opacity = "1"; }, 100);
+    setTimeout(() => {
+        dim.style.opacity = "1";
+        q.style.opacity = "1";
+        q.style.transform = "translateY(0) scale(1)";
+        st.style.opacity = "1";
+        st.style.transform = "translateY(0)";
+        btn.style.opacity = "1";
+    }, 2000);
+}
+function closePortal() {
+    const portal = document.getElementById("vampire-portal");
+    const dim = document.getElementById("portal-dim");
+    const vCanvas = document.getElementById("vortexCanvas");
+    dim.style.opacity = "0";
+    vCanvas.style.opacity = "0";
+    setTimeout(() => {
+        portal.style.display = "none";
+        cancelAnimationFrame(vortexAnimation);
+    }, 1500);
+}
+function startVortexCanvas() {
+    const canvas = document.getElementById('vortexCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    let particles = [];
+    for(let i=0; i<300; i++) {
+        particles.push({
+            angle: Math.random() * Math.PI * 2,
+            radius: Math.random() * Math.max(canvas.width, canvas.height),
+            speed: Math.random() * 0.03 + 0.01,
+            size: Math.random() * 3 + 1,
+            color: Math.random() > 0.5 ? '#ff1a40' : '#4a0000'
+        });
+    }
+    let centerX = canvas.width / 2;
+    let centerY = canvas.height / 2;
+    function drawVortex() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.angle += p.speed;
+            p.radius -= p.radius * 0.015;
+            if(p.radius < 5) p.radius = Math.max(canvas.width, canvas.height);
+            let x = centerX + Math.cos(p.angle) * p.radius;
+            let y = centerY + Math.sin(p.angle) * p.radius;
+            ctx.beginPath();
+            ctx.arc(x, y, p.size, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = p.color;
+            ctx.fill();
+        });
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 50, 0, Math.PI * 2);
+        ctx.fillStyle = "#000";
+        ctx.shadowBlur = 100;
+        ctx.shadowColor = "#ff1a40";
+        ctx.fill();
+        vortexAnimation = requestAnimationFrame(drawVortex);
+    }
+    drawVortex();
+}
+
 const firebaseConfig = {
     apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
     authDomain: "niyayesh-universe.firebaseapp.com",
@@ -349,214 +906,98 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
 
-// ---------- TEKKEN GAME (embedded game.js) ----------
-document.addEventListener("DOMContentLoaded", () => {
-    const canvas = document.getElementById("tekkenCanvas");
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    let isPlaying = false, gameLoopId = null;
-    canvas.width = 800; canvas.height = 380;
-    const player = { x:80, y:230, width:30, height:90, speed:6, color:'#ff1a40', attacking:false, attackTimer:0, health:100 };
-    const niyayesh = { x:720, y:230, width:30, height:90, color:'#ffb6c1' };
-    let enemies = [], bloodParticles = [], powerUps = [], score = 0, targetScore = 15, gameWon = false, gameTimer = 99, timerInterval = null;
-    let keys = { ArrowLeft:false, ArrowRight:false, Space:false };
-    let audioCtx = null;
-    function initAudio() { if(!audioCtx) try { audioCtx = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} }
-    function playHitSound() { if(!audioCtx) return; const t=audioCtx.currentTime; const o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type='triangle'; o.frequency.setValueAtTime(800,t); o.frequency.exponentialRampToValueAtTime(200,t+0.12); g.gain.setValueAtTime(0.3,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.12); o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t+0.15); }
-    function playHealSound() { if(!audioCtx) return; const t=audioCtx.currentTime; const o=audioCtx.createOscillator(),g=audioCtx.createGain(); o.type='sine'; o.frequency.setValueAtTime(400,t); o.frequency.linearRampToValueAtTime(600,t+0.1); g.gain.setValueAtTime(0.2,t); g.gain.exponentialRampToValueAtTime(0.001,t+0.2); o.connect(g); g.connect(audioCtx.destination); o.start(t); o.stop(t+0.25); }
-    function resizeCanvas() { const cont=document.getElementById("arcade-screen"); if(!cont) return; const w=cont.clientWidth||800; canvas.width=w; canvas.height=Math.max(260, Math.min(380, Math.round(w*0.475))); player.y=canvas.height-150; niyayesh.y=canvas.height-150; }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    window.addEventListener('keydown', e => { if(e.code==='ArrowLeft') keys.ArrowLeft=true; if(e.code==='ArrowRight') keys.ArrowRight=true; if(e.code==='Space'){ keys.Space=true; triggerArcadeAttack(); e.preventDefault(); } });
-    window.addEventListener('keyup', e => { if(e.code==='ArrowLeft') keys.ArrowLeft=false; if(e.code==='ArrowRight') keys.ArrowRight=false; if(e.code==='Space') keys.Space=false; });
-    const btnLeft=document.getElementById('btn-left'), btnRight=document.getElementById('btn-right'), btnAttack=document.getElementById('btn-attack');
-    if(btnLeft){ btnLeft.addEventListener('touchstart',e=>{e.preventDefault(); keys.ArrowLeft=true},{passive:false}); btnLeft.addEventListener('touchend',e=>{e.preventDefault(); keys.ArrowLeft=false},{passive:false}); btnLeft.addEventListener('mousedown',()=>keys.ArrowLeft=true); btnLeft.addEventListener('mouseup',()=>keys.ArrowLeft=false); btnLeft.addEventListener('mouseleave',()=>keys.ArrowLeft=false); }
-    if(btnRight){ btnRight.addEventListener('touchstart',e=>{e.preventDefault(); keys.ArrowRight=true},{passive:false}); btnRight.addEventListener('touchend',e=>{e.preventDefault(); keys.ArrowRight=false},{passive:false}); btnRight.addEventListener('mousedown',()=>keys.ArrowRight=true); btnRight.addEventListener('mouseup',()=>keys.ArrowRight=false); btnRight.addEventListener('mouseleave',()=>keys.ArrowRight=false); }
-    if(btnAttack){ btnAttack.addEventListener('touchstart',e=>{e.preventDefault(); triggerArcadeAttack()},{passive:false}); btnAttack.addEventListener('mousedown',()=>triggerArcadeAttack()); }
-
-    function createBloodSplatter(x,y) { for(let i=0;i<15;i++) bloodParticles.push({x,y:y+20,vx:(Math.random()-0.5)*10,vy:(Math.random()-1)*8,life:1,size:Math.random()*4+2}); }
-    function spawnPowerUp() { if(!isPlaying||gameWon) return; if(Math.random()<0.3) powerUps.push({x:Math.random()*(canvas.width-100)+50, y:canvas.height-180, radius:12, life:400}); setTimeout(spawnPowerUp,6000); }
-    function updateScoreboard() { const sd=document.getElementById('score-display'); if(sd) sd.innerText = `دشمنان نابود شده: ${score} / ${targetScore}`; const p2=document.getElementById('p2-health'); if(p2) p2.style.width = Math.max(0,100-(score*6.7))+'%'; }
-    function triggerArcadeAttack() { if(!isPlaying||gameWon||player.attacking) return; initAudio(); playHitSound(); player.attacking=true; player.attackTimer=12; const hit={ x:player.x+player.width, y:player.y, width:70, height:player.height }; for(let i=enemies.length-1;i>=0;i--) { let e=enemies[i]; if(hit.x<e.x+e.width&&hit.x+hit.width>e.x&&hit.y<e.y+e.height&&hit.y+hit.height>e.y) { createBloodSplatter(e.x,e.y); enemies.splice(i,1); score++; updateScoreboard(); if(score>=targetScore){ gameWon=true; enemies=[]; powerUps=[]; const sd=document.getElementById('score-display'); if(sd) sd.innerText="مسیر امن شد! به آغوش نیایش برو..."; } } } }
-    function spawnArcadeEnemies() { if(!isPlaying||gameWon) return; enemies.push({ x:canvas.width+40, y:canvas.height-150, width:30, height:90, speed:2.2+Math.random()*2.5 }); setTimeout(spawnArcadeEnemies, Math.random()*1200+600); }
-    function updateArcadePhysics() { if(!isPlaying) return; if(!gameWon) { if(keys.ArrowLeft&&player.x>0) player.x-=player.speed; if(keys.ArrowRight&&player.x<canvas.width-player.width) player.x+=player.speed;
-        enemies.forEach(e=>{ e.x-=e.speed; if(e.x<player.x+player.width&&e.x+e.width>player.x&&e.y<player.y+player.height&&e.y+e.height>player.y){ player.x=Math.max(0,player.x-24); e.x+=20; player.health=Math.max(0,player.health-5); const p1=document.getElementById('p1-health'); if(p1) p1.style.width=player.health+'%'; } });
-        for(let i=powerUps.length-1;i>=0;i--) { let pu=powerUps[i]; pu.life--; if(pu.life<=0){ powerUps.splice(i,1); continue; } const closestX=Math.max(player.x,Math.min(pu.x,player.x+player.width)); const closestY=Math.max(player.y,Math.min(pu.y,player.y+player.height)); if((pu.x-closestX)**2+(pu.y-closestY)**2 < pu.radius**2) { player.health=Math.min(100,player.health+15); powerUps.splice(i,1); initAudio(); playHealSound(); const p1=document.getElementById('p1-health'); if(p1) p1.style.width=player.health+'%'; } }
-        enemies = enemies.filter(e=>e.x+e.width>-50);
-    } else { if(player.x<niyayesh.x-player.width+5) player.x+=3.5; else { isPlaying=false; clearInterval(timerInterval); timerInterval=null; const overlay=document.getElementById('game-overlay'); if(overlay){ overlay.style.display='flex'; overlay.innerHTML=`<div style="font-size:5.5rem;filter:drop-shadow(0 0 20px #ff1a40)">👩‍❤️‍💋‍👨</div><div class="section-title" style="margin-top:20px;font-size:2rem">تا ابد در آغوش هم...</div><div style="color:#fff;margin-bottom:15px">مبین به نیایش رسید! ❤️🩸</div><button class="login-btn" onclick="startArcadeGame()">نبرد مجدد</button>`; } } }
-    if(player.attacking){ player.attackTimer--; if(player.attackTimer<=0) player.attacking=false; }
-    for(let i=bloodParticles.length-1;i>=0;i--){ let p=bloodParticles[i]; p.x+=p.vx; p.y+=p.vy; p.vy+=0.5; p.life-=0.03; if(p.life<=0) bloodParticles.splice(i,1); } }
-    function drawCharacter(ch, type) { ctx.save(); if(type==='player'){ ctx.shadowColor='#ff1a40'; ctx.shadowBlur=15; ctx.fillStyle='#ff1a40'; ctx.fillRect(ch.x,ch.y+20,ch.width,ch.height-20); } else if(type==='niyayesh'){ ctx.fillStyle='#ffb6c1'; ctx.fillRect(ch.x,ch.y+20,ch.width,ch.height-20); } else if(type==='enemy'){ ctx.fillStyle='#1c1c1c'; ctx.fillRect(ch.x,ch.y+20,ch.width,ch.height-20); } ctx.restore(); }
-    function drawPowerUps() { powerUps.forEach(pu=>{ ctx.save(); ctx.globalAlpha=0.6; ctx.fillStyle='#ff3366'; ctx.beginPath(); ctx.arc(pu.x,pu.y,pu.radius,0,Math.PI*2); ctx.fill(); ctx.restore(); }); }
-    function drawArcadeFrame() { ctx.clearRect(0,0,canvas.width,canvas.height); ctx.fillStyle='#0d0102'; ctx.fillRect(0,0,canvas.width,canvas.height); if(score>=targetScore||gameWon) drawCharacter(niyayesh,'niyayesh'); drawCharacter(player,'player'); enemies.forEach(e=>drawCharacter(e,'enemy')); drawPowerUps(); bloodParticles.forEach(p=>{ ctx.save(); ctx.globalAlpha=p.life; ctx.fillStyle='#ff1a40'; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill(); ctx.restore(); }); }
-    function loopArcade() { updateArcadePhysics(); drawArcadeFrame(); if(isPlaying||gameWon) gameLoopId=requestAnimationFrame(loopArcade); else gameLoopId=null; }
-
-    window.startArcadeGame = function() { const overlay=document.getElementById('game-overlay'); if(overlay) overlay.style.display='none'; resizeCanvas(); player.x=80; player.health=100; score=0; enemies=[]; bloodParticles=[]; powerUps=[]; gameWon=false; isPlaying=true; gameTimer=99; document.getElementById('p1-health').style.width='100%'; document.getElementById('p2-health').style.width='100%'; document.getElementById('score-display').innerText=`دشمنان نابود شده: 0 / ${targetScore}`; document.getElementById('arcade-timer-ui').innerText='99'; clearInterval(timerInterval); timerInterval=setInterval(()=>{ if(gameTimer>0&&isPlaying){ gameTimer--; document.getElementById('arcade-timer-ui').innerText=gameTimer; } },1000); spawnArcadeEnemies(); spawnPowerUp(); if(!gameLoopId) loopArcade(); for(let i=0;i<8;i++){ const h=document.createElement('div'); h.className='mini-heart'; h.textContent=['💕','💗','✨','🫶'][Math.floor(Math.random()*4)]; h.style.left=10+Math.random()*80+'%'; h.style.top=15+Math.random()*50+'%'; document.getElementById('arcade-screen').appendChild(h); setTimeout(()=>h.remove(),2400); } };
-    window.addEventListener('visibilitychange',()=>{ if(document.hidden&&timerInterval) clearInterval(timerInterval); });
-});
-
-// ---------- CASTLE (Interactive Hub) ----------
-const castleCanvas = document.getElementById('castleCanvas');
-const castleCtx = castleCanvas.getContext('2d');
-let castleLit = false;
-const castleGrid = [ /* 30x40 grid as in 5.2 */ ];
-const colorMap = { 0:'#0a0a14', 1:'#2a2a2a', 3:'#ff1a40', 4:'#111111', 5:'#ffcc00', 8:'#1a1208' };
-const zones = [
-  { name:'tower_left', x:0.15, y:0.25, w:0.1, h:0.35, msg:'این برج خاطرات ما رو نگه می‌داره. هر آجرش یه روز از عشق ماست.' },
-  { name:'tower_right', x:0.75, y:0.25, w:0.1, h:0.35, msg:'از این بالا ستاره‌ها دیده میشن... ولی هیچکدوم به پای چشمای تو نمی‌رسن.' },
-  { name:'gate', x:0.4, y:0.6, w:0.2, h:0.15, msg:'تنها کسی که اجازه ورود داره، تویی. چون قلب من فقط برای تو بازه.' }
-];
-function drawCastle(lit) {
-  const w = castleCanvas.width, h = castleCanvas.height;
-  const pw = w/40, ph = h/30;
-  const scrollY = window.scrollY;
-  const dayProgress = Math.min(1, scrollY / 1500);
-  castleCtx.clearRect(0,0,w,h);
-  const nightSky = '#0a0a14', daySky = '#2a2a3e';
-  castleCtx.fillStyle = lerpColor(nightSky, daySky, dayProgress);
-  castleCtx.fillRect(0,0,w,h);
-  // stars fade out
-  if (dayProgress < 0.8) {
-    castleCtx.fillStyle = 'rgba(255,255,255,'+(1-dayProgress)+')';
-    for (let i=0; i<30; i++) { const sx = (i*37)%w, sy = (i*19)%h*0.4; castleCtx.fillRect(sx,sy,2,2); }
-  }
-  for (let y=0; y<30; y++) {
-    const row = castleGrid[y];
-    for (let x=0; x<40; x++) {
-      let colorIndex = parseInt(row[x]);
-      if (colorIndex === 4 && lit) colorIndex = 5;
-      if (colorIndex === 0) continue;
-      castleCtx.fillStyle = colorMap[colorIndex] || '#444';
-      castleCtx.fillRect(x*pw, y*ph, pw, ph);
+db.collection("website_data").doc("texts").onSnapshot((doc) => {
+    if (doc.exists) {
+        const data = doc.data();
+        if(data.love_letter) { loveLetter = data.love_letter; }
+        document.querySelectorAll('[data-key]').forEach(el => {
+            const key = el.getAttribute('data-key');
+            if(data[key] !== undefined) {
+                if(key === "love_letter" && document.getElementById("main").style.display !== "block") return;
+                el.innerHTML = data[key];
+            }
+        });
+        preserveEmojiColor();
     }
-  }
-  // Moon with parallax
-  const moonX = w*0.8, moonY = h*0.15;
-  castleCtx.beginPath(); castleCtx.arc(moonX, moonY, 30, 0, Math.PI*2);
-  castleCtx.fillStyle = '#EAE6FF'; castleCtx.fill();
-  // if daytime, draw sun
-  if (dayProgress > 0.6) {
-    castleCtx.beginPath(); castleCtx.arc(w*0.2, h*0.1, 25, 0, Math.PI*2);
-    castleCtx.fillStyle = '#FFD700'; castleCtx.fill();
-  }
-}
-function lerpColor(a,b,t) {
-  const ah = parseInt(a.replace('#',''),16), bh = parseInt(b.replace('#',''),16);
-  const ar = (ah>>16)&0xff, ag = (ah>>8)&0xff, ab = ah&0xff;
-  const br = (bh>>16)&0xff, bg = (bh>>8)&0xff, bb = bh&0xff;
-  const rr = Math.round(ar + (br-ar)*t), rg = Math.round(ag + (bg-ag)*t), rb = Math.round(ab + (bb-ab)*t);
-  return `rgb(${rr},${rg},${rb})`;
-}
-function resizeCastleCanvas() { const cont = document.querySelector('.castle-container'); if(!cont) return; const w = cont.clientWidth; castleCanvas.width = w; castleCanvas.height = w*0.75; drawCastle(castleLit); }
-window.addEventListener('resize', resizeCastleCanvas);
-castleCanvas.addEventListener('click', (e) => {
-  const rect = castleCanvas.getBoundingClientRect();
-  const scaleX = castleCanvas.width / rect.width, scaleY = castleCanvas.height / rect.height;
-  const mx = (e.clientX - rect.left) * scaleX / castleCanvas.width;
-  const my = (e.clientY - rect.top) * scaleY / castleCanvas.height;
-  for (let z of zones) {
-    if (mx > z.x && mx < z.x+z.w && my > z.y && my < z.y+z.h) {
-      const tip = document.getElementById('castle-tooltip');
-      tip.textContent = z.msg;
-      tip.style.opacity = '1';
-      tip.style.left = e.clientX + 'px';
-      tip.style.top = (e.clientY - 50) + 'px';
-      setTimeout(() => tip.style.opacity = '0', 3500);
-      break;
+});
+
+db.collection("website_data").doc("config").get().then((doc) => {
+    if (doc.exists) {
+        const data = doc.data();
+        if(data.tvd_video_url) {
+            document.getElementById("tvd-iframe").src = data.tvd_video_url;
+        }
     }
-  }
-  castleLit = !castleLit;
-  drawCastle(castleLit);
-});
-function initCastle() { resizeCastleCanvas(); }
-
-// ---------- DAY/NIGHT SCROLL & ENDING ----------
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  const indicator = document.getElementById('time-indicator');
-  if (scrollY < 600) { indicator.textContent = '🌙 شب'; document.body.classList.remove('day-transition','full-day'); }
-  else if (scrollY < 1500) { indicator.textContent = '🌗 طلوع'; document.body.classList.add('day-transition'); document.body.classList.remove('full-day'); }
-  else { indicator.textContent = '🌞 روز'; document.body.classList.add('day-transition','full-day'); }
-  if ((window.innerHeight + scrollY) >= document.body.offsetHeight - 150) {
-    const ending = document.getElementById('ending-sec');
-    if (ending) { ending.style.display = 'block'; ending.classList.add('active'); }
-  }
-  drawCastle(castleLit);
 });
 
-// ---------- MEMORY FRAGMENTS ----------
-function createFragments() {
-  const container = document.getElementById('fragments-layer');
-  const memories = ['اولین بار که دیدمت...', 'همون روز فهمیدم زندگی‌ام عوض شده.', 'تو مثل یه رویا وارد دنیای من شدی.', 'خنده‌هات بهترین موسیقی دنیاست.'];
-  for (let i=0; i<15; i++) {
-    const frag = document.createElement('div');
-    frag.className = 'memory-fragment';
-    frag.style.left = Math.random()*100 + '%';
-    frag.style.animationDuration = (Math.random()*15+20) + 's';
-    frag.dataset.memory = memories[Math.floor(Math.random()*memories.length)];
-    container.appendChild(frag);
-    frag.addEventListener('mouseenter', (e) => {
-      const tooltip = document.createElement('div');
-      tooltip.className = 'fragment-tooltip';
-      tooltip.textContent = frag.dataset.memory;
-      tooltip.style.left = e.clientX + 'px';
-      tooltip.style.top = e.clientY + 'px';
-      document.body.appendChild(tooltip);
-      setTimeout(() => tooltip.remove(), 2500);
+function saveWebsiteTexts() {
+    if(!isAdmin) return;
+    const updatedTexts = {};
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        let content = el.innerHTML;
+        if(key === "love_letter") content = el.innerHTML.replace(/<br\s*\/?>/gi, "\n");
+        updatedTexts[key] = content;
     });
-  }
+    db.collection("website_data").doc("texts").set(updatedTexts, { merge: true })
+    .then(() => alert("تغییرات با موفقیت برای نیایش اعمال شد! ❤️"))
+    .catch(err => { console.error(err); alert("خطا در ذخیره."); });
 }
 
-// ---------- WHISPERS ----------
-const whispers = ["هنوز اینجام...", "همه‌ی اینا برای توئه.", "تو باور داری به جادو؟", "من با تو زنده‌ام.", "یادته اون روزو؟"];
-setInterval(() => {
-  const whisper = document.createElement('div');
-  whisper.className = 'whisper-text';
-  whisper.textContent = whispers[Math.floor(Math.random()*whispers.length)];
-  whisper.style.left = Math.random()*80 + '%';
-  whisper.style.top = Math.random()*80 + '%';
-  document.getElementById('whisper-layer').appendChild(whisper);
-  setTimeout(() => whisper.remove(), 4000);
-}, 12000);
-
-// ---------- LOVEEBOX ----------
-const tracks = [
-  { title: "Sweater Weather", id: "2QjOHCTQ1Jl3zawyYOpxh6" },
-  { title: "آهنگ دوم", id: "1AdIEZmXtXbxyyA5wK8Ihj" },
-  { title: "آهنگ سوم", id: "18XVXZ4Yk27u10Zwl9IUUz" }
-];
-let currentTrack = 0;
-function changeTrack(index) {
-  if (index === currentTrack) return;
-  currentTrack = index;
-  document.getElementById('music-iframe').src = `https://open.spotify.com/embed/track/${tracks[index].id}?utm_source=generator&theme=0`;
-  document.getElementById('now-playing').innerText = `🎧 ${tracks[index].title}`;
-  document.querySelectorAll('.jukebox-btn').forEach((b,i)=>b.classList.toggle('active', i===index));
-  const heart = document.createElement('span'); heart.className='mini-heart'; heart.textContent='💖';
-  heart.style.left = Math.random()*80+10+'%'; heart.style.top = Math.random()*40+30+'%';
-  document.getElementById('lovebox-sec').appendChild(heart); setTimeout(()=>heart.remove(),1500);
+function triggerUpload() {
+    if(isAdmin) document.getElementById('file-input').click();
 }
 
-// ---------- COMPLIMENT ----------
-const compliments = [ /* ... same 10 ... */ ];
-function generateCompliment() { /* ... */ }
+async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if(!file) return;
+    const memoryText = prompt("یه متن قشنگ برای این خاطره بنویس:");
+    if(memoryText === null) return;
+    const uploadBox = document.getElementById("upload-box");
+    uploadBox.innerHTML = "⏳ در حال آپلود...";
+    uploadBox.style.pointerEvents = "none";
+    const isVideo = file.type.startsWith('video');
+    const storageRef = storage.ref('memories/' + Date.now() + '_' + file.name);
+    try {
+        const snapshot = await storageRef.put(file);
+        const downloadURL = await snapshot.ref.getDownloadURL();
+        await db.collection("memories").add({
+            url: downloadURL,
+            text: memoryText,
+            type: isVideo ? 'video' : 'image',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        alert("خاطره ثبت شد!");
+        uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید`;
+        uploadBox.style.pointerEvents = "auto";
+    } catch (error) {
+        console.error(error);
+        alert("خطا در آپلود.");
+        uploadBox.innerHTML = `<span style="font-size: 2rem; display: block; margin-bottom: 10px;">📸</span> ثبت یک خاطره جدید`;
+        uploadBox.style.pointerEvents = "auto";
+    }
+}
 
-// ---------- MEMORY GAME ----------
-const memoryEmojis = ['💖','💕','💗','💘','💝','💟','❣️','💌'];
-// ... (all functions from 5.2)
-function initMemoryGame() { /* ... */ }
-function flipMemoryCard(card) { /* ... */ }
+function loadFeed() {
+    db.collection("memories").orderBy("timestamp", "desc").onSnapshot(snapshot => {
+        const postsArea = document.getElementById('posts-area');
+        postsArea.innerHTML = '';
+        if(snapshot.empty) {
+            postsArea.innerHTML = `<p style="text-align:center; color:gray;">خاطره‌ای نیست.</p>`;
+            return;
+        }
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            let mediaHtml = data.type === 'video'
+                ? `<video src="${data.url}" class="post-video" controls></video>`
+                : `<img src="${data.url}" class="post-img" loading="lazy">`;
+            postsArea.innerHTML += `<div class="post-card"><div class="post-header"><div class="avatar">M</div><div><div style="font-weight: 700;">Mobin</div><div style="font-size: 0.75rem; color: #ff1a40;">عاشق‌ترین پسر دنیا</div></div></div>${mediaHtml}<div class="post-content">${data.text}</div></div>`;
+        });
+    });
+}
 
-// ---------- TYPING & ENTRY ----------
-function typeWriter(text, i, elementId) { /* ... */ }
-function enter() { /* ... same logic but also calls createFragments(); initCastle(); */ }
-
-// ---------- OTHER REMAINING 5.2 FUNCTIONS ----------
-// (portal, secret, vortex, particles, etc.) all included
-// ...
-
-// ---------- INIT ----------
 document.addEventListener("DOMContentLoaded", preserveEmojiColor);
 </script>
+
 </body>
 </html>
