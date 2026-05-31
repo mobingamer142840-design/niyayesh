@@ -1,173 +1,305 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mobin & Niyayesh | Our Little Island 💕🌊</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/dark-mode.css">
+    <title>Mobin & Niyayesh — Future Love 2.8 💕</title>
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-storage-compat.js"></script>
 </head>
+
 <body>
 
-    <div class="ambient-glow glow-1"></div>
-    <div class="ambient-glow glow-2"></div>
+    <!-- AURORA -->
+    <div class="aurora"></div>
 
-    <button id="theme-toggle" class="emoji" onclick="toggleTheme()">🌙</button>
+    <!-- LIQUID BACKGROUND -->
+    <div class="bg-grid"></div>
 
-    <div class="bg"></div>
-    <div class="wave-container">
-        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,121.22,200.41,113.8,241.6,109.41,281.82,88.42,321.39,56.44Z" class="shape-fill-2"></path>
-            <path d="M0,0V46.29c47.79,22.2,103.59,32.15,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" class="shape-fill"></path>
-        </svg>
-    </div>
+    <!-- THEME -->
+    <button id="theme-toggle">
+        🌙
+    </button>
 
-    <div id="netflix-intro"><div class="netflix-text">N</div></div>
+    <!-- INTRO -->
+    <section id="intro-screen">
+        <div class="intro-logo">
+            N
+        </div>
+    </section>
 
-    <div class="login-wrapper" id="login-zone">
-        <div class="login-container">
-            <div class="login-emojis emoji">💕🫂</div>
-            <h1>Niyayesh</h1>
-            <p>A CHILL ISLAND JUST FOR US 🌊</p>
-            <div class="input-group">
-                <input id="pass" type="password" placeholder="رمز ورود را وارد کن...">
+    <!-- LOGIN -->
+    <section class="login-screen" id="login-screen">
+
+        <div class="glass-login">
+
+            <div class="login-glow"></div>
+
+            <div class="emoji-big">
+                💕
             </div>
-            <button class="login-btn" onclick="enter()">ورود به جزیره ما</button>
+
+            <h1>
+                Niyayesh
+            </h1>
+
+            <p>
+                A PRIVATE FUTURE ISLAND FOR OUR LOVE 🌊
+            </p>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="رمز ورود..."
+            >
+
+            <button id="login-btn">
+                ورود به دنیای ما
+            </button>
+
         </div>
-    </div>
 
-    <div id="vampire-portal">
-        <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
-        <div class="portal-dimension" id="portal-dim">
-            <div class="portal-quote" id="pt-q">"تو قشنگ‌ترین رویای واقعی منی" 💕</div>
-            <div class="portal-subtext" id="pt-st">اینجا دریچه‌ای به تمام رازها و احساسات قشنگ ماست نیایشم. جایی که زمان می‌ایسته و فقط من و تو می‌مونیم، تو یه جزیره آروم... 🌊💒</div>
-            <button class="close-portal-btn" id="pt-btn" onclick="closePortal()">بازگشت به واقعیت</button>
+    </section>
+
+    <!-- NAVBAR -->
+    <nav class="future-nav" id="future-nav">
+
+        <div class="nav-pill">
+
+            <a href="#hero">خانه</a>
+            <a href="#letter">نامه</a>
+            <a href="#oracle">گوی عشق</a>
+            <a href="#timeline">داستان</a>
+            <a href="#game">بازی</a>
+            <a href="#gallery">گالری</a>
+            <a href="#cinema">سینما</a>
+
         </div>
-    </div>
 
-    <div id="admin-save-bar">
-        <span>✍️ حالت ادیتور فعال است.</span>
-        <button class="save-btn" onclick="saveWebsiteTexts()">ذخیره تغییرات</button>
-    </div>
+    </nav>
 
-    <div id="secret-modal">
-        <div class="secret-box">
-            <div class="secret-title">🔒 صندوقچه قلب من</div>
-            <input id="secret-pass" type="password" placeholder="رمز رازها را وارد کن...">
-            <button class="login-btn" onclick="checkSecret()">باز کردن صندوقچه</button>
-            <div id="secret-content">
-                تنها راز من تویی نیایشم، تو بودی که تو سختی‌ها کنارم بودی 💕🫂<br>
-                عاشقتم دخترم و همیشه کنارتم 🫠🫂💕<br>
-                تو فرشته‌ منی منم فرشته‌ی تو :)
-            </div>
-            <button class="close-btn" onclick="closeSecret()">بستن</button>
-        </div>
-    </div>
+    <!-- MAIN -->
+    <main id="main-content">
 
-    <div class="navbar" id="navbar">
-        <div class="nav-island">
-            <a href="#letter-sec" class="active">نامه ما</a>
-            <a href="#oracle-sec">گوی عشق</a>
-            <a href="#game-sec">بازی سرنوشت</a>
-            <a href="#tarot-sec">تاروت</a>
-            <a href="#countdown-sec">روزشمار</a>
-            <a href="#story-sec">داستان</a>
-            <a href="#tvd-sec">سینما</a>
-            <a href="javascript:void(0)" onclick="openPortal()" class="highlight-link">✨ رویا</a>
-            <a href="javascript:void(0)" onclick="openSecret()">🔒 راز</a>
-        </div>
-    </div>
+        <!-- HERO -->
+        <section class="hero-section" id="hero">
 
-    <div id="main">
-        <div class="container">
-            
-            <div class="web-section reveal" id="letter-sec">
-                <div class="title-main" id="txt-main-title" data-key="main_title">For Niyayesh 🥹🫂💕</div>
-                <div class="gallery">
-                    <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="Memory 1">
-                    <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2">
+            <div class="hero-blur"></div>
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    FUTURE LOVE EXPERIENCE
                 </div>
-                <div class="text" id="typed-text" data-key="love_letter"></div>
+
+                <h1>
+                    Mobin
+                    <span>♡</span>
+                    Niyayesh
+                </h1>
+
+                <p>
+                    تو آرامش تمام جهان منی...
+                </p>
+
             </div>
 
-            <div class="web-section reveal" id="oracle-sec">
-                <div class="section-title">گوی احساسات 💭</div>
-                <p class="subtitle">گوی شیشه‌ای رو لمس کن تا یه پیغام مخفی از قلب من برات ظاهر بشه...</p>
-                <div class="oracle-container">
-                    <div class="magic-orb emoji" onclick="revealQuote()">🌊</div>
-                    <div id="oracle-quote-box"><p id="oracle-quote"></p></div>
+        </section>
+
+        <!-- LOVE LETTER -->
+        <section class="glass-section reveal" id="letter">
+
+            <div class="section-glow"></div>
+
+            <h2>
+                نامه عاشقانه 💌
+            </h2>
+
+            <div class="letter-box">
+
+                <p id="love-letter"></p>
+
+            </div>
+
+        </section>
+
+        <!-- ORACLE -->
+        <section class="glass-section reveal" id="oracle">
+
+            <h2>
+                گوی احساسات ✨
+            </h2>
+
+            <div class="orb-wrapper">
+
+                <div class="magic-orb" id="magic-orb">
+                    💎
                 </div>
+
+                <div class="oracle-text" id="oracle-text">
+                    روی گوی کلیک کن...
+                </div>
+
             </div>
 
-            <div class="web-section reveal" id="game-sec">
-                <div class="section-title">مبارزه برای عشق ⚔️🩸</div>
-                <p class="subtitle">با فلش‌ها حرکت کن و با Space حمله کن. تاریکی رو بشکاف تا به نیایش برسی...</p>
-                <div class="canvas-wrapper">
-                    <canvas id="love-game-canvas" width="600" height="400"></canvas>
-                    <div id="game-win-screen">
-                        <div class="win-emoji">🫂💕</div>
-                        <h2>You Found Her</h2>
-                        <p>مبین، تو تمام تاریکی‌ها رو از بین بردی تا به آغوش امن نیایش برسی.</p>
-                        <button onclick="resetGame()">دوباره بجنگ</button>
+        </section>
+
+        <!-- TIMELINE -->
+        <section class="glass-section reveal" id="timeline">
+
+            <h2>
+                داستان عشق ما 🌊
+            </h2>
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-card">
+
+                        <h3>
+                            شروع همه چیز
+                        </h3>
+
+                        <p>
+                            روزی که تو وارد زندگی من شدی...
+                        </p>
+
                     </div>
-                </div>
-            </div>
 
-            <div class="web-section reveal" id="tarot-sec">
-                <div class="section-title">کارت‌های سرنوشت ما 🃏</div>
-                <div class="tarot-grid">
-                    <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                        <div class="tarot-inner">
-                            <div class="tarot-front"><div class="tarot-design">I</div></div>
-                            <div class="tarot-back"><p>چون وقتی نگاهم می‌کنی، تمام دنیا برام قشنگ‌تر میشه. ✨</p></div>
-                        </div>
+                </div>
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-card">
+
+                        <h3>
+                            آینده ما
+                        </h3>
+
+                        <p>
+                            ساختن قشنگ‌ترین زندگی کنار هم...
+                        </p>
+
                     </div>
-                    <div class="tarot-card" onclick="this.classList.toggle('flipped')">
-                        <div class="tarot-inner">
-                            <div class="tarot-front"><div class="tarot-design">II</div></div>
-                            <div class="tarot-back"><p>چون هیچکس به اندازه تو، دیوونه‌بازی‌ها و رویاهای منو نمی‌فهمه. 💕</p></div>
-                        </div>
-                    </div>
+
                 </div>
+
             </div>
 
-            <div class="web-section reveal" id="countdown-sec">
-                <div class="section-title">شمارش معکوس عاشقی ⏳</div>
-                <p class="subtitle">تا تولد فرشته‌ی روی زمین (۱۵ شهریور)</p>
-                <div class="countdown-container">
-                    <div class="time-box"><span id="cd-days">00</span><div class="time-label">روز</div></div>
-                    <div class="time-box"><span id="cd-hours">00</span><div class="time-label">ساعت</div></div>
-                    <div class="time-box"><span id="cd-mins">00</span><div class="time-label">دقیقه</div></div>
-                    <div class="time-box"><span id="cd-secs">00</span><div class="time-label">ثانیه</div></div>
+        </section>
+
+        <!-- GAME -->
+        <section class="glass-section reveal" id="game">
+
+            <h2>
+                Fight For Love ⚔️
+            </h2>
+
+            <p class="game-help">
+                حرکت با Arrow Keys و حمله با Space
+            </p>
+
+            <div class="game-wrapper">
+
+                <canvas
+                    id="love-game"
+                    width="800"
+                    height="450"
+                ></canvas>
+
+                <div id="game-win">
+
+                    <h3>
+                        💕 YOU FOUND HER 💕
+                    </h3>
+
+                    <p>
+                        عشق همیشه راهش را پیدا می‌کند...
+                    </p>
+
+                    <button id="restart-game">
+                        دوباره
+                    </button>
+
                 </div>
+
             </div>
 
-            <div class="web-section reveal" id="tvd-sec">
-                <div class="section-title" data-key="tvd_sec_title">The Vampire Diaries Cinema</div>
-                <p class="subtitle" data-key="tvd_sec_desc">مخصوص تو که عاشق این دنیایی... 💕</p>
-                <div class="cinema-grid">
-                    <div class="video-wrapper">
-                        <iframe id="tvd-iframe" src="https://www.youtube.com/embed/aEzaN0eI6kU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </div>
-                </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="glass-section reveal" id="gallery">
+
+            <h2>
+                گالری خاطرات 📸
+            </h2>
+
+            <div class="gallery-grid">
+
+                <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png">
+
+                <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png">
+
             </div>
 
-            <div class="music" id="music-container">
-                <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-            
-            <div class="creator emoji">Created by Mobin with Endless Love for Niyayesh 💕💒🌊✨</div>
-        </div>
-    </div>
+        </section>
 
-    <script src="js/main.js"></script>
-    <script src="js/game.js"></script>
+        <!-- CINEMA -->
+        <section class="glass-section reveal" id="cinema">
+
+            <h2>
+                Vampire Diaries Cinema 🩸
+            </h2>
+
+            <div class="video-wrapper">
+
+                <iframe
+                    src="https://www.youtube.com/embed/aEzaN0eI6kU?rel=0&modestbranding=1&playsinline=1"
+                    title="The Vampire Diaries"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+
+            Created With Endless Love By Mobin 💕
+
+        </footer>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="firebase.js"></script>
+    <script src="animations.js"></script>
+    <script src="game.js"></script>
+    <script src="app.js"></script>
+
 </body>
+
 </html>
+`
