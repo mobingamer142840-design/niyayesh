@@ -71,7 +71,6 @@
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
     <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
     <a href="#memory-game-sec" style="color:#ff69b4;">🧠 حافظه</a>
-    <a href="#castle-sec" style="color:#ffd700;">💒 قلعه عشق</a>
     <a href="#tarot-sec">🃏 کارت‌ها</a>
     <a href="#compliment-sec">🌸 بگو دوستم داری</a>
     <a href="#lovebox-sec" style="color:#ff1a40; font-weight:900;">🎵 Lovebox</a>
@@ -106,21 +105,13 @@
             <div class="music-jukebox" style="background: none; padding: 0;">
                 <div class="now-playing" id="now-playing">🎧 Sweater Weather</div>
                 <div class="spotify-embed" id="spotify-embed">
-                    <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="80" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
                 <div class="music-controls">
                     <button class="jukebox-btn active" onclick="changeTrack(0)">🌧️ Sweater Weather</button>
                     <button class="jukebox-btn" onclick="changeTrack(1)">🎵 آهنگ دوم</button>
                     <button class="jukebox-btn" onclick="changeTrack(2)">🎵 آهنگ سوم</button>
                 </div>
-            </div>
-        </div>
-
-        <div class="web-section reveal" id="castle-sec">
-            <div class="section-title">قلعه عشق ما <span class="title-emoji">💒</span></div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">روی قلعه کلیک کن تا پنجره‌های عشق روشن بشن...</p>
-            <div class="castle-container">
-                <canvas id="castleCanvas" width="400" height="300"></canvas>
             </div>
         </div>
 
@@ -377,150 +368,6 @@ function changeTrack(index) {
     setTimeout(() => heart.remove(), 1500);
 }
 
-// --- قلعه پیکسلی ---
-const castleCanvas = document.getElementById('castleCanvas');
-const castleCtx = castleCanvas.getContext('2d');
-let castleLit = false;
-
-const castleGrid = [
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000100000000000000000100000000",
-    "0000000000000100000000000000000100000000",
-    "0000000033330100000000000000000133330000",
-    "0000000000330100000000000000000133000000",
-    "0000000000000100000000000000000100000000",
-    "0000001111111111110000001111111111110000",
-    "0000001000000000010000001000000000010000",
-    "0000001000000000010000001000000000010000",
-    "0000001004000000010000001004000000010000",
-    "0000001004000000010000001004000000010000",
-    "0000001000000000010000001000000000010000",
-    "0000001000000000010000001000000000010000",
-    "0000001004000000010000001004000000010000",
-    "0000001004000000010000001004000000010000",
-    "0000001000000000010000001000000000010000",
-    "0000001000000000010000001000000000010000",
-    "0000001111111111110000001111111111110000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "0000000000000000000000000000000000000000",
-    "8888888888888888888888888888888888888888",
-    "8888888888888888888888888888888888888888",
-    "8888888888888888888888888888888888888888",
-    "8888888888888888888888888888888888888888",
-    "8888888888888888888888888888888888888888",
-    "8888888888888888888888888888888888888888"
-];
-
-const colorMap = {
-    0: '#0a0a14', // sky
-    1: '#2a2a2a', // dark stone
-    2: '#4a4a4a', // light stone (unused for simplicity)
-    3: '#ff1a40', // red flag
-    4: '#111111', // window unlit
-    5: '#ffcc00', // window lit
-    6: '#1a1a1a', // gate
-    7: '#ff3366', // heart
-    8: '#1a1208'  // ground
-};
-
-function drawCastle(lit) {
-    const canvas = castleCanvas;
-    const ctx = castleCtx;
-    const w = canvas.width;
-    const h = canvas.height;
-    const pw = w / 40; // pixel width
-    const ph = h / 30;
-    ctx.clearRect(0, 0, w, h);
-    
-    // draw background
-    ctx.fillStyle = '#0a0a14';
-    ctx.fillRect(0, 0, w, h);
-    
-    for (let y = 0; y < 30; y++) {
-        const row = castleGrid[y];
-        for (let x = 0; x < 40; x++) {
-            let colorIndex = parseInt(row[x]);
-            if (colorIndex === 4 && lit) colorIndex = 5; // windows lit
-            if (colorIndex === 0) continue;
-            ctx.fillStyle = colorMap[colorIndex];
-            ctx.fillRect(x * pw, y * ph, pw, ph);
-        }
-    }
-    
-    // Gate detail
-    ctx.fillStyle = '#0a0a0a';
-    ctx.fillRect(17 * pw, 18 * ph, 6 * pw, 6 * ph);
-    ctx.fillStyle = '#2a2a2a';
-    ctx.fillRect(17.5 * pw, 18.5 * ph, 5 * pw, 5 * ph);
-    
-    // Heart on flag
-    ctx.fillStyle = '#ff3366';
-    ctx.font = `${pw * 3}px serif`;
-    ctx.fillText('❤️', 6.5 * pw, 3 * ph);
-    ctx.fillText('❤️', 32.5 * pw, 3 * ph);
-}
-
-function resizeCastleCanvas() {
-    const container = document.querySelector('.castle-container');
-    if (!container) return;
-    const w = container.clientWidth;
-    castleCanvas.width = w;
-    castleCanvas.height = w * 0.75; // 4:3 ratio
-    drawCastle(castleLit);
-}
-
-window.addEventListener('resize', resizeCastleCanvas);
-castleCanvas.addEventListener('click', () => {
-    castleLit = !castleLit;
-    drawCastle(castleLit);
-    
-    // spawn hearts
-    const heartContainer = document.getElementById('castle-sec');
-    for (let i = 0; i < 12; i++) {
-        const heart = document.createElement('span');
-        heart.className = 'mini-heart';
-        heart.textContent = ['💕', '💗', '✨', '❤️'][Math.floor(Math.random() * 4)];
-        heart.style.left = (Math.random() * 80 + 10) + '%';
-        heart.style.top = (Math.random() * 60 + 20) + '%';
-        heart.style.animationDelay = Math.random() * 0.5 + 's';
-        heartContainer.appendChild(heart);
-        setTimeout(() => heart.remove(), 2000);
-    }
-});
-
-function initCastle() {
-    resizeCastleCanvas();
-}
-
-// --- Compliment Generator ---
-const compliments = [
-    "تو برام مث یه آهنگ قشنگ می‌مونی که هرگز از گوش دادنش خسته نمیشم 🎶",
-    "وقتی هستی، دنیا حتی بدون رنگ هم قشنگه... 🌈",
-    "هر بار نگات می‌کنم، قلبم یه ضربان جا میندازه 💓",
-    "دوست دارم اندازه‌ی تموم ستاره‌های کهکشان، شاید هم بیشتر 🌌",
-    "تو تنها کسی هستی که می‌تونه با یه لبخند، روزمو بسازه 😊",
-    "عطر تنت قشنگ‌ترین ادکلن دنیاس برام 🌸",
-    "باهات حرف زدن یه جور آرامش خاص داره که هیچ جا پیدا نمیشه 🕊️",
-    "عشق تو، گرم‌ترین آتیشه تو سردترین زمستون ❄️🔥",
-    "می‌دونی چرا چشمات اینقدر قشنگه؟ چون قلب منو توش می‌بینم 👀💘",
-    "امروز هم مثل هر روز، اولین فکر و آخرین فکرم تویی ☀️🌙"
-];
-function generateCompliment() {
-    const el = document.getElementById('compliment-text');
-    const randomIndex = Math.floor(Math.random() * compliments.length);
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    setTimeout(() => {
-        el.innerText = compliments[randomIndex];
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-    }, 300);
-}
-
 function preserveEmojiColor() {
     const targets = document.querySelectorAll('.title-main, .section-title');
     const emojiRegex = /([🩸🃏⏳🥹🫂💕🎮🌀🔒❤️⚔️⏰✨📸🦇🧠💗🌸🎵🌧️💒])/g;
@@ -562,7 +409,6 @@ function enter(){
             typeWriter(loveLetter, 0, "typed-text");
             loadFeed();
             initMemoryGame();
-            initCastle();
         }, 3800);
     } else {
         alert("رمز ورود اشتباه است... دوباره تلاش کن عشق من");
