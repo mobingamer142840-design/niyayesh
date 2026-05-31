@@ -70,19 +70,21 @@
 <div class="navbar" id="navbar">
     <a href="#letter-sec" id="nav-letter" class="active">نامه عاشقانه</a>
     <a href="#game-sec" style="color:#ff1a40; font-weight:900;">🎮 نجات نیایش</a>
-    <a href="#memory-game-sec" style="color:#ff69b4;">🧠 بازی حافظه</a>
+    <a href="#memory-game-sec" style="color:#ff69b4;">🧠 حافظه</a>
     <a href="#oracle-sec">🔮 فال عشق</a>
-    <a href="#tarot-sec">🃏 کارت‌های سرنوشت</a>
-    <a href="#love-counter-sec">💗 شمارشگر</a>
+    <a href="#tarot-sec">🃏 کارت‌ها</a>
+    <a href="#love-jar-sec">🫙 قلک عشق</a>
+    <a href="#compliment-sec">🌸 بگو دوستم داری</a>
+    <a href="#music-sec">🎵 جوک‌باکس</a>
     <a href="#countdown-sec">⏳ ماه خونین</a>
-    <a href="#story-sec">داستان عشق ما</a>
+    <a href="#story-sec">داستان ما</a>
     <a href="#dates-sec">تاریخ‌ها</a>
     <a href="#mobin-sec">دنیای Mobin</a>
     <a href="#niyayesh-sec">دنیای Niyayesh</a>
-    <a href="#gallery-sec">آلبوم عکسامون</a>
-    <a href="#feed-sec">فید خاطرات</a>
+    <a href="#gallery-sec">آلبوم</a>
+    <a href="#feed-sec">فید</a>
     <a href="#tvd-sec">سینما</a>
-    <a href="javascript:void(0)" onclick="openPortal()" style="color:#ff1a40; font-weight:900; animation: heartBeat 2s infinite;">🌀 پورتال ومپایر</a>
+    <a href="javascript:void(0)" onclick="openPortal()" style="color:#ff1a40; font-weight:900; animation: heartBeat 2s infinite;">🌀 پورتال</a>
     <a href="javascript:void(0)" onclick="openSecret()">🔒 رازها</a>
 </div>
 
@@ -96,6 +98,19 @@
                 <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="Memory 2" loading="lazy">
             </div>
             <div class="text" id="typed-text" data-key="love_letter"></div>
+        </div>
+
+        <!-- بخش جدید: قلک عشق -->
+        <div class="web-section reveal" id="love-jar-sec">
+            <div class="section-title">قلک عشق ما <span class="title-emoji">🫙</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">هر بار که دلت خواست، یه قلب بهش اضافه کن تا لبریز شه!</p>
+            <div class="love-jar-container">
+                <div class="love-jar" id="love-jar" onclick="addHeartToJar()">
+                    <div class="jar-fill" id="jar-fill"></div>
+                    <span class="jar-label">💖</span>
+                </div>
+                <p class="jar-counter" id="jar-counter">۰ قلب عاشقانه جمع شده</p>
+            </div>
         </div>
 
         <div class="web-section reveal" id="game-sec">
@@ -126,7 +141,6 @@
             </div>
         </div>
 
-        <!-- بازی حافظه (جدید) -->
         <div class="web-section reveal" id="memory-game-sec">
             <div class="section-title">بازی حافظه عاشقانه <span class="title-emoji">🧠</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها رو جفت کن تا قدرت حافظه‌ات رو نشون بدی!</p>
@@ -137,7 +151,6 @@
             </div>
         </div>
 
-        <!-- فال عشق (جدید) -->
         <div class="web-section reveal" id="oracle-sec">
             <div class="section-title">فال عشق <span class="title-emoji">🔮</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">دلت می‌خواد بدونی امروز عشقت چی بهت می‌گه؟</p>
@@ -147,6 +160,15 @@
                     <span>✨</span>
                 </div>
                 <div class="oracle-message" id="oracle-message"></div>
+            </div>
+        </div>
+
+        <div class="web-section reveal" id="compliment-sec">
+            <div class="section-title">بگو دوستم داری <span class="title-emoji">🌸</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">یه جمله عاشقانه از قلب من... فقط کلیک کن!</p>
+            <div class="compliment-box">
+                <p class="compliment-text" id="compliment-text">💬</p>
+                <button class="login-btn" onclick="generateCompliment()" style="width:auto; padding:12px 30px; background: linear-gradient(90deg, #d63384, #ff1a40);">یه چیز قشنگ بگو</button>
             </div>
         </div>
 
@@ -184,16 +206,22 @@
                         <div class="tarot-back"><p>دوست دارم پیر بشیم و بازم مثل روزای اول، عاشقونه به چشمای هم نگاه کنیم. 👴🏻👵🏻</p></div>
                     </div>
                 </div>
+                <div class="tarot-card" onclick="this.classList.toggle('flipped')">
+                    <div class="tarot-inner">
+                        <div class="tarot-front"><div class="tarot-design">VI</div></div>
+                        <div class="tarot-back"><p>تو رویایی هستی که نمی‌خوام هرگز ازش بیدار شم. شب‌های من با تو صبح میشن. 🌙☀️</p></div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- شمارشگر عشق (جدید) -->
+        <!-- بخش شمارشگر عشق (دیگه عدد نداره!) -->
         <div class="web-section reveal" id="love-counter-sec">
             <div class="section-title">شمارشگر عشق <span class="title-emoji">💗</span></div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">از روزی که قلبم رو زدی به تپش...</p>
-            <div class="love-counter-display" id="love-counter-display">
-                <span id="love-days">0</span>
-                <div class="love-counter-label">روز پر از عشق و دیوونگی</div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">نمیشه با عدد گفت چقدر دوست دارم...</p>
+            <div class="love-counter-display">
+                <div class="eternal-love-text">به تعداد نفس‌هایی که کشیدم، دوست دارم 💖</div>
+                <div class="eternal-love-sub">هر لحظه عشق ما بی‌نهایته...</div>
             </div>
         </div>
 
@@ -205,6 +233,23 @@
                 <div class="time-box"><span id="cd-hours">00</span><div class="time-label">ساعت</div></div>
                 <div class="time-box"><span id="cd-mins">00</span><div class="time-label">دقیقه</div></div>
                 <div class="time-box"><span id="cd-secs">00</span><div class="time-label">ثانیه</div></div>
+            </div>
+        </div>
+
+        <!-- جوک‌باکس موزیک -->
+        <div class="web-section reveal" id="music-sec">
+            <div class="section-title">جوک‌باکس عاشقانه <span class="title-emoji">🎵</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">آهنگ‌هایی که با هم گوش می‌دیم...</p>
+            <div class="music-jukebox">
+                <div class="now-playing" id="now-playing">🎧 آهنگ اول</div>
+                <div class="spotify-embed" id="spotify-embed">
+                    <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                <div class="music-controls">
+                    <button class="jukebox-btn" onclick="changeTrack(0)">❤️ آهنگ ۱</button>
+                    <button class="jukebox-btn" onclick="changeTrack(1)">🌹 آهنگ ۲</button>
+                    <button class="jukebox-btn" onclick="changeTrack(2)">✨ آهنگ ۳</button>
+                </div>
             </div>
         </div>
 
@@ -314,10 +359,6 @@
             </div>
         </div>
 
-        <div class="music" id="music-container">
-            <iframe src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6?utm_source=generator&theme=0" width="100%" height="152" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>
-
         <div class="creator">Created by Mobin with Endless Love</div>
     </div>
 </div>
@@ -328,10 +369,73 @@
 let isAdmin = false;
 let loveLetter = `نیایش عزیزم،\n\nنمی‌دونم چطور بگم ولی تو برای من فقط یه آدم نیستی… یه حسِ آروم و قشنگی که توی شلوغ‌ترین لحظه‌های زندگی هم منو نگه می‌داره تو فرشته‌می.\n\nبا تو حتی روزای بدم از بین می‌رن. یه پیام از تو می‌تونه حال منو عوض کنه و یه فکر کوچیک ازت می‌تونه بهم آرامش بده.\n\nتو برام مهمی… بیشتر از چیزی که بشه راحت گفت.\n\nفقط خواستم بدونی بودنِ تو توی زندگی من یه اتفاق ساده نیست، یه چیز قشنگه که قدرشو می‌دونم.\n\nقول میدم یه زندگی برات بسازم که پر از آرامش باشه و اینو بدون همیشه کنارتم قشنگ تر از قاصدک :)\n\nدوست دارم مال منی:)\n\nباعشق 🫂💕🥹\nMobin`;
 
+// --- Love Jar ---
+let jarHearts = 0;
+const maxHearts = 15; // 15 قلب تا پر شدن
+function addHeartToJar() {
+    if (jarHearts >= maxHearts) return;
+    jarHearts++;
+    const fill = document.getElementById('jar-fill');
+    const counter = document.getElementById('jar-counter');
+    if (fill) fill.style.height = (jarHearts / maxHearts) * 100 + '%';
+    if (counter) counter.innerText = `${jarHearts} قلب عاشقانه جمع شده`;
+    if (jarHearts >= maxHearts) {
+        const jar = document.getElementById('love-jar');
+        jar.classList.add('full');
+        setTimeout(() => {
+            alert('🎉 قلک عشق پرشد! تو بی‌نهایت دوست داشتنی هستی! 💖');
+        }, 400);
+    }
+}
+
+// --- Compliment Generator ---
+const compliments = [
+    "تو برام مث یه آهنگ قشنگ می‌مونی که هرگز از گوش دادنش خسته نمیشم 🎶",
+    "وقتی هستی، دنیا حتی بدون رنگ هم قشنگه... 🌈",
+    "هر بار نگات می‌کنم، قلبم یه ضربان جا میندازه 💓",
+    "دوست دارم اندازه‌ی تموم ستاره‌های کهکشان، شاید هم بیشتر 🌌",
+    "تو تنها کسی هستی که می‌تونه با یه لبخند، روزمو بسازه 😊",
+    "عطر تنت قشنگ‌ترین ادکلن دنیاس برام 🌸",
+    "باهات حرف زدن یه جور آرامش خاص داره که هیچ جا پیدا نمیشه 🕊️",
+    "عشق تو، گرم‌ترین آتیشه تو سردترین زمستون ❄️🔥",
+    "می‌دونی چرا چشمات اینقدر قشنگه؟ چون قلب منو توش می‌بینم 👀💘",
+    "امروز هم مثل هر روز، اولین فکر و آخرین فکرم تویی ☀️🌙"
+];
+function generateCompliment() {
+    const el = document.getElementById('compliment-text');
+    const randomIndex = Math.floor(Math.random() * compliments.length);
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+        el.innerText = compliments[randomIndex];
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+    }, 300);
+}
+
+// --- Music Jukebox ---
+const tracks = [
+    { title: "آهنگ اول (Lover)", id: "2QjOHCTQ1Jl3zawyYOpxh6" },
+    { title: "آهنگ دوم (Perfect)", id: "2P5jxSgO4Y3CsEJQg5fPj8" },
+    { title: "آهنگ سوم (At My Worst)", id: "6I2UD7BqM2Y0Dv4Llw9sV5" }
+];
+let currentTrack = 0;
+function changeTrack(index) {
+    if (index === currentTrack) return;
+    currentTrack = index;
+    const iframe = document.getElementById('music-iframe');
+    const nowPlaying = document.getElementById('now-playing');
+    iframe.src = `https://open.spotify.com/embed/track/${tracks[index].id}?utm_source=generator&theme=0`;
+    nowPlaying.innerText = `🎧 ${tracks[index].title}`;
+    // active button style
+    document.querySelectorAll('.jukebox-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === index);
+    });
+}
+
 function preserveEmojiColor() {
     const targets = document.querySelectorAll('.title-main, .section-title');
-    const emojiRegex = /([🩸🃏⏳🥹🫂💕🎮🌀🔒❤️⚔️⏰✨📸🦇🧠🔮💗])/g;
-
+    const emojiRegex = /([🩸🃏⏳🥹🫂💕🎮🌀🔒❤️⚔️⏰✨📸🦇🧠🔮💗🫙🌸🎵])/g;
     targets.forEach(el => {
         if (!el || el.dataset.emojiFixed === "1") return;
         const original = el.innerHTML;
@@ -365,12 +469,11 @@ function enter(){
             }, 100);
             createCrimsonParticles();
             createSoftHearts();
-            startRosePetals(); // بارش گلبرگ
+            startRosePetals();
+            startLanterns(); // فانوس‌های شناور
             typeWriter(loveLetter, 0, "typed-text");
             loadFeed();
             initMemoryGame();
-            updateLoveCounter();
-            setInterval(updateLoveCounter, 60000);
         }, 3800);
     } else {
         alert("رمز ورود اشتباه است... دوباره تلاش کن عشق من");
@@ -398,7 +501,6 @@ function typeWriter(text, i, elementId) {
 
 function finishTypewriter() {
     setTimeout(() => {
-        document.getElementById("music-container").classList.add("show");
         document.getElementById("navbar").classList.add("show-nav");
         preserveEmojiColor();
     }, 600);
@@ -409,7 +511,6 @@ function openSecret() {
     modal.style.display = "flex";
     setTimeout(() => { modal.style.opacity = "1"; }, 10);
 }
-
 function closeSecret() {
     const modal = document.getElementById("secret-modal");
     modal.style.opacity = "0";
@@ -419,7 +520,6 @@ function closeSecret() {
         document.getElementById("secret-content").style.display = "none";
     }, 600);
 }
-
 function checkSecret() {
     let p = document.getElementById("secret-pass").value;
     if(p === "niyayeshlovemobin") {
@@ -431,12 +531,31 @@ function checkSecret() {
     }
 }
 
-// بارش گلبرگ رز
+// فانوس‌های شناور
+function startLanterns() {
+    const lanternContainer = document.createElement('div');
+    lanternContainer.className = 'lantern-container';
+    document.body.appendChild(lanternContainer);
+    function createLantern() {
+        const lantern = document.createElement('div');
+        lantern.className = 'lantern';
+        lantern.style.left = Math.random() * 100 + 'vw';
+        lantern.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        lantern.style.animationDelay = Math.random() * 5 + 's';
+        lantern.innerHTML = '🏮';
+        lanternContainer.appendChild(lantern);
+        setTimeout(() => lantern.remove(), 25000);
+    }
+    for (let i = 0; i < 10; i++) {
+        setTimeout(() => createLantern(), i * 700);
+    }
+    setInterval(createLantern, 8000);
+}
+
 function startRosePetals() {
     const petalContainer = document.createElement('div');
     petalContainer.className = 'rose-petals-container';
     document.body.appendChild(petalContainer);
-    
     function createPetal() {
         const petal = document.createElement('div');
         petal.className = 'rose-petal';
@@ -447,14 +566,12 @@ function startRosePetals() {
         petalContainer.appendChild(petal);
         setTimeout(() => petal.remove(), 15000);
     }
-    
     for(let i = 0; i < 15; i++) {
         setTimeout(() => createPetal(), i * 400);
     }
     setInterval(createPetal, 1500);
 }
 
-// اوراکل عشق
 const oracleMessages = [
     "امروز قلب تو پر از نور و آرامشه... بذار عشقت بدرخشه ✨",
     "او امروز بیشتر از همیشه به تو فکر می‌کنه... 💭❤️",
@@ -467,17 +584,14 @@ const oracleMessages = [
     "قلب تو مثل یه شمع تو تاریکی می‌مونه... گرم و روشن 🕯️",
     "فرشته‌ها به عشق شما غبطه می‌خورن... 👼💗"
 ];
-
 function revealOracle() {
     const msgEl = document.getElementById('oracle-message');
     const crystal = document.getElementById('oracle-crystal');
     const randomMsg = oracleMessages[Math.floor(Math.random() * oracleMessages.length)];
-    
     crystal.style.transform = 'scale(1.2)';
     crystal.style.boxShadow = '0 0 50px rgba(255, 26, 64, 0.9)';
     msgEl.style.opacity = '0';
     msgEl.style.transform = 'translateY(20px)';
-    
     setTimeout(() => {
         msgEl.innerText = randomMsg;
         msgEl.style.opacity = '1';
@@ -487,16 +601,6 @@ function revealOracle() {
     }, 300);
 }
 
-// شمارشگر عشق
-function updateLoveCounter() {
-    const startDate = new Date('2025-02-14');
-    const now = new Date();
-    const diffTime = Math.abs(now - startDate);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById('love-days').innerText = diffDays;
-}
-
-// بازی حافظه
 const memoryEmojis = ['💖', '💕', '💗', '💘', '💝', '💟', '❣️', '💌'];
 let memoryCards = [];
 let flippedCards = [];
@@ -513,7 +617,6 @@ function initMemoryGame() {
     memoryMoves = 0;
     memoryLocked = false;
     movesEl.innerText = 'حرکات: 0';
-    
     grid.innerHTML = '';
     memoryCards.forEach((emoji, index) => {
         const card = document.createElement('div');
@@ -530,16 +633,13 @@ function flipMemoryCard(card) {
     if (memoryLocked) return;
     if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
     if (flippedCards.length === 2) return;
-    
     card.classList.add('flipped');
     card.innerHTML = `<span class="memory-card-emoji">${card.dataset.emoji}</span>`;
     flippedCards.push(card);
-    
     if (flippedCards.length === 2) {
         memoryMoves++;
         document.getElementById('memory-moves').innerText = `حرکات: ${memoryMoves}`;
         memoryLocked = true;
-        
         const [card1, card2] = flippedCards;
         if (card1.dataset.emoji === card2.dataset.emoji) {
             card1.classList.add('matched');
@@ -547,11 +647,8 @@ function flipMemoryCard(card) {
             matchedPairs++;
             flippedCards = [];
             memoryLocked = false;
-            
             if (matchedPairs === memoryEmojis.length) {
-                setTimeout(() => {
-                    alert('🎉 آفرین! تو برنده شدی! حافظه‌ات عالیه عشق من! 🧠❤️');
-                }, 500);
+                setTimeout(() => alert('🎉 آفرین! تو برنده شدی! 🧠❤️'), 500);
             }
         } else {
             setTimeout(() => {
@@ -584,9 +681,6 @@ function createCrimsonParticles() {
 }
 
 function createSoftHearts() {
-    const wrapper = document.getElementById("main");
-    if (!wrapper) return;
-
     for (let i = 0; i < 10; i++) {
         const heart = document.createElement("div");
         heart.className = "soft-heart";
@@ -604,7 +698,6 @@ function playRomanticSound() {
     try {
         let ctx = new (window.AudioContext || window.webkitAudioContext)();
         let t = ctx.currentTime;
-
         function playTone(freq, type, startTime, duration, vol) {
             let osc = ctx.createOscillator();
             let gain = ctx.createGain();
@@ -618,7 +711,6 @@ function playRomanticSound() {
             osc.start(startTime);
             osc.stop(startTime + duration);
         }
-
         playTone(261.63, 'sine', t, 3.2, 0.4);
         playTone(311.13, 'sine', t, 3.2, 0.4);
         playTone(392.00, 'sine', t, 3.2, 0.4);
@@ -635,6 +727,15 @@ function revealOnScroll() {
             reveals[i].classList.add('active');
         }
     }
+    // فعال‌سازی آیتم منو هنگام اسکرول
+    document.querySelectorAll('.web-section[id]').forEach(sec => {
+        const top = sec.getBoundingClientRect().top;
+        if (top < window.innerHeight / 2 && top > -sec.offsetHeight / 2) {
+            document.querySelectorAll('.navbar a').forEach(a => a.classList.remove('active'));
+            const target = document.querySelector(`.navbar a[href="#${sec.id}"]`);
+            if (target) target.classList.add('active');
+        }
+    });
 }
 window.addEventListener('scroll', revealOnScroll);
 
@@ -680,7 +781,6 @@ function openPortal() {
         btn.style.opacity = "1";
     }, 2000);
 }
-
 function closePortal() {
     const portal = document.getElementById("vampire-portal");
     const dim = document.getElementById("portal-dim");
@@ -692,7 +792,6 @@ function closePortal() {
         cancelAnimationFrame(vortexAnimation);
     }, 1500);
 }
-
 function startVortexCanvas() {
     const canvas = document.getElementById('vortexCanvas');
     const ctx = canvas.getContext('2d');
@@ -716,9 +815,7 @@ function startVortexCanvas() {
         particles.forEach(p => {
             p.angle += p.speed;
             p.radius -= p.radius * 0.015;
-            if(p.radius < 5) {
-                p.radius = Math.max(canvas.width, canvas.height);
-            }
+            if(p.radius < 5) p.radius = Math.max(canvas.width, canvas.height);
             let x = centerX + Math.cos(p.angle) * p.radius;
             let y = centerY + Math.sin(p.angle) * p.radius;
             ctx.beginPath();
@@ -739,6 +836,7 @@ function startVortexCanvas() {
     drawVortex();
 }
 
+// Firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
     authDomain: "niyayesh-universe.firebaseapp.com",
@@ -747,7 +845,6 @@ const firebaseConfig = {
     messagingSenderId: "675804346928",
     appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
 };
-
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
@@ -759,7 +856,7 @@ db.collection("website_data").doc("texts").onSnapshot((doc) => {
         document.querySelectorAll('[data-key]').forEach(el => {
             const key = el.getAttribute('data-key');
             if(data[key] !== undefined) {
-                if(key === "love_letter" && document.getElementById("main").style.display !== "block") { return; }
+                if(key === "love_letter" && document.getElementById("main").style.display !== "block") return;
                 el.innerHTML = data[key];
             }
         });
@@ -771,8 +868,7 @@ db.collection("website_data").doc("config").get().then((doc) => {
     if (doc.exists) {
         const data = doc.data();
         if(data.tvd_video_url) {
-            const tvdFrame = document.getElementById("tvd-iframe");
-            if(tvdFrame) tvdFrame.src = data.tvd_video_url;
+            document.getElementById("tvd-iframe").src = data.tvd_video_url;
         }
     }
 });
@@ -783,20 +879,16 @@ function saveWebsiteTexts() {
     document.querySelectorAll('[data-key]').forEach(el => {
         const key = el.getAttribute('data-key');
         let content = el.innerHTML;
-        if(key === "love_letter") {
-            content = el.innerHTML.replace(/<br\s*\/?>/gi, "\n");
-        }
+        if(key === "love_letter") content = el.innerHTML.replace(/<br\s*\/?>/gi, "\n");
         updatedTexts[key] = content;
     });
     db.collection("website_data").doc("texts").set(updatedTexts, { merge: true })
-    .then(() => { alert("تغییرات با موفقیت برای نیایش اعمال شد! ❤️"); })
+    .then(() => alert("تغییرات با موفقیت برای نیایش اعمال شد! ❤️"))
     .catch(err => { console.error(err); alert("خطا در ذخیره."); });
 }
 
 function triggerUpload() {
-    if(isAdmin) {
-        document.getElementById('file-input').click();
-    }
+    if(isAdmin) document.getElementById('file-input').click();
 }
 
 async function handleFileUpload(event) {
