@@ -1,47 +1,283 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const gCanvas = document.getElementById('love-game-canvas');
-    if (!gCanvas) return;
-    
-    const gCtx = gCanvas.getContext('2d');
-    let player = { x: 50, y: 200, size: 20, speed: 5, isAttacking: false };
-    let enemies = [];
-    let niyayesh = { x: 500, y: 200, size: 25, active: false };
-    let keys = {};
-    let gameWon = false;
+const canvas =
 
-    function initEnemies() {
-        enemies = [];
-        for(let i=0; i<5; i++) {
-            enemies.push({ x: 200 + Math.random() * 300, y: 50 + Math.random() * 300, size: 20, speed: 1 + Math.random() * 1.5, hp: 3, alive: true });
-        }
+document.getElementById('love-game');
+
+const ctx =
+
+canvas.getContext('2d');
+
+let player = {
+
+    x:100,
+
+    y:200,
+
+    size:20,
+
+    speed:5
+
+};
+
+let enemies = [];
+
+let keys = {};
+
+let won = false;
+
+const goal = {
+
+    x:700,
+
+    y:220,
+
+    active:false
+
+};
+
+function createEnemies(){
+
+    enemies = [];
+
+    for(let i=0;i<5;i++){
+
+        enemies.push({
+
+            x:250 + Math.random()*300,
+
+            y:80 + Math.random()*250,
+
+            size:20,
+
+            hp:3,
+
+            alive:true
+
+        });
+
     }
 
-    window.addEventListener('keydown', e => keys[e.code] = true);
-    window.addEventListener('keyup', e => keys[e.code] = false);
-    window.addEventListener('keydown', e => {
-        if(e.code === 'Space' && !player.isAttacking && !gameWon) {
-            player.isAttacking = true;
-            enemies.forEach(en => {
-                if(en.alive && Math.hypot(en.x - player.x, en.y - player.y) < 60) {
-                    en.hp -= 1; if(en.hp <= 0) en.alive = false;
+}
+
+createEnemies();
+
+window.addEventListener('keydown',e=>{
+
+    keys[e.code] = true;
+
+});
+
+window.addEventListener('keyup',e=>{
+
+    keys[e.code] = false;
+
+});
+
+window.addEventListener('keydown',e=>{
+
+    if(e.code === 'Space'){
+
+        enemies.forEach(enemy=>{
+
+            if(enemy.alive){
+
+                const dx =
+
+                enemy.x - player.x;
+
+                const dy =
+
+                enemy.y - player.y;
+
+                const dist =
+
+                Math.sqrt(dx*dx + dy*dy);
+
+                if(dist < 80){
+
+                    enemy.hp--;
+
+                    if(enemy.hp <= 0){
+
+                        enemy.alive = false;
+
+                    }
+
                 }
-            });
-            setTimeout(() => player.isAttacking = false, 200);
+
+            }
+
+        });
+
+    }
+
+});
+
+function update(){
+
+    if(keys['ArrowUp']) player.y -= player.speed;
+
+    if(keys['ArrowDown']) player.y += player.speed;
+
+    if(keys['ArrowLeft']) player.x -= player.speed;
+
+    if(keys['ArrowRight']) player.x += player.speed;
+
+    let allDead = true;
+
+    enemies.forEach(enemy=>{
+
+        if(enemy.alive){
+
+            allDead = false;
+
         }
+
     });
 
-    function runGame() {
-        if(gameWon) return;
-        // لاجیک آپدیت و رسم بازی (بخش drawGame و updateGame رو از کد خودت اینجا قرار بده)
-        // این ساختار باعث میشه بازی فوق‌العاده روان (Smooth) اجرا بشه.
-        requestAnimationFrame(runGame);
-    }
-    
-    window.resetGame = function() {
-        player.x = 50; player.y = 200; niyayesh.active = false; gameWon = false;
-        document.getElementById('game-win-screen').style.display = 'none';
-        initEnemies(); runGame();
+    if(allDead){
+
+        goal.active = true;
+
     }
 
-    initEnemies(); runGame();
+    if(goal.active){
+
+        const dx = goal.x - player.x;
+
+        const dy = goal.y - player.y;
+
+        const dist =
+
+        Math.sqrt(dx*dx + dy*dy);
+
+        if(dist < 40){
+
+            won = true;
+
+            document.getElementById('game-win')
+
+            .style.display = 'flex';
+
+        }
+
+    }
+
+}
+
+function draw(){
+
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    // Goal
+
+    if(goal.active){
+
+        ctx.font = '40px Arial';
+
+        ctx.fillText(
+
+            '💕',
+
+            goal.x,
+
+            goal.y
+
+        );
+
+    }
+
+    // Enemies
+
+    enemies.forEach(enemy=>{
+
+        if(enemy.alive){
+
+            ctx.beginPath();
+
+            ctx.fillStyle =
+
+            '#ff0a54';
+
+            ctx.arc(
+
+                enemy.x,
+
+                enemy.y,
+
+                enemy.size,
+
+                0,
+
+                Math.PI*2
+
+            );
+
+            ctx.fill();
+
+        }
+
+    });
+
+    // Player
+
+    ctx.beginPath();
+
+    ctx.fillStyle =
+
+    '#ffffff';
+
+    ctx.arc(
+
+        player.x,
+
+        player.y,
+
+        player.size,
+
+        0,
+
+        Math.PI*2
+
+    );
+
+    ctx.fill();
+
+}
+
+function loop(){
+
+    if(!won){
+
+        update();
+
+        draw();
+
+    }
+
+    requestAnimationFrame(loop);
+
+}
+
+loop();
+
+document
+
+.getElementById('restart-game')
+
+.addEventListener('click',()=>{
+
+    won = false;
+
+    document.getElementById('game-win')
+
+    .style.display = 'none';
+
+    player.x = 100;
+
+    player.y = 200;
+
+    goal.active = false;
+
+    createEnemies()
+
 });
