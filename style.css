@@ -55,7 +55,7 @@ img, video, iframe, canvas {
     display: none !important;
 }
 
-/* ━━━ ستاره‌های شب ━━━ */
+/* ──── ستاره‌های شب ──── */
 .starfield {
     position: fixed;
     inset: 0;
@@ -81,33 +81,7 @@ img, video, iframe, canvas {
     50% { opacity: 1; }
 }
 
-/* ━━━ ابرها متحرک ━━━ */
-.clouds-container {
-    position: fixed;
-    inset: 0;
-    z-index: -3;
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.cloud {
-    position: absolute;
-    background: radial-gradient(circle, rgba(255,255,255,0.8), rgba(255,255,255,0));
-    border-radius: 100px;
-    opacity: 0.3;
-    will-change: transform;
-}
-
-.cloud.moving {
-    animation: cloudFloat linear infinite;
-}
-
-@keyframes cloudFloat {
-    from { transform: translateX(-100vw); }
-    to { transform: translateX(100vw); }
-}
-
-/* ━━━ ماه و خورشید ━━━ */
+/* ──── ماه و خورشید ──── */
 .celestial-body {
     position: fixed;
     border-radius: 50%;
@@ -136,19 +110,7 @@ img, video, iframe, canvas {
     transition: all 1.2s ease;
 }
 
-/* ━━━ ضوابط اسکرول ━━━ */
-.scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #ff1a40, #ffaa00, #ff1a40);
-    width: 0%;
-    z-index: 10001;
-    box-shadow: 0 0 20px #ff1a40;
-}
-
-/* ━━━ نشانگر وقت (Night/Day) ━━━ */
+/* ──── نشانگر وقت ──── */
 .time-indicator {
     position: fixed;
     top: 20px;
@@ -169,118 +131,7 @@ body.full-day .time-indicator {
     border-color: rgba(255, 215, 0, 0.3);
 }
 
-/* ━━━ فیلتر‌های احساسی ━━━ */
-.emotional-overlay {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: -1;
-    transition: all 1s ease;
-    opacity: 0;
-}
-
-.emotional-overlay.mysterious {
-    background: radial-gradient(ellipse at center, transparent 0%, rgba(70, 70, 150, 0.15) 100%);
-    opacity: 1;
-}
-
-.emotional-overlay.romantic {
-    background: radial-gradient(ellipse at center, transparent 0%, rgba(255, 100, 150, 0.12) 100%);
-    opacity: 1;
-}
-
-.emotional-overlay.ending {
-    background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
-    opacity: 1;
-}
-
-/* ━━━ پس‌زمینه و افکت‌های ثابت ━━━ */
-.vintage-overlay {
-    position: fixed;
-    top: -50%;
-    left: -50%;
-    right: -50%;
-    bottom: -50%;
-    width: 200%;
-    height: 200%;
-    background: transparent url('overlay.svg') repeat;
-    opacity: 0.15;
-    filter: sepia(0.1) contrast(1.02);
-    pointer-events: none;
-    z-index: 9999;
-    animation: noise-jump 0.12s infinite steps(3);
-}
-
-.vignette {
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle, transparent 25%, rgba(0,0,0,0.4) 85%, rgba(0,0,0,0.95) 100%);
-    pointer-events: none;
-    z-index: 9998;
-}
-
-@keyframes noise-jump {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(-0.8%, 0.5%); }
-    100% { transform: translate(0.5%, -0.8%); }
-}
-
-@keyframes film-jitter {
-    0% { transform: translate(0, 0); filter: contrast(1) sepia(0.05); }
-    50% { transform: translate(0.4px, -0.4px) scale(1.001); filter: contrast(1.08) sepia(0.12); }
-    100% { transform: translate(-0.4px, 0.4px); filter: contrast(1) sepia(0.05); }
-}
-
-.main-jitter-wrapper {
-    animation: none;
-}
-
-/* ━━━ نوار ناوبری (فقط بعد از ورود) ━━━ */
-.navbar {
-    position: fixed;
-    top: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--glass-base);
-    border: 1px solid var(--glass-specular);
-    padding: 10px 18px;
-    border-radius: 30px;
-    backdrop-filter: blur(50px) saturate(210%);
-    -webkit-backdrop-filter: blur(50px) saturate(210%);
-    display: none;
-    gap: 8px;
-    z-index: 1000;
-    opacity: 0;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.15);
-    transition: top 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), transform 0.35s ease;
-    max-width: 95vw;
-    overflow-x: auto;
-    white-space: nowrap;
-    scrollbar-width: none;
-}
-.navbar::-webkit-scrollbar { display: none; }
-.navbar.show-nav {
-    display: flex;
-    top: 20px;
-    opacity: 1;
-}
-.navbar a {
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 700;
-    padding: 8px 16px;
-    border-radius: 20px;
-    transition: 0.3s ease;
-    transform: translateZ(0);
-}
-.navbar a:hover, .navbar a.active {
-    color: #ffffff;
-    background: rgba(255, 26, 64, 0.35);
-    box-shadow: 0 4px 15px rgba(255, 26, 64, 0.3);
-}
-
-/* ━━━ Whispers (فیسفوسی) ━━━ */
+/* ──── Whispers ──── */
 .whisper {
     position: fixed;
     font-size: 0.9rem;
@@ -309,7 +160,7 @@ body.full-day .time-indicator {
     }
 }
 
-/* ━━━ Memory Fragments ━━━ */
+/* ──── Memory Fragments ──── */
 .memory-fragment {
     position: fixed;
     width: 120px;
@@ -337,29 +188,6 @@ body.full-day .time-indicator {
     transform: scale(1.1);
 }
 
-.memory-fragment .fragment-tooltip {
-    position: absolute;
-    background: rgba(0,0,0,0.9);
-    color: #fff;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-size: 0.85rem;
-    max-width: 180px;
-    white-space: normal;
-    opacity: 0;
-    pointer-events: none;
-    bottom: 140%;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: all 0.3s ease;
-    border: 1px solid rgba(255, 26, 64, 0.3);
-}
-
-.memory-fragment:hover .fragment-tooltip {
-    opacity: 1;
-    bottom: 130%;
-}
-
 @keyframes fragmentFloat {
     0%, 100% { transform: translateY(0px) translateX(0px); }
     25% { transform: translateY(-40px) translateX(20px); }
@@ -367,13 +195,7 @@ body.full-day .time-indicator {
     75% { transform: translateY(-40px) translateX(30px); }
 }
 
-/* ━━━ Particles تاریک ━━━ */
-.dark-particle {
-    position: fixed;
-    pointer-events: none;
-    will-change: transform;
-}
-
+/* ──── Particles ──── */
 .particle {
     position: fixed;
     border-radius: 50%;
@@ -398,7 +220,7 @@ body.full-day .time-indicator {
     }
 }
 
-/* ━━━ Reveal Animation بهتر ━━━ */
+/* ──── Reveal Animation ──── */
 .reveal {
     opacity: 0;
     transform: translateY(60px) scale(0.95);
@@ -410,18 +232,7 @@ body.full-day .time-indicator {
     transform: translateY(0) scale(1);
 }
 
-/* ━━━ Glow Effects ━━━ */
-.glow-text {
-    text-shadow: 0 0 20px rgba(255, 26, 64, 0.6), 0 0 40px rgba(255, 26, 64, 0.3);
-    animation: glowPulse 3s ease-in-out infinite;
-}
-
-@keyframes glowPulse {
-    0%, 100% { text-shadow: 0 0 20px rgba(255, 26, 64, 0.6), 0 0 40px rgba(255, 26, 64, 0.3); }
-    50% { text-shadow: 0 0 30px rgba(255, 26, 64, 0.8), 0 0 60px rgba(255, 26, 64, 0.5); }
-}
-
-/* ━━━ کابینه بازی Arcade ━━━ */
+/* ──── کابینه بازی Arcade ──── */
 .game-arcade-cabinet {
     width: 100%;
     max-width: 850px;
@@ -510,7 +321,7 @@ body.full-day .time-indicator {
     transform: scale(0.95);
 }
 
-/* ━━━ تاروت ━━━ */
+/* ──── تاروت ──── */
 .tarot-grid {
     display: flex;
     justify-content: center;
@@ -568,7 +379,7 @@ body.full-day .time-indicator {
     box-shadow: 0 0 30px rgba(255, 26, 64, 0.3);
 }
 
-/* ━━━ کانت داون ━━━ */
+/* ──── کانت داون ──── */
 .countdown-container {
     display: flex;
     justify-content: center;
@@ -602,15 +413,34 @@ body.full-day .time-indicator {
     font-weight: 700;
 }
 
-/* ━━━ بک‌گراند شب مرموز ━━━ */
-.night-sky {
+/* ──── بک‌گراند و مه ──── */
+.bg {
     position: fixed;
     inset: 0;
-    z-index: -5;
-    background: radial-gradient(ellipse at 50% 0%, #2a1a3f 0%, #1a0a2e 40%, #0a0a1a 100%);
+    background: radial-gradient(circle at 15% 25%, #2a0105 0%, #000000 60%), radial-gradient(circle at 85% 75%, #140003 0%, #000000 100%);
+    background-size: 140% 140%;
+    animation: gothicGradient 12s ease-in-out infinite alternate;
+    z-index: -3;
+}
+.fog {
+    position: fixed;
+    inset: 0;
+    background: url('https://i.imgur.com/3ZQ3ZQZ.png');
+    opacity: 0.04;
+    animation: moveFog 90s linear infinite;
+    z-index: -2;
+    pointer-events: none;
+}
+@keyframes gothicGradient {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+@keyframes moveFog {
+    from { transform: translateX(0); }
+    to { transform: translateX(-500px); }
 }
 
-/* ━━━ اینترو نتفلیکسی ━━━ */
+/* ──── اینترو نتفلیکسی ──── */
 #netflix-intro {
     position: fixed;
     inset: 0;
@@ -636,7 +466,7 @@ body.full-day .time-indicator {
     100% { transform: scale(6.5); filter: blur(40px); opacity: 0; }
 }
 
-/* ━━━ صفحه لاگین ━━━ */
+/* ──── صفحه لاگین ──── */
 .login-wrapper {
     position: absolute;
     top: 50%;
@@ -742,7 +572,7 @@ input:focus {
     transform: translateY(0) scale(0.99);
 }
 
-/* ━━━ مودال صندوقچه راز ━━━ */
+/* ──── مودال صندوقچه راز ──── */
 #secret-modal {
     position: fixed;
     inset: 0;
@@ -787,7 +617,7 @@ input:focus {
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
-/* ━━━ محتوای اصلی ━━━ */
+/* ──── محتوای اصلی ──── */
 #main {
     display: none;
     min-height: 100vh;
@@ -816,7 +646,7 @@ input:focus {
     gap: 80px;
 }
 
-/* ━━━ بخش‌های عمومی ━━━ */
+/* ──── بخش‌های عمومی ──── */
 .web-section {
     background: rgba(20, 0, 3, 0.35);
     border: 1px solid rgba(255, 26, 64, 0.08);
@@ -827,18 +657,6 @@ input:focus {
     box-shadow: 0 45px 95px rgba(0,0,0,0.85);
     transition: all 0.8s ease;
     position: relative;
-}
-
-/* روشنایی احساسی برای بخش‌های مختلف */
-.web-section.romantic {
-    background: rgba(255, 26, 64, 0.08);
-    border-color: rgba(255, 26, 64, 0.25);
-    box-shadow: 0 0 40px rgba(255, 26, 64, 0.15);
-}
-
-.web-section.mysterious {
-    background: rgba(100, 100, 150, 0.05);
-    border-color: rgba(100, 150, 200, 0.15);
 }
 
 .section-title {
@@ -1313,7 +1131,7 @@ input:focus {
     background: rgba(255, 26, 64, 0.05) !important;
 }
 
-/* ━━━ Hearts و Petals ━━━ */
+/* ──── Hearts و Petals ──── */
 .soft-heart, .rose-petal {
     position: fixed;
     pointer-events: none;
@@ -1357,7 +1175,7 @@ input:focus {
     }
 }
 
-/* ━━━ Lanterns ━━━ */
+/* ──── Lanterns ──── */
 .lantern-container {
     position: fixed;
     inset: 0;
@@ -1385,7 +1203,7 @@ input:focus {
     }
 }
 
-/* ━━━ Mini Hearts (Celebration) ━━━ */
+/* ──── Mini Hearts ──── */
 .mini-heart {
     position: fixed;
     font-size: 1.8rem;
@@ -1405,7 +1223,7 @@ input:focus {
     }
 }
 
-/* ━━━ Castle ━━━ */
+/* ──── Castle ──── */
 .castle-container {
     display: flex;
     justify-content: center;
@@ -1443,7 +1261,7 @@ input:focus {
     text-align: center;
 }
 
-/* ━━━ Compliments ━━━ */
+/* ──── Compliments ──── */
 .compliment-box {
     background: rgba(255, 26, 64, 0.08);
     border: 1px solid rgba(255, 26, 64, 0.25);
@@ -1465,7 +1283,7 @@ input:focus {
     transition: all 0.5s ease;
 }
 
-/* ━━━ Memory Game ━━━ */
+/* ──── Memory Game ──── */
 .memory-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -1515,7 +1333,7 @@ input:focus {
     flex-wrap: wrap;
 }
 
-/* ━━━ Love Counter ━━━ */
+/* ──── Love Counter ──── */
 .love-counter-display {
     background: linear-gradient(135deg, rgba(255, 26, 64, 0.15), rgba(139, 0, 0, 0.1));
     border: 2px solid rgba(255, 26, 64, 0.3);
@@ -1536,7 +1354,7 @@ input:focus {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* ━━━ Music Jukebox ━━━ */
+/* ──── Music Jukebox ──── */
 .music-jukebox {
     text-align: center;
 }
@@ -1582,7 +1400,7 @@ input:focus {
     border-color: #ff1a40;
 }
 
-/* ━━━ Ending Section ━━━ */
+/* ──── Ending Section ──── */
 #ending-sec {
     text-align: center;
     background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 165, 0, 0.05));
@@ -1605,7 +1423,7 @@ input:focus {
     100% { opacity: 1; }
 }
 
-/* ━━━ Creator ━━━ */
+/* ──── Creator ──── */
 .creator {
     text-align: center;
     padding: 40px 20px;
@@ -1616,7 +1434,52 @@ input:focus {
     text-transform: uppercase;
 }
 
-/* ━━━ Responsive ━━━ */
+/* ──── نوار ناوبری ──── */
+.navbar {
+    position: fixed;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--glass-base);
+    border: 1px solid var(--glass-specular);
+    padding: 10px 18px;
+    border-radius: 30px;
+    backdrop-filter: blur(50px) saturate(210%);
+    -webkit-backdrop-filter: blur(50px) saturate(210%);
+    display: none;
+    gap: 8px;
+    z-index: 1000;
+    opacity: 0;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.85), inset 0 1px 1px rgba(255,255,255,0.15);
+    transition: top 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), opacity 1.5s cubic-bezier(0.15, 0.85, 0.35, 1), transform 0.35s ease;
+    max-width: 95vw;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+.navbar::-webkit-scrollbar { display: none; }
+.navbar.show-nav {
+    display: flex;
+    top: 20px;
+    opacity: 1;
+}
+.navbar a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: 0.3s ease;
+    transform: translateZ(0);
+}
+.navbar a:hover, .navbar a.active {
+    color: #ffffff;
+    background: rgba(255, 26, 64, 0.35);
+    box-shadow: 0 4px 15px rgba(255, 26, 64, 0.3);
+}
+
+/* ──── Responsive ──── */
 @media (max-width: 768px) {
     .memory-grid {
         grid-template-columns: repeat(3, 1fr);
