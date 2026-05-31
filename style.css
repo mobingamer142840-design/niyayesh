@@ -22,7 +22,7 @@ html {
 }
 
 body {
-    font-family: 'Vazirmatn', sans-serif;
+    font-family: 'Vazirmatn', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
     background: var(--dark-void);
     overflow-x: hidden;
     min-height: 100vh;
@@ -88,7 +88,7 @@ img, video, iframe, canvas {
     animation: none;
 }
 
-/* ---- نوار ناوبری (فقط بعد از ورود نمایش داده میشه) ---- */
+/* ---- نوار ناوبری ---- */
 .navbar {
     position: fixed;
     top: -100px;
@@ -133,7 +133,6 @@ img, video, iframe, canvas {
     box-shadow: 0 4px 15px rgba(255, 26, 64, 0.3);
 }
 
-/* ---- افکت اسکرول ریویل ---- */
 .reveal {
     opacity: 0;
     transform: translateY(60px) scale(0.95);
@@ -591,7 +590,6 @@ input:focus {
     line-height: 1.5;
 }
 
-/* فیکس ایموجی */
 .emoji-fix {
     display: inline-block;
     -webkit-background-clip: initial !important;
@@ -606,7 +604,6 @@ input:focus {
     transform: translateY(1px);
 }
 
-/* گالری عکس */
 .gallery {
     display: flex;
     gap: 20px;
@@ -641,7 +638,6 @@ input:focus {
     user-select: text;
 }
 
-/* تایم‌لاین */
 .timeline {
     position: relative;
     padding-right: 20px;
@@ -675,7 +671,6 @@ input:focus {
     line-height: 1.8;
 }
 
-/* کارت‌های تاریخ تولد */
 .dates-grid {
     display: flex;
     gap: 20px;
@@ -711,7 +706,6 @@ input:focus {
     line-height: 1.7;
 }
 
-/* علایق */
 .interests-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -759,7 +753,6 @@ input:focus {
     border: 2px solid rgba(255,255,255,0.3);
 }
 
-/* آلبوم */
 .album-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -806,7 +799,6 @@ input:focus {
     color: #fff;
 }
 
-/* فید خاطرات */
 .memory-feed {
     display: flex;
     flex-direction: column;
@@ -869,7 +861,6 @@ input:focus {
     user-select: text;
 }
 
-/* سینما */
 .cinema-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -891,7 +882,6 @@ input:focus {
     height: 100%;
 }
 
-/* پورتال ومپایر */
 #vampire-portal {
     position: fixed;
     inset: 0;
@@ -965,7 +955,6 @@ input:focus {
     box-shadow: 0 0 35px #ff1a40;
 }
 
-/* نوار ادمین */
 #admin-save-bar {
     position: fixed;
     bottom: 25px;
@@ -1002,7 +991,6 @@ input:focus {
     border-radius: 8px;
 }
 
-/* موسیقی */
 .music {
     margin-top: 25px;
     display: flex;
@@ -1015,12 +1003,6 @@ input:focus {
     opacity: 1;
     transform: translateY(0);
 }
-iframe {
-    width: 100%;
-    max-width: 650px;
-    border-radius: 20px;
-    border: none;
-}
 .creator {
     text-align: center;
     padding: 20px;
@@ -1029,7 +1011,6 @@ iframe {
     font-family: 'Cinzel';
 }
 
-/* ذرات */
 .particle {
     position: fixed;
     top: -20px;
@@ -1077,7 +1058,7 @@ iframe {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ---- جدید 3.6.351 ---- */
+/* ---- جدید 5.1 ---- */
 
 /* عشق ابدی */
 .eternal-love-text {
@@ -1104,62 +1085,7 @@ iframe {
     70% { transform: scale(1); }
 }
 
-/* قلک عشق */
-.love-jar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-.love-jar {
-    width: 90px;
-    height: 130px;
-    border: 3px solid rgba(255, 26, 64, 0.6);
-    border-radius: 0 0 20px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-    box-shadow: 0 10px 30px rgba(255, 26, 64, 0.2);
-}
-.love-jar:hover {
-    transform: scale(1.05);
-}
-.jar-fill {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 0%;
-    background: linear-gradient(to top, #ff1a40, #ff6688);
-    transition: height 0.5s ease;
-    border-radius: 0 0 17px 17px;
-}
-.jar-label {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    z-index: 2;
-    pointer-events: none;
-}
-.love-jar.full .jar-label {
-    animation: pop 0.5s ease forwards;
-}
-@keyframes pop {
-    0% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.4); }
-    100% { transform: translate(-50%, -50%) scale(1); }
-}
-.jar-counter {
-    color: #ffb6c1;
-    font-weight: 700;
-}
-
-/* جوک‌باکس */
+/* Lovebox (جوک‌باکس) */
 .music-jukebox {
     display: flex;
     flex-direction: column;
