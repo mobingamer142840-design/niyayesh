@@ -606,6 +606,21 @@ input:focus {
     transform: translateY(1px);
 }
 
+/* کلاس title-emoji برای نمایش صحیح ایموجی در تایتل‌ها */
+.title-emoji {
+    display: inline-block;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    color: initial !important;
+    filter: none !important;
+    text-shadow: none !important;
+    background: none !important;
+    font-variant-emoji: emoji;
+    vertical-align: baseline;
+    transform: translateY(1px);
+}
+
 /* گالری عکس */
 .gallery {
     display: flex;
@@ -1112,7 +1127,7 @@ input:focus {
 }
 .spotify-embed {
     width: 100%;
-    max-width: 500px;
+    max-width: 350px;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 30px rgba(0,0,0,0.7);
@@ -1261,7 +1276,7 @@ input:focus {
     100% { transform: translateY(110vh) rotate(360deg) scale(0.5); opacity: 0; }
 }
 
-/* ---- قلعه پیکسلی ---- */
+/* ---- قلعه پیکسلی (CSS باقی ماند اما المان HTML حذف شده) ---- */
 .castle-container {
     max-width: 500px;
     margin: 0 auto;
