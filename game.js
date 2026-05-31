@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let enemies = [];
     let bloodParticles = [];
-    let powerUps = []; // پاور-آپ قلب
+    let powerUps = [];
     let score = 0;
     const targetScore = 15;
     let gameWon = false;
@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let keys = { ArrowLeft: false, ArrowRight: false, Space: false };
 
-    // Web Audio API برای صدای ضربه
     let audioCtx = null;
     function initAudio() {
         if (!audioCtx) {
@@ -64,6 +63,22 @@ document.addEventListener("DOMContentLoaded", () => {
         gain.connect(audioCtx.destination);
         osc.start(t);
         osc.stop(t + 0.15);
+    }
+
+    function playHealSound() {
+        if (!audioCtx) return;
+        const t = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(400, t);
+        osc.frequency.linearRampToValueAtTime(600, t + 0.1);
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(t);
+        osc.stop(t + 0.25);
     }
 
     function resizeCanvas() {
@@ -139,13 +154,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function spawnPowerUp() {
         if (!isPlaying || gameWon) return;
-        // اسپاون پاور-آپ قلب (شانس ۳۰٪ هر ۶ ثانیه)
         if (Math.random() < 0.3) {
             powerUps.push({
                 x: Math.random() * (canvas.width - 100) + 50,
                 y: canvas.height - 180,
                 radius: 12,
-                life: 400 // حدود ۶-۷ ثانیه با 60fps
+                life: 400
             });
         }
         setTimeout(spawnPowerUp, 6000);
@@ -242,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // برخورد با پاور-آپ‌ها
+            // Heart power-up collection
             for (let i = powerUps.length - 1; i >= 0; i--) {
                 let pu = powerUps[i];
                 pu.life--;
@@ -251,7 +265,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     continue;
                 }
                 
-                // برخورد دایره به مستطیل (بازیکن)
                 const closestX = Math.max(player.x, Math.min(pu.x, player.x + player.width));
                 const closestY = Math.max(player.y, Math.min(pu.y, player.y + player.height));
                 const distX = pu.x - closestX;
@@ -259,6 +272,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if ((distX * distX + distY * distY) < pu.radius * pu.radius) {
                     player.health = Math.min(100, player.health + 15);
                     powerUps.splice(i, 1);
+                    initAudio();
+                    playHealSound();
                     const p1Health = document.getElementById('p1-health');
                     if (p1Health) p1Health.style.width = player.health + '%';
                 }
@@ -363,7 +378,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ctx.shadowBlur = 15;
             ctx.fillStyle = '#ff3366';
             ctx.beginPath();
-            // رسم قلب با دو圆弧 و مثلث
             const x = pu.x, y = pu.y, r = pu.radius;
             ctx.moveTo(x, y + r * 0.4);
             ctx.bezierCurveTo(x, y - r * 0.2, x - r, y - r * 0.2, x - r, y + r * 0.3);
@@ -481,7 +495,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
 
         spawnArcadeEnemies();
-        spawnPowerUp(); // شروع اسپاون پاور-آپ
+        spawnPowerUp();
         if (!gameLoopId) loopArcade();
 
         addTinyCelebration();
