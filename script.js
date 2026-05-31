@@ -24,7 +24,7 @@ const tracks = [
 let currentTrack = 0;
 
 // Memory game variables
-let memoryEmojis = ['💖', '💕', '💗', '💘', '💝', '💟', '❣️', '💌'];
+const memoryEmojis = ['💖', '💕', '💗', '💘', '💝', '💟', '❣️', '💌'];
 let memoryCards = [], flippedCards = [], matchedPairs = 0, memoryMoves = 0, memoryLocked = false;
 
 // Fighting game variables
@@ -37,6 +37,7 @@ let timerInterval = null;
 
 // ======================== HELPER FUNCTIONS ========================
 function preserveEmojiColor() {
+    // This function now just adds a span wrapper to emojis in titles to prevent gradient issues.
     const emojiRegex = /([🩸🃏⏳🥹🫂💕🎮🌀🔒❤️⚔️⏰✨📸🦇🧠💗🌸🎵🌧️💒])/g;
     document.querySelectorAll('.title-main, .section-title').forEach(el => {
         if (!el.dataset.emojiFixed) {
@@ -77,10 +78,11 @@ function createCrimsonParticles() {
 }
 
 function createSoftHearts() {
+    const heartSymbols = ["💖", "✨", "🫶", "💕"];
     for (let i = 0; i < 10; i++) {
         const heart = document.createElement("div");
         heart.className = "soft-heart";
-        heart.textContent = ["💖", "✨", "🫶", "💕"][Math.floor(Math.random() * 4)];
+        heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
         heart.style.cssText = `position:fixed; bottom:-30px; left:${Math.random()*100}vw; font-size:1.2rem; opacity:0; animation:floatHearts ${Math.random()*8+10}s linear forwards;`;
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 20000);
@@ -535,7 +537,6 @@ db.collection("website_data").doc("config").get().then(doc => {
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('DOMContentLoaded', () => {
     preserveEmojiColor();
-    // Attach tarot flip listeners
     document.querySelectorAll('.tarot-card').forEach(card => {
         card.addEventListener('click', () => card.classList.toggle('flipped'));
     });
