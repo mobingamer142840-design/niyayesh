@@ -6,12 +6,10 @@
     <meta name="theme-color" content="#030303">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Mobin & Niyayesh | Eternal Gothic Universe v7.0</title>
+    <title>Mobin & Niyayesh | Eternal Gothic Universe v8.0</title>
 
-    <!-- بارگذاری بهترین فونت‌های فارسی و انگلیسی دنیا -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Vazirmatn:wght@300;400;700;900&display=swap" rel="stylesheet">
-    
-    <!-- کیت فایربیس نسخه کامپت پایدار -->
+
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
@@ -59,12 +57,11 @@
             letter-spacing: 2px;
         }
 
-        /* لایه‌های سینمایی پس‌زمینه */
         .bg {
             position: fixed;
             inset: 0;
-            background: radial-gradient(circle at 15% 20%, #290104 0%, #000000 75%), 
-                        radial-gradient(circle at 85% 80%, #110002 0%, #020202 100%);
+            background: radial-gradient(circle at 15% 20%, #290104 0%, #000000 75%),
+                radial-gradient(circle at 85% 80%, #110002 0%, #020202 100%);
             background-size: 140% 140%;
             animation: gothicGradient 30s ease-in-out infinite alternate;
             z-index: -3;
@@ -117,7 +114,6 @@
             to { transform: translateX(-1200px); }
         }
 
-        /* لایه نوتیفیکیشن کاستوم */
         #custom-alert {
             position: fixed;
             top: 25px;
@@ -141,7 +137,6 @@
             pointer-events: auto;
         }
 
-        /* اینترو نتفلیکس */
         #netflix-intro {
             position: fixed;
             inset: 0;
@@ -160,7 +155,7 @@
             opacity: 0;
             text-shadow: 0 0 80px var(--neon-glow), 0 0 30px rgba(255, 255, 255, 0.2);
         }
-        
+
         .animate-zoom {
             animation: romanticZoom 4s forwards cubic-bezier(0.15, 0.85, 0.35, 1);
         }
@@ -172,7 +167,6 @@
             100% { transform: scale(9.5); filter: blur(55px); opacity: 0; }
         }
 
-        /* فرم ورود رمانتیک */
         .login-wrapper {
             position: fixed;
             inset: 0;
@@ -292,7 +286,6 @@
             transform: translateY(-2px);
         }
 
-        /* کلاس ایزولاسیون ایموجی‌ها جهت پایداری گرافیکی */
         .emoji {
             font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif !important;
             display: inline-block;
@@ -305,7 +298,6 @@
             margin: 0 4px;
         }
 
-        /* نوار ناوبری شیشه‌ای و ظریف پایین گوشی و بالای دسکتاپ */
         .navbar {
             position: fixed;
             top: -100px;
@@ -349,7 +341,6 @@
             box-shadow: 0 4px 15px rgba(255, 26, 64, 0.25);
         }
 
-        /* ساختار اصلی محتوا */
         #main {
             display: none;
             opacity: 0;
@@ -364,7 +355,6 @@
             gap: 80px;
         }
 
-        /* پنل‌های شیشه‌ای گوتیک */
         .web-section {
             background: rgba(14, 2, 4, 0.44);
             border: 1px solid rgba(255, 26, 64, 0.16);
@@ -387,7 +377,6 @@
             text-align: center;
         }
 
-        /* فرشته‌ی روی زمین (My Angel) */
         .angel-hero-card {
             display: flex;
             flex-direction: column;
@@ -433,7 +422,6 @@
             100% { transform: scale(1.15); opacity: 0.8; }
         }
 
-        /* هم‌نوایی قلبی ومپایری */
         .bond-calculator-container {
             display: flex;
             flex-direction: column;
@@ -468,7 +456,6 @@
             margin: 20px 0;
         }
 
-        /* کتاب سایه‌ها (The Mystic Grimoire) */
         .cipher-box {
             background: rgba(0,0,0,0.4);
             border: 1px solid rgba(255, 26, 64, 0.15);
@@ -489,7 +476,6 @@
             animation: fadeIn 1s ease forwards;
         }
 
-        /* چرخ گردان سرنوشت گوتیک */
         .wheel-universe {
             position: relative;
             width: 280px;
@@ -518,7 +504,6 @@
             filter: drop-shadow(0 0 10px var(--neon-blood));
         }
 
-        /* چت روم خصوصی و آنلاین */
         .chat-room-container {
             display: flex;
             flex-direction: column;
@@ -594,7 +579,6 @@
             box-shadow: 0 0 15px var(--neon-glow);
         }
 
-        /* بخش طومار یادداشت‌ها و خاطرات جادویی (Mystic Grimoire) */
         .grimoire-editor {
             display: flex;
             flex-direction: column;
@@ -635,7 +619,6 @@
             color: #ddd;
             white-space: pre-wrap;
         }
-        /* افکت موم گوتیک مهر شده */
         .wax-seal {
             position: absolute;
             left: 20px;
@@ -655,7 +638,6 @@
             opacity: 0.8;
         }
 
-        /* آرکید گیم پیشرفته (The TVD Battle Arena) */
         .game-arcade-cabinet {
             width: 100%;
             background: rgba(5, 1, 2, 0.96);
@@ -721,7 +703,6 @@
             background: #0d0103;
         }
 
-        /* چاه آرزوهای کهکشانی تعاملی */
         #galaxyCanvas {
             width: 100%;
             height: 250px;
@@ -731,7 +712,6 @@
             cursor: pointer;
         }
 
-        /* فروشگاه اختصاصی مرچ */
         .merch-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -782,7 +762,6 @@
             box-shadow: 0 0 15px var(--neon-glow);
         }
 
-        /* کارت‌های تاروت سه بعدی */
         .tarot-grid {
             display: flex;
             justify-content: center;
@@ -837,7 +816,6 @@
             text-align: center;
         }
 
-        /* گالری تصاویر خاطرات */
         .album-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -878,7 +856,6 @@
             opacity: 1;
         }
 
-        /* پورتال معلق ومپایر دایریز */
         #vampire-portal {
             position: fixed;
             inset: 0;
@@ -949,7 +926,6 @@
             transform: scale(1.05);
         }
 
-        /* بازی حافظه */
         .memory-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -975,7 +951,6 @@
             transform: rotateY(180deg);
         }
 
-        /* بخش ماه خونین */
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -1005,7 +980,6 @@
             margin-top: 5px;
         }
 
-        /* جلوه اتمسفری متحرک گلبرگ */
         .atmosphere-container {
             position: fixed;
             inset: 0;
@@ -1025,7 +999,6 @@
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
 
-        /* ===== باران قلب (heartFall) ===== */
         .heart-drop {
             position: fixed;
             top: -40px;
@@ -1055,7 +1028,6 @@
             user-select: text;
         }
 
-        /* تصحیح باگ تداخل ارتفاع منوی موبایل */
         @media (max-width: 768px) {
             .navbar {
                 display: none;
@@ -1083,29 +1055,24 @@
 <div class="vignette"></div>
 <div class="atmosphere-container" id="atmosphere"></div>
 
-<!-- باکس اعلان سفارشی -->
 <div id="custom-alert">
     <span class="emoji">🩸</span>
     <span id="custom-alert-msg">خوش آمدید!</span>
 </div>
 
-<!-- ترنزیشن شروع نتفلیکس -->
 <div id="netflix-intro">
     <div class="netflix-text" id="netflix-letter">N</div>
 </div>
 
-<!-- صفحه ورود دو حالته به صورت مهمان و اختصاصی -->
 <div class="login-wrapper" id="login-zone">
     <div class="login-container">
         <div class="login-emojis"><span class="emoji">🖤</span><span class="emoji">✨</span></div>
         <h1 class="cinzel-font">Niyayesh</h1>
         <p class="cinzel-font">A Vampire Diaries Universe</p>
-        
         <div class="login-choice-btns" id="login-choices">
             <button class="action-btn primary-btn" onclick="showPassSection('love')">ورود به عنوان فرشته‌ من (Niyayesh) <span class="emoji">💕</span></button>
             <button class="action-btn secondary-btn" onclick="enterGuest()">ورود به عنوان مهمان (بدون رمز) <span class="emoji">👀</span></button>
         </div>
-
         <div class="pass-input-section" id="pass-field-area">
             <input id="pass" type="password" placeholder="رمز عبور جاویدان خود را وارد کن..." style="margin-bottom:15px;">
             <button class="action-btn primary-btn" onclick="enterPartner()">گشودن لوح اسرار <span class="emoji">🪐</span></button>
@@ -1114,7 +1081,6 @@
     </div>
 </div>
 
-<!-- هدر شناور رمانتیک پایین گوشی -->
 <div class="navbar" id="navbar">
     <a href="#angel-sec" class="active">فرشته من</a>
     <a href="#letter-sec">نامه‌ی جاودان</a>
@@ -1132,11 +1098,8 @@
     <a href="javascript:void(0)" onclick="openPortal()" style="color:var(--neon-blood); font-weight:bold;">🌀 پورتال</a>
 </div>
 
-<!-- کل محتوای اصلی رمانتیک -->
 <div id="main">
     <div class="container">
-
-        <!-- بخش اول: فرشته من -->
         <div class="web-section reveal" id="angel-sec">
             <div class="section-title">My Beautiful Angel <span class="emoji">💕</span></div>
             <div class="angel-hero-card">
@@ -1152,13 +1115,11 @@
             </div>
         </div>
 
-        <!-- بخش دوم: نامه‌ی عاشقانه جاویدان -->
         <div class="web-section reveal" id="letter-sec">
             <div class="section-title">نجوای جاویدان مبین به معشوقه‌اش <span class="emoji">💌</span></div>
             <div class="text" id="typed-text" style="min-height:200px; text-shadow: 0 0 10px rgba(255,255,255,0.12);"></div>
         </div>
 
-        <!-- بخش جدید: هم‌نوایی قلبی (The Blood Bond Resonance) -->
         <div class="web-section reveal" id="bond-sec">
             <div class="section-title">Blood Bond Resonance <span class="emoji">🤝</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">لمس کن تا شدت پیوند و هم‌نوایی ضربان قلب تو و مبین در تالار خون‌آشام‌ها سنجیده شود...</p>
@@ -1171,14 +1132,12 @@
             </div>
         </div>
 
-        <!-- بخش جدید: نقشه ستاره‌های عشق تعاملی (The Celestial Map) -->
         <div class="web-section reveal" id="star-sec">
             <div class="section-title">Celestial Love Star Map <span class="emoji">🌌</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">بر روی نقشه ستاره‌ها کلیک کن یا انگشتت را بکش تا گره‌های طلایی کهکشان و صورت فلکی عشقمان نمایان شود...</p>
             <canvas id="galaxyCanvas"></canvas>
         </div>
 
-        <!-- بخش جدید: کتاب خاطرات جاودان (Mystic Grimoire) -->
         <div class="web-section reveal" id="grimoire-sec">
             <div class="section-title">The Mystic Grimoire of Memories <span class="emoji">📔</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">خاطرات قشنگ، جملات ماندگار و دلنوشته‌های دونفره‌مان را اینجا با مهر سرخ مومی ثبت کنید...</p>
@@ -1189,12 +1148,9 @@
                     <button class="action-btn primary-btn" style="width:auto; padding: 10px 30px;" onclick="addGrimoireEntry()">مهر و ثبت خاطره</button>
                 </div>
             </div>
-            <div class="grimoire-list" id="grimoire-entries-box">
-                <!-- خاطرات گوتیک اینجا رندر می‌شوند -->
-            </div>
+            <div class="grimoire-list" id="grimoire-entries-box"></div>
         </div>
 
-        <!-- بخش جدید: چرخ گردان سرنوشت گوتیک (The Gothic Wheel) -->
         <div class="web-section reveal" id="wheel-sec">
             <div class="section-title">The Wheel of Gothic Destiny <span class="emoji">☸️</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">گردونه را بچرخان تا یک هدیه جادویی، قول یا پیام ابدی از طرف مبین دریافت کنی...</p>
@@ -1207,7 +1163,6 @@
             </div>
         </div>
 
-        <!-- بخش جدید: لوح اسرار و گشودن Grimoire -->
         <div class="web-section reveal" id="cipher-sec">
             <div class="section-title">The Book of Shadows Grimoire <span class="emoji">🔐</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 20px;">کلید طلایی را در کادر زیر وارد کن تا دست‌نوشته جادویی گشوده شود...</p>
@@ -1221,7 +1176,6 @@
             </div>
         </div>
 
-        <!-- بخش نجواگاه آنلاین (فقط بعد از زدن پسورد همسر نمایان می‌شود) -->
         <div class="web-section reveal" id="chat-sec" style="display:none;">
             <div class="section-title">نجواگاه خصوصی ما <span class="emoji">🔒</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">مکانی کاملاً امن و اختصاصی برای ارسال پیغام‌های مستقیم و عاشقانه‌ی ما...</p>
@@ -1230,9 +1184,7 @@
                     <span>💬 اتصال جاویدان مبین و نیایش</span>
                     <span style="color:var(--neon-blood); font-weight: 700;">سیستم امن فعال</span>
                 </div>
-                <div class="chat-messages" id="chat-msgs-box">
-                    <!-- پیام‌ها اینجا بارگذاری می‌شوند -->
-                </div>
+                <div class="chat-messages" id="chat-msgs-box"></div>
                 <div class="chat-input-bar">
                     <button class="chat-send-btn" onclick="sendPrivateMsg()">نجوا کن</button>
                     <input type="text" id="chat-input-field" placeholder="حرفی برای ابدیت بنویس..." onkeypress="handleChatEnter(event)">
@@ -1240,7 +1192,6 @@
             </div>
         </div>
 
-        <!-- بخش مبارزه حماسی ومپایرها (شبیه‌ساز تیکن تلو کاره) -->
         <div class="web-section reveal" id="arcade-sec">
             <div class="section-title">TEKKEN: Vampire Fighting Arena <span class="emoji">🩸</span></div>
             <div class="game-arcade-cabinet">
@@ -1262,7 +1213,6 @@
             <p style="text-align:center; color:#888; font-size:0.85rem; margin-top:15px;">در نقش شوالیه ومپایر با شمشیر نئونی در جاده تاریک میستیک فالز حریف را نابود کن!</p>
         </div>
 
-        <!-- بخش پنجم: Jukebox موسیقی -->
         <div class="web-section reveal" id="lovebox-sec">
             <div class="section-title">Gothic Jukebox Lovebox <span class="emoji">🎵</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">آواهایی که روح ما را در اتمسفر ومپایر دایریز غرق می‌کنند...</p>
@@ -1279,7 +1229,6 @@
             </div>
         </div>
 
-        <!-- بازی جادویی حافظه قلبی -->
         <div class="web-section reveal" id="memory-game-sec">
             <div class="section-title">بازی حافظه پیوند عاشقانه <span class="emoji">🧠</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">تصاویر همسان را پیدا کن تا قدرت پیوند قلبی‌مان را بسنجی!</p>
@@ -1289,7 +1238,6 @@
             </div>
         </div>
 
-        <!-- بخش ششم: کارت‌های سرنوشت تاروت -->
         <div class="web-section reveal" id="tarot-sec">
             <div class="section-title">کارت‌های سرنوشت گوتیک ما <span class="emoji">🃏</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 25px;">کارت‌ها را لمس کن تا حقایق سرنوشت عشقمان را فاش کنی...</p>
@@ -1315,7 +1263,6 @@
             </div>
         </div>
 
-        <!-- بخش هفتم: مرچ شاپ -->
         <div class="web-section reveal" id="merch-sec">
             <div class="section-title">مجموعه‌ی مرچ اختصاصی Mobin & Niyayesh <span class="emoji">🕯️</span></div>
             <p style="text-align: center; color: #aaa; margin-bottom: 30px;">طراحی‌های اختصاصی و محدود مخصوص عشق ابدی ما دو نفر</p>
@@ -1341,7 +1288,6 @@
             </div>
         </div>
 
-        <!-- بخش هشتم: آلبوم خاطرات -->
         <div class="web-section reveal" id="album-sec">
             <div class="section-title">آلبوم خاطرات ابدی ما <span class="emoji">✨</span></div>
             <div class="album-grid">
@@ -1360,10 +1306,40 @@
             </div>
         </div>
 
-        <!-- بخش نهم: شمارش معکوس میلاد -->
+        <!-- بخش جدید: قرارهای عاشقانه -->
+        <div class="web-section reveal" id="dates-sec">
+            <div class="section-title">قرارهای عاشقانه ما <span class="emoji">📅</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">لحظه‌های خاصی که با هم سپری کردیم...</p>
+            <div style="display:flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                <div class="time-box">
+                    <span class="cinzel-font">∞</span>
+                    <div class="time-label">اولین ملاقات</div>
+                </div>
+                <div class="time-box">
+                    <span class="cinzel-font">∞</span>
+                    <div class="time-label">اولین بوسه</div>
+                </div>
+                <div class="time-box">
+                    <span class="cinzel-font">∞</span>
+                    <div class="time-label">سالگرد</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- بخش جدید: پیام عاشقانه تصادفی -->
+        <div class="web-section reveal" id="love-notes-sec">
+            <div class="section-title">پیام‌های عاشقانه تصادفی <span class="emoji">💬</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">هر بار یک پیام جدید از قلب من...</p>
+            <div style="text-align:center;">
+                <p id="random-love-note" style="font-size:1.4rem; color: var(--neon-blood); min-height: 60px;"></p>
+                <button class="action-btn primary-btn" style="width:auto; padding:12px 35px;" onclick="generateLoveNote()">پیام جدید</button>
+            </div>
+        </div>
+
+        <!-- بخش جدید: شمارش معکوس -->
         <div class="web-section reveal" id="countdown-sec">
-            <div class="section-title">شمارش معکوس تا تجلی فرشته روی زمین <span class="emoji">⏳</span></div>
-            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">تا روز سالگرد باشکوه‌ترین آفریده خداوند (۲۵ آوریل ۲۰۲۷)</p>
+            <div class="section-title">شمارش معکوس تا سالگرد <span class="emoji">⏳</span></div>
+            <p style="text-align: center; color: #aaa; margin-bottom: 25px;">تا ۲۵ آوریل ۲۰۲۷</p>
             <div class="countdown-container">
                 <div class="time-box"><span id="cd-days" class="cinzel-font">00</span><div class="time-label">روز</div></div>
                 <div class="time-box"><span id="cd-hours" class="cinzel-font">00</span><div class="time-label">ساعت</div></div>
@@ -1373,12 +1349,11 @@
         </div>
 
         <div style="text-align: center; color:rgba(255,255,255,0.25); font-family:'Cinzel'; margin-top:20px; font-size:0.9rem;">
-            Created by Mobin with Infinite Deep Love v7.0
+            Created by Mobin with Infinite Deep Love v8.0
         </div>
     </div>
 </div>
 
-<!-- پورتال سه بعدی کهکشانی گوتیک -->
 <div id="vampire-portal">
     <canvas id="vortexCanvas" class="vortex-canvas"></canvas>
     <div class="portal-dimension" id="portal-dim">
@@ -1389,7 +1364,7 @@
 </div>
 
 <script>
-    // ================== Firebase Init & Config ==================
+    // ================== Firebase Init ==================
     const appId = "niyayesh-universe";
     const firebaseConfig = {
         apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
@@ -1404,7 +1379,7 @@
         firebase.initializeApp(firebaseConfig);
         db = firebase.firestore();
     } catch(err) {
-        console.warn("Firebase offline, local mode:", err.message);
+        console.warn("Firebase offline:", err.message);
     }
 
     // ================== Utilities ==================
@@ -1416,7 +1391,97 @@
         setTimeout(() => alertBox.classList.remove("show"), 3500);
     }
 
-    // ================== Resonance (فرکانس عشق) ==================
+    // ================== Auth ==================
+    let userRole = 'guest';
+    function showPassSection() {
+        document.getElementById("login-choices").style.display = "none";
+        document.getElementById("pass-field-area").style.display = "block";
+    }
+    function backToChoices() {
+        document.getElementById("pass-field-area").style.display = "none";
+        document.getElementById("login-choices").style.display = "flex";
+    }
+
+    async function enterPartner() {
+        const pass = document.getElementById("pass").value.trim().toLowerCase();
+        if (pass === "mobinloveniyayesh" || pass === "adminwiriper") {
+            userRole = 'partner';
+            const authorText = (pass === "adminwiriper") ? "مبین ❤️" : "نیایش 🕊️";
+            document.getElementById("grimoire-author-display").innerText = "نویسنده: " + authorText;
+            try { if (firebase.auth) await firebase.auth().signInAnonymously(); } catch(e) {}
+            document.getElementById("login-zone").style.display = "none";
+            document.getElementById("nav-chat-link").style.display = "inline-block";
+            document.getElementById("chat-sec").style.display = "block";
+            triggerSuccessFlow();
+        } else {
+            showNotif("❌ رمز عبور اشتباه است؛ دوباره تلاش کن عشق من.");
+        }
+    }
+
+    async function enterGuest() {
+        userRole = 'guest';
+        document.getElementById("grimoire-author-display").innerText = "نویسنده: مهمان قلمرو 👀";
+        try { if (firebase.auth) await firebase.auth().signInAnonymously(); } catch(e) {}
+        document.getElementById("login-zone").style.display = "none";
+        showNotif("💖 خوش آمدید! شما به عنوان مهمان وارد قلمرو شدید.");
+        triggerSuccessFlow();
+    }
+
+    function triggerSuccessFlow() {
+        playRomanticSound();
+        const intro = document.getElementById("netflix-intro");
+        intro.style.display = "flex";
+        document.getElementById("netflix-letter").classList.add("animate-zoom");
+        setTimeout(() => {
+            intro.style.opacity = "0";
+            setTimeout(() => intro.style.display = "none", 1500);
+            const mainContent = document.getElementById("main");
+            mainContent.style.display = "block";
+            setTimeout(() => mainContent.style.opacity = "1", 100);
+            document.getElementById("navbar").classList.add("show-nav");
+            revealOnScroll();
+            typeWriter(loveLetterText, 0, "typed-text");
+            initMemoryGame();
+            initArcadeGame();
+            initGalaxyCanvas();
+            initWheel();
+            listenToGrimoire();
+            if (userRole === 'partner') listenToPrivateChat();
+            startRoseAtmosphere();
+        }, 3800);
+    }
+
+    const loveLetterText = `نیایش عزیزم، فرشته زیبای روی زمین من...\n\nنمی‌دانم چطور احساس عمیق و کهکشانی‌ام را در قاب واژه‌ها بگنجانم، اما تو برای من هرگز یک شخص عادی نبودی؛ تو همان حس لطیف، امن و بی‌بدیلی هستی که در تاریک‌ترین و شلوغ‌ترین ثانیه‌های این جهان مرا نجات می‌دهد.\n\nبا آمدنت تمام غصه‌های جهانم رنگ باختند. یک پیغام کوتاه از تو تپش قلبم را تنظیم می‌کند و تجسم لبخند جادویی‌ات تمام روح مرا غرق در آرامشِ ابدی می‌کند.\n\nتو برای من بسیار فراتر از چیزی هستی که بشود به زبان آورد. بودنِ تو در زندگی من، باشکوه‌ترین اتفاق هستی است.\n\nقول می‌دهم آینده‌ای برایت بسازم که لایق فرشته‌ای چون تو باشد، پر از هیجان جاده‌ها و غرق در عشق بی‌پایان. این را بدان که مبینت همیشه، در هر زمان و در هر شرایطی مثل یک سایه محافظ، وفادار و عاشق در کنارت خواهد ماند.\n\nدوستت دارم تک‌دونه‌ی قلبم 🫂💕🥹\n\nباعشق، Mobin`;
+
+    function typeWriter(text, i, elementId) {
+        const el = document.getElementById(elementId);
+        if (i === 0) el.innerHTML = "";
+        if (i < text.length) {
+            let char = text.charAt(i);
+            if(char === "\n") el.innerHTML += "<br>";
+            else el.innerHTML += char;
+            setTimeout(() => typeWriter(text, i + 1, elementId), char === "." ? 350 : 35);
+        }
+    }
+
+    function startRoseAtmosphere() {
+        const container = document.getElementById("atmosphere");
+        setInterval(() => {
+            const p = document.createElement("div");
+            p.className = "petal";
+            const size = Math.random() * 15 + 10;
+            p.style.width = size + "px";
+            p.style.height = (size * 1.2) + "px";
+            p.style.left = Math.random() * 100 + "vw";
+            p.style.animationDuration = (Math.random() * 8 + 6) + "s";
+            p.style.animationDelay = Math.random() * 2 + "s";
+            p.style.transform = `rotate(${Math.random() * 360}deg)`;
+            container.appendChild(p);
+            setTimeout(() => p.remove(), 12000);
+        }, 2200);
+    }
+
+    // ================== Resonance ==================
     function renderResonance(score) {
         const el = document.getElementById('resonance-score');
         if (el) el.textContent = Math.min(score, 100) + '%';
@@ -1426,7 +1491,6 @@
         launchHeartRain();
         const txt = document.getElementById('resonance-text');
         if (txt) txt.textContent = 'فرکانس عشق هم‌طنین شد 💗';
-
         if (db) {
             db.collection("artifacts").doc(appId).collection("public").doc("data")
                 .set({ resonanceScore: firebase.firestore.FieldValue.increment(1) }, { merge: true })
@@ -1461,58 +1525,394 @@
                 renderResonance((d.exists && d.data().resonanceScore) || 0);
             }, e => console.warn(e.message));
     }
-    window.addEventListener('load', initResonanceSync);
 
-    // ================== تاریخ شمارش معکوس (اصلاح‌شده) ==================
-    function updateCountdown() {
-        const target = new Date('2027-04-25T00:00:00').getTime();
-        const now = Date.now();
-        const distance = target - now;
-        if (distance < 0) {
-            document.getElementById("cd-days").innerText = "00";
-            document.getElementById("cd-hours").innerText = "00";
-            document.getElementById("cd-mins").innerText = "00";
-            document.getElementById("cd-secs").innerText = "00";
-            return;
-        }
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        document.getElementById("cd-days").innerText = days < 10 ? "0" + days : days;
-        document.getElementById("cd-hours").innerText = hours < 10 ? "0" + hours : hours;
-        document.getElementById("cd-mins").innerText = minutes < 10 ? "0" + minutes : minutes;
-        document.getElementById("cd-secs").innerText = seconds < 10 ? "0" + seconds : seconds;
+    // ================== Grimoire & Chat ==================
+    function listenToGrimoire() {
+        if (!db) return;
+        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("grimoire")
+            .onSnapshot(snapshot => {
+                const box = document.getElementById("grimoire-entries-box");
+                box.innerHTML = "";
+                let entries = [];
+                snapshot.forEach(doc => entries.push({ id: doc.id, ...doc.data() }));
+                entries.sort((a, b) => (b.timestamp?.seconds || 0) - (a.timestamp?.seconds || 0));
+                if (entries.length === 0) {
+                    box.innerHTML = `<p style="text-align:center; color:rgba(255,255,255,0.3); margin-top:20px;">هیچ خاطره‌ای هنوز نوشته نشده است...</p>`;
+                    return;
+                }
+                entries.forEach(entry => {
+                    const dateStr = entry.timestamp ? new Date(entry.timestamp.seconds * 1000).toLocaleDateString('fa-IR') : 'به تازگی';
+                    box.innerHTML += `
+                        <div class="grimoire-card reveal active">
+                            <div class="grimoire-meta">
+                                <span>نویسنده: ${entry.author}</span>
+                                <span>📅 ${dateStr}</span>
+                            </div>
+                            <div class="grimoire-content">${entry.text}</div>
+                            <div class="wax-seal">M&N</div>
+                        </div>`;
+                });
+            });
     }
-    setInterval(updateCountdown, 1000);
 
-    // ================== تابع addNote با گارد بهبودیافته ==================
-    function addNote() {
-        const noteText = document.getElementById("note-input") ? document.getElementById("note-input").value.trim() : '';
-        if (!noteText) return showNotif("✍️ متنی برای ثبت در اوراق نجوا وارد کن.");
-        if (!db) return showNotif("⚠️ اتصال به فایربیس برقرار نیست؛ نجوا فعلاً ثبت نشد.");
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("notes").add({
-            text: noteText,
-            ts: firebase.firestore.FieldValue.serverTimestamp(),
-            author: "ملکه نیایش"
-        }).then(() => {
-            document.getElementById("note-input").value = "";
-            showNotif("📝 نجوا با مهر فایربیس ثبت شد!");
-        }).catch(err => {
-            console.error(err);
-            showNotif("⚠️ ثبت نجوا با خطا مواجه شد.");
+    async function addGrimoireEntry() {
+        const textarea = document.getElementById("grimoire-input");
+        const text = textarea.value.trim();
+        if (!text) return showNotif("❌ ابتدا متنی برای خاطره بنویسید.");
+        const passVal = document.getElementById("pass").value.trim().toLowerCase();
+        let author = "مهمان قلمرو";
+        if (userRole === 'partner') author = (passVal === "adminwiriper") ? "مبین ❤️" : "نیایش 🕊️";
+        textarea.value = "";
+        if (db) {
+            try {
+                await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("grimoire").add({
+                    author, text, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                showNotif("🕯️ طومار یادداشت مهر و در کهکشان ثبت شد!");
+            } catch(e) { showNotif("❌ خطایی رخ داد."); }
+        }
+    }
+
+    function listenToPrivateChat() {
+        if (!db) return;
+        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("messages")
+            .onSnapshot(snapshot => {
+                const msgsBox = document.getElementById("chat-msgs-box");
+                msgsBox.innerHTML = "";
+                let messages = [];
+                snapshot.forEach(doc => messages.push(doc.data()));
+                messages.sort((a, b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
+                messages.forEach(data => {
+                    const bubble = document.createElement("div");
+                    bubble.className = `message-bubble ${data.sender === 'mobin' ? 'msg-mobin' : 'msg-niyayesh'}`;
+                    bubble.innerText = `${data.sender === 'mobin' ? 'مبین' : 'نیایش'}: ${data.text}`;
+                    msgsBox.appendChild(bubble);
+                });
+                msgsBox.scrollTop = msgsBox.scrollHeight;
+            });
+    }
+
+    async function sendPrivateMsg() {
+        const input = document.getElementById("chat-input-field");
+        const txt = input.value.trim();
+        if (!txt) return;
+        const sender = (document.getElementById("pass").value === "adminwiriper") ? "mobin" : "niyayesh";
+        input.value = "";
+        if (db) {
+            try {
+                await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("messages").add({
+                    sender, text: txt, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            } catch(e) { console.error(e); }
+        }
+    }
+
+    function handleChatEnter(e) { if (e.key === 'Enter') sendPrivateMsg(); }
+
+    // ================== Cipher ==================
+    function unlockCipher() {
+        const key = document.getElementById("cipher-input").value.trim().toLowerCase();
+        const msg = document.getElementById("cipher-msg");
+        if (key === "always" || key === "همیشه") {
+            msg.style.display = "block";
+            showNotif("🔓 طلسم Grimoire با موفقیت باز شد!");
+            explodePetals();
+        } else showNotif("❌ طلسم اشتباه است؛ کلمه جادویی شما چیست؟");
+    }
+
+    function explodePetals() {
+        const container = document.getElementById("atmosphere");
+        for (let i = 0; i < 35; i++) setTimeout(() => {
+            const p = document.createElement("div");
+            p.className = "petal";
+            const size = Math.random() * 15 + 10;
+            p.style.width = size + "px";
+            p.style.height = (size * 1.2) + "px";
+            p.style.left = Math.random() * 100 + "vw";
+            p.style.animationDuration = (Math.random() * 4 + 3) + "s";
+            container.appendChild(p);
+            setTimeout(() => p.remove(), 7000);
+        }, i * 35);
+    }
+
+    // ================== Wheel ==================
+    let wheelCtx, currentAngle = 0, isSpinning = false;
+    const wheelOptions = ["💋 بوسه", "🏎️ سفر", "🥀 رز", "🪵 گردنبند", "🫂 آغوش", "🪐 طلسم عشق"];
+    function initWheel() {
+        const canvas = document.getElementById("wheelCanvas");
+        wheelCtx = canvas.getContext("2d");
+        drawWheel();
+    }
+    function drawWheel() {
+        const n = wheelOptions.length, arc = (Math.PI * 2) / n;
+        wheelCtx.clearRect(0,0,280,280);
+        for (let i = 0; i < n; i++) {
+            const angle = currentAngle + i * arc;
+            wheelCtx.beginPath();
+            wheelCtx.arc(140,140,130, angle, angle+arc);
+            wheelCtx.lineTo(140,140);
+            wheelCtx.fillStyle = i % 2 === 0 ? "#140103" : "#300206";
+            wheelCtx.strokeStyle = "rgba(255, 26, 64, 0.4)";
+            wheelCtx.fill(); wheelCtx.stroke();
+            wheelCtx.save();
+            wheelCtx.translate(140,140);
+            wheelCtx.rotate(angle + arc/2);
+            wheelCtx.fillStyle = "#fff";
+            wheelCtx.font = "bold 11px Vazirmatn";
+            wheelCtx.textAlign = "right";
+            wheelCtx.fillText(wheelOptions[i], 110, 5);
+            wheelCtx.restore();
+        }
+    }
+    function spinTheWheel() {
+        if (isSpinning) return;
+        isSpinning = true;
+        const target = currentAngle + (Math.floor(Math.random()*5)+5)*Math.PI*2 + Math.random()*Math.PI*2;
+        const start = performance.now(), dur = 4000;
+        function step(now) {
+            const p = Math.min((now-start)/dur, 1);
+            currentAngle = target * (1 - Math.pow(1-p, 3));
+            drawWheel();
+            if (p < 1) requestAnimationFrame(step);
+            else {
+                isSpinning = false;
+                const idx = Math.floor(((Math.PI*1.5 - currentAngle%(Math.PI*2) + Math.PI*2) % (Math.PI*2)) / (Math.PI*2/wheelOptions.length));
+                showNotif(`🥀 سهم فرشته من: ${wheelOptions[idx % wheelOptions.length]}`);
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // ================== Galaxy Canvas ==================
+    let galaxyCtx, particles = [];
+    function initGalaxyCanvas() {
+        const canvas = document.getElementById("galaxyCanvas");
+        galaxyCtx = canvas.getContext("2d");
+        resizeGalaxy();
+        window.addEventListener('resize', resizeGalaxy);
+        for (let i=0;i<45;i++) particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:(Math.random()-0.5)*0.3, vy:(Math.random()-0.5)*0.3, r:Math.random()*2+0.5});
+        canvas.addEventListener('mousemove', e => spawnStar(e.clientX, e.clientY));
+        canvas.addEventListener('touchmove', e => { const t = e.touches[0]; spawnStar(t.clientX, t.clientY); });
+        animateGalaxy();
+    }
+    function resizeGalaxy() {
+        const canvas = document.getElementById("galaxyCanvas");
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = 250;
+    }
+    function spawnStar(cx, cy) {
+        const rect = document.getElementById("galaxyCanvas").getBoundingClientRect();
+        if (particles.length < 120) particles.push({x: cx-rect.left, y: cy-rect.top, vx:(Math.random()-0.5)*1.5, vy:(Math.random()-0.5)*1.5, r:Math.random()*3+1, color:'#ffd700'});
+    }
+    function animateGalaxy() {
+        galaxyCtx.fillStyle = "rgba(2,2,2,0.25)";
+        galaxyCtx.fillRect(0,0, document.getElementById("galaxyCanvas").width, 250);
+        particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy;
+            if(p.x<0||p.x>document.getElementById("galaxyCanvas").width) p.vx*=-1;
+            if(p.y<0||p.y>250) p.vy*=-1;
+            galaxyCtx.beginPath();
+            galaxyCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
+            galaxyCtx.fillStyle = p.color || 'rgba(255,26,64,0.4)';
+            galaxyCtx.fill();
+            for (let j=0;j<particles.length;j++) {
+                const p2 = particles[j];
+                const dist = Math.hypot(p.x-p2.x, p.y-p2.y);
+                if (dist<85) {
+                    galaxyCtx.beginPath();
+                    galaxyCtx.moveTo(p.x,p.y);
+                    galaxyCtx.lineTo(p2.x,p2.y);
+                    galaxyCtx.strokeStyle = `rgba(255,215,0,${1-dist/85})`;
+                    galaxyCtx.stroke();
+                }
+            }
+        });
+        requestAnimationFrame(animateGalaxy);
+    }
+
+    // ================== Arcade Game ==================
+    let player = {x:80,y:190,hp:100}, enemy = {x:500,y:190,hp:100}, hitParticles=[], screenShake=0;
+    function initArcadeGame() {
+        const canvas = document.getElementById("tekkenCanvas");
+        canvas.width = 650; canvas.height = 300;
+        const ctx = canvas.getContext("2d");
+        function loop() {
+            ctx.save();
+            if(screenShake>0) { ctx.translate((Math.random()-0.5)*screenShake, (Math.random()-0.5)*screenShake); screenShake*=0.9; }
+            ctx.fillStyle="#0a0104"; ctx.fillRect(0,0,650,300);
+            ctx.fillStyle="#160309"; ctx.fillRect(0,240,650,60);
+            ctx.beginPath(); ctx.arc(325,70,30,0,Math.PI*2); ctx.fillStyle="#ff1a40"; ctx.shadowBlur=40; ctx.shadowColor="#ff1a40"; ctx.fill(); ctx.shadowBlur=0;
+            ctx.fillStyle = player.anim==='attack'?'#ff3366':'#8b0000'; ctx.fillRect(player.x,player.y,45,60);
+            ctx.fillStyle="#000"; ctx.fillRect(player.x+30,player.y+15,6,6);
+            ctx.fillStyle="#500103"; ctx.fillRect(player.x-10,player.y+15,10,45);
+            ctx.strokeStyle="#ff1a40"; ctx.lineWidth=6; ctx.beginPath();
+            if(player.anim==='attack') { ctx.moveTo(player.x+40,player.y+10); ctx.lineTo(player.x+100,player.y-10); }
+            else { ctx.moveTo(player.x+35,player.y+30); ctx.lineTo(player.x+60,player.y-15); }
+            ctx.stroke();
+            ctx.fillStyle = enemy.anim==='hit'?'#ffffff':'#222'; ctx.fillRect(enemy.x,enemy.y,45,60);
+            ctx.fillStyle="#000"; ctx.fillRect(enemy.x+45,enemy.y+15,10,45);
+            if(Math.random()<0.03 && enemy.hp>0) {
+                enemy.x += (player.x-enemy.x)*0.05;
+                if(Math.abs(player.x-enemy.x)<80) {
+                    enemy.anim='attack'; player.hp-=8; screenShake=6;
+                    for(let i=0;i<12;i++) hitParticles.push({x:player.x+40,y:player.y+30,vx:(Math.random()-0.5)*8,vy:(Math.random()-0.5)*8,size:Math.random()*4+2,color:Math.random()>0.3?'#ff1a40':'#ffd700',life:1});
+                    if(player.hp<0)player.hp=0;
+                    document.getElementById("p1-hp").style.width=player.hp+"%";
+                    setTimeout(()=>enemy.anim='idle',200);
+                }
+            }
+            hitParticles.forEach((p,i)=>{
+                p.x+=p.vx; p.y+=p.vy; p.life-=0.04;
+                if(p.life<=0) hitParticles.splice(i,1);
+                else { ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fillStyle=p.color; ctx.globalAlpha=p.life; ctx.fill(); ctx.globalAlpha=1; }
+            });
+            ctx.restore();
+            requestAnimationFrame(loop);
+        }
+        loop();
+    }
+    function movePlayer(d) { player.x+=d*25; if(player.x<10)player.x=10; if(player.x>580)player.x=580; }
+    function playerAttack() {
+        player.anim='attack';
+        if(Math.abs((player.x+50)-enemy.x)<100) {
+            enemy.hp-=15; enemy.anim='hit'; screenShake=12;
+            for(let i=0;i<12;i++) hitParticles.push({x:enemy.x,y:enemy.y+30,vx:(Math.random()-0.5)*8,vy:(Math.random()-0.5)*8,size:Math.random()*4+2,color:'#ff1a40',life:1});
+            if(enemy.hp<0) { enemy.hp=0; showNotif("🎉 تو حریف را شکست دادی!"); setTimeout(()=>{enemy.hp=100;player.hp=100;document.getElementById("p1-hp").style.width="100%";document.getElementById("p2-hp").style.width="100%";},3000); }
+            document.getElementById("p2-hp").style.width=enemy.hp+"%";
+            setTimeout(()=>enemy.anim='idle',200);
+        }
+        setTimeout(()=>player.anim='idle',200);
+    }
+
+    // ================== Memory Game ==================
+    const memoryEmojis = ['🩸','🥀','🦇','🏎️','💍','🕊️','🖤','🔥'];
+    let memCards=[], flipped=[];
+    function initMemoryGame() {
+        const grid = document.getElementById("memory-grid");
+        grid.innerHTML=""; flipped=[];
+        memCards = [...memoryEmojis,...memoryEmojis].sort(()=>Math.random()-0.5);
+        memCards.forEach((emoji,idx)=>{
+            const card = document.createElement("div");
+            card.className="memory-card"; card.dataset.emoji=emoji; card.dataset.idx=idx; card.innerText="?";
+            card.onclick=()=>{
+                if(flipped.length>=2||card.classList.contains("flipped"))return;
+                card.classList.add("flipped"); card.innerText=emoji; flipped.push(card);
+                if(flipped.length===2){
+                    const [c1,c2]=flipped;
+                    if(c1.dataset.emoji===c2.dataset.emoji) flipped=[];
+                    else setTimeout(()=>{c1.classList.remove("flipped");c1.innerText="?";c2.classList.remove("flipped");c2.innerText="?";flipped=[];},1000);
+                }
+            };
+            grid.appendChild(card);
         });
     }
 
-    // ================== ادامه‌ی اسکریپت‌های اصلی ==================
-    // (بقیه توابع اصلی از فایل قبلی شما بدون تغییر: openPortal, closePortal,
-    // unlockCipher, spinTheWheel, initGalaxyCanvas, initMemoryGame, initArcadeGame,
-    // playRomanticSound, changeTrack, typeWriter, listenGrimoire, chat functions و غیره)
+    // ================== Portal ==================
+    let vortexAnim;
+    function openPortal() {
+        const portal = document.getElementById("vampire-portal");
+        portal.style.display="flex";
+        const canvas = document.getElementById("vortexCanvas");
+        setTimeout(()=>canvas.style.opacity="1",100);
+        startVortex(canvas);
+        setTimeout(()=>{
+            document.getElementById("portal-dim").style.opacity="1";
+            document.getElementById("pt-q").style.opacity="1"; document.getElementById("pt-q").style.transform="translateY(0) scale(1)";
+            document.getElementById("pt-st").style.opacity="1"; document.getElementById("pt-st").style.transform="translateY(0)";
+            document.getElementById("pt-btn").style.opacity="1";
+        },1200);
+    }
+    function closePortal() {
+        document.getElementById("portal-dim").style.opacity="0";
+        setTimeout(()=>{ document.getElementById("vampire-portal").style.display="none"; cancelAnimationFrame(vortexAnim); },1200);
+    }
+    function startVortex(canvas) {
+        const ctx = canvas.getContext("2d");
+        canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+        let pts=[];
+        for(let i=0;i<200;i++) pts.push({angle:Math.random()*Math.PI*2, radius:Math.random()*canvas.width, speed:Math.random()*0.02+0.005, size:Math.random()*2+1, color:Math.random()>0.4?'#ff1a40':'#210004'});
+        function draw() {
+            ctx.fillStyle="rgba(0,0,0,0.12)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+            pts.forEach(p=>{
+                p.angle+=p.speed; p.radius-=p.radius*0.012;
+                if(p.radius<10)p.radius=canvas.width/2+Math.random()*200;
+                let x=canvas.width/2+Math.cos(p.angle)*p.radius, y=canvas.height/2+Math.sin(p.angle)*p.radius;
+                ctx.beginPath(); ctx.arc(x,y,p.size,0,Math.PI*2); ctx.fillStyle=p.color; ctx.fill();
+            });
+            vortexAnim=requestAnimationFrame(draw);
+        }
+        draw();
+    }
 
-    // جهت جلوگیری از طولانی شدن کد، این بخش دقیقاً مشابه فایل اصلی شماست
-    // و تمام توابع با همان نام‌ها و عملکردها وجود دارند.
+    // ================== Music ==================
+    const tracks = [
+        { id: '2QjOHCTQ1Jl3zawyYOpxh6', title: 'Sweater Weather' },
+        { id: '6UelLqTqIt2Mjjg7qQhW9A', title: 'TVD Soundtrack' },
+        { id: '3JvKfv6T31zO0ini0iNItO', title: 'Another Love' }
+    ];
+    function changeTrack(idx) {
+        document.getElementById("music-iframe").src = `https://open.spotify.com/embed/track/${tracks[idx].id}?utm_source=generator&theme=0`;
+        document.getElementById("now-playing").innerText = `🎧 ${tracks[idx].title}`;
+        showNotif(`🎵 در حال پخش: ${tracks[idx].title}`);
+    }
 
-    // در صورت نیاز به دریافت کامل فایل، همین فایل شامل همه موارد است.
+    // ================== Countdown ==================
+    function updateCountdown() {
+        const target = new Date('2027-04-25T00:00:00').getTime();
+        const now = Date.now();
+        const dist = target - now;
+        if(dist<0) return ["00","00","00","00"].forEach((v,i)=> document.getElementById(["cd-days","cd-hours","cd-mins","cd-secs"][i]).innerText=v);
+        const d = Math.floor(dist/86400000);
+        const h = Math.floor((dist%86400000)/3600000);
+        const m = Math.floor((dist%3600000)/60000);
+        const s = Math.floor((dist%60000)/1000);
+        document.getElementById("cd-days").innerText = d<10?"0"+d:d;
+        document.getElementById("cd-hours").innerText = h<10?"0"+h:h;
+        document.getElementById("cd-mins").innerText = m<10?"0"+m:m;
+        document.getElementById("cd-secs").innerText = s<10?"0"+s:s;
+    }
+    setInterval(updateCountdown,1000);
+
+    // ================== Random Love Notes ==================
+    const loveNotes = [
+        "تو بهترین اتفاق زندگی منی.",
+        "هر روز با تو یک هدیه است.",
+        "قلبم فقط برای تو می‌تپد.",
+        "زیبایی‌ات جهان را روشن می‌کند.",
+        "عشق ما از جنس جاودانگی است."
+    ];
+    function generateLoveNote() {
+        const el = document.getElementById("random-love-note");
+        el.innerText = loveNotes[Math.floor(Math.random()*loveNotes.length)];
+        el.style.animation = 'none';
+        void el.offsetWidth;
+        el.style.animation = 'fadeIn 0.8s ease';
+    }
+    window.addEventListener('load', generateLoveNote);
+
+    // ================== Merch Alert ==================
+    function triggerMerchAlert(item) { showNotif(`🥀 ${item} با موفقیت رزرو شد.`); }
+
+    // ================== Misc ==================
+    function playRomanticSound() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const t = ctx.currentTime;
+            [261.63,329.63,392.00].forEach(f=>{
+                const o=ctx.createOscillator(), g=ctx.createGain();
+                o.type='sine'; o.frequency.value=f; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(0.3,t+0.3); g.gain.exponentialRampToValueAtTime(0.01,t+3);
+                o.connect(g); g.connect(ctx.destination); o.start(t); o.stop(t+3);
+            });
+        } catch(e) {}
+    }
+    function revealOnScroll() {
+        document.querySelectorAll('.reveal').forEach(el => {
+            if(el.getBoundingClientRect().top < window.innerHeight-50) el.classList.add('active');
+        });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', ()=>{ initResonanceSync(); revealOnScroll(); });
 </script>
+
 </body>
 </html>
