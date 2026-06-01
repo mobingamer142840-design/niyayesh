@@ -15,7 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 
     <style>
-        /* ================= پالت رنگی و متغیرهای CSS ================= */
+        /* ================= پالت رنگی امپراتوری ================= */
         :root {
             --royal-gold: #d4af37;
             --royal-gold-light: #f0d58c;
@@ -37,7 +37,6 @@
             --radius-sm: 14px;
         }
 
-        /* ================= ریست ارگانیک ================= */
         * {
             margin: 0;
             padding: 0;
@@ -60,16 +59,9 @@
         .lalezar-font { font-family: 'Lalezar', cursive; }
         .cinzel-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-        /* ================= انیمیشن ذرات طلا ================= */
-        #gold-particles {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.8;
-        }
+        #gold-particles { position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0.8; }
 
-        /* ================= سیستم آلرت سفارشی ================= */
+        /* ================= سیستم آلرت ================= */
         #custom-alert {
             position: fixed;
             top: 25px;
@@ -132,7 +124,7 @@
             border-bottom: 4px solid var(--royal-gold);
         }
         .auth-form { display: none; }
-        .auth-form.active { display: block; animation: fadeIn 0.5s ease forwards; }
+        .auth-form.active { display: block; }
 
         input, textarea, select {
             width: 100%;
@@ -202,25 +194,8 @@
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(212,175,55,0.6);
         }
-        
-        .delete-btn {
-            background: rgba(138, 3, 3, 0.25);
-            color: #ff4d4d;
-            border: 1px solid rgba(255, 77, 77, 0.4);
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s;
-            float: left;
-        }
-        .delete-btn:hover {
-            background: rgba(138, 3, 3, 0.85);
-            color: white;
-        }
 
-        /* ================= انیمیشن اینترو نتفلیکسی ================= */
+        /* ================= اینترو نتفلیکسی ================= */
         #netflix-intro {
             position: fixed;
             inset: 0;
@@ -229,7 +204,6 @@
             display: none;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease;
         }
         .netflix-text {
             font-family: 'Lalezar', cursive;
@@ -267,7 +241,7 @@
             scrollbar-width: none;
         }
         .navbar.show-nav { display: flex; }
-        .navbar a {
+        .navbar a, .navbar button {
             color: rgba(255,255,255,0.75);
             text-decoration: none;
             font-size: 0.9rem;
@@ -276,8 +250,10 @@
             border-radius: 25px;
             transition: all 0.3s;
             cursor: pointer;
+            border: none;
+            background: none;
         }
-        .navbar a:hover, .navbar a.active {
+        .navbar a:hover, .navbar a.active, .navbar button:hover {
             color: var(--mobin-black);
             background: var(--royal-gold);
             box-shadow: 0 0 20px rgba(212,175,55,0.6);
@@ -292,80 +268,6 @@
             max-width: 1100px;
             margin: 120px auto 0;
         }
-        
-        /* ================= بخش تاریخ تولد مرکزی ================= */
-        .birthdays-center-section {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
-            border: 2px solid var(--royal-gold);
-            border-radius: 40px;
-            padding: 50px 30px;
-            text-align: center;
-            margin-bottom: 60px;
-            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
-            animation: birthPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes birthPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        .birthdays-center-section h2 {
-            font-family: 'Lalezar', cursive;
-            font-size: 2.5rem;
-            color: var(--royal-gold);
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
-            margin-bottom: 30px;
-        }
-
-        .birthday-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .birthday-card {
-            background: var(--glass-bg);
-            border: 2px solid var(--royal-gold);
-            border-radius: 25px;
-            padding: 30px;
-            text-align: center;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-        }
-
-        .birthday-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.3);
-        }
-
-        .birthday-card .emoji {
-            font-size: 4rem;
-            margin-bottom: 15px;
-        }
-
-        .birthday-card .name {
-            font-family: 'Lalezar', cursive;
-            font-size: 1.8rem;
-            color: var(--royal-gold);
-            margin-bottom: 10px;
-        }
-
-        .birthday-card .date {
-            font-size: 1.3rem;
-            color: var(--text-light);
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
-
-        .birthday-card .description {
-            color: rgba(224, 216, 200, 0.8);
-            line-height: 1.8;
-            font-size: 0.95rem;
-        }
 
         .royal-section {
             background: var(--glass-bg);
@@ -378,6 +280,7 @@
             box-shadow: 0 30px 85px rgba(0,0,0,0.65);
             position: relative;
         }
+
         .section-title {
             font-family: 'Lalezar', cursive;
             font-size: 2.7rem;
@@ -387,105 +290,69 @@
             text-align: center;
         }
 
-        /* ================= قاب ملکه ================= */
-        .queen-hero-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* ================= بخش تاریخ تولد مرکزی ================= */
+        .birthdays-center-section {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+            border: 2px solid var(--royal-gold);
+            border-radius: 40px;
+            padding: 50px 30px;
             text-align: center;
-            gap: 30px;
+            margin-bottom: 60px;
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+            animation: birthPulse 2s ease-in-out infinite;
         }
-        .queen-frame {
-            width: 300px;
-            height: 400px;
-            border-radius: 35px;
-            overflow: hidden;
-            border: 3px solid var(--royal-gold);
-            box-shadow: 0 0 65px rgba(212,175,55,0.65);
-            transition: transform 0.5s ease;
+        @keyframes birthPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
-        .queen-frame:hover { transform: scale(1.04); }
-        .queen-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* ================= پلیر استریم ================= */
-        .stream-box {
-            background: #000;
-            border: 3px solid var(--royal-gold);
-            border-radius: var(--radius-md);
-            aspect-ratio: 16/9;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.85);
-            margin-bottom: 25px;
+        .birthdays-center-section h2 {
+            font-family: 'Lalezar', cursive;
+            font-size: 2.5rem;
+            color: var(--royal-gold);
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
+            margin-bottom: 30px;
         }
-        .stream-overlay-status {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(212, 175, 55, 0.95);
-            color: #000;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 10;
-        }
-        .stream-video-core {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* ================= سینما ================= */
-        .cinema-theater-container {
-            background: #050505;
-            border: 4px solid #1f1f1f;
-            border-top: 4px solid var(--royal-gold);
-            border-radius: var(--radius-md);
-            box-shadow: 0 45px 110px rgba(0,0,0,0.98), inset 0 0 40px rgba(214,175,55,0.05);
-            padding: 12px;
-            margin-bottom: 25px;
-            aspect-ratio: 16/9;
-            position: relative;
-        }
-        .cinema-iframe-screen {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 14px;
-            background: #000;
-        }
-
-        /* ================= مرچ ================= */
-        .merch-grid {
+        .birthday-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
+            margin-top: 30px;
         }
-        .merch-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(212,175,55,0.2);
-            border-radius: var(--radius-md);
-            padding: 25px;
+        .birthday-card {
+            background: var(--glass-bg);
+            border: 2px solid var(--royal-gold);
+            border-radius: 25px;
+            padding: 30px;
             text-align: center;
-            transition: 0.3s;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
         }
-        .merch-card:hover { transform: translateY(-6px); border-color: var(--royal-gold); }
-        .merch-thumb {
-            width: 100%;
-            height: 230px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 18px;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4.5rem;
+        .birthday-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(212, 175, 55, 0.3);
+        }
+        .birthday-card .emoji { font-size: 4rem; margin-bottom: 15px; }
+        .birthday-card .name {
+            font-family: 'Lalezar', cursive;
+            font-size: 1.8rem;
+            color: var(--royal-gold);
+            margin-bottom: 10px;
+        }
+        .birthday-card .date {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .birthday-card .description {
+            color: rgba(224, 216, 200, 0.8);
+            line-height: 1.8;
+            font-size: 0.95rem;
         }
 
-        /* ================= استوری‌ها (دایره کامل) ================= */
+        /* ================= استوری‌های دایره‌ای ================= */
         .story-wrapper {
             display: flex;
             gap: 20px;
@@ -497,7 +364,6 @@
             background: rgba(0,0,0,0.2);
             border-radius: 20px;
         }
-
         .story-ring {
             width: 110px;
             height: 110px;
@@ -509,12 +375,10 @@
             flex-shrink: 0;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
         }
-
         .story-ring:hover { 
             transform: scale(1.1);
             box-shadow: 0 0 30px rgba(212, 175, 55, 0.6);
         }
-
         .story-clip {
             width: 100%;
             height: 100%;
@@ -529,7 +393,7 @@
             overflow: hidden;
         }
 
-        /* ================= مدال استوری‌ها ================= */
+        /* ================= مدال استوری ================= */
         .story-viewer-modal {
             position: fixed;
             inset: 0;
@@ -548,318 +412,12 @@
             border-radius: 25px;
             overflow: hidden;
             box-shadow: 0 0 60px rgba(212,175,55,0.6);
-            position: relative;
         }
         .story-modal-content img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             display: block;
-        }
-
-        /* ================= پست‌ها ================= */
-        .royal-post {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: var(--radius-md);
-            padding: 30px;
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-        .post-author-box { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
-        
-        .author-avatar { 
-            width: 55px; 
-            height: 55px; 
-            border-radius: 50%; 
-            background-size: cover; 
-            background-position: center; 
-            border: 2px solid var(--royal-gold); 
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1.3rem; 
-            overflow: hidden;
-            background-color: var(--royal-purple-light);
-        }
-        
-        /* ================= چت و نجوا ================= */
-        .chat-stream {
-            max-height: 400px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            padding: 20px;
-            background: rgba(0,0,0,0.35);
-            border-radius: var(--radius-md);
-            margin-bottom: 25px;
-        }
-        .bubble {
-            padding: 15px 22px;
-            border-radius: 22px;
-            max-width: 78%;
-            line-height: 1.8;
-            position: relative;
-        }
-        .bubble-mobin {
-            background: linear-gradient(135deg, var(--mobin-blue), #001133);
-            border-right: 4px solid var(--royal-gold);
-            align-self: flex-start;
-        }
-        .bubble-niyayesh {
-            background: linear-gradient(135deg, var(--vampire-dark), #2a0000);
-            border-left: 4px solid var(--crimson);
-            align-self: flex-end;
-        }
-        .bubble-guest {
-            background: rgba(255,255,255,0.08);
-            align-self: flex-start;
-            border-right: 3px solid #ccc;
-        }
-
-        /* ================= شاهزادگان ================= */
-        .prince-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-        .prince-card {
-            background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(40,40,40,0.3));
-            border: 2px dashed rgba(212,175,55,0.3);
-            border-radius: var(--radius-md);
-            padding: 35px;
-            text-align: center;
-        }
-
-        /* ================= علایق ================= */
-        .luxury-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        .luxury-card {
-            background: rgba(5,5,5,0.5);
-            border-radius: var(--radius-md);
-            padding: 35px;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-        .card-mobin { border-top: 4px solid var(--mobin-blue-light); }
-        .card-niyayesh { border-top: 4px solid var(--vampire-red); }
-
-        /* ================= ترمینال ادمین ================= */
-        .terminal-box {
-            background: #050505;
-            border: 2px solid var(--crimson);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            font-family: 'Courier New', monospace;
-            max-height: 350px;
-            overflow-y: auto;
-        }
-        .terminal-row {
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* ================= موزیک پلیر ================= */
-        .music-player {
-            background: var(--glass-bg);
-            border: 2px solid var(--royal-gold);
-            border-radius: 25px;
-            padding: 30px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .music-player h3 {
-            font-family: 'Lalezar', cursive;
-            color: var(--royal-gold);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .music-controls {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .music-input {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .music-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .music-btn {
-            padding: 10px 20px;
-            background: linear-gradient(90deg, #c9a03d, #d4af37);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .music-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
-        }
-
-        .music-player audio {
-            width: 100%;
-            margin-top: 15px;
-            border-radius: 10px;
-        }
-
-        /* ================= جستجو ================= */
-        .search-section {
-            background: var(--glass-bg);
-            border: 2px solid var(--royal-gold);
-            border-radius: 25px;
-            padding: 30px;
-            margin-bottom: 40px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .search-box {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .search-input {
-            flex: 1;
-            padding: 15px 20px;
-            background: rgba(0,0,0,0.3);
-            border: 2px solid var(--royal-gold);
-            border-radius: 15px;
-            color: var(--text-light);
-            font-size: 1rem;
-            outline: none;
-        }
-
-        .search-input::placeholder {
-            color: rgba(224, 216, 200, 0.5);
-        }
-
-        .search-btn {
-            padding: 15px 30px;
-            background: linear-gradient(90deg, #c9a03d, #d4af37);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .search-results {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .search-result-item {
-            background: rgba(0,0,0,0.2);
-            padding: 15px;
-            border-radius: 12px;
-            border-right: 4px solid var(--royal-gold);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .search-result-item:hover {
-            background: rgba(212, 175, 55, 0.1);
-            transform: translateX(-8px);
-        }
-
-        /* ================= هوش مصنوعی ================= */
-        .ai-chatbot {
-            background: var(--glass-bg);
-            border: 2px solid var(--royal-gold);
-            border-radius: 25px;
-            padding: 30px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .ai-chatbot h3 {
-            font-family: 'Lalezar', cursive;
-            color: var(--royal-gold);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .chat-messages {
-            background: rgba(0,0,0,0.2);
-            border-radius: 15px;
-            padding: 20px;
-            height: 300px;
-            overflow-y: auto;
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .chat-message {
-            padding: 12px 16px;
-            border-radius: 12px;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-
-        .chat-message.user {
-            background: linear-gradient(135deg, var(--mobin-blue), #001133);
-            color: white;
-            margin-right: auto;
-            border-right: 3px solid var(--royal-gold);
-        }
-
-        .chat-message.ai {
-            background: linear-gradient(135deg, var(--vampire-dark), #2a0000);
-            color: var(--text-light);
-            margin-left: auto;
-            border-left: 3px solid var(--crimson);
-        }
-
-        .chat-input-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 12px 15px;
-            background: rgba(0,0,0,0.2);
-            border: 2px solid var(--royal-gold);
-            border-radius: 12px;
-            color: var(--text-light);
-            outline: none;
-        }
-
-        .chat-send-btn {
-            padding: 12px 25px;
-            background: linear-gradient(90deg, #c9a03d, #d4af37);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
         }
 
         /* ================= DM بالا راست ================= */
@@ -870,7 +428,6 @@
             z-index: 5000;
             display: none;
         }
-
         .dm-icon-button {
             width: 50px;
             height: 50px;
@@ -887,12 +444,10 @@
             transition: all 0.3s ease;
             position: relative;
         }
-
         .dm-icon-button:hover {
             transform: scale(1.15);
             box-shadow: 0 0 35px rgba(212, 175, 55, 0.8);
         }
-
         .dm-badge {
             position: absolute;
             top: -8px;
@@ -922,7 +477,6 @@
             align-items: center;
             padding: 20px;
         }
-
         .settings-modal-content {
             background: var(--glass-bg);
             border: 2px solid var(--royal-gold);
@@ -934,7 +488,6 @@
             overflow-y: auto;
             box-shadow: 0 30px 80px rgba(0,0,0,0.8);
         }
-
         .settings-title {
             font-family: 'Lalezar', cursive;
             font-size: 2rem;
@@ -942,17 +495,12 @@
             margin-bottom: 30px;
             text-align: center;
         }
-
         .settings-group {
             margin-bottom: 25px;
             padding-bottom: 20px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
-
-        .settings-group:last-child {
-            border-bottom: none;
-        }
-
+        .settings-group:last-child { border-bottom: none; }
         .settings-label {
             display: block;
             color: var(--text-light);
@@ -960,13 +508,11 @@
             margin-bottom: 10px;
             font-size: 0.95rem;
         }
-
         .settings-switch {
             display: flex;
             gap: 10px;
             align-items: center;
         }
-
         .switch-toggle {
             width: 50px;
             height: 28px;
@@ -977,11 +523,7 @@
             position: relative;
             transition: all 0.3s;
         }
-
-        .switch-toggle.active {
-            background: var(--royal-gold);
-        }
-
+        .switch-toggle.active { background: var(--royal-gold); }
         .switch-toggle::after {
             content: '';
             position: absolute;
@@ -993,12 +535,366 @@
             right: 3px;
             transition: all 0.3s;
         }
+        .switch-toggle.active::after { right: 23px; }
 
-        .switch-toggle.active::after {
-            right: 23px;
+        /* ================= موزیک پلیر ================= */
+        .music-player {
+            background: var(--glass-bg);
+            border: 2px solid var(--royal-gold);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .music-player h3 {
+            font-family: 'Lalezar', cursive;
+            color: var(--royal-gold);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .music-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .music-input { flex: 1; min-width: 200px; }
+        .music-buttons { display: flex; gap: 10px; }
+        .music-btn {
+            padding: 10px 20px;
+            background: linear-gradient(90deg, #c9a03d, #d4af37);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .music-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
+        }
+        .music-player audio {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 10px;
         }
 
-        /* ================= انیمیشن Reveal ================= */
+        /* ================= جستجو ================= */
+        .search-section {
+            background: var(--glass-bg);
+            border: 2px solid var(--royal-gold);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(0,0,0,0.3);
+            border: 2px solid var(--royal-gold);
+            border-radius: 15px;
+            color: var(--text-light);
+            font-size: 1rem;
+            outline: none;
+        }
+        .search-input::placeholder { color: rgba(224, 216, 200, 0.5); }
+        .search-btn {
+            padding: 15px 30px;
+            background: linear-gradient(90deg, #c9a03d, #d4af37);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .search-results {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .search-result-item {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 12px;
+            border-right: 4px solid var(--royal-gold);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .search-result-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateX(-8px);
+        }
+
+        /* ================= هوش مصنوعی ================= */
+        .ai-chatbot {
+            background: var(--glass-bg);
+            border: 2px solid var(--royal-gold);
+            border-radius: 25px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .ai-chatbot h3 {
+            font-family: 'Lalezar', cursive;
+            color: var(--royal-gold);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .chat-messages {
+            background: rgba(0,0,0,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chat-message {
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        .chat-message.user {
+            background: linear-gradient(135deg, var(--mobin-blue), #001133);
+            color: white;
+            margin-right: auto;
+            border-right: 3px solid var(--royal-gold);
+        }
+        .chat-message.ai {
+            background: linear-gradient(135deg, var(--vampire-dark), #2a0000);
+            color: var(--text-light);
+            margin-left: auto;
+            border-left: 3px solid var(--crimson);
+        }
+        .chat-input-group {
+            display: flex;
+            gap: 10px;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 12px 15px;
+            background: rgba(0,0,0,0.2);
+            border: 2px solid var(--royal-gold);
+            border-radius: 12px;
+            color: var(--text-light);
+            outline: none;
+        }
+        .chat-send-btn {
+            padding: 12px 25px;
+            background: linear-gradient(90deg, #c9a03d, #d4af37);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        /* ================= قسمت‌های قدیمی ================= */
+        .queen-hero-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+
+        .queen-frame {
+            width: 300px;
+            height: 400px;
+            border-radius: 35px;
+            overflow: hidden;
+            border: 3px solid var(--royal-gold);
+            box-shadow: 0 0 65px rgba(212,175,55,0.65);
+            transition: transform 0.5s ease;
+        }
+        .queen-frame:hover { transform: scale(1.04); }
+        .queen-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        .stream-box {
+            background: #000;
+            border: 3px solid var(--royal-gold);
+            border-radius: var(--radius-md);
+            aspect-ratio: 16/9;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.85);
+            margin-bottom: 25px;
+        }
+
+        .cinema-theater-container {
+            background: #050505;
+            border: 4px solid #1f1f1f;
+            border-top: 4px solid var(--royal-gold);
+            border-radius: var(--radius-md);
+            box-shadow: 0 45px 110px rgba(0,0,0,0.98);
+            padding: 12px;
+            margin-bottom: 25px;
+            aspect-ratio: 16/9;
+            position: relative;
+        }
+        .cinema-iframe-screen {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 14px;
+            background: #000;
+        }
+
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 30px;
+        }
+        .merch-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(212,175,55,0.2);
+            border-radius: var(--radius-md);
+            padding: 25px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .merch-card:hover { transform: translateY(-6px); border-color: var(--royal-gold); }
+        .merch-thumb {
+            width: 100%;
+            height: 230px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 18px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+        }
+
+        .royal-post {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .post-author-box { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
+        .author-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--royal-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            overflow: hidden;
+            background-color: var(--royal-purple-light);
+        }
+
+        .chat-stream {
+            max-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            padding: 20px;
+            background: rgba(0,0,0,0.35);
+            border-radius: var(--radius-md);
+            margin-bottom: 25px;
+        }
+        .bubble {
+            padding: 15px 22px;
+            border-radius: 22px;
+            max-width: 78%;
+            line-height: 1.8;
+            position: relative;
+        }
+        .bubble-mobin {
+            background: linear-gradient(135deg, var(--mobin-blue), #001133);
+            border-right: 4px solid var(--royal-gold);
+            align-self: flex-start;
+        }
+        .bubble-niyayesh {
+            background: linear-gradient(135deg, var(--vampire-dark), #2a0000);
+            border-left: 4px solid var(--crimson);
+            align-self: flex-end;
+        }
+
+        .prince-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+        .prince-card {
+            background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(40,40,40,0.3));
+            border: 2px dashed rgba(212,175,55,0.3);
+            border-radius: var(--radius-md);
+            padding: 35px;
+            text-align: center;
+        }
+
+        .luxury-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .luxury-card {
+            background: rgba(5,5,5,0.5);
+            border-radius: var(--radius-md);
+            padding: 35px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .card-mobin { border-top: 4px solid var(--mobin-blue-light); }
+        .card-niyayesh { border-top: 4px solid var(--vampire-red); }
+
+        .terminal-box {
+            background: #050505;
+            border: 2px solid var(--crimson);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        .terminal-row {
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .delete-btn {
+            background: rgba(138, 3, 3, 0.25);
+            color: #ff4d4d;
+            border: 1px solid rgba(255, 77, 77, 0.4);
+            padding: 6px 14px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            float: left;
+        }
+        .delete-btn:hover {
+            background: rgba(138, 3, 3, 0.85);
+            color: white;
+        }
+
         .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.15, 0.85, 0.35, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -1027,7 +923,7 @@
     <span id="alert-text-content">خوش آمدید</span>
 </div>
 
-<!-- مدال استوری‌ها -->
+<!-- مدال استوری -->
 <div class="story-viewer-modal" id="story-viewer-gate" onclick="closeStoryViewerModal()">
     <div class="story-modal-content">
         <img id="story-modal-img-source" src="" alt="استوری">
@@ -1038,7 +934,6 @@
 <div class="settings-modal" id="settings-modal">
     <div class="settings-modal-content">
         <div class="settings-title">⚙️ تنظیمات</div>
-        
         <div class="settings-group">
             <label class="settings-label">🔔 اعلان‌های صوتی</label>
             <div class="settings-switch">
@@ -1046,7 +941,6 @@
                 <span style="color: var(--text-light);">فعال</span>
             </div>
         </div>
-
         <div class="settings-group">
             <label class="settings-label">🌙 حالت شب</label>
             <div class="settings-switch">
@@ -1054,7 +948,6 @@
                 <span style="color: var(--text-light);">فعال</span>
             </div>
         </div>
-
         <div class="settings-group">
             <label class="settings-label">✨ افکت‌های ویژه</label>
             <div class="settings-switch">
@@ -1062,8 +955,7 @@
                 <span style="color: var(--text-light);">فعال</span>
             </div>
         </div>
-
-        <button class="action-btn btn-gold" style="margin-top: 20px;" onclick="closeSettingsModal()">بستن ✕</button>
+        <button class="action-btn btn-gold" onclick="closeSettingsModal()">بستن ✕</button>
     </div>
 </div>
 
@@ -1072,57 +964,275 @@
     <div class="auth-container">
         <div class="auth-tabs">
             <div class="auth-tab active" onclick="toggleAuthTab('login')">ورود اشراف</div>
-            <div class="auth-tab" onclick="toggleAuthTab('reg')">صدور شناسنامه مهمان</div>
+            <div class="auth-tab" onclick="toggleAuthTab('reg')">صدور شناسنامه</div>
         </div>
-
         <div id="pane-login" class="auth-form active">
-            <h1 class="lalezar-font" style="color: var(--royal-purple); margin-bottom: 10px;">ورود به قصر شیشه‌ای</h1>
-            <p style="font-size: 0.9rem; color: #5c4f3d; margin-bottom: 30px; font-weight: 700;">کلید گشا یا رمز عبور ادمین را وارد نمایید</p>
-            <input type="text" id="login-uid" placeholder="نام کاربری تایید شده...">
-            <input type="password" id="login-token" placeholder="رمز عبور سلطنتی...">
-            <button class="action-btn btn-gold" onclick="verifyKingdomAccess()">گشودن دروازه‌ها ✨</button>
+            <h1 class="lalezar-font" style="color: var(--royal-purple); margin-bottom: 10px;">ورود به قصر</h1>
+            <input type="text" id="login-uid" placeholder="نام کاربری...">
+            <input type="password" id="login-token" placeholder="رمز عبور...">
+            <button class="action-btn btn-gold" onclick="verifyKingdomAccess()">ورود 👑</button>
         </div>
-
         <div id="pane-reg" class="auth-form">
-            <h1 class="lalezar-font" style="color: var(--royal-purple); margin-bottom: 10px;">تنظیم کارت هویت</h1>
-            <input type="text" id="reg-alias" placeholder="نام شریف شما...">
-            <input type="text" id="reg-uid" placeholder="نام کاربری دلخواه...">
-            <div class="file-upload-wrapper">
-                <span class="file-upload-trigger" id="file-upload-label-text">📸 انتخاب و آپلود عکس پروفایل</span>
-                <input type="file" id="reg-avatar-file" accept="image/*" onchange="processAvatarFile(this)">
-            </div>
-            <button class="action-btn btn-gold" onclick="registerKingdomGuest()">تنظیم پروفایل و ورود 📜</button>
+            <h1 class="lalezar-font" style="color: var(--royal-purple); margin-bottom: 10px;">ثبت نام</h1>
+            <input type="text" id="reg-alias" placeholder="نام شما...">
+            <input type="text" id="reg-uid" placeholder="نام کاربری...">
+            <button class="action-btn btn-gold" onclick="registerKingdomGuest()">ثبت نام 📜</button>
         </div>
     </div>
 </div>
 
-<!-- اینترو نتفلیکسی -->
+<!-- اینترو -->
 <div id="netflix-intro">
     <div class="netflix-text" id="netflix-core">M & N</div>
 </div>
 
 <!-- نوار ناوبری -->
 <div class="navbar" id="main-navigation">
-    <a onclick="document.getElementById('birthdays-center').scrollIntoView({behavior: 'smooth'})">تاریخ تولد</a>
-    <a onclick="document.getElementById('queen-sec').scrollIntoView({behavior: 'smooth'})">ملکهٔ فرشته</a>
-    <a onclick="document.getElementById('stream-sec').scrollIntoView({behavior: 'smooth'})">پورتال استریم</a>
-    <a onclick="document.getElementById('cinema-sec').scrollIntoView({behavior: 'smooth'})">سینما</a>
-    <a onclick="document.getElementById('letter-sec').scrollIntoView({behavior: 'smooth'})">نامه</a>
-    <a onclick="document.getElementById('luxury-sec').scrollIntoView({behavior: 'smooth'})">علایق</a>
-    <a onclick="document.getElementById('dynasty-sec').scrollIntoView({behavior: 'smooth'})">شاهزادگان</a>
-    <a onclick="document.getElementById('royalgram-sec').scrollIntoView({behavior: 'smooth'})">رویان‌گرام</a>
-    <a onclick="document.getElementById('merch-sec').scrollIntoView({behavior: 'smooth'})">مرچ</a>
-    <a onclick="document.getElementById('grimoire-sec').scrollIntoView({behavior: 'smooth'})">کتاب تاریخ</a>
-    <a id="nav-chat-node" style="display:none;" onclick="document.getElementById('chat-sec').scrollIntoView({behavior: 'smooth'})">تالار نجوا 🔒</a>
-    <a onclick="document.getElementById('dm-sec').scrollIntoView({behavior: 'smooth'})">دایرکت</a>
-    <a onclick="document.getElementById('promises-sec').scrollIntoView({behavior: 'smooth'})">عهدنامه‌ها</a>
-    <a onclick="document.getElementById('album-sec').scrollIntoView({behavior: 'smooth'})">آلبوم</a>
-    <a onclick="document.getElementById('music-sec').scrollIntoView({behavior: 'smooth'})">موزیک</a>
-    <a onclick="document.getElementById('search-sec').scrollIntoView({behavior: 'smooth'})">جستجو</a>
-    <a onclick="document.getElementById('ai-sec').scrollIntoView({behavior: 'smooth'})">هوش مصنوعی</a>
-    <a id="nav-admin-node" style="display:none;" onclick="document.getElementById('admin-control-room').scrollIntoView({behavior: 'smooth'})">اتاق فرمان 🛡️</a>
+    <a onclick="document.getElementById('birthdays-center').scrollIntoView({behavior: 'smooth'})">🎂 تاریخ تولد</a>
+    <a href="#queen-sec">👑 ملکه</a>
+    <a href="#stream-sec">🎮 استریم</a>
+    <a href="#cinema-sec">🎬 سینما</a>
+    <a href="#letter-sec">💌 نامه</a>
+    <a href="#luxury-sec">💎 علایق</a>
+    <a href="#dynasty-sec">👶 شاهزادگان</a>
+    <a href="#royalgram-sec">📸 رویان‌گرام</a>
+    <a href="#music-sec">🎵 موزیک</a>
+    <a href="#search-sec">🔍 جستجو</a>
+    <a href="#ai-sec">🤖 هوش مصنوعی</a>
+    <a href="#merch-sec">🛍️ مرچ</a>
+    <a href="#grimoire-sec">📖 خاطرات</a>
+    <a href="#chat-sec" id="nav-chat-node" style="display:none;">🔒 نجوا</a>
+    <a href="#dm-sec">✉️ دایرکت</a>
+    <a href="#promises-sec">📜 عهدنامه‌ها</a>
+    <a href="#album-sec">🖼️ آلبوم</a>
+    <a id="nav-admin-node" style="display:none;" onclick="document.getElementById('admin-control-room').scrollIntoView({behavior: 'smooth'})">🛡️ ادمین</a>
     <button onclick="openSettingsModal()" style="background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 1.3rem;">⚙️</button>
 </div>
 
-<!-- بدنه محتوا -->
+<!-- بدنه اصلی -->
 <div id="main-kingdom">
+
+    <!-- بخش تاریخ تولد وسط صفحه -->
+    <div class="birthdays-center-section reveal" id="birthdays-center">
+        <h2>👑 تاریخ‌های مقدس امپراتوری 👑</h2>
+        <div class="birthday-cards-grid">
+            <div class="birthday-card">
+                <div class="emoji">👑</div>
+                <div class="name">پادشاه مبین</div>
+                <div class="date">25 اسفند 1387</div>
+                <div class="description">پادشاه شجاع و بزرگ‌دل این امپراتوری جاودانی</div>
+            </div>
+            <div class="birthday-card">
+                <div class="emoji">👸🏻</div>
+                <div class="name">ملکه نیایش</div>
+                <div class="date">15 شهریور 1389</div>
+                <div class="description">ملکه فرشته‌گون و ستاره‌ی روشن قصر</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ملکه -->
+    <div class="royal-section reveal" id="queen-sec">
+        <div class="section-title">ملکهٔ بی‌همتا 👑</div>
+        <div class="queen-hero-card">
+            <div class="queen-frame">
+                <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش">
+            </div>
+            <p style="font-size: 1.25rem; line-height: 2.5; max-width: 820px; color: var(--text-light);">
+                او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند...
+            </p>
+        </div>
+    </div>
+
+    <!-- استریم -->
+    <div class="royal-section reveal" id="stream-sec">
+        <div class="section-title">پورتال استریم 🎮🎬</div>
+        <div class="stream-box">
+            <div style="width: 100%; height: 100%; background: #000; display: flex; align-items: center; justify-content: center; color: #d4af37; font-size: 1.2rem;">
+                استریم آنلاین اینجا نمایش داده می‌شود
+            </div>
+        </div>
+    </div>
+
+    <!-- سینما -->
+    <div class="royal-section reveal" id="cinema-sec">
+        <div class="section-title">سینمای سلطنتی 🍿🎬</div>
+        <div class="cinema-theater-container">
+            <iframe class="cinema-iframe-screen" id="cinema-core-screen" src="about:blank" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- نامه -->
+    <div class="royal-section reveal" id="letter-sec">
+        <div class="section-title">نجواهای مکتوب 💌</div>
+        <div id="scrolling-letter" style="font-size: 1.25rem; line-height: 2.7; color: var(--royal-gold-light);">
+            نامه‌های عاشقانه اینجا نمایش داده می‌شود...
+        </div>
+    </div>
+
+    <!-- علایق -->
+    <div class="royal-section reveal" id="luxury-sec">
+        <div class="section-title">جهان علایق 💎</div>
+        <div class="luxury-grid">
+            <div class="luxury-card card-mobin">
+                <h3 class="lalezar-font" style="color: var(--royal-gold); font-size: 1.7rem;">پادشاه مبین 🏎️</h3>
+                <p style="color: #aaa; margin-top: 15px;">نماد ابهت و قدرت...</p>
+            </div>
+            <div class="luxury-card card-niyayesh">
+                <h3 class="lalezar-font" style="color: var(--crimson); font-size: 1.7rem;">ملکه نیایش 🏛️</h3>
+                <p style="color: #aaa; margin-top: 15px;">مظهر هنر و زیبایی...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- شاهزادگان -->
+    <div class="royal-section reveal" id="dynasty-sec">
+        <div class="section-title">شاهزادگان آینده 👶🏻✨</div>
+        <div class="prince-grid">
+            <div class="prince-card">
+                <span style="font-size: 3rem;">👑</span>
+                <h3 class="lalezar-font" style="color: var(--royal-gold); margin-top: 10px;">��اهزاده آریامهر</h3>
+            </div>
+            <div class="prince-card">
+                <span style="font-size: 3rem;">⚔️</span>
+                <h3 class="lalezar-font" style="color: var(--royal-gold); margin-top: 10px;">شاهزاده سام</h3>
+            </div>
+            <div class="prince-card">
+                <span style="font-size: 3rem;">👑👸🏻</span>
+                <h3 class="lalezar-font" style="color: var(--royal-gold-light); margin-top: 10px;">پرنسس سونیا</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- رویان‌گرام -->
+    <div class="royal-section reveal" id="royalgram-sec">
+        <div class="section-title">رویان‌گرام (RoyalGram) 📸</div>
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: var(--royal-gold); margin-bottom: 15px;">📖 استوری‌های شاهانه</h4>
+            <div class="story-wrapper">
+                <div class="story-ring" onclick="openStoryViewerModal('https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=1000')">
+                    <div class="story-clip" style="background-image: url('https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=1000');"></div>
+                </div>
+                <div class="story-ring" onclick="openStoryViewerModal('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=1000')">
+                    <div class="story-clip" style="background-image: url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=1000');"></div>
+                </div>
+                <div class="story-ring" onclick="openStoryViewerModal('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000')">
+                    <div class="story-clip" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000');"></div>
+                </div>
+            </div>
+        </div>
+        <div id="live-posts-area"></div>
+        <div style="margin-top: 30px; display: flex; gap: 15px;">
+            <input type="text" id="royalgram-input-field" placeholder="پست جدید..." style="margin: 0;">
+            <button class="action-btn btn-gold" style="width: auto; padding: 0 35px;">انتشار 🚀</button>
+        </div>
+    </div>
+
+    <!-- موزیک -->
+    <div class="music-player reveal" id="music-sec">
+        <h3>🎵 پخش‌کننده موسیقی 🎵</h3>
+        <div class="music-controls">
+            <input type="text" class="music-input" id="music-url-input" placeholder="لینک mp3...">
+            <div class="music-buttons">
+                <button class="music-btn" onclick="loadMusic()">بارگیری 🎼</button>
+            </div>
+        </div>
+        <audio id="music-player" controls></audio>
+    </div>
+
+    <!-- جستجو -->
+    <div class="search-section reveal" id="search-sec">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <h3 style="color: var(--royal-gold); font-family: 'Lalezar', cursive; font-size: 1.5rem;">🔍 موتور جستجو 🔍</h3>
+        </div>
+        <div class="search-box">
+            <input type="text" class="search-input" id="search-input" placeholder="جستجو کنید...">
+            <button class="search-btn" onclick="performSearch()">جستجو 🔎</button>
+        </div>
+        <div class="search-results" id="search-results"></div>
+    </div>
+
+    <!-- هوش مصنوعی -->
+    <div class="ai-chatbot reveal" id="ai-sec">
+        <h3>🤖 دستیار هوشمند 🤖</h3>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-group">
+            <input type="text" class="chat-input" id="ai-input" placeholder="چیزی بپرسید...">
+            <button class="chat-send-btn" onclick="sendAIMessage()">ارسال 💭</button>
+        </div>
+    </div>
+
+    <!-- مرچ -->
+    <div class="royal-section reveal" id="merch-sec">
+        <div class="section-title">فروشگاه مرچ 🛍️💎</div>
+        <div class="merch-grid">
+            <div class="merch-card">
+                <div class="merch-thumb">🧥</div>
+                <h3 class="lalezar-font" style="color: var(--royal-gold);">هودی ست</h3>
+            </div>
+            <div class="merch-card">
+                <div class="merch-thumb">⌚</div>
+                <h3 class="lalezar-font" style="color: var(--royal-gold);">ساعت</h3>
+            </div>
+            <div class="merch-card">
+                <div class="merch-thumb">🧪✨</div>
+                <h3 class="lalezar-font" style="color: var(--royal-gold);">عطر</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- خاطرات -->
+    <div class="royal-section reveal" id="grimoire-sec">
+        <div class="section-title">کتاب خاطرات 📖</div>
+        <textarea id="grimoire-text-area" placeholder="خاطره بنویسید..." rows="4"></textarea>
+        <button class="action-btn btn-gold" style="width: auto; display: block; margin: 0 auto;">ثبت ✍️</button>
+        <div id="grimoire-logs" style="margin-top: 30px;"></div>
+    </div>
+
+    <!-- نجوای خصوصی -->
+    <div class="royal-section reveal" id="chat-sec" style="display: none;">
+        <div class="section-title">نجوای خصوصی 🔒💬</div>
+        <div class="chat-stream" id="live-chat-box"></div>
+        <button class="action-btn btn-gold" style="width: auto;">ارسال 🕊️</button>
+    </div>
+
+    <!-- دایرکت -->
+    <div class="royal-section reveal" id="dm-sec">
+        <div class="section-title">دایرکت خصوصی ✉️🔒</div>
+        <div style="display:flex; gap:12px; margin-bottom:15px;">
+            <input type="text" id="dm-target-username" placeholder="نام کاربری...">
+            <input type="text" id="dm-message-text" placeholder="پیام...">
+            <button class="action-btn btn-gold" style="width:auto;">ارسال 📨</button>
+        </div>
+        <div class="chat-stream" id="private-dm-stream-box" style="max-height:250px;"></div>
+    </div>
+
+    <!-- عهدنامه‌ها -->
+    <div class="royal-section reveal" id="promises-sec">
+        <div class="section-title">عهدنامه‌ها 📜</div>
+        <input type="text" id="promise-input-field" placeholder="وعده بنویسید...">
+        <button class="action-btn btn-gold" style="width: auto; display: block; margin: 15px auto;">ثبت 💍</button>
+        <div id="promises-container"></div>
+    </div>
+
+    <!-- آلبوم -->
+    <div class="royal-section reveal" id="album-sec">
+        <div class="section-title">گالری تصاویر 📸</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+            <div class="queen-frame" style="width: 100%; height: 350px;"><img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="عکس"></div>
+            <div class="queen-frame" style="width: 100%; height: 350px;"><img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="عکس"></div>
+            <div class="queen-frame" style="width: 100%; height: 350px;"><img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="عکس"></div>
+        </div>
+    </div>
+
+    <!-- ادمین -->
+    <div class="royal-section reveal" id="admin-control-room">
+        <div class="section-title" style="color: var(--crimson);">اتاق فرمان 🛡️</div>
+        <div class="terminal-box" id="admin-terminal-stream"></div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
