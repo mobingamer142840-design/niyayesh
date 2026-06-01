@@ -39,9 +39,11 @@ function verifyKingdomAccess() {
     }
     
     // شبیه‌سازی احراز هویت
-    if (username === 'mobin' && password === 'love' || username === 'niyayesh' && password === 'forever') {
+    if ((username === 'mobin' && password === 'love') || (username === 'niyayesh' && password === 'forever')) {
         activeUsername = username;
         activeUserRole = 'admin';
+        document.getElementById('nav-chat-node').style.display = 'inline';
+        document.getElementById('nav-admin-node').style.display = 'inline';
         enterKingdom();
     } else {
         showAlert('نام کاربری یا رمز عبور نادرست است', '❌');
@@ -118,11 +120,6 @@ function toggleSetting(element) {
     localStorage.setItem(element.id, isActive);
 }
 
-function toggleDMPanel() {
-    // می‌تواند به یک پنل جانبی یا مدال منتقل شود
-    document.getElementById('dm-sec').scrollIntoView({ behavior: 'smooth' });
-}
-
 // ================= توابع استوری‌ها =================
 function openStoryViewerModal(imgUrl) {
     const modal = document.getElementById('story-viewer-gate');
@@ -151,7 +148,9 @@ function addNewStory() {
     `;
     wrapper.appendChild(newStory);
     
-    document.getElementById('story-url-input').value = '';
+    if (document.getElementById('story-url-input')) {
+        document.getElementById('story-url-input').value = '';
+    }
     showAlert('استوری جدید اضافه شد ✨', '🎉');
 }
 
@@ -240,8 +239,8 @@ function addChatMessage(text, sender) {
 
 // ================= توابع Direct Message =================
 function sendDirectMessage() {
-    const username = document.getElementById('dm-username').value.trim();
-    const text = document.getElementById('dm-text').value.trim();
+    const username = document.getElementById('dm-username')?.value.trim();
+    const text = document.getElementById('dm-text')?.value.trim();
     
     if (!username || !text) {
         showAlert('نام کاربری و پیام الزامی است', '⚠️');
@@ -259,10 +258,16 @@ function sendDirectMessage() {
         border-right: 3px solid var(--royal-gold);
     `;
     message.innerHTML = `<strong>به ${username}:</strong> ${text}`;
-    messagesDiv.appendChild(message);
+    if (messagesDiv) {
+        messagesDiv.appendChild(message);
+    }
     
-    document.getElementById('dm-username').value = '';
-    document.getElementById('dm-text').value = '';
+    if (document.getElementById('dm-username')) {
+        document.getElementById('dm-username').value = '';
+    }
+    if (document.getElementById('dm-text')) {
+        document.getElementById('dm-text').value = '';
+    }
     
     showAlert(`پیام برای ${username} ارسال شد 📨`, '✅');
 }
@@ -334,13 +339,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // بارگذاری تنظیمات ذخیره شده
     if (localStorage.getItem('sound-toggle') === 'false') {
-        document.getElementById('sound-toggle').classList.remove('active');
+        const toggle = document.getElementById('sound-toggle');
+        if (toggle) toggle.classList.remove('active');
     }
     if (localStorage.getItem('dark-toggle') === 'false') {
-        document.getElementById('dark-toggle').classList.remove('active');
+        const toggle = document.getElementById('dark-toggle');
+        if (toggle) toggle.classList.remove('active');
     }
     if (localStorage.getItem('effects-toggle') === 'false') {
-        document.getElementById('effects-toggle').classList.remove('active');
+        const toggle = document.getElementById('effects-toggle');
+        if (toggle) toggle.classList.remove('active');
     }
 });
 
