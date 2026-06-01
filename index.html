@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0a1128">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>پادشاهی ابدی مبین و نیایش</title>
 
     <!-- فونت‌ها -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Vazirmatn:wght@300;400;700;900&family=Lalezar&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Vazirmatn:wght@300;400;700;900&family=Lalezar&display=swap" rel="stylesheet">
 
     <!-- Firebase Compat -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
@@ -15,902 +17,757 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
 
     <style>
+        /* ================= متغیرهای رنگی و استایل‌های پایه ================= */
         :root {
-            --gold: #d4af37;
-            --gold-light: #f0d58c;
-            --navy: #0a1128;
-            --navy-light: #1a2a6c;
+            --royal-gold: #d4af37;
+            --royal-gold-light: #f0d58c;
+            --royal-purple: #2c003e;
+            --mobin-blue: #06142e;
+            --mobin-black: #0a0a0a;
+            --vampire-red: #8a0303;
             --crimson: #a51c30;
             --cream: #fcf8f2;
-            --white: #ffffff;
-            --text-light: #5c4f3d;
-            --glass-bg: rgba(255,255,240,0.08);
-            --glass-border: rgba(212,175,55,0.3);
-            --shadow: 0 25px 60px rgba(0,0,0,0.4);
-            --radius: 20px;
+            --text: #e0d8c8;
+            --text-dark: #3a3226;
+            --glass-bg: rgba(20, 20, 20, 0.65);
+            --glass-border: rgba(212, 175, 55, 0.3);
+            --radius-lg: 24px;
+            --radius-md: 16px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
-            font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(135deg, var(--navy) 0%, #150b2b 50%, var(--navy) 100%);
-            color: var(--white);
+            font-family: 'Vazirmatn', -apple-system, sans-serif;
+            background: linear-gradient(135deg, var(--mobin-black) 0%, var(--mobin-blue) 40%, var(--royal-purple) 100%);
+            color: var(--text);
             overflow-x: hidden;
             min-height: 100vh;
-            position: relative;
-            -webkit-font-smoothing: antialiased;
+            user-select: none;
         }
 
-        .lalezar { font-family: 'Lalezar', cursive; }
-        .cinzel { font-family: 'Cinzel', serif; }
+        h1, h2, h3, .lalezar { font-family: 'Lalezar', cursive; letter-spacing: 1px; }
+        .cinzel { font-family: 'Cinzel', serif; letter-spacing: 2px; }
 
-        /* ذرات طلایی پس‌زمینه */
+        /* ================= پس زمینه و ذرات ================= */
         #gold-particles {
-            position: fixed; inset: 0; z-index: -1; pointer-events: none;
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
         }
 
-        /* اعلان‌ها */
+        /* ================= اعلان سفارشی ================= */
         #custom-alert {
-            position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-150px);
-            background: var(--cream); border: 2px solid var(--gold);
-            box-shadow: 0 12px 45px rgba(212,175,55,0.55); padding: 16px 35px;
-            border-radius: 40px; z-index: 10000; transition: transform 0.5s ease;
-            display: flex; align-items: center; gap: 12px; font-weight: 700; color: var(--navy);
-            pointer-events: none; opacity: 0;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-150px);
+            background: var(--cream);
+            border: 2px solid var(--royal-gold);
+            box-shadow: 0 10px 40px rgba(212,175,55,0.4);
+            padding: 16px 32px;
+            border-radius: 40px;
+            z-index: 11000;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
+            pointer-events: none;
         }
-        #custom-alert.show { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
+        #custom-alert.show { transform: translateX(-50%) translateY(0); }
 
-        /* صفحه ورود */
-        .login-wrapper {
-            position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center;
-            background: rgba(10,17,40,0.95); backdrop-filter: blur(20px); padding: 20px;
+        /* ================= صفحه ورود و ثبت نام ================= */
+        .auth-wrapper {
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px;
         }
-        .login-container {
-            width: 100%; max-width: 440px; background: var(--cream); border: 2px solid var(--gold);
-            border-radius: 32px; padding: 45px 35px; text-align: center;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.7), inset 0 0 30px rgba(212,175,55,0.25);
-            color: var(--navy);
+        .auth-container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--cream);
+            border: 2px solid var(--royal-gold);
+            border-radius: 40px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.8), inset 0 0 20px rgba(212,175,55,0.2);
+            color: var(--text-dark);
+            position: relative;
+            overflow: hidden;
         }
-        .login-container h1 {
-            font-family: 'Lalezar', cursive; font-size: 3.2rem; color: var(--navy-light); margin-bottom: 8px;
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(212,175,55,0.3);
         }
-        .login-container p { color: var(--text-light); margin-bottom: 30px; font-weight: 500; }
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            color: #888;
+            transition: 0.3s;
+        }
+        .auth-tab.active {
+            color: var(--royal-purple);
+            border-bottom: 3px solid var(--royal-gold);
+        }
+        .auth-form { display: none; animation: fadeIn 0.4s ease forwards; }
+        .auth-form.active { display: block; }
+        
+        input, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(212,175,55,0.5);
+            border-radius: 16px;
+            background: rgba(255,255,255,0.9);
+            color: var(--text-dark);
+            outline: none;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+        input:focus, textarea:focus {
+            border-color: var(--royal-gold);
+            box-shadow: 0 0 15px rgba(212,175,55,0.3);
+        }
 
-        .tab-btns { display: flex; gap: 8px; margin-bottom: 22px; }
-        .tab-btn {
-            flex: 1; padding: 12px; border: 1px solid var(--gold); background: transparent;
-            border-radius: 16px; cursor: pointer; font-weight: 700; transition: all 0.3s;
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.3s ease;
         }
-        .tab-btn.active { background: var(--gold); color: white; box-shadow: 0 4px 15px rgba(212,175,55,0.5); }
-
-        .form-group { margin-bottom: 16px; }
-        .form-group input {
-            width: 100%; padding: 15px 20px; border: 1px solid rgba(212,175,55,0.6);
-            border-radius: 14px; background: rgba(255,255,255,0.9); color: #2c003e;
-            font-family: inherit; outline: none; transition: 0.3s; font-size: 1rem;
+        .btn-gold {
+            background: linear-gradient(90deg, #c9a03d, #d4af37);
+            color: white;
+            box-shadow: 0 5px 15px rgba(212,175,55,0.4);
         }
-        .form-group input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.4); }
-
-        .action-btn {
-            width: 100%; padding: 15px; border: none; border-radius: 14px;
-            font-weight: 900; cursor: pointer; transition: all 0.3s; font-family: inherit;
-        }
-        .primary-btn {
-            background: linear-gradient(90deg, var(--gold), #b4942e); color: white;
-            box-shadow: 0 8px 22px rgba(212,175,55,0.4);
-        }
-        .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(212,175,55,0.6); }
-        .secondary-btn {
-            background: transparent; border: 2px solid var(--gold); color: var(--navy-light);
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(212,175,55,0.6); }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--royal-gold);
+            color: var(--royal-gold);
+            margin-top: 10px;
         }
 
-        /* نوار ناوبری شیشه‌ای */
+        /* ================= انیمیشن نتفلیکس ================= */
+        #intro-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--mobin-black);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease;
+        }
+        .intro-logo {
+            font-family: 'Lalezar', cursive;
+            font-size: 8rem;
+            color: var(--royal-gold);
+            text-shadow: 0 0 50px var(--royal-gold);
+            opacity: 0;
+        }
+        .zoom-anim { animation: royalZoom 3.5s forwards cubic-bezier(0.2, 0.8, 0.2, 1); }
+        @keyframes royalZoom {
+            0% { transform: scale(0.5); opacity: 0; }
+            30% { transform: scale(1); opacity: 1; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; filter: blur(20px); }
+        }
+
+        /* ================= نوار ناوبری ================= */
         .navbar {
-            position: fixed; top: 18px; left: 50%; transform: translateX(-50%);
-            background: rgba(10,17,40,0.85); border: 1px solid var(--gold);
-            padding: 8px 20px; border-radius: 40px; backdrop-filter: blur(25px);
-            z-index: 1000; display: none; gap: 10px; max-width: 95vw; overflow-x: auto;
-            white-space: nowrap; box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10,10,10,0.85);
+            border: 1px solid var(--royal-gold);
+            padding: 10px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            display: none;
+            gap: 8px;
+            z-index: 5000;
+            max-width: 95vw;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: none;
         }
         .navbar.show { display: flex; }
         .navbar a {
-            color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem;
-            font-weight: 700; padding: 8px 15px; border-radius: 22px; transition: 0.3s;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: 0.3s;
         }
-        .navbar a:hover, .navbar a.active { color: white; background: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.5); }
+        .navbar a:hover, .navbar a.active {
+            background: var(--royal-gold);
+            color: var(--mobin-black);
+        }
 
-        /* محتوای اصلی */
-        #main { display: none; opacity: 0; padding: 110px 20px 90px; transition: opacity 1.5s; }
-        .container { max-width: 960px; margin: auto; display: flex; flex-direction: column; gap: 70px; }
-
-        /* کارت‌های شیشه‌ای */
-        .section-card {
-            background: var(--glass-bg); border: 1px solid var(--glass-border);
-            border-radius: 24px; padding: 40px 35px; backdrop-filter: blur(18px);
-            box-shadow: var(--shadow); position: relative; overflow: hidden;
+        /* ================= ساختار اصلی ================= */
+        #main-content {
+            display: none;
+            opacity: 0;
+            padding: 100px 15px 50px;
+            transition: opacity 1.5s;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .section-box {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
         }
         .section-title {
-            font-family: 'Lalezar', cursive; font-size: 2.2rem; color: var(--gold);
-            text-shadow: 0 0 25px rgba(212,175,55,0.6); margin-bottom: 25px; text-align: center;
+            font-family: 'Lalezar', cursive;
+            font-size: 2.2rem;
+            color: var(--royal-gold);
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(212,175,55,0.4);
         }
 
-        /* استایل‌های داخلی */
-        .pulse-heart-svg { width: 100px; height: 100px; cursor: pointer; filter: drop-shadow(0 0 20px gold); }
-        .bond-rate-display { font-family: 'Cinzel', serif; font-size: 3rem; color: var(--gold); text-align: center; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+        /* ================= کارت‌های شخصی (علایق) ================= */
+        .traits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .trait-card {
+            background: rgba(0,0,0,0.4);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .trait-card:hover { transform: translateY(-5px); border-color: var(--royal-gold); }
+        
+        .theme-mobin { border-bottom: 3px solid var(--mobin-blue); }
+        .theme-niyayesh { border-bottom: 3px solid var(--vampire-red); background-image: url('data:image/svg+xml;utf8,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1" fill="rgba(138,3,3,0.2)"/></svg>'); }
+
+        /* ================= شبکه اجتماعی (رویان‌گرام) ================= */
+        .stories-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            scrollbar-width: none;
+        }
+        .story-ring {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--royal-gold), #ffdf73);
+            padding: 3px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+        .story-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--mobin-black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            border: 2px solid var(--mobin-black);
+            overflow: hidden;
+        }
+        .story-inner img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .post-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-md);
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .post-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+        .post-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--royal-gold); }
+        .post-img { width: 100%; border-radius: 12px; margin-bottom: 10px; border: 1px solid rgba(212,175,55,0.2); }
+        .post-actions { display: flex; gap: 15px; color: var(--royal-gold); font-size: 1.2rem; cursor: pointer; }
+
+        /* ================= پنل مدیریت ================= */
+        #admin-panel { display: none; }
+        .activity-log {
+            max-height: 300px;
+            overflow-y: auto;
+            background: rgba(0,0,0,0.5);
+            border-radius: var(--radius-md);
+            padding: 15px;
+            font-size: 0.9rem;
+        }
+        .log-item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+        }
+        .log-time { color: var(--royal-gold-light); font-size: 0.8rem; }
+
+        /* ================= متفرقه ================= */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-
-        .heart-drop {
-            position: fixed; top: -40px; z-index: 9999; pointer-events: none;
-            animation: heartFall linear forwards;
-        }
-        @keyframes heartFall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
-
-        .glass-card {
-            background: rgba(255,255,240,0.07); border: 1px solid rgba(212,175,55,0.2);
-            border-radius: 16px; padding: 18px; backdrop-filter: blur(8px); margin-bottom: 10px;
-        }
-
-        input, textarea {
-            width: 100%; padding: 14px 18px; border: 1px solid rgba(212,175,55,0.5);
-            border-radius: 14px; background: rgba(255,255,255,0.1); color: white;
-            font-family: inherit; outline: none; transition: 0.3s; margin-bottom: 10px;
-        }
-        input:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.4); }
-
-        .message-bubble {
-            padding: 12px 18px; border-radius: 18px; margin-bottom: 8px; max-width: 80%;
-        }
-        .msg-mobin { background: rgba(0,0,0,0.5); align-self: flex-start; border-left: 4px solid var(--gold); }
-        .msg-niyayesh { background: rgba(212,175,55,0.15); align-self: flex-end; border-right: 4px solid var(--crimson); }
-
-        .activity-log { max-height: 400px; overflow-y: auto; font-size: 0.9rem; color: #ccc; }
-        .log-entry { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        
+        .heart-beat { animation: beat 1s infinite alternate; }
+        @keyframes beat { from { transform: scale(1); } to { transform: scale(1.1); } }
 
         @media (max-width: 768px) {
-            .navbar { top: auto !important; bottom: 12px; }
-            .section-title { font-size: 1.8rem; }
-            .login-container { padding: 30px 25px; }
+            .navbar { top: auto; bottom: 15px; padding: 12px; }
+            .traits-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<!-- ذرات طلایی -->
 <canvas id="gold-particles"></canvas>
 
-<!-- اعلان -->
 <div id="custom-alert">
-    <span>👑</span>
-    <span id="custom-alert-msg"></span>
+    <span id="alert-icon">👑</span>
+    <span id="alert-msg">پیام سیستم</span>
 </div>
 
-<!-- صفحه‌ی ورود -->
-<div class="login-wrapper" id="login-zone">
-    <div class="login-container">
-        <h1 class="lalezar">پادشاهی عشق</h1>
-        <p>مبین و نیایش</p>
-        <div class="tab-btns">
-            <button class="tab-btn active" id="login-tab-btn" onclick="switchAuthTab('login')">ورود</button>
-            <button class="tab-btn" id="signup-tab-btn" onclick="switchAuthTab('signup')">ثبت‌نام</button>
+<!-- ================= پرده ورود / ثبت نام ================= -->
+<div class="auth-wrapper" id="auth-zone">
+    <div class="auth-container">
+        <div class="auth-tabs">
+            <div class="auth-tab active" onclick="switchAuthTab('login')">ورود</div>
+            <div class="auth-tab" onclick="switchAuthTab('register')">ثبت‌نام مهمان</div>
         </div>
-        <div id="login-form">
-            <div class="form-group"><input id="login-username" placeholder="نام کاربری"></div>
-            <div class="form-group"><input id="login-password" type="password" placeholder="رمز عبور"></div>
-            <button class="action-btn primary-btn" onclick="handleLogin()">ورود به قلمرو</button>
+        
+        <!-- فرم ورود -->
+        <div id="form-login" class="auth-form active">
+            <h2 class="lalezar" style="color:var(--royal-purple); margin-bottom: 5px;">قلمرو عشق</h2>
+            <p style="color:#666; margin-bottom: 20px; font-size: 0.9rem;">پادشاه مبین و ملکه نیایش</p>
+            <input type="text" id="login-user" placeholder="نام کاربری (مهمان/ادمین)">
+            <input type="password" id="login-pass" placeholder="رمز عبور سلطنتی">
+            <button class="btn btn-gold" onclick="attemptLogin()">ورود به قصر ✨</button>
         </div>
-        <div id="signup-form" style="display:none;">
-            <div class="form-group"><input id="signup-username" placeholder="نام کاربری جدید"></div>
-            <div class="form-group"><input id="signup-password" type="password" placeholder="رمز عبور"></div>
-            <button class="action-btn primary-btn" onclick="handleSignup()">ساخت حساب</button>
+
+        <!-- فرم ثبت نام -->
+        <div id="form-register" class="auth-form">
+            <h2 class="lalezar" style="color:var(--royal-purple); margin-bottom: 20px;">دریافت مجوز ورود</h2>
+            <input type="text" id="reg-name" placeholder="نام شما">
+            <input type="text" id="reg-user" placeholder="نام کاربری دلخواه">
+            <button class="btn btn-gold" onclick="registerGuest()">ثبت نام 📜</button>
         </div>
-        <button class="action-btn secondary-btn" style="margin-top:12px;" onclick="enterGuest()">ورود به عنوان مهمان</button>
     </div>
 </div>
 
-<!-- نوار ناوبری -->
-<div class="navbar" id="navbar">
-    <a href="#queen">👑 ملکه</a>
-    <a href="#letter">💌 نامه</a>
-    <a href="#resonance">💞 هم‌نوایی</a>
-    <a href="#galaxy">🌌 کهکشان</a>
-    <a href="#grimoire">📖 خاطرات</a>
-    <a href="#wheel">🎡 گردونه</a>
-    <a href="#cipher">🔐 راز</a>
-    <a href="#chat" id="nav-chat" style="display:none;">💬 چت</a>
-    <a href="#arcade">⚔️ مبارزه</a>
-    <a href="#music">🎵 موسیقی</a>
-    <a href="#promises">📜 وعده‌ها</a>
-    <a href="#loveclock">⏳ ساعت عشق</a>
-    <a href="#interests">🎯 علایق</a>
-    <a href="#birthdays">🎂 تولدها</a>
-    <a href="#dreams">✨ رویاها</a>
-    <a href="#social">📱 دیوار</a>
-    <a href="#gallery">🖼️ گالری</a>
-    <a href="javascript:void(0)" onclick="openPortal()">🌀 پورتال</a>
-    <a href="#admin" id="nav-admin" style="display:none;">🔍 ادمین</a>
+<!-- ================= پرده نمایش اولیه ================= -->
+<div id="intro-screen">
+    <div class="intro-logo" id="intro-text">M & N</div>
 </div>
 
-<!-- محتوای اصلی -->
-<div id="main">
-    <div class="container">
+<!-- ================= نوار ناوبری ================= -->
+<div class="navbar" id="navbar">
+    <a href="#about-sec">ملکه و پادشاه</a>
+    <a href="#interests-sec">علایق ما</a>
+    <a href="#dates-sec">تقویم عشق</a>
+    <a href="#social-sec">رویان‌گرام</a>
+    <a href="#dreams-sec">رویاها</a>
+    <a href="#admin-panel" id="nav-admin" style="display:none; color:var(--vampire-red);">اتاق فرمان</a>
+</div>
 
-        <!-- بخش ملکه -->
-        <div class="section-card reveal" id="queen">
-            <div class="section-title">👑 ملکه قلب من</div>
-            <div style="text-align:center;">
-                <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش" style="width:220px; border-radius:24px; border:3px solid var(--gold); box-shadow:0 0 30px gold;">
-                <p style="margin-top:25px; line-height:2.2; max-width:700px; margin-left:auto; margin-right:auto;">
-                    او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. من، مبین، پادشاه این قلمرو، تا ابد پاسدار قلب تو خواهم بود.
-                </p>
+<!-- ================= محتوای اصلی ================= -->
+<div id="main-content">
+
+    <!-- بخش معرفی -->
+    <div class="section-box reveal" id="about-sec">
+        <h2 class="section-title">داستان یک امپراتوری 👑</h2>
+        <div style="text-align: center; line-height: 2;">
+            <p>این قلمرو بر پایه عشق خالص بنا شده است. جایی که <strong>مبین</strong>، پادشاه مقتدر با روحیه‌ای به رنگ مشکی و آبی تاریک، در کنار ملکه‌ی بی‌همتای خود، <strong>نیایش</strong>، فرمانروایی می‌کند.</p>
+            <div style="margin-top: 20px; font-size: 2rem;" class="heart-beat">🖤 💙 ❤️</div>
+        </div>
+    </div>
+
+    <!-- بخش علایق (اختصاصی) -->
+    <div class="section-box reveal" id="interests-sec">
+        <h2 class="section-title">علایق و جهان ما 🌍</h2>
+        <div class="traits-grid">
+            <!-- علایق مبین -->
+            <div class="trait-card theme-mobin">
+                <h3 class="lalezar" style="color: var(--royal-gold); font-size: 1.5rem;">دنیای مبین 🏎️</h3>
+                <p style="margin: 10px 0; font-size: 0.9rem; color: #bbb;">عاشق سرعت، قدرت و طراحی بی‌نقص.</p>
+                <ul style="list-style: none; text-align: right; line-height: 2; font-weight: bold;">
+                    <li>🚙 ماشین رویاها: <span style="color:white;">پورشه باکستر</span></li>
+                    <li>🎨 رنگ‌های روح: <span style="color:#0033cc;">آبی پررنگ</span> و <span style="color:#555;">مشکی</span></li>
+                </ul>
+            </div>
+            <!-- علایق نیایش -->
+            <div class="trait-card theme-niyayesh">
+                <h3 class="lalezar" style="color: var(--vampire-red); font-size: 1.5rem;">دنیای نیایش 🧛🏻‍♀️</h3>
+                <p style="margin: 10px 0; font-size: 0.9rem; color: #bbb;">عاشق خلق زیبایی‌ها و رازهای جاودانه.</p>
+                <ul style="list-style: none; text-align: right; line-height: 2; font-weight: bold;">
+                    <li>🏛️ رشته تحصیلی: <span style="color:white;">معماری (خالق بناهای عشق)</span></li>
+                    <li>🩸 دنیای فانتزی: <span style="color:#ff4d4d;">The Vampire Diaries</span></li>
+                </ul>
             </div>
         </div>
+    </div>
 
-        <!-- بخش نامه -->
-        <div class="section-card reveal" id="letter">
-            <div class="section-title">💌 نامه عاشقانه پادشاه</div>
-            <div id="typed-text" style="min-height:180px; line-height:2.5; font-size:1.1rem; white-space:pre-wrap;"></div>
-        </div>
-
-        <!-- هم‌نوایی قلب -->
-        <div class="section-card reveal" id="resonance">
-            <div class="section-title">💞 هم‌نوایی قلب‌ها</div>
-            <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
-                <svg class="pulse-heart-svg" viewBox="0 0 32 32" onclick="resonateHearts()" style="width:100px; height:100px;">
-                    <path d="M16,28.261l-1.92-1.743C7.253,20.25,2,15.488,2,9.739C2,5.033,5.702,1.333,10.408,1.333c2.659,0,5.21,1.238,6.877,3.192c1.667-1.954,4.218-3.192,6.877-3.192C28.865,1.333,32.567,5.033,32.567,9.739c0,5.748-5.253,10.511-12.08,16.793L16,28.261z" fill="#d4af37"/>
-                </svg>
-                <div class="bond-rate-display" id="resonance-score">0%</div>
-                <p id="resonance-text" style="color:var(--gold-light);">بر قلب بزن تا فرکانس عشق بالا رود</p>
+    <!-- تقویم و تولدها -->
+    <div class="section-box reveal" id="dates-sec">
+        <h2 class="section-title">اعداد سرنوشت‌ساز 📅</h2>
+        <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; color: var(--royal-gold);" class="lalezar">۲۵</div>
+                <div style="font-weight: bold;">اسفند ۱۳۸۷</div>
+                <div style="color: #888; font-size: 0.9rem;">میلاد پادشاه (مبین)</div>
+            </div>
+            <div style="width: 2px; background: rgba(212,175,55,0.3);"></div>
+            <div style="text-align: center;">
+                <div style="font-size: 3rem; color: var(--vampire-red);" class="lalezar">۱۵</div>
+                <div style="font-weight: bold;">شهریور ۱۳۸۹</div>
+                <div style="color: #888; font-size: 0.9rem;">میلاد ملکه (نیایش)</div>
             </div>
         </div>
+    </div>
 
-        <!-- کهکشان عشق -->
-        <div class="section-card reveal" id="galaxy">
-            <div class="section-title">🌌 نقشه ستارگان عشق</div>
-            <canvas id="galaxyCanvas" style="width:100%; height:200px; background:rgba(0,0,0,0.3); border-radius:16px;"></canvas>
+    <!-- شبکه اجتماعی (رویان‌گرام) -->
+    <div class="section-box reveal" id="social-sec">
+        <h2 class="section-title">رویان‌گرام (RoyalGram) 📸</h2>
+        
+        <!-- استوری‌ها -->
+        <div class="stories-container">
+            <div class="story-ring" onclick="showStory('عشق ابدی ما')"><div class="story-inner">❤️</div></div>
+            <div class="story-ring" onclick="showStory('خاطرات خون‌آشام')"><div class="story-inner" style="background:#4a0000;">🩸</div></div>
+            <div class="story-ring" onclick="showStory('پورشه سواری')"><div class="story-inner" style="background:#001f4d;">🏎️</div></div>
+            <div class="story-ring" onclick="showStory('معماری آینده')"><div class="story-inner">🏛️</div></div>
         </div>
 
-        <!-- کتاب خاطرات -->
-        <div class="section-card reveal" id="grimoire">
-            <div class="section-title">📖 کتاب خاطرات سلطنتی</div>
-            <textarea id="grimoire-input" placeholder="خاطره‌ات را اینجا بنویس..."></textarea>
-            <button class="action-btn primary-btn" style="width:auto; margin-top:8px;" onclick="addGrimoireEntry()">ثبت خاطره</button>
-            <div id="grimoire-entries-box" style="margin-top:20px; display:flex; flex-direction:column; gap:12px;"></div>
-        </div>
-
-        <!-- گردونه سرنوشت -->
-        <div class="section-card reveal" id="wheel">
-            <div class="section-title">🎡 گردونه سرنوشت</div>
-            <div style="text-align:center;">
-                <canvas id="wheelCanvas" width="280" height="280" style="display:inline-block;"></canvas>
+        <!-- فید پست‌ها -->
+        <div id="feed-container">
+            <!-- پست اول -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar"></div>
+                    <div>
+                        <div style="font-weight: bold;">Mobin_King</div>
+                        <div style="font-size: 0.8rem; color: #888;">پادشاه</div>
+                    </div>
+                </div>
+                <div style="padding: 10px 0; line-height: 1.8;">
+                    رویای ما ماشین و خانه‌های لوکس نیست، رویای ما <strong style="color:var(--royal-gold);">«خودمان»</strong> هستیم. وقتی تو باشی، تمام دنیا متعلق به ماست. تقدیم به ملکه‌ام نیایش. 🖤💙
+                </div>
+                <div class="post-actions">
+                    <span onclick="likePost(this)">🤍</span>
+                    <span onclick="logActivity('کامنت روی پست باز شد')">💬</span>
+                </div>
             </div>
-            <button class="action-btn primary-btn" style="width:auto; margin:20px auto 0; display:block;" onclick="spinTheWheel()">بچرخان</button>
-        </div>
 
-        <!-- طلسم مخفی -->
-        <div class="section-card reveal" id="cipher">
-            <div class="section-title">🔐 گشودن راز سلطنتی</div>
-            <input id="cipher-input" placeholder="رمز را وارد کن..." style="max-width:300px; margin:0 auto; display:block;">
-            <button class="action-btn primary-btn" style="width:auto; margin:15px auto 0; display:block;" onclick="unlockCipher()">باز کن</button>
-            <p id="cipher-msg" style="display:none; margin-top:20px; color:var(--gold-light); line-height:2;"></p>
-        </div>
-
-        <!-- چت خصوصی -->
-        <div class="section-card reveal" id="chat" style="display:none;">
-            <div class="section-title">💬 تالار نجوای عاشقانه</div>
-            <div id="chat-msgs-box" style="max-height:280px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; margin-bottom:12px;"></div>
-            <div style="display:flex; gap:8px;">
-                <input id="chat-input-field" placeholder="پیام خود را بنویس...">
-                <button class="action-btn primary-btn" style="width:auto; padding:10px 20px;" onclick="sendPrivateMsg()">ارسال</button>
-            </div>
-        </div>
-
-        <!-- میدان مبارزه -->
-        <div class="section-card reveal" id="arcade">
-            <div class="section-title">⚔️ میدان مبارزه پادشاه</div>
-            <canvas id="tekkenCanvas" style="width:100%; height:250px; background:#111; border-radius:16px;"></canvas>
-            <div style="display:flex; gap:8px; justify-content:center; margin-top:12px;">
-                <button class="action-btn secondary-btn" style="width:auto; padding:8px 20px;" onclick="movePlayer(-1)">⬅️</button>
-                <button class="action-btn primary-btn" style="width:auto; padding:8px 30px;" onclick="playerAttack()">حمله ⚡</button>
-                <button class="action-btn secondary-btn" style="width:auto; padding:8px 20px;" onclick="movePlayer(1)">➡️</button>
+            <!-- ارسال پست جدید -->
+            <div style="margin-top: 20px; display: flex; gap: 10px;">
+                <input type="text" id="new-post-text" placeholder="چیزی بنویسید..." style="margin:0; background: rgba(0,0,0,0.5); color:white;">
+                <button class="btn btn-gold" style="width: auto; padding: 0 20px;" onclick="addPost()">ارسال</button>
             </div>
         </div>
+    </div>
 
-        <!-- جعبه موسیقی -->
-        <div class="section-card reveal" id="music">
-            <div class="section-title">🎵 جعبه موسیقی عاشقانه</div>
-            <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6" width="100%" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-            <div style="display:flex; gap:10px; justify-content:center; margin-top:10px;">
-                <button class="action-btn secondary-btn" style="width:auto; padding:6px 18px;" onclick="changeTrack(0)">آهنگ ۱</button>
-                <button class="action-btn secondary-btn" style="width:auto; padding:6px 18px;" onclick="changeTrack(1)">آهنگ ۲</button>
-                <button class="action-btn secondary-btn" style="width:auto; padding:6px 18px;" onclick="changeTrack(2)">آهنگ ۳</button>
-            </div>
-        </div>
-
-        <!-- وعده‌های سلطنتی -->
-        <div class="section-card reveal" id="promises">
-            <div class="section-title">📜 وعده‌های سلطنتی</div>
-            <textarea id="promise-input" placeholder="وعده‌ات به ملکه را اینجا بنویس..."></textarea>
-            <button class="action-btn primary-btn" style="width:auto; margin-top:8px;" onclick="addPromise()">ثبت وعده</button>
-            <div id="promises-list" style="margin-top:20px; display:flex; flex-direction:column; gap:10px;"></div>
-        </div>
-
-        <!-- ساعت عشق -->
-        <div class="section-card reveal" id="loveclock">
-            <div class="section-title">⏳ ساعت عشق</div>
-            <div style="display:flex; gap:25px; justify-content:center; flex-wrap:wrap; font-size:1.2rem;">
-                <div><span id="love-days">0</span> روز</div>
-                <div><span id="love-hours">0</span> ساعت</div>
-                <div><span id="love-minutes">0</span> دقیقه</div>
-                <div><span id="love-seconds">0</span> ثانیه</div>
-            </div>
-            <p style="text-align:center; margin-top:10px; color:var(--gold-light);">از آغاز این پادشاهی زیبا</p>
-        </div>
-
-        <!-- علایق ما -->
-        <div class="section-card reveal" id="interests">
-            <div class="section-title">🎯 علایق ما</div>
-            <div class="glass-card">
-                <strong>👑 مبین:</strong> عاشق پورشه باکستر 🏎️، رنگ‌های مشکی و آبی پررنگ.
-            </div>
-            <div class="glass-card">
-                <strong>👸🏻 نیایش:</strong> شیفتهٔ سریال Vampire Diaries 🧛‍♀️ و رشتهٔ معماری 🏛️.
-            </div>
-        </div>
-
-        <!-- تولدها -->
-        <div class="section-card reveal" id="birthdays">
-            <div class="section-title">🎂 تولدهای ما</div>
-            <div class="glass-card">
-                <strong>مبین:</strong> ۲۵ اسفند ۱۳۸۷<br>
-                <span id="cd-mobin" style="color:var(--gold-light); font-weight:bold;"></span> تا تولد
-            </div>
-            <div class="glass-card">
-                <strong>نیایش:</strong> ۱۵ شهریور ۱۳۸۹<br>
-                <span id="cd-niyayesh" style="color:var(--gold-light); font-weight:bold;"></span> تا تولد
-            </div>
-        </div>
-
-        <!-- رویاهای مشترک -->
-        <div class="section-card reveal" id="dreams">
-            <div class="section-title">✨ رویاهای مشترک</div>
-            <p style="text-align:center; line-height:2.2;">
-                با هم به سرزمین‌های دوردست سفر کنیم، خانه‌ای رویایی بسازیم و تا ابد عاشق بمانیم.  
-                در کنار هم پیر شویم و هر روز را به یک خاطرهٔ جاودان تبدیل کنیم.
+    <!-- رویاها -->
+    <div class="section-box reveal" id="dreams-sec">
+        <h2 class="section-title">رویای ما ✨</h2>
+        <div style="text-align: center; padding: 20px; background: rgba(212,175,55,0.1); border-radius: 20px;">
+            <p style="font-size: 1.3rem; line-height: 2; font-weight: bold; color: var(--cream);">
+                "رویای ما رسیدن به نقطه‌ای نیست، رویای ما بودن در کنار یکدیگر است. ما خودمان بزرگترین رویای هم هستیم."
             </p>
         </div>
-
-        <!-- دیوار اجتماعی -->
-        <div class="section-card reveal" id="social">
-            <div class="section-title">📱 دیوار عاشقانه</div>
-            <textarea id="post-input" placeholder="پست جدید (می‌توانی لینک عکس هم اضافه کنی)..."></textarea>
-            <button class="action-btn primary-btn" style="width:auto; margin-top:8px;" onclick="addPost()">ارسال پست</button>
-            <div id="posts-list" style="margin-top:20px; display:flex; flex-direction:column; gap:12px;"></div>
-        </div>
-
-        <!-- گالری -->
-        <div class="section-card reveal" id="gallery">
-            <div class="section-title">🖼️ گالری خاطرات</div>
-            <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap:15px;">
-                <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" style="width:100%; border-radius:16px; border:2px solid var(--gold);">
-                <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" style="width:100%; border-radius:16px; border:2px solid var(--gold);">
-            </div>
-        </div>
-
-        <!-- پنل ادمین -->
-        <div class="section-card reveal" id="admin" style="display:none;">
-            <div class="section-title">🔍 پنل ادمین</div>
-            <p style="margin-bottom:15px; color:var(--gold-light);">گزارش فعالیت‌های کاربران:</p>
-            <div class="activity-log" id="activity-log"></div>
-        </div>
-
     </div>
+
+    <!-- پنل مدیریت -->
+    <div class="section-box reveal" id="admin-panel">
+        <h2 class="section-title" style="color: var(--vampire-red);">اتاق فرمان ادمین 🛡️</h2>
+        <p style="margin-bottom: 15px; color:#bbb;">گزارش فعالیت‌های انجام شده در قلمرو:</p>
+        <div class="activity-log" id="activity-log-box">
+            <!-- لاگ‌ها با جاوااسکریپت پر می‌شوند -->
+        </div>
+        <button class="btn btn-outline" style="margin-top: 15px;" onclick="clearLogs()">پاکسازی تاریخچه</button>
+    </div>
+
 </div>
 
 <script>
-    // ============ FIREBASE SETUP ============
-    const firebaseConfig = {
-        apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
-        authDomain: "niyayesh-universe.firebaseapp.com",
-        projectId: "niyayesh-universe",
-        storageBucket: "niyayesh-universe.firebasestorage.app",
-        messagingSenderId: "675804346928",
-        appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
-    };
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+    // ================= متغیرهای سراسری =================
+    let currentUser = null;
+    let isAdmin = false;
 
-    // ============ GLOBAL STATE ============
-    let currentUser = { username: 'guest', role: 'guest' };
-
-    // ============ UTILS ============
-    function showNotif(msg) {
-        const box = document.getElementById('custom-alert');
-        document.getElementById('custom-alert-msg').innerText = msg;
-        box.classList.add('show');
-        setTimeout(() => box.classList.remove('show'), 3000);
+    // ================= سیستم نوتیفیکیشن =================
+    function showNotif(msg, icon = '👑') {
+        const box = document.getElementById("custom-alert");
+        document.getElementById("alert-msg").innerText = msg;
+        document.getElementById("alert-icon").innerText = icon;
+        box.classList.add("show");
+        setTimeout(() => box.classList.remove("show"), 3000);
     }
 
-    function logActivity(username, action) {
-        if (!username) return;
-        db.collection('activities').add({
-            username,
-            action,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
+    // ================= سیستم لاگ فعالیت‌ها (برای ادمین) =================
+    function logActivity(action) {
+        const user = currentUser || "ناشناس";
+        const time = new Date().toLocaleTimeString('fa-IR');
+        const logEntry = { user, action, time };
+        
+        let logs = JSON.parse(localStorage.getItem('royalLogs') || '[]');
+        logs.unshift(logEntry); // اضافه کردن به اول لیست
+        if(logs.length > 50) logs.pop(); // حفظ فقط 50 مورد آخر
+        localStorage.setItem('royalLogs', JSON.stringify(logs));
+
+        renderLogs();
     }
 
-    // ============ AUTH ============
-    window.switchAuthTab = function(tab) {
-        document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
-        document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
-        document.getElementById('login-tab-btn').classList.toggle('active', tab === 'login');
-        document.getElementById('signup-tab-btn').classList.toggle('active', tab === 'signup');
-    };
-
-    window.handleSignup = async function() {
-        const username = document.getElementById('signup-username').value.trim();
-        const password = document.getElementById('signup-password').value.trim();
-        if (!username || !password) return showNotif('لطفاً همه فیلدها را پر کنید.');
-        const userRef = db.collection('users').doc(username);
-        const doc = await userRef.get();
-        if (doc.exists) return showNotif('این نام کاربری قبلاً ثبت شده است.');
-        await userRef.set({ password, role: 'user' });
-        showNotif('حساب با موفقیت ساخته شد. اکنون وارد شوید.');
-        switchAuthTab('login');
-    };
-
-    window.handleLogin = async function() {
-        const username = document.getElementById('login-username').value.trim();
-        const password = document.getElementById('login-password').value.trim();
-        if (!username || !password) return showNotif('نام کاربری و رمز را وارد کنید.');
-        const userDoc = await db.collection('users').doc(username).get();
-        if (!userDoc.exists) return showNotif('کاربری با این نام یافت نشد.');
-        const data = userDoc.data();
-        if (data.password !== password) return showNotif('رمز عبور اشتباه است.');
-        currentUser = {
-            username,
-            role: (username === 'admin' && password === 'adminwiriper') ? 'admin' : 'user'
-        };
-        document.getElementById('login-zone').style.display = 'none';
-        startEmpire();
-    };
-
-    window.enterGuest = function() {
-        currentUser = { username: 'guest', role: 'guest' };
-        document.getElementById('login-zone').style.display = 'none';
-        startEmpire();
-    };
-
-    // ============ EMPIRE START ============
-    function startEmpire() {
-        // نمایش ناوبری و محتوا
-        document.getElementById('navbar').classList.add('show');
-        document.getElementById('main').style.display = 'block';
-        setTimeout(() => { document.getElementById('main').style.opacity = '1'; }, 100);
-
-        // دسترسی‌های ویژه
-        if (currentUser.role === 'admin') {
-            document.getElementById('nav-admin').style.display = 'inline-block';
-            document.getElementById('admin').style.display = 'block';
-            listenActivities();
+    function renderLogs() {
+        const box = document.getElementById('activity-log-box');
+        if(!box) return;
+        const logs = JSON.parse(localStorage.getItem('royalLogs') || '[]');
+        if(logs.length === 0) {
+            box.innerHTML = '<div style="text-align:center; padding: 20px; color:#666;">هیچ فعالیتی ثبت نشده است.</div>';
+            return;
         }
-        if (currentUser.username === 'niyayesh') {
-            document.getElementById('nav-chat').style.display = 'inline-block';
-            document.getElementById('chat').style.display = 'block';
-        }
-
-        // راه‌اندازی همه‌ی بخش‌ها
-        startTypewriter();
-        initResonance();
-        initGalaxy();
-        initWheel();
-        listenGrimoire();
-        listenChat();
-        listenPromises();
-        listenPosts();
-        initArcade();
-        startLoveClock();
-        startBirthdayCountdowns();
-        createGoldParticles();
-        revealOnScroll();
-        window.addEventListener('scroll', revealOnScroll);
-        showNotif(`👑 خوش آمدی ${currentUser.username}!`);
-        logActivity(currentUser.username, 'ورود به قلمرو');
+        box.innerHTML = logs.map(l => `
+            <div class="log-item">
+                <span>[${l.user}] ${l.action}</span>
+                <span class="log-time">${l.time}</span>
+            </div>
+        `).join('');
     }
 
-    // ============ TYPEWRITER ============
-    let typingTimer = null;
-    function startTypewriter() {
-        const text = `نیایش عزیزم، ملکهٔ قلب من...\n\nاز لحظه‌ای که نگاهت را دیدم، تاج سلطنتم بر سرم سنگینی می‌کند مگر آنکه تو کنارم باشی. تو نه فقط عشق من، که معنای پادشاهی و جاودانگی هستی.\n\nبا تو هر روز طلوعی دوباره است و هر نفس، غزلی ناب. حضور تو این قلمرو را به بهشت تبدیل کرده و قلبم تنها به ضربان نام تو زنده است.\n\nقول می‌دهم تا آخرین ستاره هم که خاموش شود، باز هم در کنارت بمانم و عشقمان را چون نگینی بر تارک این عالم بدرخشانم.\n\nپادشاهت، مبین 👑💖`;
-        const el = document.getElementById('typed-text');
-        if (!el) return;
-        el.innerHTML = '';
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                el.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
-                i++;
-                typingTimer = setTimeout(type, 30);
-            }
-        }
-        type();
+    function clearLogs() {
+        localStorage.removeItem('royalLogs');
+        renderLogs();
+        showNotif("تاریخچه فعالیت‌ها پاک شد", "🗑️");
+        logActivity("مدیر تاریخچه را پاک کرد");
     }
 
-    // ============ RESONANCE ============
-    function initResonance() {
-        db.collection('state').doc('resonance').onSnapshot(doc => {
-            if (doc.exists) {
-                const score = doc.data().score || 0;
-                document.getElementById('resonance-score').innerText = score + '%';
-            }
-        });
-    }
-
-    function resonateHearts() {
-        launchHeartRain();
-        const scoreEl = document.getElementById('resonance-score');
-        let score = parseInt(scoreEl.innerText) || 0;
-        score = Math.min(100, score + Math.floor(Math.random()*5) + 3);
-        scoreEl.innerText = score + '%';
-        db.collection('state').doc('resonance').set({ score }, { merge: true });
-        logActivity(currentUser.username, 'هم‌نوایی قلب');
-    }
-
-    function launchHeartRain() {
-        for (let i=0; i<25; i++) {
-            const h = document.createElement('div');
-            h.className = 'heart-drop';
-            h.innerText = '💖';
-            h.style.left = Math.random()*100 + 'vw';
-            h.style.animationDuration = (2 + Math.random()*3) + 's';
-            h.style.fontSize = (14 + Math.random()*20) + 'px';
-            document.body.appendChild(h);
-            setTimeout(() => h.remove(), 5000);
-        }
-    }
-
-    // ============ GALAXY ============
-    function initGalaxy() {
-        const canvas = document.getElementById('galaxyCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = 200;
-        const particles = Array.from({length: 50}, () => ({
-            x: Math.random()*canvas.width,
-            y: Math.random()*canvas.height,
-            vx: (Math.random()-0.5)*0.5,
-            vy: (Math.random()-0.5)*0.5
-        }));
-        function draw() {
-            ctx.fillStyle = 'rgba(10,17,40,0.4)';
-            ctx.fillRect(0,0,canvas.width,canvas.height);
-            particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x<0 || p.x>canvas.width) p.vx *= -1;
-                if (p.y<0 || p.y>canvas.height) p.vy *= -1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
-                ctx.fillStyle = '#f0d58c';
-                ctx.fill();
-            });
-            requestAnimationFrame(draw);
-        }
-        draw();
-    }
-
-    // ============ WHEEL ============
-    let wheelAngle = 0, wheelCtx;
-    function initWheel() {
-        const canvas = document.getElementById('wheelCanvas');
-        wheelCtx = canvas.getContext('2d');
-        const items = ["💋 بوسه", "🏎️ سفر", "🥀 رز", "💍 حلقه", "🫂 آغوش", "✨ آرزو"];
-        function draw() {
-            wheelCtx.clearRect(0,0,280,280);
-            items.forEach((item,i) => {
-                const angle = wheelAngle + i * (Math.PI*2/items.length);
-                wheelCtx.beginPath();
-                wheelCtx.arc(140,140,120, angle, angle+Math.PI*2/items.length);
-                wheelCtx.fillStyle = i%2===0 ? '#d4af37' : '#1a2a6c';
-                wheelCtx.fill();
-                wheelCtx.fillStyle = 'white';
-                wheelCtx.font = 'bold 13px Vazirmatn';
-                wheelCtx.save();
-                wheelCtx.translate(140,140);
-                wheelCtx.rotate(angle + Math.PI/items.length);
-                wheelCtx.fillText(item, 80, 5);
-                wheelCtx.restore();
-            });
-        }
-        draw();
-        window.spinTheWheel = () => {
-            const target = wheelAngle + (Math.floor(Math.random()*5)+5)*Math.PI*2;
-            let start = Date.now(), dur = 4000;
-            function anim() {
-                const p = Math.min((Date.now()-start)/dur, 1);
-                wheelAngle += (target - wheelAngle) * 0.1;
-                draw();
-                if (p < 1) requestAnimationFrame(anim);
-                else logActivity(currentUser.username, 'چرخاندن گردونه');
-            }
-            anim();
-        };
-        setInterval(draw, 50);
-    }
-
-    // ============ GRIMOIRE ============
-    function listenGrimoire() {
-        db.collection('grimoire').orderBy('timestamp','desc').onSnapshot(snap => {
-            const box = document.getElementById('grimoire-entries-box');
-            if (!box) return;
-            box.innerHTML = '';
-            snap.forEach(doc => {
-                const d = doc.data();
-                const div = document.createElement('div');
-                div.className = 'glass-card';
-                div.innerHTML = `<strong>${d.author}</strong>: ${d.text}`;
-                box.appendChild(div);
-            });
-        });
-    }
-    window.addGrimoireEntry = async () => {
-        const text = document.getElementById('grimoire-input').value.trim();
-        if (!text) return showNotif('متنی برای خاطره بنویس.');
-        await db.collection('grimoire').add({
-            author: currentUser.username,
-            text,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        document.getElementById('grimoire-input').value = '';
-        logActivity(currentUser.username, 'ثبت خاطره');
-    };
-
-    // ============ CHAT ============
-    function listenChat() {
-        db.collection('messages').orderBy('timestamp','asc').onSnapshot(snap => {
-            const box = document.getElementById('chat-msgs-box');
-            if (!box) return;
-            box.innerHTML = '';
-            snap.forEach(doc => {
-                const d = doc.data();
-                const div = document.createElement('div');
-                div.className = `message-bubble ${d.sender==='mobin'?'msg-mobin':'msg-niyayesh'}`;
-                div.innerHTML = `<strong>${d.sender}</strong>: ${d.text}`;
-                box.appendChild(div);
-            });
-            box.scrollTop = box.scrollHeight;
-        });
-    }
-    window.sendPrivateMsg = async () => {
-        const text = document.getElementById('chat-input-field').value.trim();
-        if (!text) return;
-        const sender = currentUser.username === 'niyayesh' ? 'niyayesh' : 'mobin';
-        await db.collection('messages').add({
-            sender, text,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        document.getElementById('chat-input-field').value = '';
-    };
-
-    // ============ PROMISES ============
-    function listenPromises() {
-        db.collection('promises').orderBy('timestamp','desc').onSnapshot(snap => {
-            const box = document.getElementById('promises-list');
-            if (!box) return;
-            box.innerHTML = '';
-            snap.forEach(doc => {
-                const div = document.createElement('div');
-                div.className = 'glass-card';
-                div.innerText = doc.data().text;
-                box.appendChild(div);
-            });
-        });
-    }
-    window.addPromise = async () => {
-        const text = document.getElementById('promise-input').value.trim();
-        if (!text) return;
-        await db.collection('promises').add({
-            text,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        document.getElementById('promise-input').value = '';
-        logActivity(currentUser.username, 'ثبت وعده');
-    };
-
-    // ============ SOCIAL WALL ============
-    function listenPosts() {
-        db.collection('posts').orderBy('timestamp','desc').onSnapshot(snap => {
-            const box = document.getElementById('posts-list');
-            if (!box) return;
-            box.innerHTML = '';
-            snap.forEach(doc => {
-                const p = doc.data();
-                const div = document.createElement('div');
-                div.className = 'glass-card';
-                div.innerHTML = `
-                    <strong>${p.author}</strong><br>
-                    ${p.text.replace(/\n/g, '<br>')}
-                    ${p.imageUrl ? `<br><img src="${p.imageUrl}" style="max-width:100%; border-radius:12px; margin-top:8px;">` : ''}
-                    <br><small>${p.timestamp?.toDate().toLocaleString('fa-IR') || 'چند لحظه پیش'}</small>
-                `;
-                box.appendChild(div);
-            });
-        });
-    }
-    window.addPost = async () => {
-        const text = document.getElementById('post-input').value.trim();
-        if (!text) return;
-        // تشخیص لینک عکس (ساده)
-        let imageUrl = '';
-        const words = text.split(' ');
-        const lastWord = words[words.length-1];
-        if (lastWord.startsWith('http') && (lastWord.includes('.jpg') || lastWord.includes('.png') || lastWord.includes('.jpeg'))) {
-            imageUrl = lastWord;
-        }
-        await db.collection('posts').add({
-            author: currentUser.username,
-            text,
-            imageUrl,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        document.getElementById('post-input').value = '';
-        logActivity(currentUser.username, 'ارسال پست');
-    };
-
-    // ============ BIRTHDAYS ============
-    function startBirthdayCountdowns() {
-        function getNextBirthday(month, day) {
-            const now = new Date();
-            let bday = new Date(now.getFullYear(), month-1, day);
-            if (now > bday) bday.setFullYear(bday.getFullYear()+1);
-            return bday.getTime();
-        }
-        function format(ms) {
-            const d = Math.floor(ms/86400000);
-            const h = Math.floor((ms%86400000)/3600000);
-            const m = Math.floor((ms%3600000)/60000);
-            const s = Math.floor((ms%60000)/1000);
-            return `${d} روز ${h} ساعت ${m} دقیقه ${s} ثانیه`;
-        }
-        setInterval(() => {
-            const now = Date.now();
-            const mobinBD = getNextBirthday(3, 16); // 25 Esfand ~ March 16
-            const niyayeshBD = getNextBirthday(9, 6); // 15 Shahrivar ~ Sep 6
-            document.getElementById('cd-mobin').innerText = format(mobinBD - now);
-            document.getElementById('cd-niyayesh').innerText = format(niyayeshBD - now);
-        }, 1000);
-    }
-
-    // ============ ARCADE ============
-    let playerX = 50, enemyX = 300;
-    function initArcade() {
-        const canvas = document.getElementById('tekkenCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = 250;
-        function loop() {
-            ctx.fillStyle = '#111';
-            ctx.fillRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = 'gold';
-            ctx.fillRect(playerX, 150, 30, 60);
-            ctx.fillStyle = 'crimson';
-            ctx.fillRect(enemyX, 150, 30, 60);
-            requestAnimationFrame(loop);
-        }
-        loop();
-        window.movePlayer = (dir) => { playerX = Math.min(Math.max(playerX+dir*30, 0), canvas.width-30); };
-        window.playerAttack = () => {
-            if (Math.abs(playerX - enemyX) < 80) showNotif('ضربه محکمی زدی! ⚡');
-            logActivity(currentUser.username, 'حمله در آرکید');
-        };
-    }
-
-    // ============ MUSIC ============
-    const tracks = [
-        {id: '2QjOHCTQ1Jl3zawyYOpxh6', name: 'Sweater Weather'},
-        {id: '6UelLqTqIt2Mjjg7qQhW9A', name: 'TVD Soundtrack'},
-        {id: '3JvKfv6T31zO0ini0iNItO', name: 'Another Love'}
-    ];
-    window.changeTrack = (i) => {
-        document.getElementById('music-iframe').src = `https://open.spotify.com/embed/track/${tracks[i].id}`;
-        showNotif(`در حال پخش: ${tracks[i].name}`);
-    };
-
-    // ============ CIPHER ============
-    window.unlockCipher = () => {
-        const key = document.getElementById('cipher-input').value.trim().toLowerCase();
-        const msg = document.getElementById('cipher-msg');
-        if (key === 'همیشه' || key === 'always') {
-            msg.style.display = 'block';
-            msg.innerText = 'پیام مخفی: «عشق ما تا ابد پایدار است، مثل تاجی که هرگز از سر پادشاه نمی‌افتد. 👑💖»';
-            logActivity(currentUser.username, 'گشودن طلسم');
+    // ================= سیستم احراز هویت (ساده شده) =================
+    function switchAuthTab(tab) {
+        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+        
+        if(tab === 'login') {
+            document.querySelectorAll('.auth-tab')[0].classList.add('active');
+            document.getElementById('form-login').classList.add('active');
         } else {
-            showNotif('رمز اشتباه است.');
+            document.querySelectorAll('.auth-tab')[1].classList.add('active');
+            document.getElementById('form-register').classList.add('active');
         }
-    };
-
-    // ============ PORTAL ============
-    window.openPortal = () => {
-        const portal = document.createElement('div');
-        portal.style.cssText = 'position:fixed; inset:0; background:black; z-index:9999; display:flex; align-items:center; justify-content:center; color:gold; font-size:3rem; font-family:Lalezar;';
-        portal.innerText = '✨ ورود به دنیای رویایی ✨';
-        portal.onclick = () => portal.remove();
-        document.body.appendChild(portal);
-    };
-
-    // ============ LOVE CLOCK ============
-    function startLoveClock() {
-        const start = new Date('2025-03-21').getTime(); // تاریخ شروع رابطه
-        setInterval(() => {
-            const diff = Date.now() - start;
-            if (diff < 0) return;
-            const d = Math.floor(diff/86400000);
-            const h = Math.floor((diff%86400000)/3600000);
-            const m = Math.floor((diff%3600000)/60000);
-            const s = Math.floor((diff%60000)/1000);
-            document.getElementById('love-days').innerText = d;
-            document.getElementById('love-hours').innerText = h;
-            document.getElementById('love-minutes').innerText = m;
-            document.getElementById('love-seconds').innerText = s;
-        }, 1000);
     }
 
-    // ============ ADMIN LOG ============
-    function listenActivities() {
-        db.collection('activities').orderBy('timestamp','desc').limit(50).onSnapshot(snap => {
-            const box = document.getElementById('activity-log');
-            if (!box) return;
-            box.innerHTML = '';
-            snap.forEach(doc => {
-                const a = doc.data();
-                const date = a.timestamp ? new Date(a.timestamp.toDate()).toLocaleString('fa-IR') : '';
-                const div = document.createElement('div');
-                div.className = 'log-entry';
-                div.innerText = `${a.username} — ${a.action} — ${date}`;
-                box.appendChild(div);
-            });
-        });
+    function attemptLogin() {
+        const user = document.getElementById('login-user').value.trim();
+        const pass = document.getElementById('login-pass').value.trim();
+
+        if(pass === 'adminwiriper') {
+            currentUser = 'Admin_Mobin';
+            isAdmin = true;
+            successLoginFlow("پادشاه مبین، به اتاق فرمان خوش آمدید.");
+        } 
+        else if (pass === 'mobinloveniyayesh' || pass === 'niyayesh') {
+            currentUser = 'Queen_Niyayesh';
+            successLoginFlow("ملکه نیایش، به قلمرو خودتان خوش آمدید.");
+        }
+        else if (user !== '') {
+            currentUser = user;
+            successLoginFlow(`مهمان عزیز ${user}، خوش آمدید.`);
+        } else {
+            showNotif("لطفا نام کاربری یا رمز را وارد کنید", "❌");
+        }
     }
 
-    // ============ GOLD PARTICLES ============
-    function createGoldParticles() {
-        const canvas = document.getElementById('gold-particles');
-        const ctx = canvas.getContext('2d');
+    function registerGuest() {
+        const name = document.getElementById('reg-name').value.trim();
+        const user = document.getElementById('reg-user').value.trim();
+        if(!name || !user) {
+            showNotif("پر کردن فرم الزامی است", "⚠️");
+            return;
+        }
+        currentUser = user;
+        successLoginFlow(`ثبت نام موفق. خوش آمدید ${name}`);
+    }
+
+    function successLoginFlow(msg) {
+        document.getElementById('auth-zone').style.display = 'none';
+        showNotif(msg);
+        logActivity('ورود به سایت');
+
+        // فعال‌سازی پنل ادمین
+        if(isAdmin) {
+            document.getElementById('admin-panel').style.display = 'block';
+            document.getElementById('nav-admin').style.display = 'inline-block';
+            renderLogs();
+        }
+
+        // نمایش انیمیشن
+        const intro = document.getElementById('intro-screen');
+        const text = document.getElementById('intro-text');
+        intro.style.display = 'flex';
+        text.classList.add('zoom-anim');
+
+        setTimeout(() => {
+            intro.style.opacity = '0';
+            setTimeout(() => { 
+                intro.style.display = 'none'; 
+                document.getElementById('main-content').style.display = 'block';
+                setTimeout(() => document.getElementById('main-content').style.opacity = '1', 100);
+                document.getElementById('navbar').classList.add('show');
+                initParticles();
+                window.addEventListener('scroll', handleScroll);
+                handleScroll();
+            }, 1000);
+        }, 3500);
+    }
+
+    // ================= شبکه‌های اجتماعی داخلی =================
+    function showStory(title) {
+        showNotif(`در حال مشاهده استوری: ${title}`, "👁️");
+        logActivity(`باز کردن استوری ${title}`);
+    }
+
+    function likePost(el) {
+        if(el.innerText === '🤍') {
+            el.innerText = '❤️';
+            showNotif("پست لایک شد", "❤️");
+            logActivity("لایک کردن پست پادشاه");
+        } else {
+            el.innerText = '🤍';
+        }
+    }
+
+    function addPost() {
+        const input = document.getElementById('new-post-text');
+        const text = input.value.trim();
+        if(!text) return;
+
+        const newPost = document.createElement('div');
+        newPost.className = 'post-card';
+        newPost.innerHTML = `
+            <div class="post-header">
+                <div class="post-avatar" style="background:var(--vampire-red);"></div>
+                <div>
+                    <div style="font-weight: bold;">${currentUser}</div>
+                    <div style="font-size: 0.8rem; color: #888;">همین الان</div>
+                </div>
+            </div>
+            <div style="padding: 10px 0; line-height: 1.8;">${text}</div>
+            <div class="post-actions">
+                <span onclick="likePost(this)">🤍</span>
+            </div>
+        `;
+        document.getElementById('feed-container').appendChild(newPost);
+        input.value = '';
+        logActivity("ارسال پست جدید در شبکه اجتماعی");
+        showNotif("پست شما منتشر شد", "✅");
+    }
+
+    // ================= ذرات طلا =================
+    function initParticles() {
+        const canvas = document.getElementById("gold-particles");
+        const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        const particles = Array.from({length: 50}, () => ({
-            x: Math.random()*canvas.width,
-            y: Math.random()*canvas.height,
-            vx: (Math.random()-0.5)*0.3,
-            vy: (Math.random()-0.5)*0.3,
-            size: Math.random()*3 + 1
-        }));
-        function draw() {
-            ctx.clearRect(0,0,canvas.width,canvas.height);
+        
+        let particles = [];
+        for(let i=0; i<60; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2.5 + 0.5,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x<0 || p.x>canvas.width) p.vx *= -1;
-                if (p.y<0 || p.y>canvas.height) p.vy *= -1;
+                p.x += p.vx;
+                p.y += p.vy;
+                if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-                ctx.fillStyle = 'rgba(212,175,55,0.5)';
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(212, 175, 55, 0.5)';
                 ctx.fill();
             });
-            requestAnimationFrame(draw);
+            requestAnimationFrame(animate);
         }
-        draw();
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     }
 
-    // ============ REVEAL ON SCROLL ============
-    function revealOnScroll() {
-        document.querySelectorAll('.reveal').forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight - 60) {
+    // ================= اسکرول =================
+    function handleScroll() {
+        const reveals = document.querySelectorAll('.reveal');
+        const windowHeight = window.innerHeight;
+        const revealPoint = 100;
+
+        reveals.forEach(el => {
+            const revealTop = el.getBoundingClientRect().top;
+            if(revealTop < windowHeight - revealPoint) {
                 el.classList.add('active');
+            }
+        });
+
+        // به روز رسانی منو اکتیو
+        const sections = document.querySelectorAll('.section-box');
+        const navLinks = document.querySelectorAll('.navbar a');
+        
+        let current = '';
+        sections.forEach(sec => {
+            const sectionTop = sec.offsetTop;
+            if(window.scrollY >= sectionTop - 150) {
+                current = sec.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
             }
         });
     }
 </script>
+
 </body>
 </html>
