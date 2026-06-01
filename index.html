@@ -3,632 +3,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#2c003e">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a1128">
     <title>پادشاهی ابدی مبین و نیایش</title>
-
-    <!-- فونت‌ها -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&family=Vazirmatn:wght@300;400;700;900&family=Lalezar&display=swap" rel="stylesheet">
-
-    <!-- Firebase Compat -->
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-
     <style>
         :root {
-            --royal-gold: #d4af37;
-            --royal-gold-light: #f0d58c;
-            --royal-purple: #2c003e;
-            --royal-purple-light: #4a0e5c;
+            --gold: #d4af37;
+            --gold-light: #f0d58c;
+            --navy: #0a1128;
+            --blue-deep: #1a2a6c;
             --crimson: #a51c30;
-            --crimson-light: #c93a4f;
             --cream: #fcf8f2;
-            --cream-dark: #f0e6d3;
             --text: #3a3226;
             --text-light: #5c4f3d;
             --white: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.2);
-            --glass-border: rgba(212, 175, 55, 0.4);
-            --glass-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            --radius-lg: 24px;
-            --radius-md: 16px;
-            --radius-sm: 12px;
+            --glass: rgba(255,255,255,0.08);
+            --glass-border: rgba(212,175,55,0.3);
+            --shadow: 0 20px 50px rgba(0,0,0,0.3);
+            --radius: 20px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            text-size-adjust: 100%;
-            -webkit-text-size-adjust: 100%;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Vazirmatn', -apple-system, sans-serif;
-            background: linear-gradient(180deg, #1a0f2e 0%, #2c003e 40%, #1a0f2e 100%);
-            color: var(--text);
+            font-family: 'Vazirmatn', sans-serif;
+            background: linear-gradient(135deg, #0a1128 0%, #1a0f2e 50%, #0a1128 100%);
+            color: var(--white);
             overflow-x: hidden;
             min-height: 100vh;
-            user-select: none;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
             position: relative;
         }
 
-        .persian-title {
-            font-family: 'Lalezar', cursive;
-            letter-spacing: 1px;
-        }
+        .lalezar { font-family: 'Lalezar', cursive; }
+        .cinzel { font-family: 'Cinzel', serif; }
 
-        .cinzel-font {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 2px;
-        }
-
-        /* ذرات طلایی */
         #gold-particles {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.7;
+            position: fixed; inset: 0; z-index: -1; pointer-events: none;
         }
 
-        .gold-particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--royal-gold);
-            border-radius: 50%;
-            filter: blur(1px);
-            animation: floatParticle 8s linear infinite;
-        }
-
-        @keyframes floatParticle {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-
-        /* اعلان سفارشی */
         #custom-alert {
-            position: fixed;
-            top: 25px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-220px);
-            background: var(--cream);
-            border: 2px solid var(--royal-gold);
-            box-shadow: 0 10px 45px rgba(212,175,55,0.5);
-            padding: 16px 36px;
-            border-radius: 40px;
-            z-index: 10005;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            color: var(--text);
+            position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-220px);
+            background: var(--cream); border: 2px solid var(--gold);
+            box-shadow: 0 10px 40px rgba(212,175,55,0.5); padding: 14px 30px;
+            border-radius: 40px; z-index: 10000; transition: transform 0.6s;
+            display: flex; align-items: center; gap: 10px; font-weight: 700; color: var(--text);
             pointer-events: none;
         }
-        #custom-alert.show {
-            transform: translateX(-50%) translateY(0);
-            pointer-events: auto;
-        }
+        #custom-alert.show { transform: translateX(-50%) translateY(0); pointer-events: auto; }
 
-        /* پرده‌ی ورود */
-        #netflix-intro {
-            position: fixed;
-            inset: 0;
-            background: var(--royal-purple);
-            z-index: 10000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1.2s ease;
-        }
-        .netflix-text {
-            font-family: 'Lalezar', cursive;
-            font-size: 11rem;
-            font-weight: 900;
-            color: var(--royal-gold);
-            opacity: 0;
-            text-shadow: 0 0 70px var(--royal-gold-light), 0 0 30px rgba(255,255,255,0.3);
-        }
-        .animate-zoom {
-            animation: royalZoom 4s forwards cubic-bezier(0.15, 0.85, 0.35, 1);
-        }
-        @keyframes royalZoom {
-            0% { transform: scale(0.25); filter: blur(30px); opacity: 0; }
-            22% { transform: scale(1); filter: blur(0); opacity: 1; }
-            78% { transform: scale(1.05); filter: blur(0); opacity: 1; }
-            100% { transform: scale(8); filter: blur(40px); opacity: 0; }
-        }
-
-        /* صفحه ورود */
         .login-wrapper {
-            position: fixed;
-            inset: 0;
-            z-index: 9000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(26,15,46,0.97);
-            backdrop-filter: blur(25px);
-            padding: 20px;
+            position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center;
+            background: rgba(10,17,40,0.95); backdrop-filter: blur(20px);
         }
         .login-container {
-            width: 100%;
-            max-width: 440px;
-            background: var(--cream);
-            border: 2px solid var(--royal-gold);
-            border-radius: 48px;
-            padding: 55px 35px;
-            text-align: center;
-            box-shadow: 0 30px 100px rgba(0,0,0,0.7), inset 0 0 30px rgba(212,175,55,0.3);
+            width: 100%; max-width: 420px; background: var(--cream); border: 2px solid var(--gold);
+            border-radius: 30px; padding: 40px 30px; text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.7), inset 0 0 30px rgba(212,175,55,0.2);
             color: var(--text);
         }
-        .login-emojis {
-            font-size: 4rem;
-            margin-bottom: 25px;
-        }
-        .login-container h1 {
-            font-family: 'Lalezar', cursive;
-            font-size: 3.8rem;
-            font-weight: 900;
-            margin-bottom: 8px;
-            color: var(--royal-purple);
-        }
-        .login-container p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-        .login-choice-btns {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        .pass-input-section {
-            display: none;
-            margin-bottom: 20px;
-            animation: fadeIn 0.5s ease forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .login-container h1 { font-family: 'Lalezar', cursive; font-size: 3rem; color: var(--blue-deep); margin-bottom: 10px; }
+        .login-container p { color: var(--text-light); margin-bottom: 30px; }
 
-        input, textarea {
-            width: 100%;
-            padding: 16px 20px;
-            border: 1px solid rgba(212,175,55,0.5);
-            border-radius: 20px;
-            background: rgba(255,255,255,0.8);
-            color: #2c003e;
-            outline: none;
-            text-align: right;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
+        .tab-btns { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn {
+            flex: 1; padding: 10px; border: 1px solid var(--gold); background: transparent;
+            border-radius: 20px; cursor: pointer; font-weight: 700; transition: 0.3s;
         }
-        input:focus, textarea:focus {
-            border-color: var(--royal-gold);
-            box-shadow: 0 0 25px rgba(212,175,55,0.3);
-            background: white;
+        .tab-btn.active { background: var(--gold); color: white; }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group input {
+            width: 100%; padding: 14px 20px; border: 1px solid rgba(212,175,55,0.5);
+            border-radius: 15px; background: rgba(255,255,255,0.8); color: #2c003e;
+            font-family: inherit; outline: none; transition: 0.3s;
         }
-        input::placeholder, textarea::placeholder {
-            color: #8a7b6b;
-        }
+        .form-group input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.3); }
 
         .action-btn {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 20px;
-            font-size: 1rem;
-            font-weight: 900;
-            cursor: pointer;
-            font-family: 'Vazirmatn', sans-serif;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
+            width: 100%; padding: 14px; border: none; border-radius: 15px;
+            font-weight: 900; cursor: pointer; transition: 0.3s; font-family: inherit;
         }
         .primary-btn {
-            background: linear-gradient(90deg, #c9a03d, #d4af37);
-            color: white;
+            background: linear-gradient(90deg, #d4af37, #b4942e); color: white;
             box-shadow: 0 8px 20px rgba(212,175,55,0.4);
         }
-        .primary-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(212,175,55,0.6);
-        }
+        .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(212,175,55,0.6); }
         .secondary-btn {
-            background: transparent;
-            border: 2px solid var(--royal-gold);
-            color: var(--royal-purple);
-        }
-        .secondary-btn:hover {
-            background: rgba(212,175,55,0.1);
+            background: transparent; border: 2px solid var(--gold); color: var(--blue-deep);
         }
 
-        .emoji {
-            font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif !important;
-            display: inline-block;
-            background: none !important;
-            vertical-align: middle;
-            margin: 0 4px;
-        }
-
-        /* نوار ناوبری */
         .navbar {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(44,0,62,0.8);
-            border: 1px solid var(--royal-gold);
-            padding: 8px 20px;
-            border-radius: 40px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            display: none;
-            gap: 6px;
-            z-index: 1000;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            transition: all 1s;
-            max-width: 95vw;
-            overflow-x: auto;
-            scrollbar-width: none;
-            white-space: nowrap;
+            position: fixed; top: 15px; left: 50%; transform: translateX(-50%);
+            background: rgba(10,17,40,0.9); border: 1px solid var(--gold);
+            padding: 8px 20px; border-radius: 40px; backdrop-filter: blur(20px);
+            z-index: 1000; display: none; gap: 8px; max-width: 95vw; overflow-x: auto;
+            white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,0.6);
         }
-        .navbar.show-nav {
-            display: flex;
-            top: 20px;
-        }
+        .navbar.show { display: flex; }
         .navbar a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 0.8rem;
-            font-weight: 700;
-            padding: 7px 12px;
-            border-radius: 20px;
-            transition: all 0.3s;
-            display: inline-block;
+            color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem;
+            font-weight: 700; padding: 8px 14px; border-radius: 20px; transition: 0.3s;
         }
-        .navbar a:hover, .navbar a.active {
-            color: white;
-            background: var(--royal-gold);
-            box-shadow: 0 0 15px rgba(212,175,55,0.5);
-        }
+        .navbar a:hover, .navbar a.active { color: white; background: var(--gold); }
 
-        /* محتوای اصلی */
-        #main {
-            display: none;
-            opacity: 0;
-            padding: 120px 15px 100px;
-            transition: opacity 2s;
-        }
-        .container {
-            max-width: 960px;
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 80px;
-        }
+        #main { display: none; opacity: 0; padding: 100px 15px 80px; transition: opacity 1.5s; }
+        .container { max-width: 960px; margin: auto; display: flex; flex-direction: column; gap: 70px; }
 
-        .web-section {
-            background: rgba(255,255,245,0.12);
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 32px;
-            padding: 50px 35px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 25px 70px rgba(0,0,0,0.4);
-            position: relative;
-            overflow: hidden;
-            color: var(--cream);
+        .section-card {
+            background: rgba(255,255,240,0.06); border: 1px solid rgba(212,175,55,0.25);
+            border-radius: 24px; padding: 40px 30px; backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4); position: relative; overflow: hidden;
         }
         .section-title {
-            font-family: 'Lalezar', cursive;
-            font-size: 2.5rem;
-            color: var(--royal-gold);
-            text-shadow: 0 0 25px rgba(212,175,55,0.6);
-            margin-bottom: 30px;
-            text-align: center;
+            font-family: 'Lalezar', cursive; font-size: 2.2rem; color: var(--gold);
+            text-shadow: 0 0 20px rgba(212,175,55,0.6); margin-bottom: 25px; text-align: center;
         }
 
-        /* قاب ملکه */
-        .angel-hero-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .angel-frame {
-            width: 280px;
-            height: 380px;
-            border-radius: 28px;
-            overflow: hidden;
-            border: 3px solid var(--royal-gold);
-            box-shadow: 0 0 55px rgba(212,175,55,0.5);
-            margin-bottom: 30px;
-        }
-        .angel-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s; }
+        .reveal.active { opacity: 1; transform: none; }
 
-        .pulse-heart-svg {
-            width: 110px;
-            height: 110px;
-            fill: var(--crimson);
-            filter: drop-shadow(0 0 15px rgba(200,0,30,0.7));
-            animation: beatHeart 1.2s infinite ease-in-out;
-            cursor: pointer;
-        }
-        @keyframes beatHeart {
-            0%, 100% { transform: scale(1); }
-            30% { transform: scale(1.18); }
-            50% { transform: scale(1.05); }
-            70% { transform: scale(1.18); }
-        }
-        .bond-rate-display {
-            font-family: 'Cinzel', serif;
-            font-size: 3.5rem;
-            color: var(--royal-gold);
-            text-shadow: 0 0 25px rgba(212,175,55,0.8);
-        }
-
-        /* کارت‌های عمومی */
-        .glass-card {
-            background: rgba(255,255,240,0.1);
-            border: 1px solid rgba(212,175,55,0.2);
-            border-radius: 20px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        /* چرخ */
-        .wheel-universe canvas {
-            border: 4px solid var(--royal-gold);
-            border-radius: 50%;
-            box-shadow: 0 0 30px rgba(212,175,55,0.5);
-        }
-
-        /* پیام‌ها */
-        .message-bubble {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(212,175,55,0.3);
-        }
-        .msg-mobin {
-            background: rgba(0,0,0,0.3);
-            border-left: 4px solid var(--royal-gold);
-        }
-        .msg-niyayesh {
-            background: rgba(255,255,240,0.2);
-            border-right: 4px solid var(--crimson);
-        }
-
-        /* قلب افتان */
         .heart-drop {
-            position: fixed;
-            top: -40px;
-            z-index: 9999;
-            pointer-events: none;
+            position: fixed; top: -40px; z-index: 9999; pointer-events: none;
             animation: heartFall linear forwards;
         }
-        @keyframes heartFall {
-            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
+        @keyframes heartFall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
 
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* سایر استایل‌ها */
+        .activity-log { max-height: 400px; overflow-y: auto; font-size: 0.9rem; }
+        .log-entry { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
 
         @media (max-width: 768px) {
-            .navbar { top: auto !important; bottom: 15px; }
-            .navbar.show-nav { bottom: 15px; }
-            .section-title { font-size: 2rem; }
+            .navbar { top: auto !important; bottom: 10px; }
+            .section-title { font-size: 1.8rem; }
         }
     </style>
 </head>
 <body>
+<div id="gold-particles"></div>
+<div id="custom-alert"><span>👑</span><span id="custom-alert-msg"></span></div>
 
-<canvas id="gold-particles"></canvas>
-
-<div id="custom-alert">
-    <span class="emoji">👑</span>
-    <span id="custom-alert-msg">خوش آمدید به قلمرو عشق</span>
-</div>
-
-<div id="netflix-intro">
-    <div class="netflix-text" id="netflix-letter">N</div>
-</div>
-
+<!-- صفحه لاگین -->
 <div class="login-wrapper" id="login-zone">
     <div class="login-container">
-        <div class="login-emojis"><span class="emoji">👑</span><span class="emoji">💖</span></div>
-        <h1>نیایش</h1>
-        <p>قلمرو عشق مبین و ملکه‌اش</p>
-        <div class="login-choice-btns" id="login-choices">
-            <button class="action-btn primary-btn" onclick="showPassSection()">ورود به عنوان ملکه (نیایش) 👸🏻</button>
-            <button class="action-btn secondary-btn" onclick="enterGuest()">ورود به عنوان مهمان 👀</button>
+        <h1 class="lalezar">پادشاهی عشق</h1>
+        <p>مبین و نیایش</p>
+        <div class="tab-btns">
+            <button class="tab-btn active" id="login-tab-btn" onclick="switchAuthTab('login')">ورود</button>
+            <button class="tab-btn" id="signup-tab-btn" onclick="switchAuthTab('signup')">ثبت‌نام</button>
         </div>
-        <div class="pass-input-section" id="pass-field-area">
-            <input id="pass" type="password" placeholder="رمز عبور سلطنتی...">
-            <button class="action-btn primary-btn" onclick="enterPartner()" style="margin-top:15px">ورود به تالار پادشاهی ✨</button>
-            <button onclick="backToChoices()" style="background:none; border:none; color:#5c4f3d; margin-top:12px; cursor:pointer; font-family:'Vazirmatn';">بازگشت</button>
+        <div id="login-form">
+            <div class="form-group"><input id="login-username" placeholder="نام کاربری"></div>
+            <div class="form-group"><input id="login-password" type="password" placeholder="رمز عبور"></div>
+            <button class="action-btn primary-btn" onclick="handleLogin()">ورود به قلمرو</button>
         </div>
+        <div id="signup-form" style="display:none;">
+            <div class="form-group"><input id="signup-username" placeholder="نام کاربری جدید"></div>
+            <div class="form-group"><input id="signup-password" type="password" placeholder="رمز عبور"></div>
+            <button class="action-btn primary-btn" onclick="handleSignup()">ساخت حساب</button>
+        </div>
+        <button class="action-btn secondary-btn" style="margin-top:10px;" onclick="enterGuest()">ورود به عنوان مهمان</button>
     </div>
 </div>
 
+<!-- نوار ناوبری -->
 <div class="navbar" id="navbar">
-    <a href="#angel-sec">ملکه</a>
-    <a href="#letter-sec">نامه</a>
-    <a href="#bond-sec">هم‌نوایی</a>
-    <a href="#star-sec">کهکشان</a>
-    <a href="#grimoire-sec">خاطرات</a>
-    <a href="#wheel-sec">گردونه</a>
-    <a href="#cipher-sec">راز</a>
-    <a href="#chat-sec" id="nav-chat-link" style="display:none">نجوا</a>
-    <a href="#arcade-sec">مبارزه</a>
-    <a href="#lovebox-sec">موسیقی</a>
-    <a href="#promises-sec">وعده‌ها</a>
-    <a href="#loveclock-sec">ساعت عشق</a>
-    <a href="#album-sec">گالری</a>
-    <a href="javascript:void(0)" onclick="openPortal()">🌀 پورتال</a>
+    <a href="#queen">ملکه</a>
+    <a href="#letter">نامه</a>
+    <a href="#resonance">هم‌نوایی</a>
+    <a href="#galaxy">کهکشان</a>
+    <a href="#grimoire">خاطرات</a>
+    <a href="#wheel">گردونه</a>
+    <a href="#cipher">راز</a>
+    <a href="#chat" id="nav-chat" style="display:none;">چت</a>
+    <a href="#arcade">مبارزه</a>
+    <a href="#music">موسیقی</a>
+    <a href="#promises">وعده‌ها</a>
+    <a href="#loveclock">ساعت عشق</a>
+    <a href="#interests">علایق</a>
+    <a href="#birthdays">تولدها</a>
+    <a href="#dreams">رویاها</a>
+    <a href="#social">دیوار</a>
+    <a href="#gallery">گالری</a>
+    <a href="javascript:void(0)" onclick="openPortal()">پورتال</a>
+    <a href="#admin" id="nav-admin" style="display:none;">ادمین</a>
 </div>
 
+<!-- محتوای اصلی -->
 <div id="main">
-    <div class="container">
-
-        <!-- فرشته / ملکه -->
-        <div class="web-section reveal" id="angel-sec">
-            <div class="section-title">ملکهٔ قلب من 👑</div>
-            <div class="angel-hero-card">
-                <div class="angel-frame">
-                    <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="نیایش">
-                </div>
-                <p style="max-width:700px; margin:0 auto; font-size:1.1rem; line-height:2.2;">
-                    او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. من، مبین، پادشاه این قلمرو، تا ابد پاسدار قلب تو خواهم بود.
-                </p>
-            </div>
-        </div>
-
-        <!-- نامه -->
-        <div class="web-section reveal" id="letter-sec">
-            <div class="section-title">نامهٔ عاشقانهٔ پادشاه 💌</div>
-            <div id="typed-text" style="min-height:200px; font-size:1.1rem; line-height:2.5; white-space:pre-wrap;"></div>
-        </div>
-
-        <!-- هم‌نوایی -->
-        <div class="web-section reveal" id="bond-sec">
-            <div class="section-title">هم‌نوایی قلب‌ها 💞</div>
-            <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
-                <svg class="pulse-heart-svg" viewBox="0 0 32 32" onclick="resonateHearts()">
-                    <path d="M16,28.261l-1.92-1.743C7.253,20.25,2,15.488,2,9.739C2,5.033,5.702,1.333,10.408,1.333c2.659,0,5.21,1.238,6.877,3.192c1.667-1.954,4.218-3.192,6.877-3.192C28.865,1.333,32.567,5.033,32.567,9.739c0,5.748-5.253,10.511-12.08,16.793L16,28.261z"/>
-                </svg>
-                <div class="bond-rate-display" id="resonance-score">0%</div>
-                <p id="resonance-text" style="color: var(--royal-gold);">بر قلب بزن تا فرکانس عشق بالا رود</p>
-            </div>
-        </div>
-
-        <!-- کهکشان -->
-        <div class="web-section reveal" id="star-sec">
-            <div class="section-title">نقشهٔ ستارگان عشق 🌌</div>
-            <canvas id="galaxyCanvas"></canvas>
-        </div>
-
-        <!-- خاطرات -->
-        <div class="web-section reveal" id="grimoire-sec">
-            <div class="section-title">کتاب خاطرات سلطنتی 📖</div>
-            <textarea id="grimoire-input" placeholder="خاطره‌ات را بنویس..." rows="3"></textarea>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:15px;">
-                <span id="grimoire-author-display" style="color:var(--royal-gold);">نویسنده: مهمان</span>
-                <button class="action-btn primary-btn" style="width:auto; padding:10px 25px;" onclick="addGrimoireEntry()">ثبت 👑</button>
-            </div>
-            <div id="grimoire-entries-box" style="margin-top:20px; display:flex; flex-direction:column; gap:15px;"></div>
-        </div>
-
-        <!-- گردونه -->
-        <div class="web-section reveal" id="wheel-sec">
-            <div class="section-title">گردونهٔ سرنوشت 🎡</div>
-            <div class="wheel-universe">
-                <canvas id="wheelCanvas" width="280" height="280"></canvas>
-            </div>
-            <button class="action-btn primary-btn" style="width:auto; margin:20px auto; display:block;" onclick="spinTheWheel()">بچرخان</button>
-        </div>
-
-        <!-- راز -->
-        <div class="web-section reveal" id="cipher-sec">
-            <div class="section-title">گشودن راز سلطنتی 🔐</div>
-            <input id="cipher-input" placeholder="رمز را وارد کن...">
-            <button class="action-btn primary-btn" style="width:auto; margin:15px auto; display:block;" onclick="unlockCipher()">باز کن</button>
-            <p id="cipher-msg" style="display:none; margin-top:20px; line-height:2.2; color: var(--royal-gold);"></p>
-        </div>
-
-        <!-- چت -->
-        <div class="web-section reveal" id="chat-sec" style="display:none;">
-            <div class="section-title">تالار نجوای عاشقانه 💬</div>
-            <div id="chat-msgs-box" style="max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; margin-bottom:15px;"></div>
-            <div style="display:flex; gap:10px;">
-                <input id="chat-input-field" placeholder="پیام تو...">
-                <button class="action-btn primary-btn" style="width:auto; padding:10px 20px;" onclick="sendPrivateMsg()">بفرست</button>
-            </div>
-        </div>
-
-        <!-- مبارزه -->
-        <div class="web-section reveal" id="arcade-sec">
-            <div class="section-title">میدان مبارزهٔ پادشاه ⚔️</div>
-            <canvas id="tekkenCanvas" style="width:100%; height:300px; background:#110021; border-radius:20px;"></canvas>
-            <div style="display:flex; gap:10px; justify-content:center; margin-top:15px;">
-                <button class="action-btn secondary-btn" style="width:auto;" onclick="movePlayer(-1)">⬅️</button>
-                <button class="action-btn primary-btn" style="width:auto;" onclick="playerAttack()">حمله ⚡</button>
-                <button class="action-btn secondary-btn" style="width:auto;" onclick="movePlayer(1)">➡️</button>
-            </div>
-        </div>
-
-        <!-- موسیقی -->
-        <div class="web-section reveal" id="lovebox-sec">
-            <div class="section-title">جعبهٔ موسیقی عاشقانه 🎵</div>
-            <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6" width="100%" height="80" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            <div style="display:flex; gap:10px; justify-content:center; margin-top:10px;">
-                <button class="action-btn secondary-btn" style="width:auto;" onclick="changeTrack(0)">آهنگ ۱</button>
-                <button class="action-btn secondary-btn" style="width:auto;" onclick="changeTrack(1)">آهنگ ۲</button>
-                <button class="action-btn secondary-btn" style="width:auto;" onclick="changeTrack(2)">آهنگ ۳</button>
-            </div>
-        </div>
-
-        <!-- وعده‌های سلطنتی (جدید) -->
-        <div class="web-section reveal" id="promises-sec">
-            <div class="section-title">وعده‌های سلطنتی 📜</div>
-            <textarea id="promise-input" placeholder="وعده‌ات به ملکه را اینجا بنویس..."></textarea>
-            <button class="action-btn primary-btn" style="width:auto; margin:15px auto; display:block;" onclick="addPromise()">ثبت وعده 👑</button>
-            <div id="promises-list" style="display:flex; flex-direction:column; gap:12px; margin-top:20px;"></div>
-        </div>
-
-        <!-- ساعت عشق (جدید) -->
-        <div class="web-section reveal" id="loveclock-sec">
-            <div class="section-title">ساعت عشق ⏱️</div>
-            <div style="display:flex; gap:25px; justify-content:center; flex-wrap:wrap;">
-                <div class="time-box"><span id="love-days">0</span><div>روز</div></div>
-                <div class="time-box"><span id="love-hours">0</span><div>ساعت</div></div>
-                <div class="time-box"><span id="love-minutes">0</span><div>دقیقه</div></div>
-                <div class="time-box"><span id="love-seconds">0</span><div>ثانیه</div></div>
-            </div>
-            <p style="text-align:center; margin-top:10px; color:var(--royal-gold-light);">از آغاز این پادشاهی زیبا</p>
-        </div>
-
-        <!-- آلبوم -->
-        <div class="web-section reveal" id="album-sec">
-            <div class="section-title">گالری خاطرات 📸</div>
-            <div class="album-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(180px,1fr)); gap:15px;">
-                <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" style="width:100%; border-radius:15px; border:2px solid var(--royal-gold);">
-                <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" style="width:100%; border-radius:15px; border:2px solid var(--royal-gold);">
-            </div>
-        </div>
-
+    <div class="container" id="sections-container">
+        <!-- بخش‌ها به ترتیب -->
     </div>
-</div>
-
-<!-- پورتال -->
-<div id="vampire-portal" style="position:fixed; inset:0; background:black; display:none; z-index:10000; align-items:center; justify-content:center;">
-    <div style="color:var(--royal-gold); font-family:'Lalezar'; font-size:3rem;">خوش آمدی به دنیای ما ✨</div>
-    <button onclick="closePortal()" style="margin-top:30px; background:var(--royal-gold); border:none; padding:12px 30px; border-radius:25px; cursor:pointer; font-weight:bold;">بازگشت</button>
 </div>
 
 <script>
-    // ========== Firebase ==========
-    const appId = "niyayesh-universe";
+    // ==================== FIREBASE ====================
     const firebaseConfig = {
         apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
         authDomain: "niyayesh-universe.firebaseapp.com",
@@ -637,106 +208,244 @@
         messagingSenderId: "675804346928",
         appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
     };
-    let db;
-    try {
-        firebase.initializeApp(firebaseConfig);
-        db = firebase.firestore();
-    } catch(e) { console.warn("Firebase offline"); }
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const auth = firebase.auth();
 
-    const showNotif = (msg) => {
-        const box = document.getElementById("custom-alert");
-        document.getElementById("custom-alert-msg").innerText = msg;
-        box.classList.add("show");
-        setTimeout(() => box.classList.remove("show"), 3000);
-    };
+    // ==================== STATE ====================
+    let currentUser = null; // { username, role }
+    const adminUsername = 'admin';
+    const adminPassword = 'adminwiriper';
 
-    // ========== ورود ==========
-    let userRole = 'guest';
-    window.showPassSection = () => {
-        document.getElementById("login-choices").style.display = "none";
-        document.getElementById("pass-field-area").style.display = "block";
-    };
-    window.backToChoices = () => {
-        document.getElementById("pass-field-area").style.display = "none";
-        document.getElementById("login-choices").style.display = "flex";
-    };
-    window.enterPartner = async () => {
-        const pass = document.getElementById("pass").value.trim().toLowerCase();
-        if (pass === "mobinloveniyayesh" || pass === "adminwiriper") {
-            userRole = 'partner';
-            document.getElementById("grimoire-author-display").innerText = "ملکه نیایش 👸🏻";
-            try { await firebase.auth().signInAnonymously(); } catch(e) {}
-            document.getElementById("login-zone").style.display = "none";
-            document.getElementById("nav-chat-link").style.display = "inline-block";
-            document.getElementById("chat-sec").style.display = "block";
-            triggerSuccessFlow();
-        } else showNotif("❌ رمز عبور نادرست است");
-    };
-    window.enterGuest = async () => {
-        userRole = 'guest';
-        try { await firebase.auth().signInAnonymously(); } catch(e) {}
-        document.getElementById("login-zone").style.display = "none";
-        showNotif("👑 به قلمرو عشق خوش آمدید");
-        triggerSuccessFlow();
-    };
-
-    function triggerSuccessFlow() {
-        document.getElementById("netflix-intro").style.display = "flex";
-        document.getElementById("netflix-letter").classList.add("animate-zoom");
-        setTimeout(() => {
-            document.getElementById("netflix-intro").style.opacity = "0";
-            setTimeout(() => { document.getElementById("netflix-intro").style.display = "none"; }, 1500);
-            document.getElementById("main").style.display = "block";
-            setTimeout(() => document.getElementById("main").style.opacity = "1", 100);
-            document.getElementById("navbar").classList.add("show-nav");
-            startTypewriter();
-            initResonanceSync();
-            initGalaxyCanvas();
-            initWheel();
-            listenGrimoire();
-            if (userRole === 'partner') listenChat();
-            initArcadeGame();
-            listenPromises();
-            startLoveClock();
-            createGoldParticles();
-            window.addEventListener('scroll', revealOnScroll);
-            revealOnScroll();
-        }, 3800);
+    // ==================== UTILS ====================
+    function showNotif(msg) {
+        const el = document.getElementById('custom-alert');
+        document.getElementById('custom-alert-msg').innerText = msg;
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 3000);
     }
 
-    // ========== ماشین تحریر ==========
-    let typingTimer = null;
-    const loveLetter = `نیایش عزیزم، ملکهٔ قلب من...\n\nاز لحظه‌ای که نگاهت را دیدم، تاج سلطنتم بر سرم سنگینی می‌کند مگر آنکه تو کنارم باشی. تو نه فقط عشق من، که معنای پادشاهی و جاودانگی هستی.\n\nبا تو هر روز طلوعی دوباره است و هر نفس، غزلی ناب. حضور تو این قلمرو را به بهشت تبدیل کرده و قلبم تنها به ضربان نام تو زنده است.\n\nقول می‌دهم تا آخرین ستاره هم که خاموش شود، باز هم در کنارت بمانم و عشقمان را چون نگینی بر تارک این عالم بدرخشانم.\n\nپادشاهت، مبین 👑💖`;
+    function logActivity(username, action) {
+        db.collection('activities').add({
+            username, action, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+    }
 
+    // ==================== AUTH ====================
+    function switchAuthTab(tab) {
+        document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+        document.getElementById('signup-form').style.display = tab === 'signup' ? 'block' : 'none';
+        document.getElementById('login-tab-btn').classList.toggle('active', tab === 'login');
+        document.getElementById('signup-tab-btn').classList.toggle('active', tab === 'signup');
+    }
+
+    async function handleSignup() {
+        const username = document.getElementById('signup-username').value.trim();
+        const password = document.getElementById('signup-password').value.trim();
+        if (!username || !password) return showNotif('لطفاً همه فیلدها را پر کنید');
+        const userRef = db.collection('users').doc(username);
+        const doc = await userRef.get();
+        if (doc.exists) return showNotif('این نام کاربری قبلاً ثبت شده');
+        await userRef.set({ password, role: 'user' });
+        showNotif('حساب با موفقیت ساخته شد، حالا وارد شوید');
+        switchAuthTab('login');
+    }
+
+    async function handleLogin() {
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value.trim();
+        if (!username || !password) return showNotif('نام کاربری و رمز را وارد کنید');
+        const userDoc = await db.collection('users').doc(username).get();
+        if (!userDoc.exists) return showNotif('کاربری با این نام یافت نشد');
+        const userData = userDoc.data();
+        if (userData.password !== password) return showNotif('رمز عبور اشتباه است');
+        currentUser = { username, role: userData.role || (username === adminUsername ? 'admin' : 'user') };
+        document.getElementById('login-zone').style.display = 'none';
+        if (currentUser.role === 'admin') document.getElementById('nav-admin').style.display = 'inline-block';
+        if (currentUser.username === 'niyayesh') document.getElementById('nav-chat').style.display = 'inline-block';
+        startEmpire();
+    }
+
+    async function enterGuest() {
+        currentUser = { username: 'guest', role: 'guest' };
+        document.getElementById('login-zone').style.display = 'none';
+        startEmpire();
+    }
+
+    // ==================== BUILD SECTIONS ====================
+    function buildSections() {
+        const container = document.getElementById('sections-container');
+        container.innerHTML = `
+            <div class="section-card reveal" id="queen">
+                <div class="section-title">👑 ملکه قلب من</div>
+                <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" style="width:200px; border-radius:20px; margin:0 auto; display:block; border:3px solid var(--gold);">
+                <p style="text-align:center; margin-top:20px;">او فرشته‌ی زندگی من است، ملکه‌ای که جهانم را روشن کرده.</p>
+            </div>
+            <div class="section-card reveal" id="letter">
+                <div class="section-title">💌 نامه عاشقانه</div>
+                <div id="typed-text" style="min-height:150px; line-height:2.2;"></div>
+            </div>
+            <div class="section-card reveal" id="resonance">
+                <div class="section-title">💞 هم‌نوایی قلب‌ها</div>
+                <svg class="pulse-heart-svg" viewBox="0 0 32 32" onclick="resonateHearts()" style="width:100px; display:block; margin:0 auto; cursor:pointer;">
+                    <path d="M16,28.261l-1.92-1.743C7.253,20.25,2,15.488,2,9.739C2,5.033,5.702,1.333,10.408,1.333c2.659,0,5.21,1.238,6.877,3.192c1.667-1.954,4.218-3.192,6.877-3.192C28.865,1.333,32.567,5.033,32.567,9.739c0,5.748-5.253,10.511-12.08,16.793L16,28.261z" fill="#d4af37"/>
+                </svg>
+                <div class="bond-rate-display" id="resonance-score" style="font-size:3rem; text-align:center;">0%</div>
+                <p id="resonance-text" style="text-align:center;">روی قلب بزن</p>
+            </div>
+            <div class="section-card reveal" id="galaxy">
+                <div class="section-title">🌌 کهکشان عشق</div>
+                <canvas id="galaxyCanvas" style="width:100%; height:200px; background:rgba(0,0,0,0.3); border-radius:15px;"></canvas>
+            </div>
+            <div class="section-card reveal" id="grimoire">
+                <div class="section-title">📖 کتاب خاطرات</div>
+                <textarea id="grimoire-input" placeholder="خاطره‌ات را بنویس..."></textarea>
+                <button class="action-btn primary-btn" style="width:auto; margin-top:10px;" onclick="addGrimoireEntry()">ثبت</button>
+                <div id="grimoire-entries-box" style="margin-top:15px;"></div>
+            </div>
+            <div class="section-card reveal" id="wheel">
+                <div class="section-title">🎡 گردونه سرنوشت</div>
+                <canvas id="wheelCanvas" width="280" height="280" style="display:block; margin:0 auto;"></canvas>
+                <button class="action-btn primary-btn" style="width:auto; margin:15px auto; display:block;" onclick="spinTheWheel()">بچرخان</button>
+            </div>
+            <div class="section-card reveal" id="cipher">
+                <div class="section-title">🔐 گشودن راز</div>
+                <input id="cipher-input" placeholder="رمز را وارد کن...">
+                <button class="action-btn primary-btn" style="width:auto; margin-top:10px;" onclick="unlockCipher()">باز کن</button>
+                <p id="cipher-msg" style="display:none; margin-top:10px;"></p>
+            </div>
+            <div class="section-card reveal" id="chat" style="display:none;">
+                <div class="section-title">💬 چت خصوصی</div>
+                <div id="chat-msgs-box" style="max-height:250px; overflow-y:auto; margin-bottom:10px;"></div>
+                <div style="display:flex; gap:5px;"><input id="chat-input-field"><button class="action-btn primary-btn" style="width:auto;" onclick="sendPrivateMsg()">ارسال</button></div>
+            </div>
+            <div class="section-card reveal" id="arcade">
+                <div class="section-title">⚔️ میدان مبارزه</div>
+                <canvas id="tekkenCanvas" style="width:100%; height:250px; background:#111;"></canvas>
+                <div style="display:flex; gap:5px; justify-content:center; margin-top:10px;">
+                    <button class="action-btn secondary-btn" style="width:auto;" onclick="movePlayer(-1)">⬅️</button>
+                    <button class="action-btn primary-btn" style="width:auto;" onclick="playerAttack()">حمله</button>
+                    <button class="action-btn secondary-btn" style="width:auto;" onclick="movePlayer(1)">➡️</button>
+                </div>
+            </div>
+            <div class="section-card reveal" id="music">
+                <div class="section-title">🎵 جعبه موسیقی</div>
+                <iframe id="music-iframe" src="https://open.spotify.com/embed/track/2QjOHCTQ1Jl3zawyYOpxh6" width="100%" height="80"></iframe>
+                <div style="display:flex; gap:5px; justify-content:center; margin-top:5px;">
+                    <button class="action-btn secondary-btn" style="width:auto;" onclick="changeTrack(0)">۱</button>
+                    <button class="action-btn secondary-btn" style="width:auto;" onclick="changeTrack(1)">۲</button>
+                    <button class="action-btn secondary-btn" style="width:auto;" onclick="changeTrack(2)">۳</button>
+                </div>
+            </div>
+            <div class="section-card reveal" id="promises">
+                <div class="section-title">📜 وعده‌های سلطنتی</div>
+                <textarea id="promise-input" placeholder="وعده‌ات به ملکه..."></textarea>
+                <button class="action-btn primary-btn" style="width:auto; margin-top:10px;" onclick="addPromise()">ثبت</button>
+                <div id="promises-list" style="margin-top:15px;"></div>
+            </div>
+            <div class="section-card reveal" id="loveclock">
+                <div class="section-title">⏳ ساعت عشق</div>
+                <div style="display:flex; gap:20px; justify-content:center; flex-wrap:wrap;">
+                    <div><span id="love-days">0</span> روز</div>
+                    <div><span id="love-hours">0</span> ساعت</div>
+                    <div><span id="love-minutes">0</span> دقیقه</div>
+                    <div><span id="love-seconds">0</span> ثانیه</div>
+                </div>
+            </div>
+            <div class="section-card reveal" id="interests">
+                <div class="section-title">🎯 علایق ما</div>
+                <div style="display:flex; flex-wrap:wrap; gap:20px;">
+                    <div class="glass-card"><strong>مبین:</strong> پورشه باکستر 🏎️، رنگ مشکی و آبی پررنگ</div>
+                    <div class="glass-card"><strong>نیایش:</strong> Vampire Diaries 🧛‍♀️، معماری 🏛️</div>
+                </div>
+            </div>
+            <div class="section-card reveal" id="birthdays">
+                <div class="section-title">🎂 تولدهای ما</div>
+                <div>مبین: ۲۵ اسفند ۱۳۸۷ (شمارش معکوس: <span id="cd-mobin"></span>)</div>
+                <div>نیایش: ۱۵ شهریور ۱۳۸۹ (شمارش معکوس: <span id="cd-niyayesh"></span>)</div>
+            </div>
+            <div class="section-card reveal" id="dreams">
+                <div class="section-title">✨ رویاهای مشترک</div>
+                <p>با هم به سرزمین‌های دوردست سفر کنیم، خانه‌ای رویایی بسازیم و تا ابد عاشق بمانیم.</p>
+            </div>
+            <div class="section-card reveal" id="social">
+                <div class="section-title">📱 دیوار عاشقانه</div>
+                <textarea id="post-input" placeholder="پست جدید..."></textarea>
+                <button class="action-btn primary-btn" style="width:auto; margin-top:10px;" onclick="addPost()">ارسال</button>
+                <div id="posts-list" style="margin-top:15px;"></div>
+            </div>
+            <div class="section-card reveal" id="gallery">
+                <div class="section-title">🖼️ گالری</div>
+                <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap:10px;">
+                    <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" style="width:100%; border-radius:10px; border:2px solid gold;">
+                    <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" style="width:100%; border-radius:10px; border:2px solid gold;">
+                </div>
+            </div>
+            <div class="section-card reveal" id="admin" style="display:none;">
+                <div class="section-title">🔍 پنل ادمین</div>
+                <div class="activity-log" id="activity-log"></div>
+            </div>
+        `;
+    }
+
+    // ==================== INITIALIZATION ====================
+    function startEmpire() {
+        buildSections();
+        document.getElementById('main').style.display = 'block';
+        setTimeout(() => document.getElementById('main').style.opacity = '1', 100);
+        document.getElementById('navbar').classList.add('show');
+        // فعال‌سازی بخش‌ها
+        startTypewriter();
+        initResonance();
+        initGalaxy();
+        initWheel();
+        listenGrimoire();
+        listenChat();
+        listenPromises();
+        listenPosts();
+        initArcade();
+        startLoveClock();
+        startBirthdayCountdowns();
+        if (currentUser && currentUser.role === 'admin') {
+            document.getElementById('admin').style.display = 'block';
+            listenActivities();
+        }
+        if (currentUser && currentUser.username === 'niyayesh') {
+            document.getElementById('chat').style.display = 'block';
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
+    }
+
+    // ==================== FUNCTIONS ====================
     function startTypewriter() {
-        const el = document.getElementById("typed-text");
-        if (typingTimer) clearTimeout(typingTimer);
-        el.innerHTML = "";
+        const text = "نیایش عزیزم، ملکهٔ قلب من...\nاز لحظه‌ای که نگاهت را دیدم، تاج سلطنتم بر سرم سنگینی می‌کند مگر آنکه تو کنارم باشی...";
         let i = 0;
+        const el = document.getElementById('typed-text');
+        if (!el) return;
+        el.innerHTML = '';
         function type() {
-            if (i < loveLetter.length) {
-                el.innerHTML += loveLetter.charAt(i) === '\n' ? '<br>' : loveLetter.charAt(i);
+            if (i < text.length) {
+                el.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
                 i++;
-                typingTimer = setTimeout(type, 40);
+                setTimeout(type, 40);
             }
         }
         type();
     }
 
-    // ========== قلب‌ها ==========
     function resonateHearts() {
         launchHeartRain();
-        const scoreEl = document.getElementById("resonance-score");
+        const scoreEl = document.getElementById('resonance-score');
         let score = parseInt(scoreEl.innerText) || 0;
         score = Math.min(100, score + Math.floor(Math.random()*5)+3);
         scoreEl.innerText = score + '%';
-        if (db) {
-            db.collection("artifacts").doc(appId).collection("public").doc("data")
-                .set({ resonanceScore: score }, { merge: true }).catch(e => {});
-        } else localStorage.setItem('resonance', score);
+        db.collection('state').doc('resonance').set({ score }, { merge: true });
+        logActivity(currentUser.username, 'هم‌نوایی قلب');
     }
+
     function launchHeartRain() {
-        for (let i=0; i<22; i++) {
+        for (let i=0; i<20; i++) {
             const h = document.createElement('div');
             h.className = 'heart-drop';
             h.innerText = '💖';
@@ -747,35 +456,33 @@
             setTimeout(() => h.remove(), 5000);
         }
     }
-    function initResonanceSync() {
-        if (db) {
-            db.collection("artifacts").doc(appId).collection("public").doc("data")
-                .onSnapshot(doc => {
-                    if (doc.exists) {
-                        document.getElementById("resonance-score").innerText = (doc.data().resonanceScore || 0) + '%';
-                    }
-                });
-        } else {
-            document.getElementById("resonance-score").innerText = (localStorage.getItem('resonance')||0) + '%';
-        }
+
+    function initResonance() {
+        db.collection('state').doc('resonance').onSnapshot(doc => {
+            if (doc.exists) {
+                document.getElementById('resonance-score').innerText = (doc.data().score || 0) + '%';
+            }
+        });
     }
 
-    // ========== کهکشان ==========
-    function initGalaxyCanvas() {
-        const canvas = document.getElementById("galaxyCanvas");
-        const ctx = canvas.getContext("2d");
+    function initGalaxy() {
+        const canvas = document.getElementById('galaxyCanvas');
         canvas.width = canvas.parentElement.clientWidth;
         canvas.height = 200;
-        let particles = Array.from({length:50}, ()=>({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:(Math.random()-0.5)*0.5, vy:(Math.random()-0.5)*0.5}));
+        const ctx = canvas.getContext('2d');
+        let particles = Array.from({length:40}, ()=>({
+            x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+            vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.4
+        }));
         function draw() {
-            ctx.fillStyle = 'rgba(20,5,30,0.3)';
+            ctx.fillStyle = 'rgba(10,17,40,0.4)';
             ctx.fillRect(0,0,canvas.width,canvas.height);
             particles.forEach(p => {
                 p.x += p.vx; p.y += p.vy;
-                if (p.x<0 || p.x>canvas.width) p.vx*=-1;
-                if (p.y<0 || p.y>canvas.height) p.vy*=-1;
+                if(p.x<0||p.x>canvas.width) p.vx*=-1;
+                if(p.y<0||p.y>canvas.height) p.vy*=-1;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, 2, 0, Math.PI*2);
+                ctx.arc(p.x,p.y,2,0,Math.PI*2);
                 ctx.fillStyle = '#f0d58c';
                 ctx.fill();
             });
@@ -784,11 +491,10 @@
         draw();
     }
 
-    // ========== گردونه ==========
     let wheelAngle = 0;
     function initWheel() {
-        const canvas = document.getElementById("wheelCanvas");
-        const ctx = canvas.getContext("2d");
+        const canvas = document.getElementById('wheelCanvas');
+        const ctx = canvas.getContext('2d');
         const items = ["💋 بوسه", "🏎️ سفر", "🥀 رز", "💍 حلقه", "🫂 آغوش", "✨ آرزو"];
         function draw() {
             ctx.clearRect(0,0,280,280);
@@ -796,7 +502,7 @@
                 const angle = wheelAngle + i*(Math.PI*2/items.length);
                 ctx.beginPath();
                 ctx.arc(140,140,120, angle, angle+Math.PI*2/items.length);
-                ctx.fillStyle = i%2===0?'#d4af37':'#2c003e';
+                ctx.fillStyle = i%2===0?'#d4af37':'#1a2a6c';
                 ctx.fill();
                 ctx.fillStyle = 'white';
                 ctx.font = '14px Vazirmatn';
@@ -810,182 +516,193 @@
         draw();
         window.spinTheWheel = () => {
             const target = wheelAngle + (Math.floor(Math.random()*5)+5)*Math.PI*2;
-            const start = Date.now();
-            const dur = 3000;
+            const start = Date.now(), dur = 3000;
             function anim() {
                 const p = Math.min((Date.now()-start)/dur,1);
                 wheelAngle += (target-wheelAngle)*0.08;
                 draw();
-                if (p<1) requestAnimationFrame(anim);
+                if(p<1) requestAnimationFrame(anim);
+                else logActivity(currentUser.username, 'چرخاندن گردونه');
             }
             anim();
         };
         setInterval(draw, 50);
     }
 
-    // ========== خاطرات ==========
     function listenGrimoire() {
-        if (!db) return;
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("grimoire")
-            .onSnapshot(snap => {
-                const box = document.getElementById("grimoire-entries-box");
-                box.innerHTML = "";
-                snap.forEach(doc => {
-                    const d = doc.data();
-                    box.innerHTML += `<div class="glass-card"><strong>${d.author}</strong>: ${d.text}</div>`;
-                });
+        db.collection('grimoire').orderBy('timestamp','desc').onSnapshot(snap => {
+            const box = document.getElementById('grimoire-entries-box');
+            if(!box) return;
+            box.innerHTML = '';
+            snap.forEach(doc => {
+                const d = doc.data();
+                box.innerHTML += `<div class="glass-card"><strong>${d.author}</strong>: ${d.text}</div>`;
             });
+        });
     }
+
     window.addGrimoireEntry = async () => {
-        const text = document.getElementById("grimoire-input").value.trim();
-        if (!text) return showNotif("متنی بنویس");
-        const author = userRole==='partner'?"ملکه نیایش":"مهمان";
-        if (db) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("grimoire").add({
-                author, text, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        }
-        document.getElementById("grimoire-input").value = "";
-        showNotif("ثبت شد ✨");
+        const text = document.getElementById('grimoire-input').value.trim();
+        if(!text) return showNotif('متنی بنویس');
+        await db.collection('grimoire').add({
+            author: currentUser.username, text,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        document.getElementById('grimoire-input').value = '';
+        logActivity(currentUser.username, 'ثبت خاطره');
     };
 
-    // ========== چت ==========
+    // چت
     function listenChat() {
-        if (!db) return;
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("messages")
-            .onSnapshot(snap => {
-                const box = document.getElementById("chat-msgs-box");
-                box.innerHTML = "";
-                snap.forEach(doc => {
-                    const d = doc.data();
-                    box.innerHTML += `<div class="message-bubble ${d.sender==='mobin'?'msg-mobin':'msg-niyayesh'}">${d.sender}: ${d.text}</div>`;
-                });
-                box.scrollTop = box.scrollHeight;
+        db.collection('messages').orderBy('timestamp','asc').onSnapshot(snap => {
+            const box = document.getElementById('chat-msgs-box');
+            if(!box) return;
+            box.innerHTML = '';
+            snap.forEach(doc => {
+                const d = doc.data();
+                box.innerHTML += `<div class="message-bubble ${d.sender==='mobin'?'msg-mobin':'msg-niyayesh'}"><strong>${d.sender}</strong>: ${d.text}</div>`;
             });
+            box.scrollTop = box.scrollHeight;
+        });
     }
+
     window.sendPrivateMsg = async () => {
-        const input = document.getElementById("chat-input-field");
-        const text = input.value.trim();
-        if (!text) return;
-        const sender = userRole==='partner' ? "niyayesh" : "guest";
-        if (db) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("messages").add({
-                sender, text, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        }
-        input.value = "";
+        const text = document.getElementById('chat-input-field').value.trim();
+        if(!text) return;
+        await db.collection('messages').add({
+            sender: currentUser.username === 'niyayesh' ? 'niyayesh' : 'mobin',
+            text, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        document.getElementById('chat-input-field').value = '';
     };
 
-    // ========== طلسم ==========
-    window.unlockCipher = () => {
-        const key = document.getElementById("cipher-input").value.trim().toLowerCase();
-        const msg = document.getElementById("cipher-msg");
-        if (key === "همیشه" || key === "always") {
-            msg.style.display = "block";
-            msg.innerText = "پیام مخفی: «عشق ما تا ابد پایدار است، مثل تاجی که هرگز از سر پادشاه نمی‌افتد.»";
-        } else showNotif("رمز نادرست");
-    };
-
-    // ========== وعده‌ها ==========
+    // وعده‌ها
     function listenPromises() {
-        if (!db) return;
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("promises")
-            .onSnapshot(snap => {
-                const box = document.getElementById("promises-list");
-                box.innerHTML = "";
-                snap.forEach(doc => {
-                    box.innerHTML += `<div class="glass-card">${doc.data().text}</div>`;
-                });
-            });
+        db.collection('promises').orderBy('timestamp','desc').onSnapshot(snap => {
+            const box = document.getElementById('promises-list');
+            if(!box) return;
+            box.innerHTML = '';
+            snap.forEach(doc => box.innerHTML += `<div class="glass-card">${doc.data().text}</div>`);
+        });
     }
     window.addPromise = async () => {
-        const text = document.getElementById("promise-input").value.trim();
-        if (!text) return;
-        if (db) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("promises").add({
-                text, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        }
-        document.getElementById("promise-input").value = "";
-        showNotif("وعده ثبت شد 💍");
+        const text = document.getElementById('promise-input').value.trim();
+        if(!text) return;
+        await db.collection('promises').add({
+            text, timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        document.getElementById('promise-input').value = '';
+        logActivity(currentUser.username, 'ثبت وعده');
     };
 
-    // ========== ساعت عشق ==========
-    function startLoveClock() {
-        const startDate = new Date('2025-03-21').getTime(); // تاریخ شروع رابطه (مثال)
+    // پست‌های دیوار
+    function listenPosts() {
+        db.collection('posts').orderBy('timestamp','desc').onSnapshot(snap => {
+            const box = document.getElementById('posts-list');
+            if(!box) return;
+            box.innerHTML = '';
+            snap.forEach(doc => {
+                const p = doc.data();
+                box.innerHTML += `<div class="glass-card"><strong>${p.author}</strong><br>${p.text}<br><small>${new Date(p.timestamp?.toDate()).toLocaleString('fa-IR')}</small></div>`;
+            });
+        });
+    }
+    window.addPost = async () => {
+        const text = document.getElementById('post-input').value.trim();
+        if(!text) return;
+        await db.collection('posts').add({
+            author: currentUser.username, text,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        document.getElementById('post-input').value = '';
+        logActivity(currentUser.username, 'ارسال پست');
+    };
+
+    // تولدها
+    function startBirthdayCountdowns() {
         function update() {
             const now = Date.now();
-            const diff = now - startDate;
-            if (diff < 0) return;
-            const d = Math.floor(diff/86400000);
-            const h = Math.floor((diff%86400000)/3600000);
-            const m = Math.floor((diff%3600000)/60000);
-            const s = Math.floor((diff%60000)/1000);
-            document.getElementById("love-days").innerText = d;
-            document.getElementById("love-hours").innerText = h;
-            document.getElementById("love-minutes").innerText = m;
-            document.getElementById("love-seconds").innerText = s;
+            const mobinBd = new Date(now.getFullYear(), 2, 16).getTime(); // 25 Esfand = ~March 16
+            const niyayeshBd = new Date(now.getFullYear(), 8, 6).getTime(); // 15 Shahrivar = ~Sep 6
+            if (now > mobinBd) mobinBd.setFullYear(now.getFullYear()+1);
+            if (now > niyayeshBd) niyayeshBd.setFullYear(now.getFullYear()+1);
+            document.getElementById('cd-mobin').innerText = formatDistance(mobinBd - now);
+            document.getElementById('cd-niyayesh').innerText = formatDistance(niyayeshBd - now);
         }
         setInterval(update, 1000);
         update();
     }
+    function formatDistance(ms) {
+        const d = Math.floor(ms/86400000);
+        const h = Math.floor((ms%86400000)/3600000);
+        const m = Math.floor((ms%3600000)/60000);
+        const s = Math.floor((ms%60000)/1000);
+        return `${d} روز ${h} ساعت ${m} دقیقه ${s} ثانیه`;
+    }
 
-    // ========== بازی آرکید ==========
-    // (ساده شده جهت ایجاز، همان نسخه قبلی با تغییر رنگ‌ها)
-    function initArcadeGame() {
-        const canvas = document.getElementById("tekkenCanvas");
-        const ctx = canvas.getContext("2d");
+    // آرکید ساده
+    let playerX = 50, enemyX = 300;
+    function initArcade() {
+        const canvas = document.getElementById('tekkenCanvas');
         canvas.width = canvas.parentElement.clientWidth;
-        canvas.height = 300;
-        let player = {x:80, y:150}, enemy = {x:400, y:150};
+        canvas.height = 250;
+        const ctx = canvas.getContext('2d');
         function loop() {
-            ctx.fillStyle = '#1a0f2e';
+            ctx.fillStyle = '#111';
             ctx.fillRect(0,0,canvas.width,canvas.height);
-            ctx.fillStyle = '#d4af37';
-            ctx.fillRect(player.x, player.y, 40, 60);
-            ctx.fillStyle = '#c93a4f';
-            ctx.fillRect(enemy.x, enemy.y, 40, 60);
+            ctx.fillStyle = 'gold';
+            ctx.fillRect(playerX, 150, 30, 60);
+            ctx.fillStyle = 'crimson';
+            ctx.fillRect(enemyX, 150, 30, 60);
             requestAnimationFrame(loop);
         }
         loop();
-        window.movePlayer = (d) => { player.x += d*20; };
+        window.movePlayer = (d) => playerX = Math.min(Math.max(playerX+d*30, 0), canvas.width-30);
         window.playerAttack = () => {
-            if (Math.abs(player.x - enemy.x) < 100) {
-                showNotif("ضربه زدی ⚡");
-            }
+            if(Math.abs(playerX - enemyX) < 80) showNotif('ضربه زدی!');
+            logActivity(currentUser.username, 'حمله در آرکید');
         };
     }
 
-    // ========== موسیقی ==========
+    // موسیقی
     const tracks = [
         {id: '2QjOHCTQ1Jl3zawyYOpxh6'},
         {id: '6UelLqTqIt2Mjjg7qQhW9A'},
         {id: '3JvKfv6T31zO0ini0iNItO'}
     ];
-    window.changeTrack = (i) => {
-        document.getElementById("music-iframe").src = `https://open.spotify.com/embed/track/${tracks[i].id}`;
-    };
+    window.changeTrack = (i) => document.getElementById('music-iframe').src = `https://open.spotify.com/embed/track/${tracks[i].id}`;
 
-    // ========== پورتال ==========
+    // پورتال
     window.openPortal = () => {
-        document.getElementById("vampire-portal").style.display = "flex";
-    };
-    window.closePortal = () => {
-        document.getElementById("vampire-portal").style.display = "none";
+        const portal = document.createElement('div');
+        portal.style.cssText = 'position:fixed; inset:0; background:black; z-index:9999; display:flex; align-items:center; justify-content:center; color:gold; font-size:3rem;';
+        portal.innerText = '✨ ورود به دنیای رویایی';
+        portal.onclick = () => portal.remove();
+        document.body.appendChild(portal);
     };
 
-    // ========== ذرات طلا ==========
-    function createGoldParticles() {
-        const canvas = document.getElementById("gold-particles");
-        const ctx = canvas.getContext("2d");
+    // ادمین لاگ
+    function listenActivities() {
+        db.collection('activities').orderBy('timestamp','desc').limit(50).onSnapshot(snap => {
+            const box = document.getElementById('activity-log');
+            if(!box) return;
+            box.innerHTML = '';
+            snap.forEach(doc => {
+                const a = doc.data();
+                box.innerHTML += `<div class="log-entry">${a.username} - ${a.action} - ${new Date(a.timestamp?.toDate()).toLocaleString('fa-IR')}</div>`;
+            });
+        });
+    }
+
+    // ذرات طلا
+    (function() {
+        const canvas = document.getElementById('gold-particles');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        const particles = Array.from({length:60}, ()=>({
-            x: Math.random()*canvas.width,
-            y: Math.random()*canvas.height,
-            vx: (Math.random()-0.5)*0.3,
-            vy: (Math.random()-0.5)*0.3,
-            r: Math.random()*3+1
+        const ctx = canvas.getContext('2d');
+        const particles = Array.from({length:40}, ()=>({
+            x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+            vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3
         }));
         function draw() {
             ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -994,22 +711,36 @@
                 if(p.x<0||p.x>canvas.width) p.vx*=-1;
                 if(p.y<0||p.y>canvas.height) p.vy*=-1;
                 ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-                ctx.fillStyle = 'rgba(212,175,55,0.6)';
+                ctx.arc(p.x,p.y,2,0,Math.PI*2);
+                ctx.fillStyle = 'rgba(212,175,55,0.5)';
                 ctx.fill();
             });
             requestAnimationFrame(draw);
         }
         draw();
+    })();
+
+    function startLoveClock() {
+        const start = new Date('2025-03-21').getTime();
+        setInterval(() => {
+            const diff = Date.now() - start;
+            if(diff<0) return;
+            const d = Math.floor(diff/86400000);
+            const h = Math.floor((diff%86400000)/3600000);
+            const m = Math.floor((diff%3600000)/60000);
+            const s = Math.floor((diff%60000)/1000);
+            document.getElementById('love-days').innerText = d;
+            document.getElementById('love-hours').innerText = h;
+            document.getElementById('love-minutes').innerText = m;
+            document.getElementById('love-seconds').innerText = s;
+        }, 1000);
     }
 
-    // ========== اسکرول ==========
     function revealOnScroll() {
         document.querySelectorAll('.reveal').forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight-80) el.classList.add('active');
+            if(el.getBoundingClientRect().top < window.innerHeight-50) el.classList.add('active');
         });
     }
 </script>
-
 </body>
 </html>
