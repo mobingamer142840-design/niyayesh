@@ -2,1530 +2,1727 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="theme-color" content="#0a0a0a">
-    <title>امپراتوری جاودانه، لوکس و پیشرفته مبین و نیایش</title>
-
-    <!-- فونت‌های گران‌قیمت و شاهانه -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Vazirmatn:wght@300;400;700;900&family=Lalezar&display=swap" rel="stylesheet">
-
-    <!-- کتابخانه‌های فایربیس نسخه کامپت -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore-compat.js"></script>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سامانه پادشاهی مشکی و طلایی لوکس - نسخه امپراتوری ارتقا یافته</title>
+    
+    <!-- فونت‌های رسمی و آیکون‌های شبکه اجتماعی پرمیوم -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vazirmatn-font@33.0.3/Vazirmatn-font-face.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 
+        ========================================================================
+        بخش اول: معماری کامل استایل‌ها و گرافیک کاخ سلطنتی (CSS کاملاً باز و حجیم)
+        ========================================================================
+    -->
     <style>
-        /* ================= پالت رنگی و استایل فوق لوکس امپراتوری ================= */
+        /* 
+            تعریف پالت رنگی لوکس و متغیرهای اصلی قصر طلایی و مشکی 
+        */
         :root {
-            --royal-gold: #d4af37;
-            --royal-gold-light: #f0d58c;
-            --royal-purple: #2c003e;
-            --royal-purple-light: #4a0e5c;
-            --mobin-blue: #06142e;
-            --mobin-blue-light: #002266;
-            --mobin-black: #0a0a0a;
-            --vampire-red: #8a0303;
-            --vampire-dark: #4a0000;
-            --crimson: #a51c30;
-            --cream: #fcf8f2;
-            --text-light: #e0d8c8;
-            --text-dark: #3a3226;
-            --glass-bg: rgba(15, 15, 15, 0.85);
-            --glass-border: rgba(212, 175, 55, 0.35);
-            --radius-lg: 35px;
-            --radius-md: 22px;
-            --radius-sm: 14px;
+            --palace-pure-black: #000000;
+            --palace-deep-dark: #050508;
+            --palace-card-bg: rgba(12, 12, 18, 0.85);
+            --palace-card-hover: rgba(22, 22, 32, 0.95);
+            --gold-primary: #d4af37;
+            --gold-bright: #ffd700;
+            --gold-dark: #aa771c;
+            --gold-light: #f3e5ab;
+            --text-pure-white: #ffffff;
+            --text-silver: #e2e8f0;
+            --text-muted: #94a3b8;
+            --royal-glow: 0 0 25px rgba(214, 175, 55, 0.35);
+            --royal-glow-intense: 0 0 45px rgba(255, 215, 0, 0.6);
+            --royal-border-solid: 2px solid #d4af37;
+            --royal-border-dim: 1px solid rgba(214, 175, 55, 0.25);
+            --smooth-cubic: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* ================= ریست ارگانیک و پایه وبسایت ================= */
+        /* 
+            تنظیمات پایه‌ای مرورگر و ریست کردن اسکرول‌بارها 
+        */
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
             scroll-behavior: smooth;
-            -webkit-tap-highlight-color: transparent;
+            outline: none;
         }
 
         body {
-            font-family: 'Vazirmatn', -apple-system, sans-serif;
-            background: linear-gradient(135deg, var(--mobin-black) 0%, var(--mobin-blue) 35%, var(--royal-purple) 70%, var(--mobin-black) 100%);
-            color: var(--text-light);
-            overflow-x: hidden;
+            background-color: var(--palace-pure-black);
+            color: var(--text-pure-white);
+            background-image: 
+                radial-gradient(circle at 50% 0%, #1c152a 0%, #050508 60%),
+                radial-gradient(circle at 0% 100%, #0d0a14 0%, #000000 70%);
+            background-attachment: fixed;
             min-height: 100vh;
-            user-select: none;
-            text-rendering: optimizeLegibility;
-            -webkit-font-smoothing: antialiased;
+            line-height: 1.8;
+            overflow-x: hidden;
+            padding-bottom: 80px;
         }
 
-        .lalezar-font { font-family: 'Lalezar', cursive; }
-        .cinzel-font { font-family: 'Cinzel', serif; letter-spacing: 2px; }
-
-        /* ================= انیمیشن ذرات طلا در پس‌زمینه ================= */
-        #gold-particles {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.8;
+        /* اسکرول بار اختصاصی و لوکس مرواریدی */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
         }
 
-        /* ================= سیستم آلرت سفارشی و مجلل ================= */
-        #custom-alert {
-            position: fixed;
-            top: 25px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-250px);
-            background: var(--cream);
-            border: 2px solid var(--royal-gold);
-            box-shadow: 0 15px 60px rgba(212,175,55,0.5);
-            padding: 18px 45px;
-            border-radius: 50px;
-            z-index: 100000;
-            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        ::-webkit-scrollbar-track {
+            background: var(--palace-pure-black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--gold-dark), var(--gold-bright));
+            border-radius: 5px;
+            border: 2px solid var(--palace-pure-black);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-bright);
+        }
+
+        /* کلاس‌های کاربردی برای پنهان‌سازی ارتقایافته */
+        .hidden-structure {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+        }
+
+        /* 
+            معماری هدر مجلل و شاهانه سایت 
+        */
+        .grand-royal-header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 5%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-bottom: var(--royal-border-dim);
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .header-brand-container {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .crown-emblem {
+            font-size: 2.2rem;
+            color: var(--gold-bright);
+            filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.7));
+            animation: crownGlowPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes crownGlowPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.5)); }
+            100% { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--gold-bright)); }
+        }
+
+        .header-brand-container h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 30%, var(--gold-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header-control-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .premium-action-circle {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(214, 175, 55, 0.3);
+            color: var(--text-pure-white);
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: var(--smooth-cubic);
+        }
+
+        .premium-action-circle:hover {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold-bright));
+            color: var(--palace-pure-black);
+            box-shadow: var(--royal-glow);
+            transform: translateY(-2px);
+            border-color: var(--gold-bright);
+        }
+
+        .alert-indicator-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #ef4444;
+            color: var(--text-pure-white);
+            font-size: 0.8rem;
+            font-weight: 900;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--palace-pure-black);
+            box-shadow: 0 0 8px #ef4444;
+        }
+
+        /* 
+            بدنه و شاسی اصلی چیدمان قصر 
+        */
+        .grand-palace-layout {
+            max-width: 1300px;
+            margin: 50px auto;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 55px;
+        }
+
+        .block-headline {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-weight: 900;
-            color: var(--text-dark);
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        #custom-alert.show { transform: translateX(-50%) translateY(0); }
 
-        /* ================= گیت ورود و تایید هویت اشراف ================= */
-        .auth-wrapper {
-            position: fixed;
-            inset: 0;
-            z-index: 90000;
+        .block-headline i {
+            color: var(--gold-bright);
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 5px var(--gold-solid));
+        }
+
+        .block-headline h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* 
+            معماری پنل استوری‌های کاملاً دایره‌ای و گرد متحرک
+        */
+        .emperor-stories-station {
+            background: var(--palace-card-bg);
+            border: var(--royal-border-dim);
+            border-radius: 28px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            backdrop-filter: blur(15px);
+        }
+
+        .stories-horizontal-slider {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(5, 5, 5, 0.98);
-            backdrop-filter: blur(40px);
-            padding: 20px;
-        }
-        .auth-container {
-            width: 100%;
-            max-width: 500px;
-            background: var(--cream);
-            border: 3px solid var(--royal-gold);
-            border-radius: 40px;
-            padding: 50px 40px;
-            text-align: center;
-            box-shadow: 0 30px 100px rgba(0,0,0,0.9), inset 0 0 30px rgba(212,175,55,0.25);
-            color: var(--text-dark);
-        }
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 35px;
-            border-bottom: 2px solid rgba(212,175,55,0.2);
-        }
-        .auth-tab {
-            flex: 1;
-            padding: 14px;
-            font-size: 1.15rem;
-            font-weight: 900;
-            cursor: pointer;
-            color: #8a7b6b;
-            transition: 0.3s;
-        }
-        .auth-tab.active {
-            color: var(--royal-purple);
-            border-bottom: 4px solid var(--royal-gold);
-        }
-        .auth-form { display: none; }
-        .auth-form.active { display: block; animation: fadeIn 0.5s ease forwards; }
-
-        input, textarea, select {
-            width: 100%;
-            padding: 16px 20px;
-            margin-bottom: 20px;
-            border: 2px solid rgba(212,175,55,0.4);
-            border-radius: 18px;
-            background: rgba(255,255,255,0.95);
-            color: var(--royal-purple);
-            outline: none;
-            text-align: right;
-            font-size: 1rem;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-        input:focus, textarea:focus, select:focus {
-            border-color: var(--royal-gold);
-            box-shadow: 0 0 20px rgba(212,175,55,0.4);
-        }
-
-        /* دکمه اختصاصی آپلود فایل عکس */
-        .file-upload-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-        .file-upload-trigger {
-            border: 2px dashed var(--royal-gold);
-            color: var(--text-dark);
-            background: rgba(212,175,55,0.08);
-            padding: 15px 20px;
-            border-radius: 18px;
-            font-size: 1rem;
-            font-weight: bold;
-            display: block;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .file-upload-wrapper input[type=file] {
-            font-size: 100px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .action-btn {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 18px;
-            font-size: 1.1rem;
-            font-weight: 900;
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-        .btn-gold {
-            background: linear-gradient(90deg, #c9a03d, #d4af37);
-            color: white;
-            box-shadow: 0 8px 25px rgba(212,175,55,0.4);
-        }
-        .btn-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(212,175,55,0.6);
-        }
-        
-        .delete-btn {
-            background: rgba(138, 3, 3, 0.25);
-            color: #ff4d4d;
-            border: 1px solid rgba(255, 77, 77, 0.4);
-            padding: 6px 14px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            font-weight: 700;
-            transition: all 0.3s;
-            float: left;
-        }
-        .delete-btn:hover {
-            background: rgba(138, 3, 3, 0.85);
-            color: white;
-        }
-
-        /* ================= انیمیشن اینترو نفلیکس مودی ================= */
-        #netflix-intro {
-            position: fixed;
-            inset: 0;
-            background: var(--mobin-black);
-            z-index: 95000;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1s ease;
-        }
-        .netflix-text {
-            font-family: 'Lalezar', cursive;
-            font-size: 10rem;
-            color: var(--royal-gold);
-            text-shadow: 0 0 60px var(--royal-gold);
-        }
-        .animate-zoom { animation: royalZoom 3.8s forwards cubic-bezier(0.15, 0.85, 0.35, 1); }
-        @keyframes royalZoom {
-            0% { transform: scale(0.3); filter: blur(20px); opacity: 0; }
-            25% { transform: scale(1); filter: blur(0); opacity: 1; }
-            75% { transform: scale(1.08); filter: blur(0); opacity: 1; }
-            100% { transform: scale(7); filter: blur(30px); opacity: 0; }
-        }
-
-        /* ================= نوار ناوبری شیشه‌ای امپراتوری ================= */
-        .navbar {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(10, 10, 10, 0.93);
-            border: 2px solid var(--royal-gold);
-            padding: 10px 24px;
-            border-radius: 40px;
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            display: none;
-            gap: 10px;
-            z-index: 10000;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
-            max-width: 95vw;
+            gap: 30px;
             overflow-x: auto;
-            white-space: nowrap;
-            scrollbar-width: none;
-        }
-        .navbar.show-nav { display: flex; }
-        .navbar a {
-            color: rgba(255,255,255,0.75);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 700;
-            padding: 8px 16px;
-            border-radius: 25px;
-            transition: all 0.3s;
-        }
-        .navbar a:hover, .navbar a.active {
-            color: var(--mobin-black);
-            background: var(--royal-gold);
-            box-shadow: 0 0 20px rgba(212,175,55,0.6);
+            padding: 15px 5px;
         }
 
-        /* ================= بدنه محتوایی پادشاهی ================= */
-        #main-kingdom {
-            display: none;
-            opacity: 0;
-            padding: 15px 20px 150px;
-            transition: opacity 2s;
-            max-width: 1100px;
-            margin: 120px auto 0;
-        }
-        
-        /* کتیبه تواریخ مقدس در بالاترین جایگاه وبسایت */
-        .birthdays-monument {
-            background: linear-gradient(90deg, transparent, rgba(214,175,55,0.2), transparent);
-            border-top: 2px solid var(--royal-gold);
-            border-bottom: 2px solid var(--royal-gold);
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 50px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 0 15px var(--royal-gold);
-            font-size: 1.25rem;
-            letter-spacing: 1px;
-            border-radius: 10px;
-        }
-
-        .royal-section {
-            background: var(--glass-bg);
-            border: 2px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: 55px 45px;
-            margin-bottom: 65px;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 30px 85px rgba(0,0,0,0.65);
-            position: relative;
-        }
-        .section-title {
-            font-family: 'Lalezar', cursive;
-            font-size: 2.7rem;
-            color: var(--royal-gold);
-            text-shadow: 0 0 30px rgba(212,175,55,0.5);
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        /* ================= قاب فرشته ملکه ================= */
-        .queen-hero-card {
+        .story-absolute-node {
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            gap: 30px;
-        }
-        .queen-frame {
-            width: 300px;
-            height: 400px;
-            border-radius: 35px;
-            overflow: hidden;
-            border: 3px solid var(--royal-gold);
-            box-shadow: 0 0 65px rgba(212,175,55,0.65);
-            transition: transform 0.5s ease;
-        }
-        .queen-frame:hover { transform: scale(1.04); }
-        .queen-frame img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* ================= سیستم پلیر استریم واقعی امپراتوری ================= */
-        .stream-box {
-            background: #000;
-            border: 3px solid var(--royal-gold);
-            border-radius: var(--radius-md);
-            aspect-ratio: 16/9;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.85);
-            margin-bottom: 25px;
+            cursor: pointer;
+            min-width: 100px;
+            transition: var(--smooth-cubic);
         }
-        .stream-overlay-status {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(212, 175, 55, 0.95);
-            color: #000;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            z-index: 10;
+
+        .story-absolute-node:hover {
+            transform: scale(1.05);
         }
-        .stream-video-core {
+
+        /* تضمین دایره کامل بی‌نقص برای استوری‌ها */
+        .perfect-circle-frame {
+            width: 88px;
+            height: 88px;
+            border-radius: 50% !important;
+            padding: 4px;
+            background: linear-gradient(45deg, #aa771c, #ffd700, #f3e5ab, #aa771c);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            display: block;
+        }
+
+        .perfect-circle-frame img {
             width: 100%;
             height: 100%;
+            border-radius: 50% !important;
             object-fit: cover;
+            border: 4px solid #0c0c12;
+            display: block;
         }
 
-        /* ================= سالن اختصاصی سینما سلطنتی ================= */
-        .cinema-theater-container {
-            background: #050505;
-            border: 4px solid #1f1f1f;
-            border-top: 4px solid var(--royal-gold);
-            border-radius: var(--radius-md);
-            box-shadow: 0 45px 110px rgba(0,0,0,0.98), inset 0 0 40px rgba(214,175,55,0.05);
-            padding: 12px;
-            margin-bottom: 25px;
-            aspect-ratio: 16/9;
-            position: relative;
-        }
-        .cinema-iframe-screen {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 14px;
-            background: #000;
-        }
-
-        /* ================= فروشگاه مرچ لوکس و باکلاس ================= */
-        .merch-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 30px;
-        }
-        .merch-card {
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(212,175,55,0.2);
-            border-radius: var(--radius-md);
-            padding: 25px;
+        .story-absolute-node span {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 12px;
+            color: var(--text-silver);
+            max-width: 95px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
             text-align: center;
-            transition: 0.3s;
         }
-        .merch-card:hover { transform: translateY(-6px); border-color: var(--royal-gold); }
-        .merch-thumb {
-            width: 100%;
-            height: 230px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 18px;
-            margin-bottom: 18px;
+
+        .delete-story-overlay-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4.5rem;
+            font-size: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 50;
+            transition: background 0.2s;
         }
 
-        /* ================= شبکه اجتماعی رویان‌گرام با استوری عکس واقعی ================= */
-        .story-wrapper {
+        .delete-story-overlay-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* 
+            موتور پیشرفته سرچ سلطنتی (گوگل)
+        */
+        .monarch-google-search-vault {
+            background: linear-gradient(145deg, rgba(15, 15, 22, 0.95), rgba(0, 0, 0, 1));
+            border: var(--royal-border-solid);
+            padding: 45px;
+            border-radius: 30px;
+            box-shadow: var(--royal-glow);
+            text-align: center;
+            position: relative;
+        }
+
+        .monarch-google-search-vault h2 {
+            font-size: 2rem;
+            color: var(--gold-bright);
+            margin-bottom: 12px;
+            font-weight: 900;
+        }
+
+        .monarch-google-search-vault p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 1rem;
+        }
+
+        .search-form-flex-chassis {
             display: flex;
             gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 20px;
-            scrollbar-width: none;
-            border-bottom: 1px solid rgba(212,175,55,0.18);
-            margin-bottom: 30px;
+            max-width: 850px;
+            margin: 0 auto;
         }
-        .story-ring {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #a51c30, #d4af37, #002266);
-            padding: 3px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            flex-shrink: 0;
+
+        .search-field-icon-housing {
+            position: relative;
+            flex: 1;
         }
-        .story-ring:hover { transform: scale(1.06); }
-        .story-clip {
+
+        .search-field-icon-housing i {
+            position: absolute;
+            right: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gold-primary);
+            font-size: 1.2rem;
+        }
+
+        .search-field-icon-housing input {
             width: 100%;
-            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(214, 175, 55, 0.4);
+            padding: 18px 55px 18px 25px;
+            border-radius: 16px;
+            color: var(--text-pure-white);
+            font-size: 1.1rem;
+            transition: var(--smooth-cubic);
+        }
+
+        .search-field-icon-housing input:focus {
+            border-color: var(--gold-bright);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .royal-search-execution-btn {
+            background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold-bright) 100%);
+            border: none;
+            padding: 0 35px;
+            border-radius: 16px;
+            color: var(--palace-pure-black);
+            font-weight: 900;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--smooth-cubic);
+        }
+
+        .royal-search-execution-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--royal-glow-intense);
+        }
+
+        /* 
+            بخش تولدها (منتقل شده به وسط با محاسبات معکوس زنده خط به خط)
+        */
+        .chronograph-birthdays-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .chronograph-birthdays-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .monarch-birthday-monolith {
+            background: var(--palace-card-bg);
+            border: var(--royal-border-dim);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            transition: var(--smooth-cubic);
+        }
+
+        .monarch-birthday-monolith:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold-primary);
+        }
+
+        .king-monolith { border-top: 6px solid var(--gold-bright); }
+        .queen-monolith { border-top: 6px solid #d8b4fe; }
+
+        .birthday-badge-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .king-monolith .birthday-badge-icon { color: var(--gold-bright); filter: drop-shadow(0 0 10px var(--gold-primary)); }
+        .queen-monolith .birthday-badge-icon { color: #c084fc; filter: drop-shadow(0 0 10px #a855f7); }
+
+        .monarch-birthday-monolith h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .calendar-static-pill {
+            display: inline-block;
+            background: rgba(255,255,255,0.04);
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* شمارش معکوس بسیار دقیق با ساختار باز */
+        .live-countdown-ticker-box {
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px dashed rgba(214, 175, 55, 0.3);
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .ticker-segment {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .ticker-number {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--gold-bright);
+        }
+
+        .queen-monolith .ticker-number {
+            color: #e9d5ff;
+        }
+
+        .ticker-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* 
+            مرکز کنترل پخش موزیک پیشرفته سلطنتی
+        */
+        .monarch-audio-complex {
+            background: var(--palace-card-bg);
+            border: var(--royal-border-dim);
+            border-radius: 28px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .audio-hardware-core {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .track-metadata-hub {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .vinyl-record-emblem {
+            font-size: 3rem;
+            color: var(--gold-bright);
+            transition: var(--smooth-cubic);
+        }
+
+        .metadata-text-strings h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-pure-white);
+        }
+
+        .metadata-text-strings p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .hardware-controls-row {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .grand-audio-toggle-btn {
+            background: linear-gradient(135deg, var(--gold-dark), var(--gold-bright));
+            color: var(--palace-pure-black);
+            border: none;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            background: #111;
+            font-size: 1.5rem;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            background-size: cover;
-            background-position: center;
+            transition: var(--smooth-cubic);
         }
 
-        /* مدال لایت‌باکس نمایش تصویر استوری */
-        .story-viewer-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(20px);
-            z-index: 120000;
-            display: none;
+        .grand-audio-toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: var(--royal-glow-intense);
+        }
+
+        .scrubber-timeline-chassis {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .scrubber-slider-element {
+            flex: 1;
+            accent-color: var(--gold-bright);
+            height: 8px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .ingestion-interfaces-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @media(max-width: 768px) {
+            .ingestion-interfaces-split { grid-template-columns: 1fr; }
+        }
+
+        .file-dropzone-label {
+            display: block;
+            background: rgba(255,255,255,0.01);
+            border: 2px dashed rgba(214, 175, 55, 0.3);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--smooth-cubic);
+        }
+
+        .file-dropzone-label:hover {
+            background: rgba(214, 175, 55, 0.08);
+            border-color: var(--gold-bright);
+        }
+
+        #hidden-file-ingector { display: none; }
+
+        .cloud-url-injector-bay {
+            display: flex;
+            gap: 12px;
+        }
+
+        .cloud-url-injector-bay input {
+            flex: 1;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 0 20px;
+            color: var(--text-pure-white);
+            font-size: 0.95rem;
+        }
+
+        .cloud-url-injector-bay input:focus {
+            border-color: var(--gold-primary);
+        }
+
+        .confirm-ingestion-btn {
+            background: transparent;
+            color: var(--gold-bright);
+            border: 1px solid var(--gold-primary);
+            padding: 0 30px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 800;
+            transition: var(--smooth-cubic);
+        }
+
+        .confirm-ingestion-btn:hover {
+            background: var(--gold-primary);
+            color: var(--palace-pure-black);
+        }
+
+        /* 
+            شبکه‌های اجتماعی و پل‌های ارتباطی شاهانه
+        */
+        .monarch-social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .premium-social-card-brick {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 26px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--text-pure-white);
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--smooth-cubic);
+        }
+
+        .premium-social-card-brick:hover {
+            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.04);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .social-brick-icon-container {
+            font-size: 2.3rem;
+        }
+
+        .social-brick-details-container h4 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .social-brick-details-container p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .brick-ig { border-right: 6px solid #e1306c; }
+        .brick-tg { border-right: 6px solid #0088cc; }
+        .brick-yt { border-right: 6px solid #ff0000; }
+        .brick-dc { border-right: 6px solid #5865f2; }
+
+        /* 
+            میز فرمانروایی ادمین (مدیریت استوری‌ها)
+        */
+        .emperor-hq-dashboard {
+            background: linear-gradient(135deg, rgba(30, 12, 12, 0.6) 0%, rgba(10, 5, 5, 0.8) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 28px;
+            padding: 35px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+
+        .hq-badge-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #f87171;
+            margin-bottom: 12px;
+        }
+
+        .hq-badge-header h3 { font-size: 1.4rem; font-weight: 800; }
+
+        .hq-instructions {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .hq-inputs-flex-row {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .hq-input-wrapper-block {
+            flex: 1;
+            min-width: 260px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .hq-input-wrapper-block label {
+            font-size: 0.9rem;
+            color: var(--text-silver);
+            font-weight: 600;
+        }
+
+        .hq-input-wrapper-block input {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px;
+            border-radius: 12px;
+            color: var(--text-pure-white);
+            font-size: 1rem;
+            transition: var(--smooth-cubic);
+        }
+
+        .hq-input-wrapper-block input:focus {
+            border-color: #ef4444;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.25);
+        }
+
+        .hq-execution-trigger-btn {
+            background: #1a1212;
+            color: #f87171;
+            border: 1px solid #ef4444;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            gap: 12px;
+            transition: var(--smooth-cubic);
+        }
+
+        .hq-execution-trigger-btn:hover {
+            background: #ef4444;
+            color: white;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+        }
+
+        /* 
+            ابزارک هوش مصنوعی (چت‌بات مستقل قصر)
+        */
+        .monarch-ai-satellite-station {
+            position: fixed;
+            bottom: 40px;
+            left: 40px;
+            z-index: 999999;
+        }
+
+        .ai-pulsing-trigger-orb {
+            background: linear-gradient(135deg, #1e1b4b 0%, #311068 100%);
+            border: 2px solid var(--gold-primary);
+            color: var(--text-pure-white);
+            padding: 16px 28px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 800;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+            transition: var(--smooth-cubic);
+        }
+
+        .ai-pulsing-trigger-orb:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(124, 58, 237, 0.5);
+        }
+
+        .ai-terminal-window-canvas {
+            position: absolute;
+            bottom: 85px;
+            left: 0;
+            width: 390px;
+            height: 520px;
+            background: #09090e;
+            border: 2px solid var(--gold-bright);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            transition: var(--smooth-cubic);
+        }
+
+        .ai-terminal-navbar {
+            background: #12121c;
+            padding: 20px;
+            border-bottom: var(--royal-border-dim);
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
-        .story-modal-content {
-            max-width: 90vw;
-            max-height: 85vh;
-            border: 3px solid var(--royal-gold);
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 0 60px rgba(212,175,55,0.6);
+
+        .ai-navbar-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
         }
-        .story-modal-content img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: block;
+
+        .ai-navbar-profile i { color: var(--gold-bright); }
+
+        .terminal-close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
         }
-        
-        .royal-post {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: var(--radius-md);
-            padding: 30px;
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
-        .post-author-box { display: flex; align-items: center; gap: 18px; margin-bottom: 18px; }
-        
-        /* آواتار داینامیک دیتابیس با قابلیت پشتیبانی بیس۶۴ */
-        .author-avatar { 
-            width: 55px; 
-            height: 55px; 
-            border-radius: 50%; 
-            background-size: cover; 
-            background-position: center; 
-            border: 2px solid var(--royal-gold); 
-            display:flex; 
-            align-items:center; 
-            justify-content:center; 
-            font-size:1.3rem; 
-            overflow:hidden;
-            background-color: var(--royal-purple-light);
-        }
-        
-        /* ================= سیستم نجوای زنده و دایرکت خصوصی ================= */
-        .chat-stream {
-            max-height: 400px;
+
+        .terminal-close-btn:hover { color: var(--text-pure-white); }
+
+        .ai-stream-logs-box {
+            flex: 1;
+            padding: 22px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 18px;
-            padding: 20px;
-            background: rgba(0,0,0,0.35);
-            border-radius: var(--radius-md);
-            margin-bottom: 25px;
+            gap: 15px;
         }
-        .bubble {
-            padding: 15px 22px;
-            border-radius: 22px;
-            max-width: 78%;
-            line-height: 1.8;
-            position: relative;
+
+        .chat-speech-bubble {
+            padding: 14px 18px;
+            border-radius: 16px;
+            max-width: 85%;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
-        .bubble-mobin {
-            background: linear-gradient(135deg, var(--mobin-blue), #001133);
-            border-right: 4px solid var(--royal-gold);
+
+        .bubble-core-ai {
+            background: rgba(214, 175, 55, 0.1);
+            border: 1px solid rgba(214, 175, 55, 0.25);
             align-self: flex-start;
+            border-bottom-left-radius: 2px;
+            color: var(--text-silver);
         }
-        .bubble-niyayesh {
-            background: linear-gradient(135deg, var(--vampire-dark), #2a0000);
-            border-left: 4px solid var(--crimson);
+
+        .bubble-core-user {
+            background: #4c1d95;
             align-self: flex-end;
-        }
-        .bubble-guest {
-            background: rgba(255,255,255,0.08);
-            align-self: flex-start;
-            border-right: 3px solid #ccc;
+            border-bottom-right-radius: 2px;
+            color: var(--text-pure-white);
         }
 
-        /* تالار شاهزادگان آینده */
-        .prince-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-        .prince-card {
-            background: linear-gradient(145deg, rgba(15,15,15,0.9), rgba(40,40,40,0.3));
-            border: 2px dashed rgba(212,175,55,0.3);
-            border-radius: var(--radius-md);
-            padding: 35px;
-            text-align: center;
+        .ai-command-input-dock {
+            display: flex;
+            padding: 15px;
+            background: #040406;
+            gap: 10px;
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
 
-        /* جهان علایق لوکس */
-        .luxury-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        .luxury-card {
-            background: rgba(5,5,5,0.5);
-            border-radius: var(--radius-md);
-            padding: 35px;
+        .ai-command-input-dock input {
+            flex: 1;
+            background: #11111a;
             border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 14px;
+            color: var(--text-pure-white);
+            font-size: 0.95rem;
         }
-        .card-mobin { border-top: 4px solid var(--mobin-blue-light); }
-        .card-niyayesh { border-top: 4px solid var(--vampire-red); }
 
-        .terminal-box {
-            background: #050505;
-            border: 2px solid var(--crimson);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            font-family: 'Courier New', monospace;
-            max-height: 350px;
-            overflow-y: auto;
+        .ai-command-input-dock button {
+            background: var(--gold-primary);
+            border: none;
+            width: 50px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--palace-pure-black);
+            font-size: 1.1rem;
+            transition: var(--smooth-cubic);
         }
-        .terminal-row {
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+
+        .ai-command-input-dock button:hover { background: var(--gold-bright); }
+
+        /* 
+            پنل دایرکت اینستاگرامی (صندوق پیام های دایرکت به صورت کامل و لوکس)
+        */
+        .direct-system-curtain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .direct-window-mainframe {
+            width: 95%;
+            max-width: 1000px;
+            height: 650px;
+            background: #0a0a0f;
+            border: 1px solid var(--gold-primary);
+            border-radius: 28px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.95);
+        }
+
+        .direct-mainframe-navbar {
+            padding: 22px 30px;
+            background: #12121a;
+            border-bottom: 1px solid rgba(214, 175, 55, 0.2);
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
 
-        .reveal { opacity: 0; transform: translateY(50px); transition: all 1.2s cubic-bezier(0.15, 0.85, 0.35, 1); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .direct-navbar-left-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
 
-        @media (max-width: 768px) {
-            .luxury-grid { grid-template-columns: 1fr; }
-            .navbar { top: auto; bottom: 20px; }
+        .direct-navbar-left-title h3 { font-size: 1.4rem; font-weight: 850; }
+
+        .direct-dual-pane-workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* سایدبار دایرکت شامل لیست کل کاربران */
+        .direct-contacts-sidebar {
+            width: 32%;
+            background: #0f0f16;
+            border-left: 1px solid rgba(255,255,255,0.05);
+            padding: 20px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow-y: auto;
+        }
+
+        .contact-card-node {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            padding: 15px;
+            border-radius: 16px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid transparent;
+            transition: var(--smooth-cubic);
+        }
+
+        .contact-card-node:hover {
+            background: rgba(255,255,255,0.03);
+        }
+
+        .contact-card-node.focused-contact {
+            background: rgba(214, 175, 55, 0.12) !important;
+            border: 1px solid rgba(214, 175, 55, 0.3);
+        }
+
+        .contact-avatar-orb {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #a855f7, #6b21a8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-pure-white);
+        }
+
+        .contact-meta-strings h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .contact-meta-strings p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* چت‌باکس اصلی دایرکت */
+        .direct-chat-terminal-view {
+            width: 68%;
+            display: flex;
+            flex-direction: column;
+            background: #060609;
+        }
+
+        .direct-chat-logs-container {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .direct-message-bubble-unit {
+            padding: 14px 20px;
+            border-radius: 18px;
+            max-width: 75%;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .direct-message-bubble-unit.bubble-outgoing {
+            background: #1e293b;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+            color: var(--text-pure-white);
+        }
+
+        .direct-message-bubble-unit.bubble-incoming {
+            background: rgba(168, 85, 247, 0.12);
+            align-self: flex-start;
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-bottom-left-radius: 2px;
+            color: var(--text-silver);
+        }
+
+        .direct-dock-typing-interface {
+            display: flex;
+            padding: 20px;
+            background: #0f0f16;
+            gap: 15px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .direct-dock-typing-interface input {
+            flex: 1;
+            background: #060609;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 16px;
+            border-radius: 14px;
+            color: var(--text-pure-white);
+            font-size: 1rem;
+        }
+
+        .direct-dock-typing-interface button {
+            background: var(--gold-primary);
+            border: none;
+            padding: 0 26px;
+            border-radius: 14px;
+            cursor: pointer;
+            color: var(--palace-pure-black);
+            font-weight: 800;
+            font-size: 1rem;
+            transition: var(--smooth-cubic);
+        }
+
+        /* 
+            سایدبار پنهان تند تنظیمات محیطی 
+        */
+        .settings-lateral-drawer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 340px;
+            height: 100%;
+            background: #09090d;
+            border-right: var(--royal-border-dim);
+            z-index: 1000000;
+            padding: 30px;
+            box-shadow: 15px 0 40px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            transition: var(--smooth-cubic);
+        }
+
+        .drawer-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .drawer-header-row h3 { font-size: 1.3rem; font-weight: 800; color: var(--gold-bright); }
+
+        .drawer-option-stack-row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .drawer-option-stack-row label { font-size: 0.9rem; color: var(--text-silver); }
+
+        .drawer-option-stack-row select {
+            background: #14141f;
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 14px;
+            border-radius: 10px;
+            color: white;
+            font-size: 0.95rem;
         }
     </style>
 </head>
 <body>
 
-<canvas id="gold-particles"></canvas>
-
-<!-- سیستم نوتیفیکیشن اختصاصی قصر -->
-<div id="custom-alert">
-    <span id="alert-crown">👑</span>
-    <span id="alert-text-content">خوش آمدید</span>
-</div>
-
-<!-- مدال نمایش واقعی تصاویر استوری رویان‌گرام -->
-<div class="story-viewer-modal" id="story-viewer-gate" onclick="closeStoryViewerModal()">
-    <div class="story-modal-content">
-        <img id="story-modal-img-source" src="" alt="استوری تصویری">
-    </div>
-</div>
-
-<!-- ================= پورتال احراز هویت سلطنتی ================= -->
-<div class="auth-wrapper" id="auth-gate">
-    <div class="auth-container">
-        <div class="auth-tabs">
-            <div class="auth-tab active" onclick="toggleAuthTab('login')">ورود اشراف</div>
-            <div class="auth-tab" onclick="toggleAuthTab('reg')">صدور شناسنامه مهمان</div>
-        </div>
-
-        <!-- پنل ورود اشراف -->
-        <div id="pane-login" class="auth-form active">
-            <h1 class="lalezar-font" style="color: var(--royal-purple); margin-bottom: 10px;">ورود به قصر شیشه‌ای</h1>
-            <p style="font-size: 0.9rem; color: #5c4f3d; margin-bottom: 30px; font-weight: 700;">کلید گشا یا رمز عبور ادمین را وارد نمایید</p>
-            <input type="text" id="login-uid" placeholder="نام کاربری تایید شده...">
-            <input type="password" id="login-token" placeholder="رمز عبور سلطنتی...">
-            <button class="action-btn btn-gold" onclick="verifyKingdomAccess()">گشودن دروازه‌ها ✨</button>
-        </div>
-
-        <!-- پنل ثبت نام مهمان با آپلود پیشرفته عکس پروفایل -->
-        <div id="pane-reg" class="auth-form">
-            <h1 class="lalezar-font" style="color: var(--royal-purple); margin-bottom: 10px;">تنظیم کارت هویت</h1>
-            <input type="text" id="reg-alias" placeholder="نام شریف شما...">
-            <input type="text" id="reg-uid" placeholder="نام کاربری دلخواه (یکتا برای دایرکت)...">
-            
-            <div class="file-upload-wrapper">
-                <span class="file-upload-trigger" id="file-upload-label-text">📸 انتخاب و آپلود عکس پروفایل</span>
-                <input type="file" id="reg-avatar-file" accept="image/*" onchange="processAvatarFile(this)">
-            </div>
-            
-            <button class="action-btn btn-gold" onclick="registerKingdomGuest()">تنظیم پروفایل و ورود 📜</button>
-        </div>
-    </div>
-</div>
-
-<!-- ================= پرده نمایش اینترو فیلمیک نفلیکس ================= -->
-<div id="netflix-intro">
-    <div class="netflix-text" id="netflix-core">M & N</div>
-</div>
-
-<!-- ================= نوار ناوبری لوکس پادشاهی ================= -->
-<div class="navbar" id="main-navigation">
-    <a href="#queen-sec">ملکهٔ فرشته</a>
-    <a href="#stream-sec">پورتال استریم</a>
-    <a href="#cinema-sec">سینمای سلطنتی</a>
-    <a href="#letter-sec">نامه شاهانه</a>
-    <a href="#luxury-sec">جهان علایق</a>
-    <a href="#dynasty-sec">شاهزادگان آینده</a>
-    <a href="#royalgram-sec">رویان‌گرام</a>
-    <a href="#merch-sec">مرچ سلطنتی</a>
-    <a href="#grimoire-sec">کتاب تاریخ</a>
-    <a href="#chat-sec" id="nav-chat-node" style="display:none; color: var(--royal-gold-light);">تالار نجوا 🔒</a>
-    <a href="#dm-sec">دایرکت خصوصی</a>
-    <a href="#promises-sec">عهدنامه‌ها</a>
-    <a href="#album-sec">گالری آلبوم</a>
-    <a href="#admin-control-room" id="nav-admin-node" style="display:none; color: var(--crimson); font-weight:900;">اتاق فرمان Wiriper</a>
-</div>
-
-<!-- ================= بدنه اصلی محتوایی امپراتوری ================= -->
-<div id="main-kingdom">
-
-    <!-- کتیبه تواریخ مقدس در بالاترین جایگاه وبسایت -->
-    <div class="birthdays-monument reveal">
-        👑 طلوع مبارک و متبرک پادشاه مبین: اول مهرماه ۱۳۸۴ 🌟 | طلوع پاک ملکه نیایش: دوازدهم تیرماه ۱۳۸۶ 👸🏻
-    </div>
-
-    <!-- بخش ملکه و قاب فرشته -->
-    <div class="royal-section reveal" id="queen-sec">
-        <div class="section-title">ملکهٔ بی‌همتا با بال‌های فرشته 👑</div>
-        <div class="queen-hero-card">
-            <div class="queen-frame">
-                <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش">
-            </div>
-            <p style="font-size: 1.25rem; line-height: 2.5; max-width: 820px; color: var(--text-light);">
-                او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب نیایش عزیز من.
-            </p>
-        </div>
-    </div>
-
-    <!-- بخش پورتال استریم پادشاه و ملکه با قابلیت پخش و سورس دهی لایو -->
-    <div class="royal-section reveal" id="stream-sec">
-        <div class="section-title">پورتال پخش و سورس استریم زنده 🎮🎬</div>
-        
-        <!-- پنل کنترل سورس استریم زنده مخصوص پادشاه و ملکه -->
-        <div id="stream-admin-panel" style="display:none; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 18px; margin-bottom: 25px;">
-            <p style="font-size: 0.95rem; margin-bottom: 12px; color: var(--royal-gold); font-weight: bold;">تنظیم خط سیگنال استریم زنده (مدیریت قصر):</p>
-            <div style="display: flex; gap: 12px;">
-                <input type="text" id="stream-source-url-input" placeholder="لینک سورس زنده ویدیو یا مانیتورینگ استریم (.mp4)..." style="margin:0; flex:1;">
-                <button class="action-btn btn-gold" style="width:auto; padding:0 25px; font-size:0.9rem;" onclick="updateLiveStreamSource()">اتصال خط ⚡</button>
-            </div>
-        </div>
-
-        <div class="stream-box">
-            <div class="stream-overlay-status" id="stream-live-tag">🔵 آفلاین / در انتظار سیگنال قصر</div>
-            <video class="stream-video-core" id="main-royal-video-player" controls autoplay loop muted playsinline>
-                <source id="main-video-src-node" src="" type="video/mp4">
-            </video>
-        </div>
-        <p style="text-align: center; color: #ccc; font-size: 0.95rem;">سیستم مانیتورینگ استریم بازی، وب‌کم قصر و لایو کست‌های مشترک امپراتوری.</p>
-    </div>
-
-    <!-- تالار سینمای پادشاهانه و مجلل Wiriper -->
-    <div class="royal-section reveal" id="cinema-sec">
-        <div class="section-title">سینمای مجلل پادشاهی Wiriper 🍿🎬</div>
-        <p style="text-align: center; color:#bbb; margin-bottom: 25px;">پخش همزمان فیلم، سریال و ویدیوهای یوتیوب در تالار اختصاصی مانیتورینگ امپراتوری.</p>
-        
-        <div style="background: rgba(255,255,255,0.05); padding: 22px; border-radius: 18px; margin-bottom: 25px;">
-            <label style="display:block; margin-bottom:12px; font-weight:bold; color:var(--royal-gold);">بارگذاری فیلم یا ویدیو یوتیوب:</label>
-            <div style="display:flex; gap:12px;">
-                <input type="text" id="cinema-video-link-input" placeholder="لینک کامل ویدیو یوتیوب یا لینک مستقیم فیلم..." style="margin:0; flex:1;">
-                <button class="action-btn btn-gold" style="width:auto; padding:0 25px; font-size:0.9rem;" onclick="loadCinemaMovie()">اکران فیلم 📽️</button>
-            </div>
-        </div>
-
-        <div class="cinema-theater-container">
-            <iframe class="cinema-iframe-screen" id="cinema-core-screen" src="about:blank" allowfullscreen></iframe>
-        </div>
-    </div>
-
-    <!-- نامه عاشقانه پادشاه -->
-    <div class="royal-section reveal" id="letter-sec">
-        <div class="section-title">نجواهای مکتوب پادشاه 💌</div>
-        <div id="scrolling-letter" style="font-size: 1.25rem; line-height: 2.7; white-space: pre-wrap; color: var(--royal-gold-light);"></div>
-    </div>
-
-    <!-- کارت وضعیت و مشخصات پروفایل پویا با آواتار بیس۶۴ -->
-    <div class="royal-section reveal" id="profile-custom-sec">
-        <div class="section-title">کارت پروفایل شما در امپراتوری 👤</div>
-        <div style="display: flex; gap: 30px; align-items: center; flex-wrap: wrap;">
-            <div id="my-profile-avatar-preview" class="author-avatar" style="width: 110px; height: 110px; font-size: 2.8rem;">👤</div>
-            <div style="flex: 1; min-width: 260px;">
-                <h3 id="my-profile-name-display" class="lalezar-font" style="color: var(--royal-gold); font-size: 1.9rem;">نام کاربری</h3>
-                <p id="my-profile-role-display" style="color: #aaa; font-weight: bold; margin-bottom: 15px;">نقش: مهمان قصر</p>
-                
-                <div class="file-upload-wrapper" style="max-width: 300px; margin: 0;">
-                    <span class="file-upload-trigger" style="padding: 10px 15px; font-size: 0.85rem; color: #fff; border-color: var(--royal-gold);" id="profile-edit-upload-text">تغییر عکس پروفایل 📸</span>
-                    <input type="file" accept="image/*" onchange="updateProfileAvatarLive(this)">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- بخش علایق مجلل لوکس -->
-    <div class="royal-section reveal" id="luxury-sec">
-        <div class="section-title">جهان علایق و سلایق لوکس ما 💎</div>
-        <div class="luxury-grid">
-            <div class="luxury-card card-mobin">
-                <h3 class="lalezar-font" style="color: var(--royal-gold); font-size: 1.7rem; margin-bottom: 15px;">قلمرو پادشاه مبین 🏎️</h3>
-                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">نماد ابهت، قدرت، سرعت و وفاداری بی‌پایان.</p>
-                <div style="line-height: 2.2;">
-                    <div style="margin-bottom: 10px;">🔥 <strong>ماشین رویایی:</strong> <span style="color: #fff; text-shadow:0 0 10px var(--royal-gold);">پورشه باکستر (Porsche Boxster)</span></div>
-                    <div>🎨 <strong>رنگ پادشاهی:</strong> <span style="color:#2b66ff; font-weight: 900;">مشکی عمیق و آبی پررنگ</span></div>
-                </div>
-            </div>
-            <div class="luxury-card card-niyayesh">
-                <h3 class="lalezar-font" style="color: var(--crimson); font-size: 1.7rem; margin-bottom: 15px;">جهان ملکه نیایش 🏛️</h3>
-                <p style="color: #aaa; margin-bottom: 20px; font-size: 0.95rem;">مظهر هنر، زیبایی، معماری و افسانه‌های جاودان.</p>
-                <div style="line-height: 2.2;">
-                    <div style="margin-bottom: 10px;">📐 <strong>علم متبرک:</strong> <span style="color: #fff;">مهندسی معماری لوکس</span></div>
-                    <div>🩸 <strong>سریال فانتزی محبوب:</strong> <span style="color:var(--vampire-red); font-weight:900;">خاطرات یک خون‌آشام (The Vampire Diaries)</span></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- تالار شاهزادگان آینده -->
-    <div class="royal-section reveal" id="dynasty-sec">
-        <div class="section-title">قلمرو متبرک شاهزادگان آینده 👶🏻✨</div>
-        <p style="text-align: center; max-width: 720px; margin: 0 auto 40px; line-height: 2; color: #ccc;">
-            میراث و شکوه این امپراتوری ابدی در آینده به شاهزادگان گران‌قدر و عالی‌مقام ما ارث خواهد رسید؛ کسانی که نامشان در تاریخ این پادشاهی حک شده است:
-        </p>
-        <div class="prince-grid">
-            <div class="prince-card">
-                <span style="font-size: 3rem;">👑</span>
-                <h3 class="lalezar-font" style="color: var(--royal-gold); font-size: 1.8rem; margin-top: 10px;">شاهزاده آریامهر</h3>
-                <p style="color: #aaa; font-size: 0.9rem; margin-top: 8px;">وارث اول لوکس و مظهر اصالت پادشاهی</p>
-            </div>
-            <div class="prince-card">
-                <span style="font-size: 3rem;">⚔️</span>
-                <h3 class="lalezar-font" style="color: var(--royal-gold); font-size: 1.8rem; margin-top: 10px;">شاهزاده سام</h3>
-                <p style="color: #aaa; font-size: 0.9rem; margin-top: 8px;">پاسدار بزرگ و نماد شجاعت و قدرت امپراتوری</p>
-            </div>
-            <div class="prince-card" style="border: 2px dashed var(--crimson);">
-                <span style="font-size: 3rem;">👑👸🏻</span>
-                <h3 class="lalezar-font" style="color: var(--royal-gold-light); font-size: 1.8rem; margin-top: 10px;">پرنسس سونیا</h3>
-                <p style="color: #aaa; font-size: 0.9rem; margin-top: 8px;">مظهر پاکی، زیبایی فرشته‌گون و شکوه آینده ملکه</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- شبکه اجتماعی رویان‌گرام ارتقایافته با استوری تصویری لایت باکس -->
-    <div class="royal-section reveal" id="royalgram-sec">
-        <div class="section-title">شبکه اجتماعی رویان‌گرام (RoyalGram) 📸</div>
-        
-        <!-- بارگذاری داینامیک استوری‌های مصور با قابلیت پاپ آپ -->
-        <div class="story-wrapper">
-            <div class="story-ring" onclick="openStoryViewerModal('https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=1000')">
-                <div class="story-clip" style="background-image: url('https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?q=80&w=1000');"></div>
-            </div>
-            <div class="story-ring" onclick="openStoryViewerModal('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=1000')">
-                <div class="story-clip" style="background-image: url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=1000');"></div>
-            </div>
-            <div class="story-ring" onclick="openStoryViewerModal('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000')">
-                <div class="story-clip" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1000');"></div>
-            </div>
-            <div class="story-ring" onclick="openStoryViewerModal('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000')">
-                <div class="story-clip" style="background-image: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1000');"></div>
-            </div>
-        </div>
-
-        <!-- فید پست‌های رویان‌گرام -->
-        <div id="live-posts-area"></div>
-
-        <!-- فرم ارسال پست جدید با اتصال به ساختار آواتار داینامیک -->
-        <div style="margin-top: 30px; display: flex; gap: 15px;">
-            <input type="text" id="royalgram-input-field" placeholder="پست جدید خود را در فید رویان‌گرام بنویسید..." style="margin: 0;">
-            <button class="action-btn btn-gold" style="width: auto; padding: 0 35px;" onclick="publishRoyalPost()">انتشار در شبکه 🚀</button>
-        </div>
-    </div>
-
-    <!-- فروشگاه مرچ پادشاه و ملکه با آیتم‌های فوق لوکس جدید -->
-    <div class="royal-section reveal" id="merch-sec">
-        <div class="section-title">فروشگاه مرچ لوکس پادشاه و ملکه 🛍️💎</div>
-        <div class="merch-grid">
-            <div class="merch-card">
-                <div class="merch-thumb">🧥</div>
-                <h3 class="lalezar-font" style="color: var(--royal-gold);">هودی ست امپراتوری Wiriper</h3>
-                <p style="font-size: 0.85rem; color: #bbb; margin: 8px 0 15px;">پارچه سنگین مشکی-آبی تیره با گلدوزی فرشته</p>
-                <button class="action-btn btn-gold" style="padding: 10px; font-size: 0.9rem;" onclick="showSystemNotification('به صندوق سفارشات قصر اضافه شد', '👑')">سفارش سلطنتی</button>
-            </div>
-            <div class="merch-card">
-                <div class="merch-thumb">⌚</div>
-                <h3 class="lalezar-font" style="color: var(--royal-gold);">ساعت مکانیکی اسکلتون Wiriper</h3>
-                <p style="font-size: 0.85rem; color: #bbb; margin: 8px 0 15px;">طراحی سفارشی گران‌قیمت با موتور نمایان مکانیکی و حکاکی نشان طلا</p>
-                <button class="action-btn btn-gold" style="padding: 10px; font-size: 0.9rem;" onclick="showSystemNotification('به صندوق سفارشات قصر اضافه شد', '👑')">سفارش سلطنتی</button>
-            </div>
-            <div class="merch-card">
-                <div class="merch-thumb">🧪✨</div>
-                <h3 class="lalezar-font" style="color: var(--royal-gold);">عطر شاهانه Black Crystal</h3>
-                <p style="font-size: 0.85rem; color: #bbb; margin: 8px 0 15px;">عصاره دست‌ساز فرانسوی با لایه‌های اسرارآمیز ملکه امپراتوری</p>
-                <button class="action-btn btn-gold" style="padding: 10px; font-size: 0.9rem;" onclick="showSystemNotification('به صندوق سفارشات قصر اضافه شد', '👑')">سفارش سلطنتی</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- کتاب خاطرات آنلاین -->
-    <div class="royal-section reveal" id="grimoire-sec">
-        <div class="section-title">کتاب خاطرات گرانبها سلطنتی 📖</div>
-        <textarea id="grimoire-text-area" placeholder="خاطره شیرین یا یادداشتی برای ثبت در تاریخ پادشاهی بنویسید..." rows="4"></textarea>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-weight: bold; color: var(--royal-gold);" id="grimoire-sign">نویسنده: مهمان قصر</span>
-            <button class="action-btn btn-gold" style="width: auto; padding: 12px 35px;" onclick="saveGrimoireToFirebase()">ثبت در کتاب تاریخ ✍️</button>
-        </div>
-        <div id="grimoire-logs" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;"></div>
-    </div>
-
-    <!-- تالار نجوای زنده (کاملاً پنهان و مخفی - فقط برای پادشاه و ملکه) -->
-    <div class="royal-section reveal" id="chat-sec" style="display: none;">
-        <div class="section-title">تالار اسرارآمیز نجوای پادشاه و ملکه 🔒💬</div>
-        <div class="chat-stream" id="live-chat-box"></div>
-        <div style="display: flex; gap: 15px;">
-            <input type="text" id="chat-message-input" placeholder="نجوایی کاملاً محرمانه بفرستید..." style="margin: 0;">
-            <button class="action-btn btn-gold" style="width: auto; padding: 0 30px;" onclick="sendLiveWhisper()">ارسال 🕊️</button>
-        </div>
-    </div>
-
-    <!-- پورتال ارتباط مستقیم دایرکت خصوصی برای همه کاربران -->
-    <div class="royal-section reveal" id="dm-sec">
-        <div class="section-title">صندوق دایرکت و نجواهای خصوصی ✉️🔒</div>
-        <p style="text-align:center; color:#aaa; font-size:0.9rem; margin-bottom:20px;">ارتباط رمزگذاری شده مستقیم با اشراف یا کاربران دیگر امپراتوری.</p>
-        
-        <div style="display:flex; gap:12px; margin-bottom:15px;">
-            <input type="text" id="dm-target-username" placeholder="نام کاربری مقصد..." style="margin:0; flex:1;">
-            <input type="text" id="dm-message-text" placeholder="متن پیام خصوصی..." style="margin:0; flex:2;">
-            <button class="action-btn btn-gold" style="width:auto; padding:0 25px;" onclick="sendPrivateDirectMessage()">ارسال دایرکت 📨</button>
-        </div>
-
-        <div class="chat-stream" id="private-dm-stream-box" style="max-height:250px; background:rgba(255,255,255,0.02);"></div>
-    </div>
-
-    <!-- عهدنامه‌ها و وعده‌ها -->
-    <div class="royal-section reveal" id="promises-sec">
-        <div class="section-title">عهدنامه‌ها و سوگندهای ابدی 📜</div>
-        <input type="text" id="promise-input-field" placeholder="سوگند و وعده‌ای جدید بنویسید..." style="margin: 0; margin-bottom: 15px;">
-        <button class="action-btn btn-gold" style="width: auto; display: block; margin: 0 auto 25px;" onclick="commitPromiseToFirebase()">ثبت سوگند وفاداری 💍</button>
-        <div id="promises-container" style="display: flex; flex-direction: column; gap: 12px;"></div>
-    </div>
-
-    <!-- آلبوم تصاویر کامل (۳ عکس زنده) -->
-    <div class="royal-section reveal" id="album-sec">
-        <div class="section-title">گالری تصاویر پادشاهی 📸</div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
-            <div class="queen-frame" style="width: 100%; height: 350px;"><img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="عکس ملکه"></div>
-            <div class="queen-frame" style="width: 100%; height: 350px;"><img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" alt="عکس دو"></div>
-            <div class="queen-frame" style="width: 100%; height: 350px;"><img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" alt="عکس سه"></div>
-        </div>
-    </div>
-
-    <!-- اتاق فرمان مانیتورینگ ادمین Wiriper -->
-    <div class="royal-section reveal" id="admin-control-room">
-        <div class="section-title" style="color: var(--crimson);">اتاق فرمان و مانیتورینگ ادمین (Wiriper) 🛡️</div>
-        <p style="margin-bottom: 20px; color: #ccc;">گزارش زنده تمام کلیک‌ها و حرکات کاربران در سایت شاهانه:</p>
-        <div class="terminal-box" id="admin-terminal-stream"></div>
-        <button class="action-btn btn-gold" style="background: var(--vampire-red); margin-top: 20px;" onclick="purgeTerminalLogs()">ریست و پاکسازی لاگ‌های امنیتی 🗑️</button>
-    </div>
-
-</div>
-
-<script>
-    // ================= اتصال به دیتابیس هوشمند فایربیس =================
-    const appId = "niyayesh-universe";
-    const firebaseConfig = {
-        apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
-        authDomain: "niyayesh-universe.firebaseapp.com",
-        projectId: "niyayesh-universe",
-        storageBucket: "niyayesh-universe.firebasestorage.app",
-        messagingSenderId: "675804346928",
-        appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
-    };
+    <!-- 
+        ========================================================================
+        بخش دوم: ساختار المان‌ها و تنه پلتفرم شاهانه (HTML پادشاهی)
+        ========================================================================
+    -->
     
-    let db;
-    try {
-        firebase.initializeApp(firebaseConfig);
-        db = firebase.firestore();
-    } catch(e) {
-        console.warn("اتصال فایربیس با محدودیت مواجه شد.");
-    }
-
-    // وضعیت سشن کاربر جاری
-    let activeUserRole = 'guest';
-    let activeUsername = 'مهمان ناشناس';
-    let activeUserAvatar = '';
-
-    // تبدیل و پردازش آپلود عکس پروفایل در فرم ثبت نام به فرمت Base64
-    function processAvatarFile(input) {
-        const file = input.files[0];
-        if (file) {
-            document.getElementById("file-upload-label-text").innerText = `⌛ در حال ذخیره‌سازی: ${file.name}`;
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                activeUserAvatar = e.target.result;
-                document.getElementById("file-upload-label-text").innerText = `✅ تصویر با موفقیت آپلود شد`;
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    // تغییر زنده عکس پروفایل داخل کارت پروفایل کاربری اختصاصی سایت
-    function updateProfileAvatarLive(input) {
-        const file = input.files[0];
-        if(file) {
-            document.getElementById("profile-edit-upload-text").innerText = "⌛ اعمال تغییرات...";
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                activeUserAvatar = e.target.result;
-                localStorage.setItem('kingdom_session_avatar', activeUserAvatar);
-                applySessionUIRole();
-                showSystemNotification("تصویر پروفایل جدید با موفقیت ذخیره شد", "📸");
-                appendActivityLog("عکس پروفایل خود را به صورت زنده ویرایش کرد");
-                document.getElementById("profile-edit-upload-text").innerText = "تغییر عکس پروفایل 📸";
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    // باز کردن مدال نمایش واقعی استوری‌های تصویری رویان‌گرام
-    function openStoryViewerModal(imgUrl) {
-        const modal = document.getElementById("story-viewer-gate");
-        const modalImg = document.getElementById("story-modal-img-source");
-        modalImg.src = imgUrl;
-        modal.style.display = "flex";
-        appendActivityLog(`یک استوری تصویری را تماشا کرد`);
-    }
-
-    function closeStoryViewerModal() {
-        document.getElementById("story-viewer-gate").style.display = "none";
-    }
-
-    // آپدیت سورس واقعی پلیر استریم زنده
-    function updateLiveStreamSource() {
-        const url = document.getElementById("stream-source-url-input").value.trim();
-        if(!url) return;
-        const player = document.getElementById("main-royal-video-player");
-        const source = document.getElementById("main-video-src-node");
+    <!-- هدر اصلی و فوق لوکس بالای سایت -->
+    <header class="grand-royal-header">
+        <div class="header-brand-container">
+            <i class="fas fa-crown crown-emblem"></i>
+            <h1>سیستم پادشاهی و سلطنتی</h1>
+        </div>
         
-        source.src = url;
-        player.load();
-        player.play().catch(e => console.log("پخش خودکار فعال گردید"));
-        
-        document.getElementById("stream-live-tag").innerText = "🔴 خط پخش زنده قصر فعال است";
-        showSystemNotification("سیگنال استریم زنده متصل شد", "🎮");
-        appendActivityLog("خط سیگنال استریم زنده را آپدیت کرد");
-    }
+        <div class="header-control-actions">
+            <!-- دایرکت رسمی پادشاهی در بالا سمت راست هدر بر اساس دستور شما -->
+            <button id="direct-gate-trigger-icon" class="premium-action-circle" title="صندوق دایرکت اختصاصی بانو">
+                <i class="fas fa-paper-plane"></i>
+                <span class="alert-indicator-badge" id="direct-live-badge">1</span>
+            </button>
+            
+            <button id="settings-gate-trigger-icon" class="premium-action-circle" title="تنظیمات هسته محیط کاربری">
+                <i class="fas fa-sliders-h"></i>
+            </button>
+        </div>
+    </header>
 
-    // بارگذاری و اکران فیلم در سینمای پادشاهانه با قابلیت تبدیل هوشمند یوتیوب
-    function loadCinemaMovie() {
-        let link = document.getElementById("cinema-video-link-input").value.trim();
-        if(!link) return;
-        
-        // تبدیل هوشمند لینک‌های معمولی یوتیوب به لینک Embed جهت دور زدن بلاک فریم
-        if(link.includes("youtube.com/watch?v=")) {
-            link = link.replace("watch?v=", "embed/");
-        } else if(link.includes("youtu.be/")) {
-            link = link.replace("youtu.be/", "youtube.com/embed/");
-        }
+    <!-- شاسی و بدنه اصلی برای لود بخش‌ها -->
+    <main class="grand-palace-layout">
 
-        const screen = document.getElementById("cinema-core-screen");
-        screen.src = link;
-        showSystemNotification("اکران اثر در تالار سینما آغاز شد", "📽️");
-        appendActivityLog(`یک ویدیو/فیلم جدید در تالار سینما اکران کرد`);
-    }
-
-    // بازیابی خودکار وضعیت سشن قبلی از لوکال استوریج
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedUser = localStorage.getItem('kingdom_session_user');
-        const savedRole = localStorage.getItem('kingdom_session_role');
-        const savedAvatar = localStorage.getItem('kingdom_session_avatar') || '';
-        
-        if(savedUser && savedRole) {
-            activeUsername = savedUser;
-            activeUserRole = savedRole;
-            activeUserAvatar = savedAvatar;
-            applySessionUIRole();
-            initiateKingdomFlow(`خوش‌آمدید مجدد، سشن ورود خودکار ${activeUsername} تایید شد.`);
-        }
-    });
-
-    function showSystemNotification(text, icon = '👑') {
-        const alertBox = document.getElementById("custom-alert");
-        document.getElementById("alert-text-content").innerText = text;
-        document.getElementById("alert-crown").innerText = icon;
-        alertBox.classList.add("show");
-        setTimeout(() => alertBox.classList.remove("show"), 3500);
-    }
-
-    function appendActivityLog(actionDescription) {
-        const timestamp = new Date().toLocaleTimeString('fa-IR');
-        const newLog = { user: activeUsername, role: activeUserRole, action: actionDescription, time: timestamp };
-        let logs = JSON.parse(localStorage.getItem('kingdom_activities') || '[]');
-        logs.unshift(newLog);
-        if(logs.length > 60) logs.pop();
-        localStorage.setItem('kingdom_activities', JSON.stringify(logs));
-        syncTerminalInterface();
-    }
-
-    function syncTerminalInterface() {
-        const container = document.getElementById("admin-terminal-stream");
-        if(!container) return;
-        const logs = JSON.parse(localStorage.getItem('kingdom_activities') || '[]');
-        if(logs.length === 0) {
-            container.innerHTML = '<div style="color:#666; text-align:center;">هیچ فعالیتی ثبت نشده است.</div>';
-            return;
-        }
-        container.innerHTML = logs.map(l => `
-            <div class="terminal-row">
-                <span>⚡ [${l.role.toUpperCase()}] <strong>${l.user}</strong>: ${l.action}</span>
-                <span style="color:var(--royal-gold);">${l.time}</span>
+        <!-- بخش اول: نمایش استوری‌های کاملاً گرد و دایره‌ای با کیفیت پردازش بالا -->
+        <section class="emperor-stories-station">
+            <div class="block-headline">
+                <i class="fas fa-history"></i>
+                <h3>مستندات و لحظات ثبت شده در قصر (استوری‌ها)</h3>
             </div>
-        `).join('');
-    }
+            <div class="stories-horizontal-slider" id="stories-dom-container">
+                <!-- المان‌های استوری با جاوا اسکریپت در پایین همین فایل تزریق می‌شوند -->
+            </div>
+        </section>
 
-    function purgeTerminalLogs() {
-        localStorage.removeItem('kingdom_activities');
-        syncTerminalInterface();
-        showSystemNotification("لاگ‌های ادمین پاکسازی شد", "🗑️");
-    }
+        <!-- بخش دوم: سیستم امنیتی جستجوگر متصل به موتور اصلی گوگل -->
+        <section class="monarch-google-search-vault">
+            <h2><i class="fas fa-brands fa-google"></i> موتور جستجوگر سلطنتی قصر</h2>
+            <p>فرمان‌های خود را بنویسید تا مستقیماً در پهنای شبکه جهانی گوگل برای شما پردازش و رندر شوند</p>
+            <form action="https://www.google.com/search" method="GET" target="_blank" class="search-form-flex-chassis">
+                <div class="search-field-icon-housing">
+                    <i class="fas fa-search"></i>
+                    <input type="text" name="q" placeholder="قلمرو وب را جستجو کنید عالیجناب..." required>
+                </div>
+                <button type="submit" class="royal-search-execution-btn">
+                    <span>جستجو در گوگل</span>
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </form>
+        </section>
 
-    function toggleAuthTab(targetTab) {
-        document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
-        if(targetTab === 'login') {
-            document.querySelectorAll('.auth-tab')[0].classList.add('active');
-            document.getElementById('pane-login').classList.add('active');
-        } else {
-            document.querySelectorAll('.auth-tab')[1].classList.add('active');
-            document.getElementById('pane-reg').classList.add('active');
-        }
-    }
-
-    // راستی‌آزمایی ورود به هسته پورتال
-    window.verifyKingdomAccess = function() {
-        const uid = document.getElementById("login-uid").value.trim();
-        const token = document.getElementById("login-token").value.trim().toLowerCase();
-
-        if (token === "adminwiriper") {
-            activeUserRole = 'admin';
-            activeUsername = uid || 'پادشاه مبین';
-        } else if (token === "mobinloveniyayesh" || token === "niyayesh") {
-            activeUserRole = 'queen';
-            activeUsername = uid || 'ملکه نیایش';
-        } else if (uid !== "") {
-            activeUserRole = 'guest';
-            activeUsername = uid;
-        } else {
-            showSystemNotification("اطلاعات ورود نادرست است", "❌");
-            return;
-        }
-
-        localStorage.setItem('kingdom_session_user', activeUsername);
-        localStorage.setItem('kingdom_session_role', activeUserRole);
-        localStorage.setItem('kingdom_session_avatar', activeUserAvatar);
-        applySessionUIRole();
-        initiateKingdomFlow(`درود؛ دروازه‌های قصر باز شدند.`);
-    }
-
-    window.registerKingdomGuest = function() {
-        const alias = document.getElementById("reg-alias").value.trim();
-        const username = document.getElementById("reg-uid").value.trim();
-        
-        if(!alias || !username) {
-            showSystemNotification("لطفاً فیلدها را پر کنید", "⚠️");
-            return;
-        }
-        activeUserRole = 'guest';
-        activeUsername = username;
-
-        localStorage.setItem('kingdom_session_user', activeUsername);
-        localStorage.setItem('kingdom_session_role', activeUserRole);
-        localStorage.setItem('kingdom_session_avatar', activeUserAvatar);
-        
-        applySessionUIRole();
-        initiateKingdomFlow(`شناسنامه شما با موفقیت صادر و ثبت شد.`);
-    }
-
-    function applySessionUIRole() {
-        // پنهان یا آشکارسازی هوشمند تالار نجوا منحصراً برای پادشاه و ملکه
-        if(activeUserRole === 'admin' || activeUserRole === 'queen') {
-            document.getElementById("chat-sec").style.display = "block";
-            document.getElementById("nav-chat-node").style.display = "inline-block";
-            document.getElementById("stream-admin-panel").style.display = "block";
-        } else {
-            document.getElementById("chat-sec").style.display = "none";
-            document.getElementById("nav-chat-node").style.display = "none";
-            document.getElementById("stream-admin-panel").style.display = "none";
-        }
-
-        if(activeUserRole === 'admin') {
-            document.getElementById("grimoire-sign").innerText = "نویسنده: پادشاه مبین 👑";
-            document.getElementById("admin-control-room").style.display = "block";
-            document.getElementById("nav-admin-node").style.display = "inline-block";
-        } else if(activeUserRole === 'queen') {
-            document.getElementById("grimoire-sign").innerText = "نویسنده: ملکه نیایش 👸🏻";
-        }
-        
-        // رندر و همگام‌سازی مشخصات در کارت پروفایل
-        document.getElementById("my-profile-name-display").innerText = activeUsername;
-        document.getElementById("my-profile-role-display").innerText = `سطح دسترسی قصر: ${activeUserRole.toUpperCase()}`;
-        if(activeUserAvatar) {
-            document.getElementById("my-profile-avatar-preview").style.backgroundImage = `url('${activeUserAvatar}')`;
-            document.getElementById("my-profile-avatar-preview").innerText = '';
-        } else {
-            document.getElementById("my-profile-avatar-preview").style.backgroundImage = 'none';
-            document.getElementById("my-profile-avatar-preview").innerText = '👤';
-        }
-    }
-
-    function initiateKingdomFlow(welcomeMsg) {
-        document.getElementById("auth-gate").style.display = "none";
-        showSystemNotification(welcomeMsg, "✨");
-        appendActivityLog("ورود موفقیت‌آمیز به پورتال امپراتوری");
-
-        const intro = document.getElementById("netflix-intro");
-        const coreText = document.getElementById("netflix-core");
-        intro.style.display = "flex";
-        coreText.classList.add("animate-zoom");
-
-        setTimeout(() => {
-            intro.style.opacity = "0";
-            setTimeout(() => { intro.style.display = "none"; }, 1200);
+        <!-- بخش سوم: سیستم روزشمار تولد شما و بانو (انتقال یافته به بخش میانی و مرکزی پلتفرم) -->
+        <section class="chronograph-birthdays-grid">
             
-            document.getElementById("main-kingdom").style.display = "block";
-            setTimeout(() => document.getElementById("main-kingdom").style.opacity = "1", 100);
-            document.getElementById("main-navigation").classList.add("show-nav");
-            
-            startTypewriterLetter();
-            initializeGoldDust();
-            
-            // لیسنرهای پویا فایربیس
-            listenLivePosts();
-            listenLiveGrimoire();
-            listenLiveWhispers();
-            listenLivePromises();
-            listenLiveDirectMessages();
+            <!-- کارت شمارش معکوس شاهانه شما -->
+            <div class="monarch-birthday-monolith king-monolith">
+                <div class="birthday-badge-icon"><i class="fas fa-crown"></i></div>
+                <h3>سالروز میلاد همایونی شما</h3>
+                <span class="calendar-static-pill">۲۵ اسفند ۱۳۸۷</span>
+                <div class="live-countdown-ticker-box" id="king-live-ticker">
+                    <!-- کدهای رندر زنده ثانیه‌شمار -->
+                </div>
+            </div>
 
-            window.addEventListener('scroll', scrollRevealController);
-            scrollRevealController();
-        }, 3600);
-    }
+            <!-- کارت شمارش معکوس ملکه (بانو) -->
+            <div class="monarch-birthday-monolith queen-monolith">
+                <div class="birthday-badge-icon"><i class="fas fa-chess-queen"></i></div>
+                <h3>سالروز میلاد ملکه (بانو)</h3>
+                <span class="calendar-static-pill">۱۵ شهریور ۱۳۸۹</span>
+                <div class="live-countdown-ticker-box" id="queen-live-ticker">
+                    <!-- کدهای رندر زنده ثانیه‌شمار -->
+                </div>
+            </div>
+            
+        </section>
 
-    // ================= ماشین تحریر متن عاشقانه پادشاه =================
-    const letterText = `نیایش عزیزم، ملکهٔ قلب من...\n\nاز لحظه‌ای که نگاهت را دیدم، حضور تو این قلمرو را به بهشت تبدیل کرده و قلبم تنها به ضربان نام تو زنده است.\n\nبا تو هر نفس، غزلی ناب و ماندگار است. قول می‌دهم تا آخرین روز دنیا، پادشاه وفادار تو بمانم و عشقمان را در قلب این پادشاهی چون نگینی درخشان حفظ کنم.\n\nپادشاهت، مبین 👑💖`;
-    function startTypewriterLetter() {
-        const el = document.getElementById("scrolling-letter");
-        if(!el) return;
-        let idx = 0;
-        function type() {
-            if (idx < letterText.length) {
-                el.innerHTML += letterText.charAt(idx) === '\n' ? '<br>' : letterText.charAt(idx);
-                idx++;
-                setTimeout(type, 35);
+        <!-- بخش چهارم: مرکز چندرسانه‌ای و پخش صدا با پردازش سخت‌افزاری لوکس -->
+        <section class="monarch-audio-complex">
+            <div class="block-headline">
+                <i class="fas fa-music"></i>
+                <h3>مرکز موسیقی و پژواک نوای شاهانه</h3>
+            </div>
+            
+            <div class="audio-hardware-core">
+                <audio id="core-audio-node" src=""></audio>
+                
+                <div class="track-metadata-hub">
+                    <i class="fas fa-compact-disc vinyl-record-emblem" id="vinyl-rotating-target"></i>
+                    <div class="metadata-text-strings">
+                        <h4 id="track-title-runtime-string">هیچ فایلی برای پخش انتخاب نشده است</h4>
+                        <p id="track-artist-runtime-string">سیستم صوتی آماده دریافت فایل صوتی</p>
+                    </div>
+                </div>
+
+                <div class="hardware-controls-row">
+                    <button id="hardware-playback-toggle-btn" class="grand-audio-toggle-btn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    
+                    <div class="scrubber-timeline-chassis">
+                        <span id="current-elapsed-time-string">00:00</span>
+                        <input type="range" id="hardware-timeline-scrubber" class="scrubber-slider-element" value="0" max="100">
+                        <span id="total-duration-time-string">00:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ingestion-interfaces-split">
+                <div>
+                    <label for="hidden-file-ingector" class="file-dropzone-label">
+                        <i class="fas fa-upload" style="margin-left: 8px; color: var(--gold-bright);"></i> بارگذاری آهنگ از روی حافظه محلی سیستم
+                    </label>
+                    <input type="file" id="hidden-file-ingector" accept="audio/*">
+                </div>
+                
+                <div class="cloud-url-injector-bay">
+                    <input type="text" id="cloud-music-url-input-field" placeholder="لینک مستقیم اینترنتی موزیک (URL) را وارد کنید...">
+                    <button id="cloud-url-confirm-trigger" class="confirm-ingestion-btn">تایید پیوند</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش پنجم: درگاه شبکه‌های اجتماعی امپراتوری -->
+        <section class="monarch-social-bridges">
+            <div class="block-headline">
+                <i class="fas fa-network-wired"></i>
+                <h3>پل‌های ارتباطی و رسانه‌های اجتماعی قصر</h3>
+            </div>
+            <div class="monarch-social-grid">
+                <a href="#" target="_blank" class="premium-social-card-brick brick-ig">
+                    <div class="social-brick-icon-container"><i class="fab fa-instagram" style="color: #e1306c;"></i></div>
+                    <div class="social-brick-details-container">
+                        <h4>اینستاگرام رسمی</h4>
+                        <p>ارتباط زنده و روزمرگی‌های دربار</p>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="premium-social-card-brick brick-tg">
+                    <div class="social-brick-icon-container"><i class="fab fa-telegram" style="color: #0088cc;"></i></div>
+                    <div class="social-brick-details-container">
+                        <h4>تلگرام پادشاهی</h4>
+                        <p>اطلاعیه‌ها و فرامین رسمی حکومتی</p>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="premium-social-card-brick brick-yt">
+                    <div class="social-brick-icon-container"><i class="fab fa-youtube" style="color: #ff0000;"></i></div>
+                    <div class="social-brick-details-container">
+                        <h4>یوتیوب سلطنتی</h4>
+                        <p>ویدیوها با بالاترین کیفیت ممکن</p>
+                    </div>
+                </a>
+                <a href="#" target="_blank" class="premium-social-card-brick brick-dc">
+                    <div class="social-brick-icon-container"><i class="fab fa-discord" style="color: #5865f2;"></i></div>
+                    <div class="social-brick-details-container">
+                        <h4>دیسکورد شاهانه</h4>
+                        <p>تالار گفتگو و تعامل با اهالی قلمرو</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- بخش ششم: میز فرمانروایی و مرکز مدیریت فوق محرمانه استوری‌ها -->
+        <section class="emperor-hq-dashboard">
+            <div class="hq-badge-header">
+                <i class="fas fa-user-shield"></i>
+                <h3>میز فرمانروایی و مدیریت زیرساخت استوری‌ها</h3>
+            </div>
+            <p class="hq-instructions">این بخش مستقیماً به دیتابیس لوکال متصل است. شما می‌توانید با تزریق تصویر و نام، استوری‌های جدید بر روی سیستم مستقر کنید.</p>
+            
+            <div class="hq-inputs-flex-row">
+                <div class="hq-input-wrapper-block">
+                    <label>نام شناسایی استوری</label>
+                    <input type="text" id="hq-story-title-field" placeholder="مثال: من، بانو، مسافرت...">
+                </div>
+                <div class="hq-input-wrapper-block">
+                    <label>آدرس پیوند تصویر (Direct URL)</label>
+                    <input type="text" id="hq-story-source-url-field" placeholder="https://picsum.photos/id/1025/150/150">
+                </div>
+                <div class="hq-input-wrapper-block" style="justify-content: flex-end;">
+                    <button id="hq-injection-commit-btn" class="hq-execution-trigger-btn">
+                        <i class="fas fa-bolt"></i> انتشار آنی استوری در سیستم
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 
+        ========================================================================
+        بخش سوم: پاپ‌آپ‌ها، مپ‌زون‌ها و ماژول‌های فرعی معلق در صفحه
+        ========================================================================
+    -->
+
+    <!-- ماژول اول چت‌بات هوش مصنوعی اختصاصی قصر -->
+    <div class="monarch-ai-satellite-station" id="ai-satellite-widget-root">
+        <button class="ai-pulsing-trigger-orb" id="ai-orb-clicker">
+            <i class="fas fa-robot"></i>
+            <span>مشاور هوشمند قصر</span>
+        </button>
+        
+        <div class="ai-terminal-window-canvas hidden-structure" id="ai-terminal-panel">
+            <div class="ai-terminal-navbar">
+                <div class="ai-navbar-profile">
+                    <i class="fas fa-brain"></i>
+                    <span>هوش مصنوعی مشاور</span>
+                </div>
+                <button id="ai-terminal-close-cross" class="terminal-close-btn">&times;</button>
+            </div>
+            
+            <div class="ai-stream-logs-box" id="ai-stream-chat-history">
+                <div class="chat-speech-bubble bubble-core-ai">
+                    درود بر پادشاه بزرگ و ملکه گرامی. من هوش مصنوعی مشاور قصر شما هستم. فرامین خود را صادر نمایید تا در لحظه اجرا شوند.
+                </div>
+            </div>
+            
+            <div class="ai-command-input-dock">
+                <input type="text" id="ai-terminal-input-buffer" placeholder="فرمان خود را بنویسید...">
+                <button id="ai-terminal-send-trigger"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ماژول دوم: پورتال صندوق دایرکت به سبک پلتفرم اینستاگرام با تمام جزییات -->
+    <div class="direct-system-curtain hidden-structure" id="direct-system-modal-curtain">
+        <div class="direct-window-mainframe">
+            <div class="direct-mainframe-navbar">
+                <div class="direct-navbar-left-title">
+                    <i class="fas fa-envelope-open-text style-gold" style="color: var(--gold-bright);"></i>
+                    <h3>پیام‌های خصوصی دربار (Direct)</h3>
+                </div>
+                <button id="direct-mainframe-close-cross" class="terminal-close-btn">&times;</button>
+            </div>
+            
+            <div class="direct-dual-pane-workspace">
+                <!-- لیست مخاطبین سمت راست دایرکت -->
+                <div class="direct-contacts-sidebar">
+                    <div class="contact-card-node focused-contact">
+                        <div class="contact-avatar-orb">
+                            <i class="fas fa-chess-queen"></i>
+                        </div>
+                        <div class="contact-meta-strings">
+                            <h4>بانو (ملکه قصر)</h4>
+                            <p>برنامه‌ریزی تولد چطور پیش میره؟</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- محفظه چت سمت چپ دایرکت -->
+                <div class="direct-chat-terminal-view">
+                    <div class="direct-chat-logs-container" id="direct-chat-logs-viewport">
+                        <div class="direct-message-bubble-unit bubble-incoming">سلام سرورم، وقتتون بخیر. بخش تولدها رو به وسط سایت انتقال دادید؟</div>
+                        <div class="direct-message-bubble-unit bubble-outgoing">سلام بانو. بله کاملاً دقیق آوردمش وسط سایت و استوری‌ها رو هم کاملاً گرد کردم.</div>
+                        <div class="direct-message-bubble-unit bubble-incoming">عالی شده! برنامه‌ریزی تولد چطور پیش میره؟</div>
+                    </div>
+                    
+                    <div class="direct-dock-typing-interface">
+                        <input type="text" id="direct-typing-input-field" placeholder="پاسخ خود را به بانو بنویسید...">
+                        <button id="direct-message-dispatch-trigger">ارسال پیام</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ماژول سوم: کشوی تنظیمات کلی قصر -->
+    <div class="settings-lateral-drawer hidden-structure" id="settings-lateral-drawer-root">
+        <div class="drawer-header-row">
+            <h3>تنظیمات سیستم قصر</h3>
+            <button id="settings-drawer-close-cross" class="terminal-close-btn">&times;</button>
+        </div>
+        <div class="drawer-option-stack-row">
+            <label>تم محیط کاربری</label>
+            <select id="theme-palace-selector">
+                <option value="dark-gold">تاریک مخملی و طلایی (پادشاهی)</option>
+                <option value="marble-white">روشن مرمرین دربار</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- 
+        ========================================================================
+        بخش چهارم: مهندسی منطق‌ها، دیتابیس محلی و رندر پردازش‌ها (JavaScript)
+        ========================================================================
+    -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // -----------------------------------------------------------------
+            // ۱. پایگاه داده و سیستم پردازش رندر استوری‌های گرد
+            // -----------------------------------------------------------------
+            let coreStoriesDatabase = [
+                { id: 2001, name: "من (شاهانه)", img: "https://picsum.photos/id/1025/150/150" },
+                { id: 2002, name: "بانو (ملکه)", img: "https://picsum.photos/id/838/150/150" }
+            ];
+
+            const storiesDomContainer = document.getElementById("stories-dom-container");
+
+            function renderStoriesToPalaceLayout() {
+                storiesDomContainer.innerHTML = "";
+                
+                coreStoriesDatabase.forEach(story => {
+                    const storyNodeWrapper = document.createElement("div");
+                    storyNodeWrapper.className = "story-absolute-node";
+                    
+                    storyNodeWrapper.innerHTML = `
+                        <div class="perfect-circle-frame">
+                            <img src="${story.img}" alt="${story.name}">
+                            <button class="delete-story-overlay-btn" onclick="triggerStoryDeletion(${story.id})">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        <span>${story.name}</span>
+                    `;
+                    storiesDomContainer.appendChild(storyNodeWrapper);
+                });
             }
-        }
-        type();
-    }
 
-    // ================= فایربیس: شبکه اجتماعی رویان‌گرام با همگام‌سازی عکس اختصاصی فرستنده =================
-    function listenLivePosts() {
-        if (!db) return;
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("royalgram")
-            .orderBy("timestamp", "asc").onSnapshot(snap => {
-                const area = document.getElementById("live-posts-area");
-                area.innerHTML = "";
-                snap.forEach(doc => {
-                    const data = doc.data();
-                    const id = doc.id;
+            // ثبت استوری جدید از روی میز فرماندهی
+            document.getElementById("hq-injection-commit-btn").addEventListener("click", () => {
+                const titleInput = document.getElementById("hq-story-title-field").value.trim();
+                const sourceInput = document.getElementById("hq-story-source-url-field").value.trim();
+
+                if (titleInput !== "" && sourceInput !== "") {
+                    const newStoryPayload = {
+                        id: Date.now(),
+                        name: titleInput,
+                        img: sourceInput
+                    };
                     
-                    // بررسی حق حذف پست
-                    const canDelete = (activeUserRole === 'admin' || activeUserRole === 'queen' || activeUsername === data.author);
-                    const deleteBtnHtml = canDelete ? `<button class="delete-btn" onclick="deleteRoyalGramPost('${id}')">حذف پست 🗑️</button>` : '';
-
-                    const avatarStyle = data.avatar ? `background-image: url('${data.avatar}')` : '';
-                    const avatarInit = data.avatar ? '' : '👤';
-
-                    area.innerHTML += `
-                        <div class="royal-post" id="post-${id}" style="border-left: 3px solid var(--royal-gold);">
-                            ${deleteBtnHtml}
-                            <div class="post-author-box">
-                                <div class="author-avatar" style="${avatarStyle}">${avatarInit}</div>
-                                <div>
-                                    <div style="font-weight:900;">${data.author}</div>
-                                    <div style="font-size:0.75rem; color:#aaa;">منتشر شده در رویان‌گرام</div>
-                                </div>
-                            </div>
-                            <p style="line-height:1.8; margin-top:10px;">${data.content}</p>
-                        </div>
-                    `;
-                });
-            });
-    }
-
-    window.publishRoyalPost = async function() {
-        const input = document.getElementById("royalgram-input-field");
-        const val = input.value.trim();
-        if(!val) return;
-        if(db) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("royalgram").add({
-                author: activeUsername, 
-                content: val, 
-                avatar: activeUserAvatar, // ذخیره پایدار عکس آپلود شده فرد همراه خود پست
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        }
-        input.value = "";
-        showSystemNotification("محتوا در فید رویان‌گرام قرار گرفت", "✅");
-        appendActivityLog("یک پست جدید در فید منتشر کرد");
-    }
-
-    window.deleteRoyalGramPost = async function(id) {
-        if(!db) return;
-        if(confirm("آیا از حذف این پست فید اطمینان دارید؟")) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("royalgram").doc(id).delete();
-            showSystemNotification("پست حذف شد", "🗑️");
-            appendActivityLog(`یک پست را از فید رویان‌گرام حذف کرد`);
-        }
-    }
-
-    // ================= فایربیس: کتاب خاطرات گریموار =================
-    function listenLiveGrimoire() {
-        if (!db) return;
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("grimoire")
-            .orderBy("timestamp", "desc").onSnapshot(snap => {
-                const logs = document.getElementById("grimoire-logs");
-                logs.innerHTML = "";
-                snap.forEach(doc => {
-                    const d = doc.data();
-                    const id = doc.id;
-                    const canDelete = (activeUserRole === 'admin' || activeUserRole === 'queen' || activeUsername === d.author);
-                    const deleteBtnHtml = canDelete ? `<button class="delete-btn" style="padding:2px 8px;" onclick="deleteGrimoireLog('${id}')">حذف 🗑️</button>` : '';
-                    logs.innerHTML += `
-                        <div style="background:rgba(255,255,255,0.06); padding:15px; border-radius:12px; border:1px solid rgba(212,175,55,0.2); overflow:hidden;">
-                            ${deleteBtnHtml}
-                            <strong>${d.author}:</strong> <span>${d.text}</span>
-                        </div>
-                    `;
-                });
-            });
-    }
-
-    window.saveGrimoireToFirebase = async function() {
-        const textEl = document.getElementById("grimoire-text-area");
-        const val = textEl.value.trim();
-        if(!val) return;
-        if(db) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("grimoire").add({
-                author: activeUsername, text: val, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        }
-        textEl.value = "";
-        showSystemNotification("خاطره ثبت شد", "✍️");
-        appendActivityLog("یک خاطره در کتاب تاریخ پادشاهی نوشت");
-    }
-
-    window.deleteGrimoireLog = async function(id) {
-        if(!db) return;
-        await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("grimoire").doc(id).delete();
-        showSystemNotification("خاطره پاک شد", "🗑️");
-    }
-
-    // ================= فایربیس: چت تالار نجوا مجهز به حق حذف آنلاین پیام =================
-    function listenLiveWhispers() {
-        if(!db) return;
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("messages")
-            .orderBy("timestamp", "asc").onSnapshot(snap => {
-                const box = document.getElementById("live-chat-box");
-                box.innerHTML = "";
-                snap.forEach(doc => {
-                    const d = doc.data();
-                    const id = doc.id;
-                    let cls = 'bubble-guest';
-                    if(d.role === 'admin') cls = 'bubble-mobin';
-                    if(d.role === 'queen') cls = 'bubble-niyayesh';
+                    coreStoriesDatabase.push(newStoryPayload);
+                    renderStoriesToPalaceLayout();
                     
-                    const canDelete = (activeUserRole === 'admin' || activeUserRole === 'queen' || activeUsername === d.sender);
-                    const deleteBtnHtml = canDelete ? `<span style="color:#ff4d4d; cursor:pointer; font-size:0.8rem; margin-right:12px; font-weight:bold;" onclick="deleteLiveWhisper('${id}')">❌ حذف</span>` : '';
-
-                    box.innerHTML += `
-                        <div class="bubble ${cls}">
-                            <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--royal-gold-light); margin-bottom:4px;">
-                                <strong>${d.sender}</strong>
-                                ${deleteBtnHtml}
-                            </div>
-                            <div>${d.text}</div>
-                        </div>`;
-                });
-                box.scrollTop = box.scrollHeight;
-            });
-    }
-
-    window.sendLiveWhisper = async function() {
-        const input = document.getElementById("chat-message-input");
-        const val = input.value.trim();
-        if(!val) return;
-        if(db) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("messages").add({
-                sender: activeUsername, role: activeUserRole, text: val, timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        }
-        input.value = "";
-        appendActivityLog("پیامی در تالار نجوا ارسال نمود");
-    }
-
-    window.deleteLiveWhisper = async function(id) {
-        if(!db) return;
-        await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("messages").doc(id).delete();
-        showSystemNotification("پیام نجوا با موفقیت حذف شد", "🗑️");
-    }
-
-    // ================= فایربیس: پورتال دایرکت مسیج خصوصی رمزگذاری شده/ایمن =================
-    function listenLiveDirectMessages() {
-        if(!db) return;
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("direct_messages")
-            .orderBy("timestamp", "asc").onSnapshot(snap => {
-                const box = document.getElementById("private-dm-stream-box");
-                box.innerHTML = "";
-                let counter = 0;
-
-                snap.forEach(doc => {
-                    const d = doc.data();
-                    const id = doc.id;
-                    
-                    // هر کاربر فقط پیام‌های مربوط به خودش را می‌بیند (پادشاه و ملکه ناظر کل سیستم هستند)
-                    if(activeUsername === d.sender || activeUsername === d.receiver || activeUserRole === 'admin' || activeUserRole === 'queen') {
-                        counter++;
-                        const isMySent = activeUsername === d.sender;
-                        const canDelete = isMySent || activeUserRole === 'admin' || activeUserRole === 'queen';
-                        const deleteBtnHtml = canDelete ? `<span style="color:#ff4d4d; cursor:pointer; font-size:0.75rem; margin-left:12px;" onclick="deletePrivateDM('${id}')">حذف دایرکت 🗑️</span>` : '';
-
-                        box.innerHTML += `
-                            <div style="background: ${isMySent ? 'rgba(214,175,55,0.08)' : 'rgba(255,255,255,0.04)'}; padding:12px 18px; border-radius:12px; margin-bottom:10px; border-left: 3px solid ${isMySent ? 'var(--royal-gold)' : '#a51c30'}" >
-                                <div style="font-size:0.75rem; color:#888; display:flex; justify-content:space-between; margin-bottom:5px;">
-                                    <span>از [${d.sender}] به [${d.receiver}]:</span>
-                                    ${deleteBtnHtml}
-                                </div>
-                                <div style="font-size:0.95rem; color:#fff;">${d.text}</div>
-                            </div>
-                        `;
-                    }
-                });
-                if(counter === 0) {
-                    box.innerHTML = '<div style="color:#666; text-align:center; padding-top:35px;">صندوق پیام‌های خصوصی و دایرکت شما خالی است.</div>';
+                    document.getElementById("hq-story-title-field").value = "";
+                    document.getElementById("hq-story-source-url-field").value = "";
+                } else {
+                    alert("سرورم، تکمیل نمودن نام و آدرس تصویر جهت ثبت استوری الزامی است.");
                 }
-                box.scrollTop = box.scrollHeight;
             });
-    }
 
-    window.sendPrivateDirectMessage = async function() {
-        const targetInput = document.getElementById("dm-target-username");
-        const msgInput = document.getElementById("dm-message-text");
-        const target = targetInput.value.trim();
-        const text = msgInput.value.trim();
+            // حذف استوری
+            window.triggerStoryDeletion = function(targetId) {
+                coreStoriesDatabase = coreStoriesDatabase.filter(st => st.id !== targetId);
+                renderStoriesToPalaceLayout();
+            };
 
-        if(!target || !text) {
-            showSystemNotification("نام کاربری مقصد و متن دایرکت را وارد نمایید", "⚠️");
-            return;
-        }
+            renderStoriesToPalaceLayout();
 
-        if(db) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("direct_messages").add({
-                sender: activeUsername,
-                receiver: target,
-                text: text,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+
+            // -----------------------------------------------------------------
+            // ۲. منطق کنترل پنجره‌های معلق (دایرکت و تنظیمات)
+            // -----------------------------------------------------------------
+            const directCurtainModal = document.getElementById("direct-system-modal-curtain");
+            const settingsDrawerModal = document.getElementById("settings-lateral-drawer-root");
+
+            // باز کردن دایرکت
+            document.getElementById("direct-gate-trigger-icon").addEventListener("click", () => {
+                directCurtainModal.classList.remove("hidden-structure");
+                document.getElementById("direct-live-badge").style.display = "none";
             });
-            msgInput.value = "";
-            showSystemNotification("پیام خصوصی ارسال شد", "📨");
-            appendActivityLog(`به کاربر ${target} دایرکت خصوصی فرستاد`);
-        }
-    }
 
-    window.deletePrivateDM = async function(id) {
-        if(!db) return;
-        await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("direct_messages").doc(id).delete();
-        showSystemNotification("دایرکت خصوصی حذف شد", "🗑️");
-    }
-
-    // ================= فایربیس: بخش عهدنامه‌ها =================
-    function listenLivePromises() {
-        if(!db) return;
-        db.collection("artifacts").doc(appId).collection("public").doc("data").collection("promises")
-            .orderBy("timestamp", "desc").onSnapshot(snap => {
-                const container = document.getElementById("promises-container");
-                container.innerHTML = "";
-                snap.forEach(doc => {
-                    const id = doc.id;
-                    const d = doc.data();
-                    const canDelete = (activeUserRole === 'admin' || activeUserRole === 'queen');
-                    const deleteBtnHtml = canDelete ? `<button class="delete-btn" style="padding:1px 6px;" onclick="deleteLivePromise('${id}')">حذف</button>` : '';
-                    container.innerHTML += `
-                        <div style="background:rgba(0,0,0,0.4); padding:15px; border-radius:14px; border-right:4px solid var(--royal-gold); overflow:hidden;">
-                            ${deleteBtnHtml}
-                            ${d.text}
-                        </div>
-                    `;
-                });
+            // بستن دایرکت
+            document.getElementById("direct-mainframe-close-cross").addEventListener("click", () => {
+                directCurtainModal.classList.add("hidden-structure");
             });
-    }
 
-    window.commitPromiseToFirebase = async function() {
-        const input = document.getElementById("promise-input-field");
-        const val = input.value.trim();
-        if(!val) return;
-        if(db) {
-            await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("promises").add({
-                text: `📜 سوگند وفاداری [${activeUsername}]: ${val}`,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            // باز و بسته کردن کشوی تنظیمات
+            document.getElementById("settings-gate-trigger-icon").addEventListener("click", () => {
+                settingsDrawerModal.classList.remove("hidden-structure");
             });
-        }
-        input.value = "";
-        showSystemNotification("مهر و موم شد", "💍");
-    }
-
-    window.deleteLivePromise = async function(id) {
-        if(!db) return;
-        await db.collection("artifacts").doc(appId).collection("public").doc("data").collection("promises").doc(id).delete();
-        showSystemNotification("سوگندنامه حذف شد", "🗑️");
-    }
-
-    // ================= انیمیشن طلاپردازی کتیبه پس‌زمینه =================
-    function initializeGoldDust() {
-        const canvas = document.getElementById("gold-particles");
-        const ctx = canvas.getContext("2d");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        let dustArr = Array.from({length: 75}, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-            r: Math.random() * 2.5 + 1
-        }));
-
-        function loop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            dustArr.forEach(d => {
-                d.x += d.vx; d.y += d.vy;
-                if(d.x < 0 || d.x > canvas.width) d.vx *= -1;
-                if(d.y < 0 || d.y > canvas.height) d.vy *= -1;
-                ctx.beginPath();
-                ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(212, 175, 55, 0.65)';
-                ctx.fill();
+            document.getElementById("settings-drawer-close-cross").addEventListener("click", () => {
+                settingsDrawerModal.classList.add("hidden-structure");
             });
-            requestAnimationFrame(loop);
-        }
-        loop();
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        });
-    }
 
-    function scrollRevealController() {
-        document.querySelectorAll('.reveal').forEach(block => {
-            if (block.getBoundingClientRect().top < window.innerHeight - 90) {
-                block.classList.add('active');
+
+            // -----------------------------------------------------------------
+            // ۳. سیستم چت اختصاصی دایرکت اینستاگرامی (ارسال پیام به بانو)
+            // -----------------------------------------------------------------
+            const directDispatchTrigger = document.getElementById("direct-message-dispatch-trigger");
+            const directTypingInputField = document.getElementById("direct-typing-input-field");
+            const directChatLogsViewport = document.getElementById("direct-chat-logs-viewport");
+
+            directDispatchTrigger.addEventListener("click", executeDirectDispatch);
+            directTypingInputField.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") executeDirectDispatch();
+            });
+
+            function executeDirectDispatch() {
+                const messageString = directTypingInputField.value.trim();
+                if (messageString === "") return;
+
+                appendBubbleToContainer(messageString, "direct-message-bubble-unit bubble-outgoing", directChatLogsViewport);
+                directTypingInputField.value = "";
+
+                // شبیه‌سازی هوشمند پاسخ زنده بانو بعد از چند ثانیه
+                setTimeout(() => {
+                    appendBubbleToContainer("متشکرم سرورم، این نسخه ارتقا یافته و بدون فشرده‌سازی واقعاً بی‌نظیر است! 🤍", "direct-message-bubble-unit bubble-incoming", directChatLogsViewport);
+                }, 1600);
             }
-        });
-    }
-</script>
 
+
+            // -----------------------------------------------------------------
+            // ۴. سیستم مغز پردازشی چت‌بات هوش مصنوعی قصر
+            // -----------------------------------------------------------------
+            const aiOrbClicker = document.getElementById("ai-orb-clicker");
+            const aiTerminalPanel = document.getElementById("ai-terminal-panel");
+            const aiTerminalCloseCross = document.getElementById("ai-terminal-close-cross");
+            const aiTerminalSendTrigger = document.getElementById("ai-terminal-send-trigger");
+            const aiTerminalInputBuffer = document.getElementById("ai-terminal-input-buffer");
+            const aiStreamChatHistory = document.getElementById("ai-stream-chat-history");
+
+            aiOrbClicker.addEventListener("click", () => {
+                aiTerminalPanel.classList.toggle("hidden-structure");
+            });
+            aiTerminalCloseCross.addEventListener("click", () => {
+                aiTerminalPanel.classList.add("hidden-structure");
+            });
+
+            aiTerminalSendTrigger.addEventListener("click", executeAiConversationEngine);
+            aiTerminalInputBuffer.addEventListener("keypress", (ev) => {
+                if (ev.key === "Enter") executeAiConversationEngine();
+            });
+
+            function executeAiConversationEngine() {
+                const queryText = aiTerminalInputBuffer.value.trim();
+                if (queryText === "") return;
+
+                appendBubbleToContainer(queryText, "chat-speech-bubble bubble-core-user", aiStreamChatHistory);
+                aiTerminalInputBuffer.value = "";
+
+                setTimeout(() => {
+                    let standardResponse = "درخواست سلطنتی شما دریافت شد عالیجناب؛ دستورات در لایه‌های امنیتی قصر در حال پردازش هستند.";
+                    
+                    if (queryText.includes("سلام") || queryText.includes("درود")) {
+                        standardResponse = "درود و احترام بر فرمانروای بزرگ قلمرو و بانو ملکه مکرمه. آماده دریافت دستورات هستم.";
+                    } else if (queryText.includes("تولد")) {
+                        standardResponse = "سیستم شمارش معکوس سالروز تولد شما (۲۵ اسفند) و بانو (۱۵ شهریور) در قلب مرکزی سایت به ثانیه فعال است.";
+                    } else if (queryText.includes("موزیک") || queryText.includes("آهنگ")) {
+                        standardResponse = "مرکز پخش صوتی برای بارگذاری آهنگ‌های شما آماده است. هم لینک مستقیم و هم فایل‌های محلی پشتیبانی می‌شوند.";
+                    }
+                    
+                    appendBubbleToContainer(standardResponse, "chat-speech-bubble bubble-core-ai", aiStreamChatHistory);
+                }, 800);
+            }
+
+            // تابع کمکی همگانی برای ساخت حباب پیام‌ها در چت‌ها
+            function appendBubbleToContainer(txt, classes, targetDom) {
+                const messageBubbleNode = document.createElement("div");
+                messageBubbleNode.className = txt ? classes : "hidden-structure";
+                messageBubbleNode.innerText = txt;
+                targetDom.appendChild(messageBubbleNode);
+                targetDom.scrollTop = targetDom.scrollHeight;
+            }
+
+
+            // -----------------------------------------------------------------
+            // ۵. سیستم محاسبات زنده شمارش معکوس به ثانیه‌ برای تولدها
+            // -----------------------------------------------------------------
+            function executeLiveChronographEngine() {
+                const nowTimestamp = new Date();
+                const textKing = document.getElementById("king-live-ticker");
+                const textQueen = document.getElementById("queen-live-ticker");
+
+                // تابع محاسباتی باز برای استخراج روز، ساعت، دقیقه و ثانیه
+                function computeTimeRemaining(targetMonth, targetDay) {
+                    let currentYear = nowTimestamp.getFullYear();
+                    let targetEventDate = new Date(currentYear, targetMonth - 1, targetDay);
+                    
+                    if (nowTimestamp > targetEventDate) {
+                        targetEventDate.setFullYear(currentYear + 1);
+                    }
+                    
+                    let differenceInterval = targetEventDate - nowTimestamp;
+                    
+                    let computedDays = Math.floor(differenceInterval / (1000 * 60 * 60 * 24));
+                    let computedHours = Math.floor((differenceInterval % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let computedMinutes = Math.floor((differenceInterval % (1000 * 60 * 60)) / (1000 * 60));
+                    let computedSeconds = Math.floor((differenceInterval % (1000 * 60)) / 1000);
+                    
+                    return `
+                        <div class="ticker-segment"><span class="ticker-number">${computedDays}</span><span class="ticker-label">روز</span></div>
+                        <div class="ticker-segment"><span class="ticker-number">${computedHours}</span><span class="ticker-label">ساعت</span></div>
+                        <div class="ticker-segment"><span class="ticker-number">${computedMinutes}</span><span class="ticker-label">دقیقه</span></div>
+                        <div class="ticker-segment"><span class="ticker-number">${computedSeconds}</span><span class="ticker-label">ثانیه</span></div>
+                    `;
+                }
+
+                // اسفند مصادف با ماه ۱۲ و روز ۲۵
+                textKing.innerHTML = computeTimeRemaining(12, 25);
+                // شهریور مصادف با ماه ۶ و روز ۱۵
+                textQueen.innerHTML = computeTimeRemaining(6, 15);
+            }
+
+            // اجرای لوپ ثانیه‌شمار زنده برای تولدها
+            setInterval(executeLiveChronographEngine, 1000);
+            executeLiveChronographEngine();
+
+
+            // -----------------------------------------------------------------
+            // ۶. موتور هوشمند رسانه و کنترل سخت‌افزاری موزیک پلیر
+            // -----------------------------------------------------------------
+            const coreAudioNode = document.getElementById("core-audio-node");
+            const hardwarePlaybackToggleBtn = document.getElementById("hardware-playback-toggle-btn");
+            const hardwareTimelineScrubber = document.getElementById("hardware-timeline-scrubber");
+            const vinylRotatingTarget = document.getElementById("vinyl-rotating-target");
+            
+            const trackTitleRuntimeString = document.getElementById("track-title-runtime-string");
+            const trackArtistRuntimeString = document.getElementById("track-artist-runtime-string");
+            
+            const currentElapsedTimeString = document.getElementById("current-elapsed-time-string");
+            const totalDurationTimeString = document.getElementById("total-duration-time-string");
+
+            // کلیک بر روی کلید Play/Pause
+            hardwarePlaybackToggleBtn.addEventListener("click", () => {
+                if (coreAudioNode.paused) {
+                    if (coreAudioNode.src && coreAudioNode.src !== window.location.href) {
+                        coreAudioNode.play();
+                        hardwarePlaybackToggleBtn.innerHTML = `<i class="fas fa-pause"></i>`;
+                        vinylRotatingTarget.style.animation = "fa-spin 2.5s linear infinite";
+                    } else {
+                        alert("عالیجناب، لطفاً ابتدا فایلی انتخاب کنید یا لینک مستقیمی تزریق نمایید.");
+                    }
+                } else {
+                    coreAudioNode.pause();
+                    hardwarePlaybackToggleBtn.innerHTML = `<i class="fas fa-play"></i>`;
+                    vinylRotatingTarget.style.animation = "none";
+                }
+            });
+
+            // اینجکت و لود فایل محلی سیستم
+            document.getElementById("hidden-file-ingector").addEventListener("change", (e) => {
+                const targetFile = e.target.files[0];
+                if (targetFile) {
+                    const localBlobUrl = URL.createObjectURL(targetFile);
+                    coreAudioNode.src = localBlobUrl;
+                    trackTitleRuntimeString.innerText = targetFile.name;
+                    trackArtistRuntimeString.innerText = "فایل صوتی بارگذاری شده مقامی";
+                    clearHardwarePlayerStates();
+                }
+            });
+
+            // اینجکت آدرس اینترنتی آهنگ
+            document.getElementById("cloud-url-confirm-trigger").addEventListener("click", () => {
+                const urlValue = document.getElementById("cloud-music-url-input-field").value.trim();
+                if (urlValue !== "") {
+                    coreAudioNode.src = urlValue;
+                    trackTitleRuntimeString.innerText = "آهنگ بارگذاری شده از لینک مستقیم";
+                    trackArtistRuntimeString.innerText = "پخش ابری شبکه جهانی";
+                    clearHardwarePlayerStates();
+                }
+            });
+
+            function clearHardwarePlayerStates() {
+                hardwarePlaybackToggleBtn.innerHTML = `<i class="fas fa-play"></i>`;
+                vinylRotatingTarget.style.animation = "none";
+                hardwareTimelineScrubber.value = 0;
+            }
+
+            // همگام‌سازی خط زمانی موزیک با ثانیه‌های در حال پخش
+            coreAudioNode.addEventListener("timeupdate", () => {
+                if (coreAudioNode.duration) {
+                    const progressionPercentage = (coreAudioNode.currentTime / coreAudioNode.duration) * 100;
+                    hardwareTimelineScrubber.value = progressionPercentage;
+                    
+                    currentElapsedTimeString.innerText = executeTimeFormatting(coreAudioNode.currentTime);
+                    totalDurationTimeString.innerText = executeTimeFormatting(coreAudioNode.duration);
+                }
+            });
+
+            // اسکراب کردن و جابجا کردن زمان آهنگ با کشیدن اسلایدر
+            hardwareTimelineScrubber.addEventListener("input", () => {
+                if (coreAudioNode.duration) {
+                    coreAudioNode.currentTime = (hardwareTimelineScrubber.value / 100) * coreAudioNode.duration;
+                }
+            });
+
+            function executeTimeFormatting(secondsValue) {
+                const calculatedMinutes = Math.floor(secondsValue / 60);
+                const calculatedSeconds = Math.floor(secondsValue % 60);
+                return `${calculatedMinutes < 10 ? '0' : ''}${calculatedMinutes}:${calculatedSeconds < 10 ? '0' : ''}${calculatedSeconds}`;
+            }
+
+        });
+    </script>
 </body>
 </html>
