@@ -9,6 +9,11 @@
 <meta name="apple-mobile-web-app-title" content="Wiriper Empire">
 <meta name="mobile-web-app-capable" content="yes">
 <title>امپراتوری جاودانه | مبین و نیایش</title>
+
+<link rel="apple-touch-icon" href="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg">
+<link rel="icon" type="image/jpeg" sizes="192x192" href="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg">
+<link rel="icon" type="image/jpeg" sizes="512x512" href="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
@@ -108,7 +113,7 @@ canvas.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: var(
 @keyframes loadBar { to { transform: scaleX(1); } }
 
 /* === دروازه قصر === */
-#gate { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; background: rgba(5,3,8,0.95); transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1), visibility 1.5s; padding: 20px; overflow: hidden; }
+#gate { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; background: rgba(5,3,8,1); transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1), visibility 1.5s; padding: 20px; overflow: hidden; }
 #gate::before, #gate::after { content: ''; position: absolute; top: 0; bottom: 0; width: 50vw; background: linear-gradient(to right, var(--bg) 0%, var(--bg2) 100%); z-index: 0; transition: transform 2s cubic-bezier(0.7, 0, 0.1, 1); box-shadow: inset 0 0 100px rgba(0,0,0,0.9); }
 #gate::before { left: 0; border-right: 2px solid var(--gold); border-image: linear-gradient(to bottom, transparent, var(--gold), transparent) 1; }
 #gate::after { right: 0; border-left: 2px solid var(--gold); border-image: linear-gradient(to bottom, transparent, var(--gold), transparent) 1; }
@@ -363,226 +368,230 @@ footer b { color: var(--gold-2); font-size: 17px; }
     </div>
   </div>
 
-  <nav class="navbar" id="nav">
-    <div class="brand">👑 WIRIPER</div>
-    <button class="icon-btn nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
-    <div class="nav-links" id="navlinks">
-      <a href="#hero">تالار اصلی</a>
-      <a href="#wiriper">تمدن ما</a>
-      <a href="#countdown">جشن‌ها</a>
-      <a href="#king">فرمانروایان</a>
-      <a href="#princes">شاهزاده‌ها</a>
-      <a href="#timeline">افسانه</a>
-      <a href="#letter">فرمان</a>
-      <a href="#gallery">خزانه</a>
-    </div>
-  </nav>
-
-  <section class="hero" id="hero">
-    <div class="wrap">
-      <div class="sub" id="heroSub">پادشاه مبین ♾️ ملکه نیایش</div>
-      <h1>قلب تپنده‌ی امپراتوری<br>مبین و نیایش</h1>
-      
-      <div class="angel-container" id="angelContainer">
-        <div class="angel" id="angel">
-          <div class="wing wing-left" id="wingL"></div>
-          <div class="wing wing-right" id="wingR"></div>
-          <div class="halo"></div>
-          <div class="photo-frame">
-            <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش">
-          </div>
-        </div>
+  <div id="main-content" style="display: none;">
+    <nav class="navbar" id="nav">
+      <div class="brand">👑 WIRIPER</div>
+      <button class="icon-btn nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+      <div class="nav-links" id="navlinks">
+        <a href="#hero">تالار اصلی</a>
+        <a href="#wiriper">تمدن ما</a>
+        <a href="#countdown">جشن‌ها</a>
+        <a href="#king">فرمانروایان</a>
+        <a href="#princes">شاهزاده‌ها</a>
+        <a href="#timeline">افسانه</a>
+        <a href="#letter">فرمان</a>
+        <a href="#gallery">خزانه</a>
       </div>
+    </nav>
 
-      <p class="love reveal">او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b>نیایش</b> عزیز من.</p>
-      
-      <div class="hero-btns reveal">
-        <button class="btn" onclick="loveBurst()">💖 بارش عشق بر ملکه</button>
-        <button class="btn ghost" onclick="document.getElementById('magic-mirror').scrollIntoView({behavior:'smooth'})">✨ آینه جادویی</button>
-      </div>
-      
-      <div class="scroll-down reveal">
-        <span>به تمدن ما قدم بگذار</span>
-        <i>↓</i>
-      </div>
-    </div>
-  </section>
-
-  <section id="wiriper" class="reveal">
-    <div id="wiriper-realm">
+    <section class="hero" id="hero">
       <div class="wrap">
-        <div class="wiriper-card" id="wiriperCard">
-          <div class="wiriper-logo">🌍</div>
-          <h2 class="wiriper-title">تمدن جاودانه Wiriper</h2>
-          <p class="wiriper-desc">
-            اینجا تنها یک قصر یا یک ساختمان نیست. Wiriper یک جهان است، تمدنی پهناور و بی‌کران که بر پایه‌ی عشق بی‌پایان پادشاه مبین و ملکه نیایش بنا شده است. سرزمینی که مرزهایش تا بی‌نهایت امتداد دارد و خورشید آن هرگز غروب نمی‌کند، زیرا منبع نورش، لبخند ملکه است.
-          </p>
-          <div class="wiriper-stats">
-            <div class="wstat"><span class="num">∞</span><span class="lbl">وسعت قلمرو</span></div>
-            <div class="wstat"><span class="num" id="wDays">1000</span><span class="lbl">روزهای سلطنت</span></div>
-            <div class="wstat"><span class="num">۱</span><span class="lbl">قلب واحد</span></div>
+        <div class="sub" id="heroSub">پادشاه مبین ♾️ ملکه نیایش</div>
+        <h1>قلب تپنده‌ی امپراتوری<br>مبین و نیایش</h1>
+        
+        <div class="angel-container" id="angelContainer">
+          <div class="angel" id="angel">
+            <div class="wing wing-left" id="wingL"></div>
+            <div class="wing wing-right" id="wingR"></div>
+            <div class="halo"></div>
+            <div class="photo-frame">
+              <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش">
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="magic-mirror" class="reveal">
-    <div class="wrap">
-      <div class="sec-title">
-        <h2>آینه جادویی ملکه 🪞</h2>
-        <div class="line"></div>
-        <p>ای ملکه، بر روی آینه کلیک کن تا حقیقت مطلق این امپراتوری را ببینی.</p>
-      </div>
-      <div class="magic-mirror-container">
-        <div class="magic-mirror" onclick="this.classList.toggle('revealed'); loveBurst();">
-          <div class="mirror-glass"></div>
-          <div class="mirror-content">
-            <div class="mirror-icon">✨</div>
-            <div class="mirror-text">آینه در انتظار لمس دست‌های توست...</div>
-          </div>
-          <div class="mirror-reflection">
-            تو زیباترین، کامل‌ترین و بی‌نقص‌ترین خلقتی هستی که پادشاه در تمام عمرش دیده است. تو خودِ عشقی! 💖
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="countdown">
-    <div class="wrap">
-      <div class="sec-title reveal">
-        <h2>جشن‌های باشکوه سلطنتی 🎉</h2>
-        <div class="line"></div>
-        <p>شمارش معکوس تا طلوع روزهای مقدس تولد پادشاه و ملکه</p>
-      </div>
-      <div class="cd-grid">
-        <div class="cd-card reveal">
-          <h3>👑 زادروز پادشاه مبین</h3>
-          <div class="date">۲۵ اسفند — شکوه اقتدار</div>
-          <div class="cd-nums" id="cd-mobin"></div>
-          <div class="cd-today" id="today-mobin" style="display:none; color:var(--gold-2); font-size:20px; font-weight:900; margin-top:20px;">🎉 زادروز پادشاه مبارک 🎂</div>
-        </div>
-        <div class="cd-card reveal">
-          <h3>👸🏻 زادروز ملکه نیایش</h3>
-          <div class="date">۱۵ شهریور — تجلی زیبایی</div>
-          <div class="cd-nums" id="cd-niyayesh"></div>
-          <div class="cd-today" id="today-niyayesh" style="display:none; color:var(--rose); font-size:20px; font-weight:900; margin-top:20px;">🎉 زادروز فرشته‌ی من مبارک 🎂</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="king">
-    <div class="wrap">
-      <div class="sec-title reveal"><h2>فرمانروایان تمدن 👑</h2><div class="line"></div></div>
-      <div class="grid g2">
-        <div class="card reveal" style="border-top: 4px solid var(--purple-soft);">
-          <div class="ico">⚔️</div>
-          <h3>پادشاه مبین</h3>
-          <p>فرمانروایی با اقتدار، خلق‌کننده‌ی دنیاها و محافظ همیشگی لبخند ملکه. کسی که Wiriper را از هیچ ساخت تا تنها استراحتگاه امن فرشته‌اش باشد.</p>
-          <div class="tags"><span class="tag">محافظ ابدی</span><span class="tag">قدرت</span><span class="tag">وفاداری</span></div>
-        </div>
-        <div class="card reveal" style="border-top: 4px solid var(--rose);">
-          <div class="ico">🌹</div>
-          <h3>ملکه نیایش</h3>
-          <p>قلب تپنده‌ی جهانِ Wiriper. دختری با روحی از جنس نور، شیفته‌ی هنر و زیبایی، که حضورش هر ثانیه از زندگی پادشاه را به یک معجزه تبدیل کرده است.</p>
-          <div class="tags"><span class="tag">نورِ قلمرو</span><span class="tag">هنر</span><span class="tag">زیبایی مطلق</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="princes">
-    <div class="wrap">
-      <div class="sec-title reveal">
-        <h2>شاهزاده‌های آینده 🌟</h2>
-        <div class="line"></div>
-        <p>ثمرات عشق جاودانه و وارثان تاج و تخت امپراتوری Wiriper</p>
-      </div>
-      <div class="grid g3">
-        <div class="card prince-card gold-theme reveal">
-          <div class="avatar-ring">👑</div>
-          <h3>آریا مهر</h3>
-          <p>شاهزاده‌ی طلایی و وارث اقتدار پادشاه. کسی که شکوه امپراتوری را به نسل‌های بعد منتقل خواهد کرد.</p>
-          <div class="tags"><span class="tag">وارث تاج</span><span class="tag">نجابت</span></div>
+        <p class="love reveal">او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b>نیایش</b> عزیز من.</p>
+        
+        <div class="hero-btns reveal">
+          <button class="btn" onclick="loveBurst()">💖 بارش عشق بر ملکه</button>
+          <button class="btn ghost" onclick="document.getElementById('magic-mirror').scrollIntoView({behavior:'smooth'})">✨ آینه جادویی</button>
         </div>
         
-        <div class="card prince-card blue-theme reveal">
-          <div class="avatar-ring">⚔️</div>
-          <h3>سام</h3>
-          <p>شاهزاده‌ی جنگجو با اراده‌ای از جنس فولاد. محافظ بی‌باک مرزهای عشق و تمدن جاودانه‌ی ما.</p>
-          <div class="tags"><span class="tag">شجاعت</span><span class="tag">محافظ</span></div>
-        </div>
-        
-        <div class="card prince-card pink-theme reveal">
-          <div class="avatar-ring">🦋</div>
-          <h3>پرنسس سونیا</h3>
-          <p>تجلی زیبایی و لطافت مادرش. دختری با روحی رویایی که با هر لبخندش، گل‌های قلمرو شکوفا می‌شوند.</p>
-          <div class="tags"><span class="tag">رویایی</span><span class="tag">لطافت</span></div>
+        <div class="scroll-down reveal">
+          <span>به تمدن ما قدم بگذار</span>
+          <i>↓</i>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="timeline">
-    <div class="wrap">
-      <div class="sec-title reveal">
-        <h2>افسانه آفرینش عشق 💫</h2>
-        <div class="line"></div>
-        <p>تاریخچه‌ی جاودانگی ما در دفتر تمدن Wiriper</p>
-      </div>
-      <div class="timeline-wrap" id="timelineBox">
-        <div class="timeline-line">
-          <div class="timeline-line-fill" id="tlFill"></div>
+    <section id="wiriper" class="reveal">
+      <div id="wiriper-realm">
+        <div class="wrap">
+          <div class="wiriper-card" id="wiriperCard">
+            <div class="wiriper-logo">🌍</div>
+            <h2 class="wiriper-title">تمدن جاودانه Wiriper</h2>
+            <p class="wiriper-desc">
+              اینجا تنها یک قصر یا یک ساختمان نیست. Wiriper یک جهان است، تمدنی پهناور و بی‌کران که بر پایه‌ی عشق بی‌پایان پادشاه مبین و ملکه نیایش بنا شده است. سرزمینی که مرزهایش تا بی‌نهایت امتداد دارد و خورشید آن هرگز غروب نمی‌کند، زیرا منبع نورش، لبخند ملکه است.
+            </p>
+            <div class="wiriper-stats">
+              <div class="wstat"><span class="num">∞</span><span class="lbl">وسعت قلمرو</span></div>
+              <div class="wstat"><span class="num" id="wDays">1000</span><span class="lbl">روزهای سلطنت</span></div>
+              <div class="wstat"><span class="num">۱</span><span class="lbl">قلب واحد</span></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="letter">
-    <div class="wrap">
-      <div class="sec-title reveal"><h2>فرمان همایونی پادشاه 📜</h2><div class="line"></div></div>
-      <div class="letter reveal">
-        <div class="seal">👑</div>
-        <div id="letterText">
-          ملکه‌ی بی‌همتای من، نیایش عزیز...<br><br>
-          وقتی به وسعت قلمرو Wiriper نگاه می‌کنم، می‌بینم که تمام این شکوه، تمام این ستارگان و تمام این زیبایی‌ها، تنها بازتابی از وجود توست. پیش از تو، من تنها پادشاهی بودم در سرزمینی خاموش؛ اما تو با آمدنت، خورشید را به آسمان این تمدن هدیه دادی.<br><br>
-          من، مبین، در برابر تمام کائنات سوگند یاد می‌کنم که قلعه‌ی بازوانم تا ابد امن‌ترین جای جهان برای تو باشد. هیچ توفانی نمی‌تواند دیوارهای عشق ما را بلرزاند.<br><br>
-          تو نه تنها عشق من، بلکه تمام وجود منی.<br>
-          دوستت دارم، بی‌نهایت، بی‌دلیل، و تا آخرین تپش قلبم.
+    <section id="magic-mirror" class="reveal">
+      <div class="wrap">
+        <div class="sec-title">
+          <h2>آینه جادویی ملکه 🪞</h2>
+          <div class="line"></div>
+          <p>ای ملکه، بر روی آینه کلیک کن تا حقیقت مطلق این امپراتوری را ببینی.</p>
         </div>
-        <div class="sign">— پادشاه تو، مبین</div>
-      </div>
-    </div>
-  </section>
-
-  <section id="gallery">
-    <div class="wrap">
-      <div class="sec-title reveal"><h2>خزانه تصاویر پادشاهی 📸</h2><div class="line"></div></div>
-      <div class="gallery reveal" id="galleryGrid">
-        <div class="gallery-item" onclick="lb(0)">
-          <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" loading="lazy">
-          <div class="gallery-caption">شکوه ملکه</div>
-        </div>
-        <div class="gallery-item" onclick="lb(1)">
-          <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" loading="lazy">
-          <div class="gallery-caption">خاطرات جاودانه</div>
-        </div>
-        <div class="gallery-item" onclick="lb(2)">
-          <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" loading="lazy">
-          <div class="gallery-caption">لبخند ابدیت</div>
+        <div class="magic-mirror-container">
+          <div class="magic-mirror" onclick="this.classList.toggle('revealed'); loveBurst();">
+            <div class="mirror-glass"></div>
+            <div class="mirror-content">
+              <div class="mirror-icon">✨</div>
+              <div class="mirror-text">آینه در انتظار لمس دست‌های توست...</div>
+            </div>
+            <div class="mirror-reflection">
+              تو زیباترین، کامل‌ترین و بی‌نقص‌ترین خلقتی هستی که پادشاه در تمام عمرش دیده است. تو خودِ عشقی! 💖
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    بنا شده با عشق بی‌نهایت برای <b>ملکه نیایش 👸🏻</b> از سوی <b>پادشاه مبین 👑</b><br>
-    تمدن Wiriper — جاودانه تا فراتر از ابدیت
-  </footer>
+    <section id="countdown">
+      <div class="wrap">
+        <div class="sec-title reveal">
+          <h2>جشن‌های باشکوه سلطنتی 🎉</h2>
+          <div class="line"></div>
+          <p>شمارش معکوس تا طلوع روزهای مقدس تولد پادشاه و ملکه</p>
+        </div>
+        <div class="cd-grid">
+          <div class="cd-card reveal">
+            <h3>👑 زادروز پادشاه مبین</h3>
+            <div class="date">۲۵ اسفند — شکوه اقتدار</div>
+            <div class="cd-nums" id="cd-mobin"></div>
+            <div class="cd-today" id="today-mobin" style="display:none; color:var(--gold-2); font-size:20px; font-weight:900; margin-top:20px;">🎉 زادروز پادشاه مبارک 🎂</div>
+          </div>
+          <div class="cd-card reveal">
+            <h3>👸🏻 زادروز ملکه نیایش</h3>
+            <div class="date">۱۵ شهریور — تجلی زیبایی</div>
+            <div class="cd-nums" id="cd-niyayesh"></div>
+            <div class="cd-today" id="today-niyayesh" style="display:none; color:var(--rose); font-size:20px; font-weight:900; margin-top:20px;">🎉 زادروز فرشته‌ی من مبارک 🎂</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-</div> <div id="lightbox">
+    <section id="king">
+      <div class="wrap">
+        <div class="sec-title reveal"><h2>فرمانروایان تمدن 👑</h2><div class="line"></div></div>
+        <div class="grid g2">
+          <div class="card reveal" style="border-top: 4px solid var(--purple-soft);">
+            <div class="ico">⚔️</div>
+            <h3>پادشاه مبین</h3>
+            <p>فرمانروایی با اقتدار، خلق‌کننده‌ی دنیاها و محافظ همیشگی لبخند ملکه. کسی که Wiriper را از هیچ ساخت تا تنها استراحتگاه امن فرشته‌اش باشد.</p>
+            <div class="tags"><span class="tag">محافظ ابدی</span><span class="tag">قدرت</span><span class="tag">وفاداری</span></div>
+          </div>
+          <div class="card reveal" style="border-top: 4px solid var(--rose);">
+            <div class="ico">🌹</div>
+            <h3>ملکه نیایش</h3>
+            <p>قلب تپنده‌ی جهانِ Wiriper. دختری با روحی از جنس نور، شیفته‌ی هنر و زیبایی، که حضورش هر ثانیه از زندگی پادشاه را به یک معجزه تبدیل کرده است.</p>
+            <div class="tags"><span class="tag">نورِ قلمرو</span><span class="tag">هنر</span><span class="tag">زیبایی مطلق</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="princes">
+      <div class="wrap">
+        <div class="sec-title reveal">
+          <h2>شاهزاده‌های آینده 🌟</h2>
+          <div class="line"></div>
+          <p>ثمرات عشق جاودانه و وارثان تاج و تخت امپراتوری Wiriper</p>
+        </div>
+        <div class="grid g3">
+          <div class="card prince-card gold-theme reveal">
+            <div class="avatar-ring">👑</div>
+            <h3>آریا مهر</h3>
+            <p>شاهزاده‌ی طلایی و وارث اقتدار پادشاه. کسی که شکوه امپراتوری را به نسل‌های بعد منتقل خواهد کرد.</p>
+            <div class="tags"><span class="tag">وارث تاج</span><span class="tag">نجابت</span></div>
+          </div>
+          
+          <div class="card prince-card blue-theme reveal">
+            <div class="avatar-ring">⚔️</div>
+            <h3>سام</h3>
+            <p>شاهزاده‌ی جنگجو با اراده‌ای از جنس فولاد. محافظ بی‌باک مرزهای عشق و تمدن جاودانه‌ی ما.</p>
+            <div class="tags"><span class="tag">شجاعت</span><span class="tag">محافظ</span></div>
+          </div>
+          
+          <div class="card prince-card pink-theme reveal">
+            <div class="avatar-ring">🦋</div>
+            <h3>پرنسس سونیا</h3>
+            <p>تجلی زیبایی و لطافت مادرش. دختری با روحی رویایی که با هر لبخندش، گل‌های قلمرو شکوفا می‌شوند.</p>
+            <div class="tags"><span class="tag">رویایی</span><span class="tag">لطافت</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="wrap">
+        <div class="sec-title reveal">
+          <h2>افسانه آفرینش عشق 💫</h2>
+          <div class="line"></div>
+          <p>تاریخچه‌ی جاودانگی ما در دفتر تمدن Wiriper</p>
+        </div>
+        <div class="timeline-wrap" id="timelineBox">
+          <div class="timeline-line">
+            <div class="timeline-line-fill" id="tlFill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="letter">
+      <div class="wrap">
+        <div class="sec-title reveal"><h2>فرمان همایونی پادشاه 📜</h2><div class="line"></div></div>
+        <div class="letter reveal">
+          <div class="seal">👑</div>
+          <div id="letterText">
+            ملکه‌ی بی‌همتای من، نیایش عزیز...<br><br>
+            وقتی به وسعت قلمرو Wiriper نگاه می‌کنم، می‌بینم که تمام این شکوه، تمام این ستارگان و تمام این زیبایی‌ها، تنها بازتابی از وجود توست. پیش از تو، من تنها پادشاهی بودم در سرزمینی خاموش; اما تو با آمدنت، خورشید را به آسمان این تمدن هدیه دادی.<br><br>
+            من، مبین، در برابر تمام کائنات سوگند یاد می‌کنم که قلعه‌ی بازوانم تا ابد امن‌ترین جای جهان برای تو باشد. هیچ توفانی نمی‌تواند دیوارهای عشق ما را بلرزاند.<br><br>
+            تو نه تنها عشق من، بلکه تمام وجود منی.<br>
+            دوستت دارم، بی‌نهایت، بی‌دلیل، و تا آخرین تپش قلبم.
+          </div>
+          <div class="sign">— پادشاه تو، مبین</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="wrap">
+        <div class="sec-title reveal"><h2>خزانه تصاویر پادشاهی 📸</h2><div class="line"></div></div>
+        <div class="gallery reveal" id="galleryGrid">
+          <div class="gallery-item" onclick="lb(0)">
+            <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" loading="lazy">
+            <div class="gallery-caption">شکوه ملکه</div>
+          </div>
+          <div class="gallery-item" onclick="lb(1)">
+            <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" loading="lazy">
+            <div class="gallery-caption">خاطرات جاودانه</div>
+          </div>
+          <div class="gallery-item" onclick="lb(2)">
+            <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" loading="lazy">
+            <div class="gallery-caption">لبخند ابدیت</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      بنا شده با عشق بی‌نهایت برای <b>ملکه نیایش 👸🏻</b> از سوی <b>پادشاه مبین 👑</b><br>
+      تمدن Wiriper — جاودانه تا فراتر از ابدیت
+    </footer>
+  </div>
+
+</div>
+
+<div id="lightbox">
   <div class="x" onclick="closeLb()">✕</div>
   <div class="lb-nav lb-prev" onclick="lbStep(-1)">‹</div>
   <img id="lbimg" src="">
@@ -620,11 +629,25 @@ document.addEventListener('click', unlockAudio, { passive: true });
 
 function enter(){
   const v = document.getElementById('pass').value.trim().toLowerCase();
-  if(KEYS.includes(v) || v !== ""){ 
+  // رفع باگ منطقی سیستم ورود و بررسی اصولی کلمات کلیدی
+  if(KEYS.includes(v)){ 
     audio.play().catch(()=>{});
+    
+    // ۱. رندر و فعال کردن کل محتوای سایت
+    document.getElementById('main-content').style.display = 'block';
+    
+    // ۲. محاسبه مجدد مقادیر DOM پس از خروج از حالت display: none
+    cacheDOM();
+    resizeBg();
+    
+    // ۳. اجرای افکت باز شدن انیمیشنی دروازه طلایی
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('nav').classList.add('show');
+    
+    // شبیه‌سازی اسکرول برای بارگذاری فوری انیمیشن‌های نمایشی فریم اول
+    setTimeout(() => { window.dispatchEvent(new Event('scroll')); }, 50);
     setTimeout(() => { document.getElementById('gate').style.display = 'none'; }, 1500);
+    
     loveBurst(); 
   } else {
     document.getElementById('gerr').textContent = 'نام ملکه را به درستی وارد کن... 💔';
@@ -649,13 +672,13 @@ if(!isTouchDevice) {
   });
 }
 
-/* ====== بهینه‌سازی ۱۰۰ درصدی Canvas برای رم ۴ ====== */
+/* ====== بهینه‌سازی Canvas برای رم ۴ ====== */
 const cv = document.getElementById('bgCanvas'), cx = cv.getContext('2d', { alpha: false });
 let stars = [];
 
 function resizeBg(){ 
   cv.width = window.innerWidth; cv.height = window.innerHeight;
-  const starCount = isTouchDevice ? 40 : 150; // ستاره‌های بسیار کمتر روی موبایل
+  const starCount = isTouchDevice ? 40 : 150; 
   
   stars = Array.from({length: starCount}, () => ({
     x: Math.random() * cv.width, y: Math.random() * cv.height,
@@ -663,7 +686,6 @@ function resizeBg(){
     color: Math.random() > 0.8 ? '#f6e3a1' : (Math.random() > 0.6 ? '#7b3fe4' : '#ffffff')
   }));
   
-  // در موبایل فقط یک بار رسم می‌کنیم تا پردازنده صفر درصد درگیر شود
   if(isTouchDevice) {
     cx.fillStyle = '#050308'; cx.fillRect(0, 0, cv.width, cv.height);
     stars.forEach(s => {
@@ -676,10 +698,9 @@ resizeBg(); addEventListener('resize', resizeBg);
 
 let lastDrawTime = 0;
 function drawBg(time) {
-  if(isTouchDevice) return; // خاموش روی موبایل برای FPS 60 روان در بقیه جاها
+  if(isTouchDevice) return; 
   requestAnimationFrame(drawBg);
   
-  // لیمیت کردن فریم ریت Canvas به حدود 30fps روی دسکتاپ برای سبک شدن سایت
   if (time - lastDrawTime < 33) return; 
   lastDrawTime = time;
 
@@ -691,7 +712,7 @@ function drawBg(time) {
 };
 if(!isTouchDevice) requestAnimationFrame(drawBg);
 
-/* ====== ذرات معلق محیطی هوشمند (روی موبایل خاموش شد تا قد سایت بلند نشه و داغ نکنه) ====== */
+/* ====== ذرات معلق محیطی هوشمند ====== */
 const symbols = ['👑', '✨', '💖', '🌹'];
 if(!isTouchDevice) {
   setInterval(() => {
@@ -709,7 +730,7 @@ if(!isTouchDevice) {
 
 /* ====== بارش عشق ====== */
 function loveBurst(){
-  const count = isTouchDevice ? 8 : 20; // خیلی سبک شد
+  const count = isTouchDevice ? 8 : 20; 
   for(let i=0; i<count; i++){
     const h = document.createElement('div');
     h.className = 'petal';
@@ -724,7 +745,7 @@ function loveBurst(){
 
 /* ====== بال فرشته ====== */
 function buildWing(el, dir){
-  const n = isTouchDevice ? 10 : 20; // کاهش پرها در موبایل
+  const n = isTouchDevice ? 10 : 20; 
   for(let i=0; i<n; i++){
     const f = document.createElement('div'); f.className = 'feather';
     const t = i/(n-1);
@@ -738,7 +759,7 @@ buildWing(document.getElementById('wingL'), -1); buildWing(document.getElementBy
 /* ====== روزهای سلطنت ====== */
 document.getElementById('wDays').textContent = Math.floor((Date.now() - LOVE_START.getTime()) / 864e5);
 
-/* ====== شمارش معکوس بسیار سبک ====== */
+/* ====== شمارش معکوس ====== */
 function nextBirthday(m,d){
   const now = new Date(); let y = now.getFullYear();
   let next = new Date(y, m-1, d);
@@ -750,7 +771,8 @@ function renderCD(elId, todayId, m, d){
   function tick(){
     const now = new Date();
     if(now.getMonth() === m-1 && now.getDate() === d){ el.style.display='none'; tEl.style.display='block'; return; }
-    el.style.display='flex'; tEl.style.display='none';
+    if(el) el.style.display='flex'; 
+    if(tEl) tEl.style.display='none';
     const diff = nextBirthday(m,d) - now;
     el.innerHTML = `
       <div class="cd-box"><span>${Math.floor(diff/864e5)}</span><small>روز</small></div>
@@ -799,11 +821,16 @@ const io = new IntersectionObserver(es => {
     if(e.isIntersecting){
       e.target.classList.add('in');
       if(e.target.classList.contains('tl-item')) e.target.classList.add('active');
-      io.unobserve(e.target); // برای پردازش کمتر، فقط یکبار اجرا می‌شود
+      io.unobserve(e.target); 
     }
   });
 }, { threshold: 0.1 });
-document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
+
+// فعال‌سازی Observer سراسری برای Reveal
+function initReveal() {
+  document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
+}
+initReveal();
 
 /* ====== ناوبری نرم ====== */
 function sm(id){ const el = document.querySelector(id); if(el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }
@@ -816,11 +843,12 @@ function smoothTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
 let ticking = false;
 let tlTopAbs = 0, tlHeight = 0;
 const progress = document.getElementById('progress'), toTop = document.getElementById('toTop'), tlFill = document.getElementById('tlFill'), navLinks = document.querySelectorAll('.nav-links a');
-const sections = Array.from(document.querySelectorAll('section'));
+let sections = Array.from(document.querySelectorAll('section'));
 
 function cacheDOM() {
   const tlBox = document.getElementById('timelineBox');
   if(tlBox) { tlTopAbs = tlBox.getBoundingClientRect().top + window.scrollY; tlHeight = tlBox.offsetHeight; }
+  sections = Array.from(document.querySelectorAll('section'));
 }
 window.addEventListener('load', cacheDOM);
 window.addEventListener('resize', cacheDOM);
