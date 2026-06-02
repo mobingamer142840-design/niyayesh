@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -351,142 +352,6 @@ footer b { color: var(--gold-2); font-size: 17px; }
   .gallery { column-count: 1; }
   #toTop { bottom: 20px; left: 20px; }
 }
-
-/* ==========================================================================
-   ✨ استایل‌های افزونه‌های مجلل جدید (گنجینه هدایا، اتمسفر صوتی و پارالکس سه‌بعدی)
-   ========================================================================== */
-
-/* بهینه‌سازی افکت سه‌بعدی هیرو بدون از بین رفتن انیمیشن بال‌ها */
-.angel-container {
-  transform-style: preserve-3d;
-  perspective: 1000px;
-  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.angel {
-  transform-style: preserve-3d;
-}
-.photo-frame {
-  transform: translateZ(35px);
-}
-.halo {
-  transform: translateX(-50%) rotateX(70deg) translateZ(55px);
-  transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-}
-
-/* پانل شیک گلس‌مورفیسم کنترل اتمسفر صوتی */
-.audio-ambience-panel {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: rgba(25, 15, 45, 0.55);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid var(--border);
-  padding: 6px 14px;
-  border-radius: 16px;
-  margin-left: 5px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-.audio-ambience-panel select {
-  background: transparent;
-  color: var(--gold-2);
-  border: none;
-  font-family: 'Cinzel', 'Vazirmatn';
-  font-size: 13px;
-  font-weight: 600;
-  outline: none;
-  cursor: pointer;
-  padding: 2px 5px;
-}
-.audio-ambience-panel select option {
-  background: var(--bg2);
-  color: var(--text);
-}
-.volume-slider-container {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.volume-slider-container input[type="range"] {
-  width: 65px;
-  height: 3px;
-  -webkit-appearance: none;
-  background: rgba(232, 198, 107, 0.2);
-  border-radius: 2px;
-  outline: none;
-  cursor: pointer;
-}
-.volume-slider-container input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--gold-2);
-  box-shadow: 0 0 8px var(--gold);
-}
-.vol-icon {
-  font-size: 13px;
-  color: var(--gold);
-  user-select: none;
-}
-
-/* بخش هدایای سلطنتی */
-.vouchers-section {
-  position: relative;
-  border-top: 1px solid rgba(232,198,107,0.05);
-}
-.voucher-card {
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(145deg, rgba(25, 12, 52, 0.85), rgba(8, 4, 18, 0.99)) !important;
-  border: 1px solid var(--border) !important;
-  border-radius: 35px;
-  padding: 50px 35px;
-  text-align: center;
-  transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.45s ease, box-shadow 0.45s ease !important;
-}
-.voucher-card:hover {
-  transform: translateY(-12px) scale(1.02) !important;
-  border-color: var(--gold-2) !important;
-  box-shadow: 0 25px 50px rgba(232, 198, 107, 0.2), 0 0 30px rgba(123, 63, 228, 0.25) !important;
-}
-.gold-glow-layer {
-  position: absolute;
-  inset: -50%;
-  background: radial-gradient(circle, rgba(232, 198, 107, 0.15) 0%, transparent 65%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.45s ease;
-}
-.voucher-card:hover .gold-glow-layer {
-  opacity: 1;
-  animation: rotateVoucherGlow 10s linear infinite;
-}
-@keyframes rotateVoucherGlow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-.voucher-btn {
-  margin-top: 30px !important;
-  background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--gold-deep)) !important;
-  color: #050308 !important;
-  font-weight: 900;
-  width: 100%;
-  border: none !important;
-  display: inline-block;
-  text-decoration: none;
-  text-shadow: none;
-}
-
-@media(max-width: 768px) {
-  .audio-ambience-panel {
-    padding: 4px 10px;
-    gap: 8px;
-  }
-  .volume-slider-container input[type="range"] {
-    width: 45px;
-  }
-}
 </style>
 </head>
 <body>
@@ -522,16 +387,6 @@ footer b { color: var(--gold-2); font-size: 17px; }
     <nav class="navbar" id="nav">
       <div class="brand">👑 WIRIPER</div>
       <div class="nav-controls">
-        <div class="audio-ambience-panel">
-          <select id="trackSelect" onchange="switchEmpireTrack(this.value)" title="انتخاب موسیقی سمفونی سلطنتی">
-            <option value="track1">Symphony No. 9</option>
-            <option value="track2">Imperial Sonata</option>
-          </select>
-          <div class="volume-slider-container">
-            <span class="vol-icon">🔊</span>
-            <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.6" oninput="adjustEmpireVolume(this.value)" title="تنظیم ولوم">
-          </div>
-        </div>
         <div class="audio-visualizer-btn" id="audioBtn" onclick="toggleAudio()" title="قطع/وصل موسیقی سمفونی">
           <div class="bar-container">
             <div class="v-bar"></div>
@@ -545,8 +400,6 @@ footer b { color: var(--gold-2); font-size: 17px; }
       <div class="nav-links" id="navlinks">
         <a href="#hero">تالار اصلی</a>
         <a href="#wiriper">تمدن ما</a>
-        <a href="#magic-mirror">آینه جادویی</a>
-        <a href="#royal-vouchers">هدایای سلطنتی</a>
         <a href="#countdown">جشن‌ها</a>
         <a href="#king">فرمانروایان</a>
         <a href="#princes">شاهزاده‌ها</a>
@@ -642,43 +495,6 @@ footer b { color: var(--gold-2); font-size: 17px; }
               تو زیباترین، کامل‌ترین و بی‌نقص‌ترین خلقتی هستی که پادشاه در تمام عمرش دیده است. تو خودِ عشقی! 💖
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="royal-vouchers" class="vouchers-section reveal">
-      <div class="wrap">
-        <div class="sec-title">
-          <h2>گنجینه هدایای سلطنتی 👑</h2>
-          <div class="line"></div>
-          <p>پیشکشی با اصالت و شاهانه به پاس حضور پر از برکت فرشته‌ی قلمرو؛ هر کارت فرمانی مکتوب و غیرقابل تغییر است که به اراده عالیجناب ملکه نیایش فعال می‌گردد.</p>
-        </div>
-        <div class="grid g3 vouchers-grid">
-          
-          <div class="card voucher-card">
-            <div class="gold-glow-layer"></div>
-            <div class="ico">🍽️</div>
-            <h3>فرمان همایونی</h3>
-            <p>یک شام رمانتیک، مجلل و رویایی در رستوران دلخواه ملکه نیایش، در فضایی سینمایی و سرشار از عشق همراه با پادشاه مبین.</p>
-            <a href="https://wa.me/?text=%D9%BE%D8%A7%D8%AF%D8%B4%D8%A7%D9%87%20%D9%85%D8%A8%DB%8C%D9%86%20%D8%B9%D8%B2%DB%8C%D9%82%20%D9%85%D9%86%D8%8C%20%D9%85%D9%84%DA%A9%D9%87%20%D9%86%DB%8C%D8%A7%DB%8C%D8%B4%20%D9%81%D8%B1%D9%80%D9%85%D8%A7%D9%86%20%D8%B4%D8%A7%D9%85%20%D8%B1%D9%85%D8%A7%D9%86%D8%AA%DB%8C%DA%A9%20%D8%B1%D8%A7%20%D8%B5%D8%A7%D8%AF%D8%B1%20%D9%81%D8%B1%D9%85%D9%88%D8%AF%D9%86%D8%AF%D9%8٫%20%F0%9F%92%96%E2%9C%A8" target="_blank" class="btn voucher-btn">مطالبه هدیه 🎁</a>
-          </div>
-
-          <div class="card voucher-card">
-            <div class="gold-glow-layer"></div>
-            <div class="ico">💆‍♀️</div>
-            <h3>بلیت طلایی</h3>
-            <p>یک روز کامل اختصاصی برای ماساژ، آرامش مطلق و تجدید قوا به فرمان مستقیم پادشاه مبین برای فرشته‌ی تمدن Wiriper.</p>
-            <a href="https://wa.me/?text=%D8%B9%D8%A7%D9%84%DB%8C%D8%AC%D9%86%D8%A7%D8%A8%20%D9%BE%D8%A7%D8%AF%D8%B4%D8%A7%D9%87%20%D9%85%D8%A8%DB%8C%D9%86%D8%8C%20%D9%85%D9%84%DA%A9%D9%87%20%D9%86%DB%8C%D8%A7%DB%8C%D8%B4%20%D8%AE%D9%88%D8%A7%D9%87%D8%A7%D9%86%20%D8%A7%D8%B3%D8%AA%D9%81%D8%A7%D8%AF%D9%87%20%D8%A7%D8%B2%20%D8%A8%D9%84%DB%8C%D8%AA%20%D8%B7%D9%84%D8%A7%DB%8C%DB%8C%20%D9%85%D8%A7%D8%B3%D8%A7%DA%9A%20%D9%88%20%D8%A2%D8%B1%D8%A7%D9%85%D8%B4%20%D9%87%D8%B3%D8%AA%D9%86%D8%AF%20%E2%9C%A8%F0%9F%91%B8" target="_blank" class="btn voucher-btn">مطالبه هدیه 🎁</a>
-          </div>
-
-          <div class="card voucher-card">
-            <div class="gold-glow-layer"></div>
-            <div class="ico">💎</div>
-            <h3>صندوقچه اسرارآمیز</h3>
-            <p>مجوز گشودن خزانه سلطنتی جهت تهیه یک هدیه فوق‌العاده لوکس، گران‌بها و سورپرایزکننده به انتخاب و سلیقه بی‌نظیر ملکه.</p>
-            <a href="https://wa.me/?text=%D9%BE%D8%A7%D8%AF%D8%B4%D8%A7%D9%87%20%D9%85%D9%86%20%D9%85%D8%A8%DB%8C%D9%86%D8%8C%20%D9%88%D9%82%D8%AA%20%D8%A2%D9%86%20%D8%A7%D8%B3%D8%AA%20%DA%A9%D9%87%20%D8%B5%D9%86%D8%AF%D9%82%DA%86%D9%87%20%D8%A7%D8%B3%D8%B1%D8%A7%D8%B1%D8%A2%D9%85%DB%8C%D8%B2%20%D9%87%D8%AF%D8%A7%DB%8C%D8%A7%20%D8%B1%D8%A7%20%D8%A8%D8%B1%D8%A7%DB%8C%20%D9%85%D9%84%DA%A9%D9%87%20%D9%86%DB%8C%D8%A7%DB%8C%D8%B4%20%D8%A8%DA%AF%D8%B4%D8%A7%DB%8C%DB%8C%D8%8F%20%F0%9F%92%8E%F0%9F%8E%81" target="_blank" class="btn voucher-btn">مطالبه هدیه 🎁</a>
-          </div>
-
         </div>
       </div>
     </section>
@@ -903,7 +719,7 @@ if(!isTouchDevice) {
   ringLoop();
   
   document.addEventListener('pointerover', e => {
-    if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal, .artifact-card, .voucher-card, select')) cRing.classList.add('hot');
+    if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal, .artifact-card')) cRing.classList.add('hot');
     else cRing.classList.remove('hot');
   });
 }
@@ -1116,107 +932,6 @@ window.addEventListener('scroll', () => {
     ticking = true;
   }
 }, { passive: true });
-
-/* ==========================================================================
-   ✨ منطق و اسکریپت‌های افزونه‌های ارتقا یافته پادشاهی (Audio Control & Parallax)
-   ========================================================================== */
-
-/* ۱. کنترل پیشرفته صوتی اتمسفر با قابلیت سوئیچ و Fade نرم */
-const empireTracks = {
-  track1: "https://lycee.ir/wp-content/uploads/2024/12/2.15.-Symphony-No.-9-in-D-Minor-Op.-125-II.-Molto-vivace-%E2%80%93-Presto.mp3",
-  track2: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" // موزیک دوم سلطنتی فاخر و قابل جایگزینی
-};
-let globalVolumeFadeTask = null;
-
-function switchEmpireTrack(trackKey) {
-  const targetSrc = empireTracks[trackKey];
-  if (!audio || audio.src === targetSrc) return;
-  
-  let currentVol = audio.volume;
-  clearInterval(globalVolumeFadeTask);
-  
-  globalVolumeFadeTask = setInterval(() => {
-    if (currentVol > 0.05) {
-      currentVol -= 0.05;
-      audio.volume = currentVol;
-    } else {
-      clearInterval(globalVolumeFadeTask);
-      audio.pause();
-      audio.src = targetSrc;
-      audio.load();
-      
-      const userSliderVol = parseFloat(document.getElementById('volumeSlider').value);
-      if (audioBtn.classList.contains('playing')) {
-        audio.play().then(() => {
-          fadeInEmpireTrack(userSliderVol);
-        }).catch(() => {});
-      } else {
-        audio.volume = userSliderVol;
-      }
-    }
-  }, 25);
-}
-
-function fadeInEmpireTrack(targetVolume) {
-  audio.volume = 0;
-  let currentVol = 0;
-  globalVolumeFadeTask = setInterval(() => {
-    if (currentVol < targetVolume - 0.05) {
-      currentVol += 0.05;
-      audio.volume = currentVol;
-    } else {
-      audio.volume = targetVolume;
-      clearInterval(globalVolumeFadeTask);
-    }
-  }, 25);
-}
-
-function adjustEmpireVolume(targetValue) {
-  clearInterval(globalVolumeFadeTask);
-  if (audio) {
-    audio.volume = targetValue;
-  }
-}
-
-/* ۲. سیستم پیشرفته افکت سه‌بعدی و پارالکس بال‌های فرشته */
-if (!isTouchDevice) {
-  const heroSection = document.getElementById('hero');
-  const angelContainer = document.getElementById('angelContainer');
-  const haloElement = document.querySelector('.angel .halo');
-  
-  if (heroSection && angelContainer) {
-    heroSection.addEventListener('mousemove', (e) => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      const moveX = (e.clientX - centerX) / centerX;
-      const moveY = (e.clientY - centerY) / centerY;
-      
-      // زاویه دهی سه‌بعدی بسیار نرم به کل المان پرتره و بال‌ها
-      angelContainer.style.transform = `perspective(1200px) rotateY(${moveX * 14}deg) rotateX(${-moveY * 14}deg) translateZ(15px)`;
-      
-      // حرکت مستقل هاله نور برای القای حس عمق بیشتر
-      if (haloElement) {
-        haloElement.style.transform = `translateX(calc(-50% + ${moveX * 20}px)) translateY(${moveY * 10}px) rotateX(70deg) translateZ(20px)`;
-      }
-    });
-    
-    heroSection.addEventListener('mouseleave', () => {
-      angelContainer.style.transform = 'perspective(1200px) rotateY(0deg) rotateX(0deg) translateZ(0px)';
-      if (haloElement) {
-        haloElement.style.transform = 'translateX(-50%) rotateX(70deg)';
-      }
-    });
-  }
-} else {
-  // حرکت شناور هوشمند بر پایه اسکرول و ترنزیشن در صفحات لمسی موبایل برای حفظ راندمان رم
-  window.addEventListener('scroll', () => {
-    const angelContainer = document.getElementById('angelContainer');
-    const scrollOffset = window.scrollY;
-    if (angelContainer && scrollOffset < window.innerHeight) {
-      angelContainer.style.transform = `perspective(1000px) rotateY(${Math.sin(scrollOffset * 0.008) * 4}deg) translateY(${scrollOffset * 0.08}px)`;
-    }
-  }, { passive: true });
-}
 </script>
 </body>
 </html>
