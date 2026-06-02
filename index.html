@@ -345,6 +345,11 @@ footer b { color: var(--gold-2); font-size: 17px; }
   section { padding: 80px 0; }
   .sec-title h2 { font-size: 28px; }
   .card { padding: 25px; }
+  .chat-layout { flex-direction: column !important; }
+  .chat-sidebar { width: 100% !important; border-right: none !important; border-bottom: 1px solid var(--border); }
+  .chat-main { display: none; }
+  .chat-layout.active-chat .chat-sidebar { display: none; }
+  .chat-layout.active-chat .chat-main { display: flex; }
 }
 
 @media(max-width: 520px) {
@@ -352,38 +357,75 @@ footer b { color: var(--gold-2); font-size: 17px; }
   #toTop { bottom: 20px; left: 20px; }
 }
 
-/* === استایل‌های پیام‌رسان اختصاصی (Wiriper Chat) === */
-#wiriper-chat-modal { position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; flex-direction: column; overflow: hidden; opacity: 0; transition: opacity 0.4s ease; }
+/* === استایل‌های پیام‌رسان پیشرفته تلگرامی Wiriper === */
+#wiriper-chat-modal { position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; flex-direction: column; overflow: hidden; opacity: 0; transition: opacity 0.4s ease; font-family: 'Vazirmatn'; }
 #wiriper-chat-modal.open { display: flex; opacity: 1; }
-.chat-header { padding: 15px 25px; background: rgba(20, 10, 40, 0.95); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-.chat-header-info { display: flex; align-items: center; gap: 15px; }
-.chat-header-info .avatar { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); }
-.chat-header-info h3 { color: var(--gold-2); font-size: 18px; font-family: 'Cinzel', 'Vazirmatn'; margin: 0; }
-.chat-header-info span { color: var(--rose); font-size: 12px; }
-.chat-close { color: #fff; font-size: 25px; cursor: pointer; background: none; border: none; }
 
+/* هدر پیام‌رسان (عمومی) */
+.chat-global-header { padding: 15px 25px; background: rgba(20, 10, 40, 0.95); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.5); z-index: 10; }
+.chat-global-header h3 { color: var(--gold-2); margin: 0; font-family: 'Cinzel', 'Vazirmatn'; }
+.chat-close { color: #fff; font-size: 25px; cursor: pointer; background: none; border: none; }
 .chat-login-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 20px; text-align: center; background: radial-gradient(circle, var(--bg3), var(--bg)); }
 .chat-login-box { background: var(--glass-strong); padding: 40px; border-radius: 25px; border: 1px solid var(--border); box-shadow: var(--shadow); width: min(400px, 100%); }
-.chat-login-box h2 { color: var(--gold-2); margin-bottom: 20px; }
 .chat-login-box input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; }
-.chat-login-box .btn { margin-top: 10px; }
 
-.chat-messages-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: url('https://i.ibb.co/60V0mR9/telegram-bg.png') center/cover; position: relative; }
-.chat-messages-area::before { content: ''; position: absolute; inset: 0; background: rgba(5,3,8,0.85); z-index: 0; }
-.message-bubble { position: relative; z-index: 1; max-width: 75%; padding: 12px 18px; border-radius: 20px; font-size: 15px; line-height: 1.6; word-break: break-word; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+/* لایه اصلی پیام‌رسان (دو تکه) */
+.chat-layout { display: flex; flex: 1; overflow: hidden; background: var(--bg); }
+.chat-sidebar { width: 350px; background: rgba(15, 8, 30, 0.95); border-left: 1px solid var(--border); display: flex; flex-direction: column; position: relative; }
+.sidebar-header { padding: 15px; display: flex; gap: 10px; background: rgba(10,5,20,0.8); border-bottom: 1px solid var(--border); }
+.sidebar-header button { flex: 1; padding: 10px; background: rgba(232, 198, 107, 0.1); border: 1px solid var(--border); color: var(--gold-2); border-radius: 10px; cursor: pointer; font-family: 'Vazirmatn'; transition: 0.3s; }
+.sidebar-header button:hover { background: rgba(232, 198, 107, 0.3); }
+
+/* لیست چت‌ها */
+.chat-list { flex: 1; overflow-y: auto; }
+.chat-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: background 0.2s; }
+.chat-item:hover, .chat-item.active { background: rgba(232, 198, 107, 0.1); }
+.chat-item img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin-left: 15px; }
+.chat-item-info { flex: 1; overflow: hidden; }
+.chat-item-info h4 { color: #fff; margin: 0 0 5px 0; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-item-info p { color: var(--muted); margin: 0; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* بخش اصلی چت (سمت چپ/راست بسته به LTR/RTL) */
+.chat-main { flex: 1; display: flex; flex-direction: column; background: url('https://i.ibb.co/60V0mR9/telegram-bg.png') center/cover; position: relative; }
+.chat-main::before { content: ''; position: absolute; inset: 0; background: rgba(5,3,8,0.85); z-index: 0; }
+.chat-active-header { padding: 15px 20px; background: rgba(20, 10, 40, 0.95); border-bottom: 1px solid var(--border); display: flex; align-items: center; z-index: 1; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.chat-active-header .back-btn { display: none; color: var(--gold-2); background: none; border: none; font-size: 24px; margin-left: 15px; cursor: pointer; }
+@media(max-width: 768px) { .chat-active-header .back-btn { display: block; } }
+.chat-active-header img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin-left: 15px; }
+.chat-active-header h3 { color: #fff; margin: 0; font-size: 17px; }
+.chat-active-header p { color: var(--gold); margin: 0; font-size: 12px; }
+
+/* محیط پیام‌ها */
+.chat-messages-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; position: relative; z-index: 1; }
+.message-row { display: flex; align-items: flex-end; gap: 10px; max-width: 80%; }
+.message-row.sent { align-self: flex-start; flex-direction: row-reverse; }
+.message-row.received { align-self: flex-end; }
+.message-avatar { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); }
+.message-bubble { position: relative; padding: 12px 18px; border-radius: 20px; font-size: 15px; line-height: 1.6; word-break: break-word; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
 .message-bubble img, .message-bubble video { max-width: 100%; border-radius: 10px; margin-bottom: 8px; }
-.msg-sent { align-self: flex-start; background: linear-gradient(135deg, var(--purple-deep), #2a1154); color: #fff; border-bottom-right-radius: 4px; border: 1px solid rgba(123, 63, 228, 0.3); }
-.msg-received { align-self: flex-end; background: linear-gradient(135deg, rgba(20,10,40,0.9), rgba(10,5,20,0.9)); color: var(--gold-2); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
+.message-row.sent .message-bubble { background: linear-gradient(135deg, var(--purple-deep), #2a1154); color: #fff; border-bottom-right-radius: 4px; border: 1px solid rgba(123, 63, 228, 0.3); }
+.message-row.received .message-bubble { background: linear-gradient(135deg, rgba(20,10,40,0.9), rgba(10,5,20,0.9)); color: var(--gold-2); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
+.msg-sender-name { display: block; font-size: 11px; color: var(--gold); margin-bottom: 5px; font-weight: bold; }
 .msg-time { display: block; font-size: 10px; opacity: 0.7; margin-top: 5px; text-align: right; }
 
+/* باکس ارسال پیام */
 .chat-input-area { padding: 15px 20px; background: rgba(20, 10, 40, 0.95); border-top: 1px solid var(--border); display: flex; align-items: center; gap: 10px; z-index: 10; padding-bottom: calc(15px + env(safe-area-inset-bottom)); }
 .chat-input-area input[type="text"] { flex: 1; padding: 15px 20px; border-radius: 25px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; outline: none; }
-.chat-input-area input[type="text"]:focus { border-color: var(--gold); }
 .chat-attach-btn { cursor: pointer; color: var(--gold); font-size: 24px; padding: 10px; }
-.chat-send-btn { background: linear-gradient(135deg, var(--gold-2), var(--gold-deep)); border: none; width: 50px; height: 50px; border-radius: 50%; color: #000; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(232, 198, 107, 0.4); transition: transform 0.2s; }
+.chat-send-btn { background: linear-gradient(135deg, var(--gold-2), var(--gold-deep)); border: none; width: 50px; height: 50px; border-radius: 50%; color: #000; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
 .chat-send-btn:hover { transform: scale(1.1); }
 #fileUploadInput { display: none; }
-.upload-progress { height: 3px; background: var(--gold); width: 0%; position: absolute; top: 0; left: 0; transition: width 0.3s; }
+.upload-progress { height: 3px; background: var(--gold); width: 0%; position: absolute; top: 0; left: 0; transition: width 0.3s; z-index: 100; }
+.no-chat-selected { display: flex; align-items: center; justify-content: center; flex: 1; flex-direction: column; color: var(--muted); z-index: 1; text-align: center; }
+
+/* اُورلی تنظیمات و چت جدید */
+.chat-overlay { position: absolute; inset: 0; background: rgba(10,5,20,0.98); z-index: 50; display: none; flex-direction: column; padding: 30px; overflow-y: auto; }
+.chat-overlay.open { display: flex; }
+.chat-overlay-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+.chat-overlay-header h2 { color: var(--gold-2); margin: 0; }
+.chat-overlay-close { background: none; border: none; color: var(--rose); font-size: 25px; cursor: pointer; }
+.settings-form input, .settings-form select, .settings-form textarea { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; }
+.prof-pic-preview { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; margin: 0 auto 15px auto; display: block; }
 </style>
 
 <script type="importmap">
@@ -678,39 +720,114 @@ footer b { color: var(--gold-2); font-size: 17px; }
 </div>
 
 <div id="wiriper-chat-modal">
-  <div class="chat-header">
-    <div class="chat-header-info">
-      <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" class="avatar" alt="Avatar">
-      <div>
-        <h3>پیام‌رسان سلطنتی</h3>
-        <span id="chatStatusText">در حال اتصال...</span>
-      </div>
-    </div>
+  <div class="chat-global-header">
+    <h3>پیام‌رسان تلگرامی Wiriper 💬</h3>
     <button class="chat-close" id="closeChatBtn">✕</button>
   </div>
   <div class="upload-progress" id="uploadProgressBar"></div>
 
   <div class="chat-login-container" id="chatLoginView">
     <div class="chat-login-box">
-      <h2>👑 احراز هویت سلطنتی</h2>
-      <p style="margin-bottom: 20px; font-size:14px; color:var(--muted);">برای ورود به پیام‌رسان اختصاصی، ایمیل و رمز خود را وارد کنید.</p>
-      <input type="email" id="authEmail" placeholder="ایمیل شما...">
-      <input type="password" id="authPass" placeholder="رمز عبور...">
+      <h2>👑 ورود به پیام‌رسان</h2>
+      <p style="margin-bottom: 20px; font-size:14px; color:var(--muted);">تنها با آیدی و رمز عبور وارد شوید.</p>
+      <input type="text" id="authUsername" placeholder="آیدی شما (انگلیسی بدون @)..." dir="ltr">
+      <input type="password" id="authPass" placeholder="رمز عبور..." dir="ltr">
       <button class="btn" id="loginBtn">ورود / ثبت‌نام</button>
       <div id="authError" style="color: var(--rose); margin-top: 15px; font-size: 13px;"></div>
     </div>
   </div>
 
-  <div class="chat-messages-area" id="chatMessagesView" style="display: none;">
+  <div class="chat-layout" id="chatLayoutView" style="display: none;">
+    <div class="chat-sidebar" id="chatSidebar">
+      <div class="sidebar-header">
+        <button id="btnNewChat">➕ چت/گروه جدید</button>
+        <button id="btnSettings">⚙️ پروفایل من</button>
+      </div>
+      <div class="chat-list" id="sidebarChatList">
+        </div>
     </div>
 
-  <div class="chat-input-area" id="chatInputView" style="display: none;">
-    <label class="chat-attach-btn">
-      📎
-      <input type="file" id="fileUploadInput" accept="image/*, video/*, audio/*, .pdf, .doc, .docx">
-    </label>
-    <input type="text" id="chatMessageInput" placeholder="پیام خود را بنویسید..." autocomplete="off">
-    <button class="chat-send-btn" id="sendMsgBtn">➤</button>
+    <div class="chat-main" id="chatMainArea">
+      <div id="noChatSelected" class="no-chat-selected">
+        <h2>پیام‌رسان Wiriper</h2>
+        <p>یک چت را از لیست انتخاب کنید یا چت جدیدی بسازید.</p>
+      </div>
+      
+      <div id="activeChatContainer" style="display: none; flex-direction: column; height: 100%;">
+        <div class="chat-active-header">
+          <button class="back-btn" id="backToListBtn">➔</button>
+          <img src="" id="activeChatAvatar" alt="Avatar">
+          <div>
+            <h3 id="activeChatTitle">نام چت</h3>
+            <p id="activeChatStatus">آنلاین</p>
+          </div>
+        </div>
+        
+        <div class="chat-messages-area" id="chatMessagesView">
+          </div>
+
+        <div class="chat-input-area" id="chatInputView">
+          <label class="chat-attach-btn">
+            📎
+            <input type="file" id="fileUploadInput" accept="image/*, video/*, audio/*, .pdf, .doc, .docx, .zip">
+          </label>
+          <input type="text" id="chatMessageInput" placeholder="پیام خود را بنویسید..." autocomplete="off">
+          <button class="chat-send-btn" id="sendMsgBtn">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-overlay" id="overlaySettings">
+    <div class="wrap" style="width:100%; max-width: 500px; margin: auto;">
+      <div class="chat-overlay-header">
+        <h2>تنظیمات پروفایل</h2>
+        <button class="chat-overlay-close" id="closeSettingsBtn">✕</button>
+      </div>
+      <div class="settings-form">
+        <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" id="profPicPreview" class="prof-pic-preview">
+        <label style="color:var(--gold); display:block; text-align:center; margin-bottom:15px; cursor:pointer;">
+          📸 تغییر عکس
+          <input type="file" id="profPicUpload" accept="image/*" style="display:none;">
+        </label>
+        <p style="color:var(--muted); margin-bottom:5px;">آیدی شما (غیرقابل تغییر)</p>
+        <input type="text" id="setUserId" disabled style="opacity:0.6;">
+        <p style="color:var(--muted); margin-bottom:5px;">نام نمایشی</p>
+        <input type="text" id="setUserName" placeholder="نام شما...">
+        <p style="color:var(--muted); margin-bottom:5px;">بیوگرافی</p>
+        <textarea id="setUserBio" rows="3" placeholder="بیوگرافی خود را بنویسید..."></textarea>
+        <button class="btn" id="saveSettingsBtn">ذخیره پروفایل</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-overlay" id="overlayNewChat">
+    <div class="wrap" style="width:100%; max-width: 500px; margin: auto;">
+      <div class="chat-overlay-header">
+        <h2>ساخت چت / کانال جدید</h2>
+        <button class="chat-overlay-close" id="closeNewChatBtn">✕</button>
+      </div>
+      <div class="settings-form">
+        <select id="newChatType">
+          <option value="dm">چت شخصی (با آیدی)</option>
+          <option value="group">گروه</option>
+          <option value="channel">کانال</option>
+        </select>
+        
+        <div id="targetUserIdWrap">
+          <p style="color:var(--muted); margin-bottom:5px;">آیدی شخص مقابل (بدون @)</p>
+          <input type="text" id="newChatTargetId" placeholder="مثال: mobin" dir="ltr">
+        </div>
+        
+        <div id="groupNameWrap" style="display:none;">
+          <p style="color:var(--muted); margin-bottom:5px;">نام گروه/کانال</p>
+          <input type="text" id="newChatName" placeholder="نام را وارد کنید...">
+        </div>
+
+        <button class="btn" id="createChatBtn">ایجاد و شروع</button>
+        <p id="newChatErr" style="color:var(--rose); margin-top:10px; font-size:13px;"></p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1007,7 +1124,6 @@ window.addEventListener('scroll', () => {
           else a.classList.remove('active');
         }
       });
-
       ticking = false;
     });
     ticking = true;
@@ -1016,12 +1132,12 @@ window.addEventListener('scroll', () => {
 </script>
 
 <script type="module">
+  // کانفیگ Firebase تو (دقیقاً دست‌نخورده)
   import { initializeApp } from "firebase/app";
   import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-  import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "firebase/firestore";
+  import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, getDoc, getDocs, where, updateDoc, arrayUnion } from "firebase/firestore";
   import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-  // کانفیگ فایربیس تو
   const firebaseConfig = {
     apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
     authDomain: "niyayesh-universe.firebaseapp.com",
@@ -1038,160 +1154,336 @@ window.addEventListener('scroll', () => {
   const db = getFirestore(app);
   const storage = getStorage(app);
 
-  // اِلمان‌های UI چت
-  const chatModal = document.getElementById('wiriper-chat-modal');
-  const openChatBtn = document.getElementById('openChatBtn');
-  const closeChatBtn = document.getElementById('closeChatBtn');
-  
-  const loginView = document.getElementById('chatLoginView');
-  const messagesView = document.getElementById('chatMessagesView');
-  const inputView = document.getElementById('chatInputView');
-  
-  const emailInput = document.getElementById('authEmail');
-  const passInput = document.getElementById('authPass');
-  const loginBtn = document.getElementById('loginBtn');
-  const authErr = document.getElementById('authError');
-  const chatStatusText = document.getElementById('chatStatusText');
-  
-  const msgInput = document.getElementById('chatMessageInput');
-  const sendBtn = document.getElementById('sendMsgBtn');
-  const fileInput = document.getElementById('fileUploadInput');
-  const progressBar = document.getElementById('uploadProgressBar');
-
+  // متغیرهای وضعیت
   let currentUser = null;
+  let userData = null;
+  let activeChatId = null;
+  let activeChatData = null;
   let unsubscribeMessages = null;
+  let unsubscribeChats = null;
+  let usersCache = {}; 
 
-  // باز و بسته کردن مودال چت
-  openChatBtn.addEventListener('click', () => {
-    chatModal.classList.add('open');
-    document.body.style.overflow = 'hidden'; // قفل کردن اسکرول صفحه زیرین
-  });
+  // المان‌های DOM
+  const modal = document.getElementById('wiriper-chat-modal');
+  const chatLayoutView = document.getElementById('chatLayoutView');
+  const chatLoginView = document.getElementById('chatLoginView');
+  const sidebarChatList = document.getElementById('sidebarChatList');
+  const chatMessagesView = document.getElementById('chatMessagesView');
   
-  closeChatBtn.addEventListener('click', () => {
-    chatModal.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-
-  // لاجیک لاگین/ثبت نام با ایمیل
-  loginBtn.addEventListener('click', async () => {
-    const email = emailInput.value.trim();
-    const password = passInput.value.trim();
-    if(!email || !password) { authErr.textContent = "لطفا ایمیل و رمز را وارد کنید."; return; }
+  // دکمه‌های باز و بسته
+  document.getElementById('openChatBtn').addEventListener('click', () => { modal.classList.add('open'); document.body.style.overflow = 'hidden'; });
+  document.getElementById('closeChatBtn').addEventListener('click', () => { modal.classList.remove('open'); document.body.style.overflow = ''; });
+  
+  // لاگین با آیدی
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    const rawId = document.getElementById('authUsername').value.trim().toLowerCase();
+    const password = document.getElementById('authPass').value.trim();
+    if(!rawId || !password) { document.getElementById('authError').textContent = "آیدی و رمز عبور الزامی است."; return; }
+    if(rawId.includes('@')) { document.getElementById('authError').textContent = "فقط آیدی را بدون @ وارد کنید."; return; }
     
-    loginBtn.textContent = 'در حال اتصال...';
+    const fakeEmail = rawId + "@wiriper.chat";
+    document.getElementById('loginBtn').textContent = 'در حال پردازش...';
+    
     try {
-      // تلاش برای لاگین، اگر اکانت نبود میسازیم
-      await signInWithEmailAndPassword(auth, email, password).catch(async err => {
+      await signInWithEmailAndPassword(auth, fakeEmail, password).catch(async err => {
         if(err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
-          return await createUserWithEmailAndPassword(auth, email, password);
+          const res = await createUserWithEmailAndPassword(auth, fakeEmail, password);
+          // ساخت پروفایل پیش‌فرض برای کاربر جدید
+          await setDoc(doc(db, "users", res.user.uid), {
+            uid: res.user.uid,
+            username: rawId,
+            displayName: rawId,
+            bio: 'فرزند امپراتوری Wiriper 👑',
+            avatar: 'https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg'
+          });
+          return res;
         }
         throw err;
       });
     } catch(error) {
-      authErr.textContent = 'خطا: ' + error.message;
-      loginBtn.textContent = 'ورود / ثبت‌نام';
+      document.getElementById('authError').textContent = 'خطا: ' + error.message;
+      document.getElementById('loginBtn').textContent = 'ورود / ثبت‌نام';
     }
   });
 
-  // شنونده تغییر وضعیت لاگین
-  onAuthStateChanged(auth, (user) => {
+  // وضعیت کاربر
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
-      loginView.style.display = 'none';
-      messagesView.style.display = 'flex';
-      inputView.style.display = 'flex';
-      chatStatusText.textContent = 'آنلاین 💚';
-      chatStatusText.style.color = '#00ff00';
-      loadMessages();
+      chatLoginView.style.display = 'none';
+      chatLayoutView.style.display = 'flex';
+      
+      // دریافت اطلاعات پروفایل
+      const docSnap = await getDoc(doc(db, "users", user.uid));
+      if(docSnap.exists()) userData = docSnap.data();
+      
+      loadSidebarChats();
     } else {
-      currentUser = null;
-      loginView.style.display = 'flex';
-      messagesView.style.display = 'none';
-      inputView.style.display = 'none';
-      chatStatusText.textContent = 'نیازمند ورود 🔴';
-      chatStatusText.style.color = 'var(--rose)';
+      currentUser = null; userData = null;
+      chatLoginView.style.display = 'flex';
+      chatLayoutView.style.display = 'none';
+      if(unsubscribeChats) unsubscribeChats();
       if(unsubscribeMessages) unsubscribeMessages();
     }
   });
 
-  // دریافت و رندر پیام‌ها به صورت Real-time
-  function loadMessages() {
-    const q = query(collection(db, "wiriper_messages"), orderBy("timestamp", "asc"));
-    unsubscribeMessages = onSnapshot(q, (snapshot) => {
-      messagesView.innerHTML = '';
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        const isMine = data.uid === currentUser.uid;
+  // ----- لود کردن لیست چت‌ها در سایدبار -----
+  function loadSidebarChats() {
+    const q = query(collection(db, "chats"), where("members", "array-contains", currentUser.uid));
+    unsubscribeChats = onSnapshot(q, async (snapshot) => {
+      sidebarChatList.innerHTML = '';
+      if(snapshot.empty) {
+        sidebarChatList.innerHTML = '<p style="padding:20px; text-align:center; color:var(--muted);">هنوز چتی ندارید.</p>';
+        return;
+      }
+      
+      let chatsData = [];
+      snapshot.forEach(d => chatsData.push({id: d.id, ...d.data()}));
+      
+      // مرتب سازی بر اساس زمان (اگه داشته باشیم، اینجا ساده‌تر می‌نویسیم)
+      for(let chat of chatsData) {
+        let displayTitle = chat.name;
+        let displayAvatar = chat.avatar || 'https://via.placeholder.com/50';
         
-        const bubble = document.createElement('div');
-        bubble.className = `message-bubble ${isMine ? 'msg-received' : 'msg-sent'}`;
-        
-        let mediaHtml = '';
-        if(data.fileUrl) {
-          if(data.fileType.startsWith('image/')) {
-            mediaHtml = `<img src="${data.fileUrl}" onclick="window.open('${data.fileUrl}')" style="cursor:pointer;">`;
-          } else if(data.fileType.startsWith('video/')) {
-            mediaHtml = `<video src="${data.fileUrl}" controls></video>`;
-          } else {
-            mediaHtml = `<a href="${data.fileUrl}" target="_blank" style="color:var(--gold-2); display:block; margin-bottom:5px;">📁 دانلود فایل</a>`;
-          }
+        // اگر DM باشد، اطلاعات طرف مقابل را می‌گیریم
+        if(chat.type === 'dm') {
+          const otherUserId = chat.members.find(id => id !== currentUser.uid) || currentUser.uid;
+          const otherUser = await getUserData(otherUserId);
+          displayTitle = otherUser.displayName;
+          displayAvatar = otherUser.avatar;
         }
-        
-        const textHtml = data.text ? `<div>${data.text}</div>` : '';
-        const timeHtml = `<span class="msg-time">${data.timestamp ? new Date(data.timestamp.toDate()).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : '...'}</span>`;
-        
-        bubble.innerHTML = mediaHtml + textHtml + timeHtml;
-        messagesView.appendChild(bubble);
-      });
-      // اسکرول به پایین‌ترین پیام
-      messagesView.scrollTop = messagesView.scrollHeight;
+
+        const div = document.createElement('div');
+        div.className = `chat-item ${activeChatId === chat.id ? 'active' : ''}`;
+        div.onclick = () => openChat(chat, displayTitle, displayAvatar);
+        div.innerHTML = `
+          <img src="${displayAvatar}">
+          <div class="chat-item-info">
+            <h4>${displayTitle}</h4>
+            <p>${chat.type === 'channel' ? '📢 کانال' : (chat.type === 'group' ? '👥 گروه' : '👤 چت شخصی')}</p>
+          </div>
+        `;
+        sidebarChatList.appendChild(div);
+      }
     });
   }
 
-  // ارسال پیام متنی
+  async function getUserData(uid) {
+    if(usersCache[uid]) return usersCache[uid];
+    const d = await getDoc(doc(db, "users", uid));
+    if(d.exists()) { usersCache[uid] = d.data(); return d.data(); }
+    return { displayName: 'کاربر ناشناس', avatar: 'https://via.placeholder.com/50' };
+  }
+
+  // ----- باز کردن یک چت خاص -----
+  function openChat(chat, title, avatar) {
+    activeChatId = chat.id;
+    activeChatData = chat;
+    
+    // UI موبایل
+    chatLayoutView.classList.add('active-chat');
+    
+    document.getElementById('noChatSelected').style.display = 'none';
+    document.getElementById('activeChatContainer').style.display = 'flex';
+    document.getElementById('activeChatTitle').textContent = title;
+    document.getElementById('activeChatAvatar').src = avatar;
+    
+    // بررسی دسترسی ارسال پیام در کانال
+    const inputArea = document.getElementById('chatInputView');
+    if(chat.type === 'channel' && !chat.admins.includes(currentUser.uid)) {
+      inputArea.style.display = 'none';
+    } else {
+      inputArea.style.display = 'flex';
+    }
+    
+    // لود پیام‌ها
+    if(unsubscribeMessages) unsubscribeMessages();
+    const q = query(collection(db, "chats", chat.id, "messages"), orderBy("timestamp", "asc"));
+    
+    unsubscribeMessages = onSnapshot(q, async (snapshot) => {
+      chatMessagesView.innerHTML = '';
+      for(let doc of snapshot.docs) {
+        const msg = doc.data();
+        const isMine = msg.senderId === currentUser.uid;
+        const sender = await getUserData(msg.senderId);
+        
+        const row = document.createElement('div');
+        row.className = `message-row ${isMine ? 'sent' : 'received'}`;
+        
+        let mediaHtml = '';
+        if(msg.fileUrl) {
+          if(msg.fileType && msg.fileType.startsWith('image/')) mediaHtml = `<img src="${msg.fileUrl}" style="cursor:pointer;" onclick="window.open('${msg.fileUrl}')">`;
+          else if(msg.fileType && msg.fileType.startsWith('video/')) mediaHtml = `<video src="${msg.fileUrl}" controls></video>`;
+          else mediaHtml = `<a href="${msg.fileUrl}" target="_blank" style="color:var(--gold-2); display:block; margin-bottom:5px;">📁 دانلود فایل</a>`;
+        }
+        
+        const textHtml = msg.text ? `<div>${msg.text}</div>` : '';
+        const timeHtml = `<span class="msg-time">${msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : '...'}</span>`;
+        const nameHtml = (!isMine && chat.type !== 'dm') ? `<span class="msg-sender-name">${sender.displayName}</span>` : '';
+
+        row.innerHTML = `
+          ${!isMine ? `<img src="${sender.avatar}" class="message-avatar">` : ''}
+          <div class="message-bubble">
+            ${nameHtml}
+            ${mediaHtml}
+            ${textHtml}
+            ${timeHtml}
+          </div>
+        `;
+        chatMessagesView.appendChild(row);
+      }
+      chatMessagesView.scrollTop = chatMessagesView.scrollHeight;
+    });
+    
+    // آپدیت هایلایت سایدبار
+    document.querySelectorAll('.chat-item').forEach(el => el.classList.remove('active'));
+  }
+
+  // دکمه بازگشت در موبایل
+  document.getElementById('backToListBtn').addEventListener('click', () => {
+    chatLayoutView.classList.remove('active-chat');
+  });
+
+  // ----- ارسال پیام -----
   async function sendMessage(fileUrl = null, fileType = null) {
-    const text = msgInput.value.trim();
+    if(!activeChatId) return;
+    const input = document.getElementById('chatMessageInput');
+    const text = input.value.trim();
     if (!text && !fileUrl) return;
     
-    msgInput.value = '';
-    await addDoc(collection(db, "wiriper_messages"), {
+    input.value = '';
+    await addDoc(collection(db, "chats", activeChatId, "messages"), {
       text: text,
-      uid: currentUser.uid,
+      senderId: currentUser.uid,
       fileUrl: fileUrl,
       fileType: fileType,
       timestamp: serverTimestamp()
     });
   }
+  document.getElementById('sendMsgBtn').addEventListener('click', () => sendMessage());
+  document.getElementById('chatMessageInput').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
 
-  sendBtn.addEventListener('click', () => sendMessage());
-  msgInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
-
-  // آپلود فایل (عکس/ویدیو)
+  // آپلود فایل
+  const fileInput = document.getElementById('fileUploadInput');
   fileInput.addEventListener('change', (e) => {
     const file = e.target.files[0];
-    if(!file) return;
-
-    const storageRef = ref(storage, 'wiriper_chat/' + Date.now() + '_' + file.name);
+    if(!file || !activeChatId) return;
+    const storageRef = ref(storage, 'chat_files/' + Date.now() + '_' + file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
-
     uploadTask.on('state_changed', 
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        progressBar.style.width = progress + '%';
-      }, 
-      (error) => {
-        console.error("Upload failed", error);
-        progressBar.style.width = '0%';
-        alert('خطا در آپلود فایل. قوانین Storage فایربیس را چک کنید.');
-      }, 
+      (snap) => { document.getElementById('uploadProgressBar').style.width = (snap.bytesTransferred / snap.totalBytes * 100) + '%'; }, 
+      (err) => { alert('خطا در آپلود'); document.getElementById('uploadProgressBar').style.width = '0%'; }, 
       async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        progressBar.style.width = '0%';
-        await sendMessage(downloadURL, file.type);
-        fileInput.value = ''; // ریست کردن اینپوت فایل
+        const url = await getDownloadURL(uploadTask.snapshot.ref);
+        document.getElementById('uploadProgressBar').style.width = '0%';
+        await sendMessage(url, file.type);
+        fileInput.value = ''; 
       }
     );
   });
+
+  // ----- تنظیمات پروفایل -----
+  document.getElementById('btnSettings').addEventListener('click', () => {
+    document.getElementById('overlaySettings').classList.add('open');
+    document.getElementById('setUserId').value = userData.username;
+    document.getElementById('setUserName').value = userData.displayName;
+    document.getElementById('setUserBio').value = userData.bio || '';
+    document.getElementById('profPicPreview').src = userData.avatar;
+  });
+  document.getElementById('closeSettingsBtn').addEventListener('click', () => {
+    document.getElementById('overlaySettings').classList.remove('open');
+  });
+  
+  let newAvatarFile = null;
+  document.getElementById('profPicUpload').addEventListener('change', (e) => {
+    newAvatarFile = e.target.files[0];
+    if(newAvatarFile) document.getElementById('profPicPreview').src = URL.createObjectURL(newAvatarFile);
+  });
+  
+  document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('saveSettingsBtn');
+    btn.textContent = 'در حال ذخیره...';
+    let avatarUrl = userData.avatar;
+    
+    if(newAvatarFile) {
+      const storageRef = ref(storage, 'avatars/' + currentUser.uid);
+      await uploadBytesResumable(storageRef, newAvatarFile);
+      avatarUrl = await getDownloadURL(storageRef);
+    }
+    
+    const newName = document.getElementById('setUserName').value.trim();
+    const newBio = document.getElementById('setUserBio').value.trim();
+    
+    await updateDoc(doc(db, "users", currentUser.uid), {
+      displayName: newName, bio: newBio, avatar: avatarUrl
+    });
+    
+    userData.displayName = newName; userData.bio = newBio; userData.avatar = avatarUrl;
+    usersCache[currentUser.uid] = userData;
+    btn.textContent = 'ذخیره شد!';
+    setTimeout(() => { btn.textContent = 'ذخیره پروفایل'; document.getElementById('overlaySettings').classList.remove('open'); }, 1000);
+  });
+
+  // ----- ساخت چت/گروه/کانال جدید -----
+  document.getElementById('btnNewChat').addEventListener('click', () => {
+    document.getElementById('overlayNewChat').classList.add('open');
+    document.getElementById('newChatErr').textContent = '';
+  });
+  document.getElementById('closeNewChatBtn').addEventListener('click', () => {
+    document.getElementById('overlayNewChat').classList.remove('open');
+  });
+  
+  document.getElementById('newChatType').addEventListener('change', (e) => {
+    const type = e.target.value;
+    document.getElementById('targetUserIdWrap').style.display = type === 'dm' ? 'block' : 'none';
+    document.getElementById('groupNameWrap').style.display = type !== 'dm' ? 'block' : 'none';
+  });
+
+  document.getElementById('createChatBtn').addEventListener('click', async () => {
+    const type = document.getElementById('newChatType').value;
+    const errEl = document.getElementById('newChatErr');
+    errEl.textContent = 'درحال پردازش...';
+    
+    let members = [currentUser.uid];
+    let name = '';
+    
+    if(type === 'dm') {
+      const targetId = document.getElementById('newChatTargetId').value.trim().toLowerCase();
+      if(!targetId) { errEl.textContent = 'آیدی مقصد را وارد کنید.'; return; }
+      if(targetId === userData.username) { errEl.textContent = 'نمی‌توانید به خودتان پیام دهید.'; return; }
+      
+      const q = query(collection(db, "users"), where("username", "==", targetId));
+      const snap = await getDocs(q);
+      if(snap.empty) { errEl.textContent = 'کاربری با این آیدی یافت نشد.'; return; }
+      
+      const targetUser = snap.docs[0].data();
+      members.push(targetUser.uid);
+      
+      // بررسی اینکه آیا از قبل چت دارند
+      const existingQuery = query(collection(db, "chats"), where("type", "==", "dm"), where("members", "array-contains", currentUser.uid));
+      const existSnap = await getDocs(existingQuery);
+      let foundExisting = false;
+      existSnap.forEach(d => { if(d.data().members.includes(targetUser.uid)) { foundExisting = true; errEl.textContent = 'این چت قبلا وجود دارد.'; }});
+      if(foundExisting) return;
+      
+    } else {
+      name = document.getElementById('newChatName').value.trim();
+      if(!name) { errEl.textContent = 'نام گروه/کانال را وارد کنید.'; return; }
+    }
+    
+    await addDoc(collection(db, "chats"), {
+      type: type,
+      name: name,
+      members: members,
+      admins: [currentUser.uid],
+      avatar: 'https://via.placeholder.com/150'
+    });
+    
+    document.getElementById('overlayNewChat').classList.remove('open');
+    document.getElementById('newChatTargetId').value = '';
+    document.getElementById('newChatName').value = '';
+  });
+
 </script>
 
 </body>
