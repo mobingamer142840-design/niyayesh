@@ -58,7 +58,7 @@ body {
   body { cursor: auto; } 
   .cursor-dot, .cursor-ring { display: none !important; } 
   .card, .gate-card, .magic-mirror, .wiriper-card, .letter { 
-    transform: none !important; 
+    transform: none !important;
     transition: box-shadow 0.4s ease, border-color 0.4s ease !important; 
   }
 }
@@ -74,7 +74,7 @@ a, button { -webkit-tap-highlight-color: transparent; outline: none; }
 .cursor-ring.hot { width: 70px; height: 70px; background: rgba(232, 198, 107, 0.08); border-color: var(--gold-2); backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); box-shadow: 0 0 30px rgba(232, 198, 107, 0.3); }
 
 /* === افکت‌های پس‌زمینه سینمایی و غبار طلایی پادشاهی === */
-#progress { position: fixed; top: 0; right: 0; left: 0; height: 4px; z-index: 9990; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), var(--purple)); width: 0; box-shadow: 0 0 15px var(--gold-2); transition: width 0.1s ease-out; }
+#progress { position: fixed; top: 0; right: 0; left: 0; height: 4px; z-index: 9990; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), var(--purple)); width: 0; box-shadow: 0 0 15px var(--gold-2); transition: width 0.1s ease-out; will-change: width; }
 canvas.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-canvas); transform: translateZ(0); }
 
 /* غبار طلایی معلق در فضا */
@@ -159,39 +159,24 @@ section { padding: 150px 0; position: relative; }
 .hero .sub { color: var(--gold); letter-spacing: 12px; font-size: 18px; margin-bottom: 20px; min-height: 25px; font-weight: 800; text-transform: uppercase; text-shadow: 0 0 20px var(--gold); }
 .hero h1 { font-size: clamp(45px, 9vw, 100px); line-height: 1.1; background: linear-gradient(135deg, #fff 20%, var(--gold-2) 50%, var(--gold-deep) 80%); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 15px 50px rgba(232, 198, 107, 0.4); margin-bottom: 30px; font-weight: 900; letter-spacing: -1px; }
 
-.angel-container { perspective: 1000px; margin: 50px auto; z-index: var(--z-content); transition: transform 0.2s ease-out; }
+.angel-container { perspective: 1000px; margin: 50px auto; z-index: var(--z-content); transition: transform 0.2s ease-out; will-change: transform; }
 .angel { position: relative; width: min(380px, 85vw); aspect-ratio: 1; margin: 0 auto; transition: transform 0.1s ease-out; transform-style: preserve-3d; }
 .angel::after { content: ''; position: absolute; bottom: -40px; left: 10%; right: 10%; height: 30px; background: radial-gradient(ellipse, rgba(232,198,107,0.4), transparent 70%); filter: blur(15px); transform: translateZ(-50px); }
 
 /* === اصلاح اساسی و قدرتمند باگ مربعی شدن عکس در آیفون === */
 .photo-frame { 
-  position: absolute; 
-  inset: 0; 
-  border-radius: 50%; 
-  overflow: hidden; 
-  z-index: 3; 
-  border: 4px solid rgba(255,255,255,0.8); 
-  box-shadow: 0 0 0 15px rgba(232, 198, 107, 0.15), 0 0 100px rgba(232, 198, 107, 0.7), inset 0 0 50px rgba(0,0,0,0.8); 
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-  transform: translateZ(30px);
-  /* The ultimate Safari iOS fixes below */
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-  mask-image: radial-gradient(white, black);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translateZ(30px);
+  position: absolute; inset: 0; border-radius: 50%; overflow: hidden; z-index: 3; border: 4px solid rgba(255,255,255,0.8);
+  box-shadow: 0 0 0 15px rgba(232, 198, 107, 0.15), 0 0 100px rgba(232, 198, 107, 0.7), inset 0 0 50px rgba(0,0,0,0.8);
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateZ(30px);
+  -webkit-mask-image: -webkit-radial-gradient(white, black); mask-image: radial-gradient(white, black);
+  -webkit-backface-visibility: hidden; backface-visibility: hidden; -webkit-transform: translateZ(30px);
 }
 .photo-frame::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(255,255,255,0.1) 100%); z-index: 5; pointer-events: none; mix-blend-mode: overlay; border-radius: 50%; }
 .angel:hover .photo-frame { box-shadow: 0 0 0 20px rgba(232, 198, 107, 0.25), 0 0 150px rgba(232, 198, 107, 1); border-color: #fff; }
 .photo-frame img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  display: block; 
-  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); 
-  filter: contrast(1.1) brightness(1.05);
-  border-radius: 50%; /* Double strict radius */
-  transform: scale(1) translateZ(0); /* Hardware accelerate */
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); filter: contrast(1.1) brightness(1.05); border-radius: 50%;
+  transform: scale(1) translateZ(0); 
 }
 .angel:hover .photo-frame img { transform: scale(1.15) rotate(2deg) translateZ(0); }
 
@@ -218,7 +203,7 @@ section { padding: 150px 0; position: relative; }
 
 /* === بخش تمدن Wiriper سینمایی === */
 #wiriper-realm { position: relative; border-top: 1px solid rgba(232,198,107,0.15); border-bottom: 1px solid rgba(232,198,107,0.15); padding: 120px 0; background: linear-gradient(to bottom, rgba(10,5,20,0.8), rgba(30,15,60,0.3), rgba(10,5,20,0.8)); }
-.wiriper-card { background: url('https://www.transparenttextures.com/patterns/cubes.png'), radial-gradient(circle at top right, rgba(123, 63, 228, 0.3), transparent 70%), var(--glass-strong); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--border-glow); border-radius: 50px; padding: 80px; box-shadow: var(--shadow), inset 0 0 80px rgba(232, 198, 107, 0.05); text-align: center; position: relative; overflow: hidden; transform-style: preserve-3d; }
+.wiriper-card { background: url('https://www.transparenttextures.com/patterns/cubes.png'), radial-gradient(circle at top right, rgba(123, 63, 228, 0.3), transparent 70%), var(--glass-strong); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border: 1px solid var(--border-glow); border-radius: 50px; padding: 80px; box-shadow: var(--shadow), inset 0 0 80px rgba(232, 198, 107, 0.05); text-align: center; position: relative; overflow: hidden; transform-style: preserve-3d; will-change: transform; }
 .wiriper-card::before { content: 'W'; position: absolute; top: -50px; right: -30px; font-size: 400px; color: rgba(232, 198, 107, 0.04); font-family: 'Cinzel'; font-weight: 900; line-height: 1; pointer-events: none; transform: translateZ(-20px); }
 .wiriper-logo { font-size: 100px; margin-bottom: 30px; filter: drop-shadow(0 0 50px var(--gold)); transform: translateZ(40px); display: inline-block; animation: floatIcon 4s ease-in-out infinite; }
 @keyframes floatIcon { 0%, 100% { transform: translateZ(40px) translateY(0); } 50% { transform: translateZ(40px) translateY(-15px); } }
@@ -295,7 +280,7 @@ section { padding: 150px 0; position: relative; }
 /* === تایم‌لاین سینمایی === */
 .timeline-wrap { position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0; }
 .timeline-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 6px; background: rgba(255,255,255,0.05); transform: translateX(-50%); border-radius: 6px; }
-.timeline-line-fill { position: absolute; top: 0; left: 0; width: 100%; background: linear-gradient(to bottom, var(--gold), var(--purple), var(--gold-2)); border-radius: 6px; box-shadow: 0 0 20px var(--gold), 0 0 40px var(--purple); height: 0; transition: height 0.5s ease-out; }
+.timeline-line-fill { position: absolute; top: 0; left: 0; width: 100%; background: linear-gradient(to bottom, var(--gold), var(--purple), var(--gold-2)); border-radius: 6px; box-shadow: 0 0 20px var(--gold), 0 0 40px var(--purple); height: 0; transition: height 0.2s ease-out; will-change: height; }
 .tl-item { position: relative; width: 50%; padding: 30px 50px; box-sizing: border-box; perspective: 1000px; }
 .tl-item:nth-child(odd) { left: 0; text-align: left; }
 .tl-item:nth-child(even) { left: 50%; text-align: right; }
@@ -303,7 +288,7 @@ section { padding: 150px 0; position: relative; }
 .tl-item.active .dot { background: radial-gradient(circle, #fff, var(--gold)); box-shadow: 0 0 30px var(--gold), 0 0 0 8px rgba(232, 198, 107, 0.2); border-color: #fff; transform: translateY(-50%) scale(1.2); }
 .tl-item:nth-child(odd) .dot { right: -15px; }
 .tl-item:nth-child(even) .dot { left: -15px; }
-.tl-card { background: var(--glass-strong); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(232,198,107,0.2); border-radius: 30px; padding: 40px; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; opacity: 0.5; transform: scale(0.9) translateZ(-50px); }
+.tl-card { background: var(--glass-strong); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(232,198,107,0.2); border-radius: 30px; padding: 40px; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; opacity: 0.5; transform: scale(0.9) translateZ(-50px); will-change: transform, opacity; }
 .tl-item.active .tl-card { opacity: 1; transform: scale(1) translateZ(0); border-color: var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(232, 198, 107, 0.15); }
 .tl-card:hover { transform: translateY(-10px) scale(1.02) !important; box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 40px rgba(232, 198, 107, 0.3); }
 .tl-card h4 { color: var(--gold-2); font-size: 24px; margin-bottom: 15px; font-family: 'Cinzel'; font-weight: 800; text-shadow: 0 0 10px rgba(232,198,107,0.4); }
@@ -323,7 +308,7 @@ section { padding: 150px 0; position: relative; }
 
 /* === گالری Masonry === */
 .gallery { column-count: 3; column-gap: 30px; }
-.gallery-item { break-inside: avoid; margin-bottom: 30px; position: relative; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); transform: translateZ(0); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; background: #000; }
+.gallery-item { break-inside: avoid; margin-bottom: 30px; position: relative; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); transform: translateZ(0); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; background: #000; will-change: transform; }
 .gallery-item::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%); z-index: 1; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
 .gallery-item:hover::before { opacity: 1; }
 .gallery-item img { width: 100%; height: auto; display: block; border-radius: 30px; border: 2px solid transparent; transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); filter: brightness(0.8) contrast(1.1); will-change: transform, filter; transform: translateZ(0); }
@@ -585,7 +570,7 @@ footer b { color: var(--gold-2); font-size: 19px; text-shadow: 0 0 10px rgba(232
       <div class="timeline-line">
         <div class="timeline-line-fill" id="tlFill"></div>
       </div>
-      </div>
+    </div>
   </div>
 </section>
 
@@ -632,7 +617,7 @@ footer b { color: var(--gold-2); font-size: 19px; text-shadow: 0 0 10px rgba(232
   <div class="lb-nav lb-next" onclick="lbStep(1)">›</div>
 </div>
 
-<audio id="audio" src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Beethoven_Symphony_No_9_Movement_4.ogg" loop crossorigin="anonymous"></audio>
+<audio id="audio" src="https://lycee.ir/wp-content/uploads/2024/12/2.15.-Symphony-No.-9-in-D-Minor-Op.-125-II.-Molto-vivace-%E2%80%93-Presto.mp3" loop preload="auto"></audio>
 
 <button id="toTop" onclick="smoothTop()">↑</button>
 
@@ -643,25 +628,39 @@ const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints >
 
 window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('done'), 1500));
 
-/* ====== دروازه قصر و موسیقی پس زمینه ====== */
+/* ====== دروازه قصر و موسیقی پس زمینه با دور زدن محدودیت سافاری ====== */
 const KEYS = ["niyayesh", "نیایش", "ملکه", "queen"];
 const audio = document.getElementById('audio');
-audio.volume = 0.6; // تنظیم صدای ملایم برای پس‌زمینه
+audio.volume = 0.6;
+
+// این ترفند قفل صدا را در مرورگرهای موبایل (iOS Safari) باز می‌کند
+let audioUnlocked = false;
+function unlockAudio() {
+  if (!audioUnlocked) {
+    audio.play().then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      audioUnlocked = true;
+    }).catch(() => {}); // نادیده گرفتن ارورهای احتمالی قبل از تعامل مستقیم
+    document.removeEventListener('touchstart', unlockAudio);
+    document.removeEventListener('click', unlockAudio);
+  }
+}
+document.addEventListener('touchstart', unlockAudio, { passive: true });
+document.addEventListener('click', unlockAudio, { passive: true });
 
 function enter(){
   const v = document.getElementById('pass').value.trim().toLowerCase();
   if(KEYS.includes(v) || v !== ""){ 
-    // باز کردن قفل صوتی روی گوشی و پخش سمفونی پادشاهی
-    audio.play().catch(e => console.log('Audio autoplay prevented temporarily.'));
-
+    // پخش نهایی آهنگ
+    audio.play().catch(e => console.log('مرورگر اجازه پخش نداد:', e));
+    
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('nav').classList.add('show');
     document.body.style.overflow = 'auto';
     setTimeout(() => { document.getElementById('gate').style.display = 'none'; }, 2000);
-    
-    // افکت انفجار ورود به قصر
     loveBurst(); 
-    launchFirework(15); // آتش بازی سنگین تر هنگام ورود
+    launchFirework(15);
   } else {
     document.getElementById('gerr').textContent = 'نام ملکه را به درستی وارد کن... 💔';
     const card = document.querySelector('.gate-card');
@@ -670,7 +669,7 @@ function enter(){
 }
 document.getElementById('pass').addEventListener('keydown', e => { if(e.key === 'Enter') enter() });
 
-/* ====== نشانگر موس پیشرفته و مغناطیسی (بهینه‌سازی باتری) ====== */
+/* ====== نشانگر موس پیشرفته ====== */
 const cDot = document.getElementById('cDot'), cRing = document.getElementById('cRing');
 let mx=0, my=0, rx=0, ry=0;
 
@@ -683,7 +682,7 @@ if(!isTouchDevice) {
     if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal')) cRing.classList.add('hot');
     else cRing.classList.remove('hot');
   });
-
+  
   document.querySelectorAll('.magnetic-btn').forEach(btn => {
     btn.addEventListener('mousemove', e => {
       const rect = btn.getBoundingClientRect();
@@ -701,7 +700,6 @@ if(!isTouchDevice) {
 const cv = document.getElementById('bgCanvas'), cx = cv.getContext('2d');
 let stars = [], meteors = [];
 
-// کاهش هوشمندانه ذرات برای روان شدن کامل آیفون
 const starCount = isTouchDevice ? 80 : 250; 
 
 function resizeBg(){ 
@@ -796,7 +794,7 @@ function buildWing(el, dir){
 }
 buildWing(document.getElementById('wingL'), -1); buildWing(document.getElementById('wingR'), 1);
 
-/* ====== 3D Hover Effect (Tilt) ====== */
+/* ====== 3D Hover Effect ====== */
 if(!isTouchDevice) {
   document.querySelectorAll('[data-tilt]').forEach(el => {
     el.addEventListener('mousemove', e => {
@@ -909,7 +907,7 @@ function typeLetter(){
   }
 }
 
-/* ====== گالری و لایت‌باکس با قابلیت Swipe موبایل ====== */
+/* ====== گالری و لایت‌باکس ====== */
 const imgs = [...document.querySelectorAll('#galleryGrid img')].map(i => i.src); let lbIndex=0;
 function lb(i){ lbIndex=i; document.getElementById('lbimg').src=imgs[i]; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeLb(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow='auto'; }
@@ -921,17 +919,16 @@ addEventListener('keydown', e => {
   if(e.key === 'Escape') closeLb(); if(e.key === 'ArrowLeft') lbStep(1); if(e.key === 'ArrowRight') lbStep(-1);
 });
 
-// سوایپ (Swipe) برای گوشی‌های موبایل
 let touchStartX = 0;
 const lightboxElement = document.getElementById('lightbox');
 lightboxElement.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
 lightboxElement.addEventListener('touchend', e => {
   let touchEndX = e.changedTouches[0].screenX;
-  if (touchEndX < touchStartX - 50) lbStep(-1); // Swipe Left
-  if (touchEndX > touchStartX + 50) lbStep(1);  // Swipe Right
+  if (touchEndX < touchStartX - 50) lbStep(-1); 
+  if (touchEndX > touchStartX + 50) lbStep(1);  
 }, {passive: true});
 
-/* ====== انیمیشن‌های Scroll Reveal و Timeline ====== */
+/* ====== انیمیشن‌های Scroll Reveal ====== */
 const io = new IntersectionObserver(es => {
   es.forEach(e => {
     if(e.isIntersecting){
@@ -944,56 +941,91 @@ const io = new IntersectionObserver(es => {
 document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
 
 /* ====== ناوبری نرم ====== */
-function sm(id){ const el = document.querySelector(id);
-if(el) window.scrollTo({ top: el.offsetTop - 100, behavior: 'smooth' }); }
+function sm(id){ const el = document.querySelector(id); if(el) window.scrollTo({ top: el.offsetTop - 100, behavior: 'smooth' }); }
 document.querySelectorAll('.nav-links a').forEach(a => {
   a.addEventListener('click', e => { e.preventDefault(); sm(a.getAttribute('href')); document.getElementById('navlinks').classList.remove('open'); });
 });
 function smoothTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-/* ====== Scroll Events (Parallax & Logic) ====== */
+/* ====== بهینه‌سازی بسیار قدرتمند اسکرول برای iOS 120Hz (بدون لگ و افت فریم) ====== */
 let ticking = false;
+let sectionCache = [];
+let wiriperOffset = 0;
+let tlTopAbs = 0;
+let tlHeight = 0;
+
+// این تابع فقط موقع لود شدن و تغییر سایز پنجره مقادیر را کش می‌کند تا در حین اسکرول نیازی به بازخوانی نباشد
+function cacheDOMPositions() {
+  const wiriperCard = document.getElementById('wiriperCard');
+  wiriperOffset = wiriperCard ? wiriperCard.offsetTop : 0;
+  
+  const tlBox = document.getElementById('timelineBox');
+  if(tlBox) {
+    tlTopAbs = tlBox.getBoundingClientRect().top + window.scrollY;
+    tlHeight = tlBox.offsetHeight;
+  }
+  
+  const sections = document.querySelectorAll('section');
+  sectionCache = Array.from(sections).map(s => ({ id: s.id, top: s.offsetTop }));
+}
+
+window.addEventListener('load', cacheDOMPositions);
+window.addEventListener('resize', cacheDOMPositions);
+
 const angelContainer = document.getElementById('angelContainer');
 const wiriperCard = document.getElementById('wiriperCard');
+const progress = document.getElementById('progress');
+const toTop = document.getElementById('toTop');
+const tlFill = document.getElementById('tlFill');
+const navLinks = document.querySelectorAll('.nav-links a');
 
-addEventListener('scroll', () => {
+// اضافه شدن {passive: true} برای رندر مستقیم گرافیکی در موبایل
+window.addEventListener('scroll', () => {
   if(!ticking) {
-    requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
       const top = window.scrollY;
-      const h = document.body.scrollHeight - innerHeight;
-      document.getElementById('progress').style.width = (top / h * 100) + '%';
-      document.getElementById('toTop').classList.toggle('show', top > 800);
+      const innerH = window.innerHeight;
       
-      // Parallax Effect
-      if(top < innerHeight && !isTouchDevice) {
-          angelContainer.style.transform = `translateY(${top * 0.15}px) translateZ(0)`;
-      }
-      if(wiriperCard && top > (wiriperCard.offsetTop - innerHeight) && !isTouchDevice) {
-          let diff = top - (wiriperCard.offsetTop - innerHeight/2);
-          wiriperCard.style.transform = `translateY(${diff * -0.05}px) translateZ(0)`;
-      }
-
-      // Timeline Line Fill
-      const tl = document.getElementById('timelineBox');
-      if(tl) {
-        const tlRect = tl.getBoundingClientRect();
-        if(tlRect.top < innerHeight/2 && tlRect.bottom > 0) {
-          const fillPercent = Math.min(100, Math.max(0, ((innerHeight/2 - tlRect.top) / tlRect.height) * 100));
-          document.getElementById('tlFill').style.height = fillPercent + '%';
+      // پروگرس بار بالای صفحه
+      const docHeight = document.body.scrollHeight - innerH;
+      if(progress) progress.style.width = (top / docHeight * 100) + '%';
+      
+      // دکمه بازگشت به بالا
+      if(toTop) toTop.classList.toggle('show', top > 800);
+      
+      // افکت پارالکس (فقط برای دسکتاپ تا لگ موبایل را از بین ببریم)
+      if(!isTouchDevice) {
+        if(top < innerH && angelContainer) {
+            angelContainer.style.transform = `translateY(${top * 0.15}px) translateZ(0)`;
+        }
+        if(wiriperCard && top > (wiriperOffset - innerH)) {
+            let diff = top - (wiriperOffset - innerH/2);
+            wiriperCard.style.transform = `translateY(${diff * -0.05}px) translateZ(0)`;
         }
       }
 
+      // پر شدن خط تایم لاین با محاسبات از پیش کش شده (Cache)
+      if(tlFill && tlHeight > 0) {
+        const relTop = tlTopAbs - top; 
+        if(relTop < innerH/2 && (relTop + tlHeight) > 0) {
+          const fillPercent = Math.min(100, Math.max(0, ((innerH/2 - relTop) / tlHeight) * 100));
+          tlFill.style.height = fillPercent + '%';
+        }
+      }
+
+      // اکتیو کردن منوی ناوبری
       let cur = '';
-      document.querySelectorAll('section').forEach(s => { if(top >= s.offsetTop - 200) cur = s.id; });
-      document.querySelectorAll('.nav-links a').forEach(a => {
-        a.classList.remove('active');
+      sectionCache.forEach(s => { if(top >= s.top - 200) cur = s.id; });
+      navLinks.forEach(a => {
         if(a.getAttribute('href') === '#' + cur) a.classList.add('active');
+        else a.classList.remove('active');
       });
+
       ticking = false;
     });
     ticking = true;
   }
-});
+}, { passive: true }); // ویژگی Passive کلید اصلی رفع لگ آیفون است
 </script>
 </body>
 </html>
