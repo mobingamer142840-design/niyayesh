@@ -1,988 +1,986 @@
 
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<!-- viewport-fit=cover برای رفع باگ نوار آدرس Safari موبایل -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#1a1033">
-<title>امپراتوری Wiriper | پادشاه مبین و ملکه نیایش</title>
-
-<!-- فونت‌ها: Cinzel برای حس سلطنتی، Vazirmatn برای فارسی -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#050308">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>امپراتوری جاودانه | مبین و نیایش</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
-<!-- FontAwesome 6 رایگان -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 <style>
-/* ===================================================================
-   متغیرهای تم — قابل سوئیچ بین حالت روز (طلایی) و شب (آبی‑نقره‌ای)
-   =================================================================== */
-:root{
-  --gold:#d4af37; --gold-soft:#f0d77a; --rose:#e0b0ff;
-  --bg-1:#150e2e; --bg-2:#0c081c; --card:rgba(28,18,55,.55);
-  --text:#f3ecd8; --muted:#b9a9d6; --line:rgba(212,175,55,.35);
-  --glow:rgba(212,175,55,.45); --accent:var(--gold);
-  --shadow:0 18px 50px rgba(0,0,0,.55);
-  --speed:.45s;
-}
-/* حالت شب: تم سرد آبی‑نقره‌ای */
-body.night{
-  --gold:#9fc7ff; --gold-soft:#cfe4ff; --rose:#bcd4ff;
-  --bg-1:#0a1230; --bg-2:#05060f; --card:rgba(16,26,55,.55);
-  --line:rgba(159,199,255,.3); --glow:rgba(159,199,255,.4);
-  --accent:#9fc7ff; --text:#e8f0ff; --muted:#9fb4dd;
-}
-
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Vazirmatn',sans-serif; color:var(--text);
-  background:radial-gradient(circle at 50% 0%,var(--bg-1),var(--bg-2) 70%);
-  /* dvh برای رفع پرش ارتفاع در موبایل/Safari */
-  min-height:100dvh; overflow-x:hidden; line-height:1.9;
-  transition:background var(--speed) ease;
-  cursor:none; /* نشانگر سفارشی */
-}
-h1,h2,h3,.cinzel{font-family:'Cinzel',serif; letter-spacing:1px}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-
-/* ===================================================================
-   لایه پس‌زمینه متحرک — جدا با contain برای جلوگیری از تاثیر روی ترد اصلی
-   =================================================================== */
-#bgCanvas{
-  position:fixed; inset:0; z-index:0; pointer-events:none;
-  contain:strict; will-change:transform;
-}
-.app-bg-overlay{
-  position:fixed; inset:0; z-index:0; pointer-events:none;
-  background:radial-gradient(circle at 50% 120%,transparent,var(--bg-2) 90%);
+/* === متغیرهای سلطنتی و سینمایی === */
+:root {
+  --bg: #050308; 
+  --bg2: #120a24;
+  --bg3: #1a0b2e;
+  --gold: #e8c66b; 
+  --gold-2: #f6e3a1; 
+  --gold-deep: #b8862f;
+  --purple: #7b3fe4; 
+  --purple-soft: #9d6bff; 
+  --purple-deep: #431c87;
+  --rose: #ff8fb1;
+  --neon-blue: #00f3ff;
+  --royal-pink: #ff66b2;
+  --text: #f3ecdf; 
+  --muted: #b9aecb;
+  --glass: rgba(20, 10, 40, 0.45); 
+  --glass-strong: rgba(15, 8, 30, 0.85);
+  --border: rgba(232, 198, 107, 0.3);
+  --border-glow: rgba(232, 198, 107, 0.6);
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+  --glow: 0 0 35px rgba(232, 198, 107, 0.25);
+  --z-canvas: 0; --z-ambient: 1; --z-content: 10; --z-ui: 1000;
 }
 
-/* نشانگر سینماتیک — فقط transform، با translate3d برای شتاب سخت‌افزاری */
-.cursor,.cursor-dot{
-  position:fixed; top:0; left:0; z-index:9999; pointer-events:none;
-  will-change:transform; mix-blend-mode:screen;
-}
-.cursor{width:34px;height:34px;border:2px solid var(--gold);border-radius:50%;
-  transition:width .25s,height .25s,opacity .25s;opacity:.8}
-.cursor-dot{width:6px;height:6px;background:var(--gold);border-radius:50%}
-@media(hover:none){body{cursor:auto}.cursor,.cursor-dot{display:none}}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); min-height: 100%; overflow-x: hidden; }
 
-/* ===================================================================
-   لودر اولیه
-   =================================================================== */
-#loader{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;
-  background:var(--bg-2);transition:opacity .8s,visibility .8s}
-#loader.done{opacity:0;visibility:hidden}
-.loader-crown{font-size:3.5rem;color:var(--gold);animation:pulse 1.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.15);opacity:1}}
-
-/* ===================================================================
-   دروازه ورود (کلید قلب ملکه)
-   =================================================================== */
-#gate{position:fixed;inset:0;z-index:9000;display:grid;place-items:center;
-  background:radial-gradient(circle at 50% 40%,#231646,var(--bg-2));
-  transition:opacity .7s,visibility .7s}
-#gate.open{opacity:0;visibility:hidden}
-.gate-box{text-align:center;padding:40px 28px;max-width:420px;width:92%;
-  background:var(--card);border:1px solid var(--line);border-radius:24px;
-  backdrop-filter:blur(14px);box-shadow:var(--shadow)}
-.gate-box i{font-size:2.6rem;color:var(--gold);animation:pulse 1.6s infinite}
-.gate-box h2{margin:14px 0 6px;color:var(--gold-soft);font-size:1.5rem}
-.gate-box p{color:var(--muted);font-size:.95rem;margin-bottom:18px}
-.gate-box input{width:100%;padding:14px;border-radius:14px;text-align:center;
-  background:rgba(0,0,0,.3);border:1px solid var(--line);color:var(--text);
-  font-family:'Vazirmatn';font-size:1rem;margin-bottom:12px}
-.gate-box input:focus{outline:none;border-color:var(--gold)}
-.btn{cursor:none;border:none;padding:13px 26px;border-radius:14px;font-family:'Vazirmatn';
-  font-weight:600;font-size:1rem;color:#1a1033;background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  transition:transform .2s,box-shadow .2s;box-shadow:0 8px 24px var(--glow)}
-.btn:hover{transform:translateY(-2px)}
-.gate-hint{margin-top:10px;font-size:.8rem;color:var(--muted)}
-.gate-err{color:#ff8095;font-size:.85rem;height:18px;margin-top:6px}
-
-/* ===================================================================
-   ناوبری + همبرگری
-   =================================================================== */
-nav{position:fixed;top:0;left:0;right:0;z-index:800;display:flex;justify-content:space-between;
-  align-items:center;padding:14px 26px;transition:background .4s,padding .4s;
-  backdrop-filter:blur(8px)}
-nav.scrolled{background:rgba(12,8,28,.8);padding:9px 26px;border-bottom:1px solid var(--line)}
-.brand{font-family:'Cinzel';font-weight:900;color:var(--gold);font-size:1.25rem;display:flex;gap:8px;align-items:center}
-.nav-links{display:flex;gap:22px}
-.nav-links a{color:var(--muted);font-size:.95rem;position:relative;transition:color .25s}
-.nav-links a:hover{color:var(--gold-soft)}
-.nav-links a::after{content:'';position:absolute;right:0;bottom:-6px;height:2px;width:0;
-  background:var(--gold);transition:width .3s}
-.nav-links a:hover::after{width:100%}
-.burger{display:none;font-size:1.5rem;color:var(--gold);background:none;border:none;cursor:none}
-.theme-toggle{background:none;border:1px solid var(--line);color:var(--gold);
-  width:40px;height:40px;border-radius:50%;cursor:none;font-size:1rem;transition:.25s}
-.theme-toggle:hover{background:var(--glow)}
-
-@media(max-width:880px){
-  .nav-links{position:fixed;inset:0 0 0 30%;flex-direction:column;justify-content:center;
-    align-items:center;gap:30px;background:rgba(10,6,24,.97);transform:translateX(100%);
-    transition:transform .4s ease;backdrop-filter:blur(16px)}
-  .nav-links.open{transform:translateX(0)}
-  .nav-links a{font-size:1.3rem}
-  .burger{display:block}
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  cursor: none;
+  background-color: var(--bg);
 }
 
-/* ===================================================================
-   ساختار کلی بخش‌ها
-   =================================================================== */
-main{position:relative;z-index:1}
-section{padding:90px 20px;max-width:1100px;margin:0 auto}
-.title{text-align:center;font-size:2.1rem;color:var(--gold-soft);margin-bottom:14px;
-  text-shadow:0 0 22px var(--glow)}
-.subtitle{text-align:center;color:var(--muted);max-width:640px;margin:0 auto 50px}
-/* contain برای کارت‌ها و بخش‌ها — کاهش بازمحاسبه layout/paint */
-.card,.prince-card,.gallery-item,section{contain:layout style paint}
+@media(pointer: coarse) { body { cursor: auto; } .cursor-dot, .cursor-ring { display: none !important; } }
+h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
+.lalezar { font-family: 'Lalezar', cursive; }
+::selection { background: var(--gold); color: #000; text-shadow: none; }
+a, button { -webkit-tap-highlight-color: transparent; }
 
-/* reveal روی اسکرول */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
-.reveal.in{opacity:1;transform:none}
+/* === نشانگر موس پیشرفته === */
+.cursor-dot { position: fixed; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-2); z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 20px 4px var(--gold); transition: transform 0.1s; will-change: transform; }
+.cursor-ring { position: fixed; width: 45px; height: 45px; border-radius: 50%; border: 1.5px solid rgba(232, 198, 107, 0.5); z-index: 9998; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s, backdrop-filter 0.3s; will-change: transform; }
+.cursor-ring.hot { width: 70px; height: 70px; background: rgba(232, 198, 107, 0.08); border-color: var(--gold-2); backdrop-filter: blur(2px); box-shadow: 0 0 30px rgba(232, 198, 107, 0.3); }
 
-/* قاب طلایی تزئینی مشترک */
-.frame{background:var(--card);border:1px solid var(--line);border-radius:22px;
-  padding:30px;backdrop-filter:blur(12px);box-shadow:var(--shadow);position:relative}
-.frame::before{content:'';position:absolute;inset:8px;border:1px solid var(--line);
-  border-radius:16px;pointer-events:none;opacity:.5}
+/* === افکت‌های پس‌زمینه سینمایی === */
+#progress { position: fixed; top: 0; right: 0; left: 0; height: 4px; z-index: 9990; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), var(--purple)); width: 0; box-shadow: 0 0 15px var(--gold-2); transition: width 0.1s ease-out; }
+canvas.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-canvas); }
+.ambient-fog { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'), radial-gradient(circle at 50% 50%, transparent 20%, var(--bg) 100%); opacity: 0.6; mix-blend-mode: screen; pointer-events: none; z-index: var(--z-ambient); animation: breathe 10s infinite alternate; }
+.light-rays { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-ambient); background: repeating-linear-gradient(105deg, transparent, transparent 10%, rgba(232,198,107,0.02) 10%, rgba(232,198,107,0.02) 20%); filter: blur(20px); mask-image: radial-gradient(circle at center, black, transparent); -webkit-mask-image: radial-gradient(circle at top, black, transparent); }
+@keyframes breathe { 0% { opacity: 0.4; } 100% { opacity: 0.8; } }
 
-/* ===================================================================
-   هیرو
-   =================================================================== */
-.hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;
-  align-items:center;text-align:center;padding-top:80px}
-.hero h1{font-size:clamp(2.2rem,7vw,4.5rem);color:var(--gold);
-  text-shadow:0 0 40px var(--glow);animation:floatY 5s ease-in-out infinite}
-@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.hero .crown-big{font-size:clamp(2.5rem,9vw,5rem);color:var(--gold-soft);margin-bottom:10px}
-.hero p{color:var(--muted);font-size:1.1rem;margin-top:14px}
-.love-counter{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-.lc-box{min-width:90px;padding:16px 18px;background:var(--card);border:1px solid var(--line);
-  border-radius:16px;backdrop-filter:blur(10px)}
-.lc-box b{display:block;font-size:1.9rem;color:var(--gold);font-family:'Cinzel'}
-.lc-box span{font-size:.8rem;color:var(--muted)}
+.floating-symbol { position: absolute; color: rgba(232,198,107,0.1); font-family: 'Cinzel'; font-size: 24px; pointer-events: none; animation: floatUpward 20s linear infinite; z-index: var(--z-ambient); text-shadow: 0 0 15px rgba(232,198,107,0.2); }
+@keyframes floatUpward { 0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(-20vh) rotate(360deg) scale(1.2); opacity: 0; } }
 
-/* ===================================================================
-   کارت‌های شاهانه (پادشاه/ملکه) + مدال افتخار روی هاور
-   =================================================================== */
-.royals{display:grid;grid-template-columns:1fr 1fr;gap:30px}
-@media(max-width:760px){.royals{grid-template-columns:1fr}}
-.card{text-align:center;perspective:1000px}
-.card-inner{background:var(--card);border:1px solid var(--line);border-radius:22px;
-  padding:34px 26px;backdrop-filter:blur(12px);box-shadow:var(--shadow);
-  transform-style:preserve-3d;backface-visibility:hidden;will-change:transform;
-  transition:box-shadow .3s;position:relative;overflow:hidden}
-.card-inner .avatar{width:120px;height:120px;border-radius:50%;margin:0 auto 16px;
-  display:grid;place-items:center;font-size:3rem;color:#1a1033;
-  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
-  box-shadow:0 0 30px var(--glow)}
-.card h3{color:var(--gold-soft);font-size:1.5rem}
-.card .role{color:var(--muted);font-size:.95rem;margin:4px 0 14px}
-.card .quote{font-style:italic;color:var(--text);font-size:.95rem}
-/* مدال‌ها — مخفی، با هاور ظاهر می‌شن */
-.medals{display:flex;justify-content:center;gap:10px;margin-top:16px;
-  opacity:0;transform:translateY(10px);transition:opacity .35s,transform .35s}
-.card-inner:hover .medals{opacity:1;transform:none}
-.medal{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
-  font-size:1rem;color:var(--gold);background:rgba(0,0,0,.3);border:1px solid var(--line)}
+.petal { position: fixed; top: -30px; z-index: var(--z-ui); pointer-events: none; animation: fall linear forwards; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); will-change: transform; }
+@keyframes fall { to { transform: translateY(115vh) rotate(720deg); opacity: 0; } }
 
-/* ===================================================================
-   شاهزاده‌ها — هرکدام رنگ و افکت اختصاصی
-   =================================================================== */
-.princes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-@media(max-width:820px){.princes{grid-template-columns:1fr}}
-.prince-card{position:relative;border-radius:22px;padding:30px 22px;text-align:center;
-  background:var(--card);backdrop-filter:blur(12px);overflow:hidden;
-  border:1px solid var(--pc,var(--line));box-shadow:var(--shadow);
-  perspective:900px;transform-style:preserve-3d;will-change:transform}
-.prince-card::before{content:'';position:absolute;inset:0;opacity:.12;
-  background:radial-gradient(circle at 50% 0%,var(--pc),transparent 70%);pointer-events:none}
-.prince-emblem{width:90px;height:90px;border-radius:50%;margin:0 auto 14px;display:grid;
-  place-items:center;font-size:2.3rem;color:#fff;
-  background:linear-gradient(135deg,var(--pc),transparent);box-shadow:0 0 24px var(--pc)}
-.prince-card h3{color:var(--pc-text,var(--gold-soft));font-size:1.35rem}
-.prince-card .ptitle{color:var(--muted);font-size:.9rem;margin:4px 0 12px}
-.prince-card .pquote{font-style:italic;font-size:.9rem;color:var(--text)}
-.prince-card .medals{margin-top:14px}
+/* === لودینگ سینمایی === */
+#loader { position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--bg2) 0%, var(--bg) 100%); transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease; transform-origin: top; }
+#loader.done { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+.loader-crown { font-size: 90px; filter: drop-shadow(0 0 40px var(--gold)); animation: floatCrown 3s ease-in-out infinite; }
+@keyframes floatCrown { 0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 20px var(--gold)); } 50% { transform: translateY(-20px) scale(1.1); filter: drop-shadow(0 0 60px var(--gold-2)); } }
+.loader-txt { margin-top: 35px; color: var(--gold-2); font-family: 'Cinzel'; letter-spacing: 8px; font-size: 18px; font-weight: 900; text-shadow: 0 0 20px var(--gold); }
+.loader-bar { margin-top: 40px; width: 320px; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, 0.05); position: relative; overflow: hidden; }
+.loader-bar i { position: absolute; height: 100%; width: 0; background: linear-gradient(90deg, transparent, var(--gold-2), #fff); animation: loadBar 2s cubic-bezier(0.4, 0, 0.2, 1) forwards; box-shadow: 0 0 20px var(--gold); }
+@keyframes loadBar { to { width: 100%; } }
 
-/* تبارنامه */
-.tree{margin-top:50px;text-align:center}
-.tree-top{display:flex;justify-content:center;gap:50px;margin-bottom:40px;position:relative}
-.tree-node{padding:12px 20px;border:1px solid var(--line);border-radius:14px;
-  background:var(--card);color:var(--gold-soft);font-family:'Cinzel';position:relative}
-.tree-children{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-.tree-line{height:34px;width:2px;background:var(--line);margin:0 auto}
-.tree-children .tree-node{font-size:.9rem}
+/* === دروازه قصر (آپدیت حرفه‌ای‌تر) === */
+#gate { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; background: rgba(5,3,8,0.9); backdrop-filter: blur(20px); transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1), visibility 1.5s; padding: 20px; overflow: hidden; }
+#gate::before, #gate::after { content: ''; position: absolute; top: 0; bottom: 0; width: 50vw; background: linear-gradient(to right, var(--bg) 0%, var(--bg2) 100%); z-index: 0; transition: transform 2s cubic-bezier(0.7, 0, 0.1, 1); box-shadow: inset 0 0 100px rgba(0,0,0,0.9); }
+#gate::before { left: 0; border-right: 2px solid var(--gold); border-image: linear-gradient(to bottom, transparent, var(--gold), transparent) 1; }
+#gate::after { right: 0; border-left: 2px solid var(--gold); border-image: linear-gradient(to bottom, transparent, var(--gold), transparent) 1; }
+#gate.hidden::before { transform: translateX(-100%); }
+#gate.hidden::after { transform: translateX(100%); }
+#gate.hidden .gate-card { transform: scale(1.1) translateY(-50px); opacity: 0; filter: blur(10px); }
 
-/* ===================================================================
-   تایم‌لاین
-   =================================================================== */
-.timeline{position:relative;padding-right:30px}
-.timeline::before{content:'';position:absolute;right:8px;top:0;bottom:0;width:2px;background:var(--line)}
-.tl-item{position:relative;margin-bottom:34px;padding-right:26px}
-.tl-item::before{content:'';position:absolute;right:-1px;top:6px;width:14px;height:14px;
-  border-radius:50%;background:var(--gold);box-shadow:0 0 14px var(--glow)}
-.tl-when{color:var(--gold);font-family:'Cinzel';font-size:.9rem}
-.tl-title{color:var(--gold-soft);font-size:1.15rem;margin:4px 0}
-.tl-text{color:var(--muted)}
+.gate-card { width: min(480px, 92vw); background: var(--glass-strong); backdrop-filter: blur(40px); border: 1px solid var(--border); border-radius: 40px; padding: 60px 40px; text-align: center; box-shadow: var(--shadow), 0 0 50px rgba(232, 198, 107, 0.15); position: relative; z-index: 1; transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); transform-style: preserve-3d; perspective: 1000px; }
+.gate-card::before { content: ''; position: absolute; inset: -2px; border-radius: 42px; background: linear-gradient(45deg, transparent, var(--gold), transparent); z-index: -1; opacity: 0.3; animation: spinGlow 4s linear infinite; }
+@keyframes spinGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.gate-card .crown { font-size: 70px; filter: drop-shadow(0 0 30px var(--gold)); margin-bottom: 15px; animation: pulseCrown 2s infinite alternate; }
+.gate-card h1 { font-size: 30px; margin: 15px 0; color: var(--gold-2); letter-spacing: 2px; text-shadow: 0 0 20px rgba(232, 198, 107, 0.6); }
+.gate-card p { color: var(--muted); font-size: 16px; margin-bottom: 35px; line-height: 1.8; }
+.gate-card input { width: 100%; padding: 20px 25px; border-radius: 20px; border: 2px solid rgba(232, 198, 107, 0.2); background: rgba(0, 0, 0, 0.7); color: var(--gold-2); text-align: center; font-family: 'Vazirmatn'; font-size: 18px; font-weight: 600; outline: none; transition: all 0.4s ease; box-shadow: inset 0 5px 20px rgba(0,0,0,0.8); letter-spacing: 1px; }
+.gate-card input:focus { border-color: var(--gold); box-shadow: 0 0 30px rgba(232, 198, 107, 0.3), inset 0 5px 20px rgba(0,0,0,0.8); transform: translateY(-3px); }
+.btn { margin-top: 30px; width: 100%; padding: 18px; border: 1px solid rgba(232, 198, 107, 0.5); border-radius: 20px; cursor: pointer; font-family: 'Vazirmatn'; font-weight: 900; font-size: 18px; color: #000; background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--gold-deep)); box-shadow: 0 10px 30px rgba(232, 198, 107, 0.4), inset 0 0 10px rgba(255,255,255,0.5); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
+.btn::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg) translateY(-100%); transition: transform 0.6s ease; }
+.btn:hover::after { transform: rotate(45deg) translateY(100%); }
+.btn:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 20px 50px rgba(232, 198, 107, 0.6); }
+.gate-err { color: var(--rose); font-size: 15px; margin-top: 20px; min-height: 22px; font-weight: 800; text-shadow: 0 0 15px rgba(255, 143, 177, 0.6); animation: shake 0.4s; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
 
-/* ===================================================================
-   شمارش معکوس تولدها
-   =================================================================== */
-.birthdays{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-@media(max-width:760px){.birthdays{grid-template-columns:1fr}}
-.bday-card{text-align:center}
-.bday-card .crown-icon{font-size:2.2rem;color:var(--gold)}
-.bday-card h3{color:var(--gold-soft);margin:8px 0 2px}
-.bday-card .date{color:var(--muted);font-size:.9rem;margin-bottom:14px}
-.countdown{display:flex;justify-content:center;gap:8px}
-.cd-box{min-width:62px;padding:10px 6px;background:rgba(0,0,0,.3);border-radius:12px;
-  border:1px solid var(--line)}
-.cd-box b{display:block;font-size:1.4rem;color:var(--gold);font-family:'Cinzel'}
-.cd-box span{font-size:.7rem;color:var(--muted)}
-.bday-card.king{border-top:4px solid var(--gold)}
-.bday-card.queen{border-top:4px solid var(--rose)}
+/* === ناوبار سینمایی === */
+.navbar { position: fixed; top: 0; right: 0; left: 0; z-index: 5000; display: flex; align-items: center; justify-content: space-between; padding: 20px 50px; background: linear-gradient(180deg, rgba(5, 3, 8, 0.95), transparent); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-bottom: 1px solid rgba(232, 198, 107, 0.1); transform: translateY(-130%); transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.navbar.show { transform: translateY(0); }
+.brand { display: flex; align-items: center; gap: 15px; font-family: 'Cinzel'; font-weight: 900; color: var(--gold-2); font-size: 24px; text-shadow: 0 0 25px rgba(232, 198, 107, 0.6); letter-spacing: 2px; }
+.nav-links { display: flex; gap: 5px; flex-wrap: wrap; }
+.nav-links a { color: var(--text); text-decoration: none; padding: 12px 20px; border-radius: 15px; font-size: 15px; transition: all 0.4s ease; position: relative; font-weight: 600; overflow: hidden; }
+.nav-links a::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(232, 198, 107, 0.15), transparent); transform: translateY(100%); transition: transform 0.4s ease; border-radius: 15px; z-index: -1; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 3px; background: var(--gold); transition: all 0.4s ease; transform: translateX(-50%); border-radius: 3px; box-shadow: 0 0 10px var(--gold); }
+.nav-links a:hover::before, .nav-links a.active::before { transform: translateY(0); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 80%; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold-2); text-shadow: 0 0 10px rgba(232,198,107,0.5); }
+.icon-btn { background: rgba(15,8,30,0.6); border: 1px solid rgba(232, 198, 107, 0.4); color: var(--gold-2); border-radius: 15px; padding: 12px 18px; font-size: 20px; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+.icon-btn:hover { background: rgba(232, 198, 107, 0.2); transform: translateY(-3px) scale(1.1); box-shadow: 0 10px 25px rgba(232, 198, 107, 0.5); border-color: var(--gold); }
+.nav-toggle { display: none; }
 
-/* ===================================================================
-   نامه پادشاه (تایپ‌رایتر)
-   =================================================================== */
-.letter{font-size:1.15rem;line-height:2.4;min-height:160px;color:var(--text)}
-.letter .cur{display:inline-block;width:2px;background:var(--gold);
-  animation:blink .8s step-end infinite;height:1.1em;vertical-align:-2px}
-@keyframes blink{50%{opacity:0}}
+/* === ساختار پایه === */
+.wrap { position: relative; z-index: var(--z-content); max-width: 1300px; margin: 0 auto; padding: 0 30px; perspective: 1500px; }
+section { padding: 150px 0; position: relative; }
+.sec-title { text-align: center; margin-bottom: 80px; }
+.sec-title h2 { font-size: clamp(36px, 5vw, 55px); color: var(--gold-2); letter-spacing: 3px; text-shadow: 0 0 30px rgba(232, 198, 107, 0.4); }
+.sec-title .line { width: 150px; height: 4px; margin: 25px auto; border-radius: 4px; background: linear-gradient(90deg, transparent, var(--gold), var(--gold-2), var(--gold), transparent); position: relative; box-shadow: 0 0 20px var(--gold); }
+.sec-title .line::after { content: '👑'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 0 15px; font-size: 22px; filter: drop-shadow(0 0 10px var(--gold)); }
+.sec-title p { color: var(--muted); max-width: 750px; margin: 25px auto 0; font-size: 18px; line-height: 2; font-weight: 300; }
+.reveal { opacity: 0; transform: translateY(60px) translateZ(-50px) rotateX(-5deg); transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: transform, opacity; transform-style: preserve-3d; }
+.reveal.in { opacity: 1; transform: translateY(0) translateZ(0) rotateX(0); }
 
-/* اشعار/عهدنامه‌ها */
-.poems{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-@media(max-width:760px){.poems{grid-template-columns:1fr}}
-.poem{font-style:italic;color:var(--text);text-align:center;line-height:2.3}
-.poem .by{display:block;margin-top:10px;color:var(--gold);font-style:normal;font-size:.85rem}
+/* === HERO (تالار اصلی قصر) سینمایی === */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 120px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(123, 63, 228, 0.15) 0%, rgba(232, 198, 107, 0.05) 40%, transparent 80%); pointer-events: none; z-index: var(--z-ambient); }
+.hero .sub { color: var(--gold); letter-spacing: 12px; font-size: 18px; margin-bottom: 20px; min-height: 25px; font-weight: 800; text-transform: uppercase; text-shadow: 0 0 20px var(--gold); }
+.hero h1 { font-size: clamp(45px, 9vw, 100px); line-height: 1.1; background: linear-gradient(135deg, #fff 20%, var(--gold-2) 50%, var(--gold-deep) 80%); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 15px 50px rgba(232, 198, 107, 0.4); margin-bottom: 30px; font-weight: 900; letter-spacing: -1px; }
+.angel-container { perspective: 1000px; margin: 50px auto; z-index: var(--z-content); }
+.angel { position: relative; width: min(380px, 85vw); aspect-ratio: 1; margin: 0 auto; transition: transform 0.1s ease-out; transform-style: preserve-3d; }
+.angel::after { content: ''; position: absolute; bottom: -40px; left: 10%; right: 10%; height: 30px; background: radial-gradient(ellipse, rgba(232,198,107,0.4), transparent 70%); filter: blur(15px); transform: translateZ(-50px); }
+.photo-frame { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; z-index: 3; border: 4px solid rgba(255,255,255,0.8); box-shadow: 0 0 0 15px rgba(232, 198, 107, 0.15), 0 0 100px rgba(232, 198, 107, 0.7), inset 0 0 50px rgba(0,0,0,0.8); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateZ(30px); }
+.photo-frame::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(255,255,255,0.1) 100%); z-index: 5; pointer-events: none; mix-blend-mode: overlay; }
+.angel:hover .photo-frame { box-shadow: 0 0 0 20px rgba(232, 198, 107, 0.25), 0 0 150px rgba(232, 198, 107, 1); border-color: #fff; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); filter: contrast(1.1) brightness(1.05); }
+.angel:hover .photo-frame img { transform: scale(1.15) rotate(2deg); }
+.halo { position: absolute; top: -35px; left: 50%; transform: translateX(-50%) translateZ(50px); width: 75%; height: 35px; border-radius: 50%; border: 6px solid rgba(255, 255, 255, 0.9); box-shadow: 0 0 50px var(--gold-2), inset 0 0 30px var(--gold-2); z-index: 4; animation: haloHQ 4s ease-in-out infinite; }
+@keyframes haloHQ { 0%, 100% { transform: translateX(-50%) translateY(0) translateZ(50px) rotateX(75deg); box-shadow: 0 0 50px var(--gold), inset 0 0 30px var(--gold); } 50% { transform: translateX(-50%) translateY(-20px) translateZ(50px) rotateX(70deg); box-shadow: 0 0 80px #fff, inset 0 0 50px #fff; } }
+.wing { position: absolute; top: 5%; width: 65%; height: 90%; z-index: 1; display: flex; align-items: flex-start; justify-content: center; opacity: 0.95; filter: drop-shadow(0 0 30px rgba(232,198,107,0.4)); transform: translateZ(-20px); }
+.wing-left { right: 65%; transform-origin: right center; animation: flapLHQ 6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.wing-right { left: 65%; transform-origin: left center; animation: flapRHQ 6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+@keyframes flapLHQ { 0%, 100% { transform: rotate(-5deg) scaleX(1) translateZ(-20px); } 50% { transform: rotate(15deg) scaleX(0.8) translateZ(-40px); } }
+@keyframes flapRHQ { 0%, 100% { transform: rotate(5deg) scaleX(1) translateZ(-20px); } 50% { transform: rotate(-15deg) scaleX(0.8) translateZ(-40px); } }
+.feather { position: absolute; bottom: 0; width: 24px; background: linear-gradient(to top, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.9) 70%, #fff); border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%; box-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(232, 198, 107, 0.6); backdrop-filter: blur(4px); transform-origin: bottom center; transition: all 0.3s; }
+.hero .love { max-width: 800px; margin: 30px auto 0; color: var(--text); line-height: 2.2; font-size: 20px; font-weight: 300; text-shadow: 0 5px 15px rgba(0,0,0,0.9); position: relative; z-index: 10; background: rgba(5,3,8,0.4); padding: 20px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(232,198,107,0.1); }
+.hero .love b { color: var(--gold-2); font-weight: 900; font-size: 24px; text-shadow: 0 0 15px var(--gold); }
+.hero-btns { margin-top: 50px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 15; }
+.hero-btns .btn { width: auto; margin: 0; padding: 18px 40px; font-size: 18px; border-radius: 25px; }
+.ghost { background: rgba(15,8,30,0.5); color: var(--gold-2); border: 2px solid var(--border-glow); backdrop-filter: blur(15px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.ghost:hover { background: rgba(232, 198, 107, 0.15); border-color: var(--gold); color: #fff; box-shadow: 0 15px 40px rgba(232, 198, 107, 0.4), inset 0 0 20px rgba(232,198,107,0.3); }
+.scroll-down { margin-top: 80px; color: var(--gold); font-size: 15px; animation: bobHQ 2s cubic-bezier(0.4, 0, 0.2, 1) infinite; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.9; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; z-index: 10; position: relative; }
+.scroll-down i { font-style: normal; font-size: 30px; text-shadow: 0 0 20px var(--gold); }
+@keyframes bobHQ { 0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 5px var(--gold)); } 50% { transform: translateY(20px); filter: drop-shadow(0 0 20px var(--gold-2)); } }
 
-/* ===================================================================
-   گالری + لایت‌باکس
-   =================================================================== */
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:760px){.gallery{grid-template-columns:1fr 1fr}}
-.gallery-item{aspect-ratio:1;border-radius:16px;overflow:hidden;border:1px solid var(--line);
-  cursor:none;position:relative;background:rgba(0,0,0,.3)}
-.gallery-item img{width:100%;height:100%;object-fit:cover;opacity:0;
-  transition:opacity .6s,transform .5s}
-.gallery-item img.loaded{opacity:1}
-.gallery-item:hover img{transform:scale(1.08)}
-#lightbox{position:fixed;inset:0;z-index:9500;display:none;place-items:center;
-  background:rgba(5,4,12,.92);backdrop-filter:blur(6px)}
-#lightbox.show{display:grid}
-#lightbox img{max-width:90vw;max-height:80vh;border-radius:14px;box-shadow:var(--shadow)}
-.lb-btn{position:absolute;top:50%;transform:translateY(-50%);font-size:2rem;color:var(--gold);
-  background:rgba(0,0,0,.4);border:none;width:54px;height:54px;border-radius:50%;cursor:none}
-.lb-prev{right:20px}.lb-next{left:20px}
-.lb-close{top:24px;left:24px;transform:none;font-size:1.6rem}
+/* === بخش تمدن Wiriper سینمایی === */
+#wiriper-realm { position: relative; border-top: 1px solid rgba(232,198,107,0.15); border-bottom: 1px solid rgba(232,198,107,0.15); padding: 120px 0; background: linear-gradient(to bottom, rgba(10,5,20,0.8), rgba(30,15,60,0.3), rgba(10,5,20,0.8)); }
+.wiriper-card { background: url('https://www.transparenttextures.com/patterns/cubes.png'), radial-gradient(circle at top right, rgba(123, 63, 228, 0.3), transparent 70%), var(--glass-strong); backdrop-filter: blur(30px); border: 1px solid var(--border-glow); border-radius: 50px; padding: 80px; box-shadow: var(--shadow), inset 0 0 80px rgba(232, 198, 107, 0.05); text-align: center; position: relative; overflow: hidden; transform-style: preserve-3d; }
+.wiriper-card::before { content: 'W'; position: absolute; top: -50px; right: -30px; font-size: 400px; color: rgba(232, 198, 107, 0.04); font-family: 'Cinzel'; font-weight: 900; line-height: 1; pointer-events: none; transform: translateZ(-20px); }
+.wiriper-logo { font-size: 100px; margin-bottom: 30px; filter: drop-shadow(0 0 50px var(--gold)); transform: translateZ(40px); display: inline-block; animation: floatIcon 4s ease-in-out infinite; }
+@keyframes floatIcon { 0%, 100% { transform: translateZ(40px) translateY(0); } 50% { transform: translateZ(40px) translateY(-15px); } }
+.wiriper-title { color: var(--gold-2); font-size: 45px; margin-bottom: 30px; font-family: 'Cinzel'; font-weight: 900; text-shadow: 0 0 25px rgba(232, 198, 107, 0.5); transform: translateZ(30px); }
+.wiriper-desc { color: var(--text); font-size: 19px; line-height: 2.4; max-width: 900px; margin: 0 auto 40px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); transform: translateZ(20px); font-weight: 300; }
+.wiriper-stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-top: 50px; border-top: 1px solid rgba(232,198,107,0.3); padding-top: 50px; transform: translateZ(30px); }
+.wstat { text-align: center; position: relative; }
+.wstat .num { display: block; font-size: 55px; font-family: 'Cinzel'; font-weight: 900; color: #fff; text-shadow: 0 0 25px var(--gold-2), 0 0 50px var(--gold); margin-bottom: 10px; }
+.wstat .lbl { font-size: 16px; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; font-weight: 600; }
 
-/* ===================================================================
-   نقشه قلمرو + آب‌وهوای قصر
-   =================================================================== */
-.realm-wrap{display:flex;gap:30px;align-items:center;flex-wrap:wrap;justify-content:center}
-.realm-map{width:280px;height:280px;border-radius:50%;position:relative;flex-shrink:0;
-  background:radial-gradient(circle at 40% 35%,rgba(212,175,55,.18),transparent 60%),var(--card);
-  border:2px solid var(--line);box-shadow:inset 0 0 40px var(--glow)}
-.city{position:absolute;width:14px;height:14px;border-radius:50%;background:var(--gold);
-  box-shadow:0 0 14px var(--glow);cursor:none;transform:translate(-50%,-50%);
-  animation:cityPulse 2.4s ease-in-out infinite}
-@keyframes cityPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.5)}}
-.city .tip{position:absolute;bottom:18px;right:50%;transform:translateX(50%);
-  white-space:nowrap;background:rgba(0,0,0,.8);padding:4px 10px;border-radius:8px;
-  font-size:.75rem;color:var(--gold-soft);opacity:0;pointer-events:none;transition:opacity .25s}
-.city:hover .tip{opacity:1}
-.weather{text-align:center;min-width:200px}
-.weather .w-icon{font-size:3rem;color:var(--gold);transition:color .6s}
-.weather .w-name{color:var(--gold-soft);font-family:'Cinzel';margin-top:8px;font-size:1.1rem}
+/* === آینه جادویی (3D Premium) === */
+.magic-mirror-container { display: flex; justify-content: center; margin-top: 80px; perspective: 1200px; }
+.magic-mirror { width: 350px; height: 500px; background: rgba(5, 3, 10, 0.9); border: 12px solid var(--gold); border-radius: 180px 180px 15px 15px; box-shadow: 0 40px 100px rgba(0,0,0,0.9), 0 0 80px rgba(232, 198, 107, 0.5), inset 0 0 100px rgba(232, 198, 107, 0.3); position: relative; cursor: pointer; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s ease; transform-style: preserve-3d; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.magic-mirror::after { content: ''; position: absolute; inset: -20px; background: conic-gradient(from 0deg, transparent, var(--gold), transparent); animation: spinMirror 5s linear infinite; z-index: -1; opacity: 0.5; }
+@keyframes spinMirror { 100% { transform: rotate(360deg); } }
+.magic-mirror:hover { transform: translateY(-20px) rotateY(15deg) scale(1.05); box-shadow: 0 50px 120px rgba(0,0,0,0.9), 0 0 120px rgba(232, 198, 107, 0.7), inset 0 0 120px rgba(232, 198, 107, 0.5); border-color: #fff; }
+.mirror-glass { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0) 100%); z-index: 2; pointer-events: none; border-radius: inherit; box-shadow: inset 0 0 20px rgba(255,255,255,0.3); }
+.mirror-content { padding: 40px; text-align: center; z-index: 1; transition: opacity 0.6s ease, transform 0.6s ease; transform: translateZ(40px); }
+.mirror-content.hidden { opacity: 0; transform: translateZ(40px) scale(0.8); pointer-events: none; }
+.mirror-icon { font-size: 70px; margin-bottom: 25px; animation: pulseHQ 2s infinite; filter: drop-shadow(0 0 20px var(--gold)); }
+.mirror-text { font-size: 18px; color: var(--gold-2); line-height: 2; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+.mirror-reflection { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(232,198,107,0.3), rgba(0,0,0,0.8)); opacity: 0; transition: opacity 1.5s ease; display: flex; align-items: center; justify-content: center; padding: 40px; text-align: center; font-size: 26px; color: #fff; text-shadow: 0 0 20px var(--gold-2), 0 0 40px var(--gold); font-weight: 900; line-height: 2.2; font-family: 'Cinzel'; z-index: 3; transform: translateZ(50px); }
+.magic-mirror.revealed .mirror-content { opacity: 0; transform: scale(0.5); }
+.magic-mirror.revealed .mirror-reflection { opacity: 1; }
 
-/* آرزوها */
-.wish-form{display:flex;gap:10px;max-width:560px;margin:0 auto 24px;flex-wrap:wrap}
-.wish-form input{flex:1;min-width:200px;padding:13px;border-radius:13px;background:rgba(0,0,0,.3);
-  border:1px solid var(--line);color:var(--text);font-family:'Vazirmatn'}
-.wish-form input:focus{outline:none;border-color:var(--gold)}
-.wishes-list{display:flex;flex-direction:column;gap:10px;max-width:620px;margin:0 auto}
-.wish{padding:12px 16px;background:var(--card);border:1px solid var(--line);border-radius:13px;
-  animation:wishIn .5s ease}
-@keyframes wishIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+/* === گریدها و کارت‌های 3D === */
+.grid { display: grid; gap: 40px; } .g2 { grid-template-columns: repeat(2, 1fr); } .g3 { grid-template-columns: repeat(3, 1fr); }
+.card { background: linear-gradient(145deg, rgba(30, 15, 55, 0.6), rgba(15, 8, 30, 0.9)); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 40px; padding: 50px; box-shadow: var(--shadow), inset 0 0 30px rgba(255,255,255,0.02); transition: border-color 0.4s ease, box-shadow 0.4s ease; position: relative; overflow: hidden; transform-style: preserve-3d; transform: perspective(1000px); will-change: transform; }
+.card::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transform: skewX(-25deg); transition: 0.8s ease; z-index: 1; pointer-events: none; }
+.card:hover::before { left: 200%; }
+.card:hover { box-shadow: 0 40px 100px rgba(123, 63, 228, 0.5), 0 0 50px rgba(232, 198, 107, 0.3), inset 0 0 40px rgba(255,255,255,0.05); border-color: var(--gold-2); z-index: 20; }
+.card .ico { font-size: 65px; margin-bottom: 30px; filter: drop-shadow(0 0 25px rgba(232,198,107,0.6)); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateZ(40px); display: inline-block; }
+.card:hover .ico { transform: translateZ(60px) scale(1.25) rotate(10deg); filter: drop-shadow(0 0 35px var(--gold-2)); }
+.card h3 { color: var(--gold-2); font-size: 30px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(232,198,107,0.4); transform: translateZ(30px); font-family: 'Cinzel'; font-weight: 800; }
+.card p { color: var(--muted); line-height: 2.2; font-size: 17px; transform: translateZ(20px); font-weight: 300; }
+.tags { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; transform: translateZ(25px); }
+.tag { font-size: 14px; padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(232, 198, 107, 0.4); background: rgba(232, 198, 107, 0.1); color: var(--gold-2); transition: all 0.4s ease; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
+.tag:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold), 0 10px 20px rgba(0,0,0,0.5); transform: translateY(-3px); }
 
-/* ===================================================================
-   پلیر موسیقی شناور
-   =================================================================== */
-.player{position:fixed;bottom:18px;right:18px;z-index:700;display:flex;align-items:center;
-  gap:10px;padding:10px 14px;background:rgba(12,8,28,.85);border:1px solid var(--line);
-  border-radius:40px;backdrop-filter:blur(12px);box-shadow:var(--shadow);max-width:calc(100vw - 36px)}
-.player button{background:none;border:none;color:var(--gold);font-size:1.1rem;cursor:none}
-.player .pinfo{min-width:120px;max-width:160px}
-.player .tname{font-size:.78rem;color:var(--gold-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.seek{height:5px;background:rgba(255,255,255,.15);border-radius:3px;margin-top:5px;cursor:none}
-.seek-fill{height:100%;width:0;background:var(--gold);border-radius:3px}
-@media(max-width:520px){.player .pinfo{display:none}}
+/* === بخش شاهزاده‌های آینده (جدید) === */
+.prince-card { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: visible; }
+.prince-card::after { content: ''; position: absolute; inset: -2px; border-radius: 42px; background: inherit; z-index: -1; filter: blur(15px); opacity: 0; transition: opacity 0.5s ease; }
+.prince-card:hover::after { opacity: 0.7; }
+.prince-card .avatar-ring { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; font-size: 50px; transform: translateZ(50px); box-shadow: inset 0 0 30px rgba(0,0,0,0.5); position: relative; border: 4px solid; background: rgba(0,0,0,0.4); transition: transform 0.5s ease; }
+.prince-card:hover .avatar-ring { transform: translateZ(70px) scale(1.1); }
+.gold-theme { border-top: 4px solid var(--gold); }
+.gold-theme .avatar-ring { border-color: var(--gold); color: var(--gold-2); box-shadow: 0 0 40px rgba(232,198,107,0.5); }
+.gold-theme h3 { color: var(--gold-2); text-shadow: 0 0 20px var(--gold); }
+.blue-theme { border-top: 4px solid var(--neon-blue); }
+.blue-theme .avatar-ring { border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 40px rgba(0, 243, 255, 0.5); }
+.blue-theme h3 { color: #b3faff; text-shadow: 0 0 20px var(--neon-blue); }
+.pink-theme { border-top: 4px solid var(--royal-pink); }
+.pink-theme .avatar-ring { border-color: var(--royal-pink); color: var(--royal-pink); box-shadow: 0 0 40px rgba(255, 102, 178, 0.5); }
+.pink-theme h3 { color: #ffb3d9; text-shadow: 0 0 20px var(--royal-pink); }
 
-footer{text-align:center;padding:50px 20px 110px;color:var(--muted);position:relative;z-index:1}
-footer .heart{color:#ff6b8a}
+.particle-box { position: absolute; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; border-radius: 40px; }
+.card-particle { position: absolute; opacity: 0; animation: floatParticle 3s infinite ease-in; font-size: 14px; }
+@keyframes floatParticle { 0% { transform: translateY(50px) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-50px) scale(1.2); opacity: 0; } }
 
-/* لایه ذرات روی‌هم (گلبرگ/floating) با جداسازی پینت */
-#fxLayer{position:fixed;inset:0;z-index:2;pointer-events:none;contain:paint}
-.float-sym{position:absolute;color:var(--gold);opacity:.5;will-change:transform;
-  font-size:1.2rem;top:0;left:0}
+/* === شمارش تولدها (Neon/Flip style) === */
+.cd-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+.cd-card { background: var(--glass-strong); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 40px; padding: 50px; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; transform-style: preserve-3d; transition: transform 0.5s; }
+.cd-card:hover { transform: translateY(-10px) rotateX(2deg); border-color: var(--gold); box-shadow: 0 30px 80px rgba(232, 198, 107, 0.2); }
+.cd-card::after { content: '🎉'; position: absolute; font-size: 200px; opacity: 0.02; right: -30px; bottom: -50px; pointer-events: none; transform: rotate(-15deg); }
+.cd-card h3 { color: var(--gold-2); font-size: 30px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(232,198,107,0.5); font-family: 'Cinzel'; }
+.cd-card .date { color: var(--muted); font-size: 16px; margin-bottom: 35px; letter-spacing: 2px; font-weight: 600; text-transform: uppercase; }
+.cd-nums { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.cd-box { background: linear-gradient(180deg, rgba(30,15,50,0.9), rgba(10,5,20,0.9)); border: 1px solid rgba(232, 198, 107, 0.4); border-radius: 20px; padding: 20px 15px; min-width: 90px; box-shadow: inset 0 10px 20px rgba(255,255,255,0.05), 0 10px 20px rgba(0,0,0,0.8); position: relative; overflow: hidden; }
+.cd-box::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(0,0,0,0.5); box-shadow: 0 1px 0 rgba(255,255,255,0.1); }
+.cd-box span { display: block; font-family: 'Cinzel'; font-size: 45px; color: #fff; font-weight: 900; text-shadow: 0 0 20px var(--gold-2), 0 0 40px var(--gold); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.cd-box span.pulse { transform: scale(1.15); color: var(--gold-2); text-shadow: 0 0 30px #fff; }
+.cd-box small { color: var(--gold); font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; font-weight: 800; letter-spacing: 1px; }
+
+/* === تایم‌لاین سینمایی === */
+.timeline-wrap { position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0; }
+.timeline-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 6px; background: rgba(255,255,255,0.05); transform: translateX(-50%); border-radius: 6px; }
+.timeline-line-fill { position: absolute; top: 0; left: 0; width: 100%; background: linear-gradient(to bottom, var(--gold), var(--purple), var(--gold-2)); border-radius: 6px; box-shadow: 0 0 20px var(--gold), 0 0 40px var(--purple); height: 0; transition: height 0.5s ease-out; }
+.tl-item { position: relative; width: 50%; padding: 30px 50px; box-sizing: border-box; perspective: 1000px; }
+.tl-item:nth-child(odd) { left: 0; text-align: left; }
+.tl-item:nth-child(even) { left: 50%; text-align: right; }
+.tl-item .dot { position: absolute; top: 50px; width: 30px; height: 30px; border-radius: 50%; background: #111; box-shadow: inset 0 0 10px rgba(0,0,0,0.9); border: 3px solid rgba(232, 198, 107, 0.3); z-index: 2; transition: all 0.5s ease; transform: translateY(-50%); }
+.tl-item.active .dot { background: radial-gradient(circle, #fff, var(--gold)); box-shadow: 0 0 30px var(--gold), 0 0 0 8px rgba(232, 198, 107, 0.2); border-color: #fff; transform: translateY(-50%) scale(1.2); }
+.tl-item:nth-child(odd) .dot { right: -15px; }
+.tl-item:nth-child(even) .dot { left: -15px; }
+.tl-card { background: var(--glass-strong); backdrop-filter: blur(20px); border: 1px solid rgba(232,198,107,0.2); border-radius: 30px; padding: 40px; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; opacity: 0.5; transform: scale(0.9) translateZ(-50px); }
+.tl-item.active .tl-card { opacity: 1; transform: scale(1) translateZ(0); border-color: var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(232, 198, 107, 0.15); }
+.tl-card:hover { transform: translateY(-10px) scale(1.02) !important; box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 40px rgba(232, 198, 107, 0.3); }
+.tl-card h4 { color: var(--gold-2); font-size: 24px; margin-bottom: 15px; font-family: 'Cinzel'; font-weight: 800; text-shadow: 0 0 10px rgba(232,198,107,0.4); }
+.tl-card p { color: var(--text); font-size: 16px; line-height: 2.2; font-weight: 300; }
+.tl-card .when { display: inline-block; padding: 6px 18px; background: rgba(232, 198, 107, 0.1); border-radius: 20px; color: var(--gold); font-size: 14px; font-family: 'Cinzel'; margin-bottom: 20px; border: 1px solid rgba(232,198,107,0.4); font-weight: bold; letter-spacing: 1px; box-shadow: 0 0 15px rgba(232,198,107,0.1); }
+
+/* === نامه پادشاه سینمایی === */
+.letter { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, rgba(30,15,50,0.95), rgba(15,8,25,0.98)); border: 2px solid var(--gold); border-radius: 40px; padding: 80px 60px; box-shadow: var(--shadow), 0 0 60px rgba(232,198,107,0.2), inset 0 0 40px rgba(255,255,255,0.02); position: relative; transform-style: preserve-3d; transition: transform 0.5s ease; }
+.letter:hover { transform: translateY(-10px) rotateX(2deg); box-shadow: 0 40px 100px rgba(0,0,0,0.9), 0 0 80px rgba(232,198,107,0.3); }
+.letter::before { content: ''; position: absolute; inset: 15px; border: 1px dashed rgba(232,198,107,0.4); border-radius: 25px; pointer-events: none; }
+.letter .seal { position: absolute; top: -45px; left: 50%; transform: translateX(-50%) translateZ(40px); width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #f6e3a1, #b8862f, #f6e3a1); display: flex; align-items: center; justify-content: center; font-size: 45px; box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 30px rgba(232,198,107,0.6), inset 0 0 20px #fff; border: 3px solid #fff; transition: transform 0.5s ease; cursor: pointer; }
+.letter:hover .seal { transform: translateX(-50%) translateZ(60px) rotate(15deg) scale(1.1); box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 50px var(--gold-2), inset 0 0 25px #fff; }
+#letterText { font-size: 21px; line-height: 2.8; color: var(--text); white-space: pre-wrap; min-height: 250px; text-align: justify; text-shadow: 0 2px 5px rgba(0,0,0,0.8); font-family: 'Vazirmatn'; font-weight: 300; }
+.letter .sign { margin-top: 50px; text-align: left; color: var(--gold-2); font-family: 'Cinzel'; font-size: 32px; font-weight: 900; text-shadow: 0 0 20px var(--gold); letter-spacing: 2px; }
+.cursor { display: inline-block; width: 4px; height: 1.2em; background: var(--gold-2); margin-right: 8px; vertical-align: middle; animation: blinkHQ 1s steps(1) infinite; box-shadow: 0 0 15px var(--gold); }
+@keyframes blinkHQ { 50% { opacity: 0; } }
+
+/* === گالری Masonry حرفه‌ای === */
+.gallery { column-count: 3; column-gap: 30px; }
+.gallery-item { break-inside: avoid; margin-bottom: 30px; position: relative; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); transform: translateZ(0); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; background: #000; }
+.gallery-item::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%); z-index: 1; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
+.gallery-item:hover::before { opacity: 1; }
+.gallery-item img { width: 100%; height: auto; display: block; border-radius: 30px; border: 2px solid transparent; transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); filter: brightness(0.8) contrast(1.1); will-change: transform, filter; }
+.gallery-item:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(232, 198, 107, 0.4); z-index: 10; }
+.gallery-item:hover img { border-color: var(--gold); transform: scale(1.1); filter: brightness(1.1) contrast(1.2); }
+.gallery-caption { position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; color: var(--gold-2); z-index: 2; padding: 20px; font-size: 16px; font-weight: bold; opacity: 0; transition: all 0.4s ease; text-shadow: 0 0 10px #000; }
+.gallery-item:hover .gallery-caption { bottom: 0; opacity: 1; }
+
+/* === لایت‌باکس سینمایی === */
+#lightbox { position: fixed; inset: 0; z-index: 99999; background: rgba(2, 1, 6, 0.98); display: none; align-items: center; justify-content: center; padding: 40px; backdrop-filter: blur(25px); opacity: 0; transition: opacity 0.4s ease; }
+#lightbox.open { display: flex; opacity: 1; }
+#lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 20px; border: 4px solid var(--gold); box-shadow: 0 0 150px rgba(232, 198, 107, 0.6); object-fit: contain; transform: scale(0.9); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+#lightbox.open img { transform: scale(1); }
+#lightbox .x { position: absolute; top: 40px; left: 50px; font-size: 50px; color: #fff; cursor: pointer; transition: all 0.4s ease; text-shadow: 0 0 20px var(--gold); background: rgba(0,0,0,0.5); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.2); }
+#lightbox .x:hover { transform: rotate(90deg) scale(1.2); background: var(--gold); color: #000; border-color: var(--gold); box-shadow: 0 0 30px var(--gold); }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 60px; color: #fff; cursor: pointer; background: rgba(20,10,40,0.8); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; user-select: none; border: 2px solid rgba(232,198,107,0.4); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(10px); box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+.lb-nav:hover { background: rgba(232, 198, 107, 0.3); border-color: var(--gold-2); transform: translateY(-50%) scale(1.15); box-shadow: 0 0 40px rgba(232,198,107,0.6); color: var(--gold-2); }
+.lb-prev { right: 40px; } .lb-next { left: 40px; }
+
+/* === موزیک پلیر مدرن و درخشان === */
+.player { position: fixed; bottom: calc(30px + env(safe-area-inset-bottom)); right: 30px; z-index: 5000; display: flex; flex-direction: column; gap: 15px; background: rgba(10, 5, 20, 0.85); backdrop-filter: blur(30px); border: 1px solid rgba(232,198,107,0.4); border-radius: 30px; padding: 20px 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 30px rgba(232,198,107,0.15); width: 320px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom right; }
+.player:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 80px rgba(0,0,0,1), 0 0 50px rgba(232,198,107,0.3); border-color: var(--gold); }
+.player .row { display: flex; align-items: center; gap: 15px; }
+.player button { width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer; font-size: 20px; color: #000; background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--gold-deep)); box-shadow: 0 5px 20px rgba(232, 198, 107, 0.5), inset 0 0 10px rgba(255,255,255,0.5); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content: center; }
+.player button:hover { transform: scale(1.15); box-shadow: 0 10px 30px rgba(232, 198, 107, 0.8); }
+.player .small { width: 40px; height: 40px; font-size: 16px; background: rgba(255, 255, 255, 0.05); color: var(--gold-2); border: 1px solid rgba(232,198,107,0.3); box-shadow: none; }
+.player .small:hover { background: rgba(232, 198, 107, 0.2); border-color: var(--gold); color: #fff; box-shadow: 0 0 15px rgba(232,198,107,0.4); }
+.player .info { flex: 1; display: flex; flex-direction: column; overflow: hidden; align-items: center; }
+.player .ttl { font-size: 15px; color: var(--gold-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 800; font-family: 'Cinzel'; text-shadow: 0 0 10px rgba(232,198,107,0.5); }
+.equalizer { display: flex; gap: 3px; height: 15px; align-items: flex-end; margin-top: 5px; opacity: 0; transition: opacity 0.3s; }
+.equalizer.playing { opacity: 1; }
+.eq-bar { width: 3px; background: var(--gold); border-radius: 3px; animation: eqAnim 0.5s infinite alternate ease-in-out; box-shadow: 0 0 8px var(--gold); }
+.eq-bar:nth-child(1) { animation-duration: 0.4s; } .eq-bar:nth-child(2) { animation-duration: 0.6s; height: 10px; } .eq-bar:nth-child(3) { animation-duration: 0.5s; height: 14px; } .eq-bar:nth-child(4) { animation-duration: 0.7s; height: 8px; }
+@keyframes eqAnim { 0% { height: 3px; } 100% { height: 15px; background: var(--gold-2); } }
+.player .bar { height: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); cursor: pointer; position: relative; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.8); width: 100%; border: 1px solid rgba(255,255,255,0.05); }
+.player .bar i { position: absolute; top: 0; right: 0; height: 100%; width: 0; border-radius: 8px; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), #fff); box-shadow: 0 0 15px var(--gold-2); transition: width 0.1s linear; }
+
+#toTop { position: fixed; bottom: calc(30px + env(safe-area-inset-bottom)); left: 30px; z-index: 4000; width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(232,198,107,0.5); background: rgba(10, 5, 20, 0.85); backdrop-filter: blur(20px); color: var(--gold-2); font-size: 26px; cursor: pointer; opacity: 0; transform: translateY(40px) scale(0.8); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; box-shadow: 0 15px 40px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; }
+#toTop.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+#toTop:hover { background: var(--gold); color: #000; border-color: #fff; box-shadow: 0 0 30px var(--gold); transform: translateY(-8px) scale(1.1); }
+
+footer { text-align: center; padding: 80px 30px; background: linear-gradient(to top, #020104, transparent); color: var(--muted); font-size: 16px; border-top: 1px solid rgba(232,198,107,0.15); position: relative; z-index: var(--z-content); line-height: 2.2; font-weight: 300; }
+footer b { color: var(--gold-2); font-size: 19px; text-shadow: 0 0 10px rgba(232,198,107,0.4); font-weight: 800; }
+
+/* === ریسپانسیو سینمایی === */
+@media(max-width: 1024px) {
+  .nav-links { display: none; position: absolute; top: 80px; right: 30px; left: 30px; flex-direction: column; background: rgba(5, 3, 12, 0.98); border: 1px solid var(--gold); border-radius: 25px; padding: 25px; box-shadow: 0 30px 80px rgba(0,0,0,0.9); backdrop-filter: blur(30px); }
+  .nav-links.open { display: flex; animation: slideDownHQ 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  @keyframes slideDownHQ { from { opacity:0; transform:translateY(-20px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
+  .nav-toggle { display: block; }
+  .g3 { grid-template-columns: repeat(2, 1fr); }
+  .timeline-line { left: 40px; transform: none; }
+  .tl-item { width: 100%; text-align: right !important; padding: 30px 80px 30px 20px; left: 0 !important; }
+  .tl-item .dot { left: auto !important; right: 25px !important; }
+  .gallery { column-count: 2; }
+}
+@media(max-width: 768px) {
+  .g2, .cd-grid { grid-template-columns: 1fr; }
+  .g3 { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 50px; }
+  .wiriper-stats { gap: 30px; flex-direction: column; }
+  .letter { padding: 50px 30px; }
+  #letterText { font-size: 18px; }
+}
+@media(max-width: 520px) {
+  .gallery { column-count: 1; }
+  .player { width: calc(100vw - 40px); right: 20px; left: 20px; bottom: 100px; padding: 15px; }
+  #toTop { bottom: 20px; left: 20px; width: 50px; height: 50px; }
+  section { padding: 100px 0; }
+  .sec-title h2 { font-size: 32px; }
+  .card { padding: 30px; }
+}
 </style>
 </head>
 <body>
 
-<!-- لودر -->
-<div id="loader"><i class="fas fa-crown loader-crown"></i></div>
+<canvas id="bgCanvas" class="bg-layer"></canvas>
+<div class="ambient-fog"></div>
+<div class="light-rays"></div>
 
-<!-- پس‌زمینه متحرک (یک canvas برای همه افکت‌ها) -->
-<canvas id="bgCanvas"></canvas>
-<div class="app-bg-overlay"></div>
-<div id="fxLayer"></div>
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
 
-<!-- نشانگر سینماتیک -->
-<div class="cursor"></div>
-<div class="cursor-dot"></div>
+<div id="loader">
+  <div class="loader-crown">👑</div>
+  <div class="loader-txt">EMPIRE OF ETERNITY</div>
+  <div class="loader-bar"><i></i></div>
+</div>
 
-<!-- دروازه ورود -->
+<div id="progress"></div>
+
 <div id="gate">
-  <div class="gate-box">
-    <i class="fas fa-heart"></i>
-    <h2>دروازه قلب ملکه</h2>
-    <p>برای ورود به امپراتوری Wiriper، نام ملکه را بنویسید</p>
-    <input id="gateInput" type="text" placeholder="نام ملکه..." autocomplete="off">
-    <div class="gate-err" id="gateErr"></div>
-    <button class="btn" id="gateBtn"><i class="fas fa-door-open"></i> ورود به قلمرو</button>
-    <div class="gate-hint">راهنما: «نیایش»</div>
+  <div class="gate-card" data-tilt>
+    <div class="crown">🏰</div>
+    <h1>ورود به امپراتوری Wiriper</h1>
+    <p>کلید قلب ملکه را وارد کن تا دروازه‌های طلایی گشوده شوند.</p>
+    <input id="pass" type="password" placeholder="نام ملکه..." autocomplete="off">
+    <button class="btn" onclick="enter()">گشودن دروازه‌ها ✨</button>
+    <div class="gate-err" id="gerr"></div>
   </div>
 </div>
 
-<!-- ناوبری -->
-<nav id="nav">
-  <div class="brand"><i class="fas fa-chess-king"></i> Wiriper</div>
-  <div class="nav-links" id="navLinks">
-    <a href="#royals">شاهان</a>
+<nav class="navbar" id="nav">
+  <div class="brand">👑 WIRIPER</div>
+  <button class="icon-btn nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <div class="nav-links" id="navlinks">
+    <a href="#hero">تالار اصلی</a>
+    <a href="#wiriper">تمدن ما</a>
+    <a href="#countdown">جشن‌ها</a>
+    <a href="#king">فرمانروایان</a>
     <a href="#princes">شاهزاده‌ها</a>
-    <a href="#timeline">تاریخ</a>
-    <a href="#birthdays">تولدها</a>
-    <a href="#gallery">گالری</a>
-    <a href="#realm">قلمرو</a>
-  </div>
-  <div style="display:flex;gap:10px;align-items:center">
-    <button class="theme-toggle" id="themeBtn" title="حالت روز/شب"><i class="fas fa-moon"></i></button>
-    <button class="burger" id="burger"><i class="fas fa-bars"></i></button>
+    <a href="#timeline">افسانه</a>
+    <a href="#letter">فرمان</a>
+    <a href="#gallery">خزانه</a>
   </div>
 </nav>
 
-<main>
-  <!-- هیرو -->
-  <header class="hero">
-    <div class="crown-big"><i class="fas fa-crown"></i></div>
-    <h1>امپراتوری Wiriper</h1>
-    <p>سرزمین جاودانهٔ پادشاه مبین و ملکه نیایش</p>
-    <p style="font-size:.95rem">👑 طلوع پادشاه مبین: اول مهرماه ۱۳۸۴ | طلوع ملکه نیایش: دوازدهم تیرماه ۱۳۸۶ 👸🏻</p>
-    <div class="love-counter">
-      <div class="lc-box"><b id="lcDays">0</b><span>روز سلطنت عشق</span></div>
-      <div class="lc-box"><b id="lcHours">0</b><span>ساعت</span></div>
-      <div class="lc-box"><b id="lcMin">0</b><span>دقیقه</span></div>
-      <div class="lc-box"><b id="lcSec">0</b><span>ثانیه</span></div>
-    </div>
-  </header>
-
-  <!-- شاهان -->
-  <section id="royals">
-    <h2 class="title reveal">تاج‌داران امپراتوری</h2>
-    <p class="subtitle reveal">دو روحی که جهان Wiriper را بنا نهادند</p>
-    <div class="royals">
-      <div class="card reveal" data-tilt>
-        <div class="card-inner">
-          <div class="avatar"><i class="fas fa-chess-king"></i></div>
-          <h3>پادشاه مبین 🏎️</h3>
-          <div class="role">فرمانروای قلمرو و نگهبان قلب ملکه</div>
-          <div class="quote">«تا وقتی تو ملکهٔ منی، این امپراتوری شکست‌ناپذیر است.»</div>
-          <div class="medals">
-            <div class="medal" title="شجاعت"><i class="fas fa-shield-halved"></i></div>
-            <div class="medal" title="خرد"><i class="fas fa-brain"></i></div>
-            <div class="medal" title="وفاداری"><i class="fas fa-infinity"></i></div>
-          </div>
-        </div>
-      </div>
-      <div class="card reveal" data-tilt>
-        <div class="card-inner">
-          <div class="avatar" style="background:linear-gradient(135deg,var(--rose),#fff)"><i class="fas fa-chess-queen"></i></div>
-          <h3>ملکه نیایش 🏛️</h3>
-          <div class="role">نور قلمرو و فرمانروای قلب پادشاه</div>
-          <div class="quote">«هرجا که تو باشی، همان‌جا تختِ پادشاهیِ من است.»</div>
-          <div class="medals">
-            <div class="medal" title="مهربانی"><i class="fas fa-heart"></i></div>
-            <div class="medal" title="زیبایی"><i class="fas fa-star"></i></div>
-            <div class="medal" title="ابدیت"><i class="fas fa-gem"></i></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- شاهزاده‌ها -->
-  <section id="princes">
-    <h2 class="title reveal">وارثان تاج و تخت</h2>
-    <p class="subtitle reveal">سه ستارهٔ درخشان امپراتوری Wiriper</p>
-    <div class="princes">
-      <!-- آریامهر -->
-      <div class="prince-card reveal" data-tilt style="--pc:#4aa3ff;--pc-text:#9fc7ff">
-        <div class="prince-emblem"><i class="fas fa-bolt"></i></div>
-        <h3>شاهزاده آریامهر</h3>
-        <div class="ptitle">شاهزادهٔ طوفان و سوارکار آسمان</div>
-        <div class="pquote">«سرعت در رگ‌های من جاری‌ست، مثل خون پدر.»</div>
-        <div class="medals">
-          <div class="medal" style="color:#9fc7ff"><i class="fas fa-wind"></i></div>
-          <div class="medal" style="color:#9fc7ff"><i class="fas fa-horse"></i></div>
-        </div>
-      </div>
-      <!-- سام -->
-      <div class="prince-card reveal" data-tilt style="--pc:#ff5e5e;--pc-text:#ffadad">
-        <div class="prince-emblem"><i class="fas fa-fire"></i></div>
-        <h3>شاهزاده سام</h3>
-        <div class="ptitle">شاهزادهٔ شمشیر آتشین و دل شیر</div>
-        <div class="pquote">«از هیچ نبردی نمی‌ترسم، چون نام خانواده‌ام را حمل می‌کنم.»</div>
-        <div class="medals">
-          <div class="medal" style="color:#ffadad"><i class="fas fa-khanda"></i></div>
-          <div class="medal" style="color:#ffadad"><i class="fas fa-fire-flame-curved"></i></div>
-        </div>
-      </div>
-      <!-- سونیا -->
-      <div class="prince-card reveal" data-tilt style="--pc:#e0b0ff;--pc-text:#f0d0ff">
-        <div class="prince-emblem"><i class="fas fa-wand-magic-sparkles"></i></div>
-        <h3>پرنسس سونیا</h3>
-        <div class="ptitle">پرنسس ستاره‌ها و گل سرسبد قصر</div>
-        <div class="pquote">«من نور کوچکِ مادرم؛ قلمرو را با لبخند روشن می‌کنم.»</div>
-        <div class="medals">
-          <div class="medal" style="color:#f0d0ff"><i class="fas fa-star"></i></div>
-          <div class="medal" style="color:#f0d0ff"><i class="fas fa-crown"></i></div>
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="sub" id="heroSub"></div>
+    <h1>قلب تپنده‌ی امپراتوری<br>مبین و نیایش</h1>
+    
+    <div class="angel-container" data-tilt>
+      <div class="angel" id="angel">
+        <div class="wing wing-left" id="wingL"></div>
+        <div class="wing wing-right" id="wingR"></div>
+        <div class="halo"></div>
+        <div class="photo-frame">
+          <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش">
         </div>
       </div>
     </div>
 
-    <!-- تبارنامه تعاملی -->
-    <div class="tree reveal">
-      <div class="tree-top">
-        <div class="tree-node">👑 پادشاه مبین</div>
-        <div class="tree-node">👸 ملکه نیایش</div>
-      </div>
-      <div class="tree-line"></div>
-      <div class="tree-children">
-        <div class="tree-node">⚡ آریامهر</div>
-        <div class="tree-node">🔥 سام</div>
-        <div class="tree-node">✨ سونیا</div>
-      </div>
+    <p class="love reveal">او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b>نیایش</b> عزیز من.</p>
+    
+    <div class="hero-btns reveal">
+      <button class="btn magnetic-btn" onclick="loveBurst();launchFirework(8)">💖 بارش عشق بر ملکه</button>
+      <button class="btn ghost magnetic-btn" onclick="document.getElementById('magic-mirror').scrollIntoView({behavior:'smooth'})">✨ آینه جادویی</button>
     </div>
-  </section>
-
-  <!-- تایم‌لاین -->
-  <section id="timeline">
-    <h2 class="title reveal">تاریخ امپراتوری</h2>
-    <div class="frame reveal">
-      <div class="timeline" id="timelineBox"></div>
+    
+    <div class="scroll-down reveal">
+      <span>به تمدن ما قدم بگذار</span>
+      <i>↓</i>
     </div>
-  </section>
-
-  <!-- تولدها -->
-  <section id="birthdays">
-    <h2 class="title reveal">شمارش معکوس جشن‌های شاهانه</h2>
-    <div class="birthdays">
-      <div class="frame bday-card king reveal">
-        <div class="crown-icon"><i class="fas fa-crown"></i></div>
-        <h3>تولد پادشاه مبین</h3>
-        <div class="date">۲۵ اسفند</div>
-        <div class="countdown" id="cdKing"></div>
-      </div>
-      <div class="frame bday-card queen reveal">
-        <div class="crown-icon"><i class="fas fa-chess-queen"></i></div>
-        <h3>تولد ملکه نیایش</h3>
-        <div class="date">۱۵ شهریور</div>
-        <div class="countdown" id="cdQueen"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- نامه پادشاه -->
-  <section id="letter">
-    <h2 class="title reveal">نامهٔ پادشاه به ملکه</h2>
-    <div class="frame reveal">
-      <div class="letter" id="letterBox"></div>
-    </div>
-  </section>
-
-  <!-- عهدنامه‌ها -->
-  <section id="poems">
-    <h2 class="title reveal">عهدنامه‌ها و سوگندهای ابدی 📜</h2>
-    <div class="poems">
-      <div class="frame poem reveal">«قسم به این تاج، تا آخرین تپش قلبم، تنها فرمانروای دلم تویی.»<span class="by">— پادشاه مبین</span></div>
-      <div class="frame poem reveal">«در هر زندگی که باشم، باز هم همین قلمرو، همین پادشاه، همین عشق.»<span class="by">— ملکه نیایش</span></div>
-    </div>
-  </section>
-
-  <!-- گالری -->
-  <section id="gallery">
-    <h2 class="title reveal">گالری تصاویر پادشاهی 📸</h2>
-    <p class="subtitle reveal">برای دیدن کامل، روی هر تصویر کلیک کنید</p>
-    <div class="gallery" id="galleryBox">
-      <!-- lazy loading واقعی با data-src؛ لینک‌ها را با تصاویر خودتان جایگزین کنید -->
-      <div class="gallery-item"><img data-src="https://picsum.photos/seed/wiriper1/600" alt="قلمرو ۱"></div>
-      <div class="gallery-item"><img data-src="https://picsum.photos/seed/wiriper2/600" alt="قلمرو ۲"></div>
-      <div class="gallery-item"><img data-src="https://picsum.photos/seed/wiriper3/600" alt="قلمرو ۳"></div>
-    </div>
-  </section>
-
-  <!-- قلمرو + آب‌وهوا -->
-  <section id="realm">
-    <h2 class="title reveal">نقشهٔ قلمرو Wiriper</h2>
-    <div class="frame reveal">
-      <div class="realm-wrap">
-        <div class="realm-map" id="realmMap"></div>
-        <div class="weather">
-          <div class="w-icon" id="wIcon"><i class="fas fa-sun"></i></div>
-          <div class="w-name" id="wName">آسمان آفتابی قصر</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- آرزوها -->
-  <section id="wishes">
-    <h2 class="title reveal">آرزو برای امپراتوری 🌠</h2>
-    <p class="subtitle reveal">آرزویت را برای قلمرو بنویس؛ روی دیوار قصر ثبت می‌شود</p>
-    <div class="wish-form reveal">
-      <input id="wishInput" type="text" placeholder="آرزوی من برای Wiriper..." maxlength="120">
-      <button class="btn" id="wishBtn"><i class="fas fa-star"></i> ثبت آرزو</button>
-    </div>
-    <div class="wishes-list" id="wishesList"></div>
-  </section>
-</main>
-
-<!-- پلیر موسیقی -->
-<div class="player">
-  <button id="prevBtn"><i class="fas fa-backward-step"></i></button>
-  <button id="playBtn"><i class="fas fa-play"></i></button>
-  <button id="nextBtn"><i class="fas fa-forward-step"></i></button>
-  <div class="pinfo">
-    <div class="tname" id="trackName">موسیقی سلطنتی</div>
-    <div class="seek" id="seek"><div class="seek-fill" id="seekFill"></div></div>
   </div>
-</div>
+</section>
 
-<!-- لایت‌باکس -->
-<div id="lightbox">
-  <button class="lb-btn lb-close" id="lbClose"><i class="fas fa-xmark"></i></button>
-  <button class="lb-btn lb-prev" id="lbPrev"><i class="fas fa-chevron-right"></i></button>
-  <img id="lbImg" src="" alt="">
-  <button class="lb-btn lb-next" id="lbNext"><i class="fas fa-chevron-left"></i></button>
-</div>
+<section id="wiriper" class="reveal">
+  <div id="wiriper-realm">
+    <div class="wrap">
+      <div class="wiriper-card" data-tilt>
+        <div class="wiriper-logo">🌍</div>
+        <h2 class="wiriper-title">تمدن جاودانه Wiriper</h2>
+        <p class="wiriper-desc">
+          اینجا تنها یک قصر یا یک ساختمان نیست. Wiriper یک جهان است، تمدنی پهناور و بی‌کران که بر پایه‌ی عشق بی‌پایان پادشاه مبین و ملکه نیایش بنا شده است. سرزمینی که مرزهایش تا بی‌نهایت امتداد دارد و خورشید آن هرگز غروب نمی‌کند، زیرا منبع نورش، لبخند ملکه است.
+        </p>
+        <div class="wiriper-stats">
+          <div class="wstat"><span class="num">∞</span><span class="lbl">وسعت قلمرو</span></div>
+          <div class="wstat"><span class="num" id="wDays">1000</span><span class="lbl">روزهای سلطنت</span></div>
+          <div class="wstat"><span class="num">۱</span><span class="lbl">قلب واحد</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<audio id="audio" preload="none"></audio>
+<section id="magic-mirror" class="reveal">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>آینه جادویی ملکه 🪞</h2>
+      <div class="line"></div>
+      <p>ای ملکه، بر روی آینه کلیک کن تا حقیقت مطلق این امپراتوری را ببینی.</p>
+    </div>
+    <div class="magic-mirror-container">
+      <div class="magic-mirror" onclick="this.classList.toggle('revealed'); loveBurst(); launchFirework(5);">
+        <div class="mirror-glass"></div>
+        <div class="mirror-content">
+          <div class="mirror-icon">✨</div>
+          <div class="mirror-text">آینه در انتظار لمس دست‌های توست...</div>
+        </div>
+        <div class="mirror-reflection">
+          تو زیباترین، کامل‌ترین و بی‌نقص‌ترین خلقتی هستی که پادشاه در تمام عمرش دیده است. تو خودِ عشقی! 💖
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="countdown">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>جشن‌های باشکوه سلطنتی 🎉</h2>
+      <div class="line"></div>
+      <p>شمارش معکوس تا طلوع روزهای مقدس تولد پادشاه و ملکه</p>
+    </div>
+    <div class="cd-grid">
+      <div class="cd-card reveal" data-tilt>
+        <h3>👑 زادروز پادشاه مبین</h3>
+        <div class="date">۲۵ اسفند — شکوه اقتدار</div>
+        <div class="cd-nums" id="cd-mobin"></div>
+        <div class="cd-today" id="today-mobin" style="display:none; color:var(--gold-2); font-size:22px; font-weight:900; margin-top:20px; text-shadow:0 0 15px var(--gold);">🎉 سراسر قلمرو در جشن است! زادروز پادشاه مبارک 🎂</div>
+      </div>
+      <div class="cd-card reveal" data-tilt>
+        <h3>👸🏻 زادروز ملکه نیایش</h3>
+        <div class="date">۱۵ شهریور — تجلی زیبایی</div>
+        <div class="cd-nums" id="cd-niyayesh"></div>
+        <div class="cd-today" id="today-niyayesh" style="display:none; color:var(--rose); font-size:22px; font-weight:900; margin-top:20px; text-shadow:0 0 15px var(--royal-pink);">🎉 خورشید امروز درخشان‌تر است! زادروز فرشته‌ی من مبارک 🎂</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="king">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2>فرمانروایان تمدن 👑</h2><div class="line"></div></div>
+    <div class="grid g2">
+      <div class="card reveal" style="border-top: 4px solid var(--purple-soft);" data-tilt>
+        <div class="ico">⚔️</div>
+        <h3>پادشاه مبین</h3>
+        <p>فرمانروایی با اقتدار، خلق‌کننده‌ی دنیاها و محافظ همیشگی لبخند ملکه. کسی که Wiriper را از هیچ ساخت تا تنها استراحتگاه امن فرشته‌اش باشد.</p>
+        <div class="tags"><span class="tag">محافظ ابدی</span><span class="tag">قدرت</span><span class="tag">وفاداری</span></div>
+      </div>
+      <div class="card reveal" style="border-top: 4px solid var(--rose);" data-tilt>
+        <div class="ico">🌹</div>
+        <h3>ملکه نیایش</h3>
+        <p>قلب تپنده‌ی جهانِ Wiriper. دختری با روحی از جنس نور، شیفته‌ی هنر و زیبایی، که حضورش هر ثانیه از زندگی پادشاه را به یک معجزه تبدیل کرده است.</p>
+        <div class="tags"><span class="tag">نورِ قلمرو</span><span class="tag">هنر</span><span class="tag">زیبایی مطلق</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="princes">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>شاهزاده‌های آینده 🌟</h2>
+      <div class="line"></div>
+      <p>ثمرات عشق جاودانه و وارثان تاج و تخت امپراتوری Wiriper</p>
+    </div>
+    <div class="grid g3">
+      <div class="card prince-card gold-theme reveal" data-tilt>
+        <div class="avatar-ring">👑</div>
+        <h3>آریا مهر</h3>
+        <p>شاهزاده‌ی طلایی و وارث اقتدار پادشاه. کسی که شکوه امپراتوری را به نسل‌های بعد منتقل خواهد کرد.</p>
+        <div class="tags"><span class="tag">وارث تاج</span><span class="tag">نجابت</span></div>
+      </div>
+      
+      <div class="card prince-card blue-theme reveal" data-tilt id="card-sam">
+        <div class="particle-box" id="particles-sam"></div>
+        <div class="avatar-ring">⚔️</div>
+        <h3>سام</h3>
+        <p>شاهزاده‌ی جنگجو با اراده‌ای از جنس فولاد. محافظ بی‌باک مرزهای عشق و تمدن جاودانه‌ی ما.</p>
+        <div class="tags"><span class="tag">شجاعت</span><span class="tag">محافظ</span></div>
+      </div>
+      
+      <div class="card prince-card pink-theme reveal" data-tilt id="card-sonia">
+        <div class="particle-box" id="particles-sonia"></div>
+        <div class="avatar-ring">🦋</div>
+        <h3>پرنسس سونیا</h3>
+        <p>تجلی زیبایی و لطافت مادرش. دختری با روحی رویایی که با هر لبخندش، گل‌های قلمرو شکوفا می‌شوند.</p>
+        <div class="tags"><span class="tag">رویایی</span><span class="tag">لطافت</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>افسانه آفرینش عشق 💫</h2>
+      <div class="line"></div>
+      <p>تاریخچه‌ی جاودانگی ما در دفتر تمدن Wiriper</p>
+    </div>
+    <div class="timeline-wrap" id="timelineBox">
+      <div class="timeline-line">
+        <div class="timeline-line-fill" id="tlFill"></div>
+      </div>
+      </div>
+  </div>
+</section>
+
+<section id="letter">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2>فرمان همایونی پادشاه 📜</h2><div class="line"></div></div>
+    <div class="letter reveal" data-tilt>
+      <div class="seal">👑</div>
+      <div id="letterText"></div>
+      <div class="sign">— پادشاه تو، مبین</div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2>خزانه تصاویر پادشاهی 📸</h2><div class="line"></div></div>
+    <div class="gallery reveal" id="galleryGrid">
+      <div class="gallery-item" onclick="lb(0)">
+        <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" loading="lazy">
+        <div class="gallery-caption">شکوه ملکه</div>
+      </div>
+      <div class="gallery-item" onclick="lb(1)">
+        <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" loading="lazy">
+        <div class="gallery-caption">خاطرات جاودانه</div>
+      </div>
+      <div class="gallery-item" onclick="lb(2)">
+        <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" loading="lazy">
+        <div class="gallery-caption">لبخند ابدیت</div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer>
-  <p>ساخته شده با <span class="heart"><i class="fas fa-heart"></i></span> برای ملکه نیایش</p>
-  <p style="font-size:.8rem;margin-top:6px">© امپراتوری Wiriper — تا ابد</p>
+  بنا شده با عشق بی‌نهایت برای <b>ملکه نیایش 👸🏻</b> از سوی <b>پادشاه مبین 👑</b><br>
+  تمدن Wiriper — جاودانه تا فراتر از ابدیت
 </footer>
 
+<div id="lightbox">
+  <div class="x" onclick="closeLb()">✕</div>
+  <div class="lb-nav lb-prev" onclick="lbStep(-1)">‹</div>
+  <img id="lbimg" src="">
+  <div class="lb-nav lb-next" onclick="lbStep(1)">›</div>
+</div>
+
+<div class="player">
+  <div class="info">
+    <div class="ttl" id="trackName">نور ماه بتهوون</div>
+    <div class="equalizer" id="visualizer">
+      <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+    </div>
+  </div>
+  <div class="row">
+    <button class="small" onclick="prevTrack()">⏮</button>
+    <button id="playBtn" onclick="toggleMusic()">▶</button>
+    <button class="small" onclick="nextTrack()">⏭</button>
+  </div>
+  <div class="bar" id="seekBar" onclick="seek(event)"><i id="seekFill"></i></div>
+</div>
+<audio id="audio" crossorigin="anonymous"></audio>
+
+<button id="toTop" onclick="smoothTop()">↑</button>
+
 <script>
-'use strict';
-/* ===================================================================
-   مدیریت چرخه حیات: همه RAF / interval / timeout اینجا ثبت می‌شوند
-   تا در صورت نیاز (cleanup) همه پاک شوند و نشت حافظه نداشته باشیم.
-   =================================================================== */
-const Lifecycle = {
-  rafId:null, intervals:[], timeouts:[],
-  setInterval(fn,ms){const id=setInterval(fn,ms);this.intervals.push(id);return id;},
-  setTimeout(fn,ms){const id=setTimeout(fn,ms);this.timeouts.push(id);return id;},
-  destroy(){
-    cancelAnimationFrame(this.rafId);
-    this.intervals.forEach(clearInterval);
-    this.timeouts.forEach(clearTimeout);
-    this.intervals=[];this.timeouts=[];
-  }
-};
-
-/* ====== داده‌های پایه (این بخش را با اطلاعات خودتان شخصی‌سازی کنید) ====== */
+/* ====== متغیرهای پایه ====== */
 const LOVE_START = new Date("2023-09-06T00:00:00");
+window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('done'), 1500));
 
-const timeline = [
-  {when:'آغاز تمدن', title:'تولد یک امپراتوری', text:'روزی که نگاهمان گره خورد و سنگ بنای جهان Wiriper گذاشته شد.'},
-  {when:'فصل طلایی', title:'تاج‌گذاری ملکه', text:'نیایش بر تخت قلب من نشست و نور را به این قلمرو تاریک آورد.'},
-  {when:'دوران شکوه', title:'تولد وارثان', text:'آریامهر، سام و سونیا؛ سه ستاره که آسمان قلمرو را روشن کردند.'},
-  {when:'تا ابد', title:'عهد جاودانه', text:'سوگند خوردیم که این امپراتوری هیچ‌گاه فرو نخواهد پاشید.'}
-];
-
-const tracks = [
-  {name:'نور ماه بتهوون — آرامش مطلق', src:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Beethoven_Moonlight_1st_movement.ogg'},
-  {name:'نوکتورن شوپن — عاشقانه', src:'https://upload.wikimedia.org/wikipedia/commons/7/78/Chopin_-_Nocturne_Op_9_No_2_E_Flat_Major.ogg'}
-  /* لینک mp3 اختصاصی خودتان را اینجا اضافه کنید:
-     ,{name:'آهنگ ما', src:'YOUR_MP3_LINK.mp3'} */
-];
-
-const KING_LETTER = 'ملکهٔ عزیزم، نیایش...\nاز روزی که وارد قلمرو من شدی، همه‌چیز رنگ گرفت. تو فقط ملکهٔ این امپراتوری نیستی، تو خودِ امپراتوری منی. تا آخرین نفس، تاج تو را بر سر می‌گذارم و قلبم را زیر پایت می‌گسترانم. ❤️\n— پادشاه مبین';
-
-/* ===================================================================
-   تبدیل تاریخ شمسی به میلادی (الگوریتم jalaali-js) — برای شمارش معکوس
-   =================================================================== */
-const div=(a,b)=>~~(a/b), mod=(a,b)=>a-~~(a/b)*b;
-function jalCal(jy){
-  const breaks=[-61,9,38,199,426,686,756,818,1111,1181,1210,1635,2060,2097,2192,2262,2324,2394,2456,3178];
-  let leapJ=-14,jp=breaks[0],jm,jump=0,leap,n,i,gy=jy+621,march;
-  for(i=1;i<breaks.length;i++){jm=breaks[i];jump=jm-jp;if(jy<jm)break;leapJ+=div(jump,33)*8+div(mod(jump,33),4);jp=jm;}
-  n=jy-jp; leapJ+=div(n,33)*8+div(mod(n,33)+3,4);
-  if(mod(jump,33)===4&&jump-n===4)leapJ++;
-  const leapG=div(gy,4)-div((div(gy,100)+1)*3,4)-150; march=20+leapJ-leapG;
-  if(jump-n<6)n=n-jump+div(jump+4,33)*33; leap=mod(mod(n+1,33)-1,4); if(leap===-1)leap=4;
-  return {leap,gy,march};
+/* ====== دروازه قصر ====== */
+const KEYS = ["niyayesh", "نیایش", "ملکه", "queen"];
+function enter(){
+  const v = document.getElementById('pass').value.trim().toLowerCase();
+  if(KEYS.includes(v) || v !== ""){ 
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('nav').classList.add('show');
+    document.body.style.overflow = 'auto';
+    setTimeout(() => { document.getElementById('gate').style.display = 'none'; }, 2000);
+    loveBurst(); launchFirework(8);
+    if(audio.paused) setTimeout(() => { toggleMusic(); }, 1500);
+  } else {
+    document.getElementById('gerr').textContent = 'نام ملکه را به درستی وارد کن... 💔';
+    const card = document.querySelector('.gate-card');
+    card.style.animation = 'none'; card.offsetHeight; card.style.animation = 'shake 0.4s';
+  }
 }
-function g2d(gy,gm,gd){let d=div((gy+div(gm-8,6)+100100)*1461,4)+div(153*mod(gm+9,12)+2,5)+gd-34840408;d-=div(div(gy+100100+div(gm-8,6),100)*3,4)-752;return d;}
-function j2d(jy,jm,jd){const r=jalCal(jy);return g2d(r.gy,3,r.march)+(jm-1)*31-div(jm,7)*(jm-7)+jd-1;}
-function d2g(jdn){let j=4*jdn+139361631;j+=div(div(4*jdn+183187720,146097)*3,4)*4-3908;const i=div(mod(j,1461),4)*5+308;const gd=div(mod(i,153),5)+1,gm=mod(div(i,153),12)+1,gy=div(j,1461)-100100+div(8-gm,6);return {gy,gm,gd};}
-function d2j(jdn){const gy=d2g(jdn).gy;let jy=gy-621;const r=jalCal(jy),jdn1f=g2d(gy,3,r.march);let k=jdn-jdn1f,jm,jd;if(k>=0){if(k<=185){jm=1+div(k,31);jd=mod(k,31)+1;return{jy,jm,jd};}else k-=186;}else{jy--;k+=179;if(r.leap===1)k++;}jm=7+div(k,30);jd=mod(k,30)+1;return{jy,jm,jd};}
-const jalaaliToGregorian=(jy,jm,jd)=>d2g(j2d(jy,jm,jd));
-const gregorianToJalaali=(gy,gm,gd)=>d2j(g2d(gy,gm,gd));
+document.getElementById('pass').addEventListener('keydown', e => { if(e.key === 'Enter') enter() });
 
-/* یافتن نزدیک‌ترین تولد آینده برای یک تاریخ شمسی (ماه، روز) */
-function nextJalaliBirthday(jm,jd){
-  const now=new Date();
-  const cur=gregorianToJalaali(now.getFullYear(),now.getMonth()+1,now.getDate());
-  let g=jalaaliToGregorian(cur.jy,jm,jd);
-  let t=new Date(g.gy,g.gm-1,g.gd,0,0,0);
-  if(t.getTime()<=now.getTime()){g=jalaaliToGregorian(cur.jy+1,jm,jd);t=new Date(g.gy,g.gm-1,g.gd);}
-  return t;
-}
-
-/* ===================================================================
-   راه‌اندازی پس از بارگذاری DOM
-   =================================================================== */
-document.addEventListener('DOMContentLoaded',()=>{
-  // لودر
-  window.addEventListener('load',()=>Lifecycle.setTimeout(()=>document.getElementById('loader').classList.add('done'),900));
-
-  initGate();
-  initNav();
-  initTheme();
-  initReveal();
-  initTilt();
-  initCounters();
-  initBirthdays();
-  buildTimeline();
-  buildRealm();
-  initGallery();
-  initLightbox();
-  initWishes();
-  initWeather();
-  initMusic();
-  initCursorAndBg();   // نشانگر + پس‌زمینه در یک RAF واحد
-  // نامه پس از ورود تایپ می‌شود (در gate)
+/* ====== نشانگر موس پیشرفته و مغناطیسی ====== */
+const cDot = document.getElementById('cDot'), cRing = document.getElementById('cRing');
+let mx=0, my=0, rx=0, ry=0;
+addEventListener('pointermove', e => { mx=e.clientX; my=e.clientY; cDot.style.left=mx+'px'; cDot.style.top=my+'px'; });
+function ringLoop(){ rx+=(mx-rx)*0.2; ry+=(my-ry)*0.2; cRing.style.left=rx+'px'; cRing.style.top=ry+'px'; requestAnimationFrame(ringLoop); }
+ringLoop();
+document.addEventListener('pointerover', e => {
+  if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal')) cRing.classList.add('hot');
+  else cRing.classList.remove('hot');
 });
 
-/* ---------- دروازه ورود ---------- */
-function initGate(){
-  const gate=document.getElementById('gate'),inp=document.getElementById('gateInput'),
-        btn=document.getElementById('gateBtn'),err=document.getElementById('gateErr');
-  function tryEnter(){
-    const v=inp.value.trim();
-    // پذیرش نام ملکه یا توکن‌های قبلی
-    if(v==='نیایش'||v.toLowerCase()==='niyayesh'||v.toLowerCase()==='mobinloveniyayesh'){
-      gate.classList.add('open');
-      // اسکرول از بالا و باز شدن نرم
-      window.scrollTo({top:0});
-      launchFireworks(); // جشن ورود
-      startLetterTypewriter();
-    }else{ err.textContent='این نام، نام ملکهٔ قلمرو نیست...'; }
-  }
-  btn.addEventListener('click',tryEnter);
-  inp.addEventListener('keydown',e=>{if(e.key==='Enter')tryEnter();});
-}
-
-/* ---------- ناوبری + همبرگری ---------- */
-function initNav(){
-  const nav=document.getElementById('nav'),burger=document.getElementById('burger'),
-        links=document.getElementById('navLinks');
-  burger.addEventListener('click',()=>links.classList.toggle('open'));
-  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
-  // اسکرول throttle شده با RAF + passive
-  let ticking=false;
-  window.addEventListener('scroll',()=>{
-    if(!ticking){requestAnimationFrame(()=>{nav.classList.toggle('scrolled',window.scrollY>40);ticking=false;});ticking=true;}
-  },{passive:true});
-}
-
-/* ---------- تم روز/شب خودکار + دستی ---------- */
-function initTheme(){
-  const btn=document.getElementById('themeBtn'),icon=btn.querySelector('i');
-  function apply(night){
-    document.body.classList.toggle('night',night);
-    icon.className=night?'fas fa-sun':'fas fa-moon';
-  }
-  // خودکار بر اساس ساعت سیستم: شب بین ۱۹ تا ۶
-  const h=new Date().getHours();
-  let night=(h>=19||h<6);
-  apply(night);
-  btn.addEventListener('click',()=>{night=!night;apply(night);});
-}
-
-/* ---------- Scroll Reveal با IntersectionObserver ---------- */
-function initReveal(){
-  const io=new IntersectionObserver(es=>{
-    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
-  },{threshold:.15});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-}
-
-/* ---------- تیلت سه‌بعدی: فقط روی عنصری که هاور می‌شود ---------- */
-function initTilt(){
-  // در دستگاه‌های لمسی غیرفعال تا منابع هدر نرود
-  if(window.matchMedia('(hover:none)').matches)return;
-  document.querySelectorAll('[data-tilt]').forEach(card=>{
-    let rafT=null;
-    card.addEventListener('mousemove',e=>{
-      if(rafT)return;
-      rafT=requestAnimationFrame(()=>{
-        const r=card.getBoundingClientRect();
-        const x=(e.clientX-r.left)/r.width-0.5, y=(e.clientY-r.top)/r.height-0.5;
-        const t=card.firstElementChild||card;
-        t.style.transform=`rotateY(${x*10}deg) rotateX(${-y*10}deg) translateZ(0)`;
-        rafT=null;
-      });
-    });
-    card.addEventListener('mouseleave',()=>{
-      const t=card.firstElementChild||card; t.style.transform='';
-    });
+document.querySelectorAll('.magnetic-btn').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    btn.style.transform = `translate(${x*0.2}px, ${y*0.2}px) scale(1.05)`;
   });
-}
-
-/* ---------- شمارنده روزهای عشق (آپدیت فقط در تغییر ثانیه) ---------- */
-function initCounters(){
-  const d=document.getElementById('lcDays'),h=document.getElementById('lcHours'),
-        m=document.getElementById('lcMin'),s=document.getElementById('lcSec');
-  let last={};
-  function tick(){
-    const diff=Date.now()-LOVE_START.getTime();
-    const days=Math.floor(diff/864e5),hrs=Math.floor(diff/36e5)%24,
-          min=Math.floor(diff/6e4)%60,sec=Math.floor(diff/1e3)%60;
-    // فقط در صورت تغییر، textContent عوض می‌شود (بدون رندر اضافی)
-    if(days!==last.d){d.textContent=days;last.d=days;}
-    if(hrs!==last.h){h.textContent=hrs;last.h=hrs;}
-    if(min!==last.m){m.textContent=min;last.m=min;}
-    if(sec!==last.s){s.textContent=sec;last.s=sec;}
-  }
-  tick(); Lifecycle.setInterval(tick,1000);
-}
-
-/* ---------- شمارش معکوس تولدها ---------- */
-function initBirthdays(){
-  const kBox=document.getElementById('cdKing'),qBox=document.getElementById('cdQueen');
-  const labels=['روز','ساعت','دقیقه','ثانیه'];
-  function makeBoxes(box){
-    box.innerHTML='';
-    return labels.map(l=>{
-      const d=document.createElement('div');d.className='cd-box';
-      d.innerHTML=`<b>0</b><span>${l}</span>`;box.appendChild(d);
-      return d.querySelector('b');
-    });
-  }
-  const kEls=makeBoxes(kBox),qEls=makeBoxes(qBox);
-  const kTarget=nextJalaliBirthday(12,25);
- // ۲۵ اسفند
-  const qTarget=nextJalaliBirthday(6,15);  // ۱۵ شهریور
-
-  function update(){
-    [ [kTarget,kEls], [qTarget,qEls] ].forEach(([target,els])=>{
-      let t=target.getTime()-Date.now(); if(t<0)t=0;
-      const d=Math.floor(t/864e5),h=Math.floor(t/36e5)%24,m=Math.floor(t/6e4)%60,s=Math.floor(t/1e3)%60;
-      els[0].textContent=d;els[1].textContent=h;els[2].textContent=m;els[3].textContent=s;
-    });
-  }
-  update(); Lifecycle.setInterval(update,1000);
-}
-
-/* ---------- تایپ‌رایتر نامه پادشاه ---------- */
-function startLetterTypewriter(){
-  const box=document.getElementById('letterBox'),txt=KING_LETTER;
-  let i=0; box.innerHTML='<span class="cur"></span>';
-  function type(){
-    if(i<txt.length){
-      const c=txt[i]==='\n'?'<br>':txt[i];
-      box.insertAdjacentHTML('beforeend',c);
-      i++; Lifecycle.setTimeout(type,Math.random()*40+20);
-    }else{
-      box.insertAdjacentHTML('beforeend','<span class="cur"></span>');
-    }
-  }
-  Lifecycle.setTimeout(type,500);
-}
-
-/* ---------- تایم‌لاین داستانی ---------- */
-function buildTimeline(){
-  const box=document.getElementById('timelineBox');
-  box.innerHTML=timeline.map(it=>`
-    <div class="tl-item reveal">
-      <div class="tl-when">${it.when}</div>
-      <div class="tl-title">${it.title}</div>
-      <div class="tl-text">${it.text}</div>
-    </div>
-  `).join('');
-}
-
-/* ---------- نقشه قلمرو (اینتراکتیو ساده) ---------- */
-function buildRealm(){
-  const map=document.getElementById('realmMap'),
-        cities=[{n:'قصر طلایی',x:30,y:25},{n:'کتابخانه عشق',x:70,y:40},{n:'باغ‌های ابدی',x:45,y:75}];
-  map.innerHTML=cities.map(c=>`<div class="city" style="left:${c.x}%;top:${c.y}%"><div class="tip">${c.n}</div></div>`).join('');
-}
-
-/* ---------- گالری + لایت‌باکس با Lazy Load ---------- */
-function initGallery(){
-  const imgs=document.querySelectorAll('.gallery img');
-  const io=new IntersectionObserver(es=>{
-    es.forEach(e=>{
-      if(e.isIntersecting){
-        const img=e.target; img.src=img.dataset.src;
-        img.onload=()=>img.classList.add('loaded');
-        io.unobserve(img);
-      }
-    });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = `translate(0px, 0px) scale(1)`;
   });
-  imgs.forEach(i=>io.observe(i));
+});
+
+/* ====== پس‌زمینه سینمایی و شهاب‌سنگ‌ها ====== */
+const cv = document.getElementById('bgCanvas'), cx = cv.getContext('2d');
+let stars = [], meteors = [];
+function resizeBg(){ 
+  cv.width = innerWidth; cv.height = innerHeight;
+  stars = Array.from({length: 250}, () => ({
+    x: Math.random() * cv.width, y: Math.random() * cv.height,
+    r: Math.random() * 1.5 + 0.5, a: Math.random() * Math.PI * 2, s: Math.random() * 0.02 + 0.01,
+    color: Math.random() > 0.8 ? '#f6e3a1' : (Math.random() > 0.6 ? '#7b3fe4' : '#ffffff')
+  })); 
 }
-let curImgIdx=0;
-function initLightbox(){
-  const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),
-        gallery=document.querySelectorAll('.gallery-item img');
-  document.querySelectorAll('.gallery-item').forEach((item,idx)=>{
-    item.addEventListener('click',()=>{
-      curImgIdx=idx; lbImg.src=gallery[idx].src; lb.classList.add('show');
+resizeBg(); addEventListener('resize', resizeBg);
+
+function spawnMeteor() {
+  if(Math.random() > 0.95 && meteors.length < 3) {
+    meteors.push({
+      x: Math.random() * cv.width, y: -50,
+      vx: (Math.random() - 0.5) * 5 - 2, vy: Math.random() * 5 + 5,
+      life: 1, length: Math.random() * 100 + 50
     });
-  });
-  const close=()=>lb.classList.remove('show');
-  const next=()=>{curImgIdx=(curImgIdx+1)%gallery.length; lbImg.src=gallery[curImgIdx].src;};
-  const prev=()=>{curImgIdx=(curImgIdx-1+gallery.length)%gallery.length; lbImg.src=gallery[curImgIdx].src;};
-  document.getElementById('lbClose').onclick=close;
-  document.getElementById('lbNext').onclick=next;
-  document.getElementById('lbPrev').onclick=prev;
-  lb.addEventListener('click',e=>{if(e.target===lb)close();});
-  window.addEventListener('keydown',e=>{if(!lb.classList.contains('show'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')prev();if(e.key==='ArrowLeft')next();});
-}
-
-/* ---------- بخش آرزوها (Local Storage) ---------- */
-function initWishes(){
-  const inp=document.getElementById('wishInput'),btn=document.getElementById('wishBtn'),list=document.getElementById('wishesList');
-  let wishes=JSON.parse(localStorage.getItem('wiriper_wishes')||'[]');
-  const render=()=>{list.innerHTML=wishes.map(w=>`<div class="wish">${w}</div>`).join('');};
-  render();
-  btn.onclick=()=>{
-    const v=inp.value.trim();
-    if(v){wishes.unshift(v);wishes=wishes.slice(0,5);localStorage.setItem('wiriper_wishes',JSON.stringify(wishes));inp.value='';render();}
-  };
-}
-
-/* ---------- شبیه‌ساز آب‌وهوا ---------- */
-function initWeather(){
-  const states=[
-    {n:'آسمان آفتابی قصر', i:'fa-sun', c:'#d4af37'},
-    {n:'غروب صورتی امپراتوری', i:'fa-cloud-sun', c:'#ff8095'},
-    {n:'شب‌های پرستاره Wiriper', i:'fa-moon', c:'#9fc7ff'},
-    {n:'باران الماس در قلمرو', i:'fa-cloud-showers-heavy', c:'#80d0ff'}
-  ];
-  let idx=0; const ic=document.getElementById('wIcon'), nm=document.getElementById('wName');
-  Lifecycle.setInterval(()=>{
-    idx=(idx+1)%states.length;
-    ic.style.opacity=0;
-    Lifecycle.setTimeout(()=>{
-      ic.innerHTML=`<i class="fas ${states[idx].i}"></i>`;
-      ic.style.color=states[idx].c; ic.style.opacity=1;
-      nm.textContent=states[idx].n;
-    },400);
-  },8000);
-}
-
-/* ---------- پلیر موسیقی هوشمند ---------- */
-function initMusic(){
-  const au=document.getElementById('audio'),playBtn=document.getElementById('playBtn'),
-        nextBtn=document.getElementById('nextBtn'),prevBtn=document.getElementById('prevBtn'),
-        tName=document.getElementById('trackName'),seekFill=document.getElementById('seekFill');
-  let cur=0;
-  function load(idx){
-    const t=tracks[idx]; au.src=t.src; tName.textContent=t.name;
-    if('mediaSession' in navigator){
-      navigator.mediaSession.metadata=new MediaMetadata({title:t.name,artist:'امپراتوری Wiriper'});
-    }
   }
-  load(cur);
-  playBtn.onclick=()=>{
-    if(au.paused){au.play().catch(()=>{});playBtn.innerHTML='<i class="fas fa-pause"></i>';}
-    else{au.pause();playBtn.innerHTML='<i class="fas fa-play"></i>';}
-  };
-  nextBtn.onclick=()=>{cur=(cur+1)%tracks.length;load(cur);au.play();playBtn.innerHTML='<i class="fas fa-pause"></i>';};
-  prevBtn.onclick=()=>{cur=(cur-1+tracks.length)%tracks.length;load(cur);au.play();playBtn.innerHTML='<i class="fas fa-pause"></i>';};
-  au.ontimeupdate=()=>{seekFill.style.width=(au.currentTime/au.duration*100)+'%';};
-  au.onended=()=>nextBtn.click();
 }
 
-/* ===================================================================
-   سیستم گرافیکی هسته: RAF واحد برای نشانگر و پس‌زمینه (ذرات)
-   =================================================================== */
-function initCursorAndBg(){
-  const canvas=document.getElementById('bgCanvas'),ctx=canvas.getContext('2d');
-  const cursor=document.querySelector('.cursor'),dot=document.querySelector('.cursor-dot');
-  let w,h,m={x:-100,y:-100},cm={x:-100,y:-100},dm={x:-100,y:-100};
+function drawBg(){
+  cx.clearRect(0,0,cv.width,cv.height);
   
-  const resize=()=>{
-    w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight;
-  };
-  window.addEventListener('resize',resize); resize();
-  window.addEventListener('mousemove',e=>{m.x=e.clientX;m.y=e.clientY;});
+  // Stars
+  stars.forEach(s => {
+    s.a += s.s; let o = 0.2 + Math.abs(Math.sin(s.a)) * 0.8;
+    cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    cx.fillStyle = s.color; cx.globalAlpha = o; cx.fill();
+    if(o > 0.9) { cx.shadowBlur = 10; cx.shadowColor = s.color; cx.fill(); cx.shadowBlur = 0; }
+  });
+  
+  // Meteors
+  spawnMeteor();
+  meteors.forEach((m, i) => {
+    m.x += m.vx; m.y += m.vy; m.life -= 0.02;
+    if(m.life <= 0 || m.y > cv.height) { meteors.splice(i, 1); return; }
+    cx.beginPath(); cx.moveTo(m.x, m.y); cx.lineTo(m.x - m.vx * 10, m.y - m.vy * 10);
+    cx.strokeStyle = `rgba(255, 255, 255, ${m.life})`; cx.lineWidth = 2; cx.stroke();
+  });
+  
+  cx.globalAlpha = 1;
+  requestAnimationFrame(drawBg);
+}
+drawBg();
 
-  // ذرات پس‌زمینه
-  const particles=[];
-  for(let i=0;i<60;i++)particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+0.5,s:Math.random()*0.4+0.1,o:Math.random()});
+/* ====== ذرات معلق محیطی (Floating Symbols) ====== */
+const symbols = ['👑', '✨', '💫', '💖', '🏰', '🌹'];
+setInterval(() => {
+  if(!document.getElementById('gate').classList.contains('hidden')) return;
+  const s = document.createElement('div'); s.className = 'floating-symbol';
+  s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.fontSize = (15 + Math.random() * 20) + 'px';
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 20000);
+}, 1500);
 
-  function render(time){
-    // حرکت نشانگر با تاخیر (Lerp) برای حس نرمی (۲۴۰ هرتز)
-    cm.x += (m.x-cm.x)*0.15; cm.y += (m.y-cm.y)*0.15;
-    dm.x += (m.x-dm.x)*0.3;  dm.y += (m.y-dm.y)*0.3;
-    cursor.style.transform=`translate3d(${cm.x-17}px,${cm.y-17}px,0)`;
-    dot.style.transform=`translate3d(${dm.x-3}px,${dm.y-3}px,0)`;
+/* ====== بارش عشق و آتش‌بازی ====== */
+function loveBurst(){
+  for(let i=0; i<50; i++){
+    const h = document.createElement('div'); h.className = 'petal';
+    h.textContent = ['💖', '💛', '❤️', '💕', '🌹', '✨'][Math.floor(Math.random()*6)];
+    h.style.left = Math.random() * 100 + 'vw'; 
+    h.style.top = (Math.random() * 30) + 'vh';
+    h.style.fontSize = (15 + Math.random() * 30) + 'px';
+    h.style.animationDuration = (4 + Math.random() * 5) + 's';
+    document.body.appendChild(h); setTimeout(() => h.remove(), 9000);
+  }
+}
 
-    // رندر پس‌زمینه
-    ctx.clearRect(0,0,w,h);
-    ctx.fillStyle='rgba(212,175,55,0.3)';
-    particles.forEach(p=>{
-      p.y-=p.s; if(p.y<0)p.y=h;
-      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+function launchFirework(n=3){
+  // Using background canvas for performance
+  for(let k=0; k<n; k++){
+    const x = Math.random() * cv.width, y = cv.height * 0.2 + Math.random() * cv.height * 0.4;
+    const hue = [45, 330, 280, 190][Math.floor(Math.random()*4)];
+    for(let i=0; i<80; i++){
+      const a = (Math.PI*2*i)/80, sp = 3 + Math.random()*8;
+      meteors.push({ x, y, vx: Math.cos(a)*sp, vy: Math.sin(a)*sp, life: 1, isSpark: true, c: `hsl(${hue}, 100%, ${60+Math.random()*30}%)` });
+    }
+  }
+}
+// Update meteor logic to handle sparks
+const origDraw = drawBg;
+drawBg = function() {
+  cx.clearRect(0,0,cv.width,cv.height);
+  stars.forEach(s => {
+    s.a += s.s; let o = 0.2 + Math.abs(Math.sin(s.a)) * 0.8;
+    cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, Math.PI*2); cx.fillStyle = s.color; cx.globalAlpha = o; cx.fill();
+  });
+  spawnMeteor();
+  meteors.forEach((m, i) => {
+    if(m.isSpark) {
+      m.x += m.vx; m.y += m.vy; m.vy += 0.1; m.vx *= 0.96; m.life -= 0.015;
+      if(m.life <= 0) { meteors.splice(i, 1); return; }
+      cx.globalAlpha = m.life; cx.beginPath(); cx.arc(m.x, m.y, 2.5, 0, Math.PI*2); cx.fillStyle = m.c; cx.fill();
+    } else {
+      m.x += m.vx; m.y += m.vy; m.life -= 0.02;
+      if(m.life <= 0 || m.y > cv.height) { meteors.splice(i, 1); return; }
+      cx.globalAlpha = m.life; cx.beginPath(); cx.moveTo(m.x, m.y); cx.lineTo(m.x - m.vx * 10, m.y - m.vy * 10); cx.strokeStyle = '#fff'; cx.lineWidth = 2; cx.stroke();
+    }
+  });
+  cx.globalAlpha = 1; requestAnimationFrame(drawBg);
+};
+
+/* ====== بال فرشته ====== */
+function buildWing(el, dir){
+  const n=20; 
+  for(let i=0; i<n; i++){
+    const f = document.createElement('div'); f.className = 'feather';
+    const t = i/(n-1); 
+    f.style.height = (40 + Math.sin(t*Math.PI)*110) + 'px';
+    f.style.transform = `rotate(${dir*(10 + t*140)}deg)`; 
+    el.appendChild(f);
+  }
+}
+buildWing(document.getElementById('wingL'), -1); buildWing(document.getElementById('wingR'), 1);
+
+/* ====== 3D Hover Effect (Tilt) ====== */
+document.querySelectorAll('[data-tilt]').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+    const xc = rect.width/2; const yc = rect.height/2;
+    const dx = (x - xc) / xc; const dy = (y - yc) / yc;
+    const intensity = el.classList.contains('angel-container') ? 15 : (el.classList.contains('letter') ? 5 : 10);
+    el.style.transform = `perspective(1200px) rotateY(${dx * intensity}deg) rotateX(${-dy * intensity}deg) scale3d(1.02, 1.02, 1.02)`;
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = `perspective(1200px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)`;
+  });
+});
+
+/* ====== ذرات شاهزاده‌ها ====== */
+function createCardParticles(parentId, symbol, color) {
+  const box = document.getElementById(parentId);
+  if(!box) return;
+  setInterval(() => {
+    const p = document.createElement('div');
+    p.className = 'card-particle'; p.textContent = symbol;
+    p.style.left = (Math.random() * 80 + 10) + '%';
+    p.style.color = color; p.style.textShadow = `0 0 10px ${color}`;
+    p.style.animationDuration = (2 + Math.random() * 2) + 's';
+    box.appendChild(p);
+    setTimeout(() => p.remove(), 4000);
+  }, 400);
+}
+createCardParticles('particles-sam', '⚡', 'var(--neon-blue)');
+createCardParticles('particles-sonia', '🦋', 'var(--royal-pink)');
+
+/* ====== روزهای سلطنت ====== */
+function calcWiriperDays() {
+  const diff = Date.now() - LOVE_START.getTime();
+  document.getElementById('wDays').textContent = Math.floor(diff / 864e5);
+}
+calcWiriperDays();
+
+/* ====== شمارش معکوس سینمایی ====== */
+function nextBirthday(m,d){
+  const now = new Date(); let y = now.getFullYear();
+  let next = new Date(y, m-1, d);
+  if(next < new Date(now.getFullYear(), now.getMonth(), now.getDate())) next = new Date(y+1, m-1, d);
+  return next;
+}
+function renderCD(elId, todayId, m, d){
+  const el = document.getElementById(elId), tEl = document.getElementById(todayId);
+  let lastSec = -1;
+  function tick(){
+    const now = new Date();
+    if(now.getMonth() === m-1 && now.getDate() === d){ el.style.display='none'; tEl.style.display='block'; return; }
+    el.style.display='flex'; tEl.style.display='none';
+    const diff = nextBirthday(m,d) - now;
+    const days = Math.floor(diff/864e5), hrs = Math.floor(diff/36e5)%24, min = Math.floor(diff/6e4)%60, sec = Math.floor(diff/1e3)%60;
+    
+    // Update DOM only if changed
+    if(sec !== lastSec) {
+      el.innerHTML = `
+        <div class="cd-box"><span>${days}</span><small>روز</small></div>
+        <div class="cd-box"><span>${hrs}</span><small>ساعت</small></div>
+        <div class="cd-box"><span>${min}</span><small>دقیقه</small></div>
+        <div class="cd-box"><span class="pulse">${sec}</span><small>ثانیه</small></div>`;
+      setTimeout(()=>{ const s = el.querySelector('.pulse'); if(s) s.classList.remove('pulse'); }, 300);
+      lastSec = sec;
+    }
+  }
+  tick(); setInterval(tick, 1000);
+}
+renderCD('cd-mobin', 'today-mobin', 3, 15);
+renderCD('cd-niyayesh', 'today-niyayesh', 9, 6);
+
+/* ====== تایم‌لاین ====== */
+const timeline = [
+  {when: 'آغاز تمدن', title: 'تولد یک امپراتوری', text: 'روزی که نگاهمان گره خورد و سنگ بنای جهان Wiriper گذاشته شد.'},
+  {when: 'فصل طلایی', title: 'تاج‌گذاری ملکه', text: 'نیایش بر تخت قلب من نشست و نور را به این قلمرو تاریک آورد.'},
+  {when: 'سوگند ابدی', title: 'عهد پادشاه', text: 'قسم خوردم تا واپسین نفس، سپر بلا و نگهبان خنده‌های زیبایش باشم.'},
+  {when: 'تا بی‌نهایت', title: 'آینده‌ی روشن', text: 'هر روز که می‌گذرد، تمدن ما وسیع‌تر و عشقمان دست‌نیافتنی‌تر می‌شود.'}
+];
+(function(){
+  const box = document.getElementById('timelineBox');
+  timeline.forEach(t => {
+    const it = document.createElement('div'); it.className = 'tl-item reveal';
+    it.innerHTML = `<div class="dot"></div><div class="tl-card"><span class="when">${t.when}</span><h4>${t.title}</h4><p>${t.text}</p></div>`;
+    box.appendChild(it);
+  });
+})();
+
+/* ====== زیرعنوان تایپ‌شونده ======= */
+const subs = ["EMPIRE OF WIRIPER", "سرزمینی فراتر از زمان", "پادشاه مبین ♾️ ملکه نیایش", "عشقی به وسعت یک تمدن"];
+let si=0, ci=0, del=false; const subEl = document.getElementById('heroSub');
+function typeSub(){
+  const cur = subs[si]; subEl.textContent = del ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+  if(!del && ci === cur.length){ del=true; setTimeout(typeSub, 2000); return; }
+  if(del && ci === 0){ del=false; si=(si+1)%subs.length; }
+  setTimeout(typeSub, del ? 30 : 80);
+}
+typeSub();
+
+/* ====== فرمان همایونی ====== */
+const letterStr = "ملکه‌ی بی‌همتای من، نیایش عزیز...\n\nوقتی به وسعت قلمرو Wiriper نگاه می‌کنم، می‌بینم که تمام این شکوه، تمام این ستارگان و تمام این زیبایی‌ها، تنها بازتابی از وجود توست. پیش از تو، من تنها پادشاهی بودم در سرزمینی خاموش؛ اما تو با آمدنت، خورشید را به آسمان این تمدن هدیه دادی.\n\nمن، مبین، در برابر تمام کائنات سوگند یاد می‌کنم که قلعه‌ی بازوانم تا ابد امن‌ترین جای جهان برای تو باشد. هیچ توفانی نمی‌تواند دیوارهای عشق ما را بلرزاند.\n\nتو نه تنها عشق من، بلکه تمام وجود منی.\nدوستت دارم، بی‌نهایت، بی‌دلیل، و تا آخرین تپش قلبم.";
+const lEl = document.getElementById('letterText'); let li=0, letterStarted=false;
+function typeLetter(){
+  if(li <= letterStr.length){
+    lEl.innerHTML = letterStr.slice(0, li).replace(/\n/g, '<br>') + '<span class="cursor">&nbsp;</span>';
+    li++; setTimeout(typeLetter, 40); 
+  } else {
+    lEl.innerHTML = letterStr.replace(/\n/g, '<br>');
+  }
+}
+
+/* ====== گالری و لایت‌باکس ====== */
+const imgs = [...document.querySelectorAll('#galleryGrid img')].map(i => i.src); let lbIndex=0;
+function lb(i){ lbIndex=i; document.getElementById('lbimg').src=imgs[i]; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLb(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow='auto'; }
+function lbStep(d){ lbIndex = (lbIndex + d + imgs.length) % imgs.length; document.getElementById('lbimg').src = imgs[lbIndex]; }
+document.getElementById('lightbox').addEventListener('click', e => { if(e.target.id === 'lightbox') closeLb(); });
+addEventListener('keydown', e => {
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key === 'Escape') closeLb(); if(e.key === 'ArrowLeft') lbStep(1); if(e.key === 'ArrowRight') lbStep(-1);
+});
+
+/* ====== موسیقی سلطنتی ====== */
+const tracks = [
+  { name: 'نور ماه بتهوون - آرامش مطلق', src: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Beethoven_Moonlight_1st_movement.ogg' },
+  { name: 'نوکتورن شوپن - عاشقانه', src: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/Chopin_-_Nocturne_Op_9_No_2_E_Flat_Major.ogg' },
+  { name: 'کلر دو لون - رویای شب', src: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Debussy_-_Clair_de_Lune.ogg' }
+];
+let tIdx = 0;
+const visualizer = document.getElementById('visualizer');
+function loadTrack(){ audio.src = tracks[tIdx].src; document.getElementById('trackName').textContent = tracks[tIdx].name; }
+function toggleMusic(){
+  if(audio.paused){ audio.play().catch(e=>console.log('لطفا کلیک کنید')); document.getElementById('playBtn').innerHTML = '<b>||</b>'; visualizer.classList.add('playing'); }
+  else { audio.pause(); document.getElementById('playBtn').textContent = '▶'; visualizer.classList.remove('playing'); }
+}
+function nextTrack(){ tIdx = (tIdx+1)%tracks.length; loadTrack(); if(!audio.paused) audio.play(); }
+function prevTrack(){ tIdx = (tIdx-1+tracks.length)%tracks.length; loadTrack(); if(!audio.paused) audio.play(); }
+audio.addEventListener('ended', nextTrack);
+audio.addEventListener('timeupdate', () => {
+  const p = audio.duration ? (audio.currentTime/audio.duration)*100 : 0;
+  document.getElementById('seekFill').style.width = p+'%';
+});
+function seek(e){
+  if(!audio.duration) return; const b = e.currentTarget.getBoundingClientRect();
+  const ratio = (e.clientX - b.left) / b.width; audio.currentTime = ratio * audio.duration;
+}
+loadTrack(); audio.volume = 0.5;
+
+/* ====== انیمیشن‌های Scroll Reveal و Timeline ====== */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      if(e.target.classList.contains('tl-item')) e.target.classList.add('active');
+      if(e.target.closest('#letter') && !letterStarted){ letterStarted=true; setTimeout(typeLetter, 600); }
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
+
+/* ====== ناوبری نرم ====== */
+function sm(id){ const el = document.querySelector(id); if(el) window.scrollTo({ top: el.offsetTop - 100, behavior: 'smooth' }); }
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', e => { e.preventDefault(); sm(a.getAttribute('href')); document.getElementById('navlinks').classList.remove('open'); });
+});
+function smoothTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+/* ====== Scroll Events ====== */
+let ticking = false;
+addEventListener('scroll', () => {
+  if(!ticking) {
+    requestAnimationFrame(() => {
+      const top = window.scrollY;
+      const h = document.body.scrollHeight - innerHeight;
+      document.getElementById('progress').style.width = (top / h * 100) + '%';
+      document.getElementById('toTop').classList.toggle('show', top > 800);
+      
+      // Timeline Line Fill
+      const tl = document.getElementById('timelineBox');
+      if(tl) {
+        const tlRect = tl.getBoundingClientRect();
+        if(tlRect.top < innerHeight/2 && tlRect.bottom > 0) {
+          const fillPercent = Math.min(100, Math.max(0, ((innerHeight/2 - tlRect.top) / tlRect.height) * 100));
+          document.getElementById('tlFill').style.height = fillPercent + '%';
+        }
+      }
+
+      let cur = '';
+      document.querySelectorAll('section').forEach(s => { if(top >= s.offsetTop - 200) cur = s.id; });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.remove('active');
+        if(a.getAttribute('href') === '#' + cur) a.classList.add('active');
+      });
+      ticking = false;
     });
-
-    Lifecycle.rafId=requestAnimationFrame(render);
+    ticking = true;
   }
-  Lifecycle.rafId=requestAnimationFrame(render);
-}
-
-// افکت آتش‌بازی برای ورود
-function launchFireworks(){
-  const fx=document.getElementById('fxLayer');
-  for(let i=0;i<25;i++){
-    const s=document.createElement('div');
-    s.className='fas fa-star float-sym';
-    s.style.left=Math.random()*100+'vw';
-    s.style.top='100vh';
-    s.style.color=['#d4af37','#e0b0ff','#fff'][i%3];
-    fx.appendChild(s);
-    const dur=2000+Math.random()*2000;
-    s.animate([
-      {transform:'translateY(0) scale(1)',opacity:1},
-      {transform:`translate(${(Math.random()-0.5)*200}px,-100vh) scale(0)`,opacity:0}
-    ],{duration:dur,easing:'ease-out'}).onfinish=()=>s.remove();
-  }
-}
+});
 </script>
 </body>
 </html>
