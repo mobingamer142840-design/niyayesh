@@ -12,78 +12,80 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Lalezar&family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#080611;
-  --bg2:#120a24;
-  --gold:#e8c66b;
-  --gold-2:#f6e3a1;
-  --gold-deep:#b8862f;
-  --purple:#7b3fe4;
-  --purple-soft:#9d6bff;
-  --rose:#ff8fb1;
-  --text:#f3ecdf;
-  --muted:#b9aecb;
-  --glass:rgba(30,18,55,.45);
-  --border:rgba(232,198,107,.35);
+  --bg:#080611; --bg2:#120a24;
+  --gold:#e8c66b; --gold-2:#f6e3a1; --gold-deep:#b8862f;
+  --purple:#7b3fe4; --purple-soft:#9d6bff; --rose:#ff8fb1;
+  --text:#f3ecdf; --muted:#b9aecb;
+  --glass:rgba(30,18,55,.45); --border:rgba(232,198,107,.35);
   --shadow:0 18px 60px rgba(0,0,0,.55);
+  --accent:var(--gold); --accent2:var(--purple);
+}
+/* تم رز گلد */
+body[data-theme="rose"]{
+  --bg:#0d0610; --bg2:#1c0d1c; --gold:#ffb6c1; --gold-2:#ffd9e3; --gold-deep:#d6708f;
+  --purple:#ff5e9c; --purple-soft:#ff8fb8; --border:rgba(255,182,193,.35);
+  --glass:rgba(50,18,40,.45);
+}
+/* تم نیمه‌شب */
+body[data-theme="midnight"]{
+  --bg:#04070f; --bg2:#0a1326; --gold:#9fd0ff; --gold-2:#d6ecff; --gold-deep:#4f8fd6;
+  --purple:#3f7be4; --purple-soft:#6ba0ff; --border:rgba(159,208,255,.32);
+  --glass:rgba(18,32,55,.45);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{
-  scroll-behavior:smooth;
-  -webkit-text-size-adjust:100%;
-  background:#080611;            /* رنگ پایه برای رفع سفیدی overscroll در سافاری */
-  min-height:100%;
-}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#080611;min-height:100%}
 body{
   font-family:'Vazirmatn',sans-serif;
   background:
-    radial-gradient(1200px 800px at 80% -10%,#26144f 0%,transparent 55%),
-    radial-gradient(900px 700px at 0% 100%,#1a0c39 0%,transparent 55%),
+    radial-gradient(1200px 800px at 80% -10%,var(--bg2) 0%,transparent 55%),
+    radial-gradient(900px 700px at 0% 100%,var(--bg2) 0%,transparent 55%),
     linear-gradient(160deg,var(--bg),var(--bg2));
-  background-attachment:fixed;
-  background-color:#080611;
-  color:var(--text);
-  min-height:100vh;
-  min-height:100dvh;
-  min-height:-webkit-fill-available;
-  overflow-x:hidden;
-  overscroll-behavior-y:none;
-  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  background-attachment:fixed;background-color:var(--bg);color:var(--text);
+  min-height:100vh;min-height:100dvh;min-height:-webkit-fill-available;
+  overflow-x:hidden;overscroll-behavior-y:none;cursor:none;
+  transition:background-color .6s ease;
 }
+@media(pointer:coarse){body{cursor:auto}.cursor-dot,.cursor-ring{display:none!important}}
 h1,h2,h3,.cinzel{font-family:'Cinzel',serif}
 .lalezar{font-family:'Lalezar',cursive}
 ::selection{background:var(--gold);color:#1a1026}
-a{-webkit-tap-highlight-color:transparent}
+a,button{-webkit-tap-highlight-color:transparent}
 
-/* ===== لودینگ ===== */
-#loader{position:fixed;inset:0;z-index:2000;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;background:radial-gradient(700px 500px at 50% 45%,#1e1140,#070512 75%);
-  transition:opacity .8s ease,visibility .8s}
+/* نشانگر موس */
+.cursor-dot{position:fixed;top:0;left:0;width:8px;height:8px;border-radius:50%;
+  background:var(--gold-2);z-index:3000;pointer-events:none;transform:translate(-50%,-50%);
+  box-shadow:0 0 12px var(--gold)}
+.cursor-ring{position:fixed;top:0;left:0;width:36px;height:36px;border-radius:50%;
+  border:1.5px solid var(--gold);z-index:3000;pointer-events:none;transform:translate(-50%,-50%);
+  transition:width .25s,height .25s,background .25s,border-color .25s}
+.cursor-ring.hot{width:54px;height:54px;background:rgba(232,198,107,.12);border-color:var(--gold-2)}
+
+/* لودینگ */
+#loader{position:fixed;inset:0;z-index:2500;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;background:radial-gradient(700px 500px at 50% 45%,var(--bg2),var(--bg) 75%);
+  transition:opacity .8s,visibility .8s}
 #loader.done{opacity:0;visibility:hidden}
 .loader-crown{font-size:64px;filter:drop-shadow(0 0 24px var(--gold));animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
 .loader-txt{margin-top:18px;color:var(--gold-2);font-family:'Cinzel';letter-spacing:3px;font-size:15px}
 .loader-bar{margin-top:22px;width:220px;height:5px;border-radius:5px;background:rgba(255,255,255,.1);overflow:hidden}
 .loader-bar i{display:block;height:100%;width:0;border-radius:5px;
-  background:linear-gradient(90deg,var(--gold-deep),var(--gold-2),var(--gold));animation:load 2.2s ease forwards}
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold-2),var(--gold));animation:load 2.4s ease forwards}
 @keyframes load{to{width:100%}}
 
-/* ===== نوار پیشرفت اسکرول ===== */
 #progress{position:fixed;top:0;right:0;left:0;height:3px;z-index:1500;
-  background:linear-gradient(90deg,var(--gold-deep),var(--gold-2),var(--purple));width:0;transition:width .1s}
-
-/* ===== ذرات و جرقه ===== */
-#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
-.sparkle{position:fixed;top:-10px;color:var(--gold-2);z-index:1;pointer-events:none;
-  animation:fall linear forwards;text-shadow:0 0 8px var(--gold)}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
-.heart-trail{position:fixed;z-index:1400;pointer-events:none;font-size:16px;
-  animation:floatUp 1.1s ease forwards}
+  background:linear-gradient(90deg,var(--gold-deep),var(--gold-2),var(--purple));width:0}
+#stars,#fx{position:fixed;inset:0;pointer-events:none}
+#stars{z-index:0}#fx{z-index:1450}
+.petal{position:fixed;top:-24px;z-index:1;pointer-events:none;animation:fall linear forwards;opacity:.9}
+@keyframes fall{to{transform:translateY(112vh) rotate(540deg);opacity:0}}
+.heart-trail{position:fixed;z-index:1400;pointer-events:none;font-size:16px;animation:floatUp 1.1s ease forwards}
 @keyframes floatUp{to{transform:translateY(-46px) scale(.4);opacity:0}}
 
-/* ===== دروازه ورود ===== */
+/* دروازه */
 #gate{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;
-  background:radial-gradient(800px 600px at 50% 40%,#1e1140 0%,#070512 70%);
-  transition:opacity .8s ease,visibility .8s;padding:16px}
+  background:radial-gradient(800px 600px at 50% 40%,var(--bg2) 0%,var(--bg) 70%);
+  transition:opacity .8s,visibility .8s;padding:16px}
 #gate.hidden{opacity:0;visibility:hidden}
 .gate-card{width:min(420px,92vw);background:var(--glass);backdrop-filter:blur(18px);
   border:1px solid var(--border);border-radius:28px;padding:40px 30px;text-align:center;
@@ -106,22 +108,22 @@ a{-webkit-tap-highlight-color:transparent}
 .gate-hint{margin-top:14px;font-size:11px;color:var(--muted)}
 .gate-err{color:var(--rose);font-size:13px;margin-top:12px;min-height:18px}
 
-/* ===== ناوبار ===== */
+/* ناوبار */
 .navbar{position:fixed;top:0;right:0;left:0;z-index:900;display:flex;align-items:center;
   justify-content:space-between;padding:14px 26px;backdrop-filter:blur(14px);
   background:linear-gradient(180deg,rgba(10,6,22,.88),rgba(10,6,22,.15));
   border-bottom:1px solid var(--border);transform:translateY(-130%);transition:transform .6s ease}
 .navbar.show{transform:translateY(0)}
-.brand{display:flex;align-items:center;gap:10px;font-family:'Cinzel';font-weight:800;
-  color:var(--gold-2);font-size:18px}
-.nav-links{display:flex;gap:4px;flex-wrap:wrap}
-.nav-links a{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:10px;
-  font-size:13.5px;transition:.25s}
-.nav-links a:hover{color:var(--gold-2);background:rgba(232,198,107,.1)}
-.nav-toggle{display:none;background:none;border:1px solid var(--border);color:var(--gold);
-  border-radius:10px;padding:8px 12px;font-size:18px;cursor:pointer}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Cinzel';font-weight:800;color:var(--gold-2);font-size:18px}
+.nav-links{display:flex;gap:2px;flex-wrap:wrap}
+.nav-links a{color:var(--text);text-decoration:none;padding:8px 11px;border-radius:10px;font-size:13px;transition:.25s;position:relative}
+.nav-links a:hover,.nav-links a.active{color:var(--gold-2);background:rgba(232,198,107,.12)}
+.nav-right{display:flex;gap:8px;align-items:center}
+.icon-btn{background:none;border:1px solid var(--border);color:var(--gold-2);border-radius:10px;
+  padding:8px 11px;font-size:16px;cursor:pointer;transition:.25s}
+.icon-btn:hover{background:rgba(232,198,107,.12)}
+.nav-toggle{display:none}
 
-/* ===== چیدمان ===== */
 .wrap{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 20px}
 section{padding:90px 0;position:relative}
 .sec-title{text-align:center;margin-bottom:46px}
@@ -132,7 +134,7 @@ section{padding:90px 0;position:relative}
 .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s ease}
 .reveal.in{opacity:1;transform:none}
 
-/* ===== HERO + بال ===== */
+/* HERO */
 .hero{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
   justify-content:center;text-align:center;padding-top:90px}
 .hero .sub{color:var(--gold);letter-spacing:6px;font-size:13px;margin-bottom:10px;min-height:18px}
@@ -140,13 +142,12 @@ section{padding:90px 0;position:relative}
   background:linear-gradient(135deg,#fff,var(--gold-2),var(--gold));
   -webkit-background-clip:text;background-clip:text;color:transparent;
   text-shadow:0 0 40px rgba(232,198,107,.25)}
-.angel{position:relative;width:min(320px,72vw);aspect-ratio:1;margin:38px auto 24px}
+.angel{position:relative;width:min(320px,72vw);aspect-ratio:1;margin:38px auto 24px;will-change:transform}
 .photo-frame{position:absolute;inset:0;border-radius:50%;overflow:hidden;z-index:3;
   border:4px solid var(--gold);box-shadow:0 0 0 8px rgba(232,198,107,.12),0 0 60px rgba(232,198,107,.5)}
 .photo-frame img{width:100%;height:100%;object-fit:cover;display:block}
 .halo{position:absolute;top:-18px;left:50%;transform:translateX(-50%);width:60%;height:24px;
-  border-radius:50%;border:4px solid var(--gold-2);box-shadow:0 0 30px var(--gold);z-index:4;
-  animation:halo 3s ease-in-out infinite}
+  border-radius:50%;border:4px solid var(--gold-2);box-shadow:0 0 30px var(--gold);z-index:4;animation:halo 3s ease-in-out infinite}
 @keyframes halo{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-6px)}}
 .wing{position:absolute;top:8%;width:48%;height:90%;z-index:1;display:flex;align-items:flex-start;justify-content:center}
 .wing-left{right:74%;transform-origin:right center;animation:flapL 4s ease-in-out infinite}
@@ -155,8 +156,7 @@ section{padding:90px 0;position:relative}
 @keyframes flapR{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-2deg)}}
 .feather{position:absolute;bottom:0;width:16px;
   background:linear-gradient(to top,rgba(255,255,255,.25),#fff 55%,#fff);
-  border-radius:50% 50% 50% 50%/65% 65% 35% 35%;
-  box-shadow:0 0 10px rgba(255,255,255,.7),0 0 22px rgba(232,198,107,.35)}
+  border-radius:50% 50% 50% 50%/65% 65% 35% 35%;box-shadow:0 0 10px rgba(255,255,255,.7),0 0 22px rgba(232,198,107,.35)}
 .hero .love{max-width:640px;margin:8px auto 0;color:var(--text);line-height:2;font-size:15px}
 .hero .love b{color:var(--gold-2)}
 .hero-btns{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
@@ -165,14 +165,17 @@ section{padding:90px 0;position:relative}
 .scroll-down{margin-top:26px;color:var(--gold);font-size:13px;animation:bob 2s infinite}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
 
-/* ===== کارت ===== */
-.grid{display:grid;gap:24px}
-.g2{grid-template-columns:repeat(2,1fr)}
-.g3{grid-template-columns:repeat(3,1fr)}
+/* عمر عشق */
+.love-counter{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+.lc-box{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:14px 18px;min-width:84px;text-align:center}
+.lc-box span{display:block;font-family:'Cinzel';font-size:28px;color:var(--gold-2);font-weight:800}
+.lc-box small{color:var(--muted);font-size:11px}
+
+.grid{display:grid;gap:24px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}
 .card{background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--border);
-  border-radius:22px;padding:28px;box-shadow:var(--shadow);transition:transform .35s,box-shadow .35s;
-  position:relative;overflow:hidden}
-.card:hover{transform:translateY(-8px);box-shadow:0 26px 70px rgba(123,63,228,.3)}
+  border-radius:22px;padding:28px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .35s;
+  position:relative;overflow:hidden;transform-style:preserve-3d}
+.card:hover{box-shadow:0 26px 70px rgba(123,63,228,.3)}
 .card .ico{font-size:40px;margin-bottom:12px;filter:drop-shadow(0 0 12px var(--gold))}
 .card h3{color:var(--gold-2);font-size:21px;margin-bottom:10px}
 .card p{color:var(--muted);line-height:1.9;font-size:14px}
@@ -180,10 +183,8 @@ section{padding:90px 0;position:relative}
 .tag{font-size:12px;padding:6px 12px;border-radius:20px;border:1px solid var(--border);
   background:rgba(232,198,107,.08);color:var(--gold-2)}
 
-/* ===== شمارش معکوس ===== */
 .cd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-.cd-card{background:var(--glass);border:1px solid var(--border);border-radius:22px;padding:26px;
-  text-align:center;box-shadow:var(--shadow)}
+.cd-card{background:var(--glass);border:1px solid var(--border);border-radius:22px;padding:26px;text-align:center;box-shadow:var(--shadow)}
 .cd-card h3{color:var(--gold-2);font-size:20px;margin-bottom:6px}
 .cd-card .date{color:var(--muted);font-size:13px;margin-bottom:18px}
 .cd-nums{display:flex;justify-content:center;gap:10px}
@@ -192,7 +193,22 @@ section{padding:90px 0;position:relative}
 .cd-box small{color:var(--muted);font-size:11px}
 .cd-today{margin-top:14px;color:var(--rose);font-weight:700;font-size:14px;display:none}
 
-/* ===== نقل‌قول‌ها ===== */
+/* تایم‌لاین */
+.timeline{position:relative;max-width:760px;margin:0 auto;padding:10px 0}
+.timeline::before{content:"";position:absolute;top:0;bottom:0;right:50%;width:2px;
+  background:linear-gradient(var(--gold-deep),var(--gold),var(--purple));transform:translateX(50%)}
+.tl-item{position:relative;width:50%;padding:14px 30px;box-sizing:border-box}
+.tl-item:nth-child(odd){right:0;text-align:left}
+.tl-item:nth-child(even){right:50%;text-align:right}
+.tl-item .dot{position:absolute;top:22px;width:16px;height:16px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 16px var(--gold);border:2px solid var(--bg)}
+.tl-item:nth-child(odd) .dot{right:-8px}
+.tl-item:nth-child(even) .dot{left:-8px}
+.tl-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:16px 18px}
+.tl-card h4{color:var(--gold-2);font-size:16px;margin-bottom:6px}
+.tl-card p{color:var(--muted);font-size:13px;line-height:1.8}
+.tl-card .when{color:var(--gold);font-size:12px;font-family:'Cinzel'}
+
 .quote-box{max-width:760px;margin:0 auto;text-align:center;background:var(--glass);
   border:1px solid var(--border);border-radius:24px;padding:42px 30px;box-shadow:var(--shadow);position:relative}
 .quote-box .qmark{font-size:60px;color:var(--gold);opacity:.4;font-family:'Cinzel';line-height:0;position:absolute;top:30px;right:30px}
@@ -202,17 +218,14 @@ section{padding:90px 0;position:relative}
 .quote-dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:.3s}
 .quote-dots i.on{background:var(--gold);transform:scale(1.2)}
 
-/* ===== شاهزادگان / فروشگاه ===== */
 .mini{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:22px;
-  text-align:center;box-shadow:var(--shadow);transition:transform .3s}
-.mini:hover{transform:translateY(-6px)}
+  text-align:center;box-shadow:var(--shadow);transition:transform .25s}
 .mini .av{font-size:46px;margin-bottom:8px}
 .mini h4{color:var(--gold-2);font-size:18px;margin-bottom:4px}
 .mini p{color:var(--muted);font-size:13px}
 .badge{margin-top:12px;display:inline-block;font-size:12px;padding:6px 14px;border-radius:20px;
   border:1px solid var(--border);background:rgba(232,198,107,.1);color:var(--gold-2);font-family:'Cinzel'}
 
-/* ===== نامه ===== */
 .letter{max-width:760px;margin:0 auto;background:var(--glass);border:1px solid var(--border);
   border-radius:24px;padding:40px;box-shadow:var(--shadow);position:relative}
 .letter .seal{position:absolute;top:-22px;left:50%;transform:translateX(-50%);width:50px;height:50px;
@@ -223,7 +236,6 @@ section{padding:90px 0;position:relative}
 .cursor{display:inline-block;width:2px;background:var(--gold);margin-right:2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 
-/* ===== عهدنامه ===== */
 .vow-form{display:flex;gap:10px;max-width:680px;margin:0 auto 26px;flex-wrap:wrap}
 .vow-form input{flex:1;min-width:220px;padding:14px 16px;border-radius:14px;border:1px solid var(--border);
   background:rgba(0,0,0,.35);color:var(--text);font-family:'Vazirmatn';outline:none}
@@ -232,48 +244,66 @@ section{padding:90px 0;position:relative}
 .vows{display:grid;gap:14px;max-width:760px;margin:0 auto}
 .vow{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:16px 20px;
   display:flex;justify-content:space-between;align-items:center;gap:12px}
-.vow span{line-height:1.8}
-.vow .by{color:var(--gold);font-size:12px}
+.vow span{line-height:1.8}.vow .by{color:var(--gold);font-size:12px}
 .vow button{background:none;border:none;color:var(--rose);cursor:pointer;font-size:18px}
 
-/* ===== گالری ===== */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .gallery img{width:100%;height:240px;object-fit:cover;border-radius:18px;cursor:pointer;
   border:2px solid var(--border);transition:transform .35s,box-shadow .35s}
 .gallery img:hover{transform:scale(1.03);box-shadow:0 20px 50px rgba(232,198,107,.3)}
-#lightbox{position:fixed;inset:0;z-index:1100;background:rgba(5,3,12,.94);display:none;
-  align-items:center;justify-content:center;padding:20px}
+#lightbox{position:fixed;inset:0;z-index:1100;background:rgba(5,3,12,.94);display:none;align-items:center;justify-content:center;padding:20px}
 #lightbox.open{display:flex}
-#lightbox img{max-width:92vw;max-height:84vh;border-radius:18px;border:3px solid var(--gold);
-  box-shadow:0 0 80px rgba(232,198,107,.4)}
+#lightbox img{max-width:92vw;max-height:84vh;border-radius:18px;border:3px solid var(--gold);box-shadow:0 0 80px rgba(232,198,107,.4)}
 #lightbox .x{position:absolute;top:22px;left:24px;font-size:34px;color:var(--gold-2);cursor:pointer}
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:40px;color:var(--gold-2);
-  cursor:pointer;background:rgba(0,0,0,.4);width:54px;height:54px;border-radius:50%;display:flex;
-  align-items:center;justify-content:center;user-select:none}
+  cursor:pointer;background:rgba(0,0,0,.4);width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;user-select:none}
 .lb-prev{right:18px}.lb-next{left:18px}
 
-/* ===== پخش‌کننده ===== */
-.player{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:20px;z-index:800;
-  display:flex;align-items:center;gap:10px;background:var(--glass);backdrop-filter:blur(14px);
-  border:1px solid var(--border);border-radius:50px;padding:9px 14px;box-shadow:var(--shadow)}
-.player button{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;font-size:15px;
-  color:#1a1026;background:linear-gradient(135deg,var(--gold-2),var(--gold))}
-.player .small{width:32px;height:32px;font-size:12px;background:rgba(255,255,255,.12);color:var(--gold-2)}
-.player .ttl{font-size:12px;color:var(--muted);max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* پنل تنظیمات */
+#settings{position:fixed;top:0;left:0;bottom:0;width:300px;max-width:86vw;z-index:1200;
+  background:rgba(12,7,26,.97);backdrop-filter:blur(16px);border-right:1px solid var(--border);
+  transform:translateX(-110%);transition:transform .45s ease;padding:24px;overflow-y:auto}
+#settings.open{transform:none}
+#settings h3{color:var(--gold-2);font-family:'Cinzel';margin-bottom:6px}
+#settings .close{position:absolute;top:16px;left:16px;font-size:24px;color:var(--gold-2);cursor:pointer;background:none;border:none}
+.set-group{margin-top:24px}
+.set-group label{display:block;color:var(--muted);font-size:13px;margin-bottom:10px}
+.theme-row{display:flex;gap:10px}
+.theme-dot{width:36px;height:36px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:.2s}
+.theme-dot.on{border-color:#fff;transform:scale(1.1)}
+.t-royal{background:linear-gradient(135deg,#f6e3a1,#7b3fe4)}
+.t-rose{background:linear-gradient(135deg,#ffd9e3,#ff5e9c)}
+.t-midnight{background:linear-gradient(135deg,#d6ecff,#3f7be4)}
+.switch{display:flex;align-items:center;justify-content:space-between;color:var(--muted);font-size:13px;margin:14px 0}
+.toggle{width:46px;height:26px;border-radius:20px;background:rgba(255,255,255,.15);position:relative;cursor:pointer;transition:.3s}
+.toggle.on{background:var(--gold)}
+.toggle i{position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.3s}
+.toggle.on i{right:23px}
+input[type=range]{width:100%;accent-color:var(--gold)}
+.backdrop{position:fixed;inset:0;z-index:1150;background:rgba(0,0,0,.5);opacity:0;visibility:hidden;transition:.4s}
+.backdrop.show{opacity:1;visibility:visible}
 
-/* ===== بازگشت به بالا ===== */
+/* پخش‌کننده */
+.player{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:20px;z-index:800;
+  display:flex;flex-direction:column;gap:8px;background:var(--glass);backdrop-filter:blur(14px);
+  border:1px solid var(--border);border-radius:20px;padding:12px 14px;box-shadow:var(--shadow);width:230px}
+.player .row{display:flex;align-items:center;gap:8px}
+.player button{width:38px;height:38px;border-radius:50%;border:none;cursor:pointer;font-size:14px;
+  color:#1a1026;background:linear-gradient(135deg,var(--gold-2),var(--gold))}
+.player .small{width:30px;height:30px;font-size:12px;background:rgba(255,255,255,.12);color:var(--gold-2)}
+.player .ttl{font-size:12px;color:var(--muted);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player .bar{height:5px;border-radius:5px;background:rgba(255,255,255,.12);cursor:pointer;position:relative}
+.player .bar i{position:absolute;top:0;right:0;height:100%;width:0;border-radius:5px;background:linear-gradient(90deg,var(--gold-deep),var(--gold))}
+
 #toTop{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:20px;z-index:800;
   width:46px;height:46px;border-radius:50%;border:1px solid var(--border);background:var(--glass);
   backdrop-filter:blur(10px);color:var(--gold-2);font-size:18px;cursor:pointer;opacity:0;
   transform:translateY(20px);transition:.4s;pointer-events:none}
 #toTop.show{opacity:1;transform:none;pointer-events:auto}
 
-/* ===== فوتر ===== */
-footer{text-align:center;padding:50px 20px;color:var(--muted);font-size:13px;
-  border-top:1px solid var(--border);position:relative;z-index:2}
+footer{text-align:center;padding:50px 20px;color:var(--muted);font-size:13px;border-top:1px solid var(--border);position:relative;z-index:2}
 footer b{color:var(--gold-2)}
 
-/* ===== ریسپانسیو ===== */
 @media(max-width:880px){
   .nav-links{display:none;position:absolute;top:62px;right:14px;left:14px;flex-direction:column;
     background:rgba(12,7,26,.97);border:1px solid var(--border);border-radius:16px;padding:12px}
@@ -281,13 +311,19 @@ footer b{color:var(--gold-2)}
   .nav-toggle{display:block}
   .g3,.g2,.cd-grid{grid-template-columns:1fr}
   .gallery{grid-template-columns:1fr 1fr}
+  .timeline::before{right:18px}
+  .tl-item{width:100%;text-align:right!important;padding-right:44px;padding-left:10px}
+  .tl-item:nth-child(even){right:0}
+  .tl-item .dot{right:10px!important;left:auto!important}
 }
-@media(max-width:520px){.gallery{grid-template-columns:1fr}}
+@media(max-width:520px){.gallery{grid-template-columns:1fr}.player{width:200px}}
 </style>
 </head>
 <body>
 
-<!-- لودینگ -->
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
+
 <div id="loader">
   <div class="loader-crown">👑</div>
   <div class="loader-txt">EMPIRE OF ETERNITY</div>
@@ -296,6 +332,7 @@ footer b{color:var(--gold-2)}
 
 <div id="progress"></div>
 <canvas id="stars"></canvas>
+<canvas id="fx"></canvas>
 
 <!-- دروازه -->
 <div id="gate">
@@ -313,11 +350,12 @@ footer b{color:var(--gold-2)}
 <!-- ناوبار -->
 <nav class="navbar" id="nav">
   <div class="brand">👑 امپراتوری جاودانه</div>
-  <button class="nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <button class="icon-btn nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
   <div class="nav-links" id="navlinks">
     <a href="#hero">خانه</a>
     <a href="#countdown">تولدها</a>
-    <a href="#quotes">نقل‌قول‌ها</a>
+    <a href="#timeline">داستان</a>
+    <a href="#quotes">زمزمه‌ها</a>
     <a href="#king">پادشاه</a>
     <a href="#queen">ملکه</a>
     <a href="#letter">نامه</a>
@@ -326,6 +364,9 @@ footer b{color:var(--gold-2)}
     <a href="#vows">عهدنامه‌ها</a>
     <a href="#gallery">گالری</a>
   </div>
+  <div class="nav-right">
+    <button class="icon-btn" onclick="openSettings()">⚙️</button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -333,7 +374,7 @@ footer b{color:var(--gold-2)}
   <div class="wrap">
     <div class="sub" id="heroSub"></div>
     <h1>امپراتوری جاودانهٔ<br>مبین و نیایش</h1>
-    <div class="angel">
+    <div class="angel" id="angel">
       <div class="wing wing-left" id="wingL"></div>
       <div class="wing wing-right" id="wingR"></div>
       <div class="halo"></div>
@@ -342,8 +383,9 @@ footer b{color:var(--gold-2)}
       </div>
     </div>
     <p class="love">او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b>نیایش</b> عزیز من.</p>
+    <div class="love-counter" id="loveCounter"></div>
     <div class="hero-btns">
-      <button class="btn" onclick="loveBurst()">💖 بارش عشق</button>
+      <button class="btn" onclick="loveBurst();launchFirework()">💖 بارش عشق</button>
       <a href="#countdown" class="btn ghost">⏳ شمارش تولدها</a>
     </div>
     <div class="scroll-down">↓ به قلمرو وارد شو</div>
@@ -353,10 +395,8 @@ footer b{color:var(--gold-2)}
 <!-- شمارش معکوس -->
 <section id="countdown">
   <div class="wrap">
-    <div class="sec-title reveal">
-      <h2>طلوع‌های مبارک و متبرک</h2><div class="line"></div>
-      <p>شمارش معکوس تا روزهای مقدس تولد پادشاه و ملکه</p>
-    </div>
+    <div class="sec-title reveal"><h2>طلوع‌های مبارک و متبرک</h2><div class="line"></div>
+      <p>شمارش معکوس تا روزهای مقدس تولد پادشاه و ملکه</p></div>
     <div class="cd-grid">
       <div class="cd-card reveal">
         <h3>👑 پادشاه مبین</h3>
@@ -374,7 +414,16 @@ footer b{color:var(--gold-2)}
   </div>
 </section>
 
-<!-- نقل‌قول‌ها -->
+<!-- تایم‌لاین -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2>داستان امپراتوری ما 💫</h2><div class="line"></div>
+      <p>مسیری که قلمرو ما را ساخت (متن‌ها قابل ویرایش در کد)</p></div>
+    <div class="timeline" id="timelineBox"></div>
+  </div>
+</section>
+
+<!-- زمزمه‌ها -->
 <section id="quotes">
   <div class="wrap">
     <div class="sec-title reveal"><h2>زمزمه‌های عاشقانه 💞</h2><div class="line"></div></div>
@@ -392,18 +441,12 @@ footer b{color:var(--gold-2)}
   <div class="wrap">
     <div class="sec-title reveal"><h2>قلمرو پادشاه مبین 🏎️</h2><div class="line"></div></div>
     <div class="grid g2">
-      <div class="card reveal">
-        <div class="ico">⚔️</div>
-        <h3>روح پادشاه</h3>
+      <div class="card reveal"><div class="ico">⚔️</div><h3>روح پادشاه</h3>
         <p>سواری بر مرکب سرعت، فرمانروایی با اقتدار و وفاداری که هیچ توفانی آن را نمی‌شکند. مبین، ستون این امپراتوری.</p>
-        <div class="tags"><span class="tag">قدرت</span><span class="tag">سرعت</span><span class="tag">وفاداری بی‌پایان</span></div>
-      </div>
-      <div class="card reveal">
-        <div class="ico">👑</div>
-        <h3>سوگند پادشاه</h3>
+        <div class="tags"><span class="tag">قدرت</span><span class="tag">سرعت</span><span class="tag">وفاداری بی‌پایان</span></div></div>
+      <div class="card reveal"><div class="ico">👑</div><h3>سوگند پادشاه</h3>
         <p>«تا واپسین نفس، نگهبان لبخند ملکه‌ام خواهم بود. تاج من بی او معنایی ندارد و قلمروم تنها برای اوست.»</p>
-        <div class="tags"><span class="tag">نویسنده: پادشاه مبین 👑</span></div>
-      </div>
+        <div class="tags"><span class="tag">نویسنده: پادشاه مبین 👑</span></div></div>
     </div>
   </div>
 </section>
@@ -413,18 +456,12 @@ footer b{color:var(--gold-2)}
   <div class="wrap">
     <div class="sec-title reveal"><h2>جهان ملکه نیایش 🏛️</h2><div class="line"></div></div>
     <div class="grid g2">
-      <div class="card reveal">
-        <div class="ico">🌹</div>
-        <h3>روح ملکه</h3>
+      <div class="card reveal"><div class="ico">🌹</div><h3>روح ملکه</h3>
         <p>عاشق هنر، شیفتهٔ زیبایی و معماری، و راوی افسانه‌های جاودان. نیایش، فرشته‌ای که شکوه را تعریف می‌کند.</p>
-        <div class="tags"><span class="tag">هنر</span><span class="tag">زیبایی</span><span class="tag">معماری</span><span class="tag">افسانه‌های جاودان</span></div>
-      </div>
-      <div class="card reveal">
-        <div class="ico">👸🏻</div>
-        <h3>سوگند ملکه</h3>
+        <div class="tags"><span class="tag">هنر</span><span class="tag">زیبایی</span><span class="tag">معماری</span><span class="tag">افسانه‌های جاودان</span></div></div>
+      <div class="card reveal"><div class="ico">👸🏻</div><h3>سوگند ملکه</h3>
         <p>«در این قلمرو، تنها یک پادشاه بر قلبم فرمان می‌راند و او مبین است؛ تاجِ روحم و آرامشِ همیشگی‌ام.»</p>
-        <div class="tags"><span class="tag">نویسنده: ملکه نیایش 👸🏻</span></div>
-      </div>
+        <div class="tags"><span class="tag">نویسنده: ملکه نیایش 👸🏻</span></div></div>
     </div>
   </div>
 </section>
@@ -433,11 +470,8 @@ footer b{color:var(--gold-2)}
 <section id="letter">
   <div class="wrap">
     <div class="sec-title reveal"><h2>نامهٔ پادشاه به ملکه ✉️</h2><div class="line"></div></div>
-    <div class="letter reveal">
-      <div class="seal">👑</div>
-      <div id="letterText"></div>
-      <div class="sign">— پادشاه مبین</div>
-    </div>
+    <div class="letter reveal"><div class="seal">👑</div><div id="letterText"></div>
+      <div class="sign">— پادشاه مبین</div></div>
   </div>
 </section>
 
@@ -493,7 +527,7 @@ footer b{color:var(--gold-2)}
 
 <footer>
   ساخته شده با عشق برای <b>ملکه نیایش 👸🏻</b> از سوی <b>پادشاه مبین 👑</b><br>
-  امپراتوری جاودانه — تا بی‌نهایت
+  امپراتوری جاودانه — تا بی‌نهایت · <span id="visits"></span>
 </footer>
 
 <!-- لایت‌باکس -->
@@ -504,27 +538,73 @@ footer b{color:var(--gold-2)}
   <div class="lb-nav lb-next" onclick="lbStep(1)">›</div>
 </div>
 
+<!-- پنل تنظیمات -->
+<div class="backdrop" id="backdrop" onclick="closeSettings()"></div>
+<aside id="settings">
+  <button class="close" onclick="closeSettings()">✕</button>
+  <h3>تنظیمات قصر ⚙️</h3>
+  <div class="set-group">
+    <label>تم امپراتوری</label>
+    <div class="theme-row">
+      <div class="theme-dot t-royal" onclick="setTheme('royal')" title="سلطنتی"></div>
+      <div class="theme-dot t-rose" onclick="setTheme('rose')" title="رز گلد"></div>
+      <div class="theme-dot t-midnight" onclick="setTheme('midnight')" title="نیمه‌شب"></div>
+    </div>
+  </div>
+  <div class="set-group">
+    <div class="switch"><span>افکت ستاره و گلبرگ</span><div class="toggle on" id="tgFx" onclick="toggleFx()"><i></i></div></div>
+    <div class="switch"><span>رد قلب پشت موس</span><div class="toggle on" id="tgTrail" onclick="toggleTrail()"><i></i></div></div>
+  </div>
+  <div class="set-group">
+    <label>میزان صدای موسیقی</label>
+    <input type="range" id="volRange" min="0" max="100" value="60" oninput="setVol(this.value)">
+  </div>
+  <div class="set-group">
+    <label>پشتیبان داده‌ها</label>
+    <button class="btn ghost" style="margin-top:4px" onclick="exportData()">⬇️ دریافت بکاپ</button>
+    <button class="btn ghost" style="margin-top:8px" onclick="document.getElementById('importFile').click()">⬆️ بازگردانی</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none" onchange="importData(event)">
+  </div>
+</aside>
+
 <!-- پخش‌کننده -->
 <div class="player">
-  <button class="small" onclick="prevTrack()">⏮</button>
-  <button id="playBtn" onclick="toggleMusic()">▶</button>
-  <button class="small" onclick="nextTrack()">⏭</button>
-  <div class="ttl" id="trackName">آهنگ سلطنتی</div>
+  <div class="row">
+    <button class="small" onclick="prevTrack()">⏮</button>
+    <button id="playBtn" onclick="toggleMusic()">▶</button>
+    <button class="small" onclick="nextTrack()">⏭</button>
+    <div class="ttl" id="trackName">آهنگ سلطنتی</div>
+  </div>
+  <div class="bar" id="seekBar" onclick="seek(event)"><i id="seekFill"></i></div>
 </div>
-<audio id="audio" loop>
-  <!-- لینک آهنگ دلخواهت را اینجا بگذار، مثلاً: <source src="song.mp3"> -->
-  <source src="" type="audio/mpeg">
-</audio>
+<audio id="audio"></audio>
 
-<button id="toTop" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+<button id="toTop" onclick="smoothTop()">↑</button>
 
 <script>
-/* ===== لودینگ ===== */
-window.addEventListener('load',()=>{
-  setTimeout(()=>document.getElementById('loader').classList.add('done'),2000);
-});
+/* ====== لایهٔ شبه‌بک‌اند (Vault) ====== */
+const Vault={
+  ns:'empire_v3',
+  read(k,def){try{const r=JSON.parse(localStorage.getItem(this.ns)||'{}');return (k in r)?r[k]:def;}catch(e){return def;}},
+  write(k,v){let r;try{r=JSON.parse(localStorage.getItem(this.ns)||'{}');}catch(e){r={};}r[k]=v;localStorage.setItem(this.ns,JSON.stringify(r));},
+  all(){try{return JSON.parse(localStorage.getItem(this.ns)||'{}');}catch(e){return {};}},
+  load(obj){localStorage.setItem(this.ns,JSON.stringify(obj));}
+};
+/* شمارندهٔ بازدید + آخرین ورود */
+(function(){
+  let v=Vault.read('visits',0)+1;Vault.write('visits',v);
+  Vault.write('lastVisit',new Date().toISOString());
+  window.__visits=v;
+})();
 
-/* ===== دروازه ===== */
+/* ====== تنظیمات کاربر ====== */
+let settings={theme:Vault.read('theme','royal'),fx:Vault.read('fx',true),
+  trail:Vault.read('trail',true),vol:Vault.read('vol',60)};
+
+/* ====== لودینگ ====== */
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('done'),2200));
+
+/* ====== دروازه ====== */
 const KEYS=["niyayesh","mobinloveniyayesh","نیایش"];
 function enter(){
   const v=document.getElementById('pass').value.trim().toLowerCase();
@@ -532,119 +612,145 @@ function enter(){
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('nav').classList.add('show');
     document.body.style.overflow='auto';
-    loveBurst();
-  }else{
-    document.getElementById('gerr').textContent='کلید اشتباه است؛ تنها عاشقان راه می‌یابند 💔';
-  }
+    loveBurst();launchFirework();
+  }else document.getElementById('gerr').textContent='کلید اشتباه است؛ تنها عاشقان راه می‌یابند 💔';
 }
 document.getElementById('pass').addEventListener('keydown',e=>{if(e.key==='Enter')enter()});
 
-/* ===== ستاره‌ها ===== */
-const cv=document.getElementById('stars'),cx=cv.getContext('2d');
-let stars=[];
+/* ====== نشانگر موس ====== */
+const cDot=document.getElementById('cDot'),cRing=document.getElementById('cRing');
+let mx=0,my=0,rx=0,ry=0;
+addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY;cDot.style.left=mx+'px';cDot.style.top=my+'px';});
+function ringLoop(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;cRing.style.left=rx+'px';cRing.style.top=ry+'px';requestAnimationFrame(ringLoop);}
+ringLoop();
+document.addEventListener('pointerover',e=>{
+  if(e.target.closest('a,button,.card,.mini,.gallery img,.theme-dot,.toggle'))cRing.classList.add('hot');
+  else cRing.classList.remove('hot');
+});
+
+/* ====== ستاره‌ها ====== */
+const cv=document.getElementById('stars'),cx=cv.getContext('2d');let stars=[];
 function resize(){cv.width=innerWidth;cv.height=innerHeight;
-  stars=Array.from({length:150},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,
+  stars=Array.from({length:160},()=>({x:Math.random()*cv.width,y:Math.random()*cv.height,
   r:Math.random()*1.6+.3,a:Math.random(),s:Math.random()*.02+.005}));}
 resize();addEventListener('resize',resize);
 function drawStars(){cx.clearRect(0,0,cv.width,cv.height);
-  stars.forEach(s=>{s.a+=s.s;let o=.4+Math.abs(Math.sin(s.a))*.6;
-  cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fillStyle=`rgba(246,227,161,${o})`;cx.fill();});
+  if(settings.fx)stars.forEach(s=>{s.a+=s.s;let o=.4+Math.abs(Math.sin(s.a))*.6;
+    cx.beginPath();cx.arc(s.x,s.y,s.r,0,7);cx.fillStyle=`rgba(246,227,161,${o})`;cx.fill();});
   requestAnimationFrame(drawStars);}
 drawStars();
 
-/* ===== جرقه‌ها ===== */
+/* ====== گلبرگ ====== */
 setInterval(()=>{
-  if(document.getElementById('gate').classList.contains('hidden')){
-    const s=document.createElement('div');s.className='sparkle';
-    s.textContent=['✨','⭐','❄️','💫','💛'][Math.floor(Math.random()*5)];
-    s.style.left=Math.random()*100+'vw';
-    s.style.fontSize=(10+Math.random()*16)+'px';
-    s.style.animationDuration=(5+Math.random()*6)+'s';
-    document.body.appendChild(s);
-    setTimeout(()=>s.remove(),11000);
-  }
-},700);
+  if(!settings.fx||!document.getElementById('gate').classList.contains('hidden'))return;
+  const p=document.createElement('div');p.className='petal';
+  p.textContent=['🌸','✨','🌹','💛','❄️'][Math.floor(Math.random()*5)];
+  p.style.left=Math.random()*100+'vw';p.style.fontSize=(12+Math.random()*16)+'px';
+  p.style.animationDuration=(6+Math.random()*6)+'s';
+  document.body.appendChild(p);setTimeout(()=>p.remove(),12000);
+},650);
 
-/* ===== رد قلب پشت موس ===== */
+/* ====== رد قلب ====== */
 let lastTrail=0;
 addEventListener('pointermove',e=>{
-  const now=Date.now();if(now-lastTrail<70)return;lastTrail=now;
+  if(!settings.trail)return;const now=Date.now();if(now-lastTrail<70)return;lastTrail=now;
   const h=document.createElement('div');h.className='heart-trail';
   h.textContent=['💛','💖','✨'][Math.floor(Math.random()*3)];
   h.style.left=e.clientX+'px';h.style.top=e.clientY+'px';
   document.body.appendChild(h);setTimeout(()=>h.remove(),1100);
 });
 
-/* ===== بارش عشق ===== */
+/* ====== بارش عشق ====== */
 function loveBurst(){
-  for(let i=0;i<28;i++){
-    const h=document.createElement('div');h.className='sparkle';
+  for(let i=0;i<30;i++){const h=document.createElement('div');h.className='petal';
     h.textContent=['💖','💛','❤️','💕','🌹'][Math.floor(Math.random()*5)];
-    h.style.left=Math.random()*100+'vw';
-    h.style.fontSize=(16+Math.random()*20)+'px';
+    h.style.left=Math.random()*100+'vw';h.style.fontSize=(16+Math.random()*20)+'px';
     h.style.animationDuration=(3.5+Math.random()*3)+'s';
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),7000);
-  }
+    document.body.appendChild(h);setTimeout(()=>h.remove(),7000);}
 }
 
-/* ===== بال فرشته ===== */
-function buildWing(el,dir){
-  const n=14;
-  for(let i=0;i<n;i++){
-    const f=document.createElement('div');f.className='feather';
-    const t=i/(n-1);
-    f.style.height=(40+Math.sin(t*Math.PI)*78)+'px';
-    f.style.transform=`rotate(${dir*(20+t*120)}deg)`;
-    f.style.transformOrigin='bottom center';
-    el.appendChild(f);
-  }
+/* ====== آتش‌بازی ====== */
+const fx=document.getElementById('fx'),fcx=fx.getContext('2d');let parts=[];
+function fxResize(){fx.width=innerWidth;fx.height=innerHeight;}fxResize();addEventListener('resize',fxResize);
+function launchFirework(n=3){
+  for(let k=0;k<n;k++){const x=Math.random()*fx.width,y=fx.height*.2+Math.random()*fx.height*.35;
+    const hue=Math.random()*60+30;
+    for(let i=0;i<46;i++){const a=(Math.PI*2*i)/46,sp=2+Math.random()*4;
+      parts.push({x,y,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,life:60+Math.random()*20,
+        c:`hsl(${hue},90%,${60+Math.random()*20}%)`});}}
 }
-buildWing(document.getElementById('wingL'),-1);
-buildWing(document.getElementById('wingR'),1);
+function fxLoop(){fcx.clearRect(0,0,fx.width,fx.height);
+  parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.04;p.vx*=.99;p.life--;
+    fcx.globalAlpha=Math.max(p.life/70,0);fcx.beginPath();fcx.arc(p.x,p.y,2.2,0,7);fcx.fillStyle=p.c;fcx.fill();});
+  fcx.globalAlpha=1;parts=parts.filter(p=>p.life>0);requestAnimationFrame(fxLoop);}
+fxLoop();
 
-/* ===== شمارش معکوس ===== */
-function nextBirthday(m,d){
-  const now=new Date();let y=now.getFullYear();
-  let next=new Date(y,m-1,d,0,0,0);
-  if(next<new Date(now.getFullYear(),now.getMonth(),now.getDate()))next=new Date(y+1,m-1,d);
-  return next;
-}
-function renderCD(elId,todayId,m,d){
-  const el=document.getElementById(elId),tEl=document.getElementById(todayId);
-  function tick(){
-    const now=new Date();
-    if(now.getMonth()===m-1 && now.getDate()===d){
-      el.style.display='none';tEl.style.display='block';return;
-    }
-    el.style.display='flex';tEl.style.display='none';
-    const diff=nextBirthday(m,d)-now;
-    const days=Math.floor(diff/864e5),hrs=Math.floor(diff/36e5)%24,
-          min=Math.floor(diff/6e4)%60,sec=Math.floor(diff/1e3)%60;
-    el.innerHTML=`
-      <div class="cd-box"><span>${days}</span><small>روز</small></div>
-      <div class="cd-box"><span>${hrs}</span><small>ساعت</small></div>
-      <div class="cd-box"><span>${min}</span><small>دقیقه</small></div>
-      <div class="cd-box"><span>${sec}</span><small>ثانیه</small></div>`;
-  }
+/* ====== بال فرشته ====== */
+function buildWing(el,dir){const n=14;for(let i=0;i<n;i++){const f=document.createElement('div');
+  f.className='feather';const t=i/(n-1);f.style.height=(40+Math.sin(t*Math.PI)*78)+'px';
+  f.style.transform=`rotate(${dir*(20+t*120)}deg)`;f.style.transformOrigin='bottom center';el.appendChild(f);}}
+buildWing(document.getElementById('wingL'),-1);buildWing(document.getElementById('wingR'),1);
+
+/* ====== پارالاکس hero ====== */
+const angel=document.getElementById('angel');
+addEventListener('pointermove',e=>{const dx=(e.clientX/innerWidth-.5)*18,dy=(e.clientY/innerHeight-.5)*18;
+  angel.style.transform=`translate(${dx}px,${dy}px)`;});
+
+/* ====== عمر عشق ====== */
+/* تاریخ شروع رابطه را اینجا تغییر بده (سال-ماه-روز میلادی) */
+const LOVE_START=new Date("2023-09-06T00:00:00");
+function renderLoveCounter(){
+  const el=document.getElementById('loveCounter');if(!el)return;
+  function tick(){const d=Date.now()-LOVE_START.getTime();
+    const days=Math.floor(d/864e5),h=Math.floor(d/36e5)%24,m=Math.floor(d/6e4)%60,s=Math.floor(d/1e3)%60;
+    el.innerHTML=`<div class="lc-box"><span>${days}</span><small>روز</small></div>
+      <div class="lc-box"><span>${h}</span><small>ساعت</small></div>
+      <div class="lc-box"><span>${m}</span><small>دقیقه</small></div>
+      <div class="lc-box"><span>${s}</span><small>ثانیه</small></div>`;}
   tick();setInterval(tick,1000);
 }
-renderCD('cd-mobin','today-mobin',3,15);     // ۲۵ اسفند ۱۳۸۷
-renderCD('cd-niyayesh','today-niyayesh',9,6);// ۱۵ شهریور ۱۳۸۹
+renderLoveCounter();
 
-/* ===== زیرعنوان hero (تایپ) ===== */
+/* ====== شمارش معکوس تولد ====== */
+function nextBirthday(m,d){const now=new Date();let y=now.getFullYear();
+  let next=new Date(y,m-1,d);
+  if(next<new Date(now.getFullYear(),now.getMonth(),now.getDate()))next=new Date(y+1,m-1,d);return next;}
+function renderCD(elId,todayId,m,d){
+  const el=document.getElementById(elId),tEl=document.getElementById(todayId);
+  function tick(){const now=new Date();
+    if(now.getMonth()===m-1&&now.getDate()===d){el.style.display='none';tEl.style.display='block';return;}
+    el.style.display='flex';tEl.style.display='none';const diff=nextBirthday(m,d)-now;
+    const days=Math.floor(diff/864e5),hrs=Math.floor(diff/36e5)%24,min=Math.floor(diff/6e4)%60,sec=Math.floor(diff/1e3)%60;
+    el.innerHTML=`<div class="cd-box"><span>${days}</span><small>روز</small></div>
+      <div class="cd-box"><span>${hrs}</span><small>ساعت</small></div>
+      <div class="cd-box"><span>${min}</span><small>دقیقه</small></div>
+      <div class="cd-box"><span>${sec}</span><small>ثانیه</small></div>`;}
+  tick();setInterval(tick,1000);
+}
+renderCD('cd-mobin','today-mobin',3,15);
+renderCD('cd-niyayesh','today-niyayesh',9,6);
+
+/* ====== تایم‌لاین ====== */
+const timeline=[
+  {when:'آغاز',title:'تولد یک افسانه',text:'روزی که دو قلب، یک امپراتوری ساختند.'},
+  {when:'فصل اول',title:'پادشاه و ملکه',text:'مبین تاج بر سر گذاشت و نیایش نور قلمرو شد.'},
+  {when:'فصل دوم',title:'سوگند ابدی',text:'عهدی که هیچ توفانی توان شکستنش را ندارد.'},
+  {when:'اکنون',title:'تا بی‌نهایت',text:'هر روز، فصلی تازه در داستان عشق ما.'}
+];
+(function(){const box=document.getElementById('timelineBox');
+  timeline.forEach(t=>{const it=document.createElement('div');it.className='tl-item reveal';
+    it.innerHTML=`<div class="dot"></div><div class="tl-card"><span class="when">${t.when}</span>
+      <h4>${t.title}</h4><p>${t.text}</p></div>`;box.appendChild(it);});})();
+
+/* ====== زیرعنوان hero ====== */
 const subs=["EMPIRE OF ETERNITY","عشقی که جاودانه است","مبین ❤️ نیایش"];
 let si=0,ci=0,del=false;const subEl=document.getElementById('heroSub');
-function typeSub(){
-  const cur=subs[si];
-  subEl.textContent=del?cur.slice(0,--ci):cur.slice(0,++ci);
+function typeSub(){const cur=subs[si];subEl.textContent=del?cur.slice(0,--ci):cur.slice(0,++ci);
   if(!del&&ci===cur.length){del=true;setTimeout(typeSub,1600);return;}
-  if(del&&ci===0){del=false;si=(si+1)%subs.length;}
-  setTimeout(typeSub,del?55:110);
-}
+  if(del&&ci===0){del=false;si=(si+1)%subs.length;}setTimeout(typeSub,del?55:110);}
 typeSub();
 
-/* ===== نقل‌قول‌ها ===== */
+/* ====== زمزمه‌ها ====== */
 const quotes=[
   {t:"تو تنها ستاره‌ای هستی که شب‌های قلمروم را روشن می‌کند.",b:"پادشاه مبین 👑"},
   {t:"در هر طلوع، نخستین فکرم تو هستی و در هر غروب، آخرین آرزویم.",b:"پادشاه مبین 👑"},
@@ -654,99 +760,119 @@ const quotes=[
 ];
 let qi=0;const qT=document.getElementById('quoteText'),qB=document.getElementById('quoteBy'),qD=document.getElementById('quoteDots');
 quotes.forEach((_,i)=>{const d=document.createElement('i');d.onclick=()=>showQuote(i);qD.appendChild(d);});
-function showQuote(i){
-  qi=i;qT.style.opacity=0;qB.style.opacity=0;
-  setTimeout(()=>{
-    qT.textContent='«'+quotes[i].t+'»';qB.textContent='— '+quotes[i].b;
+function showQuote(i){qi=i;qT.style.opacity=0;qB.style.opacity=0;
+  setTimeout(()=>{qT.textContent='«'+quotes[i].t+'»';qB.textContent='— '+quotes[i].b;
     qT.style.opacity=1;qB.style.opacity=1;
-    [...qD.children].forEach((d,j)=>d.classList.toggle('on',j===i));
-  },400);
-}
-showQuote(0);
-setInterval(()=>showQuote((qi+1)%quotes.length),5500);
+    [...qD.children].forEach((d,j)=>d.classList.toggle('on',j===i));},400);}
+showQuote(0);setInterval(()=>showQuote((qi+1)%quotes.length),5500);
 
-/* ===== نامه (تایپ) ===== */
+/* ====== نامه ====== */
 const letterStr="ملکه‌ی عزیزم، نیایش...\nاز روزی که وارد قلمرو قلبم شدی، هر طلوع رنگ تازه‌ای گرفت و هر شب پر از ستاره شد. تو فرشته‌ای هستی که آسمانم را معنا بخشید.\nقول می‌دهم تا ابد نگهبان لبخندت باشم و تاج این امپراتوری همیشه بر سر تو بدرخشد.\nدوستت دارم، تا بی‌نهایت و یک روز بیشتر.";
 const lEl=document.getElementById('letterText');let li=0,letterStarted=false;
-function typeLetter(){
-  if(li<=letterStr.length){
+function typeLetter(){if(li<=letterStr.length){
     lEl.innerHTML=letterStr.slice(0,li).replace(/\n/g,'<br>')+'<span class="cursor">&nbsp;</span>';
-    li++;setTimeout(typeLetter,38);
-  }else{lEl.innerHTML=letterStr.replace(/\n/g,'<br>');}
-}
+    li++;setTimeout(typeLetter,38);}else lEl.innerHTML=letterStr.replace(/\n/g,'<br>');}
 
-/* ===== عهدنامه ===== */
-let vows=JSON.parse(localStorage.getItem('vows')||'null')||[
+/* ====== عهدنامه (ذخیره در Vault) ====== */
+let vows=Vault.read('vows',null)||[
   {t:'تا ابد تنها برای تو می‌تپم، ملکه‌ی من.',by:'پادشاه مبین 👑'},
   {t:'قلب من قلمرویی‌ست که فرمانروایش تویی.',by:'ملکه نیایش 👸🏻'}
 ];
-function saveVows(){localStorage.setItem('vows',JSON.stringify(vows));}
-function renderVows(){
-  const l=document.getElementById('vowList');l.innerHTML='';
-  vows.forEach((v,i)=>{
-    const d=document.createElement('div');d.className='vow';
+function saveVows(){Vault.write('vows',vows);}
+function renderVows(){const l=document.getElementById('vowList');l.innerHTML='';
+  vows.forEach((v,i)=>{const d=document.createElement('div');d.className='vow';
     d.innerHTML=`<span>📜 ${v.t}<br><span class="by">— ${v.by}</span></span>`;
     const b=document.createElement('button');b.textContent='🗑️';
-    b.onclick=()=>{vows.splice(i,1);saveVows();renderVows();};
-    d.appendChild(b);l.appendChild(d);
-  });
-}
-function addVow(){
-  const i=document.getElementById('vowText'),t=i.value.trim();
-  if(!t)return;
-  vows.push({t,by:'عاشقان امپراتوری ❤️'});saveVows();renderVows();i.value='';loveBurst();
-}
+    b.onclick=()=>{vows.splice(i,1);saveVows();renderVows();};d.appendChild(b);l.appendChild(d);});}
+function addVow(){const i=document.getElementById('vowText'),t=i.value.trim();if(!t)return;
+  vows.push({t,by:'عاشقان امپراتوری ❤️'});saveVows();renderVows();i.value='';loveBurst();launchFirework(1);}
 renderVows();
 
-/* ===== گالری + لایت‌باکس ===== */
-const imgs=[...document.querySelectorAll('#galleryGrid img')].map(i=>i.src);
-let lbIndex=0;
-function lb(i){lbIndex=i;document.getElementById('lbimg').src=imgs[i];
-  document.getElementById('lightbox').classList.add('open');}
+/* ====== گالری + لایت‌باکس ====== */
+const imgs=[...document.querySelectorAll('#galleryGrid img')].map(i=>i.src);let lbIndex=0;
+function lb(i){lbIndex=i;document.getElementById('lbimg').src=imgs[i];document.getElementById('lightbox').classList.add('open');}
 function closeLb(){document.getElementById('lightbox').classList.remove('open');}
 function lbStep(d){lbIndex=(lbIndex+d+imgs.length)%imgs.length;document.getElementById('lbimg').src=imgs[lbIndex];}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLb();});
-addEventListener('keydown',e=>{
-  if(!document.getElementById('lightbox').classList.contains('open'))return;
-  if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lbStep(1);if(e.key==='ArrowRight')lbStep(-1);
-});
+addEventListener('keydown',e=>{if(!document.getElementById('lightbox').classList.contains('open'))return;
+  if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lbStep(1);if(e.key==='ArrowRight')lbStep(-1);});
 
-/* ===== موسیقی ===== */
-const audio=document.getElementById('audio'),tracks=["آهنگ سلطنتی"];let tIdx=0;
-function toggleMusic(){
-  if(!audio.querySelector('source').src){
-    document.getElementById('trackName').textContent='لینک آهنگ را در کد قرار بده';return;}
-  if(audio.paused){audio.play();document.getElementById('playBtn').textContent='⏸';}
-  else{audio.pause();document.getElementById('playBtn').textContent='▶';}
+/* ====== تنظیمات + تم ====== */
+function applySettings(){
+  document.body.dataset.theme=settings.theme==='royal'?'':settings.theme;
+  document.querySelectorAll('.theme-dot').forEach(d=>d.classList.remove('on'));
+  const map={royal:'.t-royal',rose:'.t-rose',midnight:'.t-midnight'};
+  const dot=document.querySelector(map[settings.theme]);if(dot)dot.classList.add('on');
+  document.getElementById('tgFx').classList.toggle('on',settings.fx);
+  document.getElementById('tgTrail').classList.toggle('on',settings.trail);
+  document.getElementById('volRange').value=settings.vol;audio.volume=settings.vol/100;
+  const tc=getComputedStyle(document.body).getPropertyValue('--bg').trim();
+  if(tc)document.querySelector('meta[name=theme-color]').setAttribute('content',tc);
 }
-function nextTrack(){document.getElementById('trackName').textContent='آهنگ بعدی';}
-function prevTrack(){document.getElementById('trackName').textContent='آهنگ قبلی';}
+function setTheme(t){settings.theme=t;Vault.write('theme',t);applySettings();}
+function toggleFx(){settings.fx=!settings.fx;Vault.write('fx',settings.fx);applySettings();}
+function toggleTrail(){settings.trail=!settings.trail;Vault.write('trail',settings.trail);applySettings();}
+function setVol(v){settings.vol=+v;Vault.write('vol',settings.vol);audio.volume=v/100;}
+function openSettings(){document.getElementById('settings').classList.add('open');document.getElementById('backdrop').classList.add('show');}
+function closeSettings(){document.getElementById('settings').classList.remove('open');document.getElementById('backdrop').classList.remove('show');}
+applySettings();
 
-/* ===== reveal + شروع نامه ===== */
-const io=new IntersectionObserver(es=>{
-  es.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      if(e.target.closest('#letter')&&!letterStarted){letterStarted=true;typeLetter();}
-    }
-  });
-},{threshold:.15});
+/* ====== بکاپ ====== */
+function exportData(){const data=JSON.stringify(Vault.all(),null,2);
+  const blob=new Blob([data],{type:'application/json'});const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download='empire-backup.json';a.click();}
+function importData(ev){const f=ev.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{Vault.load(JSON.parse(r.result));location.reload();}catch(e){alert('فایل نامعتبر است');}};r.readAsText(f);}
+
+/* ====== موسیقی ====== */
+/* لینک آهنگ‌های دلخواه را اینجا بگذار */
+const tracks=[
+  {name:'آهنگ سلطنتی',src:''},
+  {name:'زمزمهٔ عشق',src:''},
+  {name:'افسانهٔ امپراتوری',src:''}
+];
+let tIdx=0;
+function loadTrack(){audio.src=tracks[tIdx].src;document.getElementById('trackName').textContent=tracks[tIdx].name;}
+function toggleMusic(){if(!tracks[tIdx].src){document.getElementById('trackName').textContent='لینک آهنگ را در کد قرار بده';return;}
+  if(audio.paused){audio.play();document.getElementById('playBtn').textContent='⏸';}
+  else{audio.pause();document.getElementById('playBtn').textContent='▶';}}
+function nextTrack(){tIdx=(tIdx+1)%tracks.length;loadTrack();if(!audio.paused)audio.play();}
+function prevTrack(){tIdx=(tIdx-1+tracks.length)%tracks.length;loadTrack();if(!audio.paused)audio.play();}
+audio.addEventListener('ended',nextTrack);
+audio.addEventListener('timeupdate',()=>{const p=audio.duration?(audio.currentTime/audio.duration)*100:0;
+  document.getElementById('seekFill').style.width=p+'%';});
+function seek(e){if(!audio.duration)return;const b=e.currentTarget.getBoundingClientRect();
+  const ratio=(b.right-e.clientX)/b.width;audio.currentTime=ratio*audio.duration;}
+loadTrack();
+
+/* ====== reveal + شروع نامه ====== */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');
+  if(e.target.closest('#letter')&&!letterStarted){letterStarted=true;typeLetter();}}});},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-/* ===== نوار پیشرفت + دکمه بالا ===== */
-addEventListener('scroll',()=>{
-  const h=document.documentElement.scrollHeight-innerHeight;
-  const p=h>0?(scrollY/h)*100:0;
-  document.getElementById('progress').style.width=p+'%';
-  document.getElementById('toTop').classList.toggle('show',scrollY>500);
+/* ====== کارت سه‌بعدی tilt ====== */
+document.querySelectorAll('.card,.mini').forEach(c=>{
+  c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+    c.style.transform=`perspective(800px) rotateX(${-py*8}deg) rotateY(${px*8}deg) translateY(-6px)`;});
+  c.addEventListener('pointerleave',()=>c.style.transform='');
 });
 
-/* بستن منوی موبایل بعد از کلیک */
-document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click',()=>{
-  document.getElementById('navlinks').classList.remove('open');
-}));
+/* ====== اسکرول نرم + هایلایت ناوبری ====== */
+function sm
+(id){const el=document.querySelector(id);if(el)window.scrollTo({top:el.offsetTop-70,behavior:'smooth'});}
+document.querySelectorAll('.nav-links a').forEach(a=>{a.addEventListener('click',e=>{
+  e.preventDefault();sm(a.getAttribute('href'));document.getElementById('navlinks').classList.remove('open');});});
+function smoothTop(){window.scrollTo({top:0,behavior:'smooth'});}
 
-document.body.style.overflow='hidden';
+addEventListener('scroll',()=>{
+  const top=window.scrollY;document.getElementById('progress').style.width=(top/(document.body.scrollHeight-innerHeight)*100)+'%';
+  document.getElementById('toTop').classList.toggle('show',top>600);
+  let cur='';document.querySelectorAll('section').forEach(s=>{if(top>=s.offsetTop-120)cur=s.id;});
+  document.querySelectorAll('.nav-links a').forEach(a=>{a.classList.remove('active');if(a.getAttribute('href')==='#'+cur)a.classList.add('active');});
+});
+
+document.getElementById('visits').textContent=`شمارنده شکوه: ${window.__visits} بازدید`;
 </script>
 </body>
 </html>
