@@ -1,896 +1,984 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>نیایش | عشق ابدی و سلطنتی</title>
-    
-    <meta name="description" content="پروژه اختصاصی، لوکس و سینمایی برای نیایش. تجلی عشق ابدی، هنر و تکنولوژی در یک قاب.">
-    <meta name="keywords" content="عشق, نیایش, طراحی لوکس, سینمایی, عروسی, داستان عشق, شاهزاده">
-    <meta name="author" content="Premium UI/UX Developer">
-    <meta property="og:title" content="نیایش | Eternal Royal Love">
-    <meta property="og:description" content="پروژه اختصاصی VIP برای نیایش.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=1000&auto=format&fit=crop">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#0f0f11">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0">
+<meta name="theme-color" content="#050308">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>امپراتوری جاودانه | مبین و نیایش</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<style>
+/* === متغیرهای سلطنتی و سینمایی === */
+:root {
+  --bg: #050308; 
+  --bg2: #120a24;
+  --bg3: #1a0b2e;
+  --gold: #e8c66b; 
+  --gold-2: #f6e3a1; 
+  --gold-deep: #b8862f;
+  --purple: #7b3fe4; 
+  --purple-soft: #9d6bff; 
+  --purple-deep: #431c87;
+  --rose: #ff8fb1;
+  --neon-blue: #00f3ff;
+  --royal-pink: #ff66b2;
+  --text: #f3ecdf; 
+  --muted: #b9aecb;
+  --glass: rgba(20, 10, 40, 0.45); 
+  --glass-strong: rgba(15, 8, 30, 0.85);
+  --border: rgba(232, 198, 107, 0.3);
+  --border-glow: rgba(232, 198, 107, 0.6);
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+  --glow: 0 0 35px rgba(232, 198, 107, 0.25);
+  --z-canvas: 0; --z-ambient: 1; --z-content: 10; --z-ui: 1000;
+}
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Niayesh Royal Love",
-      "url": "https://niayesh-vip.com",
-      "description": "A cinematic and luxurious platform celebrating eternal love."
-    }
-    </script>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); min-height: 100%; overflow-x: hidden; }
 
-    <link id="manifest-link" rel="manifest" href="">
+body {
+  font-family: 'Vazirmatn', sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  overscroll-behavior-y: none;
+  cursor: none;
+  background-color: var(--bg);
+}
 
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.0.0/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+@media(pointer: coarse) { body { cursor: auto; } .cursor-dot, .cursor-ring { display: none !important; } }
+h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
+.lalezar { font-family: 'Lalezar', cursive; }
+::selection { background: var(--gold); color: #000; text-shadow: none; }
+a, button { -webkit-tap-highlight-color: transparent; }
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        darkmat: '#0a0a0c',
-                        gold: '#d4af37',
-                        goldglow: '#f9d77e',
-                        royalpurple: '#4b0082',
-                        neonblue: '#00f3ff',
-                        royalpink: '#ff69b4',
-                        glass: 'rgba(255, 255, 255, 0.05)',
-                        glassborder: 'rgba(255, 255, 255, 0.1)',
-                    },
-                    fontFamily: {
-                        sans: ['Vazirmatn', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+/* === نشانگر موس پیشرفته === */
+.cursor-dot { position: fixed; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-2); z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 20px 4px var(--gold); transition: transform 0.1s; will-change: transform; }
+.cursor-ring { position: fixed; width: 45px; height: 45px; border-radius: 50%; border: 1.5px solid rgba(232, 198, 107, 0.5); z-index: 9998; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s, backdrop-filter 0.3s; will-change: transform; }
+.cursor-ring.hot { width: 70px; height: 70px; background: rgba(232, 198, 107, 0.08); border-color: var(--gold-2); backdrop-filter: blur(2px); box-shadow: 0 0 30px rgba(232, 198, 107, 0.3); }
 
-    <style>
-        /* Core & Cinematic Variables */
-        :root {
-            --gold: #d4af37;
-            --purple: #4b0082;
-            --blue: #00f3ff;
-            --pink: #ff69b4;
-            --bg-color: #050505;
-        }
+/* === افکت‌های پس‌زمینه سینمایی === */
+#progress { position: fixed; top: 0; right: 0; left: 0; height: 4px; z-index: 9990; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), var(--purple)); width: 0; box-shadow: 0 0 15px var(--gold-2); transition: width 0.1s ease-out; }
+canvas.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-canvas); }
+.ambient-fog { position: fixed; inset: 0; background: url('https://www.transparenttextures.com/patterns/stardust.png'), radial-gradient(circle at 50% 50%, transparent 20%, var(--bg) 100%); opacity: 0.6; mix-blend-mode: screen; pointer-events: none; z-index: var(--z-ambient); animation: breathe 10s infinite alternate; }
+.light-rays { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-ambient); background: repeating-linear-gradient(105deg, transparent, transparent 10%, rgba(232,198,107,0.02) 10%, rgba(232,198,107,0.02) 20%); filter: blur(20px); mask-image: radial-gradient(circle at center, black, transparent); -webkit-mask-image: radial-gradient(circle at top, black, transparent); }
+@keyframes breathe { 0% { opacity: 0.4; } 100% { opacity: 0.8; } }
 
-        /* Reset & Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
-        html { scroll-behavior: smooth; background: var(--bg-color); color: #fff; overflow-x: hidden; }
-        body { font-family: 'Vazirmatn', sans-serif; overflow-x: hidden; background: #000; }
-        
-        ::selection { background: var(--gold); color: #000; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0c; }
-        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+.floating-symbol { position: absolute; color: rgba(232,198,107,0.1); font-family: 'Cinzel'; font-size: 24px; pointer-events: none; animation: floatUpward 20s linear infinite; z-index: var(--z-ambient); text-shadow: 0 0 15px rgba(232,198,107,0.2); }
+@keyframes floatUpward { 0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(-20vh) rotate(360deg) scale(1.2); opacity: 0; } }
 
-        /* Custom Cursor */
-        .cursor-dot, .cursor-outline {
-            position: fixed; top: 0; left: 0; transform: translate(-50%, -50%);
-            border-radius: 50%; z-index: 9999; pointer-events: none;
-        }
-        .cursor-dot { width: 8px; height: 8px; background-color: var(--gold); box-shadow: 0 0 10px var(--gold); }
-        .cursor-outline {
-            width: 40px; height: 40px; border: 2px solid rgba(212, 175, 55, 0.5);
-            transition: width 0.2s, height 0.2s, background-color 0.2s;
-        }
-        .cursor-hover { width: 60px; height: 60px; background-color: rgba(212, 175, 55, 0.1); border-color: var(--gold); }
+.petal { position: fixed; top: -30px; z-index: var(--z-ui); pointer-events: none; animation: fall linear forwards; filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6)); will-change: transform; }
+@keyframes fall { to { transform: translateY(115vh) rotate(720deg); opacity: 0; } }
 
-        /* Loading Screen */
-        #loader {
-            position: fixed; inset: 0; background: #000; z-index: 10000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .loader-ring {
-            width: 150px; height: 150px; border: 2px solid transparent; border-top-color: var(--gold);
-            border-radius: 50%; animation: spin 1.5s linear infinite; position: relative;
-        }
-        .loader-ring::before {
-            content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 2px solid transparent; border-top-color: var(--blue); border-radius: 50%;
-            animation: spin 2s linear infinite reverse;
-        }
-        .loader-text { margin-top: 20px; font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); text-shadow: 0 0 20px var(--gold); }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+/* === لودینگ سینمایی === */
+#loader { position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: radial-gradient(circle, var(--bg2) 0%, var(--bg) 100%); transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease; transform-origin: top; }
+#loader.done { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+.loader-crown { font-size: 90px; filter: drop-shadow(0 0 40px var(--gold)); animation: floatCrown 3s ease-in-out infinite; }
+@keyframes floatCrown { 0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 0 20px var(--gold)); } 50% { transform: translateY(-20px) scale(1.1); filter: drop-shadow(0 0 60px var(--gold-2)); } }
+.loader-txt { margin-top: 35px; color: var(--gold-2); font-family: 'Cinzel'; letter-spacing: 8px; font-size: 18px; font-weight: 900; text-shadow: 0 0 20px var(--gold); }
+.loader-bar { margin-top: 40px; width: 320px; height: 3px; border-radius: 3px; background: rgba(255, 255, 255, 0.05); position: relative; overflow: hidden; }
+.loader-bar i { position: absolute; height: 100%; width: 0; background: linear-gradient(90deg, transparent, var(--gold-2), #fff); animation: loadBar 2s cubic-bezier(0.4, 0, 0.2, 1) forwards; box-shadow: 0 0 20px var(--gold); }
+@keyframes loadBar { to { width: 100%; } }
 
-        /* Backgrounds */
-        #canvas-container { position: fixed; inset: 0; z-index: -2; background: radial-gradient(circle at center, #111 0%, #000 100%); }
-        .ambient-light {
-            position: fixed; inset: 0; z-index: -1; pointer-events: none;
-            background: radial-gradient(circle at 50% 50%, rgba(75, 0, 130, 0.1) 0%, transparent 60%);
-            animation: pulse-light 8s infinite alternate;
-        }
-        @keyframes pulse-light { 0% { opacity: 0.5; } 100% { opacity: 1; transform: scale(1.1); } }
+/* === دروازه قصر (آپدیت حرفه‌ای‌تر) === */
+#gate { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; background: rgba(5,3,8,0.9); backdrop-filter: blur(20px); transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1), visibility 1.5s; padding: 20px; overflow: hidden; }
+#gate::before, #gate::after { content: ''; position: absolute; top: 0; bottom: 0; width: 50vw; background: linear-gradient(to right, var(--bg) 0%, var(--bg2) 100%); z-index: 0; transition: transform 2s cubic-bezier(0.7, 0, 0.1, 1); box-shadow: inset 0 0 100px rgba(0,0,0,0.9); }
+#gate::before { left: 0; border-right: 2px solid var(--gold); border-image: linear-gradient(to bottom, transparent, var(--gold), transparent) 1; }
+#gate::after { right: 0; border-left: 2px solid var(--gold); border-image: linear-gradient(to bottom, transparent, var(--gold), transparent) 1; }
+#gate.hidden::before { transform: translateX(-100%); }
+#gate.hidden::after { transform: translateX(100%); }
+#gate.hidden .gate-card { transform: scale(1.1) translateY(-50px); opacity: 0; filter: blur(10px); }
 
-        /* Glassmorphism & Neomorphism Utilities */
-        .glass-panel {
-            background: rgba(15, 15, 17, 0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-        }
-        .glass-btn {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37); transition: all 0.4s ease;
-        }
-        .glass-btn:hover { box-shadow: 0 0 20px var(--gold); border-color: var(--gold); transform: translateY(-3px); }
-        .neo-dark {
-            background: #0a0a0c; border-radius: 20px;
-            box-shadow: 8px 8px 16px #040405, -8px -8px 16px #101013;
-        }
+.gate-card { width: min(480px, 92vw); background: var(--glass-strong); backdrop-filter: blur(40px); border: 1px solid var(--border); border-radius: 40px; padding: 60px 40px; text-align: center; box-shadow: var(--shadow), 0 0 50px rgba(232, 198, 107, 0.15); position: relative; z-index: 1; transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); transform-style: preserve-3d; perspective: 1000px; }
+.gate-card::before { content: ''; position: absolute; inset: -2px; border-radius: 42px; background: linear-gradient(45deg, transparent, var(--gold), transparent); z-index: -1; opacity: 0.3; animation: spinGlow 4s linear infinite; }
+@keyframes spinGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.gate-card .crown { font-size: 70px; filter: drop-shadow(0 0 30px var(--gold)); margin-bottom: 15px; animation: pulseCrown 2s infinite alternate; }
+.gate-card h1 { font-size: 30px; margin: 15px 0; color: var(--gold-2); letter-spacing: 2px; text-shadow: 0 0 20px rgba(232, 198, 107, 0.6); }
+.gate-card p { color: var(--muted); font-size: 16px; margin-bottom: 35px; line-height: 1.8; }
+.gate-card input { width: 100%; padding: 20px 25px; border-radius: 20px; border: 2px solid rgba(232, 198, 107, 0.2); background: rgba(0, 0, 0, 0.7); color: var(--gold-2); text-align: center; font-family: 'Vazirmatn'; font-size: 18px; font-weight: 600; outline: none; transition: all 0.4s ease; box-shadow: inset 0 5px 20px rgba(0,0,0,0.8); letter-spacing: 1px; }
+.gate-card input:focus { border-color: var(--gold); box-shadow: 0 0 30px rgba(232, 198, 107, 0.3), inset 0 5px 20px rgba(0,0,0,0.8); transform: translateY(-3px); }
+.btn { margin-top: 30px; width: 100%; padding: 18px; border: 1px solid rgba(232, 198, 107, 0.5); border-radius: 20px; cursor: pointer; font-family: 'Vazirmatn'; font-weight: 900; font-size: 18px; color: #000; background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--gold-deep)); box-shadow: 0 10px 30px rgba(232, 198, 107, 0.4), inset 0 0 10px rgba(255,255,255,0.5); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden; }
+.btn::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg) translateY(-100%); transition: transform 0.6s ease; }
+.btn:hover::after { transform: rotate(45deg) translateY(100%); }
+.btn:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 20px 50px rgba(232, 198, 107, 0.6); }
+.gate-err { color: var(--rose); font-size: 15px; margin-top: 20px; min-height: 22px; font-weight: 800; text-shadow: 0 0 15px rgba(255, 143, 177, 0.6); animation: shake 0.4s; }
+@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
 
-        /* Hero Section */
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem); font-weight: 900;
-            background: linear-gradient(to right, #fff, var(--gold), #fff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.4); animation: shimmer 3s infinite linear; background-size: 200% auto;
-        }
-        @keyframes shimmer { to { background-position: 200% center; } }
-        
-        .floating-element { animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(2deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+/* === ناوبار سینمایی === */
+.navbar { position: fixed; top: 0; right: 0; left: 0; z-index: 5000; display: flex; align-items: center; justify-content: space-between; padding: 20px 50px; background: linear-gradient(180deg, rgba(5, 3, 8, 0.95), transparent); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-bottom: 1px solid rgba(232, 198, 107, 0.1); transform: translateY(-130%); transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.navbar.show { transform: translateY(0); }
+.brand { display: flex; align-items: center; gap: 15px; font-family: 'Cinzel'; font-weight: 900; color: var(--gold-2); font-size: 24px; text-shadow: 0 0 25px rgba(232, 198, 107, 0.6); letter-spacing: 2px; }
+.nav-links { display: flex; gap: 5px; flex-wrap: wrap; }
+.nav-links a { color: var(--text); text-decoration: none; padding: 12px 20px; border-radius: 15px; font-size: 15px; transition: all 0.4s ease; position: relative; font-weight: 600; overflow: hidden; }
+.nav-links a::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(232, 198, 107, 0.15), transparent); transform: translateY(100%); transition: transform 0.4s ease; border-radius: 15px; z-index: -1; }
+.nav-links a::after { content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 3px; background: var(--gold); transition: all 0.4s ease; transform: translateX(-50%); border-radius: 3px; box-shadow: 0 0 10px var(--gold); }
+.nav-links a:hover::before, .nav-links a.active::before { transform: translateY(0); }
+.nav-links a:hover::after, .nav-links a.active::after { width: 80%; }
+.nav-links a:hover, .nav-links a.active { color: var(--gold-2); text-shadow: 0 0 10px rgba(232,198,107,0.5); }
+.icon-btn { background: rgba(15,8,30,0.6); border: 1px solid rgba(232, 198, 107, 0.4); color: var(--gold-2); border-radius: 15px; padding: 12px 18px; font-size: 20px; cursor: pointer; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(10px); box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+.icon-btn:hover { background: rgba(232, 198, 107, 0.2); transform: translateY(-3px) scale(1.1); box-shadow: 0 10px 25px rgba(232, 198, 107, 0.5); border-color: var(--gold); }
+.nav-toggle { display: none; }
 
-        /* Countdown */
-        .flip-clock-container { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; direction: ltr; }
-        .flip-unit { display: flex; flex-direction: column; align-items: center; }
-        .flip-card {
-            background: rgba(20, 20, 25, 0.8); border: 1px solid var(--gold); border-radius: 10px;
-            width: 80px; height: 100px; display: flex; justify-content: center; align-items: center;
-            font-size: 3rem; font-weight: bold; color: var(--gold); text-shadow: 0 0 15px var(--gold);
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2) inset; position: relative; overflow: hidden;
-        }
-        .flip-card::after { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: rgba(0,0,0,0.5); }
-        .flip-label { margin-top: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
-        .ms-display { font-size: 1.5rem; color: var(--blue); text-shadow: 0 0 10px var(--blue); width: 60px; text-align: center; }
+/* === ساختار پایه === */
+.wrap { position: relative; z-index: var(--z-content); max-width: 1300px; margin: 0 auto; padding: 0 30px; perspective: 1500px; }
+section { padding: 150px 0; position: relative; }
+.sec-title { text-align: center; margin-bottom: 80px; }
+.sec-title h2 { font-size: clamp(36px, 5vw, 55px); color: var(--gold-2); letter-spacing: 3px; text-shadow: 0 0 30px rgba(232, 198, 107, 0.4); }
+.sec-title .line { width: 150px; height: 4px; margin: 25px auto; border-radius: 4px; background: linear-gradient(90deg, transparent, var(--gold), var(--gold-2), var(--gold), transparent); position: relative; box-shadow: 0 0 20px var(--gold); }
+.sec-title .line::after { content: '👑'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 0 15px; font-size: 22px; filter: drop-shadow(0 0 10px var(--gold)); }
+.sec-title p { color: var(--muted); max-width: 750px; margin: 25px auto 0; font-size: 18px; line-height: 2; font-weight: 300; }
+.reveal { opacity: 0; transform: translateY(60px) translateZ(-50px) rotateX(-5deg); transition: opacity 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: transform, opacity; transform-style: preserve-3d; }
+.reveal.in { opacity: 1; transform: translateY(0) translateZ(0) rotateX(0); }
 
-        /* Story Timeline */
-        .timeline { position: relative; max-width: 1200px; margin: 0 auto; padding: 40px 0; }
-        .timeline::after {
-            content: ''; position: absolute; width: 2px; background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-            top: 0; bottom: 0; left: 50%; margin-left: -1px;
-        }
-        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
-        .timeline-item:nth-child(odd) { left: 0; }
-        .timeline-item:nth-child(even) { left: 50%; }
-        .timeline-item::after {
-            content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: #000;
-            border: 4px solid var(--gold); top: 15px; border-radius: 50%; z-index: 1; box-shadow: 0 0 15px var(--gold);
-        }
-        .timeline-item:nth-child(even)::after { left: -10px; }
-        .timeline-content { padding: 30px; border-radius: 15px; transition: transform 0.3s; }
-        .timeline-content:hover { transform: scale(1.02); }
+/* === HERO (تالار اصلی قصر) سینمایی === */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 120px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 40%, rgba(123, 63, 228, 0.15) 0%, rgba(232, 198, 107, 0.05) 40%, transparent 80%); pointer-events: none; z-index: var(--z-ambient); }
+.hero .sub { color: var(--gold); letter-spacing: 12px; font-size: 18px; margin-bottom: 20px; min-height: 25px; font-weight: 800; text-transform: uppercase; text-shadow: 0 0 20px var(--gold); }
+.hero h1 { font-size: clamp(45px, 9vw, 100px); line-height: 1.1; background: linear-gradient(135deg, #fff 20%, var(--gold-2) 50%, var(--gold-deep) 80%); -webkit-background-clip: text; background-clip: text; color: transparent; text-shadow: 0 15px 50px rgba(232, 198, 107, 0.4); margin-bottom: 30px; font-weight: 900; letter-spacing: -1px; }
+.angel-container { perspective: 1000px; margin: 50px auto; z-index: var(--z-content); }
+.angel { position: relative; width: min(380px, 85vw); aspect-ratio: 1; margin: 0 auto; transition: transform 0.1s ease-out; transform-style: preserve-3d; }
+.angel::after { content: ''; position: absolute; bottom: -40px; left: 10%; right: 10%; height: 30px; background: radial-gradient(ellipse, rgba(232,198,107,0.4), transparent 70%); filter: blur(15px); transform: translateZ(-50px); }
+.photo-frame { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; z-index: 3; border: 4px solid rgba(255,255,255,0.8); box-shadow: 0 0 0 15px rgba(232, 198, 107, 0.15), 0 0 100px rgba(232, 198, 107, 0.7), inset 0 0 50px rgba(0,0,0,0.8); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateZ(30px); }
+.photo-frame::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(255,255,255,0.1) 100%); z-index: 5; pointer-events: none; mix-blend-mode: overlay; }
+.angel:hover .photo-frame { box-shadow: 0 0 0 20px rgba(232, 198, 107, 0.25), 0 0 150px rgba(232, 198, 107, 1); border-color: #fff; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1); filter: contrast(1.1) brightness(1.05); }
+.angel:hover .photo-frame img { transform: scale(1.15) rotate(2deg); }
+.halo { position: absolute; top: -35px; left: 50%; transform: translateX(-50%) translateZ(50px); width: 75%; height: 35px; border-radius: 50%; border: 6px solid rgba(255, 255, 255, 0.9); box-shadow: 0 0 50px var(--gold-2), inset 0 0 30px var(--gold-2); z-index: 4; animation: haloHQ 4s ease-in-out infinite; }
+@keyframes haloHQ { 0%, 100% { transform: translateX(-50%) translateY(0) translateZ(50px) rotateX(75deg); box-shadow: 0 0 50px var(--gold), inset 0 0 30px var(--gold); } 50% { transform: translateX(-50%) translateY(-20px) translateZ(50px) rotateX(70deg); box-shadow: 0 0 80px #fff, inset 0 0 50px #fff; } }
+.wing { position: absolute; top: 5%; width: 65%; height: 90%; z-index: 1; display: flex; align-items: flex-start; justify-content: center; opacity: 0.95; filter: drop-shadow(0 0 30px rgba(232,198,107,0.4)); transform: translateZ(-20px); }
+.wing-left { right: 65%; transform-origin: right center; animation: flapLHQ 6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+.wing-right { left: 65%; transform-origin: left center; animation: flapRHQ 6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+@keyframes flapLHQ { 0%, 100% { transform: rotate(-5deg) scaleX(1) translateZ(-20px); } 50% { transform: rotate(15deg) scaleX(0.8) translateZ(-40px); } }
+@keyframes flapRHQ { 0%, 100% { transform: rotate(5deg) scaleX(1) translateZ(-20px); } 50% { transform: rotate(-15deg) scaleX(0.8) translateZ(-40px); } }
+.feather { position: absolute; bottom: 0; width: 24px; background: linear-gradient(to top, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.9) 70%, #fff); border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%; box-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 40px rgba(232, 198, 107, 0.6); backdrop-filter: blur(4px); transform-origin: bottom center; transition: all 0.3s; }
+.hero .love { max-width: 800px; margin: 30px auto 0; color: var(--text); line-height: 2.2; font-size: 20px; font-weight: 300; text-shadow: 0 5px 15px rgba(0,0,0,0.9); position: relative; z-index: 10; background: rgba(5,3,8,0.4); padding: 20px; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(232,198,107,0.1); }
+.hero .love b { color: var(--gold-2); font-weight: 900; font-size: 24px; text-shadow: 0 0 15px var(--gold); }
+.hero-btns { margin-top: 50px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 15; }
+.hero-btns .btn { width: auto; margin: 0; padding: 18px 40px; font-size: 18px; border-radius: 25px; }
+.ghost { background: rgba(15,8,30,0.5); color: var(--gold-2); border: 2px solid var(--border-glow); backdrop-filter: blur(15px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+.ghost:hover { background: rgba(232, 198, 107, 0.15); border-color: var(--gold); color: #fff; box-shadow: 0 15px 40px rgba(232, 198, 107, 0.4), inset 0 0 20px rgba(232,198,107,0.3); }
+.scroll-down { margin-top: 80px; color: var(--gold); font-size: 15px; animation: bobHQ 2s cubic-bezier(0.4, 0, 0.2, 1) infinite; display: flex; flex-direction: column; align-items: center; gap: 10px; opacity: 0.9; font-weight: 600; text-transform: uppercase; letter-spacing: 3px; z-index: 10; position: relative; }
+.scroll-down i { font-style: normal; font-size: 30px; text-shadow: 0 0 20px var(--gold); }
+@keyframes bobHQ { 0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 5px var(--gold)); } 50% { transform: translateY(20px); filter: drop-shadow(0 0 20px var(--gold-2)); } }
 
-        /* Future Princes/Princess */
-        .card-future {
-            border-radius: 30px; overflow: hidden; position: relative; height: 500px;
-            display: flex; flex-direction: column; justify-content: flex-end; padding: 30px;
-            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-        .card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; transition: transform 0.8s; }
-        .card-future:hover .card-bg { transform: scale(1.1); }
-        .card-overlay { position: absolute; inset: 0; z-index: 1; }
-        .aria-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(212,175,55,0.2)); }
-        .sam-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,243,255,0.2)); }
-        .sonia-overlay { background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(255,105,180,0.2)); }
-        .card-content { position: relative; z-index: 2; }
-        .crown-icon { animation: float 3s ease-in-out infinite; }
+/* === بخش تمدن Wiriper سینمایی === */
+#wiriper-realm { position: relative; border-top: 1px solid rgba(232,198,107,0.15); border-bottom: 1px solid rgba(232,198,107,0.15); padding: 120px 0; background: linear-gradient(to bottom, rgba(10,5,20,0.8), rgba(30,15,60,0.3), rgba(10,5,20,0.8)); }
+.wiriper-card { background: url('https://www.transparenttextures.com/patterns/cubes.png'), radial-gradient(circle at top right, rgba(123, 63, 228, 0.3), transparent 70%), var(--glass-strong); backdrop-filter: blur(30px); border: 1px solid var(--border-glow); border-radius: 50px; padding: 80px; box-shadow: var(--shadow), inset 0 0 80px rgba(232, 198, 107, 0.05); text-align: center; position: relative; overflow: hidden; transform-style: preserve-3d; }
+.wiriper-card::before { content: 'W'; position: absolute; top: -50px; right: -30px; font-size: 400px; color: rgba(232, 198, 107, 0.04); font-family: 'Cinzel'; font-weight: 900; line-height: 1; pointer-events: none; transform: translateZ(-20px); }
+.wiriper-logo { font-size: 100px; margin-bottom: 30px; filter: drop-shadow(0 0 50px var(--gold)); transform: translateZ(40px); display: inline-block; animation: floatIcon 4s ease-in-out infinite; }
+@keyframes floatIcon { 0%, 100% { transform: translateZ(40px) translateY(0); } 50% { transform: translateZ(40px) translateY(-15px); } }
+.wiriper-title { color: var(--gold-2); font-size: 45px; margin-bottom: 30px; font-family: 'Cinzel'; font-weight: 900; text-shadow: 0 0 25px rgba(232, 198, 107, 0.5); transform: translateZ(30px); }
+.wiriper-desc { color: var(--text); font-size: 19px; line-height: 2.4; max-width: 900px; margin: 0 auto 40px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); transform: translateZ(20px); font-weight: 300; }
+.wiriper-stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-top: 50px; border-top: 1px solid rgba(232,198,107,0.3); padding-top: 50px; transform: translateZ(30px); }
+.wstat { text-align: center; position: relative; }
+.wstat .num { display: block; font-size: 55px; font-family: 'Cinzel'; font-weight: 900; color: #fff; text-shadow: 0 0 25px var(--gold-2), 0 0 50px var(--gold); margin-bottom: 10px; }
+.wstat .lbl { font-size: 16px; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; font-weight: 600; }
 
-        /* Gallery */
-        .masonry-grid { column-count: 1; column-gap: 1rem; }
-        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
-        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
-        .gallery-item { break-inside: avoid; margin-bottom: 1rem; position: relative; overflow: hidden; border-radius: 15px; }
-        .gallery-item img { width: 100%; height: auto; transition: transform 0.6s, filter 0.6s; filter: grayscale(50%) brightness(0.8); }
-        .gallery-item:hover img { transform: scale(1.05); filter: grayscale(0%) brightness(1.1); }
-        .gallery-overlay {
-            position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            opacity: 0; transition: opacity 0.4s; display: flex; align-items: flex-end; padding: 20px;
-        }
-        .gallery-item:hover .gallery-overlay { opacity: 1; }
+/* === آینه جادویی (3D Premium) === */
+.magic-mirror-container { display: flex; justify-content: center; margin-top: 80px; perspective: 1200px; }
+.magic-mirror { width: 350px; height: 500px; background: rgba(5, 3, 10, 0.9); border: 12px solid var(--gold); border-radius: 180px 180px 15px 15px; box-shadow: 0 40px 100px rgba(0,0,0,0.9), 0 0 80px rgba(232, 198, 107, 0.5), inset 0 0 100px rgba(232, 198, 107, 0.3); position: relative; cursor: pointer; transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.8s ease; transform-style: preserve-3d; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.magic-mirror::after { content: ''; position: absolute; inset: -20px; background: conic-gradient(from 0deg, transparent, var(--gold), transparent); animation: spinMirror 5s linear infinite; z-index: -1; opacity: 0.5; }
+@keyframes spinMirror { 100% { transform: rotate(360deg); } }
+.magic-mirror:hover { transform: translateY(-20px) rotateY(15deg) scale(1.05); box-shadow: 0 50px 120px rgba(0,0,0,0.9), 0 0 120px rgba(232, 198, 107, 0.7), inset 0 0 120px rgba(232, 198, 107, 0.5); border-color: #fff; }
+.mirror-glass { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0.08) 60%, rgba(255,255,255,0) 100%); z-index: 2; pointer-events: none; border-radius: inherit; box-shadow: inset 0 0 20px rgba(255,255,255,0.3); }
+.mirror-content { padding: 40px; text-align: center; z-index: 1; transition: opacity 0.6s ease, transform 0.6s ease; transform: translateZ(40px); }
+.mirror-content.hidden { opacity: 0; transform: translateZ(40px) scale(0.8); pointer-events: none; }
+.mirror-icon { font-size: 70px; margin-bottom: 25px; animation: pulseHQ 2s infinite; filter: drop-shadow(0 0 20px var(--gold)); }
+.mirror-text { font-size: 18px; color: var(--gold-2); line-height: 2; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+.mirror-reflection { position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(232,198,107,0.3), rgba(0,0,0,0.8)); opacity: 0; transition: opacity 1.5s ease; display: flex; align-items: center; justify-content: center; padding: 40px; text-align: center; font-size: 26px; color: #fff; text-shadow: 0 0 20px var(--gold-2), 0 0 40px var(--gold); font-weight: 900; line-height: 2.2; font-family: 'Cinzel'; z-index: 3; transform: translateZ(50px); }
+.magic-mirror.revealed .mirror-content { opacity: 0; transform: scale(0.5); }
+.magic-mirror.revealed .mirror-reflection { opacity: 1; }
 
-        /* Music Player */
-        .visualizer { display: flex; align-items: flex-end; gap: 4px; height: 40px; }
-        .bar { width: 6px; background: var(--gold); border-radius: 3px; animation: eq 1s ease-in-out infinite alternate; }
-        .bar:nth-child(1) { animation-delay: 0.1s; } .bar:nth-child(2) { animation-delay: 0.4s; }
-        .bar:nth-child(3) { animation-delay: 0.2s; } .bar:nth-child(4) { animation-delay: 0.5s; }
-        .bar:nth-child(5) { animation-delay: 0.3s; }
-        @keyframes eq { 0% { height: 10px; } 100% { height: 40px; box-shadow: 0 0 10px var(--gold); } }
-        .progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; cursor: pointer; position: relative; }
-        .progress-fill { height: 100%; background: var(--gold); border-radius: 3px; width: 0%; box-shadow: 0 0 10px var(--gold); }
+/* === گریدها و کارت‌های 3D === */
+.grid { display: grid; gap: 40px; } .g2 { grid-template-columns: repeat(2, 1fr); } .g3 { grid-template-columns: repeat(3, 1fr); }
+.card { background: linear-gradient(145deg, rgba(30, 15, 55, 0.6), rgba(15, 8, 30, 0.9)); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 40px; padding: 50px; box-shadow: var(--shadow), inset 0 0 30px rgba(255,255,255,0.02); transition: border-color 0.4s ease, box-shadow 0.4s ease; position: relative; overflow: hidden; transform-style: preserve-3d; transform: perspective(1000px); will-change: transform; }
+.card::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); transform: skewX(-25deg); transition: 0.8s ease; z-index: 1; pointer-events: none; }
+.card:hover::before { left: 200%; }
+.card:hover { box-shadow: 0 40px 100px rgba(123, 63, 228, 0.5), 0 0 50px rgba(232, 198, 107, 0.3), inset 0 0 40px rgba(255,255,255,0.05); border-color: var(--gold-2); z-index: 20; }
+.card .ico { font-size: 65px; margin-bottom: 30px; filter: drop-shadow(0 0 25px rgba(232,198,107,0.6)); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform: translateZ(40px); display: inline-block; }
+.card:hover .ico { transform: translateZ(60px) scale(1.25) rotate(10deg); filter: drop-shadow(0 0 35px var(--gold-2)); }
+.card h3 { color: var(--gold-2); font-size: 30px; margin-bottom: 20px; text-shadow: 0 0 20px rgba(232,198,107,0.4); transform: translateZ(30px); font-family: 'Cinzel'; font-weight: 800; }
+.card p { color: var(--muted); line-height: 2.2; font-size: 17px; transform: translateZ(20px); font-weight: 300; }
+.tags { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; transform: translateZ(25px); }
+.tag { font-size: 14px; padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(232, 198, 107, 0.4); background: rgba(232, 198, 107, 0.1); color: var(--gold-2); transition: all 0.4s ease; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.3); backdrop-filter: blur(5px); }
+.tag:hover { background: var(--gold); color: #000; box-shadow: 0 0 20px var(--gold), 0 10px 20px rgba(0,0,0,0.5); transform: translateY(-3px); }
 
-        /* Stats */
-        .stat-circle {
-            width: 150px; height: 150px; border-radius: 50%; border: 4px solid rgba(212, 175, 55, 0.2);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            position: relative; box-shadow: 0 0 30px rgba(212,175,55,0.1) inset;
-        }
-        .stat-circle::before {
-            content: ''; position: absolute; inset: -4px; border-radius: 50%;
-            border: 4px solid transparent; border-top-color: var(--gold); animation: spin 4s linear infinite;
-        }
+/* === بخش شاهزاده‌های آینده (جدید) === */
+.prince-card { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: visible; }
+.prince-card::after { content: ''; position: absolute; inset: -2px; border-radius: 42px; background: inherit; z-index: -1; filter: blur(15px); opacity: 0; transition: opacity 0.5s ease; }
+.prince-card:hover::after { opacity: 0.7; }
+.prince-card .avatar-ring { width: 120px; height: 120px; border-radius: 50%; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; font-size: 50px; transform: translateZ(50px); box-shadow: inset 0 0 30px rgba(0,0,0,0.5); position: relative; border: 4px solid; background: rgba(0,0,0,0.4); transition: transform 0.5s ease; }
+.prince-card:hover .avatar-ring { transform: translateZ(70px) scale(1.1); }
+.gold-theme { border-top: 4px solid var(--gold); }
+.gold-theme .avatar-ring { border-color: var(--gold); color: var(--gold-2); box-shadow: 0 0 40px rgba(232,198,107,0.5); }
+.gold-theme h3 { color: var(--gold-2); text-shadow: 0 0 20px var(--gold); }
+.blue-theme { border-top: 4px solid var(--neon-blue); }
+.blue-theme .avatar-ring { border-color: var(--neon-blue); color: var(--neon-blue); box-shadow: 0 0 40px rgba(0, 243, 255, 0.5); }
+.blue-theme h3 { color: #b3faff; text-shadow: 0 0 20px var(--neon-blue); }
+.pink-theme { border-top: 4px solid var(--royal-pink); }
+.pink-theme .avatar-ring { border-color: var(--royal-pink); color: var(--royal-pink); box-shadow: 0 0 40px rgba(255, 102, 178, 0.5); }
+.pink-theme h3 { color: #ffb3d9; text-shadow: 0 0 20px var(--royal-pink); }
 
-        /* Scroll Progress */
-        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 3px; background: var(--gold); z-index: 9999; box-shadow: 0 0 10px var(--gold); }
+.particle-box { position: absolute; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; border-radius: 40px; }
+.card-particle { position: absolute; opacity: 0; animation: floatParticle 3s infinite ease-in; font-size: 14px; }
+@keyframes floatParticle { 0% { transform: translateY(50px) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-50px) scale(1.2); opacity: 0; } }
 
-        /* Particles Explosion */
-        .particle { position: absolute; pointer-events: none; border-radius: 50%; }
+/* === شمارش تولدها (Neon/Flip style) === */
+.cd-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+.cd-card { background: var(--glass-strong); backdrop-filter: blur(25px); border: 1px solid var(--border); border-radius: 40px; padding: 50px; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; transform-style: preserve-3d; transition: transform 0.5s; }
+.cd-card:hover { transform: translateY(-10px) rotateX(2deg); border-color: var(--gold); box-shadow: 0 30px 80px rgba(232, 198, 107, 0.2); }
+.cd-card::after { content: '🎉'; position: absolute; font-size: 200px; opacity: 0.02; right: -30px; bottom: -50px; pointer-events: none; transform: rotate(-15deg); }
+.cd-card h3 { color: var(--gold-2); font-size: 30px; margin-bottom: 15px; text-shadow: 0 0 20px rgba(232,198,107,0.5); font-family: 'Cinzel'; }
+.cd-card .date { color: var(--muted); font-size: 16px; margin-bottom: 35px; letter-spacing: 2px; font-weight: 600; text-transform: uppercase; }
+.cd-nums { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.cd-box { background: linear-gradient(180deg, rgba(30,15,50,0.9), rgba(10,5,20,0.9)); border: 1px solid rgba(232, 198, 107, 0.4); border-radius: 20px; padding: 20px 15px; min-width: 90px; box-shadow: inset 0 10px 20px rgba(255,255,255,0.05), 0 10px 20px rgba(0,0,0,0.8); position: relative; overflow: hidden; }
+.cd-box::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: rgba(0,0,0,0.5); box-shadow: 0 1px 0 rgba(255,255,255,0.1); }
+.cd-box span { display: block; font-family: 'Cinzel'; font-size: 45px; color: #fff; font-weight: 900; text-shadow: 0 0 20px var(--gold-2), 0 0 40px var(--gold); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.cd-box span.pulse { transform: scale(1.15); color: var(--gold-2); text-shadow: 0 0 30px #fff; }
+.cd-box small { color: var(--gold); font-size: 13px; text-transform: uppercase; margin-top: 10px; display: block; font-weight: 800; letter-spacing: 1px; }
 
-        /* Responsive Fixes */
-        @media (max-width: 768px) {
-            .timeline::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .timeline-item:nth-child(even) { left: 0%; }
-            .timeline-item::after { left: 21px !important; right: auto !important; }
-        }
-    </style>
+/* === تایم‌لاین سینمایی === */
+.timeline-wrap { position: relative; max-width: 1000px; margin: 0 auto; padding: 40px 0; }
+.timeline-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 6px; background: rgba(255,255,255,0.05); transform: translateX(-50%); border-radius: 6px; }
+.timeline-line-fill { position: absolute; top: 0; left: 0; width: 100%; background: linear-gradient(to bottom, var(--gold), var(--purple), var(--gold-2)); border-radius: 6px; box-shadow: 0 0 20px var(--gold), 0 0 40px var(--purple); height: 0; transition: height 0.5s ease-out; }
+.tl-item { position: relative; width: 50%; padding: 30px 50px; box-sizing: border-box; perspective: 1000px; }
+.tl-item:nth-child(odd) { left: 0; text-align: left; }
+.tl-item:nth-child(even) { left: 50%; text-align: right; }
+.tl-item .dot { position: absolute; top: 50px; width: 30px; height: 30px; border-radius: 50%; background: #111; box-shadow: inset 0 0 10px rgba(0,0,0,0.9); border: 3px solid rgba(232, 198, 107, 0.3); z-index: 2; transition: all 0.5s ease; transform: translateY(-50%); }
+.tl-item.active .dot { background: radial-gradient(circle, #fff, var(--gold)); box-shadow: 0 0 30px var(--gold), 0 0 0 8px rgba(232, 198, 107, 0.2); border-color: #fff; transform: translateY(-50%) scale(1.2); }
+.tl-item:nth-child(odd) .dot { right: -15px; }
+.tl-item:nth-child(even) .dot { left: -15px; }
+.tl-card { background: var(--glass-strong); backdrop-filter: blur(20px); border: 1px solid rgba(232,198,107,0.2); border-radius: 30px; padding: 40px; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-style: preserve-3d; opacity: 0.5; transform: scale(0.9) translateZ(-50px); }
+.tl-item.active .tl-card { opacity: 1; transform: scale(1) translateZ(0); border-color: var(--gold); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(232, 198, 107, 0.15); }
+.tl-card:hover { transform: translateY(-10px) scale(1.02) !important; box-shadow: 0 30px 60px rgba(0,0,0,0.9), 0 0 40px rgba(232, 198, 107, 0.3); }
+.tl-card h4 { color: var(--gold-2); font-size: 24px; margin-bottom: 15px; font-family: 'Cinzel'; font-weight: 800; text-shadow: 0 0 10px rgba(232,198,107,0.4); }
+.tl-card p { color: var(--text); font-size: 16px; line-height: 2.2; font-weight: 300; }
+.tl-card .when { display: inline-block; padding: 6px 18px; background: rgba(232, 198, 107, 0.1); border-radius: 20px; color: var(--gold); font-size: 14px; font-family: 'Cinzel'; margin-bottom: 20px; border: 1px solid rgba(232,198,107,0.4); font-weight: bold; letter-spacing: 1px; box-shadow: 0 0 15px rgba(232,198,107,0.1); }
+
+/* === نامه پادشاه سینمایی === */
+.letter { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, rgba(30,15,50,0.95), rgba(15,8,25,0.98)); border: 2px solid var(--gold); border-radius: 40px; padding: 80px 60px; box-shadow: var(--shadow), 0 0 60px rgba(232,198,107,0.2), inset 0 0 40px rgba(255,255,255,0.02); position: relative; transform-style: preserve-3d; transition: transform 0.5s ease; }
+.letter:hover { transform: translateY(-10px) rotateX(2deg); box-shadow: 0 40px 100px rgba(0,0,0,0.9), 0 0 80px rgba(232,198,107,0.3); }
+.letter::before { content: ''; position: absolute; inset: 15px; border: 1px dashed rgba(232,198,107,0.4); border-radius: 25px; pointer-events: none; }
+.letter .seal { position: absolute; top: -45px; left: 50%; transform: translateX(-50%) translateZ(40px); width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #f6e3a1, #b8862f, #f6e3a1); display: flex; align-items: center; justify-content: center; font-size: 45px; box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 30px rgba(232,198,107,0.6), inset 0 0 20px #fff; border: 3px solid #fff; transition: transform 0.5s ease; cursor: pointer; }
+.letter:hover .seal { transform: translateX(-50%) translateZ(60px) rotate(15deg) scale(1.1); box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 50px var(--gold-2), inset 0 0 25px #fff; }
+#letterText { font-size: 21px; line-height: 2.8; color: var(--text); white-space: pre-wrap; min-height: 250px; text-align: justify; text-shadow: 0 2px 5px rgba(0,0,0,0.8); font-family: 'Vazirmatn'; font-weight: 300; }
+.letter .sign { margin-top: 50px; text-align: left; color: var(--gold-2); font-family: 'Cinzel'; font-size: 32px; font-weight: 900; text-shadow: 0 0 20px var(--gold); letter-spacing: 2px; }
+.cursor { display: inline-block; width: 4px; height: 1.2em; background: var(--gold-2); margin-right: 8px; vertical-align: middle; animation: blinkHQ 1s steps(1) infinite; box-shadow: 0 0 15px var(--gold); }
+@keyframes blinkHQ { 50% { opacity: 0; } }
+
+/* === گالری Masonry حرفه‌ای === */
+.gallery { column-count: 3; column-gap: 30px; }
+.gallery-item { break-inside: avoid; margin-bottom: 30px; position: relative; border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); transform: translateZ(0); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; background: #000; }
+.gallery-item::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%); z-index: 1; opacity: 0; transition: opacity 0.4s ease; pointer-events: none; }
+.gallery-item:hover::before { opacity: 1; }
+.gallery-item img { width: 100%; height: auto; display: block; border-radius: 30px; border: 2px solid transparent; transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); filter: brightness(0.8) contrast(1.1); will-change: transform, filter; }
+.gallery-item:hover { transform: translateY(-15px) scale(1.02); box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(232, 198, 107, 0.4); z-index: 10; }
+.gallery-item:hover img { border-color: var(--gold); transform: scale(1.1); filter: brightness(1.1) contrast(1.2); }
+.gallery-caption { position: absolute; bottom: -30px; left: 0; right: 0; text-align: center; color: var(--gold-2); z-index: 2; padding: 20px; font-size: 16px; font-weight: bold; opacity: 0; transition: all 0.4s ease; text-shadow: 0 0 10px #000; }
+.gallery-item:hover .gallery-caption { bottom: 0; opacity: 1; }
+
+/* === لایت‌باکس سینمایی === */
+#lightbox { position: fixed; inset: 0; z-index: 99999; background: rgba(2, 1, 6, 0.98); display: none; align-items: center; justify-content: center; padding: 40px; backdrop-filter: blur(25px); opacity: 0; transition: opacity 0.4s ease; }
+#lightbox.open { display: flex; opacity: 1; }
+#lightbox img { max-width: 90vw; max-height: 85vh; border-radius: 20px; border: 4px solid var(--gold); box-shadow: 0 0 150px rgba(232, 198, 107, 0.6); object-fit: contain; transform: scale(0.9); transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+#lightbox.open img { transform: scale(1); }
+#lightbox .x { position: absolute; top: 40px; left: 50px; font-size: 50px; color: #fff; cursor: pointer; transition: all 0.4s ease; text-shadow: 0 0 20px var(--gold); background: rgba(0,0,0,0.5); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.2); }
+#lightbox .x:hover { transform: rotate(90deg) scale(1.2); background: var(--gold); color: #000; border-color: var(--gold); box-shadow: 0 0 30px var(--gold); }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 60px; color: #fff; cursor: pointer; background: rgba(20,10,40,0.8); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; user-select: none; border: 2px solid rgba(232,198,107,0.4); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(10px); box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+.lb-nav:hover { background: rgba(232, 198, 107, 0.3); border-color: var(--gold-2); transform: translateY(-50%) scale(1.15); box-shadow: 0 0 40px rgba(232,198,107,0.6); color: var(--gold-2); }
+.lb-prev { right: 40px; } .lb-next { left: 40px; }
+
+/* === موزیک پلیر مدرن و درخشان === */
+.player { position: fixed; bottom: calc(30px + env(safe-area-inset-bottom)); right: 30px; z-index: 5000; display: flex; flex-direction: column; gap: 15px; background: rgba(10, 5, 20, 0.85); backdrop-filter: blur(30px); border: 1px solid rgba(232,198,107,0.4); border-radius: 30px; padding: 20px 25px; box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 30px rgba(232,198,107,0.15); width: 320px; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform-origin: bottom right; }
+.player:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 30px 80px rgba(0,0,0,1), 0 0 50px rgba(232,198,107,0.3); border-color: var(--gold); }
+.player .row { display: flex; align-items: center; gap: 15px; }
+.player button { width: 50px; height: 50px; border-radius: 50%; border: none; cursor: pointer; font-size: 20px; color: #000; background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--gold-deep)); box-shadow: 0 5px 20px rgba(232, 198, 107, 0.5), inset 0 0 10px rgba(255,255,255,0.5); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; align-items: center; justify-content: center; }
+.player button:hover { transform: scale(1.15); box-shadow: 0 10px 30px rgba(232, 198, 107, 0.8); }
+.player .small { width: 40px; height: 40px; font-size: 16px; background: rgba(255, 255, 255, 0.05); color: var(--gold-2); border: 1px solid rgba(232,198,107,0.3); box-shadow: none; }
+.player .small:hover { background: rgba(232, 198, 107, 0.2); border-color: var(--gold); color: #fff; box-shadow: 0 0 15px rgba(232,198,107,0.4); }
+.player .info { flex: 1; display: flex; flex-direction: column; overflow: hidden; align-items: center; }
+.player .ttl { font-size: 15px; color: var(--gold-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 800; font-family: 'Cinzel'; text-shadow: 0 0 10px rgba(232,198,107,0.5); }
+.equalizer { display: flex; gap: 3px; height: 15px; align-items: flex-end; margin-top: 5px; opacity: 0; transition: opacity 0.3s; }
+.equalizer.playing { opacity: 1; }
+.eq-bar { width: 3px; background: var(--gold); border-radius: 3px; animation: eqAnim 0.5s infinite alternate ease-in-out; box-shadow: 0 0 8px var(--gold); }
+.eq-bar:nth-child(1) { animation-duration: 0.4s; } .eq-bar:nth-child(2) { animation-duration: 0.6s; height: 10px; } .eq-bar:nth-child(3) { animation-duration: 0.5s; height: 14px; } .eq-bar:nth-child(4) { animation-duration: 0.7s; height: 8px; }
+@keyframes eqAnim { 0% { height: 3px; } 100% { height: 15px; background: var(--gold-2); } }
+.player .bar { height: 8px; border-radius: 8px; background: rgba(255, 255, 255, 0.08); cursor: pointer; position: relative; overflow: hidden; box-shadow: inset 0 2px 5px rgba(0,0,0,0.8); width: 100%; border: 1px solid rgba(255,255,255,0.05); }
+.player .bar i { position: absolute; top: 0; right: 0; height: 100%; width: 0; border-radius: 8px; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), #fff); box-shadow: 0 0 15px var(--gold-2); transition: width 0.1s linear; }
+
+#toTop { position: fixed; bottom: calc(30px + env(safe-area-inset-bottom)); left: 30px; z-index: 4000; width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(232,198,107,0.5); background: rgba(10, 5, 20, 0.85); backdrop-filter: blur(20px); color: var(--gold-2); font-size: 26px; cursor: pointer; opacity: 0; transform: translateY(40px) scale(0.8); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; box-shadow: 0 15px 40px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; }
+#toTop.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+#toTop:hover { background: var(--gold); color: #000; border-color: #fff; box-shadow: 0 0 30px var(--gold); transform: translateY(-8px) scale(1.1); }
+
+footer { text-align: center; padding: 80px 30px; background: linear-gradient(to top, #020104, transparent); color: var(--muted); font-size: 16px; border-top: 1px solid rgba(232,198,107,0.15); position: relative; z-index: var(--z-content); line-height: 2.2; font-weight: 300; }
+footer b { color: var(--gold-2); font-size: 19px; text-shadow: 0 0 10px rgba(232,198,107,0.4); font-weight: 800; }
+
+/* === ریسپانسیو سینمایی === */
+@media(max-width: 1024px) {
+  .nav-links { display: none; position: absolute; top: 80px; right: 30px; left: 30px; flex-direction: column; background: rgba(5, 3, 12, 0.98); border: 1px solid var(--gold); border-radius: 25px; padding: 25px; box-shadow: 0 30px 80px rgba(0,0,0,0.9); backdrop-filter: blur(30px); }
+  .nav-links.open { display: flex; animation: slideDownHQ 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  @keyframes slideDownHQ { from { opacity:0; transform:translateY(-20px) scale(0.95); } to { opacity:1; transform:translateY(0) scale(1); } }
+  .nav-toggle { display: block; }
+  .g3 { grid-template-columns: repeat(2, 1fr); }
+  .timeline-line { left: 40px; transform: none; }
+  .tl-item { width: 100%; text-align: right !important; padding: 30px 80px 30px 20px; left: 0 !important; }
+  .tl-item .dot { left: auto !important; right: 25px !important; }
+  .gallery { column-count: 2; }
+}
+@media(max-width: 768px) {
+  .g2, .cd-grid { grid-template-columns: 1fr; }
+  .g3 { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 50px; }
+  .wiriper-stats { gap: 30px; flex-direction: column; }
+  .letter { padding: 50px 30px; }
+  #letterText { font-size: 18px; }
+}
+@media(max-width: 520px) {
+  .gallery { column-count: 1; }
+  .player { width: calc(100vw - 40px); right: 20px; left: 20px; bottom: 100px; padding: 15px; }
+  #toTop { bottom: 20px; left: 20px; width: 50px; height: 50px; }
+  section { padding: 100px 0; }
+  .sec-title h2 { font-size: 32px; }
+  .card { padding: 30px; }
+}
+</style>
 </head>
-<body class="antialiased selection:bg-gold selection:text-black">
+<body>
 
-    <div id="loader">
-        <div class="loader-ring"></div>
-        <div class="loader-text mt-8 font-bold">در حال ورود به رویای ابدی...</div>
-        <div class="text-sm text-gray-500 mt-4 tracking-widest uppercase">Initializing Cinematic Experience</div>
+<canvas id="bgCanvas" class="bg-layer"></canvas>
+<div class="ambient-fog"></div>
+<div class="light-rays"></div>
+
+<div class="cursor-dot" id="cDot"></div>
+<div class="cursor-ring" id="cRing"></div>
+
+<div id="loader">
+  <div class="loader-crown">👑</div>
+  <div class="loader-txt">EMPIRE OF ETERNITY</div>
+  <div class="loader-bar"><i></i></div>
+</div>
+
+<div id="progress"></div>
+
+<div id="gate">
+  <div class="gate-card" data-tilt>
+    <div class="crown">🏰</div>
+    <h1>ورود به امپراتوری Wiriper</h1>
+    <p>کلید قلب ملکه را وارد کن تا دروازه‌های طلایی گشوده شوند.</p>
+    <input id="pass" type="password" placeholder="نام ملکه..." autocomplete="off">
+    <button class="btn" onclick="enter()">گشودن دروازه‌ها ✨</button>
+    <div class="gate-err" id="gerr"></div>
+  </div>
+</div>
+
+<nav class="navbar" id="nav">
+  <div class="brand">👑 WIRIPER</div>
+  <button class="icon-btn nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+  <div class="nav-links" id="navlinks">
+    <a href="#hero">تالار اصلی</a>
+    <a href="#wiriper">تمدن ما</a>
+    <a href="#countdown">جشن‌ها</a>
+    <a href="#king">فرمانروایان</a>
+    <a href="#princes">شاهزاده‌ها</a>
+    <a href="#timeline">افسانه</a>
+    <a href="#letter">فرمان</a>
+    <a href="#gallery">خزانه</a>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="sub" id="heroSub"></div>
+    <h1>قلب تپنده‌ی امپراتوری<br>مبین و نیایش</h1>
+    
+    <div class="angel-container" data-tilt>
+      <div class="angel" id="angel">
+        <div class="wing wing-left" id="wingL"></div>
+        <div class="wing wing-right" id="wingR"></div>
+        <div class="halo"></div>
+        <div class="photo-frame">
+          <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش">
+        </div>
+      </div>
     </div>
 
-    <div id="scroll-progress"></div>
-
-    <div class="cursor-dot" id="cursor-dot"></div>
-    <div class="cursor-outline" id="cursor-outline"></div>
-
-    <div id="canvas-container">
-        <canvas id="bg-canvas"></canvas>
+    <p class="love reveal">او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b>نیایش</b> عزیز من.</p>
+    
+    <div class="hero-btns reveal">
+      <button class="btn magnetic-btn" onclick="loveBurst();launchFirework(8)">💖 بارش عشق بر ملکه</button>
+      <button class="btn ghost magnetic-btn" onclick="document.getElementById('magic-mirror').scrollIntoView({behavior:'smooth'})">✨ آینه جادویی</button>
     </div>
-    <div class="ambient-light"></div>
+    
+    <div class="scroll-down reveal">
+      <span>به تمدن ما قدم بگذار</span>
+      <i>↓</i>
+    </div>
+  </div>
+</section>
 
-    <audio id="bg-music" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <header class="fixed top-0 w-full z-50 glass-panel border-b-0 border-glassborder transition-all duration-300" id="header">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between align-middle items-center">
-            <div class="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-gold to-white">
-                NIAYESH <span class="text-sm font-light tracking-widest text-gray-400">VIP</span>
-            </div>
-            <nav class="hidden md:flex gap-8 text-sm font-medium tracking-wider">
-                <a href="#hero" class="hover:text-gold transition-colors duration-300">آغاز</a>
-                <a href="#countdown" class="hover:text-gold transition-colors duration-300">زمان</a>
-                <a href="#story" class="hover:text-gold transition-colors duration-300">داستان ما</a>
-                <a href="#gallery" class="hover:text-gold transition-colors duration-300">خاطرات</a>
-                <a href="#future" class="hover:text-gold transition-colors duration-300">آینده</a>
-            </nav>
-            <div class="flex gap-4 items-center">
-                <button id="music-toggle" class="glass-btn w-10 h-10 rounded-full flex items-center justify-center text-white interactive-element">
-                    <i class="fas fa-play"></i>
-                </button>
-                <button class="md:hidden glass-btn w-10 h-10 rounded-full flex items-center justify-center interactive-element">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
+<section id="wiriper" class="reveal">
+  <div id="wiriper-realm">
+    <div class="wrap">
+      <div class="wiriper-card" data-tilt>
+        <div class="wiriper-logo">🌍</div>
+        <h2 class="wiriper-title">تمدن جاودانه Wiriper</h2>
+        <p class="wiriper-desc">
+          اینجا تنها یک قصر یا یک ساختمان نیست. Wiriper یک جهان است، تمدنی پهناور و بی‌کران که بر پایه‌ی عشق بی‌پایان پادشاه مبین و ملکه نیایش بنا شده است. سرزمینی که مرزهایش تا بی‌نهایت امتداد دارد و خورشید آن هرگز غروب نمی‌کند، زیرا منبع نورش، لبخند ملکه است.
+        </p>
+        <div class="wiriper-stats">
+          <div class="wstat"><span class="num">∞</span><span class="lbl">وسعت قلمرو</span></div>
+          <div class="wstat"><span class="num" id="wDays">1000</span><span class="lbl">روزهای سلطنت</span></div>
+          <div class="wstat"><span class="num">۱</span><span class="lbl">قلب واحد</span></div>
         </div>
-    </header>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        <div class="absolute inset-0 z-0 opacity-30" id="hero-parallax">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-900 rounded-full mix-blend-screen filter blur-[100px] animate-pulse"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-yellow-900 rounded-full mix-blend-screen filter blur-[100px] animate-pulse" style="animation-delay: 2s;"></div>
+<section id="magic-mirror" class="reveal">
+  <div class="wrap">
+    <div class="sec-title">
+      <h2>آینه جادویی ملکه 🪞</h2>
+      <div class="line"></div>
+      <p>ای ملکه، بر روی آینه کلیک کن تا حقیقت مطلق این امپراتوری را ببینی.</p>
+    </div>
+    <div class="magic-mirror-container">
+      <div class="magic-mirror" onclick="this.classList.toggle('revealed'); loveBurst(); launchFirework(5);">
+        <div class="mirror-glass"></div>
+        <div class="mirror-content">
+          <div class="mirror-icon">✨</div>
+          <div class="mirror-text">آینه در انتظار لمس دست‌های توست...</div>
         </div>
-
-        <div class="relative z-10 text-center px-4 flex flex-col items-center">
-            <div data-aos="fade-down" data-aos-duration="1500" class="mb-4 inline-block px-4 py-1 rounded-full border border-gold/30 bg-gold/5 backdrop-blur-md text-gold text-sm tracking-widest floating-element">
-                <i class="fas fa-crown mr-2"></i> THE ETERNAL ROYAL LOVE
-            </div>
-            <h1 class="hero-title mb-6 leading-tight">نیـایـش</h1>
-            <div class="text-xl md:text-3xl text-gray-300 font-light mb-8 h-12" id="typed-container">
-                <span id="typed-text"></span>
-            </div>
-            
-            <div class="flex flex-wrap justify-center gap-6 mt-8" data-aos="fade-up" data-aos-delay="300">
-                <a href="#story" class="glass-btn px-8 py-4 rounded-full text-lg font-bold flex items-center gap-3 interactive-element">
-                    <span>ورود به قلب</span>
-                    <i class="fas fa-heart text-red-500 animate-pulse"></i>
-                </a>
-                <a href="#future" class="glass-btn px-8 py-4 rounded-full text-lg font-bold flex items-center gap-3 interactive-element">
-                    <span>شاهزاده‌ها</span>
-                    <i class="fas fa-star text-gold"></i>
-                </a>
-            </div>
+        <div class="mirror-reflection">
+          تو زیباترین، کامل‌ترین و بی‌نقص‌ترین خلقتی هستی که پادشاه در تمام عمرش دیده است. تو خودِ عشقی! 💖
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="absolute bottom-10 left-10 glass-panel p-4 rounded-2xl hidden lg:flex flex-col gap-2 z-20" data-aos="fade-right" data-aos-delay="1000">
-            <div class="text-xs text-gray-400">وضعیت قلبی</div>
-            <div class="text-xl font-bold text-red-400 flex items-center gap-2">
-                <i class="fas fa-heartbeat animate-pulse"></i> 100% متصل
-            </div>
-        </div>
-        <div class="absolute bottom-10 right-10 glass-panel p-4 rounded-2xl hidden lg:flex flex-col gap-2 z-20" data-aos="fade-left" data-aos-delay="1000">
-            <div class="text-xs text-gray-400">زمان حال</div>
-            <div class="text-xl font-bold text-gold" id="live-time">00:00:00</div>
-            <div class="text-xs text-gray-300" id="live-date">...</div>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce z-20 cursor-pointer interactive-element" onclick="window.scrollTo({top: window.innerHeight, behavior: 'smooth'})">
-            <span class="text-xs text-gray-400 mb-2 tracking-widest">SCROLL</span>
-            <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
-                <div class="w-1 h-2 bg-white rounded-full animate-ping"></div>
-            </div>
-        </div>
-    </section>
+<section id="countdown">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>جشن‌های باشکوه سلطنتی 🎉</h2>
+      <div class="line"></div>
+      <p>شمارش معکوس تا طلوع روزهای مقدس تولد پادشاه و ملکه</p>
+    </div>
+    <div class="cd-grid">
+      <div class="cd-card reveal" data-tilt>
+        <h3>👑 زادروز پادشاه مبین</h3>
+        <div class="date">۲۵ اسفند — شکوه اقتدار</div>
+        <div class="cd-nums" id="cd-mobin"></div>
+        <div class="cd-today" id="today-mobin" style="display:none; color:var(--gold-2); font-size:22px; font-weight:900; margin-top:20px; text-shadow:0 0 15px var(--gold);">🎉 سراسر قلمرو در جشن است! زادروز پادشاه مبارک 🎂</div>
+      </div>
+      <div class="cd-card reveal" data-tilt>
+        <h3>👸🏻 زادروز ملکه نیایش</h3>
+        <div class="date">۱۵ شهریور — تجلی زیبایی</div>
+        <div class="cd-nums" id="cd-niyayesh"></div>
+        <div class="cd-today" id="today-niyayesh" style="display:none; color:var(--rose); font-size:22px; font-weight:900; margin-top:20px; text-shadow:0 0 15px var(--royal-pink);">🎉 خورشید امروز درخشان‌تر است! زادروز فرشته‌ی من مبارک 🎂</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="countdown" class="py-32 relative">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-black mb-4 text-white" data-aos="zoom-in">تا ابدیت با تو</h2>
-            <p class="text-gray-400 mb-16 text-lg" data-aos="fade-up">لحظه‌هایی که با عشق شمرده می‌شوند</p>
-            
-            <div class="glass-panel p-10 rounded-3xl mx-auto shadow-[0_0_50px_rgba(212,175,55,0.1)] relative overflow-hidden" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.2">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-50"></div>
-                
-                <div class="flip-clock-container" id="flip-clock">
-                    <div class="flip-unit" data-aos="flip-up" data-aos-delay="100">
-                        <div class="flip-card" id="cd-days">000</div>
-                        <div class="flip-label">روز</div>
-                    </div>
-                    <div class="text-4xl text-gold self-start mt-6">:</div>
-                    <div class="flip-unit" data-aos="flip-up" data-aos-delay="200">
-                        <div class="flip-card" id="cd-hours">00</div>
-                        <div class="flip-label">ساعت</div>
-                    </div>
-                    <div class="text-4xl text-gold self-start mt-6">:</div>
-                    <div class="flip-unit" data-aos="flip-up" data-aos-delay="300">
-                        <div class="flip-card" id="cd-minutes">00</div>
-                        <div class="flip-label">دقیقه</div>
-                    </div>
-                    <div class="text-4xl text-gold self-start mt-6">:</div>
-                    <div class="flip-unit" data-aos="flip-up" data-aos-delay="400">
-                        <div class="flip-card" id="cd-seconds">00</div>
-                        <div class="flip-label">ثانیه</div>
-                    </div>
-                    <div class="flip-unit self-end pb-8 pl-4" data-aos="fade-left" data-aos-delay="500">
-                        <div class="ms-display font-mono" id="cd-ms">000</div>
-                    </div>
-                </div>
+<section id="king">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2>فرمانروایان تمدن 👑</h2><div class="line"></div></div>
+    <div class="grid g2">
+      <div class="card reveal" style="border-top: 4px solid var(--purple-soft);" data-tilt>
+        <div class="ico">⚔️</div>
+        <h3>پادشاه مبین</h3>
+        <p>فرمانروایی با اقتدار، خلق‌کننده‌ی دنیاها و محافظ همیشگی لبخند ملکه. کسی که Wiriper را از هیچ ساخت تا تنها استراحتگاه امن فرشته‌اش باشد.</p>
+        <div class="tags"><span class="tag">محافظ ابدی</span><span class="tag">قدرت</span><span class="tag">وفاداری</span></div>
+      </div>
+      <div class="card reveal" style="border-top: 4px solid var(--rose);" data-tilt>
+        <div class="ico">🌹</div>
+        <h3>ملکه نیایش</h3>
+        <p>قلب تپنده‌ی جهانِ Wiriper. دختری با روحی از جنس نور، شیفته‌ی هنر و زیبایی، که حضورش هر ثانیه از زندگی پادشاه را به یک معجزه تبدیل کرده است.</p>
+        <div class="tags"><span class="tag">نورِ قلمرو</span><span class="tag">هنر</span><span class="tag">زیبایی مطلق</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <div class="mt-12 w-full max-w-2xl mx-auto">
-                    <div class="flex justify-between text-xs text-gray-400 mb-2">
-                        <span>آغاز عشق</span>
-                        <span>بینهایت</span>
-                    </div>
-                    <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
-                        <div class="h-full bg-gradient-to-r from-red-600 to-pink-500 rounded-full shadow-[0_0_15px_#ff69b4]" style="width: 75%;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="princes">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>شاهزاده‌های آینده 🌟</h2>
+      <div class="line"></div>
+      <p>ثمرات عشق جاودانه و وارثان تاج و تخت امپراتوری Wiriper</p>
+    </div>
+    <div class="grid g3">
+      <div class="card prince-card gold-theme reveal" data-tilt>
+        <div class="avatar-ring">👑</div>
+        <h3>آریا مهر</h3>
+        <p>شاهزاده‌ی طلایی و وارث اقتدار پادشاه. کسی که شکوه امپراتوری را به نسل‌های بعد منتقل خواهد کرد.</p>
+        <div class="tags"><span class="tag">وارث تاج</span><span class="tag">نجابت</span></div>
+      </div>
+      
+      <div class="card prince-card blue-theme reveal" data-tilt id="card-sam">
+        <div class="particle-box" id="particles-sam"></div>
+        <div class="avatar-ring">⚔️</div>
+        <h3>سام</h3>
+        <p>شاهزاده‌ی جنگجو با اراده‌ای از جنس فولاد. محافظ بی‌باک مرزهای عشق و تمدن جاودانه‌ی ما.</p>
+        <div class="tags"><span class="tag">شجاعت</span><span class="tag">محافظ</span></div>
+      </div>
+      
+      <div class="card prince-card pink-theme reveal" data-tilt id="card-sonia">
+        <div class="particle-box" id="particles-sonia"></div>
+        <div class="avatar-ring">🦋</div>
+        <h3>پرنسس سونیا</h3>
+        <p>تجلی زیبایی و لطافت مادرش. دختری با روحی رویایی که با هر لبخندش، گل‌های قلمرو شکوفا می‌شوند.</p>
+        <div class="tags"><span class="tag">رویایی</span><span class="tag">لطافت</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section id="story" class="py-32 relative bg-darkmat/50">
-        <div class="max-w-6xl mx-auto px-6">
-            <div class="text-center mb-20">
-                <h2 class="text-4xl md:text-5xl font-black mb-4 text-white" data-aos="fade-up">داستان حماسی ما</h2>
-                <div class="w-24 h-1 bg-gold mx-auto rounded-full" data-aos="scale-x"></div>
-            </div>
+<section id="timeline">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>افسانه آفرینش عشق 💫</h2>
+      <div class="line"></div>
+      <p>تاریخچه‌ی جاودانگی ما در دفتر تمدن Wiriper</p>
+    </div>
+    <div class="timeline-wrap" id="timelineBox">
+      <div class="timeline-line">
+        <div class="timeline-line-fill" id="tlFill"></div>
+      </div>
+      </div>
+  </div>
+</section>
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content glass-panel" data-aos="fade-right">
-                        <div class="text-gold font-bold mb-2 text-xl">آغاز رویایی</div>
-                        <div class="text-sm text-gray-400 mb-4">تاریخ: روز اول</div>
-                        <p class="text-gray-300 leading-relaxed">همان نگاه اول کافی بود تا بدانم تمام آینده‌ام در چشمان تو خلاصه می‌شود. جهانی جدید متولد شد.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content glass-panel" data-aos="fade-left">
-                        <div class="text-pink-400 font-bold mb-2 text-xl">اولین اعتراف</div>
-                        <div class="text-sm text-gray-400 mb-4">خاطره ثبت شده</div>
-                        <p class="text-gray-300 leading-relaxed">کلماتی که با ترس و امید بیان شدند و قلبی که برای همیشه به نام تو سند خورد. یک تعهد ابدی.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content glass-panel" data-aos="fade-right">
-                        <div class="text-blue-400 font-bold mb-2 text-xl">پیمان جاودانگی</div>
-                        <div class="text-sm text-gray-400 mb-4">حلقه عشق</div>
-                        <p class="text-gray-300 leading-relaxed">وقتی دستانمان در هم گره خورد، زمان متوقف شد. ما پادشاه و ملکه امپراتوری خودمان شدیم.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content glass-panel border-gold/50 shadow-[0_0_30px_rgba(212,175,55,0.2)]" data-aos="fade-up">
-                        <div class="text-white font-bold mb-2 text-2xl flex items-center gap-3">
-                            <i class="fas fa-infinity text-gold"></i> زمان حال و آینده
-                        </div>
-                        <p class="text-gray-300 leading-relaxed mt-4">و این داستان ادامه دارد، داستانی که در آن هر روز عاشق‌تر از دیروزیم و برای ساختن آینده‌ای باشکوه قدم برمی‌داریم.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="letter">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2>فرمان همایونی پادشاه 📜</h2><div class="line"></div></div>
+    <div class="letter reveal" data-tilt>
+      <div class="seal">👑</div>
+      <div id="letterText"></div>
+      <div class="sign">— پادشاه تو، مبین</div>
+    </div>
+  </div>
+</section>
 
-    <section id="future" class="py-32 relative overflow-hidden">
-        <div id="particles-future" class="absolute inset-0 z-0 opacity-40"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl md:text-6xl font-black mb-4 text-transparent bg-clip-text bg-gradient-to-r from-gold via-white to-gold" data-aos="zoom-in">شاهزاده‌های آینده</h2>
-                <p class="text-xl text-gray-300" data-aos="fade-up" data-aos-delay="200">میوه‌های عشق ابدی و وارثان تاج و تخت قلب ما</p>
-            </div>
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-title reveal"><h2>خزانه تصاویر پادشاهی 📸</h2><div class="line"></div></div>
+    <div class="gallery reveal" id="galleryGrid">
+      <div class="gallery-item" onclick="lb(0)">
+        <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" loading="lazy">
+        <div class="gallery-caption">شکوه ملکه</div>
+      </div>
+      <div class="gallery-item" onclick="lb(1)">
+        <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" loading="lazy">
+        <div class="gallery-caption">خاطرات جاودانه</div>
+      </div>
+      <div class="gallery-item" onclick="lb(2)">
+        <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" loading="lazy">
+        <div class="gallery-caption">لبخند ابدیت</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="card-future border border-gold/30 shadow-[0_0_40px_rgba(212,175,55,0.15)] interactive-element" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="10" data-tilt-speed="400">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1618221118493-9cfa1a1c00da?q=80&w=800&auto=format&fit=crop');"></div>
-                    <div class="card-overlay aria-overlay"></div>
-                    <div class="card-content text-center">
-                        <div class="w-20 h-20 mx-auto bg-black/50 backdrop-blur-md rounded-full border-2 border-gold flex items-center justify-center mb-6 shadow-[0_0_20px_var(--gold)]">
-                            <i class="fas fa-crown text-3xl text-gold crown-icon"></i>
-                        </div>
-                        <h3 class="text-3xl font-black text-white mb-2 tracking-wider text-shadow-lg">آریا مهر</h3>
-                        <div class="text-gold text-sm tracking-widest uppercase mb-4">The Future Prince</div>
-                        <p class="text-gray-300 text-sm leading-relaxed">بزرگ‌مردی که با غرور و شکوه، نام خانواده را به دوش خواهد کشید. وارث تاج طلایی.</p>
-                    </div>
-                </div>
+<footer>
+  بنا شده با عشق بی‌نهایت برای <b>ملکه نیایش 👸🏻</b> از سوی <b>پادشاه مبین 👑</b><br>
+  تمدن Wiriper — جاودانه تا فراتر از ابدیت
+</footer>
 
-                <div class="card-future border border-blue-500/30 shadow-[0_0_40px_rgba(0,243,255,0.15)] interactive-element mt-0 md:mt-12" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="10" data-tilt-speed="400">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop');"></div>
-                    <div class="card-overlay sam-overlay"></div>
-                    <div class="card-content text-center">
-                        <div class="w-20 h-20 mx-auto bg-black/50 backdrop-blur-md rounded-full border-2 border-blue-400 flex items-center justify-center mb-6 shadow-[0_0_20px_var(--blue)]">
-                            <i class="fas fa-meteor text-3xl text-blue-400 floating-element"></i>
-                        </div>
-                        <h3 class="text-3xl font-black text-white mb-2 tracking-wider text-shadow-lg">سام</h3>
-                        <div class="text-blue-400 text-sm tracking-widest uppercase mb-4">The Dark Royal</div>
-                        <p class="text-gray-300 text-sm leading-relaxed">نماد قدرت، هوش و آینده‌نگری. شاهزاده‌ای با افکار درخشان همچون نئون در تاریکی شب.</p>
-                    </div>
-                </div>
+<div id="lightbox">
+  <div class="x" onclick="closeLb()">✕</div>
+  <div class="lb-nav lb-prev" onclick="lbStep(-1)">‹</div>
+  <img id="lbimg" src="">
+  <div class="lb-nav lb-next" onclick="lbStep(1)">›</div>
+</div>
 
-                <div class="card-future border border-pink-500/30 shadow-[0_0_40px_rgba(255,105,180,0.15)] interactive-element" data-aos="fade-up" data-aos-delay="500" data-tilt data-tilt-max="10" data-tilt-speed="400">
-                    <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1518895949257-7621c3c786d7?q=80&w=800&auto=format&fit=crop');"></div>
-                    <div class="card-overlay sonia-overlay"></div>
-                    <div class="card-content text-center">
-                        <div class="w-20 h-20 mx-auto bg-black/50 backdrop-blur-md rounded-full border-2 border-pink-400 flex items-center justify-center mb-6 shadow-[0_0_20px_var(--pink)]">
-                            <i class="fas fa-gem text-3xl text-pink-400 animate-pulse"></i>
-                        </div>
-                        <h3 class="text-3xl font-black text-white mb-2 tracking-wider text-shadow-lg">سونیا</h3>
-                        <div class="text-pink-400 text-sm tracking-widest uppercase mb-4">The Dream Princess</div>
-                        <p class="text-gray-300 text-sm leading-relaxed">فرشته‌ای زیبا با قلبی از طلا. دختری که جهان را با لبخندها و مهربانی‌اش تسخیر خواهد کرد.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="player">
+  <div class="info">
+    <div class="ttl" id="trackName">نور ماه بتهوون</div>
+    <div class="equalizer" id="visualizer">
+      <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+    </div>
+  </div>
+  <div class="row">
+    <button class="small" onclick="prevTrack()">⏮</button>
+    <button id="playBtn" onclick="toggleMusic()">▶</button>
+    <button class="small" onclick="nextTrack()">⏭</button>
+  </div>
+  <div class="bar" id="seekBar" onclick="seek(event)"><i id="seekFill"></i></div>
+</div>
+<audio id="audio" crossorigin="anonymous"></audio>
 
-    <section id="gallery" class="py-32 bg-black/80 relative border-t border-glassborder">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex justify-between items-end mb-16">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-black text-white" data-aos="fade-right">گالری خاطرات</h2>
-                    <p class="text-gray-400 mt-2" data-aos="fade-right" data-aos-delay="100">لحظاتی که در زمان منجمد شدند</p>
-                </div>
-                <div class="hidden md:flex gap-4" data-aos="fade-left">
-                    <button class="glass-btn px-4 py-2 rounded-full text-sm text-gold">همه</button>
-                    <button class="glass-btn px-4 py-2 rounded-full text-sm">عاشقانه</button>
-                    <button class="glass-btn px-4 py-2 rounded-full text-sm">سفرها</button>
-                </div>
-            </div>
+<button id="toTop" onclick="smoothTop()">↑</button>
 
-            <div class="masonry-grid" id="masonry-container">
-                <script>
-                    const images = [
-                        'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600',
-                        'https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=600',
-                        'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600',
-                        'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600',
-                        'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600',
-                        'https://images.unsplash.com/photo-1494774157365-9e04c6720e47?w=600'
-                    ];
-                    images.forEach((src, i) => {
-                        document.write(`
-                            <div class="gallery-item interactive-element" data-aos="fade-up" data-aos-delay="${i * 100}">
-                                <img src="${src}" alt="Memory ${i+1}" loading="lazy">
-                                <div class="gallery-overlay">
-                                    <div>
-                                        <div class="text-gold font-bold text-lg mb-1"><i class="fas fa-heart text-red-500 mr-2"></i>خاطره ${i+1}</div>
-                                        <p class="text-sm text-gray-300">ثبت شده در قلب ما برای همیشه.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        `);
-                    });
-                </script>
-            </div>
-        </div>
-    </section>
+<script>
+/* ====== متغیرهای پایه ====== */
+const LOVE_START = new Date("2023-09-06T00:00:00");
+window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('done'), 1500));
 
-    <section id="interactive" class="py-32 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                
-                <div class="glass-panel p-10 rounded-3xl" data-aos="fade-right">
-                    <h3 class="text-3xl font-bold mb-8 text-white flex items-center gap-3">
-                        <i class="fas fa-fire text-orange-500"></i> سنجش عشق
-                    </h3>
-                    <div class="relative w-full h-40 bg-black/50 rounded-2xl border border-glassborder overflow-hidden mb-8 flex justify-center items-center interactive-element" id="love-touch-zone">
-                        <div class="absolute inset-0 bg-gradient-to-r from-red-500/0 via-pink-500/20 to-red-500/0 opacity-0 transition-opacity duration-300" id="love-glow"></div>
-                        <div class="text-center z-10 pointer-events-none">
-                            <i class="fas fa-fingerprint text-4xl text-gray-500 mb-2" id="fingerprint-icon"></i>
-                            <p class="text-sm text-gray-400">برای سنجش حرارت عشق کلیک کنید و نگه دارید</p>
-                        </div>
-                        <div class="absolute bottom-0 left-0 h-2 bg-gradient-to-r from-red-600 to-gold w-0 transition-all duration-[3000ms] ease-out" id="love-progress"></div>
-                    </div>
-                    <div class="text-center hidden" id="love-result">
-                        <div class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-gold animate-pulse">1000%</div>
-                        <div class="text-gold mt-2 font-bold">عشق بی‌نهایت و فراتر از سنجش!</div>
-                    </div>
-                </div>
+/* ====== دروازه قصر ====== */
+const KEYS = ["niyayesh", "نیایش", "ملکه", "queen"];
+function enter(){
+  const v = document.getElementById('pass').value.trim().toLowerCase();
+  if(KEYS.includes(v) || v !== ""){ 
+    document.getElementById('gate').classList.add('hidden');
+    document.getElementById('nav').classList.add('show');
+    document.body.style.overflow = 'auto';
+    setTimeout(() => { document.getElementById('gate').style.display = 'none'; }, 2000);
+    loveBurst(); launchFirework(8);
+    if(audio.paused) setTimeout(() => { toggleMusic(); }, 1500);
+  } else {
+    document.getElementById('gerr').textContent = 'نام ملکه را به درستی وارد کن... 💔';
+    const card = document.querySelector('.gate-card');
+    card.style.animation = 'none'; card.offsetHeight; card.style.animation = 'shake 0.4s';
+  }
+}
+document.getElementById('pass').addEventListener('keydown', e => { if(e.key === 'Enter') enter() });
 
-                <div class="grid grid-cols-2 gap-6" id="stats-container">
-                    <div class="glass-panel p-6 rounded-3xl flex flex-col items-center justify-center text-center" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="stat-circle mb-4">
-                            <span class="text-4xl font-bold text-white stat-number" data-target="3650">0</span>
-                        </div>
-                        <div class="text-gold font-bold">روزهای عاشقی</div>
-                    </div>
-                    <div class="glass-panel p-6 rounded-3xl flex flex-col items-center justify-center text-center" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="stat-circle mb-4">
-                            <span class="text-4xl font-bold text-white stat-number" data-target="1000000">0</span>
-                        </div>
-                        <div class="text-pink-400 font-bold">ضربان قلب مشترک</div>
-                    </div>
-                    <div class="glass-panel p-6 rounded-3xl flex flex-col items-center justify-center text-center" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="stat-circle mb-4">
-                            <span class="text-4xl font-bold text-white stat-number" data-target="500">0</span>
-                        </div>
-                        <div class="text-blue-400 font-bold">خاطرات ثبت شده</div>
-                    </div>
-                    <div class="glass-panel p-6 rounded-3xl flex flex-col items-center justify-center text-center" data-aos="zoom-in" data-aos-delay="400">
-                        <div class="stat-circle mb-4">
-                            <i class="fas fa-infinity text-5xl text-white"></i>
-                        </div>
-                        <div class="text-purple-400 font-bold">درصد وفاداری</div>
-                    </div>
-                </div>
+/* ====== نشانگر موس پیشرفته و مغناطیسی ====== */
+const cDot = document.getElementById('cDot'), cRing = document.getElementById('cRing');
+let mx=0, my=0, rx=0, ry=0;
+addEventListener('pointermove', e => { mx=e.clientX; my=e.clientY; cDot.style.left=mx+'px'; cDot.style.top=my+'px'; });
+function ringLoop(){ rx+=(mx-rx)*0.2; ry+=(my-ry)*0.2; cRing.style.left=rx+'px'; cRing.style.top=ry+'px'; requestAnimationFrame(ringLoop); }
+ringLoop();
+document.addEventListener('pointerover', e => {
+  if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal')) cRing.classList.add('hot');
+  else cRing.classList.remove('hot');
+});
 
-            </div>
-        </div>
-    </section>
+document.querySelectorAll('.magnetic-btn').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width/2;
+    const y = e.clientY - rect.top - rect.height/2;
+    btn.style.transform = `translate(${x*0.2}px, ${y*0.2}px) scale(1.05)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = `translate(0px, 0px) scale(1)`;
+  });
+});
 
-    <section class="py-20 bg-gradient-to-b from-transparent to-[#050505] relative border-t border-glassborder">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <i class="fas fa-quote-right text-4xl text-glass border-glassborder mb-8 block"></i>
-            <div class="swiper-container quote-swiper overflow-hidden rounded-2xl glass-panel p-10 relative">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide text-2xl md:text-3xl font-light text-gray-200 leading-relaxed italic">
-                        "تو نه تنها عشق من، بلکه تمام وجود و دلیل نفس کشیدن منی، نیایش."
-                    </div>
-                    <div class="swiper-slide text-2xl md:text-3xl font-light text-gray-200 leading-relaxed italic">
-                        "هر روز که بیدار می‌شوم، خداوند را برای هدیه‌ای چون تو شکر می‌کنم."
-                    </div>
-                    <div class="swiper-slide text-2xl md:text-3xl font-light text-gray-200 leading-relaxed italic">
-                        "پادشاهی قلب من تا ابد به نام تو سند خورده است، ملکه من."
-                    </div>
-                </div>
-            </div>
+/* ====== پس‌زمینه سینمایی و شهاب‌سنگ‌ها ====== */
+const cv = document.getElementById('bgCanvas'), cx = cv.getContext('2d');
+let stars = [], meteors = [];
+function resizeBg(){ 
+  cv.width = innerWidth; cv.height = innerHeight;
+  stars = Array.from({length: 250}, () => ({
+    x: Math.random() * cv.width, y: Math.random() * cv.height,
+    r: Math.random() * 1.5 + 0.5, a: Math.random() * Math.PI * 2, s: Math.random() * 0.02 + 0.01,
+    color: Math.random() > 0.8 ? '#f6e3a1' : (Math.random() > 0.6 ? '#7b3fe4' : '#ffffff')
+  })); 
+}
+resizeBg(); addEventListener('resize', resizeBg);
 
-            <div class="mt-16 glass-panel p-6 rounded-full inline-flex items-center gap-6 shadow-[0_0_30px_rgba(212,175,55,0.1)]" data-aos="fade-up">
-                <div class="visualizer">
-                    <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                </div>
-                <div class="flex flex-col items-start w-48">
-                    <div class="text-sm font-bold text-white mb-1">Eternal Love Symphony</div>
-                    <div class="text-xs text-gold">Niayesh Edition</div>
-                    <div class="progress-bar mt-2 w-full" id="music-progress-bar">
-                        <div class="progress-fill" id="music-progress-fill"></div>
-                    </div>
-                </div>
-                <button id="player-play-btn" class="w-12 h-12 bg-gold text-black rounded-full flex items-center justify-center hover:scale-110 transition-transform interactive-element shadow-[0_0_15px_var(--gold)]">
-                    <i class="fas fa-play"></i>
-                </button>
-            </div>
-        </div>
-    </section>
+function spawnMeteor() {
+  if(Math.random() > 0.95 && meteors.length < 3) {
+    meteors.push({
+      x: Math.random() * cv.width, y: -50,
+      vx: (Math.random() - 0.5) * 5 - 2, vy: Math.random() * 5 + 5,
+      life: 1, length: Math.random() * 100 + 50
+    });
+  }
+}
 
-    <footer id="footer" class="relative pt-32 pb-10 overflow-hidden bg-[#020202]">
-        <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0]">
-            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[60px]">
-                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-[#050505]"></path>
-            </svg>
-        </div>
+function drawBg(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  
+  // Stars
+  stars.forEach(s => {
+    s.a += s.s; let o = 0.2 + Math.abs(Math.sin(s.a)) * 0.8;
+    cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    cx.fillStyle = s.color; cx.globalAlpha = o; cx.fill();
+    if(o > 0.9) { cx.shadowBlur = 10; cx.shadowColor = s.color; cx.fill(); cx.shadowBlur = 0; }
+  });
+  
+  // Meteors
+  spawnMeteor();
+  meteors.forEach((m, i) => {
+    m.x += m.vx; m.y += m.vy; m.life -= 0.02;
+    if(m.life <= 0 || m.y > cv.height) { meteors.splice(i, 1); return; }
+    cx.beginPath(); cx.moveTo(m.x, m.y); cx.lineTo(m.x - m.vx * 10, m.y - m.vy * 10);
+    cx.strokeStyle = `rgba(255, 255, 255, ${m.life})`; cx.lineWidth = 2; cx.stroke();
+  });
+  
+  cx.globalAlpha = 1;
+  requestAnimationFrame(drawBg);
+}
+drawBg();
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-            <h2 class="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-gold to-white mb-6">NIAYESH VIP PROJECT</h2>
-            <p class="text-gray-400 max-w-2xl mb-10 leading-relaxed text-sm">
-                طراحی شده با عشق بی‌نهایت و بالاترین سطح تکنولوژی برای خلق یک تجربه سینمایی و سلطنتی. این صفحه نه تنها یک کد، بلکه تجلی احساسات است.
-            </p>
-            
-            <div class="flex gap-6 mb-12">
-                <a href="#" class="w-12 h-12 glass-panel rounded-full flex items-center justify-center hover:text-gold hover:border-gold transition-colors interactive-element"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="w-12 h-12 glass-panel rounded-full flex items-center justify-center hover:text-blue-400 hover:border-blue-400 transition-colors interactive-element"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="w-12 h-12 glass-panel rounded-full flex items-center justify-center hover:text-red-500 hover:border-red-500 transition-colors interactive-element"><i class="fas fa-heart"></i></a>
-            </div>
+/* ====== ذرات معلق محیطی (Floating Symbols) ====== */
+const symbols = ['👑', '✨', '💫', '💖', '🏰', '🌹'];
+setInterval(() => {
+  if(!document.getElementById('gate').classList.contains('hidden')) return;
+  const s = document.createElement('div'); s.className = 'floating-symbol';
+  s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+  s.style.left = Math.random() * 100 + 'vw';
+  s.style.fontSize = (15 + Math.random() * 20) + 'px';
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 20000);
+}, 1500);
 
-            <div class="w-full border-t border-glassborder pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-500">
-                <div>&copy; 2026 Eternal Love Project. All rights reserved.</div>
-                <div class="mt-4 md:mt-0 font-mono tracking-widest flex items-center gap-2">
-                    CODED WITH <i class="fas fa-heart text-red-500 animate-pulse"></i> FOR NIAYESH
-                </div>
-            </div>
-        </div>
-    </footer>
+/* ====== بارش عشق و آتش‌بازی ====== */
+function loveBurst(){
+  for(let i=0; i<50; i++){
+    const h = document.createElement('div'); h.className = 'petal';
+    h.textContent = ['💖', '💛', '❤️', '💕', '🌹', '✨'][Math.floor(Math.random()*6)];
+    h.style.left = Math.random() * 100 + 'vw'; 
+    h.style.top = (Math.random() * 30) + 'vh';
+    h.style.fontSize = (15 + Math.random() * 30) + 'px';
+    h.style.animationDuration = (4 + Math.random() * 5) + 's';
+    document.body.appendChild(h); setTimeout(() => h.remove(), 9000);
+  }
+}
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+function launchFirework(n=3){
+  // Using background canvas for performance
+  for(let k=0; k<n; k++){
+    const x = Math.random() * cv.width, y = cv.height * 0.2 + Math.random() * cv.height * 0.4;
+    const hue = [45, 330, 280, 190][Math.floor(Math.random()*4)];
+    for(let i=0; i<80; i++){
+      const a = (Math.PI*2*i)/80, sp = 3 + Math.random()*8;
+      meteors.push({ x, y, vx: Math.cos(a)*sp, vy: Math.sin(a)*sp, life: 1, isSpark: true, c: `hsl(${hue}, 100%, ${60+Math.random()*30}%)` });
+    }
+  }
+}
+// Update meteor logic to handle sparks
+const origDraw = drawBg;
+drawBg = function() {
+  cx.clearRect(0,0,cv.width,cv.height);
+  stars.forEach(s => {
+    s.a += s.s; let o = 0.2 + Math.abs(Math.sin(s.a)) * 0.8;
+    cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, Math.PI*2); cx.fillStyle = s.color; cx.globalAlpha = o; cx.fill();
+  });
+  spawnMeteor();
+  meteors.forEach((m, i) => {
+    if(m.isSpark) {
+      m.x += m.vx; m.y += m.vy; m.vy += 0.1; m.vx *= 0.96; m.life -= 0.015;
+      if(m.life <= 0) { meteors.splice(i, 1); return; }
+      cx.globalAlpha = m.life; cx.beginPath(); cx.arc(m.x, m.y, 2.5, 0, Math.PI*2); cx.fillStyle = m.c; cx.fill();
+    } else {
+      m.x += m.vx; m.y += m.vy; m.life -= 0.02;
+      if(m.life <= 0 || m.y > cv.height) { meteors.splice(i, 1); return; }
+      cx.globalAlpha = m.life; cx.beginPath(); cx.moveTo(m.x, m.y); cx.lineTo(m.x - m.vx * 10, m.y - m.vy * 10); cx.strokeStyle = '#fff'; cx.lineWidth = 2; cx.stroke();
+    }
+  });
+  cx.globalAlpha = 1; requestAnimationFrame(drawBg);
+};
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 1. Loading Screen Logic ---
-            setTimeout(() => {
-                const loader = document.getElementById('loader');
-                loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 1500);
-            }, 2500);
+/* ====== بال فرشته ====== */
+function buildWing(el, dir){
+  const n=20; 
+  for(let i=0; i<n; i++){
+    const f = document.createElement('div'); f.className = 'feather';
+    const t = i/(n-1); 
+    f.style.height = (40 + Math.sin(t*Math.PI)*110) + 'px';
+    f.style.transform = `rotate(${dir*(10 + t*140)}deg)`; 
+    el.appendChild(f);
+  }
+}
+buildWing(document.getElementById('wingL'), -1); buildWing(document.getElementById('wingR'), 1);
 
-            // --- 2. Smooth Scrolling (Lenis) ---
-            const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), direction: 'vertical', gestureDirection: 'vertical', smooth: true, mouseMultiplier: 1, smoothTouch: false, touchMultiplier: 2, infinite: false });
-            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-            requestAnimationFrame(raf);
+/* ====== 3D Hover Effect (Tilt) ====== */
+document.querySelectorAll('[data-tilt]').forEach(el => {
+  el.addEventListener('mousemove', e => {
+    const rect = el.getBoundingClientRect();
+    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+    const xc = rect.width/2; const yc = rect.height/2;
+    const dx = (x - xc) / xc; const dy = (y - yc) / yc;
+    const intensity = el.classList.contains('angel-container') ? 15 : (el.classList.contains('letter') ? 5 : 10);
+    el.style.transform = `perspective(1200px) rotateY(${dx * intensity}deg) rotateX(${-dy * intensity}deg) scale3d(1.02, 1.02, 1.02)`;
+  });
+  el.addEventListener('mouseleave', () => {
+    el.style.transform = `perspective(1200px) rotateY(0deg) rotateX(0deg) scale3d(1, 1, 1)`;
+  });
+});
 
-            // --- 3. Custom Cursor & Hover Effects ---
-            const cursorDot = document.getElementById('cursor-dot');
-            const cursorOutline = document.getElementById('cursor-outline');
-            window.addEventListener('mousemove', (e) => {
-                const posX = e.clientX; const posY = e.clientY;
-                cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
-                cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
-                
-                // Particle trail effect
-                if(Math.random() > 0.8) createCursorParticle(posX, posY);
-            });
-            
-            document.querySelectorAll('.interactive-element, a, button').forEach(el => {
-                el.addEventListener('mouseenter', () => { cursorOutline.classList.add('cursor-hover'); cursorDot.style.transform = 'translate(-50%, -50%) scale(1.5)'; });
-                el.addEventListener('mouseleave', () => { cursorOutline.classList.remove('cursor-hover'); cursorDot.style.transform = 'translate(-50%, -50%) scale(1)'; });
-            });
+/* ====== ذرات شاهزاده‌ها ====== */
+function createCardParticles(parentId, symbol, color) {
+  const box = document.getElementById(parentId);
+  if(!box) return;
+  setInterval(() => {
+    const p = document.createElement('div');
+    p.className = 'card-particle'; p.textContent = symbol;
+    p.style.left = (Math.random() * 80 + 10) + '%';
+    p.style.color = color; p.style.textShadow = `0 0 10px ${color}`;
+    p.style.animationDuration = (2 + Math.random() * 2) + 's';
+    box.appendChild(p);
+    setTimeout(() => p.remove(), 4000);
+  }, 400);
+}
+createCardParticles('particles-sam', '⚡', 'var(--neon-blue)');
+createCardParticles('particles-sonia', '🦋', 'var(--royal-pink)');
 
-            function createCursorParticle(x, y) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                const size = Math.random() * 4 + 2;
-                particle.style.width = `${size}px`; particle.style.height = `${size}px`;
-                particle.style.background = `rgba(212, 175, 55, ${Math.random()})`;
-                particle.style.left = `${x}px`; particle.style.top = `${y}px`;
-                document.body.appendChild(particle);
-                
-                gsap.to(particle, {
-                    y: y + (Math.random() * 50 - 25), x: x + (Math.random() * 50 - 25),
-                    opacity: 0, duration: 1 + Math.random(),
-                    onComplete: () => particle.remove()
-                });
-            }
+/* ====== روزهای سلطنت ====== */
+function calcWiriperDays() {
+  const diff = Date.now() - LOVE_START.getTime();
+  document.getElementById('wDays').textContent = Math.floor(diff / 864e5);
+}
+calcWiriperDays();
 
-            // --- 4. Canvas Background (Galaxy & Stars) ---
-            const canvas = document.getElementById('bg-canvas');
-            const ctx = canvas.getContext('2d');
-            let w, h, stars = [];
-            
-            function initCanvas() {
-                w = canvas.width = window.innerWidth;
-                h = canvas.height = window.innerHeight;
-                stars = [];
-                for(let i=0; i<300; i++) {
-                    stars.push({
-                        x: Math.random() * w, y: Math.random() * h,
-                        r: Math.random() * 1.5,
-                        vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2,
-                        glow: Math.random() > 0.9 ? true : false
-                    });
-                }
-            }
-            window.addEventListener('resize', initCanvas);
-            initCanvas();
+/* ====== شمارش معکوس سینمایی ====== */
+function nextBirthday(m,d){
+  const now = new Date(); let y = now.getFullYear();
+  let next = new Date(y, m-1, d);
+  if(next < new Date(now.getFullYear(), now.getMonth(), now.getDate())) next = new Date(y+1, m-1, d);
+  return next;
+}
+function renderCD(elId, todayId, m, d){
+  const el = document.getElementById(elId), tEl = document.getElementById(todayId);
+  let lastSec = -1;
+  function tick(){
+    const now = new Date();
+    if(now.getMonth() === m-1 && now.getDate() === d){ el.style.display='none'; tEl.style.display='block'; return; }
+    el.style.display='flex'; tEl.style.display='none';
+    const diff = nextBirthday(m,d) - now;
+    const days = Math.floor(diff/864e5), hrs = Math.floor(diff/36e5)%24, min = Math.floor(diff/6e4)%60, sec = Math.floor(diff/1e3)%60;
+    
+    // Update DOM only if changed
+    if(sec !== lastSec) {
+      el.innerHTML = `
+        <div class="cd-box"><span>${days}</span><small>روز</small></div>
+        <div class="cd-box"><span>${hrs}</span><small>ساعت</small></div>
+        <div class="cd-box"><span>${min}</span><small>دقیقه</small></div>
+        <div class="cd-box"><span class="pulse">${sec}</span><small>ثانیه</small></div>`;
+      setTimeout(()=>{ const s = el.querySelector('.pulse'); if(s) s.classList.remove('pulse'); }, 300);
+      lastSec = sec;
+    }
+  }
+  tick(); setInterval(tick, 1000);
+}
+renderCD('cd-mobin', 'today-mobin', 3, 15);
+renderCD('cd-niyayesh', 'today-niyayesh', 9, 6);
 
-            function drawCanvas() {
-                ctx.clearRect(0, 0, w, h);
-                stars.forEach(s => {
-                    ctx.beginPath();
-                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-                    ctx.fillStyle = s.glow ? '#d4af37' : '#ffffff';
-                    if(s.glow) { ctx.shadowBlur = 10; ctx.shadowColor = '#d4af37'; } else { ctx.shadowBlur = 0; }
-                    ctx.fill();
-                    s.x += s.vx; s.y += s.vy;
-                    if(s.x < 0 || s.x > w) s.vx = -s.vx;
-                    if(s.y < 0 || s.y > h) s.vy = -s.vy;
-                });
-                
-                // Shooting star logic
-                if(Math.random() > 0.98) {
-                    const sx = Math.random() * w; const sy = 0;
-                    ctx.beginPath();
-                    ctx.moveTo(sx, sy); ctx.lineTo(sx - 50, sy + 50);
-                    ctx.strokeStyle = 'rgba(255,255,255,0.8)'; ctx.lineWidth = 1;
-                    ctx.stroke();
-                }
-                requestAnimationFrame(drawCanvas);
-            }
-            drawCanvas();
+/* ====== تایم‌لاین ====== */
+const timeline = [
+  {when: 'آغاز تمدن', title: 'تولد یک امپراتوری', text: 'روزی که نگاهمان گره خورد و سنگ بنای جهان Wiriper گذاشته شد.'},
+  {when: 'فصل طلایی', title: 'تاج‌گذاری ملکه', text: 'نیایش بر تخت قلب من نشست و نور را به این قلمرو تاریک آورد.'},
+  {when: 'سوگند ابدی', title: 'عهد پادشاه', text: 'قسم خوردم تا واپسین نفس، سپر بلا و نگهبان خنده‌های زیبایش باشم.'},
+  {when: 'تا بی‌نهایت', title: 'آینده‌ی روشن', text: 'هر روز که می‌گذرد، تمدن ما وسیع‌تر و عشقمان دست‌نیافتنی‌تر می‌شود.'}
+];
+(function(){
+  const box = document.getElementById('timelineBox');
+  timeline.forEach(t => {
+    const it = document.createElement('div'); it.className = 'tl-item reveal';
+    it.innerHTML = `<div class="dot"></div><div class="tl-card"><span class="when">${t.when}</span><h4>${t.title}</h4><p>${t.text}</p></div>`;
+    box.appendChild(it);
+  });
+})();
 
-            // --- 5. Typed.js Initialization ---
-            new Typed('#typed-text', {
-                strings: ['فراتر از یک عشق...', 'یک پادشاهی ابدی...', 'تپش قلب من...', 'آرامش جانم، نیایش...'],
-                typeSpeed: 60, backSpeed: 40, backDelay: 2000, loop: true, showCursor: true, cursorChar: '|'
-            });
+/* ====== زیرعنوان تایپ‌شونده ======= */
+const subs = ["EMPIRE OF WIRIPER", "سرزمینی فراتر از زمان", "پادشاه مبین ♾️ ملکه نیایش", "عشقی به وسعت یک تمدن"];
+let si=0, ci=0, del=false; const subEl = document.getElementById('heroSub');
+function typeSub(){
+  const cur = subs[si]; subEl.textContent = del ? cur.slice(0, --ci) : cur.slice(0, ++ci);
+  if(!del && ci === cur.length){ del=true; setTimeout(typeSub, 2000); return; }
+  if(del && ci === 0){ del=false; si=(si+1)%subs.length; }
+  setTimeout(typeSub, del ? 30 : 80);
+}
+typeSub();
 
-            // --- 6. Live Clock & Date ---
-            function updateClock() {
-                const now = new Date();
-                document.getElementById('live-time').innerText = now.toLocaleTimeString('fa-IR');
-                document.getElementById('live-date').innerText = new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: 'long', day: 'numeric' }).format(now);
-            }
-            setInterval(updateClock, 1000); updateClock();
+/* ====== فرمان همایونی ====== */
+const letterStr = "ملکه‌ی بی‌همتای من، نیایش عزیز...\n\nوقتی به وسعت قلمرو Wiriper نگاه می‌کنم، می‌بینم که تمام این شکوه، تمام این ستارگان و تمام این زیبایی‌ها، تنها بازتابی از وجود توست. پیش از تو، من تنها پادشاهی بودم در سرزمینی خاموش؛ اما تو با آمدنت، خورشید را به آسمان این تمدن هدیه دادی.\n\nمن، مبین، در برابر تمام کائنات سوگند یاد می‌کنم که قلعه‌ی بازوانم تا ابد امن‌ترین جای جهان برای تو باشد. هیچ توفانی نمی‌تواند دیوارهای عشق ما را بلرزاند.\n\nتو نه تنها عشق من، بلکه تمام وجود منی.\nدوستت دارم، بی‌نهایت، بی‌دلیل، و تا آخرین تپش قلبم.";
+const lEl = document.getElementById('letterText'); let li=0, letterStarted=false;
+function typeLetter(){
+  if(li <= letterStr.length){
+    lEl.innerHTML = letterStr.slice(0, li).replace(/\n/g, '<br>') + '<span class="cursor">&nbsp;</span>';
+    li++; setTimeout(typeLetter, 40); 
+  } else {
+    lEl.innerHTML = letterStr.replace(/\n/g, '<br>');
+  }
+}
 
-            // --- 7. Advanced Countdown ---
-            // Target: 100 years from now (symbolic)
-            const targetDate = new Date(); targetDate.setFullYear(targetDate.getFullYear() + 100);
-            
-            function updateCountdown() {
-                const now = new Date();
-                const diff = targetDate - now;
-                
-                if (diff > 0) {
-                    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                    const m = Math.floor((diff / 1000 / 60) % 60);
-                    const s = Math.floor((diff / 1000) % 60);
-                    const ms = Math.floor(diff % 1000);
+/* ====== گالری و لایت‌باکس ====== */
+const imgs = [...document.querySelectorAll('#galleryGrid img')].map(i => i.src); let lbIndex=0;
+function lb(i){ lbIndex=i; document.getElementById('lbimg').src=imgs[i]; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeLb(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow='auto'; }
+function lbStep(d){ lbIndex = (lbIndex + d + imgs.length) % imgs.length; document.getElementById('lbimg').src = imgs[lbIndex]; }
+document.getElementById('lightbox').addEventListener('click', e => { if(e.target.id === 'lightbox') closeLb(); });
+addEventListener('keydown', e => {
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key === 'Escape') closeLb(); if(e.key === 'ArrowLeft') lbStep(1); if(e.key === 'ArrowRight') lbStep(-1);
+});
 
-                    document.getElementById('cd-days').innerText = String(d).padStart(3, '0');
-                    document.getElementById('cd-hours').innerText = String(h).padStart(2, '0');
-                    document.getElementById('cd-minutes').innerText = String(m).padStart(2, '0');
-                    document.getElementById('cd-seconds').innerText = String(s).padStart(2, '0');
-                    document.getElementById('cd-ms').innerText = String(ms).padStart(3, '0');
-                }
-                requestAnimationFrame(updateCountdown);
-            }
-            requestAnimationFrame(updateCountdown);
+/* ====== موسیقی سلطنتی ====== */
+const tracks = [
+  { name: 'نور ماه بتهوون - آرامش مطلق', src: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Beethoven_Moonlight_1st_movement.ogg' },
+  { name: 'نوکتورن شوپن - عاشقانه', src: 'https://upload.wikimedia.org/wikipedia/commons/e/e1/Chopin_-_Nocturne_Op_9_No_2_E_Flat_Major.ogg' },
+  { name: 'کلر دو لون - رویای شب', src: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Debussy_-_Clair_de_Lune.ogg' }
+];
+let tIdx = 0;
+const visualizer = document.getElementById('visualizer');
+function loadTrack(){ audio.src = tracks[tIdx].src; document.getElementById('trackName').textContent = tracks[tIdx].name; }
+function toggleMusic(){
+  if(audio.paused){ audio.play().catch(e=>console.log('لطفا کلیک کنید')); document.getElementById('playBtn').innerHTML = '<b>||</b>'; visualizer.classList.add('playing'); }
+  else { audio.pause(); document.getElementById('playBtn').textContent = '▶'; visualizer.classList.remove('playing'); }
+}
+function nextTrack(){ tIdx = (tIdx+1)%tracks.length; loadTrack(); if(!audio.paused) audio.play(); }
+function prevTrack(){ tIdx = (tIdx-1+tracks.length)%tracks.length; loadTrack(); if(!audio.paused) audio.play(); }
+audio.addEventListener('ended', nextTrack);
+audio.addEventListener('timeupdate', () => {
+  const p = audio.duration ? (audio.currentTime/audio.duration)*100 : 0;
+  document.getElementById('seekFill').style.width = p+'%';
+});
+function seek(e){
+  if(!audio.duration) return; const b = e.currentTarget.getBoundingClientRect();
+  const ratio = (e.clientX - b.left) / b.width; audio.currentTime = ratio * audio.duration;
+}
+loadTrack(); audio.volume = 0.5;
 
-            // --- 8. Audio Player Logic ---
-            const audio = document.getElementById('bg-music');
-            const playBtns = [document.getElementById('music-toggle'), document.getElementById('player-play-btn')];
-            let isPlaying = false;
-            
-            playBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    if(isPlaying) { audio.pause(); playBtns.forEach(b => b.innerHTML = '<i class="fas fa-play"></i>'); }
-                    else { audio.play().catch(e => console.log("Audio play blocked", e)); playBtns.forEach(b => b.innerHTML = '<i class="fas fa-pause text-gold"></i>'); }
-                    isPlaying = !isPlaying;
-                });
-            });
+/* ====== انیمیشن‌های Scroll Reveal و Timeline ====== */
+const io = new IntersectionObserver(es => {
+  es.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      if(e.target.classList.contains('tl-item')) e.target.classList.add('active');
+      if(e.target.closest('#letter') && !letterStarted){ letterStarted=true; setTimeout(typeLetter, 600); }
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
 
-            // Fake Progress Bar update
-            setInterval(() => {
-                if(isPlaying) {
-                    const fill = document.getElementById('music-progress-fill');
-                    let w = parseFloat(fill.style.width || 0);
-                    w = w >= 100 ? 0 : w + 0.5;
-                    fill.style.width = w + '%';
-                }
-            }, 1000);
+/* ====== ناوبری نرم ====== */
+function sm(id){ const el = document.querySelector(id); if(el) window.scrollTo({ top: el.offsetTop - 100, behavior: 'smooth' }); }
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', e => { e.preventDefault(); sm(a.getAttribute('href')); document.getElementById('navlinks').classList.remove('open'); });
+});
+function smoothTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-            // --- 9. GSAP Animations & Counters ---
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Scroll Progress Bar
-            window.addEventListener('scroll', () => {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById('scroll-progress').style.width = scrolled + '%';
-            });
+/* ====== Scroll Events ====== */
+let ticking = false;
+addEventListener('scroll', () => {
+  if(!ticking) {
+    requestAnimationFrame(() => {
+      const top = window.scrollY;
+      const h = document.body.scrollHeight - innerHeight;
+      document.getElementById('progress').style.width = (top / h * 100) + '%';
+      document.getElementById('toTop').classList.toggle('show', top > 800);
+      
+      // Timeline Line Fill
+      const tl = document.getElementById('timelineBox');
+      if(tl) {
+        const tlRect = tl.getBoundingClientRect();
+        if(tlRect.top < innerHeight/2 && tlRect.bottom > 0) {
+          const fillPercent = Math.min(100, Math.max(0, ((innerHeight/2 - tlRect.top) / tlRect.height) * 100));
+          document.getElementById('tlFill').style.height = fillPercent + '%';
+        }
+      }
 
-            // Stats Counter Animation
-            const statNumbers = document.querySelectorAll('.stat-number');
-            let played = false;
-            ScrollTrigger.create({
-                trigger: "#stats-container",
-                start: "top 80%",
-                onEnter: () => {
-                    if(played) return; played = true;
-                    statNumbers.forEach(num => {
-                        const target = parseInt(num.getAttribute('data-target'));
-                        gsap.to(num, {
-                            innerHTML: target,
-                            duration: 3,
-                            ease: "power2.out",
-                            snap: { innerHTML: 1 },
-                            onUpdate: function() { num.innerHTML = Math.round(this.targets()[0].innerHTML).toLocaleString('fa-IR'); }
-                        });
-                    });
-                }
-            });
-
-            // --- 10. Interactive Love Meter ---
-            const loveZone = document.getElementById('love-touch-zone');
-            const loveGlow = document.getElementById('love-glow');
-            const loveProgress = document.getElementById('love-progress');
-            const loveResult = document.getElementById('love-result');
-            const fingerprintIcon = document.getElementById('fingerprint-icon');
-            let holdTimer;
-            
-            loveZone.addEventListener('mousedown', startLoveTest);
-            loveZone.addEventListener('touchstart', startLoveTest, {passive: true});
-            loveZone.addEventListener('mouseup', cancelLoveTest);
-            loveZone.addEventListener('mouseleave', cancelLoveTest);
-            loveZone.addEventListener('touchend', cancelLoveTest);
-
-            function startLoveTest() {
-                fingerprintIcon.classList.add('text-gold', 'animate-pulse');
-                loveGlow.style.opacity = '1';
-                loveProgress.style.width = '100%';
-                
-                holdTimer = setTimeout(() => {
-                    loveZone.style.display = 'none';
-                    loveResult.classList.remove('hidden');
-                    // Confetti explosion
-                    for(let i=0; i<50; i++) createCursorParticle(window.innerWidth/2, window.innerHeight/2);
-                }, 3000); // 3 seconds hold
-            }
-
-            function cancelLoveTest() {
-                clearTimeout(holdTimer);
-                fingerprintIcon.classList.remove('text-gold', 'animate-pulse');
-                loveGlow.style.opacity = '0';
-                loveProgress.style.width = '0%';
-            }
-
-            // --- 11. Libraries Init ---
-            AOS.init({ duration: 1000, once: true, offset: 100 });
-            
-            new Swiper('.quote-swiper', {
-                loop: true, autoplay: { delay: 4000, disableOnInteraction: false },
-                effect: 'fade', fadeEffect: { crossFade: true }
-            });
-
-            VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
-                max: 15, speed: 400, glare: true, "max-glare": 0.2
-            });
-
-            // --- 12. Dynamic PWA Service Worker Injection (Single File Requirement) ---
-            const swCode = `
-                self.addEventListener('install', e => {
-                    e.waitUntil(caches.open('niayesh-v1').then(cache => cache.addAll(['/'])));
-                });
-                self.addEventListener('fetch', e => {
-                    e.respondWith(caches.match(e.request).then(res => res || fetch(e.request)));
-                });
-            `;
-            const blob = new Blob([swCode], {type: 'application/javascript'});
-            const swUrl = URL.createObjectURL(blob);
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register(swUrl).then(() => console.log('PWA Ready')).catch(err => console.log('SW Registration failed', err));
-            }
-
-            // Generate Manifest dynamically
-            const manifest = {
-                name: "Niayesh VIP Project", short_name: "Niayesh",
-                start_url: ".", display: "standalone", background_color: "#050505", theme_color: "#050505",
-                icons: [{"src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23d4af37'/%3E%3C/svg%3E", "sizes": "192x192", "type": "image/svg+xml"}]
-            };
-            const manifestBlob = new Blob([JSON.stringify(manifest)], {type: 'application/json'});
-            document.getElementById('manifest-link').href = URL.createObjectURL(manifestBlob);
-        });
-    </script>
+      let cur = '';
+      document.querySelectorAll('section').forEach(s => { if(top >= s.offsetTop - 200) cur = s.id; });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.classList.remove('active');
+        if(a.getAttribute('href') === '#' + cur) a.classList.add('active');
+      });
+      ticking = false;
+    });
+    ticking = true;
+  }
+});
+</script>
 </body>
 </html>
