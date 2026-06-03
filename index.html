@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Wiriper Empire">
+<meta name="mobile-web-app-capable" content="yes">
 <title>امپراتوری جاودانه | مبین و نیایش</title>
 
 <link rel="apple-touch-icon" href="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg">
@@ -14,9 +15,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
 <style>
-/* === متغیرهای سلطنتی و پایه === */
+/* === متغیرهای تم سلطنتی و سینمایی === */
 :root {
   --bg: #050308;
   --bg2: #120a24;
@@ -28,53 +30,56 @@
   --purple-soft: #9d6bff; 
   --purple-deep: #431c87;
   --rose: #ff8fb1;
-  --neon-blue: #00f3ff;
-  --royal-pink: #ff66b2;
   --text: #f3ecdf; 
   --muted: #b9aecb;
-  --danger: #ff6b6b;
-  --success: #4caf78;
   --glass: rgba(20, 10, 40, 0.45); 
-  --glass-strong: rgba(15, 8, 30, 0.85);
+  --glass-strong: rgba(15, 8, 30, 0.88);
   --border: rgba(232, 198, 107, 0.3);
   --shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
-  --z-canvas: 0; --z-ambient: 1; --z-content: 10; --z-ui: 1000; --z-modal: 100000;
+  --glow: 0 0 35px rgba(232, 198, 107, 0.25);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; background: var(--bg); min-height: 100%; overflow-x: hidden; }
-
 body {
-  font-family: 'Vazirmatn', sans-serif;
+  font-family: 'Vazirmatn', 'Tahoma', sans-serif;
   color: var(--text);
   min-height: 100vh;
   overflow-x: hidden;
   background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
   position: relative;
 }
 
 #app-wrapper { overflow: hidden; width: 100%; position: relative; min-height: 100vh; }
 
-/* === اسکرول‌بار سفارشی === */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--gold-deep); border-radius: 4px; }
+/* بهینه‌سازی تاچ و نرخ نوسازی بالا برای آیفون */
+@media(pointer: coarse) { 
+  .cursor-dot, .cursor-ring { display: none !important; } 
+  .card, .gate-card, .wiriper-card, .artifact-card { transform: none !important; transition: border-color 0.4s ease !important; }
+}
 
 h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
-::selection { background: var(--gold); color: #000; }
-a, button { outline: none; border: none; cursor: pointer; background: none; font-family: inherit; }
+.lalezar { font-family: 'Lalezar', cursive; }
 
-/* === افکت‌های پس‌زمینه سینمایی === */
+/* کورسر اختصاصی دسکتاپ */
+.cursor-dot { position: fixed; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-2); z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 20px 4px var(--gold); }
+.cursor-ring { position: fixed; width: 45px; height: 45px; border-radius: 50%; border: 1.5px solid rgba(232, 198, 107, 0.5); z-index: 9998; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s; }
+
+/* پارتیکلها و جلوه‌های پس‌زمینه */
 #progress { position: fixed; top: 0; right: 0; left: 0; height: 4px; z-index: 9990; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), var(--purple)); transform: scaleX(0); transform-origin: right; box-shadow: 0 0 15px var(--gold-2); will-change: transform; }
-canvas.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-canvas); }
-.royal-dust { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-ambient); background-image: radial-gradient(circle, rgba(232,198,107,0.15) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.3; }
-.ambient-fog { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 20%, var(--bg) 100%); opacity: 0.6; pointer-events: none; z-index: var(--z-ambient); }
+canvas.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.royal-dust { position: fixed; inset: 0; pointer-events: none; z-index: 1; background-image: radial-gradient(circle, rgba(232,198,107,0.1) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.3; }
+.ambient-fog { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 20%, var(--bg) 100%); opacity: 0.6; pointer-events: none; z-index: 1; }
 
-.petal { position: fixed; top: -30px; z-index: var(--z-ui); pointer-events: none; animation: fall linear forwards; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4)); }
+.floating-symbol { position: fixed; color: rgba(232,198,107,0.15); font-family: 'Cinzel'; pointer-events: none; animation: floatUpward 20s linear forwards; z-index: 1; text-shadow: 0 0 20px rgba(232,198,107,0.4); }
+@keyframes floatUpward { 0% { transform: translate3d(0, 100vh, 0) rotate(0deg) scale(0.8); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translate3d(0, -20vh, 0) rotate(360deg) scale(1.2); opacity: 0; } }
+
+.petal { position: fixed; top: -30px; z-index: 1000; pointer-events: none; animation: fall linear forwards; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4)); }
 @keyframes fall { to { transform: translate3d(0, 105vh, 0) rotate(720deg); opacity: 0; } }
 
-/* === لودینگ === */
-#loader { position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease; transform-origin: top; }
+/* === لودینگ سلطنتی === */
+#loader { position: fixed; inset: 0; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease; }
 #loader.done { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 .loader-crown { font-size: 90px; filter: drop-shadow(0 0 20px var(--gold)); animation: floatCrown 3s ease-in-out infinite; }
 @keyframes floatCrown { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-20px) scale(1.1); } }
@@ -83,228 +88,271 @@ canvas.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: var(
 .loader-bar i { position: absolute; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, transparent, var(--gold-2), #fff); animation: loadBar 2s cubic-bezier(0.4, 0, 0.2, 1) forwards; box-shadow: 0 0 20px var(--gold); }
 @keyframes loadBar { to { transform: scaleX(1); } }
 
-/* === دروازه قصر === */
-#gate { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; background: rgba(5,3,8,1); transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1), visibility 1.5s; padding: 20px; overflow: hidden; }
+/* === دروازه باشکوه ورود === */
+#gate { position: fixed; inset: 0; z-index: 9000; display: flex; align-items: center; justify-content: center; background: #050308; transition: opacity 1.5s cubic-bezier(0.8, 0, 0.2, 1), visibility 1.5s; padding: 20px; }
 #gate::before, #gate::after { content: ''; position: absolute; top: 0; bottom: 0; width: 50vw; background: linear-gradient(to right, var(--bg) 0%, var(--bg2) 100%); z-index: 0; transition: transform 2s cubic-bezier(0.7, 0, 0.1, 1); box-shadow: inset 0 0 100px rgba(0,0,0,0.9); }
-#gate::before { left: 0; border-right: 2px solid var(--gold); border-image: linear-gradient(to bottom, transparent, var(--gold), transparent) 1; }
-#gate::after { right: 0; border-left: 2px solid var(--gold); border-image: linear-gradient(to bottom, transparent, var(--gold), transparent) 1; }
+#gate::before { left: 0; border-right: 2px solid var(--gold); }
+#gate::after { right: 0; border-left: 2px solid var(--gold); }
 #gate.hidden::before { transform: translateX(-100%); }
 #gate.hidden::after { transform: translateX(100%); }
 #gate.hidden .gate-card { transform: scale(1.1) translateY(-30px); opacity: 0; filter: blur(5px); }
 
-.gate-card { width: min(480px, 92vw); background: var(--glass-strong); backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 40px; padding: 60px 40px; text-align: center; box-shadow: var(--shadow); position: relative; z-index: 1; transition: all 1s ease; }
+.gate-card { width: min(480px, 92vw); background: var(--glass-strong); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid var(--border); border-radius: 40px; padding: 60px 40px; text-align: center; box-shadow: var(--shadow); position: relative; z-index: 1; transition: all 1s ease; }
 .gate-card .crown { font-size: 70px; filter: drop-shadow(0 0 20px var(--gold)); margin-bottom: 15px; animation: pulseCrown 2s infinite alternate; }
 @keyframes pulseCrown { 0% { transform: scale(1); } 100% { transform: scale(1.05); } }
-.gate-card h1 { font-size: 30px; margin: 15px 0; color: var(--gold-2); letter-spacing: 2px; text-shadow: 0 0 20px rgba(232, 198, 107, 0.6); }
-.gate-card p { color: var(--muted); font-size: 16px; margin-bottom: 35px; line-height: 1.8; }
-.gate-card input { width: 100%; padding: 20px 25px; border-radius: 20px; border: 2px solid rgba(232, 198, 107, 0.2); background: rgba(0, 0, 0, 0.7); color: var(--gold-2); text-align: center; font-family: 'Vazirmatn'; font-size: 18px; outline: none; transition: all 0.4s ease; }
-.gate-card input:focus { border-color: var(--gold); }
-.btn-main { margin-top: 30px; width: 100%; padding: 18px; border: 1px solid rgba(232, 198, 107, 0.5); border-radius: 20px; font-weight: 900; font-size: 18px; color: #000; background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--gold-deep)); box-shadow: 0 5px 20px rgba(232, 198, 107, 0.3); transition: all 0.3s ease; }
-.btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(232, 198, 107, 0.5); }
-.btn-main:disabled { opacity: 0.6; pointer-events: none; }
-.gate-err { color: var(--danger); font-size: 15px; margin-top: 20px; min-height: 22px; font-weight: 800; }
-@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-10px); } 75% { transform: translateX(10px); } }
+.gate-card h1 { font-size: 26px; margin: 15px 0; color: var(--gold-2); text-shadow: 0 0 20px rgba(232, 198, 107, 0.6); }
+.gate-card p { color: var(--muted); font-size: 15px; margin-bottom: 35px; line-height: 1.8; }
+.gate-card input { width: 100%; padding: 18px 25px; border-radius: 20px; border: 2px solid rgba(232, 198, 107, 0.2); background: rgba(0, 0, 0, 0.7); color: var(--gold-2); text-align: center; font-size: 18px; font-weight: 600; outline: none; transition: all 0.4s ease; }
+.gate-card input:focus { border-color: var(--gold); box-shadow: 0 0 20px rgba(232, 198, 107, 0.3); }
+.btn { margin-top: 25px; width: 100%; padding: 16px; border: 1px solid rgba(232, 198, 107, 0.5); border-radius: 20px; cursor: pointer; font-weight: 900; font-size: 17px; color: #000; background: linear-gradient(135deg, var(--gold-2), var(--gold), var(--gold-deep)); box-shadow: 0 5px 20px rgba(232, 198, 107, 0.3); transition: all 0.3s ease; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(232, 198, 107, 0.5); }
+.gate-err { color: var(--rose); font-size: 14px; margin-top: 15px; min-height: 22px; font-weight: 800; }
 
-/* === ناوبار === */
+/* === ناوبار اصلی سایت === */
 .navbar { position: fixed; top: 0; right: 0; left: 0; z-index: 5000; display: flex; align-items: center; justify-content: space-between; padding: calc(20px + env(safe-area-inset-top)) 50px 20px 50px; background: rgba(5, 3, 8, 0.95); border-bottom: 1px solid rgba(232, 198, 107, 0.1); transform: translateY(-130%); transition: transform 0.8s ease; }
 .navbar.show { transform: translateY(0); }
-.brand { font-family: 'Cinzel'; font-weight: 900; color: var(--gold-2); font-size: 24px; text-shadow: 0 0 15px rgba(232, 198, 107, 0.6); }
+.brand { display: flex; align-items: center; gap: 15px; font-family: 'Cinzel'; font-weight: 900; color: var(--gold-2); font-size: 24px; }
+.nav-controls { display: flex; align-items: center; gap: 15px; }
 .nav-links { display: flex; gap: 5px; flex-wrap: wrap; }
-.nav-links a { color: var(--text); text-decoration: none; padding: 12px 20px; border-radius: 15px; font-size: 15px; transition: all 0.3s ease; font-weight: 600; cursor: pointer; }
+.nav-links a { color: var(--text); text-decoration: none; padding: 12px 20px; border-radius: 15px; font-size: 15px; transition: all 0.3s ease; font-weight: 600; cursor: pointer;}
 .nav-links a:hover, .nav-links a.active { color: var(--gold-2); background: rgba(232, 198, 107, 0.1); }
-#openChatBtn { color: var(--gold-2); border: 1px solid var(--gold); font-weight: 800; background: rgba(232, 198, 107, 0.05); }
 
-/* === استایل‌های پایه سایت === */
-.wrap { position: relative; z-index: var(--z-content); max-width: 1300px; margin: 0 auto; padding: 0 30px; }
+/* ویژوالایزر موزیک اختصاصی */
+.audio-visualizer-btn { display: flex; align-items: center; gap: 4px; padding: 12px 15px; border-radius: 15px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(20, 10, 40, 0.6); cursor: pointer; transition: all 0.3s ease; }
+.bar-container { display: flex; align-items: flex-end; gap: 2.5px; height: 16px; width: 20px; }
+.v-bar { width: 3px; height: 30%; background: var(--gold-2); border-radius: 2px; }
+.audio-visualizer-btn.playing .v-bar { animation: bounceVisualizer 0.6s ease infinite alternate; }
+.audio-visualizer-btn.playing .v-bar:nth-child(1) { animation-delay: 0.1s; }
+.audio-visualizer-btn.playing .v-bar:nth-child(2) { animation-delay: 0.4s; }
+.audio-visualizer-btn.playing .v-bar:nth-child(3) { animation-delay: 0.2s; }
+@keyframes bounceVisualizer { 0% { height: 20%; } 100% { height: 100%; } }
+
+/* === بخش محتوای تالار اصلی === */
+.wrap { position: relative; z-index: 10; max-width: 1300px; margin: 0 auto; padding: 0 30px; }
 section { padding: 120px 0; position: relative; }
 .sec-title { text-align: center; margin-bottom: 80px; }
-.sec-title h2 { font-size: clamp(32px, 5vw, 50px); color: var(--gold-2); letter-spacing: 2px; text-shadow: 0 0 20px rgba(232, 198, 107, 0.4); }
-.sec-title .line { width: 120px; height: 3px; margin: 25px auto; border-radius: 4px; background: linear-gradient(90deg, transparent, var(--gold), var(--gold-2), var(--gold), transparent); position: relative; }
+.sec-title h2 { font-size: clamp(32px, 5vw, 50px); color: var(--gold-2); text-shadow: 0 0 20px rgba(232, 198, 107, 0.4); }
+.sec-title .line { width: 120px; height: 3px; margin: 25px auto; background: linear-gradient(90deg, transparent, var(--gold), var(--gold-2), var(--gold), transparent); position: relative; }
 .sec-title .line::after { content: '👑'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--bg); padding: 0 15px; font-size: 20px; }
-.sec-title p { color: var(--muted); max-width: 750px; margin: 25px auto 0; font-size: 17px; line-height: 2; }
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
-.reveal.in { opacity: 1; transform: translateY(0); }
+.sec-title p { color: var(--muted); max-width: 750px; margin: 25px auto 0; font-size: 16px; line-height: 2; }
 
-/* === بخش HERO === */
-.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 100px; }
-.hero .sub { color: var(--gold); letter-spacing: 5px; font-size: 18px; margin-bottom: 20px; font-weight: 800; }
-.hero h1 { font-size: clamp(40px, 8vw, 90px); background: linear-gradient(135deg, #fff 20%, var(--gold-2) 50%, var(--gold-deep) 80%); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 30px; font-weight: 900; }
+/* انیمیشن افکت بال‌های فرشته و هالو */
+.hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-top: 100px; position: relative; }
+.hero .sub { color: var(--gold); letter-spacing: 5px; font-size: 18px; margin-bottom: 20px; font-weight: 800; text-shadow: 0 0 15px var(--gold); }
+.hero h1 { font-size: clamp(36px, 7vw, 80px); line-height: 1.3; background: linear-gradient(135deg, #fff 20%, var(--gold-2) 50%, var(--gold-deep) 80%); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 30px; font-weight: 900; }
 
-.angel-container { margin: 40px auto; z-index: var(--z-content); }
-.angel { position: relative; width: min(350px, 80vw); aspect-ratio: 1; margin: 0 auto; }
+.angel-container { margin: 40px auto; z-index: 5; }
+.angel { position: relative; width: min(320px, 75vw); aspect-ratio: 1; margin: 0 auto; }
 .photo-frame { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; z-index: 3; border: 4px solid rgba(255,255,255,0.8); box-shadow: 0 0 40px rgba(232, 198, 107, 0.3); background: var(--bg2); }
-.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; transition: transform 0.8s ease; }
+.angel:hover .photo-frame img { transform: scale(1.1); }
+.halo { position: absolute; top: -25px; left: 50%; width: 75%; height: 30px; border-radius: 50%; border: 4px solid rgba(255, 255, 255, 0.9); box-shadow: 0 0 25px var(--gold-2); z-index: 4; transform: translateX(-50%) rotateX(70deg); }
+.wing { position: absolute; top: 5%; width: 65%; height: 90%; z-index: 1; opacity: 0.9; background: url('https://i.ibb.co/LzdM6vFf/wings-template.png') no-repeat center/contain; }
+.wing-left { right: 60%; transform-origin: right center; animation: flapL 6s ease-in-out infinite; }
+.wing-right { left: 60%; transform-origin: left center; animation: flapR 6s ease-in-out infinite; transform: scaleX(-1); }
+@keyframes flapL { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(10deg); } }
+@keyframes flapR { 0%, 100% { transform: scaleX(-1) rotate(-5deg); } 50% { transform: scaleX(-1) rotate(10deg); } }
 
-/* ==========================================================================
-   ====== پیام‌رسان WIRIPER (کامل و یکپارچه شده با ظاهری سلطنتی) ======
-   ========================================================================== */
+.hero .love { max-width: 800px; margin: 30px auto 0; color: var(--text); line-height: 2; font-size: 17px; background: rgba(5,3,8,0.6); padding: 25px; border-radius: 20px; border: 1px solid rgba(232,198,107,0.1); }
+.hero .love b { color: var(--gold-2); font-weight: 900; }
 
-#chatModalWrapper { position: fixed; inset: 0; z-index: var(--z-modal); background: var(--bg); display: none; opacity: 0; transition: opacity 0.4s ease; flex-direction: column; }
-#chatModalWrapper.open { display: flex; opacity: 1; }
-.chat-close-main { position: absolute; top: 15px; left: 20px; font-size: 24px; color: var(--text); z-index: 10; background: rgba(0,0,0,0.5); width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); }
-.chat-close-main:hover { background: var(--danger); color: #fff; border-color: var(--danger); }
+/* بخش شمارش معکوس زادروزها */
+.cd-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+.cd-card { background: var(--glass); border: 1px solid var(--border); border-radius: 25px; padding: 40px; text-align: center; backdrop-filter: blur(10px); }
+.cd-card h3 { font-size: 22px; color: var(--gold-2); margin-bottom: 10px; }
+.cd-card .date { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+.cd-nums { display: flex; justify-content: center; gap: 15px; font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #fff; }
 
-/* --- Auth View (Login / Register) --- */
-#chatAuthView { flex: 1; display: flex; align-items: center; justify-content: center; background: radial-gradient(ellipse at top, var(--bg2) 0%, var(--bg) 70%); padding: 20px; position: relative; }
-.auth-box { width: 100%; max-width: 400px; background: var(--glass-strong); backdrop-filter: blur(15px); border: 1px solid var(--gold); border-radius: 25px; padding: 40px 30px; box-shadow: 0 0 40px rgba(232, 198, 107, 0.15); position: relative; z-index: 2; }
-.auth-logo { font-size: 3rem; text-align: center; margin-bottom: 10px; filter: drop-shadow(0 0 15px var(--gold)); }
-.auth-box h2 { text-align: center; color: var(--gold-2); font-size: 1.4rem; margin-bottom: 25px; font-family: 'Cinzel', 'Vazirmatn'; }
-.auth-tabs { display: flex; gap: 8px; margin-bottom: 25px; background: rgba(0,0,0,0.4); padding: 5px; border-radius: 15px; }
-.auth-tabs button { flex: 1; padding: 12px; color: var(--muted); border-radius: 12px; transition: 0.3s; font-weight: 600; }
-.auth-tabs button.active { background: linear-gradient(135deg, var(--gold-deep), var(--gold)); color: #000; font-weight: 800; box-shadow: 0 5px 15px rgba(232, 198, 107, 0.3); }
-.auth-field { margin-bottom: 18px; }
-.auth-field label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; }
-.auth-field input { width: 100%; padding: 15px; background: rgba(0,0,0,0.6); border: 1px solid var(--gold-deep); border-radius: 12px; color: var(--txt); font-size: 1rem; transition: 0.3s; outline: none; }
-.auth-field input:focus { border-color: var(--gold-2); box-shadow: inset 0 0 10px rgba(232, 198, 107, 0.2); }
-.auth-msg { color: var(--danger); font-size: 0.85rem; text-align: center; min-height: 20px; margin-bottom: 15px; font-weight: bold; }
-.auth-msg.success { color: var(--success); }
+/* =================================================== */
+/* === استایل‌های پیشرفته پیام‌رسان قصر (Wiriper Messenger) === */
+/* =================================================== */
+#messengerModal {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  background: rgba(5, 3, 8, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  padding-top: calc(80px + env(safe-area-inset-top));
+}
+#messengerModal.open { display: block; opacity: 1; }
 
-/* --- Messenger Main Layout --- */
-#chatAppView { flex: 1; display: none; height: 100vh; overflow: hidden; background: var(--bg); }
-.chat-sidebar { width: 350px; flex-shrink: 0; display: flex; flex-direction: column; background: rgba(15, 8, 30, 0.98); border-left: 1px solid var(--border); }
-.side-header { padding: 15px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 15px; }
-.me-info-row { display: flex; align-items: center; gap: 12px; }
-.chat-avatar { width: 50px; height: 50px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: 700; color: #000; overflow: hidden; background: linear-gradient(135deg, var(--gold-deep), var(--gold-2)); border: 2px solid var(--gold); }
-.chat-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.chat-avatar.sm { width: 40px; height: 40px; font-size: 1rem; }
-.chat-avatar.lg { width: 120px; height: 120px; font-size: 3rem; margin: 0 auto 15px; border-width: 4px; }
-.me-details { flex: 1; min-width: 0; }
-.me-details b { display: block; color: var(--gold-2); font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.me-details span { font-size: 0.8rem; color: var(--muted); }
-.icon-btn { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1.2rem; transition: 0.2s; background: rgba(232, 198, 107, 0.05); border: 1px solid rgba(232, 198, 107, 0.2); }
-.icon-btn:hover { background: rgba(232, 198, 107, 0.2); }
-.search-bar { width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid var(--border); border-radius: 20px; color: var(--text); outline: none; transition: 0.3s; }
-.search-bar:focus { border-color: var(--gold); }
-.action-buttons { display: flex; gap: 8px; padding: 10px 15px; border-bottom: 1px solid var(--border); }
-.action-buttons button { flex: 1; padding: 10px; font-size: 0.85rem; border: 1px solid var(--gold-deep); color: var(--gold-2); border-radius: 12px; transition: 0.2s; background: rgba(20, 10, 40, 0.6); }
-.action-buttons button:hover { background: rgba(232, 198, 107, 0.15); }
-
-/* --- Chat List --- */
-.chat-list-container { flex: 1; overflow-y: auto; }
-.chat-item { display: flex; align-items: center; gap: 15px; padding: 15px; cursor: pointer; border-bottom: 1px solid rgba(232, 198, 107, 0.05); transition: 0.2s; }
-.chat-item:hover { background: rgba(232, 198, 107, 0.1); }
-.chat-item.active { background: rgba(232, 198, 107, 0.15); border-right: 3px solid var(--gold); }
-.ci-content { flex: 1; min-width: 0; }
-.ci-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-.ci-name { color: var(--gold-2); font-weight: 700; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ci-time { font-size: 0.75rem; color: var(--muted); }
-.ci-last { font-size: 0.85rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.badge { font-size: 0.65rem; padding: 2px 8px; border-radius: 8px; background: var(--purple-deep); color: #fff; margin-left: 6px; }
-
-/* --- Chat Area --- */
-.chat-main { flex: 1; display: flex; flex-direction: column; position: relative; background: var(--bg); }
-.empty-chat { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--muted); }
-.empty-chat .ico { font-size: 4rem; opacity: 0.5; margin-bottom: 15px; filter: drop-shadow(0 0 20px var(--gold)); }
-.active-chat-view { flex: 1; display: none; flex-direction: column; min-height: 0; }
-.chat-header { display: flex; align-items: center; gap: 15px; padding: 15px 20px; background: rgba(15, 8, 30, 0.95); border-bottom: 1px solid var(--border); z-index: 10; }
-#btnBackToChats { display: none; font-size: 1.5rem; }
-.ch-info { flex: 1; min-width: 0; cursor: pointer; }
-.ch-name { color: var(--gold-2); font-weight: 700; font-size: 1.1rem; }
-.ch-sub { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
-
-/* --- Messages --- */
-.messages-area { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 8px; background-size: cover; background-position: center; background-color: var(--bg); position: relative; }
-.messages-area::before { content: ''; position: absolute; inset: 0; background: rgba(5,3,8,0.7); z-index: 0; pointer-events: none; }
-.msg-row { display: flex; width: 100%; margin-top: 5px; z-index: 1; position: relative; }
-.msg-row.me { justify-content: flex-start; } /* RTL: me is left/start */
-.msg-row.other { justify-content: flex-end; }
-.msg-bubble { max-width: 75%; padding: 10px 15px; border-radius: 18px; font-size: 0.95rem; line-height: 1.6; word-break: break-word; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-.msg-row.me .msg-bubble { background: linear-gradient(135deg, var(--purple-deep), #2a1154); color: #fff; border-bottom-right-radius: 4px; border: 1px solid rgba(123, 63, 228, 0.3); }
-.msg-row.other .msg-bubble { background: linear-gradient(135deg, rgba(20,10,40,0.95), rgba(10,5,20,0.95)); color: var(--gold-2); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
-.msg-sender { font-size: 0.75rem; font-weight: 700; color: var(--gold); margin-bottom: 4px; display: block; }
-.msg-bubble img, .msg-bubble video { max-width: 250px; width: 100%; border-radius: 12px; margin-top: 5px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
-.msg-bubble audio { max-width: 250px; margin-top: 5px; }
-.msg-meta { display: flex; gap: 8px; align-items: center; justify-content: flex-end; font-size: 0.7rem; opacity: 0.7; margin-top: 5px; }
-.edited-mark { font-style: italic; }
-.msg-tools { position: absolute; top: -15px; right: 10px; display: none; gap: 5px; background: var(--bg2); padding: 4px; border-radius: 10px; border: 1px solid var(--gold-deep); }
-.msg-bubble:hover .msg-tools { display: flex; }
-.msg-tools button { width: 26px; height: 26px; border-radius: 50%; background: var(--bg); color: var(--gold); font-size: 0.8rem; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); }
-.gift-bubble { text-align: center; background: linear-gradient(135deg, #b8862f, #7b3fe4) !important; border: 1px solid var(--gold) !important; color: #fff !important; }
-.gift-bubble .g-ico { font-size: 3rem; display: block; margin-bottom: 5px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
-.gift-bubble .g-val { font-weight: 900; font-size: 1.1rem; }
-
-/* --- Input Area --- */
-.edit-bar { display: none; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(20, 10, 40, 0.95); border-top: 1px solid var(--border); color: var(--gold-2); font-size: 0.9rem; }
-.edit-bar .preview { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0.8; }
-.chat-input-area { display: flex; align-items: flex-end; gap: 10px; padding: 15px 20px; background: rgba(15, 8, 30, 0.98); border-top: 1px solid var(--border); position: relative; }
-.upload-progress { position: absolute; top: 0; left: 0; height: 3px; background: var(--gold-2); width: 0%; transition: width 0.3s; }
-.chat-input-area textarea { flex: 1; resize: none; max-height: 150px; min-height: 50px; padding: 12px 18px; background: rgba(0,0,0,0.6); border: 1px solid var(--border); border-radius: 25px; color: var(--text); font-size: 1rem; outline: none; line-height: 1.5; transition: 0.3s; }
-.chat-input-area textarea:focus { border-color: var(--gold); }
-.send-btn { width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-2), var(--gold-deep)); color: #000; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 5px 15px rgba(232, 198, 107, 0.3); transition: 0.2s; }
-.send-btn:hover { transform: scale(1.1); }
-.attach-btn { width: 50px; height: 50px; border-radius: 50%; background: transparent; color: var(--gold); border: 1px solid var(--gold-deep); font-size: 1.3rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: 0.2s; }
-.attach-btn:hover { background: rgba(232, 198, 107, 0.1); }
-
-/* --- Modals for Messenger --- */
-.sys-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: calc(var(--z-modal) + 10); padding: 20px; }
-.sys-modal.show { display: flex; }
-.sys-card { width: 100%; max-width: 450px; max-height: 90vh; overflow-y: auto; background: var(--bg2); border: 1px solid var(--gold); border-radius: 25px; padding: 30px; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.7); }
-.sys-card h2 { color: var(--gold-2); font-size: 1.3rem; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-family: 'Cinzel', 'Vazirmatn'; }
-.sys-card h2 .close-m { color: var(--muted); font-size: 1.5rem; transition: 0.2s; }
-.sys-card h2 .close-m:hover { color: var(--danger); }
-.pill { display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; border-radius: 20px; background: linear-gradient(135deg, var(--purple-deep), var(--gold-deep)); color: #fff; font-weight: 700; margin-bottom: 20px; }
-.user-list-res { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-.user-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 15px; cursor: pointer; transition: 0.2s; }
-.user-item:hover { background: rgba(232, 198, 107, 0.1); border-color: var(--gold); }
-.gift-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
-.gift-card { background: rgba(0,0,0,0.4); border: 1px solid var(--border); border-radius: 15px; padding: 15px 10px; text-align: center; cursor: pointer; transition: 0.2s; }
-.gift-card:hover { border-color: var(--gold-2); transform: translateY(-5px); background: rgba(232, 198, 107, 0.1); }
-.gift-card .gi { font-size: 2.5rem; margin-bottom: 5px; }
-.gift-card .gn { font-size: 0.9rem; color: var(--gold-2); font-weight: 700; }
-.gift-card .gc { font-size: 0.8rem; color: var(--muted); }
-.bg-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 15px; }
-.bg-swatch { height: 70px; border-radius: 12px; cursor: pointer; border: 2px solid transparent; transition: 0.2s; }
-.bg-swatch:hover { border-color: var(--gold); transform: scale(1.05); }
-
-/* --- Responsive Messenger --- */
-@media(max-width: 768px) {
-  .chat-sidebar { width: 100%; position: absolute; inset: 0; z-index: 5; }
-  .active-chat-view { position: absolute; inset: 0; z-index: 6; background: var(--bg); display: none; }
-  .active-chat-view.show-mobile { display: flex !important; }
-  #btnBackToChats { display: block; }
+.messenger-container {
+  width: 95vw;
+  max-width: 1400px;
+  height: calc(100vh - 120px);
+  margin: 0 auto;
+  background: rgba(15, 8, 30, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  position: relative;
 }
 
-/* === Toast Notification === */
-#sysToast { position: fixed; bottom: 30px; left: 50%; transform: translate(-50%, 100px); background: var(--glass-strong); border: 1px solid var(--gold); color: var(--gold-2); padding: 12px 25px; border-radius: 25px; font-weight: 700; z-index: 200000; transition: 0.4s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; pointer-events: none; }
-#sysToast.show { transform: translate(-50%, 0); opacity: 1; }
-</style>
+.close-messenger {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--gold-2);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  z-index: 8100;
+  transition: all 0.3s ease;
+}
+.close-messenger:hover { background: var(--rose); color: #000; transform: rotate(90deg); }
 
-<script type="importmap">
-  {
-    "imports": {
-      "firebase/app": "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js",
-      "firebase/auth": "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js",
-      "firebase/firestore": "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js",
-      "firebase/storage": "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js"
-    }
-  }
-</script>
+/* پورت و ادغام اصولی ساختار کامپوننت‌های چت */
+.chat-sidebar {
+  width: 350px;
+  border-left: 1px solid rgba(232, 198, 107, 0.15);
+  background: rgba(10, 5, 20, 0.8);
+  display: flex;
+  flex-direction: column;
+}
+.chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: rgba(5, 3, 10, 0.4);
+  position: relative;
+}
+
+.chat-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(232, 198, 107, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(15, 8, 35, 0.5);
+}
+
+.chat-messages-area {
+  flex: 1;
+  padding: 25px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.chat-messages-area::before {
+  content: ''; position: absolute; inset: 0; background: rgba(5,3,8,0.75); z-index: 0;
+}
+
+.message-bubble {
+  position: relative; z-index: 1; max-width: 75%; padding: 14px 20px; border-radius: 22px; font-size: 15px; line-line-height: 1.6; word-break: break-word; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.msg-sent { align-self: flex-start; background: linear-gradient(135deg, var(--purple-deep), #2a1154); color: #fff; border-bottom-right-radius: 4px; border: 1px solid rgba(123, 63, 228, 0.3); }
+.msg-received { align-self: flex-end; background: linear-gradient(135deg, rgba(20,10,40,0.9), rgba(10,5,20,0.9)); color: var(--gold-2); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
+
+.chat-input-row {
+  padding: 20px;
+  border-top: 1px solid rgba(232, 198, 107, 0.15);
+  display: flex;
+  gap: 12px;
+  background: rgba(10, 5, 20, 0.9);
+  align-items: center;
+}
+.chat-input-row input { flex: 1; padding: 15px 20px; border-radius: 15px; border: 1px solid var(--border); background: rgba(0,0,0,0.5); color: #fff; outline: none; }
+
+/* فرم‌های احراز هویت مودال چت */
+.chat-auth-view {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+.auth-box-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  padding: 40px;
+  border-radius: 30px;
+  box-shadow: var(--shadow);
+}
+.auth-tabs { display: flex; gap: 10px; margin-bottom: 25px; border-bottom: 1px solid rgba(232,198,107,0.2); padding-bottom: 10px; }
+.auth-tabs button { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; font-weight: 700; padding: 5px 15px; }
+.auth-tabs button.active { color: var(--gold-2); border-bottom: 2px solid var(--gold); }
+.field { margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; text-align: right; }
+.field label { font-size: 13px; color: var(--gold); font-weight: 600; }
+.field input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(232,198,107,0.2); background: rgba(0,0,0,0.4); color: #fff; outline: none; }
+
+/* استایل لیست مخاطبین و کانال‌ها در سایدبار */
+.sidebar-list-item { padding: 15px; border-bottom: 1px solid rgba(232,198,107,0.08); display: flex; align-items: center; gap: 12px; cursor: pointer; transition: background 0.3s; }
+.sidebar-list-item:hover { background: rgba(232,198,107,0.05); }
+.sidebar-list-item .avatar { width: 45px; height: 45px; border-radius: 50%; background: var(--purple-deep); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+
+/* توست و نوتیفیکیشن‌ها */
+#toast { position: fixed; bottom: 30px; right: 30px; background: linear-gradient(135deg, var(--purple), var(--purple-deep)); color: #fff; padding: 15px 30px; border-radius: 15px; border: 1px solid var(--gold); box-shadow: var(--shadow); z-index: 10000; display: none; }
+
+/* دکمه‌های کنترلی ترنسparent منوی پیام رسان */
+.btn-chat-action { background: none; border: 1px solid var(--border); color: var(--gold-2); padding: 8px 16px; border-radius: 12px; cursor: pointer; font-size: 13px; transition: all 0.3s; }
+.btn-chat-action:hover { background: rgba(232,198,107,0.1); }
+</style>
 </head>
 <body>
 
 <div id="app-wrapper">
-  <div class="royal-dust"></div>
-  <canvas id="bgCanvas" class="bg-layer"></canvas>
-  <div class="ambient-fog"></div>
   <div id="progress"></div>
+  <canvas id="bgCanvas" class="bg-layer"></canvas>
+  <div class="royal-dust"></div>
+  <div class="ambient-fog"></div>
+
+  <div id="loader">
+    <div class="loader-crown">👑</div>
+    <div class="loader-txt">WIRIPER EMPIRE</div>
+    <div class="loader-bar"><i></i></div>
+  </div>
 
   <div id="gate">
     <div class="gate-card">
-      <div class="crown">🏰</div>
-      <h1>ورود به امپراتوری Wiriper</h1>
-      <p>کلید قلب ملکه را وارد کن تا دروازه‌های طلایی گشوده شوند.</p>
-      <input id="pass" type="password" placeholder="نام ملکه..." autocomplete="off">
-      <button class="btn-main" onclick="enterGate()">گشودن دروازه‌ها ✨</button>
-      <div class="gate-err" id="gerr"></div>
+      <div class="crown">👑</div>
+      <h1>امپراتوری باشکوه و جاودانه</h1>
+      <p>جهت گام نهادن به تالار همیشگی عشق مبین و نیایش، نام مقدس ملکه قلمرو را وارد نمایید.</p>
+      <input type="password" id="pass" placeholder="نام ملکه را بنویسید..." autocomplete="off">
+      <button class="btn" onclick="enter()">گشودن دروازه پادشاهی</button>
+      <div id="gateErr" class="gate-err"></div>
     </div>
   </div>
 
   <div id="main-content" style="display: none;">
     <nav class="navbar" id="nav">
-      <div class="brand">👑 WIRIPER</div>
-      <div class="nav-links" id="navlinks">
-        <a href="#hero">تالار اصلی</a>
-        <a id="openChatBtn">💬 پیام‌رسان قصر</a>
+      <div class="brand">WIRIPER EMPIRE 👑</div>
+      <div class="nav-links">
+        <a href="#hero" class="active">تالار اصلی</a>
+        <a href="#countdown">روزهای مقدس</a>
+        <a id="openChatBtn" style="color: var(--gold-2); border: 1px solid var(--gold); font-weight: 800;">💬 پیام‌رسان قصر</a>
+      </div>
+      <div class="nav-controls">
+        <button class="audio-visualizer-btn" id="audioBtn" onclick="toggleAudio()">
+          <div class="bar-container">
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+          </div>
+          <span style="font-size: 13px; color: var(--gold-2); font-weight: bold; margin-right: 5px;">موزیک قصر</span>
+        </button>
       </div>
     </nav>
 
@@ -312,664 +360,398 @@ section { padding: 120px 0; position: relative; }
       <div class="wrap">
         <div class="sub">پادشاه مبین ♾️ ملکه نیایش</div>
         <h1>قلب تپنده‌ی امپراتوری<br>مبین و نیایش</h1>
-        <div class="angel-container">
+        
+        <div class="angel-container" id="angelContainer">
           <div class="angel">
+            <div class="wing wing-left"></div>
+            <div class="wing wing-right"></div>
+            <div class="halo"></div>
             <div class="photo-frame">
               <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش">
             </div>
           </div>
         </div>
-        <p class="love reveal" style="max-width:800px;margin:30px auto;line-height:2;font-size:18px;background:rgba(5,3,8,0.6);padding:20px;border-radius:15px;border:1px solid rgba(232,198,107,0.1);">
-          او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b style="color:var(--gold-2);font-size:22px;">نیایش</b> عزیز من.
-        </p>
+
+        <div class="love">
+          او ملکهٔ بی‌همتای این امپراتوری بزرگ است. حضور پرشکوهش قلمرو ما را معنا می‌بخشد و لبخندش تبلور یک فرشته واقعی در کائنات است. من، <b>مبین</b>، تا آخرین تپش قلبم نگاهبان این شکوه خواهم بود.
+        </div>
+      </div>
+    </section>
+
+    <section id="countdown">
+      <div class="wrap">
+        <div class="sec-title">
+          <h2>جشن‌های باشکوه سلطنتی 🎉</h2>
+          <div class="line"></div>
+          <p>شمارش معکوس دقیق تا طلوع روزهای مقدس تولد پادشاه و ملکه</p>
+        </div>
+        <div class="cd-grid">
+          <div class="cd-card">
+            <h3>👑 زادروز پادشاه مبین</h3>
+            <div class="date">۲۵ اسفند — شکوه اقتدار</div>
+            <div class="cd-nums" id="cd-mobin">-- روز -- ساعت</div>
+          </div>
+          <div class="cd-card">
+            <h3>👸🏻 زادروز ملکه نیایش</h3>
+            <div class="date">۱۵ شهریور — تجلی زیبایی</div>
+            <div class="cd-nums" id="cd-niyayesh">-- روز -- ساعت</div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
 </div>
 
-<div id="chatModalWrapper">
-  <button class="chat-close-main" id="closeChatBtnMain">✕</button>
-
-  <div id="chatAuthView">
-    <div class="auth-box">
-      <div class="auth-logo">👑</div>
-      <h2>احراز هویت سلطنتی</h2>
-      <div class="auth-tabs">
-        <button id="tabLogin" class="active">ورود</button>
-        <button id="tabReg">ثبت‌نام</button>
+<div id="messengerModal">
+  <button class="close-messenger" id="closeChatBtn">✕</button>
+  
+  <div class="messenger-container">
+    
+    <div class="chat-auth-view" id="chatAuthSection">
+      <div class="auth-box-card">
+        <div class="auth-tabs">
+          <button id="tabLoginBtn" class="active" onclick="switchAuthTab('login')">ورود سلطنتی</button>
+          <button id="tabRegBtn" onclick="switchAuthTab('reg')">ثبت‌نام شهروند</button>
+        </div>
+        
+        <div id="chatLoginForm">
+          <div class="field"><label>پست الکترونیک یا شناسه کاربری</label><input id="chatEmail" type="email" placeholder="name@domain.com"></div>
+          <div class="field"><label>رمز عبور</label><input id="chatPass" type="password" placeholder="••••••"></div>
+          <button class="btn" style="margin-top:10px;" id="btnChatLogin">ورود به ارتباطات</button>
+        </div>
+        
+        <div id="chatRegForm" style="display:none;">
+          <div class="field"><label>نام نمایشی (مثلاً نیایش)</label><input id="chatRegName" type="text" placeholder="نام شما"></div>
+          <div class="field"><label>پست الکترونیک</label><input id="chatRegEmail" type="email" placeholder="noble@wiriper.com"></div>
+          <div class="field"><label>رمز عبور (حداقل ۶ کاراکتر)</label><input id="chatRegPass" type="password" placeholder="••••••"></div>
+          <button class="btn" style="margin-top:10px;" id="btnChatRegister">ایجاد حساب کاربری</button>
+        </div>
+        <div id="chatAuthMsg" style="color:var(--rose); margin-top:15px; font-size:13px; text-align:center;"></div>
       </div>
-      <div class="auth-field" id="wrapRegName" style="display: none;">
-        <label>نام نمایشی</label>
-        <input type="text" id="authDisplayName" placeholder="مثلاً: ملکه نیایش">
-      </div>
-      <div class="auth-field">
-        <label>نام کاربری (انگلیسی)</label>
-        <input type="text" id="authUsername" placeholder="username" autocomplete="off">
-      </div>
-      <div class="auth-field">
-        <label>رمز عبور</label>
-        <input type="password" id="authPassword" placeholder="••••••">
-      </div>
-      <div class="auth-msg" id="authError"></div>
-      <button class="btn-main" id="btnSubmitAuth" style="margin-top: 10px;">ورود به قصر</button>
     </div>
-  </div>
 
-  <div id="chatAppView">
-    <aside class="chat-sidebar">
-      <div class="side-header">
-        <div class="me-info-row">
-          <div class="chat-avatar" id="myAvatar">👤</div>
-          <div class="me-details">
-            <b id="myName">—</b>
-            <span id="myUsername">@—</span>
+    <div class="chat-sidebar">
+      <div class="chat-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="font-weight:bold; color:var(--gold-2);" id="currentUserLabel">بارگذاری...</div>
+        </div>
+        <button class="btn-chat-action" id="btnChatLogout">🚪 خروج</button>
+      </div>
+      <div style="padding:15px; border-bottom:1px solid rgba(232,198,107,0.1);">
+        <input type="text" placeholder="جستجوی کانال‌ها و کاربران..." style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border); background:rgba(0,0,0,0.3); color:#fff; font-size:13px;">
+      </div>
+      <div style="flex:1; overflow-y:auto;" id="chatRoomsList">
+        <div class="sidebar-list-item">
+          <div class="avatar">🏛️</div>
+          <div>
+            <div style="font-weight:bold; color:#fff;">تالار گفتگوی امپراتوری</div>
+            <div style="font-size:12px; color:var(--muted);">کانال عمومی و ریل‌تایم</div>
           </div>
-          <button class="icon-btn" id="btnOpenMyProfile" title="پروفایل">⚙️</button>
         </div>
-        <input type="text" class="search-bar" id="searchInput" placeholder="جستجوی کاربر (یوزرنیم)...">
       </div>
-      <div class="action-buttons">
-        <button id="btnSearchUser">👤 یافتن</button>
-        <button id="btnCreateGroup">👥 گروه</button>
-        <button id="btnCreateChannel">📢 کانال</button>
-      </div>
-      <div class="chat-list-container" id="chatListArea">
-        </div>
-    </aside>
+    </div>
 
-    <main class="chat-main">
-      <div class="empty-chat" id="emptyChatState">
-        <div class="ico">💬</div>
-        <h2>به پیام‌رسان قصر خوش آمدید</h2>
-        <p>یک گفتگو را انتخاب کنید یا کاربری را جستجو کنید.</p>
+    <div class="chat-main">
+      <div class="chat-header">
+        <div>
+          <span style="font-weight:900; color:var(--gold-2);" id="currentRoomTitle">🏛️ تالار گفتگوی امپراتوری</span>
+          <span style="font-size:12px; color:var(--muted); margin-right:10px;" id="chatStatusText">آنلاین 🟢</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn-chat-action" onclick="showToast('🎁 بخش اعتبارات و هدایا به زودی فعال می‌شود!')">⭐ هدیه قلمرو</button>
+        </div>
       </div>
       
-      <div class="active-chat-view" id="activeChatState">
-        <div class="chat-header">
-          <button class="icon-btn" id="btnBackToChats">→</button>
-          <div class="chat-avatar sm" id="activeChatAvatar" style="cursor:pointer;">💬</div>
-          <div class="ch-info" id="activeChatInfoBlock">
-            <div class="ch-name" id="activeChatTitle">—</div>
-            <div class="ch-sub" id="activeChatSub">—</div>
-          </div>
-          <button class="icon-btn" id="btnOpenGiftModal" title="ارسال هدیه">🎁</button>
-          <button class="icon-btn" id="btnOpenBgModal" title="تغییر بک‌گراند">🖼️</button>
+      <div class="chat-messages-area" id="chatMessagesView">
         </div>
-
-        <div class="messages-area" id="messagesArea">
-          </div>
-
-        <div class="edit-bar" id="editBanner">
-          <span>✏️ ویرایش:</span>
-          <span class="preview" id="editPreviewText"></span>
-          <button class="icon-btn" id="cancelEditBtn" style="width:30px;height:30px;font-size:0.9rem;color:var(--danger);border-color:var(--danger);">✕</button>
-        </div>
-
-        <div class="chat-input-area">
-          <div class="upload-progress" id="uploadLine"></div>
-          <button class="attach-btn" id="btnAttachFile">📎</button>
-          <input type="file" id="inputFile" accept="image/*,video/*,audio/*" style="display:none;">
-          <textarea id="msgInputBox" placeholder="پیام خود را بنویسید..."></textarea>
-          <button class="send-btn" id="btnSendMessage">➤</button>
-        </div>
+      
+      <div class="chat-input-row">
+        <input type="text" id="chatInputField" placeholder="پیام خود را به تالار ارسال کنید...">
+        <button class="btn" style="width:auto; margin:0; padding:12px 25px;" id="btnSendMessage">ارسال 🕊️</button>
       </div>
-    </main>
+    </div>
+
   </div>
 </div>
 
-<div class="sys-modal" id="modalMyProfile">
-  <div class="sys-card" style="text-align: center;">
-    <h2>پروفایل من <button class="close-m" data-close>✕</button></h2>
-    <div class="chat-avatar lg" id="previewMyAvatar" style="position:relative;">👤
-      <label for="inputMyAvatar" style="position:absolute;bottom:0;right:0;background:var(--gold);color:#000;border-radius:50%;width:35px;height:35px;display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px solid var(--bg2);font-size:1rem;">📷</label>
-    </div>
-    <input type="file" id="inputMyAvatar" accept="image/*" style="display:none;">
-    <div class="pill" style="margin: 10px 0 20px;">💎 اعتبار: <span id="valMyCredits">0</span></div>
+<div id="toast"></div>
+
+<audio id="audio" loop preload="auto">
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</audio>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-auth.js";
+  import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app-firestore.js";
+
+  // کانفیگ دیتابیس رسمی شما از روی متد ارسالی در مستندات
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
+    authDomain: "niyayesh-universe.firebaseapp.com",
+    databaseURL: "https://niyayesh-universe-default-rtdb.firebaseio.com",
+    projectId: "niyayesh-universe",
+    storageBucket: "niyayesh-universe.firebasestorage.app",
+    messagingSenderId: "675804"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  let currentChatUser = null;
+
+  // مدیریت رویدادها و استیت‌های پیام‌رسان
+  window.switchAuthTab = function(type) {
+    if(type === 'login') {
+      document.getElementById('chatLoginForm').style.display = 'block';
+      document.getElementById('chatRegForm').style.display = 'none';
+      document.getElementById('tabLoginBtn').classList.add('active');
+      document.getElementById('tabRegBtn').classList.remove('active');
+    } else {
+      document.getElementById('chatLoginForm').style.display = 'none';
+      document.getElementById('chatRegForm').style.display = 'block';
+      document.getElementById('tabLoginBtn').classList.remove('active');
+      document.getElementById('tabRegBtn').classList.add('active');
+    }
+  }
+
+  // ثبت نام کاربر جدید در فایربیس چت روم قلمرو
+  document.getElementById('btnChatRegister').onclick = async () => {
+    const name = document.getElementById('chatRegName').value.trim();
+    const email = document.getElementById('chatRegEmail').value.trim();
+    const pass = document.getElementById('chatRegPass').value.trim();
+    const msgEl = document.getElementById('chatAuthMsg');
     
-    <div class="auth-field" style="text-align:right;"><label>نام نمایشی</label><input type="text" id="inpMyName"></div>
-    <div class="auth-field" style="text-align:right;"><label>بایوگرافی</label><input type="text" id="inpMyBio"></div>
-    <button class="btn-main" id="btnSaveProfile">ذخیره تغییرات</button>
-    <button class="btn-main" id="btnLogout" style="background:transparent;border:1px solid var(--danger);color:var(--danger);box-shadow:none;margin-top:10px;">خروج از حساب</button>
-  </div>
-</div>
+    if(!name || !email || !pass) { msgEl.textContent = "تمامی فیلدها باید تکمیل شوند."; return; }
+    try {
+      await createUserWithEmailAndPassword(auth, email, pass);
+      msgEl.textContent = "حساب کاربری با موفقیت ساخته شد!";
+    } catch(err) {
+      msgEl.textContent = "خطا در ثبت‌نام: " + err.message;
+    }
+  };
 
-<div class="sys-modal" id="modalFindUser">
-  <div class="sys-card">
-    <h2>یافتن کاربر <button class="close-m" data-close>✕</button></h2>
-    <div style="display:flex;gap:10px;">
-      <input type="text" id="inpSearchUser" class="search-bar" placeholder="نام کاربری (انگلیسی)...">
-      <button class="btn-main" id="btnDoSearch" style="width:auto;margin:0;padding:10px 20px;">بگرد</button>
-    </div>
-    <div class="user-list-res" id="boxSearchResults"></div>
-  </div>
-</div>
+  // ورود کاربر موجود
+  document.getElementById('btnChatLogin').onclick = async () => {
+    const email = document.getElementById('chatEmail').value.trim();
+    const pass = document.getElementById('chatPass').value.trim();
+    const msgEl = document.getElementById('chatAuthMsg');
+    
+    try {
+      await signInWithEmailAndPassword(auth, email, pass);
+      msgEl.textContent = "";
+    } catch(err) {
+      msgEl.textContent = "رمز عبور یا نام کاربری اشتباه است.";
+    }
+  };
 
-<div class="sys-modal" id="modalUserInfo">
-  <div class="sys-card" style="text-align: center;">
-    <h2 style="justify-content: flex-end;"><button class="close-m" data-close>✕</button></h2>
-    <div class="chat-avatar lg" id="infoAvatar">👤</div>
-    <h3 id="infoName" style="color:var(--gold-2);font-size:1.3rem;">—</h3>
-    <div id="infoUsername" style="color:var(--muted);margin:5px 0 15px;">@—</div>
-    <p id="infoBio" style="color:var(--text);font-size:0.95rem;margin-bottom:25px;line-height:1.6;"></p>
-    <button class="btn-main" id="btnStartPrivateChat">💬 شروع گفتگوی خصوصی</button>
-  </div>
-</div>
+  // خروج از حساب پیام‌رسان
+  document.getElementById('btnChatLogout').onclick = () => { signOut(auth); };
 
-<div class="sys-modal" id="modalNewChat">
-  <div class="sys-card">
-    <h2 id="newChatHeading">گروه جدید <button class="close-m" data-close>✕</button></h2>
-    <div class="auth-field"><label id="newChatLbl">نام گروه</label><input type="text" id="inpNewChatName"></div>
-    <div style="margin-bottom:15px;color:var(--muted);font-size:0.85rem;">(افزودن اعضا بعداً از طریق لینک یا جستجو قابل انجام است)</div>
-    <button class="btn-main" id="btnSubmitNewChat">ایجاد</button>
-  </div>
-</div>
+  // سابسکریپشن وضعیت لاگین به صورت لایو
+  onAuthStateChanged(auth, (user) => {
+    if(user) {
+      currentChatUser = user;
+      document.getElementById('chatAuthSection').style.display = 'none';
+      document.getElementById('currentUserLabel').textContent = user.email.split('@')[0];
+      loadRealtimeMessages();
+    } else {
+      currentChatUser = null;
+      document.getElementById('chatAuthSection').style.display = 'flex';
+    }
+  });
 
-<div class="sys-modal" id="modalGift">
-  <div class="sys-card">
-    <h2>خزانه هدایا <button class="close-m" data-close>✕</button></h2>
-    <div class="pill" style="display:flex;justify-content:center;">💎 موجودی شما: <span id="valGiftCredits">0</span></div>
-    <div class="gift-grid" id="boxGifts"></div>
-  </div>
-</div>
+  // ارسال پیام به دیتابیس ریل‌تایم فایربیس چت روم قلمرو
+  document.getElementById('btnSendMessage').onclick = sendMessageToServer;
+  document.getElementById('chatInputField').onkeydown = (e) => { if(e.key === 'Enter') sendMessageToServer(); };
 
-<div class="sys-modal" id="modalBg">
-  <div class="sys-card">
-    <h2>تغییر منظره <button class="close-m" data-close>✕</button></h2>
-    <div class="bg-grid" id="boxBgs"></div>
-    <button class="btn-main" id="btnResetBg" style="background:transparent;border:1px solid var(--danger);color:var(--danger);box-shadow:none;">حذف منظره</button>
-  </div>
-</div>
+  async function sendMessageToServer() {
+    const input = document.getElementById('chatInputField');
+    const text = input.value.trim();
+    if(!text || !currentChatUser) return;
 
-<div id="sysToast"></div>
+    try {
+      await addDoc(collection(db, "wiriper_messages"), {
+        uid: currentChatUser.uid,
+        sender: currentChatUser.email.split('@')[0],
+        message: text,
+        timestamp: serverTimestamp()
+      });
+      input.value = "";
+    } catch(e) {
+      showToast("خطا در ارسال پیام به شبکه قصر.");
+    }
+  }
+
+  // شنونده پیام‌های لحظه‌ای و رندر چت‌ها بدون ریلود صفحه با راندمان بالا
+  let unsubscribeChat = null;
+  function loadRealtimeMessages() {
+    const q = query(collection(db, "wiriper_messages"), orderBy("timestamp", "asc"));
+    const view = document.getElementById('chatMessagesView');
+    
+    if(unsubscribeChat) unsubscribeChat();
+
+    unsubscribeChat = onSnapshot(q, (snapshot) => {
+      view.innerHTML = "";
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const bubble = document.createElement('div');
+        const isMine = currentChatUser && data.uid === currentChatUser.uid;
+        
+        bubble.className = `message-bubble ${isMine ? 'msg-sent' : 'msg-received'}`;
+        bubble.innerHTML = `
+          <div style="font-size:11px; color:var(--gold-2); margin-bottom:4px; font-weight:800;">${data.sender}</div>
+          <div>${data.message}</div>
+        `;
+        view.appendChild(bubble);
+      });
+      view.scrollTop = view.scrollHeight;
+    });
+  }
+</script>
 
 <script>
-// =========================================================================
-// === منطق پایه سایت (دروازه، انیمیشن‌ها) ===
-// =========================================================================
-const KEYS = ["niyayesh", "نیایش", "ملکه", "queen"];
+/* =================================================== */
+/* === اسکریپت‌های سینمایی، لودر، انیمیشن‌ها و کورسر === */
+/* =================================================== */
+const KEYS = ["نیایش", "niyayesh", "ملکه", "queen"];
+const audio = document.getElementById('audio');
+const audioBtn = document.getElementById('audioBtn');
+audio.volume = 0.5;
 
-function enterGate() {
-  const pass = document.getElementById('pass').value.trim().toLowerCase();
-  if (KEYS.includes(pass)) {
+// برداشتن انیمیشن لودینگ پس از اتمام بارگذاری کامل کدهای کلاینت
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('done');
+  }, 1200);
+  initCanvasStars();
+  updateCountdownTimers();
+});
+
+// گشودن دروازه با کلیدهای از پیش تعیین شده
+function enter() {
+  const inputVal = document.getElementById('pass').value.trim().toLowerCase();
+  const errEl = document.getElementById('gateErr');
+  
+  if (KEYS.includes(inputVal)) {
     document.getElementById('main-content').style.display = 'block';
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('nav').classList.add('show');
-    setTimeout(() => { document.getElementById('gate').style.display = 'none'; }, 1500);
-    loveBurst();
+    
+    // باز کردن قفل صوتی مرورگرها به صورت کاملاً استاندارد تعاملی
+    audio.play().then(() => {
+      audioBtn.classList.add('playing');
+    }).catch(() => {});
+    
+    setTimeout(() => {
+      document.getElementById('gate').style.display = 'none';
+    }, 1500);
   } else {
-    document.getElementById('gerr').textContent = 'نام ملکه را به درستی وارد کن... 💔';
-    const card = document.querySelector('.gate-card');
-    card.style.animation = 'none'; card.offsetHeight; card.style.animation = 'shake 0.4s';
-  }
-}
-document.getElementById('pass').addEventListener('keydown', e => { if (e.key === 'Enter') enterGate() });
-
-function loveBurst() {
-  for (let i = 0; i < 20; i++) {
-    const h = document.createElement('div');
-    h.className = 'petal';
-    h.textContent = ['💖', '❤️', '✨', '👑'][Math.floor(Math.random() * 4)];
-    h.style.left = Math.random() * 100 + 'vw';
-    h.style.fontSize = (15 + Math.random() * 20) + 'px';
-    h.style.animationDuration = (3 + Math.random() * 3) + 's';
-    document.body.appendChild(h);
-    setTimeout(() => h.remove(), 6000);
+    errEl.textContent = "کلمه ورود نادرست است؛ شکوه پادشاهی اجازه ورود به شما را نمی‌دهد.";
+    document.querySelector('.gate-card').style.animation = 'shake 0.4s ease';
+    setTimeout(() => { document.querySelector('.gate-card').style.animation = ''; }, 400);
   }
 }
 
-// =========================================================================
-// === کنترل UI پیام‌رسان (باز/بسته کردن مودال‌ها) ===
-// =========================================================================
-const chatWrapper = document.getElementById('chatModalWrapper');
-document.getElementById('openChatBtn').onclick = () => { chatWrapper.classList.add('open'); document.body.style.overflow = 'hidden'; };
-document.getElementById('closeChatBtnMain').onclick = () => { chatWrapper.classList.remove('open'); document.body.style.overflow = ''; };
-
-function showToast(msg) {
-  const t = document.getElementById('sysToast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-
-function openModal(id) { document.getElementById(id).classList.add('show'); }
-function closeModal(id) { document.getElementById(id).classList.remove('show'); }
-document.querySelectorAll('[data-close]').forEach(btn => {
-  btn.onclick = () => btn.closest('.sys-modal').classList.remove('show');
-});
-
-// سوئیچ تب لاگین/ثبت نام
-const tabLogin = document.getElementById('tabLogin');
-const tabReg = document.getElementById('tabReg');
-const wrapRegName = document.getElementById('wrapRegName');
-const btnSubmitAuth = document.getElementById('btnSubmitAuth');
-let isRegisterMode = false;
-
-tabLogin.onclick = () => { isRegisterMode = false; tabLogin.classList.add('active'); tabReg.classList.remove('active'); wrapRegName.style.display = 'none'; btnSubmitAuth.textContent = 'ورود به قصر'; };
-tabReg.onclick = () => { isRegisterMode = true; tabReg.classList.add('active'); tabLogin.classList.remove('active'); wrapRegName.style.display = 'block'; btnSubmitAuth.textContent = 'ثبت‌نام در امپراتوری'; };
-
-// بازگشت به لیست در موبایل
-document.getElementById('btnBackToChats').onclick = () => {
-  document.getElementById('activeChatState').classList.remove('show-mobile');
-};
-</script>
-
-<script type="module">
-// =========================================================================
-// === منطق فایربیس و عملکرد پیام‌رسان WIRIPER ===
-// =========================================================================
-import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, addDoc, collection, query, where, orderBy, onSnapshot, serverTimestamp, deleteDoc, increment, getDocs, limit } from "firebase/firestore";
-import { getStorage, ref as sRef, uploadBytes, getDownloadURL } from "firebase/storage";
-
-// کانفیگ ارائه شده کاربر (تغییر ندادم)
-const firebaseConfig = {
-  apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
-  authDomain: "niyayesh-universe.firebaseapp.com",
-  databaseURL: "https://niyayesh-universe-default-rtdb.firebaseio.com",
-  projectId: "niyayesh-universe",
-  storageBucket: "niyayesh-universe.firebasestorage.app",
-  messagingSenderId: "675804346928",
-  appId: "1:675804346928:web:8e8c33f7a26d2824340bf5",
-  measurementId: "G-5X7BKVZBNN"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-// --- متغیرهای سراسری پیام‌رسان ---
-let ME = null;
-let currentChat = null;
-let unsubChats = null;
-let unsubMsgs = null;
-let editingMsgId = null;
-let targetUserInfo = null; // برای وقتی کاربری را سرچ می‌کنیم
-
-const EMAIL_SUFFIX = "@wiriper.app";
-const GIFTS = [
-  {ico:"🌹", name:"گل رز ملکه", cost:5}, {ico:"🎂", name:"کیک سلطنتی", cost:10},
-  {ico:"💖", name:"قلب ابدی", cost:15}, {ico:"💎", name:"الماس قصر", cost:25},
-  {ico:"👑", name:"تاج طلایی", cost:50}, {ico:"🌌", name:"کهکشان", cost:100}
-];
-const BGS = [
-  "linear-gradient(135deg, #120a24, #050308)", "linear-gradient(135deg, #431c87, #120a24)",
-  "linear-gradient(135deg, #b8862f, #050308)", "linear-gradient(135deg, #ff66b2, #431c87)"
-];
-
-// --- ابزارهای کمکی ---
-const $ = id => document.getElementById(id);
-function escapeHTML(str) { return (str||"").replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
-function formatTime(ts) { if(!ts) return ""; const d = ts.toDate ? ts.toDate() : new Date(ts); return d.toLocaleTimeString('fa-IR', {hour:'2-digit', minute:'2-digit'}); }
-function generateAvatarHTML(url, name) { return url ? `<img src="${escapeHTML(url)}">` : (name ? name.charAt(0) : '👑'); }
-
-// --- احراز هویت (Auth) ---
-$("btnSubmitAuth").onclick = async () => {
-  const u = $("authUsername").value.trim().toLowerCase();
-  const p = $("authPassword").value;
-  const isReg = $("tabReg").classList.contains('active');
-  const dn = $("authDisplayName").value.trim();
-
-  if(!u || !p || (isReg && !dn)) { $("authError").textContent = "لطفاً تمام فیلدها را پر کنید."; return; }
-  $("btnSubmitAuth").disabled = true; $("authError").textContent = "در حال ارتباط با قصر...";
-  $("authError").style.color = "var(--gold-2)";
-
-  try {
-    if(isReg) {
-      const snap = await getDoc(doc(db, "usernames", u));
-      if(snap.exists()) throw new Error("این نام کاربری قبلاً در امپراتوری ثبت شده است.");
-      const cred = await createUserWithEmailAndPassword(auth, u + EMAIL_SUFFIX, p);
-      await setDoc(doc(db, "users", cred.user.uid), {
-        uid: cred.user.uid, username: u, displayName: dn, photoURL: "", bio: "شهروند امپراتوری Wiriper", credits: 50, createdAt: serverTimestamp()
-      });
-      await setDoc(doc(db, "usernames", u), { uid: cred.user.uid });
-    } else {
-      await signInWithEmailAndPassword(auth, u + EMAIL_SUFFIX, p);
-    }
-  } catch(e) {
-    $("authError").style.color = "var(--danger)";
-    $("authError").textContent = e.message.includes('auth/') ? "اطلاعات ورود اشتباه است." : e.message;
-    $("btnSubmitAuth").disabled = false;
-  }
-};
-
-onAuthStateChanged(auth, async (user) => {
-  if(user) {
-    const docSnap = await getDoc(doc(db, "users", user.uid));
-    if(docSnap.exists()) {
-      ME = docSnap.data();
-      $("chatAuthView").style.display = "none";
-      $("chatAppView").style.display = "flex";
-      updateMyProfileUI();
-      loadChatList();
-    }
+// کنترلر وضعیت موزیک بتهوون تالار
+function toggleAudio() {
+  if (audio.paused) {
+    audio.play().catch(()=>{});
+    audioBtn.classList.add('playing');
   } else {
-    ME = null;
-    $("chatAuthView").style.display = "flex";
-    $("chatAppView").style.display = "none";
-    $("btnSubmitAuth").disabled = false;
-    $("authError").textContent = "";
-    if(unsubChats) unsubChats();
-    if(unsubMsgs) unsubMsgs();
+    audio.pause();
+    audioBtn.classList.remove('playing');
+  }
+}
+
+// مدیریت و ناوبری باز و بسته شدن مودال سیستم پیام‌رسان قصر بدون تداخل
+const openChatBtn = document.getElementById('openChatBtn');
+const closeChatBtn = document.getElementById('closeChatBtn');
+const messengerModal = document.getElementById('messengerModal');
+
+openChatBtn.onclick = () => { messengerModal.classList.add('open'); document.body.style.overflow = 'hidden'; };
+closeChatBtn.onclick = () => { messengerModal.classList.remove('open'); document.body.style.overflow = ''; };
+
+// سیستم توست نوتیفیکیشن
+function showToast(text) {
+  const t = document.getElementById('toast');
+  t.textContent = text;
+  t.style.display = 'block';
+  setTimeout(() => { t.style.display = 'none'; }, 3000);
+}
+
+// پیاده‌سازی شمارش معکوس باشکوه روز تولد مبین و نیایش
+function updateCountdownTimers() {
+  const cdMobin = document.getElementById('cd-mobin');
+  const cdNiyayesh = document.getElementById('cd-niyayesh');
+
+  function calculateTime(month, day) {
+    const now = new Date();
+    let target = new Date(now.getFullYear(), month - 1, day);
+    if (now > target) target.setFullYear(now.getFullYear() + 1);
+    const diff = target - now;
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    return `${days} روز و ${hours} ساعت`;
+  }
+
+  // ۲۵ اسفند تولد پادشاه مبین (برابر با March 15 دیت سیستم) و ۱۵ شهریور ملکه نیایش (برابر با September 6)
+  setInterval(() => {
+    cdMobin.textContent = calculateTime(3, 15);
+    cdNiyayesh.textContent = calculateTime(9, 6);
+  }, 1000);
+}
+
+// انیمیشن رندر ذرات ستاره‌های کهکشانی پس‌زمینه با ۶۰ الی ۱۲۰ فریم ثابت
+function initCanvasStars() {
+  const canvas = document.getElementById('bgCanvas');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.onresize = resize;
+  resize();
+
+  for(let i=0; i<65; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 2 + 0.5,
+      speed: Math.random() * 0.4 + 0.1
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(232, 198, 107, 0.4)";
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+      s.y -= s.speed;
+      if (s.y < 0) s.y = canvas.height;
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+// نشانگر موس شخصی‌سازی‌شده و نرم دسکتاپ
+const dot = document.querySelector('.cursor-dot');
+const ring = document.querySelector('.cursor-ring');
+window.addEventListener('mousemove', (e) => {
+  if(dot && ring) {
+    dot.style.left = e.clientX + 'px';
+    dot.style.top = e.clientY + 'px';
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
   }
 });
-
-// --- پروفایل شخصی ---
-function updateMyProfileUI() {
-  $("myName").textContent = ME.displayName;
-  $("myUsername").textContent = "@" + ME.username;
-  $("myAvatar").innerHTML = generateAvatarHTML(ME.photoURL, ME.displayName);
-  
-  $("inpMyName").value = ME.displayName;
-  $("inpMyBio").value = ME.bio || "";
-  $("valMyCredits").textContent = ME.credits || 0;
-  $("previewMyAvatar").innerHTML = generateAvatarHTML(ME.photoURL, ME.displayName);
-}
-
-$("btnOpenMyProfile").onclick = () => openModal('modalMyProfile');
-$("btnLogout").onclick = () => signOut(auth);
-
-$("btnSaveProfile").onclick = async () => {
-  const newName = $("inpMyName").value.trim();
-  const newBio = $("inpMyBio").value.trim();
-  if(!newName) return showToast("نام نمی‌تواند خالی باشد.");
-
-  let newPhotoURL = ME.photoURL;
-  const file = $("inputMyAvatar").files[0];
-  if(file) {
-    showToast("در حال آپلود عکس...");
-    const storageRef = sRef(storage, `avatars/${ME.uid}_${Date.now()}`);
-    await uploadBytes(storageRef, file);
-    newPhotoURL = await getDownloadURL(storageRef);
-  }
-
-  await updateDoc(doc(db, "users", ME.uid), { displayName: newName, bio: newBio, photoURL: newPhotoURL });
-  ME.displayName = newName; ME.bio = newBio; ME.photoURL = newPhotoURL;
-  updateMyProfileUI();
-  showToast("تغییرات با موفقیت ذخیره شد.");
-  closeModal('modalMyProfile');
-};
-
-$("inputMyAvatar").onchange = e => {
-  if(e.target.files[0]) {
-    const reader = new FileReader();
-    reader.onload = e => { $("previewMyAvatar").innerHTML = `<img src="${e.target.result}">`; }
-    reader.readAsDataURL(e.target.files[0]);
-  }
-};
-
-// --- جستجو و شروع چت خصوصی ---
-$("btnSearchUser").onclick = () => { $("boxSearchResults").innerHTML=""; $("inpSearchUser").value=""; openModal('modalFindUser'); };
-
-$("btnDoSearch").onclick = async () => {
-  const u = $("inpSearchUser").value.trim().toLowerCase();
-  if(!u) return;
-  $("boxSearchResults").innerHTML = "<div style='color:var(--gold);'>در حال جستجو...</div>";
-  const snap = await getDocs(query(collection(db, "users"), where("username", "==", u), limit(1)));
-  $("boxSearchResults").innerHTML = "";
-  
-  if(snap.empty) { $("boxSearchResults").innerHTML = "<div style='color:var(--danger);'>کاربری یافت نشد.</div>"; return; }
-  
-  const ud = snap.docs[0].data();
-  if(ud.uid === ME.uid) { $("boxSearchResults").innerHTML = "<div style='color:var(--muted);'>شما نمی‌توانید با خودتان چت کنید.</div>"; return; }
-  
-  const div = document.createElement("div"); div.className = "user-item";
-  div.innerHTML = `<div class="chat-avatar sm">${generateAvatarHTML(ud.photoURL, ud.displayName)}</div>
-    <div style="flex:1"><b style="color:var(--gold-2);display:block;">${escapeHTML(ud.displayName)}</b><span style="font-size:0.8rem;color:var(--muted);">@${ud.username}</span></div>`;
-  div.onclick = () => { targetUserInfo = ud; showUserInfoModal(); };
-  $("boxSearchResults").appendChild(div);
-};
-
-function showUserInfoModal() {
-  $("infoName").textContent = targetUserInfo.displayName;
-  $("infoUsername").textContent = "@" + targetUserInfo.username;
-  $("infoBio").textContent = targetUserInfo.bio || "بدون بایوگرافی";
-  $("infoAvatar").innerHTML = generateAvatarHTML(targetUserInfo.photoURL, targetUserInfo.displayName);
-  closeModal('modalFindUser'); openModal('modalUserInfo');
-}
-
-$("btnStartPrivateChat").onclick = async () => {
-  closeModal('modalUserInfo');
-  const chatId = [ME.uid, targetUserInfo.uid].sort().join("_");
-  const chatRef = doc(db, "chats", chatId);
-  const snap = await getDoc(chatRef);
-  
-  if(!snap.exists()) {
-    await setDoc(chatRef, {
-      type: "private", members: [ME.uid, targetUserInfo.uid], updatedAt: serverTimestamp(), lastMsg: "آغاز گفتگو",
-      nicknames: { [ME.uid]: ME.displayName, [targetUserInfo.uid]: targetUserInfo.displayName },
-      photos: { [ME.uid]: ME.photoURL, [targetUserInfo.uid]: targetUserInfo.photoURL }, bg: ""
-    });
-  }
-  openChat(chatId);
-};
-
-// --- ساخت گروه و کانال ---
-$("btnCreateGroup").onclick = () => { $("newChatHeading").textContent="گروه جدید"; $("newChatLbl").textContent="نام گروه"; $("modalNewChat").dataset.type="group"; openModal('modalNewChat'); };
-$("btnCreateChannel").onclick = () => { $("newChatHeading").textContent="کانال جدید"; $("newChatLbl").textContent="نام کانال"; $("modalNewChat").dataset.type="channel"; openModal('modalNewChat'); };
-
-$("btnSubmitNewChat").onclick = async () => {
-  const name = $("inpNewChatName").value.trim();
-  if(!name) return showToast("نام نمی‌تواند خالی باشد.");
-  const type = $("modalNewChat").dataset.type;
-  
-  const newChatRef = await addDoc(collection(db, "chats"), {
-    name, type, members: [ME.uid], owner: ME.uid, updatedAt: serverTimestamp(), lastMsg: "ایجاد شد", photoURL: "", bg: ""
-  });
-  
-  closeModal('modalNewChat'); $("inpNewChatName").value = "";
-  showToast((type==='group'?'گروه':'کانال') + " با موفقیت ایجاد شد.");
-  openChat(newChatRef.id);
-};
-
-// --- لیست چت‌ها ---
-function loadChatList() {
-  if(unsubChats) unsubChats();
-  const q = query(collection(db, "chats"), where("members", "array-contains", ME.uid), orderBy("updatedAt", "desc"));
-  unsubChats = onSnapshot(q, (snap) => {
-    const list = $("chatListArea"); list.innerHTML = "";
-    snap.forEach(d => {
-      const chat = d.data(); chat.id = d.id;
-      let title = chat.name || "?", sub = chat.lastMsg || "", icon = chat.photoURL;
-      
-      if(chat.type === "private") {
-        const otherId = chat.members.find(u => u !== ME.uid);
-        title = chat.nicknames?.[otherId] || "کاربر";
-        icon = chat.photos?.[otherId] || "";
-      }
-      
-      const el = document.createElement("div");
-      el.className = "chat-item" + (currentChat?.id === chat.id ? " active" : "");
-      el.innerHTML = `
-        <div class="chat-avatar">${generateAvatarHTML(icon, title)}</div>
-        <div class="ci-content">
-          <div class="ci-top">
-            <div class="ci-name">${escapeHTML(title)} ${chat.type !== 'private' ? `<span class="badge">${chat.type==='group'?'گروه':'کانال'}</span>` : ''}</div>
-            <div class="ci-time">${formatTime(chat.updatedAt)}</div>
-          </div>
-          <div class="ci-last">${escapeHTML(sub)}</div>
-        </div>
-      `;
-      el.onclick = () => openChat(chat.id, chat, title, icon);
-      list.appendChild(el);
-    });
-  });
-}
-
-// --- باز کردن چت و پیام‌ها ---
-async function openChat(chatId, preloadedData = null, title = null, icon = null) {
-  if(!preloadedData) {
-    const snap = await getDoc(doc(db, "chats", chatId));
-    if(snap.exists()) preloadedData = snap.data(); else return;
-    preloadedData.id = chatId;
-    if(preloadedData.type === "private") {
-        const otherId = preloadedData.members.find(u => u !== ME.uid);
-        title = preloadedData.nicknames?.[otherId] || "کاربر";
-        icon = preloadedData.photos?.[otherId] || "";
-    } else {
-        title = preloadedData.name; icon = preloadedData.photoURL;
-    }
-  }
-
-  currentChat = preloadedData;
-  $("emptyChatState").style.display = "none";
-  $("activeChatState").style.display = "flex";
-  
-  if(window.innerWidth <= 768) $("activeChatState").classList.add('show-mobile'); // برای موبایل
-
-  $("activeChatTitle").textContent = title;
-  $("activeChatSub").textContent = currentChat.type === 'private' ? 'چت خصوصی' : (currentChat.type === 'group' ? 'گروه' : 'کانال');
-  $("activeChatAvatar").innerHTML = generateAvatarHTML(icon, title);
-  applyBg(currentChat.bg);
-
-  if(unsubMsgs) unsubMsgs();
-  const q = query(collection(db, "chats", chatId, "messages"), orderBy("createdAt", "asc"), limit(150));
-  unsubMsgs = onSnapshot(q, (snap) => {
-    const box = $("messagesArea"); box.innerHTML = "";
-    snap.forEach(d => {
-      const m = d.data(); m.id = d.id;
-      const isMe = m.senderId === ME.uid;
-      const row = document.createElement("div"); row.className = "msg-row " + (isMe ? "me" : "other");
-      
-      let content = "";
-      if(m.type === 'text') content = escapeHTML(m.body).replace(/\n/g, "<br>");
-      else if(m.type === 'image') content = `<img src="${m.url}" onclick="window.open('${m.url}')">`;
-      else if(m.type === 'video') content = `<video src="${m.url}" controls></video>`;
-      else if(m.type === 'audio') content = `<audio src="${m.url}" controls></audio>`;
-      else if(m.type === 'gift') content = `<div class="g-ico">${m.gift.ico}</div><div class="g-val">${m.gift.name}</div>`;
-
-      const tools = isMe && m.type === 'text' ? `<div class="msg-tools"><button data-action="edit" data-id="${m.id}" data-body="${escapeHTML(m.body)}">✏️</button><button data-action="del" data-id="${m.id}">🗑️</button></div>` : '';
-      const senderHtml = (!isMe && currentChat.type !== 'private') ? `<span class="msg-sender">${escapeHTML(m.senderName)}</span>` : '';
-
-      row.innerHTML = `<div class="msg-bubble ${m.type === 'gift' ? 'gift-bubble' : ''}">
-        ${tools}${senderHtml}${content}
-        <div class="msg-meta">${m.edited ? '<span class="edited-mark">ویرایش شده</span>' : ''}<span>${formatTime(m.createdAt)}</span></div>
-      </div>`;
-      box.appendChild(row);
-    });
-    box.scrollTop = box.scrollHeight;
-    
-    // Attach event listeners for edit/del
-    box.querySelectorAll('.msg-tools button').forEach(btn => {
-        btn.onclick = () => {
-            if(btn.dataset.action === 'edit') triggerEdit(btn.dataset.id, btn.dataset.body);
-            if(btn.dataset.action === 'del') triggerDelete(btn.dataset.id);
-        }
-    });
-  });
-}
-
-// --- ارسال پیام و فایل ---
-$("btnSendMessage").onclick = async () => {
-  const text = $("msgInputBox").value.trim();
-  if(!text || !currentChat) return;
-
-  if(currentChat.type === 'channel' && currentChat.owner !== ME.uid) return showToast("فقط مدیر کانال حق ارسال پیام دارد.");
-
-  if(editingMsgId) {
-    await updateDoc(doc(db, "chats", currentChat.id, "messages", editingMsgId), { body: text, edited: true });
-    $("msgInputBox").value = ""; $("editBanner").style.display = "none"; editingMsgId = null;
-    return;
-  }
-
-  const msgObj = { senderId: ME.uid, senderName: ME.displayName, type: "text", body: text, createdAt: serverTimestamp(), edited: false };
-  await addDoc(collection(db, "chats", currentChat.id, "messages"), msgObj);
-  await updateDoc(doc(db, "chats", currentChat.id), { lastMsg: text.substring(0,30), updatedAt: serverTimestamp() });
-  $("msgInputBox").value = "";
-};
-
-// ویرایش و حذف
-function triggerEdit(id, body) {
-    editingMsgId = id;
-    $("editPreviewText").textContent = body;
-    $("msgInputBox").value = body;
-    $("editBanner").style.display = "flex";
-    $("msgInputBox").focus();
-}
-$("cancelEditBtn").onclick = () => { editingMsgId = null; $("msgInputBox").value = ""; $("editBanner").style.display = "none"; };
-
-async function triggerDelete(id) {
-    if(confirm("آیا از حذف پیام اطمینان دارید؟")) {
-        await deleteDoc(doc(db, "chats", currentChat.id, "messages", id));
-    }
-}
-
-// فایل‌ها
-$("btnAttachFile").onclick = () => $("inputFile").click();
-$("inputFile").onchange = async (e) => {
-  const file = e.target.files[0]; if(!file || !currentChat) return;
-  if(currentChat.type === 'channel' && currentChat.owner !== ME.uid) return showToast("فقط مدیر کانال حق ارسال فایل دارد.");
-  if(file.size > 20 * 1024 * 1024) return showToast("حجم فایل باید کمتر از ۲۰ مگابایت باشد.");
-
-  let type = 'file';
-  if(file.type.startsWith('image')) type = 'image';
-  else if(file.type.startsWith('video')) type = 'video';
-  else if(file.type.startsWith('audio')) type = 'audio';
-
-  $("uploadLine").style.width = "30%";
-  try {
-    const sref = sRef(storage, `chat_media/${currentChat.id}_${Date.now()}_${file.name}`);
-    await uploadBytes(sref, file);
-    $("uploadLine").style.width = "70%";
-    const url = await getDownloadURL(sref);
-    
-    await addDoc(collection(db, "chats", currentChat.id, "messages"), { senderId: ME.uid, senderName: ME.displayName, type, url, createdAt: serverTimestamp() });
-    await updateDoc(doc(db, "chats", currentChat.id), { lastMsg: "📎 پیوست رسانه", updatedAt: serverTimestamp() });
-    $("uploadLine").style.width = "0%";
-    $("inputFile").value = "";
-  } catch(err) {
-    showToast("خطا در آپلود. دسترسی‌های Storage را بررسی کنید.");
-    $("uploadLine").style.width = "0%";
-  }
-};
-
-// --- هدایا ---
-$("btnOpenGiftModal").onclick = () => {
-    if(!currentChat) return;
-    $("valGiftCredits").textContent = ME.credits || 0;
-    const box = $("boxGifts"); box.innerHTML = "";
-    GIFTS.forEach(g => {
-        const d = document.createElement('div'); d.className = "gift-card";
-        d.innerHTML = `<div class="gi">${g.ico}</div><div class="gn">${g.name}</div><div class="gc">💎 ${g.cost}</div>`;
-        d.onclick = () => sendGift(g);
-        box.appendChild(d);
-    });
-    openModal('modalGift');
-};
-
-async function sendGift(gift) {
-    if((ME.credits || 0) < gift.cost) return showToast("موجودی الماس شما کافی نیست.");
-    
-    await updateDoc(doc(db, "users", ME.uid), { credits: increment(-gift.cost) });
-    ME.credits -= gift.cost; $("valGiftCredits").textContent = ME.credits; updateMyProfileUI();
-
-    await addDoc(collection(db, "chats", currentChat.id, "messages"), { senderId: ME.uid, senderName: ME.displayName, type: "gift", gift, createdAt: serverTimestamp() });
-    await updateDoc(doc(db, "chats", currentChat.id), { lastMsg: `🎁 ${gift.name}`, updatedAt: serverTimestamp() });
-    
-    closeModal('modalGift');
-    showToast("هدیه با موفقیت ارسال شد.");
-}
-
-// --- تغییر بک‌گراند ---
-$("btnOpenBgModal").onclick = () => {
-    if(!currentChat) return;
-    const box = $("boxBgs"); box.innerHTML = "";
-    BGS.forEach(bg => {
-        const d = document.createElement('div'); d.className = "bg-swatch"; d.style.background = bg;
-        d.onclick = async () => { await updateDoc(doc(db, "chats", currentChat.id), { bg }); currentChat.bg = bg; applyBg(bg); closeModal('modalBg'); };
-        box.appendChild(d);
-    });
-    openModal('modalBg');
-};
-$("btnResetBg").onclick = async () => {
-    await updateDoc(doc(db, "chats", currentChat.id), { bg: "" });
-    currentChat.bg = ""; applyBg(""); closeModal('modalBg');
-};
-function applyBg(bg) {
-    $("messagesArea").style.backgroundImage = bg && bg.startsWith('url') ? bg : '';
-    $("messagesArea").style.background = bg && !bg.startsWith('url') ? bg : '';
-    if(!bg) $("messagesArea").style.background = 'var(--bg)';
-}
 </script>
 
 </body>
