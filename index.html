@@ -29,11 +29,14 @@
     --premium-glow: linear-gradient(135deg, #8957e5, #dfb73e);
   }
   
-  * { box-sizing:border-box; margin:0; padding:0; font-family: 'Segoe UI', Tahoma, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  html, body { height:100dvh; overflow:hidden; background:var(--bg); color:var(--txt); -webkit-tap-highlight-color:transparent; scroll-behavior: smooth; overscroll-behavior-y: none; }
+  * { box-sizing:border-box; margin:0; padding:0;
+      font-family: 'Segoe UI', Tahoma, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { height:100dvh; overflow:hidden; background:var(--bg); color:var(--txt); -webkit-tap-highlight-color:transparent; scroll-behavior: smooth;
+               overscroll-behavior-y: none; }
   
   /* 60fps/120fps Hardware Accelerated Animations */
-  .fade-in { animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; will-change: opacity, transform; }
+  .fade-in { animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+             will-change: opacity, transform; }
   .pop-in { animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; will-change: transform, opacity; }
   .slide-down { animation: slideDown 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
   
@@ -53,8 +56,10 @@
   img { user-select:none; -webkit-user-drag: none; }
 
   /* AUTH SCREEN */
-  #authScreen { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% -20%, #1a1a24, var(--bg)); z-index:50; }
-  .auth-card { width:92%; max-width:400px; background:var(--panel); border:1px solid var(--line); border-radius:32px; padding:40px 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.8), var(--gold-glow); backdrop-filter: blur(30px); }
+  #authScreen { position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+                background:radial-gradient(circle at 50% -20%, #1a1a24, var(--bg)); z-index:50; }
+  .auth-card { width:92%; max-width:400px; background:var(--panel); border:1px solid var(--line); border-radius:32px; padding:40px 32px;
+               box-shadow: 0 20px 60px rgba(0,0,0,0.8), var(--gold-glow); backdrop-filter: blur(30px); }
   .auth-logo { text-align:center; margin-bottom:30px; animation: popIn 0.5s ease; }
   .auth-logo h1 { background: var(--premium); background-size: 200% auto; -webkit-background-clip: text; color: transparent; font-size:42px; letter-spacing:1px; font-weight:900; }
   .auth-logo p { color:var(--muted); font-size:14px; margin-top:8px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
@@ -65,7 +70,8 @@
   
   .field { margin-bottom:20px; }
   .field label { display:block; font-size:12px; color:var(--gold); margin-bottom:8px; font-weight:700; margin-right: 8px; text-transform:uppercase; letter-spacing: 1px; }
-  .field input { width:100%; padding:16px 20px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--txt); font-size:15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); transition:0.3s; }
+  .field input { width:100%; padding:16px 20px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--txt); font-size:15px;
+                 box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); transition:0.3s; }
   .field input:focus { border-color:var(--gold2); box-shadow: 0 0 20px rgba(223,183,62,0.15), inset 0 2px 5px rgba(0,0,0,0.3); background:rgba(0,0,0,0.7); }
   
   .btn-main { width:100%; padding:16px; background:var(--premium); color:#000; font-weight:900; font-size:16px; border-radius:18px; margin-top:10px; box-shadow: var(--gold-glow); text-transform: uppercase; letter-spacing: 1px; }
@@ -237,7 +243,7 @@
   .modal h2 .x { background:rgba(255,255,255,0.05); color:var(--muted); font-size:20px; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:0.3s; border:1px solid transparent;}
   .modal h2 .x:hover { color:#fff; background:var(--danger); transform: rotate(90deg) scale(1.1); box-shadow: 0 8px 20px rgba(255,0,0,0.4); border-color:rgba(255,0,0,0.5);}
   
-  .modal textarea, .modal input[type=text], .modal input[type=date] { width:100%; padding:18px 20px; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--txt); font-size:16px; margin-bottom: 20px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); font-family:inherit;}
+  .modal textarea, .modal input[type=text], .modal input[type=date], .modal input[type=password] { width:100%; padding:18px 20px; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--txt); font-size:16px; margin-bottom: 20px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); font-family:inherit;}
   .modal textarea:focus, .modal input:focus { border-color:var(--gold2); box-shadow: 0 0 15px rgba(223,183,62,0.2), inset 0 2px 5px rgba(0,0,0,0.3); background:rgba(0,0,0,0.6);}
 
   .profile-head { text-align:center; margin-bottom:35px; }
@@ -328,7 +334,6 @@
 
 <div id="app">
   <div class="layout">
-    
     <div class="sidebar">
       <div class="side-header">
         <img id="meAvatar" class="me-avatar" onclick="openMyProfile()">
@@ -565,7 +570,7 @@ let activeChat = null;
 let msgUnsub = null;
 let chatsUnsub = null;
 let userUnsub = null;
-let actionState = { type: null, id: null }; 
+let actionState = { type: null, id: null };
 let viewedUser = null;
 let isRoyalDecreeMode = false;
 let currentMainTab = 'chats'; 
@@ -577,7 +582,6 @@ const BACKGROUNDS = ['', 'linear-gradient(135deg,#1a1a24,#030305)', 'linear-grad
 function $(id){ return document.getElementById(id); }
 function toast(t, icon=''){ const el=$('toast'); el.innerHTML = `${icon} <span>${t}</span>`; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),3500); }
 function esc(s){ return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-function emailFor(u){ return u.toLowerCase()+"@wiriper.app"; }
 function initials(name){ return (name||'?').trim().charAt(0).toUpperCase(); }
 function timeStr(ts){ if(!ts) return ''; const d=new Date(ts); return d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}); }
 function privateChatId(a,b){ return [a,b].sort().join('_'); }
@@ -618,10 +622,19 @@ window.toggleRoyalAudio = () => {
     else { audio.pause(); toast('پخش متوقف شد', '⏸️'); }
 };
 
-// ---------- AUTH & PRESENCE ----------
+// ---------- CUSTOM AUTH (NO EMAIL/SUPABASE AUTH REQUIRED) ----------
+const generateUID = () => {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+};
+
 window.doRegister = async ()=>{
   const name=$('rName').value.trim();
-  const username=$('rUser').value.trim(); const pass=$('rPass').value;
+  const username=$('rUser').value.trim();
+  const pass=$('rPass').value;
+  
   if(!name||!username||!pass) return authMsg('همه فیلدها را پر کنید');
   if(!/^[a-zA-Z0-9_]{3,20}$/.test(username)) return authMsg('نام کاربری فقط انگلیسی و اعداد');
   if(pass.length<6) return authMsg('رمز حداقل ۶ کاراکتر');
@@ -629,48 +642,75 @@ window.doRegister = async ()=>{
   
   try{
     authMsg('در حال ساخت قصر...',true);
-    const { data: taken } = await supabase.from('usernames').select('*').eq('usernameLower', uLower).single();
+    const { data: taken } = await supabase.from('usernames').select('*').eq('usernameLower', uLower).maybeSingle();
     if(taken) return authMsg('این نام کاربری از قبل تصرف شده است');
     
-    const { data: cred, error: authErr } = await supabase.auth.signUp({ email: emailFor(username), password: pass });
-    if(authErr) throw authErr;
+    const uid = generateUID();
     
-    const uid = cred.user.id;
-    await supabase.from('users').insert([{ uid, username, usernameLower:uLower, displayName:name, bio:'', photoURL:'', birthDate:'', belovedBirthDate:'', credits:500, isPremium:false, receivedGifts:[], giftScore:0, createdAt: new Date().toISOString(), lastOnline: new Date().toISOString() }]);
+    const { error: insertErr } = await supabase.from('users').insert([{ uid, username, usernameLower:uLower, password:pass, displayName:name, bio:'', photoURL:'', birthDate:'', belovedBirthDate:'', credits:500, isPremium:false, receivedGifts:[], giftScore:0, createdAt: new Date().toISOString(), lastOnline: new Date().toISOString() }]);
+    
+    if(insertErr) throw insertErr;
+
     await supabase.from('usernames').insert([{ usernameLower:uLower, uid }]);
+    
+    localStorage.setItem('wiriper_uid', uid);
+    
+    const { data: userDoc } = await supabase.from('users').select('*').eq('uid', uid).single();
+    ME = userDoc; 
+    
+    enterApp();
+    updatePresence();
+    presenceInterval = setInterval(updatePresence, 60000);
+
     authMsg('تاج‌گذاری موفقیت‌آمیز بود!',true);
-  }catch(e){ authMsg('خطا: '+(e.message)); }
+  }catch(e){ authMsg('خطا: '+(e.message || 'مشکل در ارتباط با سرور')); }
 };
 
 window.doLogin = async ()=>{
-  const username=$('lUser').value.trim(); const pass=$('lPass').value;
+  const username=$('lUser').value.trim();
+  const pass=$('lPass').value;
+  
   if(!username||!pass) return authMsg('نام و رمز عبور را وارد کنید');
   try{ 
-      authMsg('در حال گشودن دروازه...',true); 
-      const { error } = await supabase.auth.signInWithPassword({ email: emailFor(username), password: pass });
-      if(error) throw error;
+      authMsg('در حال گشودن دروازه...',true);
+      const uLower = username.toLowerCase();
+      
+      const { data, error } = await supabase.from('users').select('*').eq('usernameLower', uLower).eq('password', pass).maybeSingle();
+      
+      if(error || !data) throw new Error('نام کاربری یا رمز عبور اشتباه است');
+
+      localStorage.setItem('wiriper_uid', data.uid);
+      ME = data; 
+      
+      enterApp();
+      updatePresence();
+      presenceInterval = setInterval(updatePresence, 60000);
   }
-  catch(e){ authMsg('اطلاعات ورود اشتباه است'); }
+  catch(e){ authMsg(e.message || 'اطلاعات ورود اشتباه است'); }
 };
 
 window.doLogout = async ()=>{ 
     if(!confirm('آیا برای خروج کامل از قصر اطمینان دارید؟')) return;
     if(presenceInterval) clearInterval(presenceInterval); 
-    await supabase.auth.signOut(); 
+    localStorage.removeItem('wiriper_uid');
     location.reload(); 
 };
 
-supabase.auth.onAuthStateChange(async (event, session) => {
-  if (session?.user) {
-    const { data: userDoc } = await supabase.from('users').select('*').eq('uid', session.user.id).single();
-    if (!userDoc) { await supabase.auth.signOut(); return; }
-    ME = userDoc; 
-    enterApp();
-    updatePresence();
-    presenceInterval = setInterval(updatePresence, 60000);
-  } else {
-    $('authScreen').style.display='flex'; $('app').style.display='none';
+window.addEventListener('DOMContentLoaded', async () => {
+  const savedUid = localStorage.getItem('wiriper_uid');
+  if (savedUid) {
+    const { data: userDoc } = await supabase.from('users').select('*').eq('uid', savedUid).maybeSingle();
+    if (userDoc) { 
+      ME = userDoc; 
+      enterApp();
+      updatePresence();
+      presenceInterval = setInterval(updatePresence, 60000);
+      return; 
+    } else {
+      localStorage.removeItem('wiriper_uid');
+    }
   }
+  $('authScreen').style.display='flex'; $('app').style.display='none';
 });
 
 async function updatePresence() {
@@ -693,7 +733,8 @@ function renderMeHeader(){
   const title = ME.isPremium ? `👑 ${ME.displayName}` : ME.displayName;
   $('meName').textContent=title; $('meId').textContent='@'+ME.username;
   const av=$('meAvatar');
-  if(ME.photoURL) av.src=ME.photoURL; else { av.removeAttribute('src'); av.style.background='var(--panel2)'; }
+  if(ME.photoURL) av.src=ME.photoURL;
+  else { av.removeAttribute('src'); av.style.background='var(--panel2)'; }
   if(ME.isPremium) av.classList.add('premium'); else av.classList.remove('premium');
   $('btnRoyalDecree').style.display = ME.isPremium ? 'flex' : 'none';
 }
@@ -721,7 +762,6 @@ window.switchMainTab = (tab) => {
 
 function subscribeChats(){
   const fetchChats = async () => {
-     // Fetch where members array contains ME.uid
      const { data } = await supabase.from('chats').select('*').cs('members', `["${ME.uid}"]`);
      if(data) {
          allMyChats = data.sort((a,b)=> new Date(b.lastTime).getTime() - new Date(a.lastTime).getTime());
@@ -740,9 +780,7 @@ function subscribeChats(){
 async function renderChatList(chats, isDiscover = false){
   const list=$('mainList'); list.innerHTML='';
   for(const c of chats){
-    // Ghost Channel Fix: Ignore empty broken docs
     if (!c.type || (!c.name && c.type !== 'private')) continue;
-
     const meta=await chatDisplay(c);
     const div=document.createElement('div');
     div.className='chat-item'+(c.id===activeChatId?' active':'');
@@ -801,7 +839,8 @@ async function getUser(uid){
 
 async function chatDisplay(c){
   if(c.type==='private'){
-    const other=(c.members||[]).find(m=>m!==ME.uid) || ME.uid; const u=await getUser(other);
+    const other=(c.members||[]).find(m=>m!==ME.uid) || ME.uid;
+    const u=await getUser(other);
     const title = u.isPremium ? `👑 ${u.displayName}` : u.displayName;
     return {name:title, photo:u.photoURL, icon:initials(u.displayName), userData: u};
   }
@@ -820,7 +859,6 @@ window.openChat = async (chatId, chatDataObj = null)=>{
   $('emptyChat').style.display='none'; $('activeChat').style.display='flex';
   $('chatPanel').classList.add('open');
   $('giftBtn').style.display = activeChat.type==='private'?'block':'none'; $('boostBtn').style.display = activeChat.type==='channel'?'block':'none';
-  
   if(activeChat.type === 'channel') $('callActionsBar').style.display = 'none';
   else $('callActionsBar').style.display = 'flex';
 
@@ -829,17 +867,18 @@ window.openChat = async (chatId, chatDataObj = null)=>{
   applyBackground(activeChat.background); checkJoinStatus(); checkPinnedMsg(); subscribeMessages(chatId);
   document.querySelectorAll('.chat-item').forEach(el=>el.classList.remove('active'));
 };
-
 window.closeChat=()=>{ $('chatPanel').classList.remove('open'); activeChatId=null; };
 
 async function renderChatHeader(){
   if(!activeChat) return; const meta=await chatDisplay(activeChat); $('hName').textContent=meta.name;
-  const hav=$('hAv'); if(meta.photo) hav.innerHTML=`<img src="${meta.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; else hav.textContent=meta.icon;
+  const hav=$('hAv'); if(meta.photo) hav.innerHTML=`<img src="${meta.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
+  else hav.textContent=meta.icon;
   
   if(activeChat.type==='private'){
     const u = meta.userData;
     $('hSub').textContent = getLastSeenText(u.lastOnline);
-    if(getLastSeenText(u.lastOnline) === 'آنلاین') $('hSub').style.color = 'var(--green)'; else $('hSub').style.color = 'var(--gold2)';
+    if(getLastSeenText(u.lastOnline) === 'آنلاین') $('hSub').style.color = 'var(--green)';
+    else $('hSub').style.color = 'var(--gold2)';
   }else if(activeChat.type==='group'){ $('hSub').textContent=(activeChat.members||[]).length+' حاضر'; $('hSub').style.color = 'var(--gold2)';
   }else{ 
       const lvl = Math.floor((activeChat.boosts||0) / 5) + 1;
@@ -885,7 +924,6 @@ window.joinCurrentChannel = async () => {
 // ---------- MESSAGES & REACTIONS ----------
 function subscribeMessages(chatId){
   if(msgUnsub) supabase.removeChannel(msgUnsub);
-  
   const fetchMessages = async () => {
       const { data } = await supabase.from('messages').select('*').eq('chatId', chatId).order('createdAt', { ascending: true }).limit(300);
       const box=$('messages'); const wasAtBottom = box.scrollHeight - box.scrollTop <= box.clientHeight + 150;
@@ -893,7 +931,6 @@ function subscribeMessages(chatId){
       if(wasAtBottom) { setTimeout(() => { box.scrollTo({top: box.scrollHeight, behavior: 'smooth'}); }, 50); }
   }
   fetchMessages();
-  
   msgUnsub = supabase.channel(`messages_${chatId}`)
     .on('postgres_changes', { event: '*', schema: 'public', table: 'messages', filter: `chatId=eq.${chatId}` }, payload => {
         if(payload.eventType === 'INSERT') {
@@ -912,7 +949,6 @@ function renderMessage(id,m){
   const tempClass = m.temp ? 'temp-msg' : '';
   
   let inner='';
-
   let replyHTML = '';
   if(m.replyTo) {
       replyHTML = `<div class="reply-box" onclick="document.getElementById('msg_${m.replyTo.id}')?.scrollIntoView({behavior:'smooth', block:'center'})">
@@ -960,8 +996,8 @@ function renderMessage(id,m){
   const tickIcon = mine && !m.temp ? (isSeen ? '<span class="tick seen">✓✓</span>' : '<span class="tick sent">✓</span>') : (m.temp ? '<span class="tick sent">⏳</span>' : '');
   const lvl = Math.floor((activeChat?.boosts||0) / 5) + 1;
   const customReact = lvl >= 2 ? `<button onclick="toggleReaction('${id}', '🦄')" title="لول ۲">🦄</button>` : '';
-  const actions = !m.temp && m.type!=='gift' ? `
-    <div class="msg-actions">
+  const actions = !m.temp && m.type!=='gift' ?
+    `<div class="msg-actions">
       <button onclick="startReply('${id}', this)" title="پاسخ دادن">↩️</button>
       <button onclick="pinMsg('${id}', this)" title="سنجاق کردن">📌</button>
       <button onclick="translateMsg('${id}')" title="ترجمه">🌍</button>
@@ -973,7 +1009,7 @@ function renderMessage(id,m){
       ${(mine && m.type==='text')?`<button onclick="startEdit('${id}',this)" title="ویرایش">✏️</button>`:''}
       ${mine?`<button onclick="deleteMessage('${id}')" style="color:var(--danger)" title="حذف کامل">🗑</button>`:''}
     </div>`:'';
-
+  
   row.innerHTML=`<div class="bubble ${isDecree} ${tempClass}">${actions}${senderTag}${replyHTML}${inner}<div id="trans_${id}" class="translated-txt" style="display:none;"></div>${reactHTML}<div class="b-meta">${editedTag}<span>${timeStr(m.createdAt)}</span>${tickIcon}</div></div>`;
   
   let pureText = m.text || '';
@@ -1095,13 +1131,15 @@ async function pushMessage(data){
 
 // ---------- FILE UPLOAD ----------
 window.handleFileSelect = async (e)=>{
-  const file=e.target.files[0]; e.target.value=''; if(!file||!activeChatId) return;
+  const file=e.target.files[0]; e.target.value='';
+  if(!file||!activeChatId) return;
   if(file.size>40*1024*1024) return toast('حجم فایل بیش از حد مجاز است','⚠️');
   
   const previewId = 'temp_' + Date.now();
   const reader = new FileReader();
   reader.onload = async (event) => {
-     let type='file'; if(file.type.startsWith('image/')) type='image'; else if(file.type.startsWith('video/')) type='video';
+     let type='file'; if(file.type.startsWith('image/')) type='image';
+     else if(file.type.startsWith('video/')) type='video';
      const tempMsg = { id: previewId, senderId: ME.uid, senderName: ME.displayName, type: type, mediaURL: event.target.result, fileName: file.name, text: 'در حال ارسال... ⏳', createdAt: new Date().toISOString(), temp: true, reactions:{} };
      renderMessage(previewId, tempMsg);
      $('messages').scrollTo({top: $('messages').scrollHeight, behavior: 'smooth'});
@@ -1109,7 +1147,6 @@ window.handleFileSelect = async (e)=>{
      try{
         const path=`messages/${activeChatId}/${Date.now()}_${file.name}`;
         const { data: uploadData, error } = await supabase.storage.from('wiriper_storage').upload(path, file, { cacheControl: '3600', upsert: false });
-        
         if (error) {
             const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
             alert('🚨 خطا در آپلود! لطفاً در تنظیمات Supabase باکت wiriper_storage را به صورت Public ایجاد کنید.');
@@ -1118,10 +1155,8 @@ window.handleFileSelect = async (e)=>{
 
         const { data: publicUrlData } = supabase.storage.from('wiriper_storage').getPublicUrl(path);
         const url = publicUrlData.publicUrl;
-
         let payload = { type, mediaURL:url, fileName:file.name, text:'' };
         if(actionState.type === 'reply') payload.replyTo = { id: actionState.id, sender: actionState.sender, text: actionState.text };
-        
         await pushMessage(payload);
         cancelAction();
         const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
@@ -1140,7 +1175,8 @@ window.openPremiumModal = () => { $('mainMenu').style.display='none';
 }
 window.buyPremium = async () => {
     if((ME.credits||0) < 500) return toast('اعتبار شما کافی نیست','⚠️');
-    ME.credits -= 500; ME.isPremium = true; 
+    ME.credits -= 500;
+    ME.isPremium = true; 
     await supabase.from('users').update({ credits: ME.credits, isPremium: true }).eq('uid', ME.uid);
     closeModal('premiumModal');
     toast('شما به مقام پادشاهی ارتقا یافتید! 👑','🎉'); renderMeHeader();
@@ -1157,7 +1193,8 @@ window.boostChannel = async () => {
 // ---------- PROFILE ----------
 window.openMyProfile=()=>{
   $('mainMenu').style.display='none'; $('ppName').value=ME.displayName; $('ppBirth').value=ME.birthDate||''; $('ppBelovedBirth').value=ME.belovedBirthDate||''; $('ppBio').value=ME.bio||''; $('ppUser').value='@'+ME.username; $('ppCredit').textContent=ME.credits||0; $('ppGiftScore').textContent=ME.giftScore||0;
-  const av=$('ppAv'); if(ME.photoURL){ av.src=ME.photoURL; av.style.display='block'; } else { av.removeAttribute('src'); }
+  const av=$('ppAv'); if(ME.photoURL){ av.src=ME.photoURL; av.style.display='block';
+  } else { av.removeAttribute('src'); }
   if(ME.isPremium) av.style.borderColor = '#8957e5';
   
   const gBox = $('myGiftsGallery');
@@ -1167,18 +1204,20 @@ window.openMyProfile=()=>{
 };
 
 window.saveProfile = async ()=>{
-  const name=$('ppName').value.trim(); const bio=$('ppBio').value.trim(); const birth=$('ppBirth').value; const belovedBirth = $('ppBelovedBirth').value;
+  const name=$('ppName').value.trim();
+  const bio=$('ppBio').value.trim(); const birth=$('ppBirth').value; const belovedBirth = $('ppBelovedBirth').value;
   if(!name) return toast('نام نمی‌تواند خالی باشد','⚠️');
   try{ 
       await supabase.from('users').update({ displayName:name, bio, birthDate:birth, belovedBirthDate: belovedBirth }).eq('uid', ME.uid);
-      ME.displayName=name; ME.bio=bio; ME.birthDate=birth; ME.belovedBirthDate=belovedBirth; 
+      ME.displayName=name; ME.bio=bio; ME.birthDate=birth; ME.belovedBirthDate=belovedBirth;
       renderMeHeader(); toast('در جریده ثبت شد','✔'); closeModal('myProfileModal');
   }
   catch(e){ toast('خطا در ذخیره','❌'); }
 };
 
 window.uploadAvatar = async (e)=>{
-  const file=e.target.files[0]; e.target.value=''; if(!file) return;
+  const file=e.target.files[0];
+  e.target.value=''; if(!file) return;
   toast('در حال پردازش پرتره... ⏳');
   try{
     const path=`profiles/${ME.uid}/avatar_${Date.now()}`;
@@ -1212,7 +1251,8 @@ window.viewUser = async (uid)=>{
   const av=$('upAv');
   if(u.photoURL) av.innerHTML=`<img src="${u.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; else av.textContent=initials(u.displayName);
   if(u.isPremium) av.style.border = '4px solid #8957e5'; else av.style.border = '4px solid var(--gold2)';
-  if(u.bio){ $('upBio').style.display='block'; $('upBio').textContent=u.bio; } else $('upBio').style.display='none';
+  if(u.bio){ $('upBio').style.display='block';
+  $('upBio').textContent=u.bio; } else $('upBio').style.display='none';
   
   const gBox = $('userGiftsGallery');
   if(u.receivedGifts && u.receivedGifts.length > 0){ gBox.innerHTML = u.receivedGifts.map(g => `<div class="gift-gallery-item"><div style="font-size:35px; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.5))">${g.emoji}</div><div style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">از ${g.sender}</div></div>`).reverse().join('');
@@ -1220,12 +1260,13 @@ window.viewUser = async (uid)=>{
   openModal('userProfileModal');
 };
 
-window.startChatWithViewedUser = async ()=>{ closeModal('userProfileModal'); await openOrCreatePrivate(viewedUser.uid, viewedUser); };
+window.startChatWithViewedUser = async ()=>{ closeModal('userProfileModal');
+  await openOrCreatePrivate(viewedUser.uid, viewedUser); };
 async function openOrCreatePrivate(otherUid, otherData){
   const cid=privateChatId(ME.uid,otherUid); 
   const { data: s } = await supabase.from('chats').select('*').eq('id', cid).single();
   if(!s){ 
-      await supabase.from('chats').insert([{ id: cid, type:'private', members:[ME.uid,otherUid].sort(), lastMessage:'', lastTime: new Date().toISOString(), background:'' }]); 
+      await supabase.from('chats').insert([{ id: cid, type:'private', members:[ME.uid,otherUid].sort(), lastMessage:'', lastTime: new Date().toISOString(), background:'' }]);
   }
   userCache[otherUid]=otherData; openChat(cid);
 }
@@ -1234,11 +1275,11 @@ async function openOrCreatePrivate(otherUid, otherData){
 let searchTimer=null;
 window.onSearchInput=()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(runSearch,300); };
 async function runSearch(){
-  let term=$('globalSearch').value.trim().toLowerCase().replace(/^@/,''); const box=$('mainList');
+  let term=$('globalSearch').value.trim().toLowerCase().replace(/^@/,'');
+  const box=$('mainList');
   if(!term){ switchMainTab(currentMainTab); return; }
   $('listTitle').textContent='نتایج جستجو...';
   box.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">درحال جستجو... 🔍</div>';
-  
   try{
     const { data: uSnap } = await supabase.from('users').select('*').gte('usernameLower', term).lte('usernameLower', term+'\uf8ff').limit(15);
     const { data: cSnap } = await supabase.from('chats').select('*').eq('type', 'channel').limit(30);
@@ -1261,12 +1302,13 @@ async function runSearch(){
         }
     });
     if(!found) box.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">کسی یا دیوانی یافت نشد.</div>';
-  }catch(e){ box.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">خطا در موتور جستجو</div>'; }
+  }catch(e){ box.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">خطا در موتور جستجو</div>';
+  }
 }
 
 // ---------- GROUPS & CHANNELS ----------
 window.loadMemberPicker = async ()=>{
-  const box=$('grpMembers'); box.innerHTML='در حال فراخوانی...'; 
+  const box=$('grpMembers'); box.innerHTML='در حال فراخوانی...';
   const { data: snap } = await supabase.from('users').select('*').limit(50);
   box.innerHTML='';
   (snap||[]).forEach(u=>{
@@ -1284,7 +1326,8 @@ window.createGroup = async ()=>{
   closeModal('newGroupModal'); $('grpName').value=''; toast('محفل ساخته شد','✔'); openChat(ref.id);
 };
 window.createChannel = async ()=>{
-  const name=$('chName').value.trim(); const desc=$('chDesc').value.trim(); if(!name) return toast('نام را وارد کنید','⚠️');
+  const name=$('chName').value.trim(); const desc=$('chDesc').value.trim();
+  if(!name) return toast('نام را وارد کنید','⚠️');
   const { data: ref } = await supabase.from('chats').insert([{ type:'channel', name, nameLower:name.toLowerCase(), description:desc, photoURL:'', owner:ME.uid, admins:[], members:[ME.uid], boosts:0, lastMessage:'دیوان دایر شد', lastTime: new Date().toISOString(), background:'' }]).select().single();
   closeModal('newChannelModal'); $('chName').value=''; $('chDesc').value=''; toast('دیوان ساخته شد','✔'); openChat(ref.id);
 };
@@ -1307,7 +1350,8 @@ window.openChatInfo = async ()=>{
         $('ciBoosts').style.display = 'inline-block';
         $('ciBoosts').textContent = `لول دیوان: ${lvl} (${activeChat.boosts||0} 🚀)`;
         $('ciSub').textContent = (activeChat.members||[]).length + ' دنبال‌کننده';
-        if(activeChat.owner === ME.uid) $('channelSettingsUI').style.display = 'block'; else $('channelSettingsUI').style.display = 'none';
+        if(activeChat.owner === ME.uid) $('channelSettingsUI').style.display = 'block';
+        else $('channelSettingsUI').style.display = 'none';
     } else {
         $('ciBoosts').style.display = 'none';
         if(activeChat.owner === ME.uid) $('channelSettingsUI').style.display = 'block'; else $('channelSettingsUI').style.display = 'none';
@@ -1315,10 +1359,10 @@ window.openChatInfo = async ()=>{
     }
     
     if(activeChat.description){ $('ciDesc').style.display='block'; $('ciDesc').textContent=activeChat.description; } else $('ciDesc').style.display='none';
-    
     for(const uid of (activeChat.members||[])){
       const u=await getUser(uid); const div=document.createElement('div'); div.className='member-pick'; div.style.background='rgba(0,0,0,0.5)';
-      const isOwner = uid===activeChat.owner; const isAdmin = (activeChat.admins||[]).includes(uid);
+      const isOwner = uid===activeChat.owner;
+      const isAdmin = (activeChat.admins||[]).includes(uid);
       const badge = isOwner ? '<span class="rank" style="background:var(--danger)">👑 مالک</span>' : (isAdmin ? '<span class="rank" style="background:#007aff">🛡️ وزیر</span>' : '');
       div.innerHTML=`${u.photoURL?`<img class="av" style="width:45px;height:45px" src="${u.photoURL}">`:`<div class="av" style="width:45px;height:45px">${initials(u.displayName)}</div>`}
         <div class="ci-main" onclick="closeModal('chatInfoModal'); viewUser('${uid}');"><div class="ci-name" style="font-size:15px">${u.isPremium?'👑':''}${esc(u.displayName)} ${badge}</div><div class="ci-last" style="font-size:12px">@${esc(u.username)}</div></div>`;
@@ -1341,13 +1385,15 @@ window.toggleAdmin = async (uid, isCurrentlyAdmin) => {
         activeChat.admins = activeChat.admins.filter(a => a !== uid);
         await supabase.from('chats').update({ admins: activeChat.admins }).eq('id', activeChatId);
     } else { 
-        if(!activeChat.admins) activeChat.admins = []; activeChat.admins.push(uid);
+        if(!activeChat.admins) activeChat.admins = [];
+        activeChat.admins.push(uid);
         await supabase.from('chats').update({ admins: activeChat.admins }).eq('id', activeChatId);
     }
     openChatInfo();
 }
 
-window.clearActiveChat=()=>{ activeChatId=null; activeChat=null; if(msgUnsub) supabase.removeChannel(msgUnsub); $('activeChat').style.display='none'; $('emptyChat').style.display='flex'; $('chatPanel').classList.remove('open'); };
+window.clearActiveChat=()=>{ activeChatId=null; activeChat=null; if(msgUnsub) supabase.removeChannel(msgUnsub); $('activeChat').style.display='none'; $('emptyChat').style.display='flex'; $('chatPanel').classList.remove('open');
+};
 
 // ---------- CREDITS & GIFTS ----------
 window.openCreditModal=()=>{ $('mainMenu').style.display='none'; $('cmCredit').textContent=ME.credits||0; openModal('creditModal'); };
@@ -1365,7 +1411,8 @@ window.openGiftModal=()=>{
   else giftTargetUid=null;
   $('gmCredit').textContent=ME.credits||0; openModal('giftModal');
 };
-window.openGiftToViewedUser=()=>{ closeModal('userProfileModal'); giftTargetUid=viewedUser.uid; $('gmCredit').textContent=ME.credits||0; openModal('giftModal'); };
+window.openGiftToViewedUser=()=>{ closeModal('userProfileModal'); giftTargetUid=viewedUser.uid;
+  $('gmCredit').textContent=ME.credits||0; openModal('giftModal'); };
 
 window.sendGift = async (emoji,value)=>{
   if((ME.credits||0)<value) return toast('خزانه شما خالی است','⚠️');
@@ -1374,7 +1421,8 @@ window.sendGift = async (emoji,value)=>{
       await supabase.from('users').update({ credits: ME.credits }).eq('uid', ME.uid);
       await supabase.from('chats').update({ boosts: activeChat.boosts }).eq('id', activeChatId);
       await pushMessage({ type:'gift', gift:emoji, giftValue:value, text:'' });
-      closeModal('giftModal'); renderChatHeader(); return toast('پیشکش به دیوان اهدا شد و قدرت دیوان افزایش یافت! 🚀','👑');
+      closeModal('giftModal');
+      renderChatHeader(); return toast('پیشکش به دیوان اهدا شد و قدرت دیوان افزایش یافت! 🚀','👑');
   }
 
   let chatId=activeChatId;
@@ -1385,7 +1433,6 @@ window.sendGift = async (emoji,value)=>{
   
   ME.credits=(ME.credits||0)-value;
   await supabase.from('users').update({ credits: ME.credits }).eq('uid', ME.uid);
-  
   if(giftTargetUid) { 
       const u = await getUser(giftTargetUid);
       let hisCredits = (u.credits||0) + value;
@@ -1398,12 +1445,12 @@ window.sendGift = async (emoji,value)=>{
   await pushMessage({ type:'gift', gift:emoji, giftValue:value, text:'' });
   closeModal('giftModal'); toast('پیشکش ارسال شد '+emoji,'🎁');
 };
-
 // ---------- BACKGROUND ----------
 window.openBgModal=()=>{
   $('chatMenu').style.display='none';
   const grid=$('bgGrid'); grid.innerHTML='';
-  BACKGROUNDS.forEach((bg)=>{ const d=document.createElement('div'); d.className='bg-opt'+(activeChat?.background===bg?' sel':''); d.style.background = bg||'var(--bg2)'; d.onclick=()=>setBackground(bg); grid.appendChild(d); }); openModal('bgModal');
+  BACKGROUNDS.forEach((bg)=>{ const d=document.createElement('div'); d.className='bg-opt'+(activeChat?.background===bg?' sel':''); d.style.background = bg||'var(--bg2)'; d.onclick=()=>setBackground(bg); grid.appendChild(d); });
+  openModal('bgModal');
 };
 window.setBackground = async (bg)=>{ await supabase.from('chats').update({ background:bg }).eq('id', activeChatId); activeChat.background=bg; applyBackground(bg); closeModal('bgModal'); toast('پرده‌خوانی عمارت تغییر کرد','🖼️'); };
 $('msgInput').addEventListener('keydown',(e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); } });
