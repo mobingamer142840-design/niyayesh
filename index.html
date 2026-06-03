@@ -29,14 +29,11 @@
     --premium-glow: linear-gradient(135deg, #8957e5, #dfb73e);
   }
   
-  * { box-sizing:border-box; margin:0; padding:0;
-      font-family: 'Segoe UI', Tahoma, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  html, body { height:100dvh; overflow:hidden; background:var(--bg); color:var(--txt); -webkit-tap-highlight-color:transparent; scroll-behavior: smooth;
-               overscroll-behavior-y: none; }
+  * { box-sizing:border-box; margin:0; padding:0; font-family: 'Segoe UI', Tahoma, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { height:100dvh; overflow:hidden; background:var(--bg); color:var(--txt); -webkit-tap-highlight-color:transparent; scroll-behavior: smooth; overscroll-behavior-y: none; }
   
   /* 60fps/120fps Hardware Accelerated Animations */
-  .fade-in { animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-             will-change: opacity, transform; }
+  .fade-in { animation: fadeIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; will-change: opacity, transform; }
   .pop-in { animation: popIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; will-change: transform, opacity; }
   .slide-down { animation: slideDown 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
   
@@ -56,10 +53,8 @@
   img { user-select:none; -webkit-user-drag: none; }
 
   /* AUTH SCREEN */
-  #authScreen { position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
-                background:radial-gradient(circle at 50% -20%, #1a1a24, var(--bg)); z-index:50; }
-  .auth-card { width:92%; max-width:400px; background:var(--panel); border:1px solid var(--line); border-radius:32px; padding:40px 32px;
-               box-shadow: 0 20px 60px rgba(0,0,0,0.8), var(--gold-glow); backdrop-filter: blur(30px); }
+  #authScreen { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% -20%, #1a1a24, var(--bg)); z-index:50; }
+  .auth-card { width:92%; max-width:400px; background:var(--panel); border:1px solid var(--line); border-radius:32px; padding:40px 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.8), var(--gold-glow); backdrop-filter: blur(30px); }
   .auth-logo { text-align:center; margin-bottom:30px; animation: popIn 0.5s ease; }
   .auth-logo h1 { background: var(--premium); background-size: 200% auto; -webkit-background-clip: text; color: transparent; font-size:42px; letter-spacing:1px; font-weight:900; }
   .auth-logo p { color:var(--muted); font-size:14px; margin-top:8px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
@@ -70,8 +65,7 @@
   
   .field { margin-bottom:20px; }
   .field label { display:block; font-size:12px; color:var(--gold); margin-bottom:8px; font-weight:700; margin-right: 8px; text-transform:uppercase; letter-spacing: 1px; }
-  .field input { width:100%; padding:16px 20px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--txt); font-size:15px;
-                 box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); transition:0.3s; }
+  .field input { width:100%; padding:16px 20px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--txt); font-size:15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); transition:0.3s; }
   .field input:focus { border-color:var(--gold2); box-shadow: 0 0 20px rgba(223,183,62,0.15), inset 0 2px 5px rgba(0,0,0,0.3); background:rgba(0,0,0,0.7); }
   
   .btn-main { width:100%; padding:16px; background:var(--premium); color:#000; font-weight:900; font-size:16px; border-radius:18px; margin-top:10px; box-shadow: var(--gold-glow); text-transform: uppercase; letter-spacing: 1px; }
@@ -243,7 +237,7 @@
   .modal h2 .x { background:rgba(255,255,255,0.05); color:var(--muted); font-size:20px; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:0.3s; border:1px solid transparent;}
   .modal h2 .x:hover { color:#fff; background:var(--danger); transform: rotate(90deg) scale(1.1); box-shadow: 0 8px 20px rgba(255,0,0,0.4); border-color:rgba(255,0,0,0.5);}
   
-  .modal textarea, .modal input[type=text], .modal input[type=date], .modal input[type=password] { width:100%; padding:18px 20px; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--txt); font-size:16px; margin-bottom: 20px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); font-family:inherit;}
+  .modal textarea, .modal input[type=text], .modal input[type=date] { width:100%; padding:18px 20px; background:rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--txt); font-size:16px; margin-bottom: 20px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); font-family:inherit;}
   .modal textarea:focus, .modal input:focus { border-color:var(--gold2); box-shadow: 0 0 15px rgba(223,183,62,0.2), inset 0 2px 5px rgba(0,0,0,0.3); background:rgba(0,0,0,0.6);}
 
   .profile-head { text-align:center; margin-bottom:35px; }
@@ -334,6 +328,7 @@
 
 <div id="app">
   <div class="layout">
+    
     <div class="sidebar">
       <div class="side-header">
         <img id="meAvatar" class="me-avatar" onclick="openMyProfile()">
@@ -557,20 +552,32 @@
 <div id="toast" class="toast"></div>
 
 <script type="module">
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp, getDocs, limit, increment, arrayUnion, arrayRemove, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getStorage, ref as sRef, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-const supabaseUrl = "https://omcisiupgqtweaymsmce.supabase.co";
-const supabaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9tY2lzaXVwZ3F0d2VheW1zbWNlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NzI1NjEsImV4cCI6MjA5NjA0ODU2MX0.vBEXazOs8_sBKGjg1Nzr_G1FrpqdlKS_d-ddBf_dyyw";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const firebaseConfig = {
+  apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
+  authDomain: "niyayesh-universe.firebaseapp.com",
+  databaseURL: "https://niyayesh-universe-default-rtdb.firebaseio.com",
+  projectId: "niyayesh-universe",
+  storageBucket: "niyayesh-universe.firebasestorage.app",
+  messagingSenderId: "675804346928",
+  appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
 // ---------- STATE ----------
 let ME = null;            
 let activeChatId = null;  
 let activeChat = null;    
 let msgUnsub = null;
-let chatsUnsub = null;
-let userUnsub = null;
-let actionState = { type: null, id: null };
+let chatsUnsub = null;    
+let actionState = { type: null, id: null }; 
 let viewedUser = null;
 let isRoyalDecreeMode = false;
 let currentMainTab = 'chats'; 
@@ -582,14 +589,15 @@ const BACKGROUNDS = ['', 'linear-gradient(135deg,#1a1a24,#030305)', 'linear-grad
 function $(id){ return document.getElementById(id); }
 function toast(t, icon=''){ const el=$('toast'); el.innerHTML = `${icon} <span>${t}</span>`; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),3500); }
 function esc(s){ return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function emailFor(u){ return u.toLowerCase()+"@wiriper.app"; }
 function initials(name){ return (name||'?').trim().charAt(0).toUpperCase(); }
-function timeStr(ts){ if(!ts) return ''; const d=new Date(ts); return d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}); }
+function timeStr(ts){ if(!ts) return ''; const d=ts.toDate?ts.toDate():new Date(ts); return d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}); }
 function privateChatId(a,b){ return [a,b].sort().join('_'); }
 
 // Last Seen Logic
 function getLastSeenText(timestamp) {
     if(!timestamp) return 'اخیراً';
-    const diff = Date.now() - new Date(timestamp).getTime();
+    const diff = Date.now() - timestamp.toMillis();
     if(diff < 120000) return 'آنلاین'; // < 2 mins
     if(diff < 3600000) return `${Math.floor(diff/60000)} دقیقه پیش`;
     if(diff < 86400000) return `${Math.floor(diff/3600000)} ساعت پیش`;
@@ -622,19 +630,10 @@ window.toggleRoyalAudio = () => {
     else { audio.pause(); toast('پخش متوقف شد', '⏸️'); }
 };
 
-// ---------- CUSTOM AUTH (NO EMAIL/SUPABASE AUTH REQUIRED) ----------
-const generateUID = () => {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-};
-
+// ---------- AUTH & PRESENCE ----------
 window.doRegister = async ()=>{
   const name=$('rName').value.trim();
-  const username=$('rUser').value.trim();
-  const pass=$('rPass').value;
-  
+  const username=$('rUser').value.trim(); const pass=$('rPass').value;
   if(!name||!username||!pass) return authMsg('همه فیلدها را پر کنید');
   if(!/^[a-zA-Z0-9_]{3,20}$/.test(username)) return authMsg('نام کاربری فقط انگلیسی و اعداد');
   if(pass.length<6) return authMsg('رمز حداقل ۶ کاراکتر');
@@ -642,99 +641,57 @@ window.doRegister = async ()=>{
   
   try{
     authMsg('در حال ساخت قصر...',true);
-    const { data: taken } = await supabase.from('usernames').select('*').eq('usernameLower', uLower).maybeSingle();
-    if(taken) return authMsg('این نام کاربری از قبل تصرف شده است');
-    
-    const uid = generateUID();
-    
-    const { error: insertErr } = await supabase.from('users').insert([{ uid, username, usernameLower:uLower, password:pass, displayName:name, bio:'', photoURL:'', birthDate:'', belovedBirthDate:'', credits:500, isPremium:false, receivedGifts:[], giftScore:0, createdAt: new Date().toISOString(), lastOnline: new Date().toISOString() }]);
-    
-    if(insertErr) throw insertErr;
-
-    await supabase.from('usernames').insert([{ usernameLower:uLower, uid }]);
-    
-    localStorage.setItem('wiriper_uid', uid);
-    
-    const { data: userDoc } = await supabase.from('users').select('*').eq('uid', uid).single();
-    ME = userDoc; 
-    
-    enterApp();
-    updatePresence();
-    presenceInterval = setInterval(updatePresence, 60000);
-
+    const taken=await getDoc(doc(db,'usernames',uLower));
+    if(taken.exists()) return authMsg('این نام کاربری از قبل تصرف شده است');
+    const cred=await createUserWithEmailAndPassword(auth,emailFor(username),pass);
+    const uid=cred.user.uid;
+    await setDoc(doc(db,'users',uid),{ uid, username, usernameLower:uLower, displayName:name, bio:'', photoURL:'', birthDate:'', belovedBirthDate:'', credits:500, isPremium:false, receivedGifts:[], giftScore:0, createdAt:serverTimestamp(), lastOnline:serverTimestamp() });
+    await setDoc(doc(db,'usernames',uLower),{ uid });
     authMsg('تاج‌گذاری موفقیت‌آمیز بود!',true);
-  }catch(e){ authMsg('خطا: '+(e.message || 'مشکل در ارتباط با سرور')); }
+  }catch(e){ authMsg('خطا: '+(e.message)); }
 };
 
 window.doLogin = async ()=>{
-  const username=$('lUser').value.trim();
-  const pass=$('lPass').value;
-  
+  const username=$('lUser').value.trim(); const pass=$('lPass').value;
   if(!username||!pass) return authMsg('نام و رمز عبور را وارد کنید');
-  try{ 
-      authMsg('در حال گشودن دروازه...',true);
-      const uLower = username.toLowerCase();
-      
-      const { data, error } = await supabase.from('users').select('*').eq('usernameLower', uLower).eq('password', pass).maybeSingle();
-      
-      if(error || !data) throw new Error('نام کاربری یا رمز عبور اشتباه است');
-
-      localStorage.setItem('wiriper_uid', data.uid);
-      ME = data; 
-      
-      enterApp();
-      updatePresence();
-      presenceInterval = setInterval(updatePresence, 60000);
-  }
-  catch(e){ authMsg(e.message || 'اطلاعات ورود اشتباه است'); }
+  try{ authMsg('در حال گشودن دروازه...',true); await signInWithEmailAndPassword(auth,emailFor(username),pass); }
+  catch(e){ authMsg('اطلاعات ورود اشتباه است'); }
 };
 
 window.doLogout = async ()=>{ 
     if(!confirm('آیا برای خروج کامل از قصر اطمینان دارید؟')) return;
     if(presenceInterval) clearInterval(presenceInterval); 
-    localStorage.removeItem('wiriper_uid');
+    await signOut(auth); 
     location.reload(); 
 };
 
-window.addEventListener('DOMContentLoaded', async () => {
-  const savedUid = localStorage.getItem('wiriper_uid');
-  if (savedUid) {
-    const { data: userDoc } = await supabase.from('users').select('*').eq('uid', savedUid).maybeSingle();
-    if (userDoc) { 
-      ME = userDoc; 
-      enterApp();
-      updatePresence();
-      presenceInterval = setInterval(updatePresence, 60000);
-      return; 
-    } else {
-      localStorage.removeItem('wiriper_uid');
-    }
+onAuthStateChanged(auth, async (user)=>{
+  if(user){
+    const snap=await getDoc(doc(db,'users',user.uid));
+    if(!snap.exists()){ await signOut(auth); return; }
+    ME=snap.data(); enterApp();
+    updatePresence();
+    presenceInterval = setInterval(updatePresence, 60000);
+  }else{
+    $('authScreen').style.display='flex'; $('app').style.display='none';
   }
-  $('authScreen').style.display='flex'; $('app').style.display='none';
 });
-
 async function updatePresence() {
-    if(ME) await supabase.from('users').update({ lastOnline: new Date().toISOString() }).eq('uid', ME.uid);
+    if(ME) await updateDoc(doc(db,'users',ME.uid), { lastOnline: serverTimestamp() });
 }
 
 function enterApp(){
   $('authScreen').style.display='none'; $('app').style.display='block';
   renderMeHeader();
   subscribeChats();
-  
-  if(userUnsub) supabase.removeChannel(userUnsub);
-  userUnsub = supabase.channel('my_user_changes')
-    .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'users', filter: `uid=eq.${ME.uid}` }, payload => {
-        ME = payload.new; renderMeHeader();
-    }).subscribe();
+  onSnapshot(doc(db,'users',ME.uid),(s)=>{ if(s.exists()){ ME=s.data(); renderMeHeader(); }});
 }
 
 function renderMeHeader(){
   const title = ME.isPremium ? `👑 ${ME.displayName}` : ME.displayName;
   $('meName').textContent=title; $('meId').textContent='@'+ME.username;
   const av=$('meAvatar');
-  if(ME.photoURL) av.src=ME.photoURL;
-  else { av.removeAttribute('src'); av.style.background='var(--panel2)'; }
+  if(ME.photoURL) av.src=ME.photoURL; else { av.removeAttribute('src'); av.style.background='var(--panel2)'; }
   if(ME.isPremium) av.classList.add('premium'); else av.classList.remove('premium');
   $('btnRoyalDecree').style.display = ME.isPremium ? 'flex' : 'none';
 }
@@ -761,32 +718,27 @@ window.switchMainTab = (tab) => {
 }
 
 function subscribeChats(){
-  const fetchChats = async () => {
-     const { data } = await supabase.from('chats').select('*').cs('members', `["${ME.uid}"]`);
-     if(data) {
-         allMyChats = data.sort((a,b)=> new Date(b.lastTime).getTime() - new Date(a.lastTime).getTime());
-         if(currentMainTab==='chats') renderChatList(allMyChats);
-         if(activeChatId){ const updated = allMyChats.find(c=>c.id===activeChatId); if(updated) { activeChat=updated; renderChatHeader(); checkJoinStatus(); checkPinnedMsg(); } }
-     }
-  };
-  fetchChats();
-  
-  if(chatsUnsub) supabase.removeChannel(chatsUnsub);
-  chatsUnsub = supabase.channel('chats_listener')
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'chats' }, payload => { fetchChats(); })
-    .subscribe();
+  const q=query(collection(db,'chats'), where('members','array-contains',ME.uid));
+  chatsUnsub=onSnapshot(q,(snap)=>{
+    allMyChats=[]; snap.forEach(d=>allMyChats.push({id:d.id,...d.data()}));
+    allMyChats.sort((a,b)=>{ const ta=a.lastTime?.toMillis?.()||0, tb=b.lastTime?.toMillis?.()||0; return tb-ta; });
+    if(currentMainTab==='chats') renderChatList(allMyChats);
+    if(activeChatId){ const updated = allMyChats.find(c=>c.id===activeChatId); if(updated) { activeChat=updated; renderChatHeader(); checkJoinStatus(); checkPinnedMsg(); } }
+  });
 }
 
 async function renderChatList(chats, isDiscover = false){
   const list=$('mainList'); list.innerHTML='';
   for(const c of chats){
+    // Ghost Channel Fix: Ignore empty broken docs
     if (!c.type || (!c.name && c.type !== 'private')) continue;
+
     const meta=await chatDisplay(c);
     const div=document.createElement('div');
     div.className='chat-item'+(c.id===activeChatId?' active':'');
     div.onclick=()=>openChat(c.id, c);
     const tag = c.type==='group'?'<span class="tag">محفل</span>' : c.type==='channel'?'<span class="tag">دیوان</span>':'';
-    const sub = isDiscover ? `${(c.members||[]).length} عضو` : esc(c.lastMessage||'');
+    const sub = isDiscover ? `${c.members.length} عضو` : esc(c.lastMessage||'');
     
     let dot = '';
     if(c.type==='private' && meta.userData) {
@@ -804,9 +756,10 @@ async function renderChatList(chats, isDiscover = false){
 async function loadDiscover(){
   const list=$('mainList'); list.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">در حال کاوش... 🌍</div>';
   try{
-    const { data: channels } = await supabase.from('chats').select('*').eq('type', 'channel').limit(30);
-    if(channels) channels.sort((a,b)=>(b.members||[]).length - (a.members||[]).length);
-    if(!channels || channels.length===0) list.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">دیوانی یافت نشد.</div>'; else renderChatList(channels, true);
+    const q=query(collection(db,'chats'), where('type','==','channel'), limit(30));
+    const snap=await getDocs(q); let channels=[]; snap.forEach(d=>channels.push({id:d.id,...d.data()}));
+    channels.sort((a,b)=>b.members.length - a.members.length);
+    if(channels.length===0) list.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">دیوانی یافت نشد.</div>'; else renderChatList(channels, true);
   }catch(e){ list.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">خطا در شبکه</div>'; }
 }
 
@@ -814,11 +767,11 @@ async function loadLeaders(){
   const list=$('mainList');
   list.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">در حال احضار اشراف... 👑</div>';
   try{
-    const { data: users } = await supabase.from('users').select('*').order('giftScore', { ascending: false }).limit(25);
-    list.innerHTML='';
+    const q=query(collection(db,'users'), orderBy('giftScore','desc'), limit(25));
+    const snap=await getDocs(q); list.innerHTML='';
     let rank = 1;
-    (users||[]).forEach(u=>{
-      const div=document.createElement('div'); div.className='chat-item'; div.onclick=()=>viewUser(u.uid);
+    snap.forEach(d=>{
+      const u=d.data(); const div=document.createElement('div'); div.className='chat-item'; div.onclick=()=>viewUser(u.uid);
       const icon = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':`#${rank}`;
       div.innerHTML=`
         ${u.photoURL?`<img class="av" src="${u.photoURL}">`:`<div class="av">${initials(u.displayName)}</div>`}
@@ -826,21 +779,20 @@ async function loadLeaders(){
         <div class="ci-last" style="color:var(--gold2); font-weight:bold;">امتیاز: ${u.giftScore||0} ⭐</div></div>`;
       list.appendChild(div); rank++;
     });
-  }catch(e){ list.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">خطا در دریافت برترین‌ها.</div>'; }
+  }catch(e){ list.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">لطفاً Index فایربیس ایجاد شود.</div>'; }
 }
 
 const userCache={};
 async function getUser(uid){
   if(userCache[uid]) return userCache[uid];
-  const { data: u } = await supabase.from('users').select('*').eq('uid', uid).single();
-  if(u){ userCache[uid]=u; return u; }
+  const s=await getDoc(doc(db,'users',uid));
+  if(s.exists()){ userCache[uid]=s.data(); return userCache[uid]; }
   return {displayName:'کاربر غایب', username:'', photoURL:'', uid};
 }
 
 async function chatDisplay(c){
   if(c.type==='private'){
-    const other=(c.members||[]).find(m=>m!==ME.uid) || ME.uid;
-    const u=await getUser(other);
+    const other=c.members.find(m=>m!==ME.uid) || ME.uid; const u=await getUser(other);
     const title = u.isPremium ? `👑 ${u.displayName}` : u.displayName;
     return {name:title, photo:u.photoURL, icon:initials(u.displayName), userData: u};
   }
@@ -852,13 +804,13 @@ window.openChat = async (chatId, chatDataObj = null)=>{
   activeChatId=chatId;
   if(chatDataObj) activeChat = chatDataObj;
   else {
-    const { data: s } = await supabase.from('chats').select('*').eq('id', chatId).single();
-    if(!s) return toast('عمارت یافت نشد','❌'); activeChat=s;
+    const s=await getDoc(doc(db,'chats',chatId)); if(!s.exists()) return toast('عمارت یافت نشد','❌'); activeChat={id:chatId,...s.data()};
   }
   
   $('emptyChat').style.display='none'; $('activeChat').style.display='flex';
   $('chatPanel').classList.add('open');
   $('giftBtn').style.display = activeChat.type==='private'?'block':'none'; $('boostBtn').style.display = activeChat.type==='channel'?'block':'none';
+  
   if(activeChat.type === 'channel') $('callActionsBar').style.display = 'none';
   else $('callActionsBar').style.display = 'flex';
 
@@ -867,19 +819,18 @@ window.openChat = async (chatId, chatDataObj = null)=>{
   applyBackground(activeChat.background); checkJoinStatus(); checkPinnedMsg(); subscribeMessages(chatId);
   document.querySelectorAll('.chat-item').forEach(el=>el.classList.remove('active'));
 };
+
 window.closeChat=()=>{ $('chatPanel').classList.remove('open'); activeChatId=null; };
 
 async function renderChatHeader(){
   if(!activeChat) return; const meta=await chatDisplay(activeChat); $('hName').textContent=meta.name;
-  const hav=$('hAv'); if(meta.photo) hav.innerHTML=`<img src="${meta.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`;
-  else hav.textContent=meta.icon;
+  const hav=$('hAv'); if(meta.photo) hav.innerHTML=`<img src="${meta.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; else hav.textContent=meta.icon;
   
   if(activeChat.type==='private'){
     const u = meta.userData;
     $('hSub').textContent = getLastSeenText(u.lastOnline);
-    if(getLastSeenText(u.lastOnline) === 'آنلاین') $('hSub').style.color = 'var(--green)';
-    else $('hSub').style.color = 'var(--gold2)';
-  }else if(activeChat.type==='group'){ $('hSub').textContent=(activeChat.members||[]).length+' حاضر'; $('hSub').style.color = 'var(--gold2)';
+    if(getLastSeenText(u.lastOnline) === 'آنلاین') $('hSub').style.color = 'var(--green)'; else $('hSub').style.color = 'var(--gold2)';
+  }else if(activeChat.type==='group'){ $('hSub').textContent=activeChat.members.length+' حاضر'; $('hSub').style.color = 'var(--gold2)';
   }else{ 
       const lvl = Math.floor((activeChat.boosts||0) / 5) + 1;
       $('hSub').textContent=`دیوان سطح ${lvl} (${activeChat.boosts || 0} بوست 🚀)`; 
@@ -890,7 +841,7 @@ async function renderChatHeader(){
 function applyBackground(bg){ $('messages').style.backgroundImage = bg||''; $('messages').style.backgroundColor = bg?'':'var(--bg)'; }
 
 function checkJoinStatus() {
-    if(activeChat.type==='channel' && !(activeChat.members||[]).includes(ME.uid)) { $('inputBar').style.display = 'none'; $('joinBar').style.display = 'block'; }
+    if(activeChat.type==='channel' && !activeChat.members.includes(ME.uid)) { $('inputBar').style.display = 'none'; $('joinBar').style.display = 'block'; }
     else { $('joinBar').style.display = 'none'; $('inputBar').style.display = 'flex'; }
 }
 
@@ -915,29 +866,19 @@ window.scrollToPinned = () => {
 
 window.joinCurrentChannel = async () => {
     if(!activeChatId) return; toast('در حال ورود...','⏳');
-    if(!activeChat.members) activeChat.members = [];
-    activeChat.members.push(ME.uid);
-    await supabase.from('chats').update({ members: activeChat.members }).eq('id', activeChatId);
-    checkJoinStatus(); renderChatHeader(); toast('شما رسماً به این دیوان پیوستید!','✅');
+    await updateDoc(doc(db,'chats',activeChatId), { members: arrayUnion(ME.uid) });
+    activeChat.members.push(ME.uid); checkJoinStatus(); renderChatHeader(); toast('شما رسماً به این دیوان پیوستید!','✅');
 }
 
 // ---------- MESSAGES & REACTIONS ----------
 function subscribeMessages(chatId){
-  if(msgUnsub) supabase.removeChannel(msgUnsub);
-  const fetchMessages = async () => {
-      const { data } = await supabase.from('messages').select('*').eq('chatId', chatId).order('createdAt', { ascending: true }).limit(300);
-      const box=$('messages'); const wasAtBottom = box.scrollHeight - box.scrollTop <= box.clientHeight + 150;
-      box.innerHTML=''; (data||[]).forEach(d=>renderMessage(d.id,d));
-      if(wasAtBottom) { setTimeout(() => { box.scrollTo({top: box.scrollHeight, behavior: 'smooth'}); }, 50); }
-  }
-  fetchMessages();
-  msgUnsub = supabase.channel(`messages_${chatId}`)
-    .on('postgres_changes', { event: '*', schema: 'public', table: 'messages', filter: `chatId=eq.${chatId}` }, payload => {
-        if(payload.eventType === 'INSERT') {
-            renderMessage(payload.new.id, payload.new);
-            setTimeout(()=>$('messages').scrollTo({top: $('messages').scrollHeight, behavior: 'smooth'}), 50);
-        } else { fetchMessages(); }
-    }).subscribe();
+  if(msgUnsub) msgUnsub();
+  const q=query(collection(db,'chats',chatId,'messages'), orderBy('createdAt','asc'), limit(300));
+  msgUnsub=onSnapshot(q,(snap)=>{
+    const box=$('messages'); const wasAtBottom = box.scrollHeight - box.scrollTop <= box.clientHeight + 150;
+    box.innerHTML=''; snap.forEach(d=>renderMessage(d.id,d.data()));
+    if(wasAtBottom) { setTimeout(() => { box.scrollTo({top: box.scrollHeight, behavior: 'smooth'}); }, 50); }
+  });
 }
 
 function renderMessage(id,m){
@@ -949,6 +890,7 @@ function renderMessage(id,m){
   const tempClass = m.temp ? 'temp-msg' : '';
   
   let inner='';
+
   let replyHTML = '';
   if(m.replyTo) {
       replyHTML = `<div class="reply-box" onclick="document.getElementById('msg_${m.replyTo.id}')?.scrollIntoView({behavior:'smooth', block:'center'})">
@@ -971,9 +913,8 @@ function renderMessage(id,m){
   }
   else{ inner=`<div class="b-text" id="txt_${id}">${esc(m.text)}</div>`; }
 
-  if(!mine && !m.temp && (!(m.readBy||[]).includes(ME.uid))) {
-      let currentReadBy = m.readBy || []; currentReadBy.push(ME.uid);
-      supabase.from('messages').update({ readBy: currentReadBy }).eq('id', id).then();
+  if(!mine && !m.temp && (!m.readBy || !m.readBy.includes(ME.uid))) {
+      updateDoc(doc(db, 'chats', activeChatId, 'messages', id), { readBy: arrayUnion(ME.uid) }).catch(()=>{});
   }
 
   let reactHTML = '';
@@ -996,8 +937,8 @@ function renderMessage(id,m){
   const tickIcon = mine && !m.temp ? (isSeen ? '<span class="tick seen">✓✓</span>' : '<span class="tick sent">✓</span>') : (m.temp ? '<span class="tick sent">⏳</span>' : '');
   const lvl = Math.floor((activeChat?.boosts||0) / 5) + 1;
   const customReact = lvl >= 2 ? `<button onclick="toggleReaction('${id}', '🦄')" title="لول ۲">🦄</button>` : '';
-  const actions = !m.temp && m.type!=='gift' ?
-    `<div class="msg-actions">
+  const actions = !m.temp && m.type!=='gift' ? `
+    <div class="msg-actions">
       <button onclick="startReply('${id}', this)" title="پاسخ دادن">↩️</button>
       <button onclick="pinMsg('${id}', this)" title="سنجاق کردن">📌</button>
       <button onclick="translateMsg('${id}')" title="ترجمه">🌍</button>
@@ -1009,7 +950,7 @@ function renderMessage(id,m){
       ${(mine && m.type==='text')?`<button onclick="startEdit('${id}',this)" title="ویرایش">✏️</button>`:''}
       ${mine?`<button onclick="deleteMessage('${id}')" style="color:var(--danger)" title="حذف کامل">🗑</button>`:''}
     </div>`:'';
-  
+
   row.innerHTML=`<div class="bubble ${isDecree} ${tempClass}">${actions}${senderTag}${replyHTML}${inner}<div id="trans_${id}" class="translated-txt" style="display:none;"></div>${reactHTML}<div class="b-meta">${editedTag}<span>${timeStr(m.createdAt)}</span>${tickIcon}</div></div>`;
   
   let pureText = m.text || '';
@@ -1023,13 +964,15 @@ function renderMessage(id,m){
 
 window.toggleReaction = async (msgId, emoji) => {
     if(!activeChatId) return;
-    const { data: snap } = await supabase.from('messages').select('*').eq('id', msgId).single();
-    if(snap){
-        let reactions = snap.reactions || {};
+    const msgRef = doc(db, 'chats', activeChatId, 'messages', msgId);
+    const snap = await getDoc(msgRef);
+    if(snap.exists()){
+        let data = snap.data();
+        let reactions = data.reactions || {};
         if(!reactions[emoji]) reactions[emoji] = [];
         if(reactions[emoji].includes(ME.uid)) reactions[emoji] = reactions[emoji].filter(id => id !== ME.uid);
         else reactions[emoji].push(ME.uid);
-        await supabase.from('messages').update({ reactions }).eq('id', msgId);
+        await updateDoc(msgRef, { reactions });
     }
 }
 
@@ -1055,7 +998,7 @@ window.pinMsg = async (id, btn) => {
     const bubble = btn.closest('.bubble');
     let text = bubble.dataset.text;
     if(text.length > 40) text = text.substring(0, 40) + '...';
-    await supabase.from('chats').update({ pinnedMsg: {id, text} }).eq('id', activeChatId);
+    await updateDoc(doc(db, 'chats', activeChatId), { pinnedMsg: {id, text} });
     toast('پیام سنجاق شد 📌', '✔');
 }
 
@@ -1073,14 +1016,14 @@ window.translateMsg = (id) => {
 }
 
 window.deleteMessage = async (id)=>{ 
-    try { await supabase.from('messages').delete().eq('id', id); toast('پیام با موفقیت پاک شد 🧹','✨'); } 
+    try { await deleteDoc(doc(db,'chats',activeChatId,'messages',id)); toast('پیام با موفقیت پاک شد 🧹','✨'); } 
     catch(e) { toast('خطا در پاکسازی','❌'); }
 };
 
 window.deleteActiveChat = async () => {
     if(!confirm('آیا از انحلال کامل این عمارت اطمینان دارید؟ این عمل غیرقابل بازگشت است.')) return;
     try {
-        await supabase.from('chats').delete().eq('id', activeChatId);
+        await deleteDoc(doc(db, 'chats', activeChatId));
         closeModal('chatInfoModal');
         clearActiveChat();
         toast('عمارت با موفقیت منحل شد', '🗑️');
@@ -1104,7 +1047,7 @@ window.sendMessage = async ()=>{
   if(!activeChatId) return;
   
   if(actionState.type === 'edit'){
-    if(!text) return; await supabase.from('messages').update({ text, edited:true }).eq('id', actionState.id);
+    if(!text) return; await updateDoc(doc(db,'chats',activeChatId,'messages',actionState.id),{ text, edited:true });
     cancelAction(); input.value=''; autoGrow(input); return;
   }
   
@@ -1122,45 +1065,48 @@ window.sendMessage = async ()=>{
 };
 
 async function pushMessage(data){
-  const msg={ chatId: activeChatId, senderId:ME.uid, senderName:ME.displayName, senderIsPremium: ME.isPremium||false, createdAt: new Date().toISOString(), edited:false, deleted:false, reactions:{}, readBy:[], ...data };
-  await supabase.from('messages').insert([msg]);
+  const msg={ senderId:ME.uid, senderName:ME.displayName, senderIsPremium: ME.isPremium||false, createdAt:serverTimestamp(), edited:false, deleted:false, reactions:{}, readBy:[], ...data };
+  await addDoc(collection(db,'chats',activeChatId,'messages'),msg);
   let preview = data.text || (data.type==='image'?'📷 نگاره':data.type==='video'?'🎬 طومار متحرک':data.type==='file'?'📜 طومار':data.type==='gift'?'🎁 پیشکش':'پیام');
   if(data.isRoyalDecree) preview = '📜 فرمان سلطنتی';
-  await supabase.from('chats').update({ lastMessage:preview.slice(0,40), lastTime: new Date().toISOString() }).eq('id', activeChatId);
+  await updateDoc(doc(db,'chats',activeChatId),{ lastMessage:preview.slice(0,40), lastTime:serverTimestamp() });
 }
 
 // ---------- FILE UPLOAD ----------
 window.handleFileSelect = async (e)=>{
-  const file=e.target.files[0]; e.target.value='';
-  if(!file||!activeChatId) return;
+  const file=e.target.files[0]; e.target.value=''; if(!file||!activeChatId) return;
   if(file.size>40*1024*1024) return toast('حجم فایل بیش از حد مجاز است','⚠️');
   
   const previewId = 'temp_' + Date.now();
   const reader = new FileReader();
   reader.onload = async (event) => {
-     let type='file'; if(file.type.startsWith('image/')) type='image';
-     else if(file.type.startsWith('video/')) type='video';
-     const tempMsg = { id: previewId, senderId: ME.uid, senderName: ME.displayName, type: type, mediaURL: event.target.result, fileName: file.name, text: 'در حال ارسال... ⏳', createdAt: new Date().toISOString(), temp: true, reactions:{} };
+     let type='file'; if(file.type.startsWith('image/')) type='image'; else if(file.type.startsWith('video/')) type='video';
+     const tempMsg = { id: previewId, senderId: ME.uid, senderName: ME.displayName, type: type, mediaURL: event.target.result, fileName: file.name, text: 'در حال ارسال... ⏳', createdAt: new Date(), temp: true, reactions:{} };
      renderMessage(previewId, tempMsg);
      $('messages').scrollTo({top: $('messages').scrollHeight, behavior: 'smooth'});
 
      try{
         const path=`messages/${activeChatId}/${Date.now()}_${file.name}`;
-        const { data: uploadData, error } = await supabase.storage.from('wiriper_storage').upload(path, file, { cacheControl: '3600', upsert: false });
-        if (error) {
-            const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
-            alert('🚨 خطا در آپلود! لطفاً در تنظیمات Supabase باکت wiriper_storage را به صورت Public ایجاد کنید.');
-            return;
-        }
+        const r=sRef(storage,path);
+        const uploadTask = uploadBytesResumable(r, file);
 
-        const { data: publicUrlData } = supabase.storage.from('wiriper_storage').getPublicUrl(path);
-        const url = publicUrlData.publicUrl;
-        let payload = { type, mediaURL:url, fileName:file.name, text:'' };
-        if(actionState.type === 'reply') payload.replyTo = { id: actionState.id, sender: actionState.sender, text: actionState.text };
-        await pushMessage(payload);
-        cancelAction();
-        const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
-        toast('با موفقیت ارسال شد','✔');
+        uploadTask.on('state_changed', null, 
+          (error) => { 
+             console.error(error);
+             const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
+             alert('🚨 خطا در آپلود!'); 
+          }, 
+          async () => {
+            const url = await getDownloadURL(uploadTask.snapshot.ref);
+            let payload = { type, mediaURL:url, fileName:file.name, text:'' };
+            if(actionState.type === 'reply') payload.replyTo = { id: actionState.id, sender: actionState.sender, text: actionState.text };
+            
+            await pushMessage(payload);
+            cancelAction();
+            const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
+            toast('با موفقیت ارسال شد','✔');
+          }
+        );
      }catch(err){ 
         toast('خطا در سیستم ابری','❌'); 
         const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
@@ -1175,26 +1121,23 @@ window.openPremiumModal = () => { $('mainMenu').style.display='none';
 }
 window.buyPremium = async () => {
     if((ME.credits||0) < 500) return toast('اعتبار شما کافی نیست','⚠️');
-    ME.credits -= 500;
-    ME.isPremium = true; 
-    await supabase.from('users').update({ credits: ME.credits, isPremium: true }).eq('uid', ME.uid);
-    closeModal('premiumModal');
+    await updateDoc(doc(db,'users',ME.uid), { credits: increment(-500), isPremium: true });
+    ME.credits -= 500; ME.isPremium = true; closeModal('premiumModal');
     toast('شما به مقام پادشاهی ارتقا یافتید! 👑','🎉'); renderMeHeader();
 }
 window.boostChannel = async () => {
     if(!activeChat || activeChat.type !== 'channel') return;
     if((ME.credits||0) < 50) return toast('ارتقای دیوان نیازمند ۵۰ سکه است','⚠️');
+    await updateDoc(doc(db,'users',ME.uid), { credits: increment(-50) });
+    await updateDoc(doc(db,'chats',activeChatId), { boosts: increment(1) });
     ME.credits -= 50; activeChat.boosts = (activeChat.boosts||0) + 1;
-    await supabase.from('users').update({ credits: ME.credits }).eq('uid', ME.uid);
-    await supabase.from('chats').update({ boosts: activeChat.boosts }).eq('id', activeChatId);
     renderChatHeader(); toast('دیوان سلطنتی قدرتمندتر شد! 🚀','⚡');
 }
 
 // ---------- PROFILE ----------
 window.openMyProfile=()=>{
   $('mainMenu').style.display='none'; $('ppName').value=ME.displayName; $('ppBirth').value=ME.birthDate||''; $('ppBelovedBirth').value=ME.belovedBirthDate||''; $('ppBio').value=ME.bio||''; $('ppUser').value='@'+ME.username; $('ppCredit').textContent=ME.credits||0; $('ppGiftScore').textContent=ME.giftScore||0;
-  const av=$('ppAv'); if(ME.photoURL){ av.src=ME.photoURL; av.style.display='block';
-  } else { av.removeAttribute('src'); }
+  const av=$('ppAv'); if(ME.photoURL){ av.src=ME.photoURL; av.style.display='block'; } else { av.removeAttribute('src'); }
   if(ME.isPremium) av.style.borderColor = '#8957e5';
   
   const gBox = $('myGiftsGallery');
@@ -1204,31 +1147,31 @@ window.openMyProfile=()=>{
 };
 
 window.saveProfile = async ()=>{
-  const name=$('ppName').value.trim();
-  const bio=$('ppBio').value.trim(); const birth=$('ppBirth').value; const belovedBirth = $('ppBelovedBirth').value;
+  const name=$('ppName').value.trim(); const bio=$('ppBio').value.trim(); const birth=$('ppBirth').value; const belovedBirth = $('ppBelovedBirth').value;
   if(!name) return toast('نام نمی‌تواند خالی باشد','⚠️');
   try{ 
-      await supabase.from('users').update({ displayName:name, bio, birthDate:birth, belovedBirthDate: belovedBirth }).eq('uid', ME.uid);
-      ME.displayName=name; ME.bio=bio; ME.birthDate=birth; ME.belovedBirthDate=belovedBirth;
+      await updateDoc(doc(db,'users',ME.uid),{ displayName:name, bio, birthDate:birth, belovedBirthDate: belovedBirth }); 
+      ME.displayName=name; ME.bio=bio; ME.birthDate=birth; ME.belovedBirthDate=belovedBirth; 
       renderMeHeader(); toast('در جریده ثبت شد','✔'); closeModal('myProfileModal');
   }
   catch(e){ toast('خطا در ذخیره','❌'); }
 };
 
 window.uploadAvatar = async (e)=>{
-  const file=e.target.files[0];
-  e.target.value=''; if(!file) return;
+  const file=e.target.files[0]; e.target.value=''; if(!file) return;
   toast('در حال پردازش پرتره... ⏳');
   try{
-    const path=`profiles/${ME.uid}/avatar_${Date.now()}`;
-    const { data: uploadData, error } = await supabase.storage.from('wiriper_storage').upload(path, file);
-    if(error) throw error;
-    const { data: publicUrlData } = supabase.storage.from('wiriper_storage').getPublicUrl(path);
-    const url = publicUrlData.publicUrl;
-    await supabase.from('users').update({ photoURL:url }).eq('uid', ME.uid);
-    ME.photoURL=url; $('ppAv').src=url; renderMeHeader();
-    toast('پرتره زیبای شما ذخیره شد 🎨','✔');
-  }catch(err){ toast('خطای سرور Storage','❌'); }
+    const r=sRef(storage,`profiles/${ME.uid}/avatar_${Date.now()}`);
+    const uploadTask = uploadBytesResumable(r, file);
+    uploadTask.on('state_changed', null, 
+      (error) => { toast('خطا در بارگذاری','🚨'); }, 
+      async () => {
+        const url=await getDownloadURL(uploadTask.snapshot.ref);
+        await updateDoc(doc(db,'users',ME.uid),{ photoURL:url }); ME.photoURL=url; $('ppAv').src=url; renderMeHeader();
+        toast('پرتره زیبای شما ذخیره شد 🎨','✔');
+      }
+    );
+  }catch(err){ toast('خطای سرور','❌'); }
 };
 
 window.viewUser = async (uid)=>{
@@ -1251,8 +1194,7 @@ window.viewUser = async (uid)=>{
   const av=$('upAv');
   if(u.photoURL) av.innerHTML=`<img src="${u.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; else av.textContent=initials(u.displayName);
   if(u.isPremium) av.style.border = '4px solid #8957e5'; else av.style.border = '4px solid var(--gold2)';
-  if(u.bio){ $('upBio').style.display='block';
-  $('upBio').textContent=u.bio; } else $('upBio').style.display='none';
+  if(u.bio){ $('upBio').style.display='block'; $('upBio').textContent=u.bio; } else $('upBio').style.display='none';
   
   const gBox = $('userGiftsGallery');
   if(u.receivedGifts && u.receivedGifts.length > 0){ gBox.innerHTML = u.receivedGifts.map(g => `<div class="gift-gallery-item"><div style="font-size:35px; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.5))">${g.emoji}</div><div style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">از ${g.sender}</div></div>`).reverse().join('');
@@ -1260,14 +1202,10 @@ window.viewUser = async (uid)=>{
   openModal('userProfileModal');
 };
 
-window.startChatWithViewedUser = async ()=>{ closeModal('userProfileModal');
-  await openOrCreatePrivate(viewedUser.uid, viewedUser); };
+window.startChatWithViewedUser = async ()=>{ closeModal('userProfileModal'); await openOrCreatePrivate(viewedUser.uid, viewedUser); };
 async function openOrCreatePrivate(otherUid, otherData){
-  const cid=privateChatId(ME.uid,otherUid); 
-  const { data: s } = await supabase.from('chats').select('*').eq('id', cid).single();
-  if(!s){ 
-      await supabase.from('chats').insert([{ id: cid, type:'private', members:[ME.uid,otherUid].sort(), lastMessage:'', lastTime: new Date().toISOString(), background:'' }]);
-  }
+  const cid=privateChatId(ME.uid,otherUid); const ref=doc(db,'chats',cid); const s=await getDoc(ref);
+  if(!s.exists()){ await setDoc(ref,{ type:'private', members:[ME.uid,otherUid].sort(), lastMessage:'', lastTime:serverTimestamp(), background:'' }); }
   userCache[otherUid]=otherData; openChat(cid);
 }
 
@@ -1275,44 +1213,44 @@ async function openOrCreatePrivate(otherUid, otherData){
 let searchTimer=null;
 window.onSearchInput=()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(runSearch,300); };
 async function runSearch(){
-  let term=$('globalSearch').value.trim().toLowerCase().replace(/^@/,'');
-  const box=$('mainList');
+  let term=$('globalSearch').value.trim().toLowerCase().replace(/^@/,''); const box=$('mainList');
   if(!term){ switchMainTab(currentMainTab); return; }
   $('listTitle').textContent='نتایج جستجو...';
   box.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">درحال جستجو... 🔍</div>';
+  
   try{
-    const { data: uSnap } = await supabase.from('users').select('*').gte('usernameLower', term).lte('usernameLower', term+'\uf8ff').limit(15);
-    const { data: cSnap } = await supabase.from('chats').select('*').eq('type', 'channel').limit(30);
+    const uQ=query(collection(db,'users'), where('usernameLower','>=',term), where('usernameLower','<=',term+'\uf8ff'), limit(15));
+    const uSnap=await getDocs(uQ);
+    const cQ=query(collection(db,'chats'), where('type','==','channel'), limit(30));
+    const cSnap=await getDocs(cQ);
     
     box.innerHTML=''; let found=false;
-    (uSnap||[]).forEach(u=>{
-      if(u.uid===ME.uid) return; found=true; const div=document.createElement('div'); div.className='chat-item';
+    uSnap.forEach(d=>{
+      const u=d.data(); if(u.uid===ME.uid) return; found=true; const div=document.createElement('div'); div.className='chat-item';
       div.onclick=()=>{ openOrCreatePrivate(u.uid,u); $('globalSearch').value=''; switchMainTab('chats'); };
       let dot = getLastSeenText(u.lastOnline) === 'آنلاین' ? '<span class="online-dot"></span>' : '';
       div.innerHTML=`${u.photoURL?`<img class="av" src="${u.photoURL}">`:`<div class="av">${initials(u.displayName)}</div>`}
         <div class="ci-main"><div class="ci-name">${u.isPremium?'👑':''}${esc(u.displayName)} ${dot}</div><div class="ci-last">@${esc(u.username)}</div></div>`;
       box.appendChild(div);
     });
-    (cSnap||[]).forEach(c=>{
+    cSnap.forEach(d=>{
+        const c=d.data();
         if(c.name && c.name.toLowerCase().includes(term)){
             found=true; const div=document.createElement('div'); div.className='chat-item';
-            div.onclick=()=>{ openChat(c.id, c); $('globalSearch').value=''; switchMainTab('chats'); };
-            div.innerHTML=`<div class="av">📢</div><div class="ci-main"><div class="ci-name">${esc(c.name)} <span class="tag">دیوان</span></div><div class="ci-last">${(c.members||[]).length} عضو</div></div>`;
+            div.onclick=()=>{ openChat(d.id, {id:d.id, ...c}); $('globalSearch').value=''; switchMainTab('chats'); };
+            div.innerHTML=`<div class="av">📢</div><div class="ci-main"><div class="ci-name">${esc(c.name)} <span class="tag">دیوان</span></div><div class="ci-last">${c.members.length} عضو</div></div>`;
             box.appendChild(div);
         }
     });
     if(!found) box.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">کسی یا دیوانی یافت نشد.</div>';
-  }catch(e){ box.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">خطا در موتور جستجو</div>';
-  }
+  }catch(e){ box.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">خطا در موتور جستجو</div>'; }
 }
 
 // ---------- GROUPS & CHANNELS ----------
 window.loadMemberPicker = async ()=>{
-  const box=$('grpMembers'); box.innerHTML='در حال فراخوانی...';
-  const { data: snap } = await supabase.from('users').select('*').limit(50);
-  box.innerHTML='';
-  (snap||[]).forEach(u=>{
-    if(u.uid===ME.uid) return; const div=document.createElement('div'); div.className='member-pick'; div.dataset.uid=u.uid; div.onclick=()=>div.classList.toggle('sel');
+  const box=$('grpMembers'); box.innerHTML='در حال فراخوانی...'; const snap=await getDocs(query(collection(db,'users'),limit(50))); box.innerHTML='';
+  snap.forEach(d=>{
+    const u=d.data(); if(u.uid===ME.uid) return; const div=document.createElement('div'); div.className='member-pick'; div.dataset.uid=u.uid; div.onclick=()=>div.classList.toggle('sel');
     div.innerHTML=`${u.photoURL?`<img class="av" style="width:45px;height:45px" src="${u.photoURL}">`:`<div class="av" style="width:45px;height:45px">${initials(u.displayName)}</div>`}
       <div class="ci-main"><div class="ci-name" style="font-size:15px">${u.isPremium?'👑':''}${esc(u.displayName)}</div><div class="ci-last" style="font-size:12px">@${esc(u.username)}</div></div><span class="chk" style="color:var(--gold2); font-weight:bold;">انتخاب</span>`;
     box.appendChild(div);
@@ -1322,13 +1260,12 @@ window.loadMemberPicker = async ()=>{
 window.createGroup = async ()=>{
   const name=$('grpName').value.trim(); if(!name) return toast('نام را وارد کنید','⚠️');
   const sel=[...document.querySelectorAll('#grpMembers .member-pick.sel')].map(e=>e.dataset.uid);
-  const { data: ref } = await supabase.from('chats').insert([{ type:'group', name, photoURL:'', owner:ME.uid, admins:[], members:[ME.uid,...sel], lastMessage:'محفل دایر شد', lastTime: new Date().toISOString(), background:'' }]).select().single();
+  const ref=await addDoc(collection(db,'chats'),{ type:'group', name, photoURL:'', owner:ME.uid, admins:[], members:[ME.uid,...sel], lastMessage:'محفل دایر شد', lastTime:serverTimestamp(), background:'' });
   closeModal('newGroupModal'); $('grpName').value=''; toast('محفل ساخته شد','✔'); openChat(ref.id);
 };
 window.createChannel = async ()=>{
-  const name=$('chName').value.trim(); const desc=$('chDesc').value.trim();
-  if(!name) return toast('نام را وارد کنید','⚠️');
-  const { data: ref } = await supabase.from('chats').insert([{ type:'channel', name, nameLower:name.toLowerCase(), description:desc, photoURL:'', owner:ME.uid, admins:[], members:[ME.uid], boosts:0, lastMessage:'دیوان دایر شد', lastTime: new Date().toISOString(), background:'' }]).select().single();
+  const name=$('chName').value.trim(); const desc=$('chDesc').value.trim(); if(!name) return toast('نام را وارد کنید','⚠️');
+  const ref=await addDoc(collection(db,'chats'),{ type:'channel', name, nameLower:name.toLowerCase(), description:desc, photoURL:'', owner:ME.uid, admins:[], members:[ME.uid], boosts:0, lastMessage:'دیوان دایر شد', lastTime:serverTimestamp(), background:'' });
   closeModal('newChannelModal'); $('chName').value=''; $('chDesc').value=''; toast('دیوان ساخته شد','✔'); openChat(ref.id);
 };
 
@@ -1339,7 +1276,7 @@ window.openChatInfo = async ()=>{
   const av=$('ciAv'); if(meta.photo) av.innerHTML=`<img src="${meta.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; else av.textContent=meta.icon;
   const mbox=$('ciMembers'); mbox.innerHTML='';
   if(activeChat.type==='private'){
-    const other=(activeChat.members||[]).find(m=>m!==ME.uid) || ME.uid; const u=await getUser(other); $('ciSub').textContent='@'+u.username;
+    const other=activeChat.members.find(m=>m!==ME.uid) || ME.uid; const u=await getUser(other); $('ciSub').textContent='@'+u.username;
     if(u.bio){ $('ciDesc').style.display='block'; $('ciDesc').textContent=u.bio; } else $('ciDesc').style.display='none';
     $('ciBoosts').style.display = 'none'; $('channelSettingsUI').style.display = 'none'; $('ciMembersTitle').style.display = 'none'; mbox.style.display = 'none';
     closeModal('chatInfoModal'); viewUser(other); return;
@@ -1349,20 +1286,19 @@ window.openChatInfo = async ()=>{
         const lvl = Math.floor((activeChat.boosts||0) / 5) + 1;
         $('ciBoosts').style.display = 'inline-block';
         $('ciBoosts').textContent = `لول دیوان: ${lvl} (${activeChat.boosts||0} 🚀)`;
-        $('ciSub').textContent = (activeChat.members||[]).length + ' دنبال‌کننده';
-        if(activeChat.owner === ME.uid) $('channelSettingsUI').style.display = 'block';
-        else $('channelSettingsUI').style.display = 'none';
+        $('ciSub').textContent = activeChat.members.length + ' دنبال‌کننده';
+        if(activeChat.owner === ME.uid) $('channelSettingsUI').style.display = 'block'; else $('channelSettingsUI').style.display = 'none';
     } else {
         $('ciBoosts').style.display = 'none';
         if(activeChat.owner === ME.uid) $('channelSettingsUI').style.display = 'block'; else $('channelSettingsUI').style.display = 'none';
-        $('ciSub').textContent = (activeChat.members||[]).length + ' عضو حاضر';
+        $('ciSub').textContent = activeChat.members.length + ' عضو حاضر';
     }
     
     if(activeChat.description){ $('ciDesc').style.display='block'; $('ciDesc').textContent=activeChat.description; } else $('ciDesc').style.display='none';
-    for(const uid of (activeChat.members||[])){
+    
+    for(const uid of activeChat.members){
       const u=await getUser(uid); const div=document.createElement('div'); div.className='member-pick'; div.style.background='rgba(0,0,0,0.5)';
-      const isOwner = uid===activeChat.owner;
-      const isAdmin = (activeChat.admins||[]).includes(uid);
+      const isOwner = uid===activeChat.owner; const isAdmin = (activeChat.admins||[]).includes(uid);
       const badge = isOwner ? '<span class="rank" style="background:var(--danger)">👑 مالک</span>' : (isAdmin ? '<span class="rank" style="background:#007aff">🛡️ وزیر</span>' : '');
       div.innerHTML=`${u.photoURL?`<img class="av" style="width:45px;height:45px" src="${u.photoURL}">`:`<div class="av" style="width:45px;height:45px">${initials(u.displayName)}</div>`}
         <div class="ci-main" onclick="closeModal('chatInfoModal'); viewUser('${uid}');"><div class="ci-name" style="font-size:15px">${u.isPremium?'👑':''}${esc(u.displayName)} ${badge}</div><div class="ci-last" style="font-size:12px">@${esc(u.username)}</div></div>`;
@@ -1381,78 +1317,58 @@ window.openChatInfo = async ()=>{
 window.toggleAdmin = async (uid, isCurrentlyAdmin) => {
     if(!activeChatId || ME.uid !== activeChat.owner) return;
     toast('در حال تغییر مقام...','⏳');
-    if(isCurrentlyAdmin) { 
-        activeChat.admins = activeChat.admins.filter(a => a !== uid);
-        await supabase.from('chats').update({ admins: activeChat.admins }).eq('id', activeChatId);
-    } else { 
-        if(!activeChat.admins) activeChat.admins = [];
-        activeChat.admins.push(uid);
-        await supabase.from('chats').update({ admins: activeChat.admins }).eq('id', activeChatId);
-    }
+    const chatRef = doc(db, 'chats', activeChatId);
+    if(isCurrentlyAdmin) { await updateDoc(chatRef, { admins: arrayRemove(uid) }); activeChat.admins = activeChat.admins.filter(a => a !== uid); } 
+    else { await updateDoc(chatRef, { admins: arrayUnion(uid) }); if(!activeChat.admins) activeChat.admins = []; activeChat.admins.push(uid); }
     openChatInfo();
 }
 
-window.clearActiveChat=()=>{ activeChatId=null; activeChat=null; if(msgUnsub) supabase.removeChannel(msgUnsub); $('activeChat').style.display='none'; $('emptyChat').style.display='flex'; $('chatPanel').classList.remove('open');
-};
+window.clearActiveChat=()=>{ activeChatId=null; activeChat=null; if(msgUnsub) msgUnsub(); $('activeChat').style.display='none'; $('emptyChat').style.display='flex'; $('chatPanel').classList.remove('open'); };
 
 // ---------- CREDITS & GIFTS ----------
 window.openCreditModal=()=>{ $('mainMenu').style.display='none'; $('cmCredit').textContent=ME.credits||0; openModal('creditModal'); };
-window.addCredits = async (n)=>{ 
-    ME.credits=(ME.credits||0)+n;
-    await supabase.from('users').update({ credits: ME.credits }).eq('uid', ME.uid);
-    $('cmCredit').textContent=ME.credits; toast('+'+n+' سکه واریز شد','⭐'); 
-};
+window.addCredits = async (n)=>{ await updateDoc(doc(db,'users',ME.uid),{ credits: increment(n) }); ME.credits=(ME.credits||0)+n; $('cmCredit').textContent=ME.credits; toast('+'+n+' سکه واریز شد','⭐'); };
 
 let giftTargetUid=null;
 window.openGiftModal=()=>{
   $('chatMenu').style.display='none'; 
-  if(activeChat?.type==='private'){ giftTargetUid=(activeChat.members||[]).find(m=>m!==ME.uid) || ME.uid; }
+  if(activeChat?.type==='private'){ giftTargetUid=activeChat.members.find(m=>m!==ME.uid) || ME.uid; }
   else if (activeChat?.type==='channel') { giftTargetUid = 'CHANNEL_GIFT'; }
   else giftTargetUid=null;
   $('gmCredit').textContent=ME.credits||0; openModal('giftModal');
 };
-window.openGiftToViewedUser=()=>{ closeModal('userProfileModal'); giftTargetUid=viewedUser.uid;
-  $('gmCredit').textContent=ME.credits||0; openModal('giftModal'); };
+window.openGiftToViewedUser=()=>{ closeModal('userProfileModal'); giftTargetUid=viewedUser.uid; $('gmCredit').textContent=ME.credits||0; openModal('giftModal'); };
 
 window.sendGift = async (emoji,value)=>{
   if((ME.credits||0)<value) return toast('خزانه شما خالی است','⚠️');
   if(giftTargetUid === 'CHANNEL_GIFT') {
+      await updateDoc(doc(db,'users',ME.uid),{ credits: increment(-value) });
+      await updateDoc(doc(db,'chats',activeChatId),{ boosts: increment(Math.floor(value/10)) });
       ME.credits=(ME.credits||0)-value; activeChat.boosts = (activeChat.boosts||0) + Math.floor(value/10);
-      await supabase.from('users').update({ credits: ME.credits }).eq('uid', ME.uid);
-      await supabase.from('chats').update({ boosts: activeChat.boosts }).eq('id', activeChatId);
       await pushMessage({ type:'gift', gift:emoji, giftValue:value, text:'' });
-      closeModal('giftModal');
-      renderChatHeader(); return toast('پیشکش به دیوان اهدا شد و قدرت دیوان افزایش یافت! 🚀','👑');
+      closeModal('giftModal'); renderChatHeader(); return toast('پیشکش به دیوان اهدا شد و قدرت دیوان افزایش یافت! 🚀','👑');
   }
 
   let chatId=activeChatId;
-  if(giftTargetUid && (!activeChat || activeChat.type!=='private' || !(activeChat.members||[]).includes(giftTargetUid))){
+  if(giftTargetUid && (!activeChat || activeChat.type!=='private' || !activeChat.members.includes(giftTargetUid))){
     const u=await getUser(giftTargetUid); await openOrCreatePrivate(giftTargetUid,u); chatId=activeChatId;
   }
   if(!chatId) return toast('ابتدا مسیر ارتباطی ایجاد کنید');
   
+  await updateDoc(doc(db,'users',ME.uid),{ credits: increment(-value) });
+  if(giftTargetUid) { await updateDoc(doc(db,'users',giftTargetUid),{ credits: increment(value), giftScore: increment(value), receivedGifts: arrayUnion({emoji, sender: ME.displayName, value}) }); }
   ME.credits=(ME.credits||0)-value;
-  await supabase.from('users').update({ credits: ME.credits }).eq('uid', ME.uid);
-  if(giftTargetUid) { 
-      const u = await getUser(giftTargetUid);
-      let hisCredits = (u.credits||0) + value;
-      let hisScore = (u.giftScore||0) + value;
-      let hisGifts = u.receivedGifts || [];
-      hisGifts.push({emoji, sender: ME.displayName, value});
-      await supabase.from('users').update({ credits: hisCredits, giftScore: hisScore, receivedGifts: hisGifts }).eq('uid', giftTargetUid);
-  }
-  
   await pushMessage({ type:'gift', gift:emoji, giftValue:value, text:'' });
   closeModal('giftModal'); toast('پیشکش ارسال شد '+emoji,'🎁');
 };
+
 // ---------- BACKGROUND ----------
 window.openBgModal=()=>{
   $('chatMenu').style.display='none';
   const grid=$('bgGrid'); grid.innerHTML='';
-  BACKGROUNDS.forEach((bg)=>{ const d=document.createElement('div'); d.className='bg-opt'+(activeChat?.background===bg?' sel':''); d.style.background = bg||'var(--bg2)'; d.onclick=()=>setBackground(bg); grid.appendChild(d); });
-  openModal('bgModal');
+  BACKGROUNDS.forEach((bg)=>{ const d=document.createElement('div'); d.className='bg-opt'+(activeChat?.background===bg?' sel':''); d.style.background = bg||'var(--bg2)'; d.onclick=()=>setBackground(bg); grid.appendChild(d); }); openModal('bgModal');
 };
-window.setBackground = async (bg)=>{ await supabase.from('chats').update({ background:bg }).eq('id', activeChatId); activeChat.background=bg; applyBackground(bg); closeModal('bgModal'); toast('پرده‌خوانی عمارت تغییر کرد','🖼️'); };
+window.setBackground = async (bg)=>{ await updateDoc(doc(db,'chats',activeChatId),{ background:bg }); activeChat.background=bg; applyBackground(bg); closeModal('bgModal'); toast('پرده‌خوانی عمارت تغییر کرد','🖼️'); };
 $('msgInput').addEventListener('keydown',(e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); } });
 </script>
 </body>
