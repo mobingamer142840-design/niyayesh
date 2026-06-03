@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#050308">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -16,9 +16,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Lalezar&family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 <style>
-/* === متغیرهای ادغام شده سلطنتی و سینمایی === */
+/* === متغیرهای سلطنتی و سینمایی === */
 :root {
   --bg: #050308;
   --bg2: #120a24;
@@ -41,19 +41,6 @@
   --shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
   --glow: 0 0 35px rgba(232, 198, 107, 0.25);
   --z-canvas: 0; --z-ambient: 1; --z-content: 10; --z-ui: 1000;
-  
-  /* Chat Specific Variables */
-  --panel: rgba(18, 18, 24, 0.85); 
-  --panel2: rgba(25, 25, 32, 0.95);
-  --gold-glow: 0 0 20px rgba(246, 227, 161, 0.4);
-  --gold-glow-strong: 0 0 40px rgba(246, 227, 161, 0.7);
-  --me: linear-gradient(145deg, #431c87, #2a1154); 
-  --other: rgba(28, 32, 38, 0.9); 
-  --line: rgba(232, 198, 107, 0.15); 
-  --danger: #ff3b30; 
-  --green: #34c759;
-  --premium: linear-gradient(135deg, #f6e3a1, #e8c66b, #b8862f);
-  --premium-glow: linear-gradient(135deg, #7b3fe4, #e8c66b);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -68,14 +55,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   position: relative;
-  overscroll-behavior-y: none;
 }
-
-/* === اسکرول‌بار === */
-::-webkit-scrollbar { width:5px; height:5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background:rgba(232, 198, 107, 0.3); border-radius:10px; }
-::-webkit-scrollbar-thumb:hover { background:var(--gold-2); }
 
 #app-wrapper {
   overflow: hidden;
@@ -88,7 +68,8 @@ body {
 @media(pointer: coarse) { 
   .cursor-dot, .cursor-ring { display: none !important; } 
   .card, .gate-card, .magic-mirror, .wiriper-card, .letter, .artifact-card { 
-    transform: none !important; transition: border-color 0.4s ease !important; 
+    transform: none !important;
+    transition: border-color 0.4s ease !important; 
   }
 }
 
@@ -98,17 +79,22 @@ h1, h2, h3, .cinzel { font-family: 'Cinzel', serif; }
 a, button { -webkit-tap-highlight-color: transparent; outline: none; }
 
 /* === نشانگر موس پیشرفته === */
-.cursor-dot { position: fixed; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-2); z-index: 999999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 20px 4px var(--gold); transition: transform 0.1s; }
-.cursor-ring { position: fixed; width: 45px; height: 45px; border-radius: 50%; border: 1.5px solid rgba(232, 198, 107, 0.5); z-index: 999998; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s; }
+.cursor-dot { position: fixed; width: 6px; height: 6px; border-radius: 50%; background: var(--gold-2); z-index: 9999; pointer-events: none; transform: translate(-50%, -50%); box-shadow: 0 0 20px 4px var(--gold); transition: transform 0.1s; }
+.cursor-ring { position: fixed; width: 45px; height: 45px; border-radius: 50%; border: 1.5px solid rgba(232, 198, 107, 0.5); z-index: 9998; pointer-events: none; transform: translate(-50%, -50%); transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s; }
 .cursor-ring.hot { width: 70px; height: 70px; background: rgba(232, 198, 107, 0.08); border-color: var(--gold-2); box-shadow: 0 0 30px rgba(232, 198, 107, 0.3); }
 
 /* === افکت‌های پس‌زمینه سینمایی === */
 #progress { position: fixed; top: 0; right: 0; left: 0; height: 4px; z-index: 9990; background: linear-gradient(90deg, var(--gold-deep), var(--gold-2), var(--purple)); transform: scaleX(0); transform-origin: right; box-shadow: 0 0 15px var(--gold-2); will-change: transform; }
+
 canvas.bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-canvas); }
+
 .royal-dust { position: fixed; inset: 0; pointer-events: none; z-index: var(--z-ambient); background-image: radial-gradient(circle, rgba(232,198,107,0.15) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.3; }
+
 .ambient-fog { position: fixed; inset: 0; background: radial-gradient(circle at 50% 50%, transparent 20%, var(--bg) 100%); opacity: 0.6; pointer-events: none; z-index: var(--z-ambient); }
+
 .floating-symbol { position: fixed; color: rgba(232,198,107,0.15); font-family: 'Cinzel'; pointer-events: none; animation: floatUpward 20s linear forwards; z-index: var(--z-ambient); text-shadow: 0 0 20px rgba(232,198,107,0.4); }
 @keyframes floatUpward { 0% { transform: translate3d(0, 100vh, 0) rotate(0deg) scale(0.8); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translate3d(0, -20vh, 0) rotate(360deg) scale(1.2); opacity: 0; } }
+
 .petal { position: fixed; top: -30px; z-index: var(--z-ui); pointer-events: none; animation: fall linear forwards; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4)); }
 @keyframes fall { to { transform: translate3d(0, 105vh, 0) rotate(720deg); opacity: 0; } }
 
@@ -185,12 +171,23 @@ section { padding: 120px 0; position: relative; }
 
 .angel-container { margin: 40px auto; z-index: var(--z-content); transition: transform 0.2s ease-out; }
 .angel { position: relative; width: min(350px, 80vw); aspect-ratio: 1; margin: 0 auto; }
-.photo-frame { position: absolute; inset: 0; border-radius: 50%; overflow: hidden; z-index: 3; border: 4px solid rgba(255,255,255,0.8); box-shadow: 0 0 40px rgba(232, 198, 107, 0.3); transition: all 0.5s ease; -webkit-mask-image: -webkit-radial-gradient(white, black); mask-image: radial-gradient(white, black); background: var(--bg2); }
+
+.photo-frame { 
+  position: absolute; inset: 0; border-radius: 50%; overflow: hidden; z-index: 3; border: 4px solid rgba(255,255,255,0.8);
+  box-shadow: 0 0 40px rgba(232, 198, 107, 0.3);
+  transition: all 0.5s ease;
+  -webkit-mask-image: -webkit-radial-gradient(white, black); mask-image: radial-gradient(white, black);
+  background: var(--bg2);
+}
 .angel:hover .photo-frame { border-color: #fff; box-shadow: 0 0 60px rgba(232, 198, 107, 0.6); }
-.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; transition: transform 0.8s ease; filter: contrast(1.1); }
+.photo-frame img { 
+  width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%;
+  transition: transform 0.8s ease; filter: contrast(1.1);
+}
 .angel:hover .photo-frame img { transform: scale(1.1); }
 
 .halo { position: absolute; top: -30px; left: 50%; width: 75%; height: 35px; border-radius: 50%; border: 5px solid rgba(255, 255, 255, 0.9); box-shadow: 0 0 25px var(--gold-2); z-index: 4; transform: translateX(-50%) rotateX(70deg); }
+
 .wing { position: absolute; top: 5%; width: 65%; height: 90%; z-index: 1; display: flex; align-items: flex-start; justify-content: center; opacity: 0.9; }
 .wing-left { right: 65%; transform-origin: right center; animation: flapL 6s ease-in-out infinite; }
 .wing-right { left: 65%; transform-origin: left center; animation: flapR 6s ease-in-out infinite; }
@@ -219,6 +216,8 @@ section { padding: 120px 0; position: relative; }
 .wstat { text-align: center; }
 .wstat .num { display: block; font-size: 45px; font-family: 'Cinzel'; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--gold-2); margin-bottom: 5px; }
 .wstat .lbl { font-size: 15px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+/* ارکان و نشان‌های گنجینه سلطنتی جدید اضافه شده در آپدیت */
 .artifacts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
 .artifact-card { background: rgba(5, 3, 10, 0.6); border: 1px solid rgba(232, 198, 107, 0.15); border-radius: 20px; padding: 25px; transition: all 0.4s ease; text-align: right; }
 .artifact-card:hover { border-color: var(--gold); background: rgba(20, 10, 40, 0.5); transform: translateY(-5px); }
@@ -299,12 +298,22 @@ section { padding: 120px 0; position: relative; }
 .gallery-caption { position: absolute; bottom: 0; left: 0; right: 0; text-align: center; color: var(--gold-2); padding: 15px; font-size: 15px; font-weight: bold; opacity: 0; transition: opacity 0.3s ease; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); }
 .gallery-item:hover .gallery-caption { opacity: 1; }
 
+/* === لایت‌باکس === */
+#lightbox { position: fixed; inset: 0; z-index: 99999; background: rgba(2, 1, 6, 0.98); display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; touch-action: none; }
+#lightbox.open { display: flex; opacity: 1; }
+#lightbox img { max-width: 95vw; max-height: 90vh; border-radius: 15px; border: 2px solid var(--gold); object-fit: contain; transform: scale(0.95); transition: transform 0.3s ease; }
+#lightbox.open img { transform: scale(1); }
+#lightbox .x { position: absolute; top: 20px; left: 20px; font-size: 35px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.5); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); z-index: 100000; }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); font-size: 50px; color: #fff; cursor: pointer; background: rgba(20,10,40,0.8); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; user-select: none; border: 1px solid rgba(232,198,107,0.4); }
+.lb-prev { right: 20px; } .lb-next { left: 20px; }
+
 #toTop { position: fixed; bottom: 30px; left: 30px; z-index: 4000; width: 50px; height: 50px; border-radius: 50%; border: 2px solid rgba(232,198,107,0.5); background: rgba(10, 5, 20, 0.9); color: var(--gold-2); font-size: 24px; cursor: pointer; opacity: 0; transform: translateY(20px); transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; justify-content: center; }
 #toTop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
 footer { text-align: center; padding: 60px 20px; background: var(--bg); color: var(--muted); font-size: 15px; border-top: 1px solid rgba(232,198,107,0.1); position: relative; z-index: var(--z-content); line-height: 2; }
 footer b { color: var(--gold-2); font-size: 17px; }
 
+/* === بهینه‌سازی ریسپانسیو و موبایل === */
 @media(max-width: 1024px) {
   .nav-links { display: none; position: absolute; top: 70px; right: 20px; left: 20px; flex-direction: column; background: rgba(5, 3, 12, 0.98); border: 1px solid var(--gold); border-radius: 20px; padding: 20px; }
   .nav-links.open { display: flex; }
@@ -317,15 +326,22 @@ footer b { color: var(--gold-2); font-size: 17px; }
 }
 
 @media(max-width: 768px) {
-  .wiriper-card, .card, .cd-card, .tl-card, .gate-card, .artifact-card { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; background: rgba(15, 8, 30, 0.95) !important; }
+  .wiriper-card, .card, .cd-card, .tl-card, .gate-card, .artifact-card { 
+    backdrop-filter: none !important; 
+    -webkit-backdrop-filter: none !important; 
+    background: rgba(15, 8, 30, 0.95) !important;
+  }
   .ambient-fog { display: none; }
   .royal-dust { opacity: 0.1; }
   .wing { animation-duration: 8s; }
+
   .g2, .cd-grid, .g3, .artifacts-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 45px; }
   .wiriper-stats { gap: 20px; flex-direction: column; }
   .letter { padding: 40px 25px; }
   #letterText { font-size: 18px; }
+  .lb-nav { width: 50px; height: 50px; font-size: 35px; }
+  .lb-prev { right: 10px; } .lb-next { left: 10px; }
   section { padding: 80px 0; }
   .sec-title h2 { font-size: 28px; }
   .card { padding: 25px; }
@@ -336,269 +352,51 @@ footer b { color: var(--gold-2); font-size: 17px; }
   #toTop { bottom: 20px; left: 20px; }
 }
 
-/* =========================================================================
-   === ADVANCED MESSENGER CHAT UI (Integrated from Royal Edition 4.0) ===
-   ========================================================================= */
+/* === استایل‌های پیام‌رسان اختصاصی (Wiriper Chat) === */
+#wiriper-chat-modal { position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; flex-direction: column; overflow: hidden; opacity: 0; transition: opacity 0.4s ease; }
+#wiriper-chat-modal.open { display: flex; opacity: 1; }
+.chat-header { padding: 15px 25px; background: rgba(20, 10, 40, 0.95); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
+.chat-header-info { display: flex; align-items: center; gap: 15px; }
+.chat-header-info .avatar { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--gold); }
+.chat-header-info h3 { color: var(--gold-2); font-size: 18px; font-family: 'Cinzel', 'Vazirmatn'; margin: 0; }
+.chat-header-info span { color: var(--rose); font-size: 12px; }
+.chat-close { color: #fff; font-size: 25px; cursor: pointer; background: none; border: none; }
 
-#messenger-overlay {
-  position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; overflow: hidden; opacity: 0; transition: opacity 0.4s ease;
-}
-#messenger-overlay.open { display: block; opacity: 1; }
-#messenger-overlay button { cursor:pointer; border:none; font-family:inherit; transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); outline: none; }
-#messenger-overlay button:active { transform: scale(0.94); }
-#messenger-overlay input, #messenger-overlay textarea { font-family:inherit; outline:none; transition: all 0.25s ease; resize: vertical; overflow-x: hidden; }
+.chat-login-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 20px; text-align: center; background: radial-gradient(circle, var(--bg3), var(--bg)); }
+.chat-login-box { background: var(--glass-strong); padding: 40px; border-radius: 25px; border: 1px solid var(--border); box-shadow: var(--shadow); width: min(400px, 100%); }
+.chat-login-box h2 { color: var(--gold-2); margin-bottom: 20px; }
+.chat-login-box input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; }
+.chat-login-box .btn { margin-top: 10px; }
 
-/* Animations */
-.fade-in { animation: fadeIn 0.25s ease-out forwards; will-change: opacity, transform; }
-.pop-in { animation: popIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; will-change: transform, opacity; }
-.slide-down { animation: slideDown 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-@keyframes popIn { 0% { opacity:0; transform: translateY(10px) scale(0.97); } 100% { opacity:1; transform: translateY(0) scale(1); } }
-@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes slideDown { from { transform:translateY(-100%); opacity:0; } to { transform:translateY(0); opacity:1; } }
-@keyframes pulseBorder { 0% { border-color: var(--gold-2); box-shadow: var(--gold-glow); } 100% { border-color: #fff; box-shadow: var(--gold-glow-strong); } }
+.chat-messages-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: url('https://i.ibb.co/60V0mR9/telegram-bg.png') center/cover; position: relative; }
+.chat-messages-area::before { content: ''; position: absolute; inset: 0; background: rgba(5,3,8,0.85); z-index: 0; }
+.message-bubble { position: relative; z-index: 1; max-width: 75%; padding: 12px 18px; border-radius: 20px; font-size: 15px; line-height: 1.6; word-break: break-word; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.message-bubble img, .message-bubble video { max-width: 100%; border-radius: 10px; margin-bottom: 8px; }
+.msg-sent { align-self: flex-start; background: linear-gradient(135deg, var(--purple-deep), #2a1154); color: #fff; border-bottom-right-radius: 4px; border: 1px solid rgba(123, 63, 228, 0.3); }
+.msg-received { align-self: flex-end; background: linear-gradient(135deg, rgba(20,10,40,0.9), rgba(10,5,20,0.9)); color: var(--gold-2); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
+.msg-time { display: block; font-size: 10px; opacity: 0.7; margin-top: 5px; text-align: right; }
 
-/* AUTH SCREEN */
-#authScreen { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% -20%, #1a1a24, var(--bg)); z-index:50; }
-#authScreen .close-msgr { position:absolute; top:20px; left:20px; background:rgba(255,255,255,0.05); color:var(--text); width:45px; height:45px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; border:1px solid rgba(255,255,255,0.1); cursor:pointer; z-index:60;}
-#authScreen .close-msgr:hover { background:var(--danger); color:#fff; border-color:var(--danger); transform:rotate(90deg);}
-
-.auth-card { width:92%; max-width:400px; background:var(--panel); border:1px solid var(--line); border-radius:32px; padding:40px 32px; box-shadow: 0 20px 60px rgba(0,0,0,0.8), var(--gold-glow); backdrop-filter: blur(30px); }
-.auth-logo { text-align:center; margin-bottom:30px; animation: popIn 0.4s ease; }
-.auth-logo h1 { background: var(--premium); background-size: 200% auto; -webkit-background-clip: text; color: transparent; font-size:38px; letter-spacing:1px; font-weight:900; }
-.auth-logo p { color:var(--muted); font-size:14px; margin-top:8px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;}
-
-.auth-tabs { display:flex; background:rgba(0,0,0,0.6); border-radius:18px; padding:6px; margin-bottom:25px; border:1px solid rgba(255,255,255,0.05); }
-.auth-tabs button { flex:1; padding:12px; background:none; color:var(--muted); border-radius:14px; font-size:14px; font-weight:800; transition: 0.3s; }
-.auth-tabs button.active { background:var(--premium); color:#000; box-shadow:0 4px 15px rgba(232,198,107,0.4); transform: scale(1.02); }
-
-.field { margin-bottom:20px; }
-.field label { display:block; font-size:12px; color:var(--gold); margin-bottom:8px; font-weight:700; margin-right: 8px; text-transform:uppercase; letter-spacing: 1px; }
-.field input, .field textarea { width:100%; padding:16px 20px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.08); border-radius:18px; color:var(--text); font-size:15px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.3); transition:0.3s; }
-.field input:focus, .field textarea:focus { border-color:var(--gold-2); box-shadow: 0 0 20px rgba(232,198,107,0.15), inset 0 2px 5px rgba(0,0,0,0.3); background:rgba(0,0,0,0.7); }
-
-.btn-main { width:100%; padding:16px; background:var(--premium); color:#000; font-weight:900; font-size:15px; border-radius:18px; margin-top:10px; box-shadow: var(--gold-glow); text-transform: uppercase; letter-spacing: 1px; }
-.btn-main:hover { transform:translateY(-2px); box-shadow: var(--gold-glow-strong); }
-
-.auth-msg { margin-top:15px; font-size:13px; text-align:center; min-height:20px; font-weight:bold; transition: 0.3s; opacity: 0; }
-.auth-msg.show { opacity: 1; }
-.auth-msg.err { color:var(--danger); } .auth-msg.ok { color:var(--gold-2); }
-
-/* APP LAYOUT */
-#chatApp { display:none; height:100dvh; width: 100%; position: absolute; inset:0; }
-.layout { display:flex; height:100%; width: 100%; }
-
-/* SIDEBAR */
-.sidebar { width:380px; min-width:380px; background:var(--bg2); border-left:1px solid rgba(255,255,255,0.03); display:flex; flex-direction:column; z-index:10; }
-.side-header { display:flex; align-items:center; gap:14px; padding:20px; border-bottom:1px solid rgba(255,255,255,0.03); background:var(--panel2); }
-.me-avatar { width:48px; height:48px; border-radius:50%; object-fit:cover; cursor:pointer; background:var(--bg); border:2px solid var(--gold-2); box-shadow: 0 0 15px rgba(232,198,107,0.2); transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.me-avatar.premium { animation: pulseBorder 2.5s infinite alternate; }
-.me-avatar:hover { transform: scale(1.1) rotate(5deg); box-shadow: var(--gold-glow-strong); }
-
-.side-header .me-info { flex:1; cursor:pointer; min-width:0; }
-.side-header .me-name { font-size:16px; font-weight:800; color:var(--text); display:flex; align-items:center; gap:6px; }
-.side-header .me-id { font-size:12px; color:var(--gold-2); margin-top:3px; font-weight:600; opacity:0.8; }
-
-.app-icon-btn { width:40px; height:40px; border-radius:50%; background:rgba(255,255,255,0.03); color:var(--gold-2); font-size:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0; border:1px solid rgba(255,255,255,0.05); transition:0.3s; }
-.app-icon-btn:hover { background:rgba(232,198,107,0.15); border-color:var(--gold-2); box-shadow: var(--gold-glow); transform: rotate(90deg); }
-
-/* TABS & SEARCH */
-.main-tabs { display:flex; padding:10px 20px; gap:8px; background:var(--bg2); border-bottom:1px solid rgba(255,255,255,0.03); }
-.main-tabs button { flex:1; padding:10px; background:transparent; color:var(--muted); border-radius:14px; font-size:13px; font-weight:800; transition:0.3s; }
-.main-tabs button:hover { background:rgba(255,255,255,0.03); color:var(--text); }
-.main-tabs button.active { background:rgba(232,198,107,0.1); color:var(--gold-2); box-shadow: inset 0 0 10px rgba(232,198,107,0.1); }
-
-.search-row { padding:15px 20px; background:var(--bg2); }
-.search-row input { width:100%; padding:14px 22px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.05); border-radius:24px; color:var(--text); font-size:14px; text-align: right; box-shadow: inset 0 2px 10px rgba(0,0,0,0.4); }
-.search-row input:focus { border-color:var(--gold-2); background:rgba(0,0,0,0.8); box-shadow: 0 0 15px rgba(232,198,107,0.15), inset 0 2px 10px rgba(0,0,0,0.5); }
-
-.new-menu { display:flex; gap:12px; padding:0 20px 15px; }
-.new-menu button { flex:1; padding:12px; background:rgba(255,255,255,0.02); color:var(--gold-2); border-radius:16px; font-size:13px; border:1px solid rgba(255,255,255,0.05); font-weight:800; transition:0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.new-menu button:hover { background:rgba(232,198,107,0.1); border-color:var(--gold-2); transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,0.4); }
-
-.list-title { padding:10px 24px; font-size:12px; color:var(--muted); font-weight:800; background:rgba(11,11,16,0.9); backdrop-filter: blur(15px); position: sticky; top:0; z-index:2; text-transform: uppercase; letter-spacing:1px; }
-.chat-list { flex:1; overflow-y:auto; padding-bottom: 20px; }
-.chat-item { display:flex; align-items:center; gap:14px; padding:12px 20px; cursor:pointer; border-radius: 18px; margin: 4px 12px; transition: 0.25s ease; border:1px solid transparent; will-change: background-color; }
-.chat-item:hover { background:rgba(255,255,255,0.02); }
-.chat-item.active { background:rgba(232,198,107,0.1); border-color:rgba(232,198,107,0.3); box-shadow: inset 0 0 15px rgba(232,198,107,0.1); }
-
-.av { width:48px; height:48px; border-radius:50%; object-fit:cover; background:var(--panel2); display:flex; align-items:center; justify-content:center; font-size:20px; color:var(--gold-2); flex-shrink:0; border: 2px solid transparent; transition:0.3s; }
-.chat-item:hover .av { border-color: rgba(232,198,107,0.5); }
-.chat-item.active .av { border-color: var(--gold-2); box-shadow: var(--gold-glow); }
-
-.ci-main { flex:1; min-width:0; }
-.ci-name { font-size:15px; font-weight:800; display:flex; align-items:center; gap:6px; color:var(--text); }
-.ci-name .tag { font-size:10px; background:var(--gold-2); color:#000; padding:2px 6px; border-radius:6px; font-weight:900; }
-.ci-last { font-size:13px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:4px; font-weight:500; }
-.ci-time { font-size:11px; color:var(--muted); font-weight:700; margin-bottom: auto; margin-top: 5px; }
-.online-dot { width:8px; height:8px; background:var(--green); border-radius:50%; display:inline-block; margin-left:5px; box-shadow: 0 0 8px var(--green); }
-
-/* CHAT PANEL */
-.chat-panel { flex:1; display:flex; flex-direction:column; position:relative; background:var(--bg); }
-.empty-chat { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--muted); text-align: center; background: radial-gradient(circle at center, rgba(232,198,107,0.03) 0%, transparent 60%); }
-.empty-chat .big { font-size:100px; margin-bottom:20px; filter: drop-shadow(0 0 40px rgba(232,198,107,0.2)); animation: popIn 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
-
-.chat-header { display:flex; align-items:center; gap:16px; padding:12px 24px; background:var(--panel2); border-bottom:1px solid rgba(255,255,255,0.03); z-index:20; backdrop-filter: blur(25px); box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
-.chat-header .back { display:none; color:var(--text); font-size:24px; background:none; padding: 0 10px; border:none; cursor:pointer;}
-.chat-header .h-av { width:44px; height:44px; border-radius:50%; object-fit:cover; background:var(--bg); display:flex; align-items:center; justify-content:center; color:var(--gold-2); cursor:pointer; border:2px solid transparent; transition:0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
-.chat-header .h-av:hover { border-color:var(--gold-2); transform:scale(1.05); box-shadow: var(--gold-glow); }
-.chat-header .h-info { flex:1; cursor:pointer; min-width:0; }
-.chat-header .h-name { font-size:16px; font-weight:900; color:var(--text); }
-.chat-header .h-sub { font-size:12px; color:var(--gold-2); margin-top: 3px; font-weight:700; opacity: 0.9; }
-
-.call-actions { display:flex; gap:10px; margin-left:15px; }
-.call-btn { width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.05); color:var(--text); display:flex; align-items:center; justify-content:center; font-size:16px; transition:0.3s; border:1px solid rgba(255,255,255,0.05); }
-.call-btn:hover { background:rgba(232,198,107,0.2); color:var(--gold-2); transform:translateY(-2px); border-color:var(--gold-2); box-shadow: var(--gold-glow); }
-
-.pinned-bar { display:none; background: rgba(25, 25, 32, 0.85); border-bottom: 1px solid rgba(232,198,107,0.2); padding: 8px 24px; cursor: pointer; backdrop-filter: blur(20px); position: relative; z-index: 10; animation: slideDown 0.3s ease; }
-.pinned-bar:hover { background: rgba(35, 35, 45, 0.95); }
-.pinned-bar::before { content: ''; position:absolute; right:15px; top:10px; bottom:10px; width:3px; background:var(--gold-2); border-radius:3px; }
-.pinned-bar .p-title { color:var(--gold-2); font-size:12px; font-weight:bold; margin-bottom:2px; }
-.pinned-bar .p-text { color:var(--text); font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; opacity:0.9;}
-
-.messages { flex:1; overflow-y:auto; padding:25px; display:flex; flex-direction:column; gap:12px; background-size:cover; background-position:center; background-attachment: fixed; }
-
-.msg-row { display:flex; max-width:80%; gap: 8px; opacity: 0; animation: popIn 0.3s ease-out forwards; align-self: flex-end; transform-origin: bottom left; }
-.msg-row.me { align-self: flex-start; transform-origin: bottom right; }
-
-.bubble { background:var(--other); padding:8px 14px; border-radius:18px; border-bottom-left-radius: 4px; position:relative; word-break:break-word; box-shadow:0 4px 15px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.03); transition: 0.2s ease-out; will-change: transform, box-shadow; }
-.msg-row.me .bubble { background:var(--me); border-bottom-left-radius: 18px; border-bottom-right-radius: 4px; border: 1px solid rgba(232,198,107,0.08); }
-.bubble:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.4); z-index:2; border-color:rgba(232,198,107,0.3); }
-
-.bubble.temp-msg { opacity: 0.6; filter: grayscale(30%); animation: pulseOpacity 1.5s infinite; }
-@keyframes pulseOpacity { 0%{opacity:0.6;} 50%{opacity:0.9;} 100%{opacity:0.6;} }
-
-.bubble.premium-msg { border: 1px solid rgba(232,198,107,0.6); box-shadow: inset 0 0 10px rgba(232,198,107,0.1), 0 4px 15px rgba(0,0,0,0.3); }
-.bubble.royal-decree { background: linear-gradient(145deg, rgba(232,198,107,0.25), rgba(0,0,0,0.95)); border: 2px solid var(--gold-2); box-shadow: var(--gold-glow-strong); animation: pulseBorder 3s infinite alternate; }
-
-.reply-box { border-right: 3px solid var(--gold-2); background: rgba(0,0,0,0.3); padding: 6px 10px; border-radius: 6px; margin-bottom: 6px; cursor:pointer; transition:0.2s; }
-.reply-box:hover { background: rgba(232,198,107,0.1); transform:translateX(-2px); }
-.reply-box .r-sender { font-size: 11px; color: var(--gold-2); font-weight: 800; margin-bottom: 2px; }
-.reply-box .r-text { font-size: 12px; color: rgba(255,255,255,0.8); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight:500;}
-
-.b-sender { font-size:12px; color:var(--gold-2); font-weight:900; margin-bottom:6px; cursor:pointer; letter-spacing:0.5px; }
-.b-text { font-size:14px; line-height:1.5; white-space:pre-wrap; font-weight: 500;}
-.b-meta { font-size:10px; color:rgba(255,255,255,0.4); margin-top:6px; text-align:left; display:flex; gap:6px; justify-content:flex-end; align-items:center; font-weight:700;}
-
-.tick { font-size: 12px; margin-left: 2px; transition:0.3s; }
-.tick.sent { color: rgba(255,255,255,0.4); }
-.tick.seen { color: var(--gold-2); filter:drop-shadow(0 0 2px rgba(232,198,107,0.5)); }
-
-.b-img, .b-video { max-width:250px; width: 100%; border-radius:12px; display:block; cursor:pointer; border:1px solid rgba(255,255,255,0.1); transition:0.3s ease; margin-top:5px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-.b-img:hover { filter: brightness(1.1); transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
-.b-file { display:flex; align-items:center; gap:12px; padding:10px 14px; background:rgba(0,0,0,0.5); border-radius:14px; min-width:200px; border:1px solid rgba(255,255,255,0.05); transition:0.3s; text-decoration:none; margin-top:5px; }
-.b-file:hover { background:rgba(232,198,107,0.15); border-color:var(--gold-2); transform:translateY(-2px); box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
-.b-file .fi { width:40px; height:40px; border-radius:10px; background:var(--premium); color:#000; display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0; box-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-.b-file .f-name { color:var(--text); font-size:13px; font-weight:800; word-break: break-all; }
-
-.gift-bubble { text-align:center; padding:25px 35px; background: radial-gradient(circle, rgba(232,198,107,0.2), rgba(0,0,0,0.9)); border:1px solid var(--gold-2); border-radius:24px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-.gift-bubble .g-emoji { font-size:60px; filter: drop-shadow(0 8px 15px rgba(232,198,107,0.6)); animation: popIn 0.5s ease-out; }
-.gift-bubble .g-txt { font-size:14px; color:var(--gold-2); margin-top:10px; font-weight:900; text-transform: uppercase; letter-spacing: 1px; }
-
-.translated-txt { margin-top:8px; padding-top:8px; border-top:1px dashed rgba(255,255,255,0.2); color:var(--gold); font-size:13px; font-style:italic; animation: fadeIn 0.3s ease; }
-
-.reactions-display { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
-.react-badge { background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.05); border-radius:16px; padding:4px 10px; font-size:12px; display:flex; align-items:center; gap:4px; color:var(--text); cursor:pointer; transition:0.2s ease-out; backdrop-filter: blur(10px); font-weight:700;}
-.react-badge:hover { background:rgba(232,198,107,0.25); transform: scale(1.1) translateY(-1px); border-color:var(--gold-2); z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.3);}
-.react-badge.reacted { background:rgba(232,198,107,0.3); border-color: var(--gold-2); color:var(--gold-2); box-shadow: var(--gold-glow); }
-
-.msg-actions { position:absolute; top:-45px; left:0; background:rgba(25,25,32,0.95); border:1px solid rgba(255,255,255,0.1); border-radius:14px; display:flex; gap:4px; padding:6px; z-index:10; box-shadow: 0 10px 25px rgba(0,0,0,0.5); opacity:0; pointer-events:none; transition: 0.25s ease-out; transform: translateY(10px) scale(0.95); backdrop-filter: blur(20px); }
-.bubble:hover .msg-actions { opacity:1; pointer-events:auto; transform: translateY(0) scale(1); }
-.msg-actions button { padding:6px 10px; background:rgba(255,255,255,0.03); color:var(--text); font-size:14px; border-radius:10px; border:1px solid transparent; transition:0.2s; }
-.msg-actions button:hover { background:rgba(232,198,107,0.2); border-color:var(--gold-2); transform:scale(1.1) translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-
-.join-bar { display:none; padding:12px; background:var(--panel2); border-top:1px solid rgba(255,255,255,0.05); text-align:center; backdrop-filter: blur(25px); z-index:10;}
-
-.input-bar { display:flex; align-items:flex-end; gap:10px; padding:12px 20px; background:var(--panel2); border-top:1px solid rgba(255,255,255,0.05); backdrop-filter: blur(30px); z-index:10; }
-.input-bar textarea { flex:1; resize:none; max-height:150px; min-height:48px; padding:12px 18px; background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.08); border-radius:24px; color:var(--text); font-size:14px; text-align:right; box-shadow: inset 0 2px 8px rgba(0,0,0,0.3); line-height:1.5; font-weight:500;}
-.input-bar textarea:focus { border-color:var(--gold-2); background:rgba(0,0,0,0.7); box-shadow: 0 0 15px rgba(232,198,107,0.15), inset 0 2px 8px rgba(0,0,0,0.4); }
-
-.action-btn { width:46px; height:46px; border-radius:50%; background:rgba(255,255,255,0.03); color:var(--gold-2); font-size:20px; flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:0.2s ease-out; border:1px solid rgba(255,255,255,0.05);}
-.action-btn:hover { background:rgba(232,198,107,0.15); color:#fff; transform: scale(1.1) rotate(10deg); box-shadow: 0 4px 15px rgba(0,0,0,0.3); border-color:var(--gold-2);}
-
-.send-btn { width:48px; height:48px; border-radius:50%; background:var(--premium); color:#000; font-size:20px; flex-shrink:0; display:flex; align-items:center; justify-content:center; box-shadow: 0 4px 15px rgba(232,198,107,0.3); transition: 0.2s ease-out; padding-left: 2px; border:none; cursor:pointer;}
-.send-btn:hover { transform: scale(1.1) translateY(-2px); box-shadow: var(--gold-glow-strong); }
-
-.action-banner { display:none; padding:10px 20px; background:rgba(0,0,0,0.85); border-top:1px solid rgba(232,198,107,0.4); align-items:center; gap:12px; font-size:13px; backdrop-filter:blur(20px); z-index:9; animation: slideDown 0.25s ease-out; }
-.action-banner .a-icon { font-size: 20px; }
-.action-banner .a-content { flex:1; display:flex; flex-direction:column; overflow:hidden; }
-.action-banner .a-title { color:var(--gold-2); font-weight:900; margin-bottom:2px; letter-spacing:0.5px;}
-.action-banner .a-txt { color:var(--text); white-space:nowrap; text-overflow:ellipsis; overflow:hidden; opacity: 0.9; font-weight:500;}
-.action-banner .close-btn { color:var(--muted); background:none; font-size:22px; transition:0.2s; border:none; cursor:pointer;}
-.action-banner .close-btn:hover { color:var(--danger); transform:rotate(90deg) scale(1.1); }
-
-/* MODALS - Messenger Specific */
-.msg-modal-bg { position:fixed; inset:0; background:rgba(0,0,0,0.85); display:flex; visibility:hidden; opacity:0; pointer-events:none; align-items:center; justify-content:center; z-index:110000; padding:20px; backdrop-filter: blur(10px); transition: opacity 0.3s ease-out, visibility 0.3s; }
-.msg-modal-bg.show { visibility:visible; opacity:1; pointer-events:auto; }
-.msg-modal { width:100%; max-width:480px; max-height:92vh; overflow-y:auto; background:var(--panel2); border:1px solid rgba(255,255,255,0.08); border-radius:28px; padding:35px 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); transform: scale(0.9) translateY(20px); transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: transform; color: var(--text); }
-.msg-modal-bg.show .msg-modal { transform: scale(1) translateY(0); }
-
-.msg-modal h2 { color:var(--text); font-size:20px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; font-weight:900; letter-spacing: 1px;}
-.msg-modal h2 .x { background:rgba(255,255,255,0.05); color:var(--muted); font-size:18px; width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center; transition:0.2s; border:1px solid transparent; cursor:pointer;}
-.msg-modal h2 .x:hover { color:#fff; background:var(--danger); transform: rotate(90deg) scale(1.1); box-shadow: 0 4px 15px rgba(255,0,0,0.4); border-color:rgba(255,0,0,0.5);}
-
-.profile-head { text-align:center; margin-bottom:25px; }
-.profile-head .p-av { width:120px; height:120px; border-radius:50%; object-fit:cover; margin:0 auto 20px; border:3px solid var(--gold-2); background:var(--bg); display:flex; align-items:center; justify-content:center; font-size:50px; color:var(--gold-2); box-shadow: 0 10px 25px rgba(0,0,0,0.4); transition:0.3s ease-out; }
-.profile-head .p-av:hover { transform:scale(1.05) rotate(5deg); box-shadow: var(--gold-glow-strong); }
-.profile-head .p-name { font-size:24px; font-weight:900; color:var(--text); display:flex; justify-content:center; align-items:center; gap:8px; }
-.profile-head .p-id { color:var(--gold-2); font-size:14px; margin-top:6px; font-weight:700; letter-spacing: 1px;}
-.profile-head .p-bio { margin-top:15px; font-size:14px; color:rgba(255,255,255,0.9); background:rgba(0,0,0,0.4); padding:15px; border-radius:18px; border:1px solid rgba(255,255,255,0.05); line-height:1.6; font-weight:500;}
-
-.credit-box { display:flex; align-items:center; justify-content:center; gap:10px; margin:20px 0; font-size:22px; font-weight:900; color:var(--gold); background:rgba(232,198,107,0.1); padding:15px; border-radius:20px; border:1px solid rgba(232,198,107,0.3); box-shadow: inset 0 0 15px rgba(0,0,0,0.5); text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
-
-.gift-gallery { display:flex; gap:10px; overflow-x:auto; padding:10px 5px; margin-top:10px; }
-.gift-gallery-item { background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:15px 10px; text-align:center; min-width:90px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition:0.2s ease-out; }
-.gift-gallery-item:hover { transform: translateY(-5px) scale(1.05); background:rgba(232,198,107,0.15); border-color:var(--gold-2); box-shadow: var(--gold-glow); }
-
-/* Multiple Profiles Gallery */
-.photo-gallery { display: flex; gap: 8px; overflow-x: auto; padding: 10px 5px; margin-top: 10px; }
-.photo-gallery img { width: 60px; height: 60px; border-radius: 12px; object-fit: cover; border: 2px solid rgba(255,255,255,0.1); cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-.photo-gallery img:hover { border-color: var(--gold-2); transform: scale(1.1); box-shadow: var(--gold-glow); }
-
-.member-pick { display:flex; align-items:center; gap:12px; padding:12px; cursor:pointer; border-radius:16px; border:1px solid transparent; transition:0.2s; background:rgba(0,0,0,0.3); margin-bottom:6px; }
-.member-pick:hover { background:rgba(255,255,255,0.05); transform:translateX(-3px); }
-.member-pick.sel { background:rgba(232,198,107,0.15); border-color:var(--gold-2); transform:scale(1.02); box-shadow: 0 4px 12px rgba(0,0,0,0.3);}
-
-.gift-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-.gift-opt { background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.05); border-radius:22px; padding:20px 10px; text-align:center; cursor:pointer; transition:all 0.25s ease-out; }
-.gift-opt:hover { border-color:var(--gold-2); background:rgba(232,198,107,0.15); transform:scale(1.05) translateY(-5px); box-shadow: var(--gold-glow-strong); z-index:2; position:relative; }
-.gift-opt .ge { font-size:45px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5)); transition:0.3s; } 
-.gift-opt:hover .ge { transform:scale(1.1); }
-.gift-opt .gp { font-size:14px; color:var(--gold); margin-top:12px; font-weight:900; }
-
-.bg-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
-.bg-opt { height:110px; border-radius:18px; cursor:pointer; border:3px solid transparent; background-size:cover; background-position:center; transition:0.2s ease-out; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
-.bg-opt:hover { transform:scale(1.03); border-color:rgba(255,255,255,0.5); }
-.bg-opt.sel { border-color:var(--gold-2); box-shadow: var(--gold-glow-strong); }
-
-.toast { position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(80px) scale(0.9); background:rgba(20,20,25,0.98); color:#fff; padding:14px 30px; border-radius:24px; font-size:15px; font-weight:800; z-index:120000; border:1px solid var(--gold-2); opacity:0; transition:all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow:0 10px 30px rgba(0,0,0,0.6), var(--gold-glow); backdrop-filter:blur(20px); display:flex; align-items:center; gap:10px; }
-.toast.show { transform:translateX(-50%) translateY(0) scale(1); opacity:1; }
-
-.menu-pop { position:absolute; top:75px; left:24px; background:rgba(25,25,32,0.98); border:1px solid rgba(255,255,255,0.1); border-radius:20px; padding:10px; z-index:30; display:none; min-width:240px; box-shadow:0 15px 40px rgba(0,0,0,0.7); animation: popIn 0.25s cubic-bezier(0.2, 0.8, 0.2, 1); backdrop-filter:blur(25px); }
-.menu-pop button { display:block; width:100%; text-align:right; padding:14px 18px; background:none; color:var(--text); border-radius:12px; font-size:14px; font-weight:800; transition: 0.2s; margin-bottom:4px; border:none; cursor:pointer;}
-.menu-pop button:hover { background:rgba(255,255,255,0.05); transform: translateX(-4px); color:var(--gold-2); }
-.menu-pop button.danger { color:var(--danger); }
-.menu-pop button.danger:hover { background:rgba(255,59,48,0.15); color:#fff; }
-
-.info-section-title { font-size: 13px; color: var(--gold-2); font-weight: 800; margin: 20px 0 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;}
-
-.mock-content { text-align:center; padding: 30px 15px;}
-.mock-icon { font-size:60px; filter: drop-shadow(0 8px 15px rgba(0,0,0,0.4)); margin-bottom:15px; animation: popIn 0.4s ease;}
-.mock-text { font-size:16px; color:var(--text); font-weight:bold; line-height:1.5;}
-
-.msg-lightbox { position:fixed; inset:0; z-index:130000; background:rgba(0,0,0,0.95); display:none; align-items:center; justify-content:center; opacity:0; transition:0.3s; }
-.msg-lightbox.show { display:flex; opacity:1; }
-.msg-lightbox img { max-width:90%; max-height:90%; border-radius:20px; box-shadow: 0 0 40px rgba(0,0,0,0.8), 0 0 15px rgba(232,198,107,0.2); border:2px solid rgba(255,255,255,0.1); object-fit:contain; }
-
-@media(max-width:760px){
-  .sidebar { width:100%; min-width:0; }
-  .chat-panel { position:fixed; inset:0; z-index:30; transform:translateX(-100%); transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1); will-change: transform; }
-  .chat-panel.open { transform:translateX(0); }
-  .chat-header .back { display:block; }
-  .msg-row { max-width:92%; }
-  .bubble { max-width: 100%; }
-  .call-actions { display: none; }
-}
+.chat-input-area { padding: 15px 20px; background: rgba(20, 10, 40, 0.95); border-top: 1px solid var(--border); display: flex; align-items: center; gap: 10px; z-index: 10; padding-bottom: calc(15px + env(safe-area-inset-bottom)); }
+.chat-input-area input[type="text"] { flex: 1; padding: 15px 20px; border-radius: 25px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; outline: none; }
+.chat-input-area input[type="text"]:focus { border-color: var(--gold); }
+.chat-attach-btn { cursor: pointer; color: var(--gold); font-size: 24px; padding: 10px; }
+.chat-send-btn { background: linear-gradient(135deg, var(--gold-2), var(--gold-deep)); border: none; width: 50px; height: 50px; border-radius: 50%; color: #000; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(232, 198, 107, 0.4); transition: transform 0.2s; }
+.chat-send-btn:hover { transform: scale(1.1); }
+#fileUploadInput { display: none; }
+.upload-progress { height: 3px; background: var(--gold); width: 0%; position: absolute; top: 0; left: 0; transition: width 0.3s; }
 </style>
+
+<script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js",
+      "firebase/storage": "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js"
+    }
+  }
+</script>
+
 </head>
 <body>
 
@@ -646,7 +444,7 @@ footer b { color: var(--gold-2); font-size: 17px; }
       <div class="nav-links" id="navlinks">
         <a href="#hero">تالار اصلی</a>
         <a href="#wiriper">تمدن ما</a>
-        <a id="openChatBtn" style="color: var(--gold-2); border: 1px solid var(--gold); font-weight: 800;" onclick="openMessengerOverlay()">💬 پیام‌رسان قصر</a>
+        <a id="openChatBtn" style="color: var(--gold-2); border: 1px solid var(--gold); font-weight: 800;">💬 پیام‌رسان قصر</a>
         <a href="#countdown">جشن‌ها</a>
         <a href="#king">فرمانروایان</a>
         <a href="#gallery">خزانه</a>
@@ -715,6 +513,7 @@ footer b { color: var(--gold-2); font-size: 17px; }
                 <p>طراحی و بافت لوکس‌ترین جامه‌های تمدن Wiriper برای حفاظت از شکوه استایل ملکه.</p>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -800,12 +599,14 @@ footer b { color: var(--gold-2); font-size: 17px; }
             <p>شاهزاده‌ی طلایی و وارث اقتدار پادشاه. کسی که شکوه امپراتوری را به نسل‌های بعد منتقل خواهد کرد.</p>
             <div class="tags"><span class="tag">وارث تاج</span><span class="tag">نجابت</span></div>
           </div>
+          
           <div class="card prince-card blue-theme reveal">
             <div class="avatar-ring">⚔️</div>
             <h3>سام</h3>
             <p>شاهزاده‌ی جنگجو با اراده‌ای از جنس فولاد. محافظ بی‌باک مرزهای عشق و تمدن جاودانه‌ی ما.</p>
             <div class="tags"><span class="tag">شجاعت</span><span class="tag">محافظ</span></div>
           </div>
+          
           <div class="card prince-card pink-theme reveal">
             <div class="avatar-ring">🦋</div>
             <h3>پرنسس سونیا</h3>
@@ -876,6 +677,43 @@ footer b { color: var(--gold-2); font-size: 17px; }
 
 </div>
 
+<div id="wiriper-chat-modal">
+  <div class="chat-header">
+    <div class="chat-header-info">
+      <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" class="avatar" alt="Avatar">
+      <div>
+        <h3>پیام‌رسان سلطنتی</h3>
+        <span id="chatStatusText">در حال اتصال...</span>
+      </div>
+    </div>
+    <button class="chat-close" id="closeChatBtn">✕</button>
+  </div>
+  <div class="upload-progress" id="uploadProgressBar"></div>
+
+  <div class="chat-login-container" id="chatLoginView">
+    <div class="chat-login-box">
+      <h2>👑 احراز هویت سلطنتی</h2>
+      <p style="margin-bottom: 20px; font-size:14px; color:var(--muted);">برای ورود به پیام‌رسان اختصاصی، ایمیل و رمز خود را وارد کنید.</p>
+      <input type="email" id="authEmail" placeholder="ایمیل شما...">
+      <input type="password" id="authPass" placeholder="رمز عبور...">
+      <button class="btn" id="loginBtn">ورود / ثبت‌نام</button>
+      <div id="authError" style="color: var(--rose); margin-top: 15px; font-size: 13px;"></div>
+    </div>
+  </div>
+
+  <div class="chat-messages-area" id="chatMessagesView" style="display: none;">
+    </div>
+
+  <div class="chat-input-area" id="chatInputView" style="display: none;">
+    <label class="chat-attach-btn">
+      📎
+      <input type="file" id="fileUploadInput" accept="image/*, video/*, audio/*, .pdf, .doc, .docx">
+    </label>
+    <input type="text" id="chatMessageInput" placeholder="پیام خود را بنویسید..." autocomplete="off">
+    <button class="chat-send-btn" id="sendMsgBtn">➤</button>
+  </div>
+</div>
+
 <div id="lightbox">
   <div class="x" onclick="closeLb()">✕</div>
   <div class="lb-nav lb-prev" onclick="lbStep(-1)">‹</div>
@@ -883,286 +721,15 @@ footer b { color: var(--gold-2); font-size: 17px; }
   <div class="lb-nav lb-next" onclick="lbStep(1)">›</div>
 </div>
 
-<button id="toTop" onclick="smoothTop()">↑</button>
-
-<div id="messenger-overlay">
-  <audio id="royalAudio" loop>
-      <source src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Beethoven_Symphony_No._9_in_D_minor%2C_Op._125_-_I._Allegro_ma_non_troppo%2C_un_poco_maestoso.ogg" type="audio/ogg">
-  </audio>
-
-  <div id="authScreen">
-    <button class="close-msgr" onclick="closeMessengerOverlay()" title="بازگشت به سایت">✕</button>
-    <div class="auth-card">
-      <div class="auth-logo">
-        <h1>👑 Wiriper Prime</h1>
-        <p>پیام‌رسان اختصاصی و امن امپراتوری</p>
-      </div>
-      <div class="auth-tabs">
-        <button id="tabLogin" class="active" onclick="switchTab('login')">ورود به قصر</button>
-        <button id="tabReg" onclick="switchTab('reg')">تاج‌گذاری (ثبت‌نام)</button>
-      </div>
-      <div id="loginForm">
-        <div class="field"><label>نام کاربری</label><input id="lUser" type="text" placeholder="مثال: king_cyrus" autocomplete="off"></div>
-        <div class="field"><label>رمز عبور</label><input id="lPass" type="password" placeholder="••••••••"></div>
-        <button class="btn-main" onclick="doLogin()">گشودن دروازه</button>
-      </div>
-      <div id="regForm" style="display:none;">
-        <div class="field"><label>نام نمایشی (لقب)</label><input id="rName" type="text" placeholder="مثلاً: کوروش بزرگ" autocomplete="off"></div>
-        <div class="field"><label>نام کاربری (انگلیسی)</label><input id="rUser" type="text" placeholder="username" autocomplete="off"></div>
-        <div class="field"><label>رمز عبور (حداقل ۶ کاراکتر)</label><input id="rPass" type="password" placeholder="••••••••"></div>
-        <button class="btn-main" onclick="doRegister()">دریافت تاج و تخت</button>
-      </div>
-      <div id="authMsg" class="auth-msg"></div>
-    </div>
-  </div>
-
-  <div id="chatApp">
-    <div class="layout">
-      <div class="sidebar">
-        <div class="side-header">
-          <button class="app-icon-btn" style="margin-left: 10px; border-color:var(--danger); color:var(--danger);" onclick="closeMessengerOverlay()" title="بستن پیام‌رسان">✕</button>
-          <img id="meAvatar" class="me-avatar" onclick="openMyProfile()">
-          <div class="me-info" onclick="openMyProfile()">
-            <div id="meName" class="me-name">...</div>
-            <div id="meId" class="me-id">@...</div>
-          </div>
-          <button class="app-icon-btn" onclick="toggleMenu(event)">👑</button>
-          <div id="mainMenu" class="menu-pop">
-            <button onclick="openMyProfile()">👤 شناسنامه من</button>
-            <button onclick="openPremiumModal()" style="color:var(--gold-2)">💎 ارتقا به پادشاهی</button>
-            <button onclick="openCreditModal()">⭐ خزانه‌داری سلطنتی</button>
-            <button onclick="toggleRoyalAudio()" style="color:var(--gold-2)">🎵 پخش سمفونی نهم</button>
-            <button class="danger" onclick="doLogout()">🚪 خروج کامل از اکانت</button>
-          </div>
-        </div>
-        
-        <div class="search-row">
-          <input id="globalSearch" type="text" placeholder="جستجوی آیدی، کاربران یا دیوان‌ها..." oninput="onSearchInput()">
-        </div>
-
-        <div class="main-tabs">
-          <button id="tabChats" class="active" onclick="switchMainTab('chats')">💬 عمارت‌ها</button>
-          <button id="tabDiscover" onclick="switchMainTab('discover')">🌍 اکتشاف</button>
-          <button id="tabLeaders" onclick="switchMainTab('leaders')">🏆 برترین‌ها</button>
-        </div>
-        
-        <div class="new-menu" id="newMenuControls">
-          <button onclick="openMsgModal('newGroupModal'); loadMemberPicker('group')">➕ تأسیس محفل (گروه)</button>
-          <button onclick="openMsgModal('newChannelModal')">📢 تأسیس دیوان (کانال)</button>
-        </div>
-        
-        <div class="list-title" id="listTitle">گفتگوهای شما</div>
-        <div id="mainList" class="chat-list"></div>
-      </div>
-
-      <div id="chatPanel" class="chat-panel">
-        <div id="emptyChat" class="empty-chat">
-          <div class="big">🏛️</div>
-          <div style="font-size:18px; font-weight:900; letter-spacing:1px;">عمارتی را انتخاب کنید یا فرمانی صادر کنید</div>
-        </div>
-
-        <div id="activeChat" style="display:none; flex-direction:column; height:100%;">
-          <div class="chat-header">
-            <button class="back" onclick="closeChat()">➤</button>
-            <div id="hAv" class="h-av" onclick="openChatInfo()"></div>
-            <div class="h-info" onclick="openChatInfo()">
-              <div id="hName" class="h-name">...</div>
-              <div id="hSub" class="h-sub">...</div>
-            </div>
-            <div class="call-actions" id="callActionsBar">
-               <button class="call-btn" onclick="showMockModal('📞 برقراری تماس صوتی امن...')" title="تماس صوتی">📞</button>
-               <button class="call-btn" onclick="showMockModal('📹 برقراری ارتباط تصویری...')" title="تماس تصویری">📹</button>
-            </div>
-            <button class="app-icon-btn" style="width:38px;height:38px;" onclick="toggleChatMenu(event)">⋮</button>
-            <div id="chatMenu" class="menu-pop">
-              <button onclick="openBgModal()">🖼 پرده‌خوانی (بک‌گراند)</button>
-              <button id="giftBtn" onclick="openGiftModal()">🎁 ارسال پیشکش ویژه</button>
-              <button id="boostBtn" style="display:none" onclick="boostChannel()">🚀 ارتقای دیوان (Boost)</button>
-              <button onclick="clearChatHistory()" style="color:var(--rose)">🧹 پاکسازی تاریخچه پیام‌ها</button>
-              <button class="danger" onclick="clearActiveChat()">بستن موقت عمارت</button>
-            </div>
-          </div>
-
-          <div id="pinnedBar" class="pinned-bar" onclick="scrollToPinned()">
-              <div class="p-title">📌 فرمان سنجاق شده</div>
-              <div class="p-text" id="pinnedText">...</div>
-          </div>
-
-          <div id="messages" class="messages"></div>
-
-          <div id="joinBar" class="join-bar">
-            <button class="btn-main" style="max-width:350px; margin:0 auto;" onclick="joinCurrentChannel()">پیوستن به این دیوان</button>
-          </div>
-
-          <div id="actionBanner" class="action-banner">
-            <div class="a-icon" id="abIcon">✏️</div>
-            <div class="a-content">
-              <div class="a-title" id="abTitle">در حال ویرایش</div>
-              <div class="a-txt" id="abText">...</div>
-            </div>
-            <button class="close-btn" onclick="cancelAction()">✕</button>
-          </div>
-
-          <div id="inputBar" class="input-bar">
-            <input type="file" id="fileInput" accept="image/*,video/*,.pdf" style="display:none" onchange="handleFileSelect(event)">
-            <button class="action-btn" onclick="document.getElementById('fileInput').click()" title="ارسال فایل/عکس/ویدیو">📎</button>
-            <button class="action-btn" onclick="showMockModal('🎤 در حال ضبط صدای پادشاه...')" title="ضبط صدا">🎤</button>
-            <button class="action-btn" id="btnRoyalDecree" onclick="toggleRoyalDecree()" style="display:none; color: gold;" title="فرمان سلطنتی">📜</button>
-            <textarea id="msgInput" rows="1" placeholder="پیام خود را بنویسید..." oninput="autoGrow(this)"></textarea>
-            <button class="send-btn" onclick="sendMessage()">➤</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="myProfileModal" class="msg-modal-bg">
-  <div class="msg-modal">
-    <h2>شناسنامه من <button class="x" onclick="closeMsgModal('myProfileModal')">✕</button></h2>
-    <div class="profile-head">
-      <img id="ppAv" class="p-av">
-      <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(event)">
-      <button class="btn-main" style="width:auto; padding:10px 25px; font-size:13px; margin-top:5px; border-radius:16px;" onclick="document.getElementById('avatarInput').click()">📷 تغییر پرتره</button>
-    </div>
-    
-    <div class="field">
-      <label>گالری پرتره‌ها</label>
-      <div id="myPhotoGallery" class="photo-gallery">هیچ تصویری وجود ندارد.</div>
-    </div>
-
-    <div class="field"><label>لقب (نام نمایشی)</label><input id="ppName" type="text"></div>
-    <div class="field dates-row" style="display:flex; gap:15px; flex-wrap:wrap;">
-        <div style="flex:1; min-width: 140px;"><label>تاریخ تولد شما</label><input id="ppBirth" type="date"></div>
-        <div style="flex:1; min-width: 140px;"><label>تاریخ تولد یار (Beloved)</label><input id="ppBelovedBirth" type="date"></div>
-    </div>
-    <div class="field"><label>حسب حال (بایو)</label><textarea id="ppBio" placeholder="چیزی درباره خود بنویسید..."></textarea></div>
-    <div class="field"><label>شناسه کاربری</label><input id="ppUser" type="text" disabled style="opacity:0.5; cursor:not-allowed;"></div>
-    
-    <div class="credit-box">خزانه: ⭐ <span id="ppCredit">0</span></div>
-    
-    <div class="field">
-      <label>گنجینه پیشکش‌ها (امتیاز: <span id="ppGiftScore">0</span>)</label>
-      <div id="myGiftsGallery" class="gift-gallery">هیچ پیشکشی دریافت نشده است.</div>
-    </div>
-    <button class="btn-main" onclick="saveProfile()">ثبت در جریده</button>
-  </div>
-</div>
-
-<div id="userProfileModal" class="msg-modal-bg">
-  <div class="msg-modal">
-    <h2>شناسنامه کاربر <button class="x" onclick="closeMsgModal('userProfileModal')">✕</button></h2>
-    <div class="profile-head">
-      <div id="upAv" class="p-av"></div>
-      <div id="upName" class="p-name"></div>
-      <div id="upId" class="p-id"></div>
-      <div id="upStatus" style="font-size:12px; color:var(--muted); margin-top:5px; font-weight:bold;"></div>
-      <div id="upBirth" style="font-size:13px; color:var(--gold); margin-top:10px; font-weight:bold; display:none;">🎂 <span id="upBirthVal"></span></div>
-      <div id="upBio" class="p-bio" style="display:none; margin-top:15px;"></div>
-    </div>
-    <div class="field">
-      <label>گالری پرتره‌ها</label>
-      <div id="userPhotoGallery" class="photo-gallery">عکسی موجود نیست.</div>
-    </div>
-    <div class="field">
-      <label>گنجینه پیشکش‌ها</label>
-      <div id="userGiftsGallery" class="gift-gallery">این شخص هنوز پیشکشی ندارد.</div>
-    </div>
-    <button class="btn-main" style="margin-bottom:10px" onclick="startChatWithViewedUser()">💬 ارسال نامه خصوصی</button>
-    <button class="btn-main" style="margin-bottom:10px; background:rgba(0,0,0,0.5); color:var(--text); border:1px solid rgba(255,255,255,0.1);" onclick="showMockModal('🔒 در حال ایجاد تونل رمزنگاری شده برای Secret Chat...')">🔒 شروع Secret Chat</button>
-    <button class="btn-main btn-premium" onclick="openGiftToViewedUser()">🎁 تقدیم پیشکش</button>
-  </div>
-</div>
-
-<div id="premiumModal" class="msg-modal-bg">
-  <div class="msg-modal">
-    <h2>مقام پادشاهی 💎 <button class="x" onclick="closeMsgModal('premiumModal')">✕</button></h2>
-    <div style="color:var(--text); margin-bottom: 25px; line-height: 1.8; text-align: justify; background:rgba(0,0,0,0.5); padding:25px; border-radius:20px; font-size:14px; border:1px solid rgba(255,255,255,0.08); box-shadow: inset 0 4px 10px rgba(0,0,0,0.5);">
-      با خرید اشتراک <strong>Wiriper Prime</strong> قدرت مطلق را تجربه کنید: <br><br>
-      👑 <span style="color:var(--gold)">دریافت نشان و هاله طلایی متحرک</span><br>
-      📜 <span style="color:var(--gold)">ارسال «فرمان سلطنتی» (پیام درخشان)</span><br>
-      🚀 <span style="color:var(--gold)">قابلیت ارتقای دیوان‌ها (Boost Levels)</span><br>
-      💎 <span style="color:var(--gold)">حضور ویژه در تالار برترین‌ها</span><br>
-      🔒 <span style="color:var(--gold)">اولویت در Secret Chats و تماس‌ها</span>
-    </div>
-    <div class="credit-box" style="margin-bottom:20px;">هزینه: ⭐ 500 سکه</div>
-    <button class="btn-main btn-premium" onclick="buyPremium()">خرید مقام پادشاهی</button>
-  </div>
-</div>
-
-<div id="newGroupModal" class="msg-modal-bg"><div class="msg-modal"><h2>تأسیس محفل <button class="x" onclick="closeMsgModal('newGroupModal')">✕</button></h2><div class="field"><label>نام محفل</label><input id="grpName" type="text" placeholder="نام گروه"></div><div class="field"><label>دعوت از حاضرین</label><div id="grpMembers" style="max-height:220px; overflow-y:auto; border:1px solid rgba(255,255,255,0.1); border-radius:18px; padding:12px; background:rgba(0,0,0,0.4);"></div></div><button class="btn-main" onclick="createGroup()">بنیان‌گذاری</button></div></div>
-<div id="newChannelModal" class="msg-modal-bg"><div class="msg-modal"><h2>تأسیس دیوان <button class="x" onclick="closeMsgModal('newChannelModal')">✕</button></h2><div class="field"><label>نام دیوان</label><input id="chName" type="text" placeholder="نام کانال"></div><div class="field"><label>شرح دیوان</label><textarea id="chDesc" placeholder="درباره کانال..."></textarea></div><button class="btn-main" onclick="createChannel()">بنیان‌گذاری</button></div></div>
-<div id="creditModal" class="msg-modal-bg"><div class="msg-modal"><h2>خزانه‌داری سلطنتی <button class="x" onclick="closeMsgModal('creditModal')">✕</button></h2><div class="credit-box">موجودی: ⭐ <span id="cmCredit">0</span></div><p style="font-size:14px; color:var(--muted); margin-bottom:20px; text-align:center; font-weight:600;">جهت آزمایش امکانات، از خزانه وام بگیرید:</p><button class="btn-main" style="background:rgba(255,255,255,0.05); border:1px solid var(--gold-2); color:var(--gold)" onclick="addCredits(300)">+۳۰۰ سکه طلای رایگان</button></div></div>
-
-<div id="giftModal" class="msg-modal-bg">
-  <div class="msg-modal" style="max-width:550px">
-    <h2 style="border:none">تقدیم پیشکش <button class="x" onclick="closeMsgModal('giftModal')">✕</button></h2>
-    <p style="font-size:15px; color:var(--text); margin-bottom:20px; text-align:center; background:rgba(232,198,107,0.2); padding:12px; border-radius:16px; border:1px solid var(--gold-2); font-weight:900; letter-spacing:1px;">موجودی شما: ⭐ <span id="gmCredit">0</span></p>
-    <div class="gift-grid">
-      <div class="gift-opt" onclick="sendGift('🌹',5)"><div class="ge">🌹</div><div class="gp">⭐5</div></div>
-      <div class="gift-opt" onclick="sendGift('🍺',10)"><div class="ge">🍺</div><div class="gp">⭐10</div></div>
-      <div class="gift-opt" onclick="sendGift('💍',20)"><div class="ge">💍</div><div class="gp">⭐20</div></div>
-      <div class="gift-opt" onclick="sendGift('💎',30)"><div class="ge">💎</div><div class="gp">⭐30</div></div>
-      <div class="gift-opt" onclick="sendGift('👑',50)"><div class="ge">👑</div><div class="gp">⭐50</div></div>
-      <div class="gift-opt" onclick="sendGift('🚀',75)"><div class="ge">🚀</div><div class="gp">⭐75</div></div>
-      <div class="gift-opt" onclick="sendGift('🏆',100)"><div class="ge">🏆</div><div class="gp">⭐100</div></div>
-      <div class="gift-opt" onclick="sendGift('🏰',250)"><div class="ge">🏰</div><div class="gp">⭐250</div></div>
-      <div class="gift-opt" onclick="sendGift('🌌',500)"><div class="ge">🌌</div><div class="gp">⭐500</div></div>
-    </div>
-  </div>
-</div>
-
-<div id="bgModal" class="msg-modal-bg"><div class="msg-modal"><h2>پرده‌خوانی عمارت <button class="x" onclick="closeMsgModal('bgModal')">✕</button></h2><div class="bg-grid" id="bgGrid"></div></div></div>
-
-<div id="chatInfoModal" class="msg-modal-bg">
-  <div class="msg-modal" style="max-width:500px">
-    <h2>اطلاعات عمارت <button class="x" onclick="closeMsgModal('chatInfoModal')">✕</button></h2>
-    <div class="profile-head">
-      <div id="ciAv" class="p-av"></div>
-      <div id="ciName" class="p-name"></div>
-      <div id="ciSub" class="p-id"></div>
-      <div style="color:var(--gold-2); font-size:14px; margin-top:12px; font-weight:900; background:rgba(232,198,107,0.1); padding:8px 12px; border-radius:10px; display:inline-block;" id="ciBoosts"></div>
-      <div id="ciDesc" class="p-bio" style="display:none; margin-top:15px;"></div>
-    </div>
-    
-    <div id="channelSettingsUI" style="display:none;">
-        <div class="info-section-title">تنظیمات مالک</div>
-        <button class="btn-main" style="background:rgba(255,255,255,0.05); color:var(--text); border:1px solid rgba(255,255,255,0.1); font-size:13px; margin-bottom:8px;" onclick="showMockModal('⚙️ تنظیمات پیشرفته کانال در حال بارگذاری...')">⚙️ تنظیمات دیوان</button>
-        <button class="btn-main danger" style="background:rgba(255,59,48,0.15); color:var(--danger); border:1px solid rgba(255,59,48,0.3); font-size:13px; margin-bottom:8px;" onclick="deleteActiveChat()">🗑 انحلال کامل دیوان/محفل</button>
-    </div>
-
-    <div id="leaveChatUI" style="display:none;">
-        <button class="btn-main danger" style="background:rgba(255,59,48,0.15); color:var(--danger); border:1px solid rgba(255,59,48,0.3); font-size:13px; margin-bottom:8px;" onclick="leaveActiveChat()">🚪 خروج از این عمارت</button>
-    </div>
-
-    <div class="info-section-title" id="ciMembersTitle">اعضای حاضر</div>
-    <div id="ciMembers" style="max-height: 250px; overflow-y:auto; background:rgba(0,0,0,0.4); border-radius:20px; padding:12px; border:1px solid rgba(255,255,255,0.08); box-shadow:inset 0 4px 10px rgba(0,0,0,0.3);"></div>
-  </div>
-</div>
-
-<div id="msgLightbox" class="msg-lightbox" onclick="if(event.target===this) this.classList.remove('show')">
-  <button style="position:absolute; top:20px; left:20px; color:var(--text); font-size:30px; background:rgba(0,0,0,0.6); width:45px; height:45px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; border:1px solid rgba(255,255,255,0.2); transition:0.2s;" onclick="document.getElementById('msgLightbox').classList.remove('show')">✕</button>
-  <img id="msgLbImg" src="">
-</div>
-
-<div id="mockModal" class="msg-modal-bg">
-    <div class="msg-modal" style="max-width:350px; text-align:center;">
-        <button class="x" style="position:absolute; top:15px; left:15px; font-size:20px; color:var(--muted); background:none;" onclick="closeMsgModal('mockModal')">✕</button>
-        <div class="mock-content">
-            <div class="mock-icon" id="mockIcon">🚀</div>
-            <div class="mock-text" id="mockText">در حال پردازش...</div>
-        </div>
-    </div>
-</div>
-
-<div id="toast" class="toast"></div>
-
 <audio id="audio" src="https://lycee.ir/wp-content/uploads/2024/12/2.15.-Symphony-No.-9-in-D-Minor-Op.-125-II.-Molto-vivace-%E2%80%93-Presto.mp3" loop preload="auto"></audio>
+
+<button id="toTop" onclick="smoothTop()">↑</button>
 
 <script>
 /* ====== متغیرهای پایه ====== */
 const LOVE_START = new Date("2023-09-06T00:00:00");
 const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
+
 window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('done'), 1000));
 
 /* ====== دروازه قصر و موسیقی ====== */
@@ -1183,6 +750,7 @@ function unlockAudio() {
 }
 document.addEventListener('touchstart', unlockAudio, { passive: true });
 document.addEventListener('click', unlockAudio, { passive: true });
+
 function toggleAudio() {
   if (audio.paused) {
     audio.play().catch(()=>{});
@@ -1199,6 +767,7 @@ function enter(){
     audio.play().then(() => {
       audioBtn.classList.add('playing');
     }).catch(()=>{});
+    
     document.getElementById('main-content').style.display = 'block';
     
     cacheDOM();
@@ -1229,23 +798,25 @@ if(!isTouchDevice) {
   ringLoop();
   
   document.addEventListener('pointerover', e => {
-    if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal, .artifact-card, .chat-item, .bubble')) cRing.classList.add('hot');
+    if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal, .artifact-card')) cRing.classList.add('hot');
     else cRing.classList.remove('hot');
   });
 }
 
-/* ====== بهینه‌سازی Canvas ====== */
+/* ====== بهینه‌سازی Canvas برای ساختارهای بهینه ====== */
 const cv = document.getElementById('bgCanvas'), cx = cv.getContext('2d', { alpha: false });
 let stars = [];
 
 function resizeBg(){ 
   cv.width = window.innerWidth; cv.height = window.innerHeight;
   const starCount = isTouchDevice ? 40 : 150; 
+  
   stars = Array.from({length: starCount}, () => ({
     x: Math.random() * cv.width, y: Math.random() * cv.height,
     r: Math.random() * 1.5 + 0.5, a: Math.random() * Math.PI * 2, s: Math.random() * 0.05 + 0.01,
     color: Math.random() > 0.8 ? '#f6e3a1' : (Math.random() > 0.6 ? '#7b3fe4' : '#ffffff')
   }));
+  
   if(isTouchDevice) {
     cx.fillStyle = '#050308'; cx.fillRect(0, 0, cv.width, cv.height);
     stars.forEach(s => {
@@ -1260,6 +831,7 @@ let lastDrawTime = 0;
 function drawBg(time) {
   if(isTouchDevice) return; 
   requestAnimationFrame(drawBg);
+  
   if (time - lastDrawTime < 33) return; 
   lastDrawTime = time;
 
@@ -1271,12 +843,13 @@ function drawBg(time) {
 };
 if(!isTouchDevice) requestAnimationFrame(drawBg);
 
-/* ====== ذرات معلق ====== */
+/* ====== ذرات معلق محیطی ====== */
 const symbols = ['👑', '✨', '💖', '🌹'];
 if(!isTouchDevice) {
   setInterval(() => {
     if(!document.getElementById('gate').classList.contains('hidden')) return;
     if(document.querySelectorAll('.floating-symbol').length > 5) return; 
+    
     const s = document.createElement('div'); s.className = 'floating-symbol';
     s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
     s.style.left = Math.random() * 100 + 'vw';
@@ -1286,8 +859,9 @@ if(!isTouchDevice) {
   }, 3000);
 }
 
+/* ====== بارش عشق ====== */
 function loveBurst(){
-  const count = isTouchDevice ? 8 : 20;
+  const count = isTouchDevice ? 8 : 20; 
   for(let i=0; i<count; i++){
     const h = document.createElement('div');
     h.className = 'petal';
@@ -1300,8 +874,9 @@ function loveBurst(){
   }
 }
 
+/* ====== بال فرشته ====== */
 function buildWing(el, dir){
-  const n = isTouchDevice ? 10 : 20;
+  const n = isTouchDevice ? 10 : 20; 
   for(let i=0; i<n; i++){
     const f = document.createElement('div'); f.className = 'feather';
     const t = i/(n-1);
@@ -1312,8 +887,10 @@ function buildWing(el, dir){
 }
 buildWing(document.getElementById('wingL'), -1); buildWing(document.getElementById('wingR'), 1);
 
+/* ====== روزهای سلطنت ====== */
 document.getElementById('wDays').textContent = Math.floor((Date.now() - LOVE_START.getTime()) / 864e5);
 
+/* ====== شمارش معکوس ====== */
 function nextBirthday(m,d){
   const now = new Date(); let y = now.getFullYear();
   let next = new Date(y, m-1, d);
@@ -1339,6 +916,7 @@ function renderCD(elId, todayId, m, d){
 renderCD('cd-mobin', 'today-mobin', 3, 15);
 renderCD('cd-niyayesh', 'today-niyayesh', 9, 6);
 
+/* ====== تایم‌لاین ====== */
 const timeline = [
   {when: 'آغاز تمدن', title: 'تولد یک امپراتوری', text: 'روزی که نگاهمان گره خورد و سنگ بنای جهان Wiriper گذاشته شد.'},
   {when: 'فصل طلایی', title: 'تاج‌گذاری ملکه', text: 'نیایش بر تخت قلب من نشست و نور را به این قلمرو تاریک آورد.'},
@@ -1352,13 +930,23 @@ timeline.forEach(t => {
   box.appendChild(it);
 });
 
-/* ====== گالری ====== */
+/* ====== گالری و لایت‌باکس ====== */
 const imgs = [...document.querySelectorAll('#galleryGrid img')].map(i => i.src); let lbIndex=0;
 function lb(i){ lbIndex=i; document.getElementById('lbimg').src=imgs[i]; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeLb(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
 function lbStep(d){ lbIndex = (lbIndex + d + imgs.length) % imgs.length; document.getElementById('lbimg').src = imgs[lbIndex]; }
-document.getElementById('lightbox').addEventListener('click', e => { if(e.target.id === 'lightbox') closeLb(); });
 
+document.getElementById('lightbox').addEventListener('click', e => { if(e.target.id === 'lightbox') closeLb(); });
+let touchStartX = 0;
+const lbox = document.getElementById('lightbox');
+lbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+lbox.addEventListener('touchend', e => {
+  let touchEndX = e.changedTouches[0].screenX;
+  if (touchEndX < touchStartX - 40) lbStep(-1); 
+  if (touchEndX > touchStartX + 40) lbStep(1);  
+}, {passive: true});
+
+/* ====== انیمیشن‌های Scroll Reveal ====== */
 const io = new IntersectionObserver(es => {
   es.forEach(e => {
     if(e.isIntersecting){
@@ -1368,15 +956,20 @@ const io = new IntersectionObserver(es => {
     }
   });
 }, { threshold: 0.1 });
-function initReveal() { document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el)); }
+
+function initReveal() {
+  document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
+}
 initReveal();
 
+/* ====== ناوبری نرم ====== */
 function sm(id){ const el = document.querySelector(id); if(el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }
 document.querySelectorAll('.nav-links a:not(#openChatBtn)').forEach(a => {
   a.addEventListener('click', e => { e.preventDefault(); sm(a.getAttribute('href')); document.getElementById('navlinks').classList.remove('open'); });
 });
 function smoothTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
+/* ====== اسکرول بهینه (100% ضد لگ) ====== */
 let ticking = false;
 let tlTopAbs = 0, tlHeight = 0;
 const progress = document.getElementById('progress'), toTop = document.getElementById('toTop'), tlFill = document.getElementById('tlFill'), navLinks = document.querySelectorAll('.nav-links a');
@@ -1387,21 +980,25 @@ function cacheDOM() {
   if(tlBox) { tlTopAbs = tlBox.getBoundingClientRect().top + window.scrollY; tlHeight = tlBox.offsetHeight; }
   sections = Array.from(document.querySelectorAll('section'));
 }
-window.addEventListener('load', cacheDOM); window.addEventListener('resize', cacheDOM);
+window.addEventListener('load', cacheDOM);
+window.addEventListener('resize', cacheDOM);
 
 window.addEventListener('scroll', () => {
   if(!ticking) {
     window.requestAnimationFrame(() => {
       const top = window.scrollY;
       const innerH = window.innerHeight;
+      
       if(progress) progress.style.transform = `scaleX(${top / (document.body.scrollHeight - innerH)})`;
       if(toTop) toTop.classList.toggle('show', top > 600);
+      
       if(tlFill && tlHeight > 0) {
         const relTop = tlTopAbs - top; 
         if(relTop < innerH/2 && (relTop + tlHeight) > 0) {
           tlFill.style.transform = `scaleY(${Math.min(1, Math.max(0, (innerH/2 - relTop) / tlHeight))})`;
         }
       }
+
       let cur = '';
       for (let s of sections) { if(top >= s.offsetTop - 150) cur = s.id; }
       navLinks.forEach(a => {
@@ -1410,6 +1007,7 @@ window.addEventListener('scroll', () => {
           else a.classList.remove('active');
         }
       });
+
       ticking = false;
     });
     ticking = true;
@@ -1418,908 +1016,183 @@ window.addEventListener('scroll', () => {
 </script>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp, getDocs, limit, increment, arrayUnion, arrayRemove, deleteDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+  import { initializeApp } from "firebase/app";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+  import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "firebase/firestore";
+  import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
-  authDomain: "niyayesh-universe.firebaseapp.com",
-  databaseURL: "https://niyayesh-universe-default-rtdb.firebaseio.com",
-  projectId: "niyayesh-universe",
-  storageBucket: "niyayesh-universe.firebasestorage.app",
-  messagingSenderId: "675804346928",
-  appId: "1:675804346928:web:8e8c33f7a26d2824340bf5"
-};
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
+  // کانفیگ فایربیس تو
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
+    authDomain: "niyayesh-universe.firebaseapp.com",
+    databaseURL: "https://niyayesh-universe-default-rtdb.firebaseio.com",
+    projectId: "niyayesh-universe",
+    storageBucket: "niyayesh-universe.firebasestorage.app",
+    messagingSenderId: "675804346928",
+    appId: "1:675804346928:web:8e8c33f7a26d2824340bf5",
+    measurementId: "G-5X7BKVZBNN"
+  };
 
-// ---------- STATE ----------
-let ME = null;
-let activeChatId = null;  
-let activeChat = null;    
-let msgUnsub = null;
-let chatsUnsub = null;
-let actionState = { type: null, id: null }; 
-let viewedUser = null;
-let isRoyalDecreeMode = false;
-let currentMainTab = 'chats'; 
-let allMyChats = [];
-let presenceInterval = null;
-const BACKGROUNDS = ['', 'linear-gradient(135deg,#1a1a24,#030305)', 'linear-gradient(135deg,#231610,#0a0502)', 'linear-gradient(135deg,#0a151b,#061015)', 'linear-gradient(135deg,#2e1a42,#110217)', 'url("https://www.transparenttextures.com/patterns/stardust.png")'];
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
 
-// ---------- HELPERS ----------
-function $(id){ return document.getElementById(id); }
-function toast(t, icon=''){ const el=$('toast'); el.innerHTML = `${icon} <span>${t}</span>`; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),3500); }
-function esc(s){ return (s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-function emailFor(u){ return u.toLowerCase()+"@wiriper.app"; }
-function initials(name){ return (name||'?').trim().charAt(0).toUpperCase(); }
-function timeStr(ts){ if(!ts) return ''; const d=ts.toDate?ts.toDate():new Date(ts); return d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}); }
-function privateChatId(a,b){ return [a,b].sort().join('_'); }
-function getLastSeenText(timestamp) {
-    if(!timestamp) return 'اخیراً';
-    const diff = Date.now() - timestamp.toMillis();
-    if(diff < 120000) return 'آنلاین'; // < 2 mins
-    if(diff < 3600000) return `${Math.floor(diff/60000)} دقیقه پیش`;
-    if(diff < 86400000) return `${Math.floor(diff/3600000)} ساعت پیش`;
-    return `${Math.floor(diff/86400000)} روز پیش`;
-}
+  // اِلمان‌های UI چت
+  const chatModal = document.getElementById('wiriper-chat-modal');
+  const openChatBtn = document.getElementById('openChatBtn');
+  const closeChatBtn = document.getElementById('closeChatBtn');
+  
+  const loginView = document.getElementById('chatLoginView');
+  const messagesView = document.getElementById('chatMessagesView');
+  const inputView = document.getElementById('chatInputView');
+  
+  const emailInput = document.getElementById('authEmail');
+  const passInput = document.getElementById('authPass');
+  const loginBtn = document.getElementById('loginBtn');
+  const authErr = document.getElementById('authError');
+  const chatStatusText = document.getElementById('chatStatusText');
+  
+  const msgInput = document.getElementById('chatMessageInput');
+  const sendBtn = document.getElementById('sendMsgBtn');
+  const fileInput = document.getElementById('fileUploadInput');
+  const progressBar = document.getElementById('uploadProgressBar');
 
-// ---------- MESSENGER OVERLAY LOGIC ----------
-window.openMessengerOverlay = () => {
-    $('messenger-overlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    if(ME) {
-        $('authScreen').style.display = 'none';
-        $('chatApp').style.display = 'block';
-    } else {
-        $('authScreen').style.display = 'flex';
-        $('chatApp').style.display = 'none';
-    }
-};
+  let currentUser = null;
+  let unsubscribeMessages = null;
 
-window.closeMessengerOverlay = () => {
-    $('messenger-overlay').classList.remove('open');
+  // باز و بسته کردن مودال چت
+  openChatBtn.addEventListener('click', () => {
+    chatModal.classList.add('open');
+    document.body.style.overflow = 'hidden'; // قفل کردن اسکرول صفحه زیرین
+  });
+  
+  closeChatBtn.addEventListener('click', () => {
+    chatModal.classList.remove('open');
     document.body.style.overflow = '';
-};
-
-// Modals inside Messenger
-window.openMsgModal=(id)=>$(id).classList.add('show');
-window.closeMsgModal=(id)=>$(id).classList.remove('show');
-
-window.showMockModal = (text) => {
-    $('mockText').textContent = text;
-    let icon = '🚀';
-    if(text.includes('تماس')) icon = '📞';
-    if(text.includes('تصویری')) icon = '📹';
-    if(text.includes('Secret')) icon = '🔒';
-    if(text.includes('صدا')) icon = '🎤';
-    $('mockIcon').textContent = icon;
-    openMsgModal('mockModal');
-    setTimeout(() => { closeMsgModal('mockModal'); }, 2500);
-}
-
-window.switchTab = (t)=>{
-  $('tabLogin').classList.toggle('active',t==='login'); $('tabReg').classList.toggle('active',t==='reg');
-  $('loginForm').style.display = t==='login'?'block':'none'; $('regForm').style.display = t==='reg'?'block':'none';
-  $('authMsg').classList.remove('show');
-};
-function authMsg(t,ok){ const m=$('authMsg'); m.textContent=t; m.className='auth-msg show '+(ok?'ok':'err'); }
-
-// ---------- AUDIO ----------
-window.toggleRoyalAudio = () => {
-    const audio = $('royalAudio');
-    if(audio.paused) { audio.play(); toast('سمفونی نهم در حال پخش است...', '🎵'); }
-    else { audio.pause(); toast('پخش متوقف شد', '⏸️'); }
-};
-
-// ---------- AUTH & PRESENCE ----------
-window.doRegister = async ()=>{
-  const name=$('rName').value.trim();
-  const username=$('rUser').value.trim();
-  const pass=$('rPass').value;
-  if(!name||!username||!pass) return authMsg('همه فیلدها را پر کنید');
-  if(!/^[a-zA-Z0-9_]{3,20}$/.test(username)) return authMsg('نام کاربری فقط انگلیسی و اعداد');
-  if(pass.length<6) return authMsg('رمز حداقل ۶ کاراکتر');
-  const uLower=username.toLowerCase();
-  
-  try{
-    authMsg('در حال ساخت قصر...',true);
-    const taken=await getDoc(doc(db,'usernames',uLower));
-    if(taken.exists()) return authMsg('این نام کاربری از قبل تصرف شده است');
-    const cred=await createUserWithEmailAndPassword(auth,emailFor(username),pass);
-    const uid=cred.user.uid;
-    await setDoc(doc(db,'users',uid),{ uid, username, usernameLower:uLower, displayName:name, bio:'', photoURL:'', photoGallery:[], birthDate:'', belovedBirthDate:'', credits:500, isPremium:false, receivedGifts:[], giftScore:0, createdAt:serverTimestamp(), lastOnline:serverTimestamp() });
-    await setDoc(doc(db,'usernames',uLower),{ uid });
-    authMsg('تاج‌گذاری موفقیت‌آمیز بود!',true);
-  }catch(e){ authMsg('خطا: '+(e.message)); }
-};
-
-window.doLogin = async ()=>{
-  const username=$('lUser').value.trim(); const pass=$('lPass').value;
-  if(!username||!pass) return authMsg('نام و رمز عبور را وارد کنید');
-  try{ authMsg('در حال گشودن دروازه...',true); await signInWithEmailAndPassword(auth,emailFor(username),pass); }
-  catch(e){ authMsg('اطلاعات ورود اشتباه است'); }
-};
-
-window.doLogout = async ()=>{ 
-    if(!confirm('آیا برای خروج کامل از قصر اطمینان دارید؟')) return;
-    if(presenceInterval) clearInterval(presenceInterval); 
-    await signOut(auth); 
-    $('chatApp').style.display = 'none';
-    $('authScreen').style.display = 'flex';
-};
-
-onAuthStateChanged(auth, async (user)=>{
-  if(user){
-    const snap=await getDoc(doc(db,'users',user.uid));
-    if(!snap.exists()){ await signOut(auth); return; }
-    ME=snap.data(); 
-    if(!ME.photoGallery) ME.photoGallery = [];
-    enterApp();
-    updatePresence();
-    presenceInterval = setInterval(updatePresence, 60000);
-  }else{
-    if($('messenger-overlay').classList.contains('open')) {
-        $('authScreen').style.display='flex'; $('chatApp').style.display='none';
-    }
-  }
-});
-async function updatePresence() {
-    if(ME) await updateDoc(doc(db,'users',ME.uid), { lastOnline: serverTimestamp() });
-}
-
-function enterApp(){
-  $('authScreen').style.display='none'; $('chatApp').style.display='block';
-  renderMeHeader();
-  subscribeChats();
-  onSnapshot(doc(db,'users',ME.uid),(s)=>{ if(s.exists()){ ME=s.data(); if(!ME.photoGallery) ME.photoGallery=[]; renderMeHeader(); }});
-}
-
-function renderMeHeader(){
-  const title = ME.isPremium ? `👑 ${ME.displayName}` : ME.displayName;
-  $('meName').textContent=title; $('meId').textContent='@'+ME.username;
-  const av=$('meAvatar');
-  if(ME.photoURL) av.src=ME.photoURL; else { av.removeAttribute('src'); av.style.background='var(--panel2)'; }
-  if(ME.isPremium) av.classList.add('premium'); else av.classList.remove('premium');
-  $('btnRoyalDecree').style.display = ME.isPremium ? 'flex' : 'none';
-}
-
-window.toggleMenu=(e)=>{ e.stopPropagation(); const m=$('mainMenu'); m.style.display=m.style.display==='block'?'none':'block'; };
-window.toggleChatMenu=(e)=>{ e.stopPropagation(); const m=$('chatMenu'); m.style.display=m.style.display==='block'?'none':'block'; };
-document.addEventListener('click',()=>{ $('mainMenu').style.display='none'; $('chatMenu').style.display='none'; });
-
-// ---------- TABS & LISTS ----------
-window.switchMainTab = (tab) => {
-  currentMainTab = tab;
-  ['tabChats','tabDiscover','tabLeaders'].forEach(t=>$(t).classList.remove('active'));
-  $(`tab${tab.charAt(0).toUpperCase() + tab.slice(1)}`).classList.add('active');
-  $('newMenuControls').style.display = tab==='chats'?'flex':'none';
-  $('globalSearch').parentElement.style.display = (tab==='chats' || tab==='discover')?'block':'none';
-  
-  if(tab==='chats'){ $('listTitle').textContent='عمارت‌های شما'; renderChatList(allMyChats); }
-  else if(tab==='discover'){ $('listTitle').textContent='دیوان‌های برتر (اکتشاف)'; loadDiscover(); }
-  else if(tab==='leaders'){ $('listTitle').textContent='پادشاهان محبوب (تالار افتخارات)'; loadLeaders(); }
-}
-
-function subscribeChats(){
-  const q=query(collection(db,'chats'), where('members','array-contains',ME.uid));
-  chatsUnsub=onSnapshot(q,(snap)=>{
-    allMyChats=[]; snap.forEach(d=>allMyChats.push({id:d.id,...d.data()}));
-    allMyChats.sort((a,b)=>{ const ta=a.lastTime?.toMillis?.()||0, tb=b.lastTime?.toMillis?.()||0; return tb-ta; });
-    if(currentMainTab==='chats') renderChatList(allMyChats);
-    if(activeChatId){ const updated = allMyChats.find(c=>c.id===activeChatId); if(updated) { activeChat=updated; renderChatHeader(); checkJoinStatus(); checkPinnedMsg(); } }
   });
-}
 
-async function renderChatList(chats, isDiscover = false){
-  const list=$('mainList'); list.innerHTML='';
-  for(const c of chats){
-    if (!c.type || (!c.name && c.type !== 'private')) continue;
-    const meta=await chatDisplay(c);
-    const div=document.createElement('div');
-    div.className='chat-item'+(c.id===activeChatId?' active':'');
-    div.onclick=()=>openChat(c.id, c);
-    const tag = c.type==='group'?'<span class="tag">محفل</span>' : c.type==='channel'?'<span class="tag">دیوان</span>':'';
-    const sub = isDiscover ? `${c.members.length} عضو` : esc(c.lastMessage||'');
+  // لاجیک لاگین/ثبت نام با ایمیل
+  loginBtn.addEventListener('click', async () => {
+    const email = emailInput.value.trim();
+    const password = passInput.value.trim();
+    if(!email || !password) { authErr.textContent = "لطفا ایمیل و رمز را وارد کنید."; return; }
     
-    let dot = '';
-    if(c.type==='private' && meta.userData) {
-        if(getLastSeenText(meta.userData.lastOnline) === 'آنلاین') dot = '<span class="online-dot"></span>';
+    loginBtn.textContent = 'در حال اتصال...';
+    try {
+      // تلاش برای لاگین، اگر اکانت نبود میسازیم
+      await signInWithEmailAndPassword(auth, email, password).catch(async err => {
+        if(err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
+          return await createUserWithEmailAndPassword(auth, email, password);
+        }
+        throw err;
+      });
+    } catch(error) {
+      authErr.textContent = 'خطا: ' + error.message;
+      loginBtn.textContent = 'ورود / ثبت‌نام';
     }
+  });
 
-    div.innerHTML=`
-      ${meta.photo?`<img class="av" src="${meta.photo}">`:`<div class="av">${meta.icon}</div>`}
-      <div class="ci-main"><div class="ci-name">${esc(meta.name)} ${tag} ${dot}</div><div class="ci-last">${sub}</div></div>
-      ${!isDiscover ? `<div class="ci-time">${timeStr(c.lastTime)}</div>` : ''}`;
-    list.appendChild(div);
-  }
-}
-
-async function loadDiscover(){
-  const list=$('mainList'); list.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">در حال کاوش... 🌍</div>';
-  try{
-    const q=query(collection(db,'chats'), where('type','==','channel'), limit(30));
-    const snap=await getDocs(q); let channels=[]; snap.forEach(d=>channels.push({id:d.id,...d.data()}));
-    channels.sort((a,b)=>b.members.length - a.members.length);
-    if(channels.length===0) list.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">دیوانی یافت نشد.</div>'; else renderChatList(channels, true);
-  }catch(e){ list.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">خطا در شبکه</div>'; }
-}
-
-async function loadLeaders(){
-  const list=$('mainList');
-  list.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">در حال احضار اشراف... 👑</div>';
-  try{
-    const q=query(collection(db,'users'), orderBy('giftScore','desc'), limit(25));
-    const snap=await getDocs(q); list.innerHTML='';
-    let rank = 1;
-    snap.forEach(d=>{
-      const u=d.data(); const div=document.createElement('div'); div.className='chat-item'; div.onclick=()=>viewUser(u.uid);
-      const icon = rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':`#${rank}`;
-      div.innerHTML=`
-        ${u.photoURL?`<img class="av" src="${u.photoURL}">`:`<div class="av">${initials(u.displayName)}</div>`}
-        <div class="ci-main"><div class="ci-name">${u.isPremium?'👑':''}${esc(u.displayName)} <span class="rank">${icon}</span></div>
-        <div class="ci-last" style="color:var(--gold-2); font-weight:bold;">امتیاز: ${u.giftScore||0} ⭐</div></div>`;
-      list.appendChild(div); rank++;
-    });
-  }catch(e){ list.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">لطفاً Index فایربیس ایجاد شود.</div>'; }
-}
-
-const userCache={};
-async function getUser(uid){
-  if(userCache[uid]) return userCache[uid];
-  const s=await getDoc(doc(db,'users',uid));
-  if(s.exists()){ userCache[uid]=s.data(); return userCache[uid]; }
-  return {displayName:'کاربر غایب', username:'', photoURL:'', uid};
-}
-
-async function chatDisplay(c){
-  if(c.type==='private'){
-    const other=c.members.find(m=>m!==ME.uid) || ME.uid; const u=await getUser(other);
-    const title = u.isPremium ? `👑 ${u.displayName}` : u.displayName;
-    return {name:title, photo:u.photoURL, icon:initials(u.displayName), userData: u};
-  }
-  return {name:c.name, photo:c.photoURL, icon: c.type==='channel'?'📢':'👥'};
-}
-
-// ---------- OPEN CHAT ----------
-window.openChat = async (chatId, chatDataObj = null)=>{
-  activeChatId=chatId;
-  if(chatDataObj) activeChat = chatDataObj;
-  else {
-    const s=await getDoc(doc(db,'chats',chatId)); if(!s.exists()) return toast('عمارت یافت نشد','❌'); activeChat={id:chatId,...s.data()};
-  }
-  
-  $('emptyChat').style.display='none'; $('activeChat').style.display='flex';
-  $('chatPanel').classList.add('open');
-  $('giftBtn').style.display = activeChat.type==='private'?'block':'none'; $('boostBtn').style.display = activeChat.type==='channel'?'block':'none';
-  
-  if(activeChat.type === 'channel') $('callActionsBar').style.display = 'none';
-  else $('callActionsBar').style.display = 'flex';
-
-  cancelAction(); 
-  await renderChatHeader();
-  applyBackground(activeChat.background); checkJoinStatus(); checkPinnedMsg(); subscribeMessages(chatId);
-  document.querySelectorAll('.chat-item').forEach(el=>el.classList.remove('active'));
-};
-
-window.closeChat=()=>{ $('chatPanel').classList.remove('open'); activeChatId=null; };
-
-async function renderChatHeader(){
-  if(!activeChat) return; const meta=await chatDisplay(activeChat); $('hName').textContent=meta.name;
-  const hav=$('hAv'); if(meta.photo) hav.innerHTML=`<img src="${meta.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; else hav.textContent=meta.icon;
-  
-  if(activeChat.type==='private'){
-    const u = meta.userData;
-    $('hSub').textContent = getLastSeenText(u.lastOnline);
-    if(getLastSeenText(u.lastOnline) === 'آنلاین') $('hSub').style.color = 'var(--green)'; else $('hSub').style.color = 'var(--gold-2)';
-  }else if(activeChat.type==='group'){ $('hSub').textContent=activeChat.members.length+' حاضر'; $('hSub').style.color = 'var(--gold-2)';
-  }else{ 
-      const lvl = Math.floor((activeChat.boosts||0) / 5) + 1;
-      $('hSub').textContent=`دیوان سطح ${lvl} (${activeChat.boosts || 0} بوست 🚀)`; 
-      $('hSub').style.color = 'var(--gold-2)';
-  }
-}
-
-function applyBackground(bg){ $('messages').style.backgroundImage = bg||''; $('messages').style.backgroundColor = bg?'':'var(--bg)'; }
-
-function checkJoinStatus() {
-    if(activeChat.type==='channel' && !activeChat.members.includes(ME.uid)) { $('inputBar').style.display = 'none'; $('joinBar').style.display = 'block'; }
-    else { $('joinBar').style.display = 'none'; $('inputBar').style.display = 'flex'; }
-}
-
-function checkPinnedMsg() {
-    if(activeChat && activeChat.pinnedMsg) {
-        $('pinnedBar').style.display = 'block';
-        $('pinnedText').textContent = activeChat.pinnedMsg.text;
-        $('pinnedBar').dataset.id = activeChat.pinnedMsg.id;
+  // شنونده تغییر وضعیت لاگین
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      currentUser = user;
+      loginView.style.display = 'none';
+      messagesView.style.display = 'flex';
+      inputView.style.display = 'flex';
+      chatStatusText.textContent = 'آنلاین 💚';
+      chatStatusText.style.color = '#00ff00';
+      loadMessages();
     } else {
-        $('pinnedBar').style.display = 'none';
+      currentUser = null;
+      loginView.style.display = 'flex';
+      messagesView.style.display = 'none';
+      inputView.style.display = 'none';
+      chatStatusText.textContent = 'نیازمند ورود 🔴';
+      chatStatusText.style.color = 'var(--rose)';
+      if(unsubscribeMessages) unsubscribeMessages();
     }
-}
-window.scrollToPinned = () => {
-    const id = $('pinnedBar').dataset.id;
-    const el = document.getElementById('msg_'+id);
-    if(el) {
-        el.scrollIntoView({behavior:'smooth', block:'center'});
-        el.querySelector('.bubble').style.boxShadow = '0 0 30px rgba(232,198,107,0.8)';
-        setTimeout(()=>el.querySelector('.bubble').style.boxShadow = '', 2000);
-    }
-}
-
-window.joinCurrentChannel = async () => {
-    if(!activeChatId) return; toast('در حال ورود...','⏳');
-    await updateDoc(doc(db,'chats',activeChatId), { members: arrayUnion(ME.uid) });
-    activeChat.members.push(ME.uid); checkJoinStatus(); renderChatHeader(); toast('شما رسماً به این دیوان پیوستید!','✅');
-}
-
-window.leaveActiveChat = async () => {
-    if(!activeChatId || !activeChat) return;
-    if(activeChat.owner === ME.uid && activeChat.type !== 'private') {
-        return toast('مالک عمارت باید آن را منحل کند، نه خروج.', '⚠️');
-    }
-    if(!confirm('آیا برای خروج از این عمارت اطمینان دارید؟')) return;
-    try {
-        await updateDoc(doc(db, 'chats', activeChatId), { members: arrayRemove(ME.uid) });
-        closeMsgModal('chatInfoModal');
-        clearActiveChat();
-        toast('شما از عمارت خارج شدید.', '🚪');
-    } catch(e) { toast('خطا در خروج', '❌'); }
-};
-
-window.clearChatHistory = async () => {
-    if(!activeChatId) return;
-    if(!confirm('آیا از پاکسازی تمام پیام‌های این عمارت اطمینان دارید؟ (این عمل برای همه اعمال می‌شود)')) return;
-    toast('در حال پاکسازی... ⏳');
-    try {
-        const q = query(collection(db, 'chats', activeChatId, 'messages'));
-        const snap = await getDocs(q);
-        const batch = writeBatch(db);
-        snap.forEach(doc => batch.delete(doc.ref));
-        await batch.commit();
-        toast('تاریخچه پیام‌ها پاک شد 🧹', '✔');
-    } catch(e) { toast('خطا در پاکسازی', '❌'); }
-};
-
-// ---------- MESSAGES & REACTIONS ----------
-function subscribeMessages(chatId){
-  if(msgUnsub) msgUnsub();
-  const q=query(collection(db,'chats',chatId,'messages'), orderBy('createdAt','asc'), limit(300));
-  msgUnsub=onSnapshot(q,(snap)=>{
-    const box=$('messages'); const wasAtBottom = box.scrollHeight - box.scrollTop <= box.clientHeight + 150;
-    box.innerHTML=''; snap.forEach(d=>renderMessage(d.id,d.data()));
-    if(wasAtBottom) { setTimeout(() => { box.scrollTo({top: box.scrollHeight, behavior: 'smooth'}); }, 50); }
   });
-}
 
-function renderMessage(id,m){
-  const box=$('messages'); const mine=m.senderId===ME.uid;
-  
-  const row=document.createElement('div'); 
-  row.className='msg-row'+(mine?' me':''); 
-  row.id = `msg_${id}`;
-  
-  const showSender = !mine && (activeChat.type!=='private');
-  const isPremiumUser = m.senderIsPremium;
-  const isDecree = m.isRoyalDecree ? 'royal-decree' : (isPremiumUser && mine ? 'premium-msg' : '');
-  const tempClass = m.temp ? 'temp-msg' : '';
-  
-  let inner='';
-  let replyHTML = '';
-  if(m.replyTo) {
-      replyHTML = `<div class="reply-box" onclick="document.getElementById('msg_${m.replyTo.id}')?.scrollIntoView({behavior:'smooth', block:'center'})">
-          <div class="r-sender">${esc(m.replyTo.sender)}</div><div class="r-text">${esc(m.replyTo.text)}</div></div>`;
-  }
-
-  if(m.type==='gift'){
-    row.innerHTML=`<div class="bubble gift-bubble pop-in"><div class="g-emoji">${m.gift}</div><div class="g-txt">پیشکش دربار ⭐${m.giftValue}</div><div class="b-meta">${timeStr(m.createdAt)}</div></div>`;
-    box.appendChild(row); return;
-  }else if(m.type==='image'){ 
-    inner=`<img class="b-img" src="${m.mediaURL}" onclick="if(!'${m.temp}') showMsgLightbox('${m.mediaURL}')">`; 
-    if(m.text) inner+=`<div class="b-text" style="margin-top:8px">${esc(m.text)}</div>`;
-  }
-  else if(m.type==='video'){ 
-    inner=`<video class="b-video" src="${m.mediaURL}" controls></video>`; 
-    if(m.text) inner+=`<div class="b-text" style="margin-top:8px">${esc(m.text)}</div>`;
-  }
-  else if(m.type==='file'){ 
-    inner=`<a class="b-file" href="${m.mediaURL}" target="_blank" download><span class="fi">📜</span><span class="f-name">${esc(m.fileName||'طومار')}</span></a>`;
-  }
-  else{ inner=`<div class="b-text" id="txt_${id}">${esc(m.text)}</div>`; }
-
-  if(!mine && !m.temp && (!m.readBy || !m.readBy.includes(ME.uid))) {
-      updateDoc(doc(db, 'chats', activeChatId, 'messages', id), { readBy: arrayUnion(ME.uid) }).catch(()=>{});
-  }
-
-  let reactHTML = '';
-  if(m.reactions && Object.keys(m.reactions).length > 0 && !m.temp){
-    reactHTML = `<div class="reactions-display">`;
-    for(const [emoji, users] of Object.entries(m.reactions)){
-       if(users.length > 0) {
-           const iReacted = users.includes(ME.uid);
-           reactHTML += `<div class="react-badge ${iReacted?'reacted':''}" onclick="toggleReaction('${id}', '${emoji}')">${emoji} <span>${users.length}</span></div>`;
-       }
-    }
-    reactHTML += `</div>`;
-  }
-
-  const editedTag = m.edited?'<span class="b-edited" style="font-size:9px; font-style:italic;">ویرایش شده</span>':'';
-  const senderNameColor = isPremiumUser ? 'var(--gold)' : 'var(--gold-2)';
-  const senderTag = showSender?`<div class="b-sender" style="color:${senderNameColor}" onclick="viewUser('${m.senderId}')">${isPremiumUser?'👑':''}${esc(m.senderName)}</div>`:'';
-  
-  const isSeen = m.readBy && m.readBy.length > 0;
-  const tickIcon = mine && !m.temp ? (isSeen ? '<span class="tick seen">✓✓</span>' : '<span class="tick sent">✓</span>') : (m.temp ? '<span class="tick sent">⏳</span>' : '');
-  const lvl = Math.floor((activeChat?.boosts||0) / 5) + 1;
-  const customReact = lvl >= 2 ? `<button onclick="toggleReaction('${id}', '🦄')" title="لول ۲">🦄</button>` : '';
-  
-  const actions = !m.temp && m.type!=='gift' ?
-    `<div class="msg-actions">
-      <button onclick="startReply('${id}', this)" title="پاسخ دادن">↩️</button>
-      <button onclick="pinMsg('${id}', this)" title="سنجاق کردن">📌</button>
-      <button onclick="translateMsg('${id}')" title="ترجمه">🌍</button>
-      <div style="width:1px; background:rgba(255,255,255,0.2); margin:0 5px;"></div>
-      <button onclick="toggleReaction('${id}', '❤️')">❤️</button>
-      <button onclick="toggleReaction('${id}', '🔥')">🔥</button>
-      <button onclick="toggleReaction('${id}', '😂')">😂</button>
-      ${customReact}
-      ${(mine && m.type==='text')?`<button onclick="startEdit('${id}',this)" title="ویرایش">✏️</button>`:''}
-      ${mine?`<button onclick="deleteMessage('${id}')" style="color:var(--danger)" title="حذف کامل">🗑</button>`:''}
-    </div>`:'';
-  row.innerHTML=`<div class="bubble ${isDecree} ${tempClass}">${actions}${senderTag}${replyHTML}${inner}<div id="trans_${id}" class="translated-txt" style="display:none;"></div>${reactHTML}<div class="b-meta">${editedTag}<span>${timeStr(m.createdAt)}</span>${tickIcon}</div></div>`;
-  
-  let pureText = m.text || '';
-  if(m.type==='image' && pureText==='') pureText = '📷 تصویر';
-  if(m.type==='video' && pureText==='') pureText = '🎬 ویدیو';
-  if(m.type==='file' && pureText==='') pureText = '📜 فایل';
-  row.querySelector('.bubble').dataset.text = pureText; 
-  row.querySelector('.bubble').dataset.senderName = m.senderName;
-  box.appendChild(row);
-}
-
-window.toggleReaction = async (msgId, emoji) => {
-    if(!activeChatId) return;
-    const msgRef = doc(db, 'chats', activeChatId, 'messages', msgId);
-    const snap = await getDoc(msgRef);
-    if(snap.exists()){
-        let data = snap.data();
-        let reactions = data.reactions || {};
-        if(!reactions[emoji]) reactions[emoji] = [];
-        if(reactions[emoji].includes(ME.uid)) reactions[emoji] = reactions[emoji].filter(id => id !== ME.uid);
-        else reactions[emoji].push(ME.uid);
-        await updateDoc(msgRef, { reactions });
-    }
-}
-
-window.showMsgLightbox=(url)=>{ 
-    $('msgLbImg').src=url; 
-    $('msgLightbox').classList.add('show');
-};
-
-// ---------- ACTIONS (REPLY, EDIT, PIN, TRANSLATE) ----------
-window.startReply = (id, btn) => {
-    const bubble = btn.closest('.bubble');
-    actionState = { type: 'reply', id: id, sender: bubble.dataset.senderName, text: bubble.dataset.text };
-    $('abIcon').textContent = '↩️'; $('abTitle').textContent = `پاسخ به ${actionState.sender}`;
-    $('abText').textContent = actionState.text; $('actionBanner').style.display = 'flex'; $('msgInput').focus();
-};
-window.startEdit=(id,btn)=>{ 
-    const bubble=btn.closest('.bubble');
-    actionState = { type: 'edit', id: id };
-    $('abIcon').textContent = '✏️'; $('abTitle').textContent = 'در حال ویرایش فرمان...'; $('abText').textContent = bubble.dataset.text;
-    $('actionBanner').style.display='flex'; $('msgInput').value=bubble.dataset.text; $('msgInput').focus(); autoGrow($('msgInput')); 
-};
-window.cancelAction = () => { actionState = { type: null, id: null };
-  $('actionBanner').style.display = 'none'; $('msgInput').value = ''; };
-
-window.pinMsg = async (id, btn) => {
-    if(!activeChatId) return;
-    const bubble = btn.closest('.bubble');
-    let text = bubble.dataset.text;
-    if(text.length > 40) text = text.substring(0, 40) + '...';
-    await updateDoc(doc(db, 'chats', activeChatId), { pinnedMsg: {id, text} });
-    toast('پیام سنجاق شد 📌', '✔');
-}
-
-window.translateMsg = (id) => {
-    const txtDiv = document.getElementById('txt_'+id);
-    const transDiv = document.getElementById('trans_'+id);
-    if(!txtDiv || !transDiv) return toast('قابلیت ترجمه فقط برای متون است','⚠️');
-    if(transDiv.style.display === 'block') { transDiv.style.display = 'none'; return; }
-    
-    transDiv.style.display = 'block';
-    transDiv.textContent = 'در حال ترجمه سلطنتی... ⏳';
-    setTimeout(() => {
-        transDiv.textContent = `ترجمه (شبیه‌سازی): ${txtDiv.textContent}`;
-    }, 1000);
-}
-
-window.deleteMessage = async (id)=>{ 
-    try { await deleteDoc(doc(db,'chats',activeChatId,'messages',id)); toast('پیام با موفقیت پاک شد 🧹','✨'); } 
-    catch(e) { toast('خطا در پاکسازی','❌'); }
-};
-window.deleteActiveChat = async () => {
-    if(!confirm('آیا از انحلال کامل این عمارت اطمینان دارید؟ این عمل غیرقابل بازگشت است.')) return;
-    try {
-        await deleteDoc(doc(db, 'chats', activeChatId));
-        closeMsgModal('chatInfoModal');
-        clearActiveChat();
-        toast('عمارت با موفقیت منحل شد', '🗑️');
-    } catch(e) {
-        toast('خطا در انحلال', '❌');
-    }
-};
-
-// ---------- SEND ----------
-window.autoGrow=(el)=>{ el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,150)+'px'; };
-window.toggleRoyalDecree = () => {
-    isRoyalDecreeMode = !isRoyalDecreeMode;
-    $('btnRoyalDecree').style.background = isRoyalDecreeMode ? 'rgba(232,198,107,0.3)' : 'rgba(255,255,255,0.03)';
-    $('btnRoyalDecree').style.boxShadow = isRoyalDecreeMode ? 'var(--gold-glow)' : 'none';
-    $('btnRoyalDecree').style.color = isRoyalDecreeMode ? '#fff' : 'var(--gold-2)';
-    toast(isRoyalDecreeMode ? 'حالت فرمان سلطنتی روشن شد 📜' : 'حالت عادی');
-}
-
-window.sendMessage = async ()=>{
-  const input=$('msgInput'); const text=input.value.trim();
-  if(!activeChatId) return;
-  
-  if(actionState.type === 'edit'){
-    if(!text) return;
-    await updateDoc(doc(db,'chats',activeChatId,'messages',actionState.id),{ text, edited:true });
-    cancelAction(); input.value=''; autoGrow(input); return;
-  }
-  
-  if(activeChat.type==='channel' && activeChat.owner!==ME.uid && !(activeChat.admins||[]).includes(ME.uid)){
-      return toast('فقط مالک و وزرا می‌توانند فرمان صادر کنند','⚠️');
-  }
-  if(!text) return;
-  
-  let payload = { type:'text', text, isRoyalDecree: isRoyalDecreeMode && ME.isPremium };
-  if(actionState.type === 'reply') payload.replyTo = { id: actionState.id, sender: actionState.sender, text: actionState.text.substring(0,60) };
-  
-  input.value=''; autoGrow(input); cancelAction();
-  await pushMessage(payload);
-  isRoyalDecreeMode = false; $('btnRoyalDecree').style.background = 'rgba(255,255,255,0.03)'; $('btnRoyalDecree').style.boxShadow = 'none'; $('btnRoyalDecree').style.color = 'var(--gold-2)';
-};
-async function pushMessage(data){
-  const msg={ senderId:ME.uid, senderName:ME.displayName, senderIsPremium: ME.isPremium||false, createdAt:serverTimestamp(), edited:false, deleted:false, reactions:{}, readBy:[], ...data };
-  await addDoc(collection(db,'chats',activeChatId,'messages'),msg);
-  let preview = data.text || (data.type==='image'?'📷 نگاره':data.type==='video'?'🎬 طومار متحرک':data.type==='file'?'📜 طومار':data.type==='gift'?'🎁 پیشکش':'پیام');
-  if(data.isRoyalDecree) preview = '📜 فرمان سلطنتی';
-  await updateDoc(doc(db,'chats',activeChatId),{ lastMessage:preview.slice(0,40), lastTime:serverTimestamp() });
-}
-
-// ---------- FIREBASE STORAGE FILE UPLOAD ----------
-window.handleFileSelect = async (e)=>{
-  const file=e.target.files[0]; e.target.value=''; if(!file||!activeChatId) return;
-  if(file.size > 50*1024*1024) return toast('حجم فایل بیش از حد مجاز است (حداکثر ۵۰ مگ)', '⚠️');
-  
-  const previewId = 'temp_' + Date.now();
-  let type = 'file'; if(file.type.startsWith('image/')) type = 'image'; else if(file.type.startsWith('video/')) type = 'video';
-  
-  const tempMsg = { id: previewId, senderId: ME.uid, senderName: ME.displayName, type: type, mediaURL: '', fileName: file.name, text: 'در حال آپلود در فضای ابری... ⏳', createdAt: new Date(), temp: true, reactions:{} };
-  renderMessage(previewId, tempMsg);
-  $('messages').scrollTo({top: $('messages').scrollHeight, behavior: 'smooth'});
-
-  try {
-      const storageRef = ref(storage, 'wiriper_chat/' + Date.now() + '_' + file.name);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on('state_changed', 
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          const tempEl = document.getElementById('txt_'+previewId);
-          if(tempEl) tempEl.textContent = `در حال آپلود... %${Math.round(progress)}`;
-        }, 
-        (error) => {
-          toast('خطا در آپلود فایل', '❌');
-          const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
-        }, 
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          let payload = { type, mediaURL:downloadURL, fileName:file.name, text:'' };
-          if(actionState.type === 'reply') payload.replyTo = { id: actionState.id, sender: actionState.sender, text: actionState.text };
-          await pushMessage(payload);
-          cancelAction();
-          const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
-          toast('فایل با موفقیت ارسال شد', '✔');
+  // دریافت و رندر پیام‌ها به صورت Real-time
+  function loadMessages() {
+    const q = query(collection(db, "wiriper_messages"), orderBy("timestamp", "asc"));
+    unsubscribeMessages = onSnapshot(q, (snapshot) => {
+      messagesView.innerHTML = '';
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const isMine = data.uid === currentUser.uid;
+        
+        const bubble = document.createElement('div');
+        bubble.className = `message-bubble ${isMine ? 'msg-received' : 'msg-sent'}`;
+        
+        let mediaHtml = '';
+        if(data.fileUrl) {
+          if(data.fileType.startsWith('image/')) {
+            mediaHtml = `<img src="${data.fileUrl}" onclick="window.open('${data.fileUrl}')" style="cursor:pointer;">`;
+          } else if(data.fileType.startsWith('video/')) {
+            mediaHtml = `<video src="${data.fileUrl}" controls></video>`;
+          } else {
+            mediaHtml = `<a href="${data.fileUrl}" target="_blank" style="color:var(--gold-2); display:block; margin-bottom:5px;">📁 دانلود فایل</a>`;
+          }
         }
-      );
-  } catch(err) {
-      toast('خطا در ارتباط با سرور Storage', '❌');
-      const tempEl = document.getElementById('msg_'+previewId); if(tempEl) tempEl.remove();
-  }
-};
-
-// ---------- PREMIUM & BOOST ----------
-window.openPremiumModal = () => { $('mainMenu').style.display='none';
-    if(ME.isPremium) return toast('شما در حال حاضر پادشاه هستید! 👑');
-    openMsgModal('premiumModal');
-}
-window.buyPremium = async () => {
-    if((ME.credits||0) < 500) return toast('اعتبار شما کافی نیست','⚠️');
-    await updateDoc(doc(db,'users',ME.uid), { credits: increment(-500), isPremium: true });
-    ME.credits -= 500; ME.isPremium = true; closeMsgModal('premiumModal');
-    toast('شما به مقام پادشاهی ارتقا یافتید! 👑','🎉'); renderMeHeader();
-}
-window.boostChannel = async () => {
-    if(!activeChat || activeChat.type !== 'channel') return;
-    if((ME.credits||0) < 50) return toast('ارتقای دیوان نیازمند ۵۰ سکه است','⚠️');
-    await updateDoc(doc(db,'users',ME.uid), { credits: increment(-50) });
-    await updateDoc(doc(db,'chats',activeChatId), { boosts: increment(1) });
-    ME.credits -= 50; activeChat.boosts = (activeChat.boosts||0) + 1;
-    renderChatHeader(); toast('دیوان سلطنتی قدرتمندتر شد! 🚀','⚡');
-}
-
-// ---------- PROFILE & AVATAR (Multiple Profiles) ----------
-function renderPhotoGallery(galleryArr, containerId) {
-    const box = $(containerId);
-    if(!galleryArr || galleryArr.length === 0) {
-        box.innerHTML = 'تصویری وجود ندارد.';
-        return;
-    }
-    box.innerHTML = galleryArr.map(url => `<img src="${url}" onclick="showMsgLightbox('${url}')">`).reverse().join('');
-}
-
-window.openMyProfile=()=>{
-  $('mainMenu').style.display='none'; $('ppName').value=ME.displayName; $('ppBirth').value=ME.birthDate||''; $('ppBelovedBirth').value=ME.belovedBirthDate||''; $('ppBio').value=ME.bio||''; $('ppUser').value='@'+ME.username; $('ppCredit').textContent=ME.credits||0; $('ppGiftScore').textContent=ME.giftScore||0;
-  const av=$('ppAv'); if(ME.photoURL){ av.src=ME.photoURL; av.style.display='block'; } else { av.removeAttribute('src'); }
-  if(ME.isPremium) av.style.borderColor = '#8957e5';
-  
-  renderPhotoGallery(ME.photoGallery, 'myPhotoGallery');
-  
-  const gBox = $('myGiftsGallery');
-  if(ME.receivedGifts && ME.receivedGifts.length > 0){ gBox.innerHTML = ME.receivedGifts.map(g => `<div class="gift-gallery-item"><div style="font-size:35px; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.5))">${g.emoji}</div><div style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">از ${g.sender}</div></div>`).reverse().join('');
-  } else gBox.innerHTML = '<div style="color:var(--muted); padding:10px;">هیچ پیشکشی دریافت نشده است.</div>';
-  openMsgModal('myProfileModal');
-};
-
-window.saveProfile = async ()=>{
-  const name=$('ppName').value.trim(); const bio=$('ppBio').value.trim(); const birth=$('ppBirth').value; const belovedBirth = $('ppBelovedBirth').value;
-  if(!name) return toast('نام نمی‌تواند خالی باشد','⚠️');
-  try{ 
-      await updateDoc(doc(db,'users',ME.uid),{ displayName:name, bio, birthDate:birth, belovedBirthDate: belovedBirth }); 
-      ME.displayName=name; ME.bio=bio; ME.birthDate=birth; ME.belovedBirthDate=belovedBirth; 
-      renderMeHeader();
-      toast('در جریده ثبت شد','✔'); closeMsgModal('myProfileModal');
-  }
-  catch(e){ toast('خطا در ذخیره','❌'); }
-};
-
-window.uploadAvatar = async (e)=>{
-  const file=e.target.files[0]; e.target.value='';
-  if(!file) return;
-  toast('در حال ارسال پرتره به فضای ابری... ⏳');
-  try{
-      const storageRef = ref(storage, 'wiriper_avatars/' + Date.now() + '_' + file.name);
-      const uploadTask = uploadBytesResumable(storageRef, file);
-
-      uploadTask.on('state_changed', null, 
-        (error) => toast('خطا در بارگذاری تصویر', '🚨'), 
-        async () => {
-          const url = await getDownloadURL(uploadTask.snapshot.ref);
-          await updateDoc(doc(db,'users',ME.uid), { photoURL:url, photoGallery: arrayUnion(url) }); 
-          ME.photoURL=url;
-          if(!ME.photoGallery) ME.photoGallery = [];
-          ME.photoGallery.push(url);
-          $('ppAv').src=url; 
-          renderPhotoGallery(ME.photoGallery, 'myPhotoGallery');
-          renderMeHeader();
-          toast('پرتره زیبای شما ذخیره شد 🎨','✔');
-        }
-      );
-  }catch(err){ toast('خطای سرور ارتباطی','❌'); }
-};
-
-window.viewUser = async (uid)=>{
-  if(uid===ME.uid){ openMyProfile(); return; }
-  const u=await getUser(uid);
-  viewedUser=u;
-  const title = u.isPremium ? `👑 ${u.displayName}` : u.displayName;
-  $('upName').textContent=title; $('upId').textContent='@'+u.username;
-  
-  $('upStatus').textContent = getLastSeenText(u.lastOnline);
-  if(getLastSeenText(u.lastOnline) === 'آنلاین') $('upStatus').style.color = 'var(--green)';
-  else $('upStatus').style.color = 'var(--muted)';
-  if(u.birthDate) { 
-      $('upBirth').style.display = 'block'; 
-      let displayBirth = `🎂 ${u.birthDate}`;
-      if(u.belovedBirthDate) displayBirth += ` | 💍 ${u.belovedBirthDate}`;
-      $('upBirthVal').textContent = displayBirth; 
-  } else $('upBirth').style.display = 'none';
-
-  const av=$('upAv');
-  if(u.photoURL) av.innerHTML=`<img src="${u.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; else av.textContent=initials(u.displayName);
-  if(u.isPremium) av.style.border = '3px solid #8957e5'; else av.style.border = '3px solid var(--gold-2)';
-  if(u.bio){ $('upBio').style.display='block'; $('upBio').textContent=u.bio; } else $('upBio').style.display='none';
-  
-  renderPhotoGallery(u.photoGallery, 'userPhotoGallery');
-
-  const gBox = $('userGiftsGallery');
-  if(u.receivedGifts && u.receivedGifts.length > 0){ gBox.innerHTML = u.receivedGifts.map(g => `<div class="gift-gallery-item"><div style="font-size:35px; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.5))">${g.emoji}</div><div style="font-size:12px; color:var(--gold); margin-top:8px; font-weight:bold;">از ${g.sender}</div></div>`).reverse().join('');
-  } else gBox.innerHTML = '<div style="color:var(--muted); padding:10px;">این شخص هنوز پیشکشی ندارد.</div>';
-  openMsgModal('userProfileModal');
-};
-
-window.startChatWithViewedUser = async ()=>{ closeMsgModal('userProfileModal'); await openOrCreatePrivate(viewedUser.uid, viewedUser); };
-async function openOrCreatePrivate(otherUid, otherData){
-  const cid=privateChatId(ME.uid,otherUid); const ref=doc(db,'chats',cid); const s=await getDoc(ref);
-  if(!s.exists()){ await setDoc(ref,{ type:'private', members:[ME.uid,otherUid].sort(), lastMessage:'', lastTime:serverTimestamp(), background:'' }); }
-  userCache[otherUid]=otherData; openChat(cid);
-}
-
-// ---------- SEARCH ----------
-let searchTimer=null;
-window.onSearchInput=()=>{ clearTimeout(searchTimer); searchTimer=setTimeout(runSearch,300); };
-async function runSearch(){
-  let term=$('globalSearch').value.trim().toLowerCase().replace(/^@/,''); const box=$('mainList');
-  if(!term){ switchMainTab(currentMainTab); return; }
-  $('listTitle').textContent='نتایج جستجو...';
-  box.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">درحال جستجو... 🔍</div>';
-  
-  try{
-    const uQ=query(collection(db,'users'), where('usernameLower','>=',term), where('usernameLower','<=',term+'\uf8ff'), limit(15));
-    const uSnap=await getDocs(uQ);
-    const cQ=query(collection(db,'chats'), where('type','==','channel'), limit(30));
-    const cSnap=await getDocs(cQ);
-    
-    box.innerHTML=''; let found=false;
-    uSnap.forEach(d=>{
-      const u=d.data(); if(u.uid===ME.uid) return; found=true; const div=document.createElement('div'); div.className='chat-item';
-      div.onclick=()=>{ openOrCreatePrivate(u.uid,u); $('globalSearch').value=''; switchMainTab('chats'); };
-      let dot = getLastSeenText(u.lastOnline) === 'آنلاین' ? '<span class="online-dot"></span>' : '';
-      div.innerHTML=`${u.photoURL?`<img class="av" src="${u.photoURL}">`:`<div class="av">${initials(u.displayName)}</div>`}
-        <div class="ci-main"><div class="ci-name">${u.isPremium?'👑':''}${esc(u.displayName)} ${dot}</div><div class="ci-last">@${esc(u.username)}</div></div>`;
-      box.appendChild(div);
+        
+        const textHtml = data.text ? `<div>${data.text}</div>` : '';
+        const timeHtml = `<span class="msg-time">${data.timestamp ? new Date(data.timestamp.toDate()).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : '...'}</span>`;
+        
+        bubble.innerHTML = mediaHtml + textHtml + timeHtml;
+        messagesView.appendChild(bubble);
+      });
+      // اسکرول به پایین‌ترین پیام
+      messagesView.scrollTop = messagesView.scrollHeight;
     });
-    cSnap.forEach(d=>{
-        const c=d.data();
-        if(c.name && c.name.toLowerCase().includes(term)){
-            found=true; const div=document.createElement('div'); div.className='chat-item';
-            div.onclick=()=>{ openChat(d.id, {id:d.id, ...c}); $('globalSearch').value=''; switchMainTab('chats'); };
-            div.innerHTML=`<div class="av">📢</div><div class="ci-main"><div class="ci-name">${esc(c.name)} <span class="tag">دیوان</span></div><div class="ci-last">${c.members.length} عضو</div></div>`;
-            box.appendChild(div);
-        }
-    });
-    if(!found) box.innerHTML='<div style="padding:30px;text-align:center;color:var(--muted)">کسی یا دیوانی یافت نشد.</div>';
-  }catch(e){ box.innerHTML='<div style="padding:30px;text-align:center;color:var(--danger)">خطا در موتور جستجو</div>'; }
-}
+  }
 
-// ---------- GROUPS & CHANNELS ----------
-window.loadMemberPicker = async ()=>{
-  const box=$('grpMembers'); box.innerHTML='در حال فراخوانی...'; const snap=await getDocs(query(collection(db,'users'),limit(50))); box.innerHTML='';
-  snap.forEach(d=>{
-    const u=d.data(); if(u.uid===ME.uid) return; const div=document.createElement('div'); div.className='member-pick'; div.dataset.uid=u.uid; div.onclick=()=>div.classList.toggle('sel');
-    div.innerHTML=`${u.photoURL?`<img class="av" style="width:40px;height:40px" src="${u.photoURL}">`:`<div class="av" style="width:40px;height:40px">${initials(u.displayName)}</div>`}
-      <div class="ci-main"><div class="ci-name" style="font-size:14px">${u.isPremium?'👑':''}${esc(u.displayName)}</div><div class="ci-last" style="font-size:11px">@${esc(u.username)}</div></div><span class="chk" style="color:var(--gold-2); font-weight:bold;">انتخاب</span>`;
-    box.appendChild(div);
+  // ارسال پیام متنی
+  async function sendMessage(fileUrl = null, fileType = null) {
+    const text = msgInput.value.trim();
+    if (!text && !fileUrl) return;
+    
+    msgInput.value = '';
+    await addDoc(collection(db, "wiriper_messages"), {
+      text: text,
+      uid: currentUser.uid,
+      fileUrl: fileUrl,
+      fileType: fileType,
+      timestamp: serverTimestamp()
+    });
+  }
+
+  sendBtn.addEventListener('click', () => sendMessage());
+  msgInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
+
+  // آپلود فایل (عکس/ویدیو)
+  fileInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if(!file) return;
+
+    const storageRef = ref(storage, 'wiriper_chat/' + Date.now() + '_' + file.name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed', 
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        progressBar.style.width = progress + '%';
+      }, 
+      (error) => {
+        console.error("Upload failed", error);
+        progressBar.style.width = '0%';
+        alert('خطا در آپلود فایل. قوانین Storage فایربیس را چک کنید.');
+      }, 
+      async () => {
+        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+        progressBar.style.width = '0%';
+        await sendMessage(downloadURL, file.type);
+        fileInput.value = ''; // ریست کردن اینپوت فایل
+      }
+    );
   });
-};
-
-window.createGroup = async ()=>{
-  const name=$('grpName').value.trim(); if(!name) return toast('نام را وارد کنید','⚠️');
-  const sel=[...document.querySelectorAll('#grpMembers .member-pick.sel')].map(e=>e.dataset.uid);
-  const ref=await addDoc(collection(db,'chats'),{ type:'group', name, photoURL:'', owner:ME.uid, admins:[], members:[ME.uid,...sel], lastMessage:'محفل دایر شد', lastTime:serverTimestamp(), background:'' });
-  closeMsgModal('newGroupModal'); $('grpName').value=''; toast('محفل ساخته شد','✔'); openChat(ref.id);
-};
-window.createChannel = async ()=>{
-  const name=$('chName').value.trim(); const desc=$('chDesc').value.trim(); if(!name) return toast('نام را وارد کنید','⚠️');
-  const ref=await addDoc(collection(db,'chats'),{ type:'channel', name, nameLower:name.toLowerCase(), description:desc, photoURL:'', owner:ME.uid, admins:[], members:[ME.uid], boosts:0, lastMessage:'دیوان دایر شد', lastTime:serverTimestamp(), background:'' });
-  closeMsgModal('newChannelModal'); $('chName').value=''; $('chDesc').value=''; toast('دیوان ساخته شد','✔'); openChat(ref.id);
-};
-
-// ---------- CHAT INFO & ADMINS ----------
-window.openChatInfo = async ()=>{
-  if(!activeChat) return;
-  const meta=await chatDisplay(activeChat); $('ciName').textContent=meta.name;
-  const av=$('ciAv'); if(meta.photo) av.innerHTML=`<img src="${meta.photo}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">`; else av.textContent=meta.icon;
-  const mbox=$('ciMembers'); mbox.innerHTML='';
-  
-  if(activeChat.type==='private'){
-    const other=activeChat.members.find(m=>m!==ME.uid) || ME.uid; const u=await getUser(other); $('ciSub').textContent='@'+u.username;
-    if(u.bio){ $('ciDesc').style.display='block'; $('ciDesc').textContent=u.bio; } else $('ciDesc').style.display='none';
-    $('ciBoosts').style.display = 'none'; $('channelSettingsUI').style.display = 'none'; $('leaveChatUI').style.display = 'none'; $('ciMembersTitle').style.display = 'none'; mbox.style.display = 'none';
-    closeMsgModal('chatInfoModal'); viewUser(other); return;
-  }else{
-    $('ciMembersTitle').style.display = 'block'; mbox.style.display = 'block';
-    
-    if(activeChat.type==='channel') {
-        const lvl = Math.floor((activeChat.boosts||0) / 5) + 1;
-        $('ciBoosts').style.display = 'inline-block';
-        $('ciBoosts').textContent = `لول دیوان: ${lvl} (${activeChat.boosts||0} 🚀)`;
-        $('ciSub').textContent = activeChat.members.length + ' دنبال‌کننده';
-        if(activeChat.owner === ME.uid) { $('channelSettingsUI').style.display = 'block'; $('leaveChatUI').style.display = 'none'; }
-        else { $('channelSettingsUI').style.display = 'none'; $('leaveChatUI').style.display = 'block'; }
-    } else {
-        $('ciBoosts').style.display = 'none';
-        if(activeChat.owner === ME.uid) { $('channelSettingsUI').style.display = 'block'; $('leaveChatUI').style.display = 'none'; }
-        else { $('channelSettingsUI').style.display = 'none'; $('leaveChatUI').style.display = 'block'; }
-        $('ciSub').textContent = activeChat.members.length + ' عضو حاضر';
-    }
-    
-    if(activeChat.description){ $('ciDesc').style.display='block'; $('ciDesc').textContent=activeChat.description; } else $('ciDesc').style.display='none';
-    
-    for(const uid of activeChat.members){
-      const u=await getUser(uid); const div=document.createElement('div'); div.className='member-pick'; div.style.background='rgba(0,0,0,0.5)';
-      const isOwner = uid===activeChat.owner;
-      const isAdmin = (activeChat.admins||[]).includes(uid);
-      const badge = isOwner ? '<span class="rank" style="background:var(--danger)">👑 مالک</span>' : (isAdmin ? '<span class="rank" style="background:#007aff">🛡️ وزیر</span>' : '');
-      div.innerHTML=`${u.photoURL?`<img class="av" style="width:40px;height:40px" src="${u.photoURL}">`:`<div class="av" style="width:40px;height:40px">${initials(u.displayName)}</div>`}
-        <div class="ci-main" onclick="closeMsgModal('chatInfoModal'); viewUser('${uid}');"><div class="ci-name" style="font-size:14px">${u.isPremium?'👑':''}${esc(u.displayName)} ${badge}</div><div class="ci-last" style="font-size:11px">@${esc(u.username)}</div></div>`;
-      if(ME.uid === activeChat.owner && !isOwner) {
-          const btn = document.createElement('button');
-          btn.textContent = isAdmin ? 'عزل' : 'نصب وزیر';
-          btn.style.cssText = 'padding:6px 12px; font-size:11px; background:rgba(232,198,107,0.15); color:var(--gold-2); border-radius:10px; font-weight:800; cursor:pointer; transition:0.2s; border:1px solid rgba(232,198,107,0.3);';
-          btn.onmouseover = ()=>btn.style.background='rgba(232,198,107,0.3)'; btn.onmouseout = ()=>btn.style.background='rgba(232,198,107,0.15)';
-          btn.onclick = (e) => { e.stopPropagation(); toggleAdmin(uid, isAdmin); };
-          div.appendChild(btn);
-      } mbox.appendChild(div);
-    }
-  } openMsgModal('chatInfoModal');
-};
-
-window.toggleAdmin = async (uid, isCurrentlyAdmin) => {
-    if(!activeChatId || ME.uid !== activeChat.owner) return;
-    toast('در حال تغییر مقام...','⏳');
-    const chatRef = doc(db, 'chats', activeChatId);
-    if(isCurrentlyAdmin) { await updateDoc(chatRef, { admins: arrayRemove(uid) }); activeChat.admins = activeChat.admins.filter(a => a !== uid); } 
-    else { await updateDoc(chatRef, { admins: arrayUnion(uid) }); if(!activeChat.admins) activeChat.admins = []; activeChat.admins.push(uid); }
-    openChatInfo();
-}
-
-window.clearActiveChat=()=>{ activeChatId=null; activeChat=null; if(msgUnsub) msgUnsub(); $('activeChat').style.display='none'; $('emptyChat').style.display='flex'; $('chatPanel').classList.remove('open'); };
-
-// ---------- CREDITS & GIFTS ----------
-window.openCreditModal=()=>{ $('mainMenu').style.display='none'; $('cmCredit').textContent=ME.credits||0; openMsgModal('creditModal'); };
-window.addCredits = async (n)=>{ await updateDoc(doc(db,'users',ME.uid),{ credits: increment(n) }); ME.credits=(ME.credits||0)+n; $('cmCredit').textContent=ME.credits; toast('+'+n+' سکه واریز شد','⭐'); };
-
-let giftTargetUid=null;
-window.openGiftModal=()=>{
-  $('chatMenu').style.display='none'; 
-  if(activeChat?.type==='private'){ giftTargetUid=activeChat.members.find(m=>m!==ME.uid) || ME.uid; }
-  else if (activeChat?.type==='channel') { giftTargetUid = 'CHANNEL_GIFT'; }
-  else giftTargetUid=null;
-  $('gmCredit').textContent=ME.credits||0; openMsgModal('giftModal');
-};
-window.openGiftToViewedUser=()=>{ closeMsgModal('userProfileModal'); giftTargetUid=viewedUser.uid; $('gmCredit').textContent=ME.credits||0; openMsgModal('giftModal'); };
-
-window.sendGift = async (emoji,value)=>{
-  if((ME.credits||0)<value) return toast('خزانه شما خالی است','⚠️');
-  if(giftTargetUid === 'CHANNEL_GIFT') {
-      await updateDoc(doc(db,'users',ME.uid),{ credits: increment(-value) });
-      await updateDoc(doc(db,'chats',activeChatId),{ boosts: increment(Math.floor(value/10)) });
-      ME.credits=(ME.credits||0)-value;
-      activeChat.boosts = (activeChat.boosts||0) + Math.floor(value/10);
-      await pushMessage({ type:'gift', gift:emoji, giftValue:value, text:'' });
-      closeMsgModal('giftModal'); renderChatHeader();
-      return toast('پیشکش به دیوان اهدا شد و قدرت دیوان افزایش یافت! 🚀','👑');
-  }
-
-  let chatId=activeChatId;
-  if(giftTargetUid && (!activeChat || activeChat.type!=='private' || !activeChat.members.includes(giftTargetUid))){
-    const u=await getUser(giftTargetUid); await openOrCreatePrivate(giftTargetUid,u); chatId=activeChatId;
-  }
-  if(!chatId) return toast('ابتدا مسیر ارتباطی ایجاد کنید');
-  
-  await updateDoc(doc(db,'users',ME.uid),{ credits: increment(-value) });
-  if(giftTargetUid) { await updateDoc(doc(db,'users',giftTargetUid),{ credits: increment(value), giftScore: increment(value), receivedGifts: arrayUnion({emoji, sender: ME.displayName, value}) }); }
-  ME.credits=(ME.credits||0)-value;
-  await pushMessage({ type:'gift', gift:emoji, giftValue:value, text:'' });
-  closeMsgModal('giftModal'); toast('پیشکش ارسال شد '+emoji,'🎁');
-};
-
-// ---------- BACKGROUND ----------
-window.openBgModal=()=>{
-  $('chatMenu').style.display='none';
-  const grid=$('bgGrid'); grid.innerHTML='';
-  BACKGROUNDS.forEach((bg)=>{ const d=document.createElement('div'); d.className='bg-opt'+(activeChat?.background===bg?' sel':''); d.style.background = bg||'var(--bg2)'; d.onclick=()=>setBackground(bg); grid.appendChild(d); }); openMsgModal('bgModal');
-};
-window.setBackground = async (bg)=>{ await updateDoc(doc(db,'chats',activeChatId),{ background:bg }); activeChat.background=bg; applyBackground(bg); closeMsgModal('bgModal'); toast('پرده‌خوانی عمارت تغییر کرد','🖼️'); };
-
-$('msgInput').addEventListener('keydown',(e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); } });
 </script>
+
 </body>
 </html>
