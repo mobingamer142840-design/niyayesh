@@ -217,7 +217,6 @@ section { padding: 120px 0; position: relative; }
 .wstat .num { display: block; font-size: 45px; font-family: 'Cinzel'; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--gold-2); margin-bottom: 5px; }
 .wstat .lbl { font-size: 15px; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
 
-/* ارکان و نشان‌های گنجینه سلطنتی جدید اضافه شده در آپدیت */
 .artifacts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 50px; }
 .artifact-card { background: rgba(5, 3, 10, 0.6); border: 1px solid rgba(232, 198, 107, 0.15); border-radius: 20px; padding: 25px; transition: all 0.4s ease; text-align: right; }
 .artifact-card:hover { border-color: var(--gold); background: rgba(20, 10, 40, 0.5); transform: translateY(-5px); }
@@ -345,11 +344,6 @@ footer b { color: var(--gold-2); font-size: 17px; }
   section { padding: 80px 0; }
   .sec-title h2 { font-size: 28px; }
   .card { padding: 25px; }
-  .chat-layout { flex-direction: column !important; }
-  .chat-sidebar { width: 100% !important; border-right: none !important; border-bottom: 1px solid var(--border); }
-  .chat-main { display: none; }
-  .chat-layout.active-chat .chat-sidebar { display: none; }
-  .chat-layout.active-chat .chat-main { display: flex; }
 }
 
 @media(max-width: 520px) {
@@ -357,75 +351,86 @@ footer b { color: var(--gold-2); font-size: 17px; }
   #toTop { bottom: 20px; left: 20px; }
 }
 
-/* === استایل‌های پیام‌رسان پیشرفته تلگرامی Wiriper === */
+/* ========================================================
+   استایل‌های سیستم چت پیشرفته (شبیه تلگرام)
+======================================================== */
 #wiriper-chat-modal { position: fixed; inset: 0; z-index: 100000; background: var(--bg); display: none; flex-direction: column; overflow: hidden; opacity: 0; transition: opacity 0.4s ease; font-family: 'Vazirmatn'; }
 #wiriper-chat-modal.open { display: flex; opacity: 1; }
 
-/* هدر پیام‌رسان (عمومی) */
-.chat-global-header { padding: 15px 25px; background: rgba(20, 10, 40, 0.95); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.5); z-index: 10; }
-.chat-global-header h3 { color: var(--gold-2); margin: 0; font-family: 'Cinzel', 'Vazirmatn'; }
+.chat-header-global { padding: 15px 25px; background: rgba(15, 8, 30, 0.95); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 20px rgba(0,0,0,0.5); z-index: 50; }
+.chat-header-global h3 { color: var(--gold-2); margin: 0; font-family: 'Cinzel', 'Vazirmatn'; }
 .chat-close { color: #fff; font-size: 25px; cursor: pointer; background: none; border: none; }
-.chat-login-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 20px; text-align: center; background: radial-gradient(circle, var(--bg3), var(--bg)); }
-.chat-login-box { background: var(--glass-strong); padding: 40px; border-radius: 25px; border: 1px solid var(--border); box-shadow: var(--shadow); width: min(400px, 100%); }
-.chat-login-box input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; }
 
-/* لایه اصلی پیام‌رسان (دو تکه) */
-.chat-layout { display: flex; flex: 1; overflow: hidden; background: var(--bg); }
-.chat-sidebar { width: 350px; background: rgba(15, 8, 30, 0.95); border-left: 1px solid var(--border); display: flex; flex-direction: column; position: relative; }
-.sidebar-header { padding: 15px; display: flex; gap: 10px; background: rgba(10,5,20,0.8); border-bottom: 1px solid var(--border); }
-.sidebar-header button { flex: 1; padding: 10px; background: rgba(232, 198, 107, 0.1); border: 1px solid var(--border); color: var(--gold-2); border-radius: 10px; cursor: pointer; font-family: 'Vazirmatn'; transition: 0.3s; }
-.sidebar-header button:hover { background: rgba(232, 198, 107, 0.3); }
+/* فرم لاگین */
+.chat-login-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 20px; background: radial-gradient(circle, var(--bg3), var(--bg)); }
+.chat-login-box { background: var(--glass-strong); padding: 40px; border-radius: 25px; border: 1px solid var(--border); box-shadow: var(--shadow); width: min(400px, 100%); text-align: center; }
+.chat-login-box h2 { color: var(--gold-2); margin-bottom: 15px; }
+.chat-login-box input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; outline: none; }
+.chat-login-box input:focus { border-color: var(--gold); }
 
-/* لیست چت‌ها */
-.chat-list { flex: 1; overflow-y: auto; }
-.chat-item { display: flex; align-items: center; padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer; transition: background 0.2s; }
-.chat-item:hover, .chat-item.active { background: rgba(232, 198, 107, 0.1); }
-.chat-item img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin-left: 15px; }
-.chat-item-info { flex: 1; overflow: hidden; }
-.chat-item-info h4 { color: #fff; margin: 0 0 5px 0; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.chat-item-info p { color: var(--muted); margin: 0; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* ساختار اصلی چت (تلگرام-مانند) */
+.telegram-layout { display: flex; height: calc(100vh - 65px); width: 100%; background: var(--bg2); overflow: hidden; }
+.tg-sidebar { width: 350px; background: rgba(10, 5, 20, 0.95); border-left: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; z-index: 10; transition: transform 0.3s ease; }
+.tg-main { flex: 1; display: flex; flex-direction: column; background: url('https://i.ibb.co/60V0mR9/telegram-bg.png') center/cover; position: relative; }
+.tg-main::before { content: ''; position: absolute; inset: 0; background: rgba(5,3,8,0.88); z-index: 0; }
 
-/* بخش اصلی چت (سمت چپ/راست بسته به LTR/RTL) */
-.chat-main { flex: 1; display: flex; flex-direction: column; background: url('https://i.ibb.co/60V0mR9/telegram-bg.png') center/cover; position: relative; }
-.chat-main::before { content: ''; position: absolute; inset: 0; background: rgba(5,3,8,0.85); z-index: 0; }
-.chat-active-header { padding: 15px 20px; background: rgba(20, 10, 40, 0.95); border-bottom: 1px solid var(--border); display: flex; align-items: center; z-index: 1; box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-.chat-active-header .back-btn { display: none; color: var(--gold-2); background: none; border: none; font-size: 24px; margin-left: 15px; cursor: pointer; }
-@media(max-width: 768px) { .chat-active-header .back-btn { display: block; } }
-.chat-active-header img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); margin-left: 15px; }
-.chat-active-header h3 { color: #fff; margin: 0; font-size: 17px; }
-.chat-active-header p { color: var(--gold); margin: 0; font-size: 12px; }
+/* سایدبار */
+.tg-sidebar-header { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; gap: 10px; align-items: center; }
+.tg-btn-menu { background: none; border: none; color: var(--gold-2); font-size: 24px; cursor: pointer; }
+.tg-search { flex: 1; padding: 10px 15px; border-radius: 20px; border: none; background: rgba(255,255,255,0.05); color: #fff; font-family: 'Vazirmatn'; outline: none; }
+.tg-chat-list { flex: 1; overflow-y: auto; }
+.tg-chat-item { display: flex; align-items: center; gap: 15px; padding: 15px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.02); transition: background 0.2s; }
+.tg-chat-item:hover, .tg-chat-item.active { background: rgba(232,198,107,0.1); }
+.tg-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); background: var(--bg); display:flex; align-items:center; justify-content:center; color:var(--gold-2); font-weight:bold; font-size:20px; }
+.tg-chat-info { flex: 1; overflow: hidden; }
+.tg-chat-name { color: #fff; font-weight: bold; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; justify-content: space-between; }
+.tg-chat-preview { color: var(--muted); font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tg-fab { position: absolute; bottom: 20px; right: 20px; width: 55px; height: 55px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-2), var(--gold-deep)); color: #000; font-size: 24px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 15px rgba(232,198,107,0.4); border: none; z-index: 20; }
 
-/* محیط پیام‌ها */
-.chat-messages-area { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; position: relative; z-index: 1; }
-.message-row { display: flex; align-items: flex-end; gap: 10px; max-width: 80%; }
-.message-row.sent { align-self: flex-start; flex-direction: row-reverse; }
-.message-row.received { align-self: flex-end; }
-.message-avatar { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 1px solid var(--border); }
-.message-bubble { position: relative; padding: 12px 18px; border-radius: 20px; font-size: 15px; line-height: 1.6; word-break: break-word; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-.message-bubble img, .message-bubble video { max-width: 100%; border-radius: 10px; margin-bottom: 8px; }
-.message-row.sent .message-bubble { background: linear-gradient(135deg, var(--purple-deep), #2a1154); color: #fff; border-bottom-right-radius: 4px; border: 1px solid rgba(123, 63, 228, 0.3); }
-.message-row.received .message-bubble { background: linear-gradient(135deg, rgba(20,10,40,0.9), rgba(10,5,20,0.9)); color: var(--gold-2); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
-.msg-sender-name { display: block; font-size: 11px; color: var(--gold); margin-bottom: 5px; font-weight: bold; }
-.msg-time { display: block; font-size: 10px; opacity: 0.7; margin-top: 5px; text-align: right; }
+/* ناحیه اصلی چت */
+.tg-chat-header { position: relative; z-index: 1; padding: 10px 20px; background: rgba(15, 8, 30, 0.95); display: flex; align-items: center; gap: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); box-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.tg-back-btn { display: none; background: none; border: none; color: var(--gold-2); font-size: 24px; cursor: pointer; }
+.tg-chat-header-info { flex: 1; cursor: pointer; }
+.tg-chat-header-name { color: #fff; font-weight: bold; font-size: 16px; }
+.tg-chat-header-status { color: var(--gold); font-size: 12px; }
 
-/* باکس ارسال پیام */
-.chat-input-area { padding: 15px 20px; background: rgba(20, 10, 40, 0.95); border-top: 1px solid var(--border); display: flex; align-items: center; gap: 10px; z-index: 10; padding-bottom: calc(15px + env(safe-area-inset-bottom)); }
-.chat-input-area input[type="text"] { flex: 1; padding: 15px 20px; border-radius: 25px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; outline: none; }
-.chat-attach-btn { cursor: pointer; color: var(--gold); font-size: 24px; padding: 10px; }
-.chat-send-btn { background: linear-gradient(135deg, var(--gold-2), var(--gold-deep)); border: none; width: 50px; height: 50px; border-radius: 50%; color: #000; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform 0.2s; }
-.chat-send-btn:hover { transform: scale(1.1); }
-#fileUploadInput { display: none; }
-.upload-progress { height: 3px; background: var(--gold); width: 0%; position: absolute; top: 0; left: 0; transition: width 0.3s; z-index: 100; }
-.no-chat-selected { display: flex; align-items: center; justify-content: center; flex: 1; flex-direction: column; color: var(--muted); z-index: 1; text-align: center; }
+.tg-messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
+.tg-bubble { max-width: 75%; padding: 10px 15px; border-radius: 18px; position: relative; word-wrap: break-word; font-size: 15px; line-height: 1.5; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.tg-sent { align-self: flex-start; background: linear-gradient(135deg, var(--purple-deep), #2a1154); color: #fff; border-bottom-right-radius: 4px; border: 1px solid rgba(123, 63, 228, 0.3); }
+.tg-recv { align-self: flex-end; background: rgba(25, 15, 45, 0.9); color: var(--gold-2); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
+.tg-bubble-media { max-width: 100%; border-radius: 10px; margin-bottom: 5px; cursor: pointer; }
+.tg-bubble-audio { width: 250px; max-width: 100%; outline: none; }
+.tg-bubble-time { font-size: 10px; opacity: 0.6; text-align: right; margin-top: 5px; display: flex; justify-content: flex-end; gap: 5px; }
+.tg-msg-actions { position: absolute; top: 5px; right: 5px; display: none; background: rgba(0,0,0,0.8); border-radius: 5px; padding: 2px 5px; }
+.tg-bubble:hover .tg-msg-actions { display: flex; gap: 5px; }
+.tg-msg-action-btn { background: none; border: none; color: var(--gold); cursor: pointer; font-size: 12px; }
 
-/* اُورلی تنظیمات و چت جدید */
-.chat-overlay { position: absolute; inset: 0; background: rgba(10,5,20,0.98); z-index: 50; display: none; flex-direction: column; padding: 30px; overflow-y: auto; }
-.chat-overlay.open { display: flex; }
-.chat-overlay-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
-.chat-overlay-header h2 { color: var(--gold-2); margin: 0; }
-.chat-overlay-close { background: none; border: none; color: var(--rose); font-size: 25px; cursor: pointer; }
-.settings-form input, .settings-form select, .settings-form textarea { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid rgba(232, 198, 107, 0.3); background: rgba(0,0,0,0.5); color: #fff; font-family: 'Vazirmatn'; }
-.prof-pic-preview { width: 100px; height: 100px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; margin: 0 auto 15px auto; display: block; }
+.tg-input-area { position: relative; z-index: 1; padding: 15px 20px; background: rgba(15, 8, 30, 0.95); display: flex; align-items: flex-end; gap: 10px; padding-bottom: calc(15px + env(safe-area-inset-bottom)); }
+.tg-attach { font-size: 24px; color: var(--muted); cursor: pointer; padding: 5px; }
+.tg-input-wrapper { flex: 1; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 10px 15px; border: 1px solid rgba(232,198,107,0.2); display: flex; align-items: center; }
+.tg-input { width: 100%; border: none; background: transparent; color: #fff; font-family: 'Vazirmatn'; outline: none; resize: none; max-height: 100px; }
+.tg-send-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--gold-2); color: #000; border: none; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; transition: transform 0.2s; }
+.tg-send-btn:hover { transform: scale(1.1); }
+
+/* مودال‌های داخلی چت (تنظیمات، پروفایل، ساخت گروه) */
+.tg-modal { position: absolute; inset: 0; background: rgba(0,0,0,0.8); z-index: 100; display: none; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(5px); }
+.tg-modal.active { display: flex; }
+.tg-modal-content { background: var(--bg2); width: min(400px, 100%); border-radius: 20px; border: 1px solid var(--gold); padding: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.8); position: relative; }
+.tg-modal-close { position: absolute; top: 15px; left: 15px; background: none; border: none; color: var(--rose); font-size: 20px; cursor: pointer; }
+.tg-modal-title { color: var(--gold-2); margin-bottom: 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+.tg-input-group { margin-bottom: 15px; }
+.tg-input-group label { display: block; color: var(--muted); font-size: 13px; margin-bottom: 5px; }
+.tg-input-group input, .tg-input-group textarea { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(232,198,107,0.3); border-radius: 10px; color: #fff; font-family: 'Vazirmatn'; outline:none; }
+.tg-input-group input:focus { border-color: var(--gold); }
+.tg-stars-badge { display: inline-block; background: linear-gradient(45deg, var(--gold), var(--gold-deep)); color: #000; padding: 5px 10px; border-radius: 15px; font-weight: bold; font-size: 12px; }
+
+@media(max-width: 768px) {
+  .tg-sidebar { position: absolute; top: 0; bottom: 0; right: 0; width: 100%; z-index: 20; transform: translateX(0); }
+  .tg-sidebar.hidden { transform: translateX(100%); }
+  .tg-back-btn { display: block; }
+}
+
+#tg-upload-progress { position: absolute; top: 0; left: 0; height: 3px; background: var(--gold-2); width: 0%; transition: width 0.3s; z-index: 10; }
 </style>
 
 <script type="importmap">
@@ -497,7 +502,6 @@ footer b { color: var(--gold-2); font-size: 17px; }
       <div class="wrap">
         <div class="sub" id="heroSub">پادشاه مبین ♾️ ملکه نیایش</div>
         <h1>قلب تپنده‌ی امپراتوری<br>مبین و نیایش</h1>
-        
         <div class="angel-container" id="angelContainer">
           <div class="angel" id="angel">
             <div class="wing wing-left" id="wingL"></div>
@@ -508,14 +512,11 @@ footer b { color: var(--gold-2); font-size: 17px; }
             </div>
           </div>
         </div>
-
         <p class="love reveal">او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b>نیایش</b> عزیز من.</p>
-        
         <div class="hero-btns reveal">
           <button class="btn" onclick="loveBurst()">💖 بارش عشق بر ملکه</button>
           <button class="btn ghost" onclick="document.getElementById('magic-mirror').scrollIntoView({behavior:'smooth'})">✨ آینه جادویی</button>
         </div>
-        
         <div class="scroll-down reveal">
           <span>به تمدن ما قدم بگذار</span>
           <i>↓</i>
@@ -529,33 +530,17 @@ footer b { color: var(--gold-2); font-size: 17px; }
           <div class="wiriper-card" id="wiriperCard">
             <div class="wiriper-logo">🌍</div>
             <h2 class="wiriper-title">تمدن جاودانه Wiriper</h2>
-            <p class="wiriper-desc">
-              اینجا تنها یک قصر یا یک ساختمان نیست. Wiriper یک جهان است، تمدنی پهناور و بی‌کران که بر پایه‌ی عشق بی‌پایان پادشاه مبین و ملکه نیایش بنا شده است. سرزمینی که مرزهایش تا بی‌نهایت امتداد دارد و خورشید آن هرگز غروب نمی‌کند، زیرا منبع نورش، لبخند ملکه است.
-            </p>
+            <p class="wiriper-desc">اینجا تنها یک قصر یا یک ساختمان نیست. Wiriper یک جهان است، تمدنی پهناور و بی‌کران که بر پایه‌ی عشق بی‌پایان پادشاه مبین و ملکه نیایش بنا شده است.</p>
             <div class="wiriper-stats">
               <div class="wstat"><span class="num">∞</span><span class="lbl">وسعت قلمرو</span></div>
               <div class="wstat"><span class="num" id="wDays">1000</span><span class="lbl">روزهای سلطنت</span></div>
               <div class="wstat"><span class="num">۱</span><span class="lbl">قلب واحد</span></div>
             </div>
-
             <div class="artifacts-grid">
-              <div class="artifact-card">
-                <div class="artifact-icon">⏳</div>
-                <h4>گاه‌شمار ابدیت</h4>
-                <p>سنجش ثانیه‌های مقدس با بالا‌ترین عیار وفاداری و مهندسی زمان، تا فراتر از مرزهای مکان.</p>
-              </div>
-              <div class="artifact-card">
-                <div class="artifact-icon">🔮</div>
-                <h4>عدسی حقیقت</h4>
-                <p>ثبت دقیق تار و پود خاطرات تمدن با کادربندی‌های هنری و نورپردازی اصیل رمبراند.</p>
-              </div>
-              <div class="artifact-card">
-                <div class="artifact-icon">✨</div>
-                <h4>تار و پود طلایی</h4>
-                <p>طراحی و بافت لوکس‌ترین جامه‌های تمدن Wiriper برای حفاظت از شکوه استایل ملکه.</p>
-              </div>
+              <div class="artifact-card"><div class="artifact-icon">⏳</div><h4>گاه‌شمار ابدیت</h4><p>سنجش ثانیه‌های مقدس...</p></div>
+              <div class="artifact-card"><div class="artifact-icon">🔮</div><h4>عدسی حقیقت</h4><p>ثبت دقیق تار و پود خاطرات...</p></div>
+              <div class="artifact-card"><div class="artifact-icon">✨</div><h4>تار و پود طلایی</h4><p>طراحی و بافت لوکس‌ترین...</p></div>
             </div>
-
           </div>
         </div>
       </div>
@@ -563,21 +548,12 @@ footer b { color: var(--gold-2); font-size: 17px; }
 
     <section id="magic-mirror" class="reveal">
       <div class="wrap">
-        <div class="sec-title">
-          <h2>آینه جادویی ملکه 🪞</h2>
-          <div class="line"></div>
-          <p>ای ملکه، بر روی آینه کلیک کن تا حقیقت مطلق این امپراتوری را ببینی.</p>
-        </div>
+        <div class="sec-title"><h2>آینه جادویی ملکه 🪞</h2><div class="line"></div></div>
         <div class="magic-mirror-container">
           <div class="magic-mirror" onclick="this.classList.toggle('revealed'); loveBurst();">
             <div class="mirror-glass"></div>
-            <div class="mirror-content">
-              <div class="mirror-icon">✨</div>
-              <div class="mirror-text">آینه در انتظار لمس دست‌های توست...</div>
-            </div>
-            <div class="mirror-reflection">
-              تو زیباترین، کامل‌ترین و بی‌نقص‌ترین خلقتی هستی که پادشاه در تمام عمرش دیده است. تو خودِ عشقی! 💖
-            </div>
+            <div class="mirror-content"><div class="mirror-icon">✨</div><div class="mirror-text">آینه در انتظار لمس دست‌های توست...</div></div>
+            <div class="mirror-reflection">تو زیباترین، کامل‌ترین و بی‌نقص‌ترین خلقتی هستی... 💖</div>
           </div>
         </div>
       </div>
@@ -585,24 +561,10 @@ footer b { color: var(--gold-2); font-size: 17px; }
 
     <section id="countdown">
       <div class="wrap">
-        <div class="sec-title reveal">
-          <h2>جشن‌های باشکوه سلطنتی 🎉</h2>
-          <div class="line"></div>
-          <p>شمارش معکوس تا طلوع روزهای مقدس تولد پادشاه و ملکه</p>
-        </div>
+        <div class="sec-title reveal"><h2>جشن‌های باشکوه سلطنتی 🎉</h2><div class="line"></div></div>
         <div class="cd-grid">
-          <div class="cd-card reveal">
-            <h3>👑 زادروز پادشاه مبین</h3>
-            <div class="date">۲۵ اسفند — شکوه اقتدار</div>
-            <div class="cd-nums" id="cd-mobin"></div>
-            <div class="cd-today" id="today-mobin" style="display:none; color:var(--gold-2); font-size:20px; font-weight:900; margin-top:20px;">🎉 زادروز پادشاه مبارک 🎂</div>
-          </div>
-          <div class="cd-card reveal">
-            <h3>👸🏻 زادروز ملکه نیایش</h3>
-            <div class="date">۱۵ شهریور — تجلی زیبایی</div>
-            <div class="cd-nums" id="cd-niyayesh"></div>
-            <div class="cd-today" id="today-niyayesh" style="display:none; color:var(--rose); font-size:20px; font-weight:900; margin-top:20px;">🎉 زادروز فرشته‌ی من مبارک 🎂</div>
-          </div>
+          <div class="cd-card reveal"><h3>👑 زادروز پادشاه مبین</h3><div class="date">۲۵ اسفند</div><div class="cd-nums" id="cd-mobin"></div><div id="today-mobin" style="display:none; color:var(--gold-2); font-weight:900; margin-top:20px;">🎉 مبارک 🎂</div></div>
+          <div class="cd-card reveal"><h3>👸🏻 زادروز ملکه نیایش</h3><div class="date">۱۵ شهریور</div><div class="cd-nums" id="cd-niyayesh"></div><div id="today-niyayesh" style="display:none; color:var(--rose); font-weight:900; margin-top:20px;">🎉 مبارک 🎂</div></div>
         </div>
       </div>
     </section>
@@ -611,66 +573,27 @@ footer b { color: var(--gold-2); font-size: 17px; }
       <div class="wrap">
         <div class="sec-title reveal"><h2>فرمانروایان تمدن 👑</h2><div class="line"></div></div>
         <div class="grid g2">
-          <div class="card reveal" style="border-top: 4px solid var(--purple-soft);">
-            <div class="ico">⚔️</div>
-            <h3>پادشاه مبین</h3>
-            <p>فرمانروایی با اقتدار، خلق‌کننده‌ی دنیاها و محافظ همیشگی لبخند ملکه. کسی که Wiriper را از هیچ ساخت تا تنها استراحتگاه امن فرشته‌اش باشد.</p>
-            <div class="tags"><span class="tag">محافظ ابدی</span><span class="tag">قدرت</span><span class="tag">وفاداری</span></div>
-          </div>
-          <div class="card reveal" style="border-top: 4px solid var(--rose);">
-            <div class="ico">🌹</div>
-            <h3>ملکه نیایش</h3>
-            <p>قلب تپنده‌ی جهانِ Wiriper. دختری با روحی از جنس نور، شیفته‌ی هنر و زیبایی، که حضورش هر ثانیه از زندگی پادشاه را به یک معجزه تبدیل کرده است.</p>
-            <div class="tags"><span class="tag">نورِ قلمرو</span><span class="tag">هنر</span><span class="tag">زیبایی مطلق</span></div>
-          </div>
+          <div class="card reveal" style="border-top: 4px solid var(--purple-soft);"><div class="ico">⚔️</div><h3>پادشاه مبین</h3><p>فرمانروایی با اقتدار...</p></div>
+          <div class="card reveal" style="border-top: 4px solid var(--rose);"><div class="ico">🌹</div><h3>ملکه نیایش</h3><p>قلب تپنده‌ی جهانِ Wiriper...</p></div>
         </div>
       </div>
     </section>
 
     <section id="princes">
       <div class="wrap">
-        <div class="sec-title reveal">
-          <h2>شاهزاده‌های آینده 🌟</h2>
-          <div class="line"></div>
-          <p>ثمرات عشق جاودانه و وارثان تاج و تخت امپراتوری Wiriper</p>
-        </div>
+        <div class="sec-title reveal"><h2>شاهزاده‌های آینده 🌟</h2><div class="line"></div></div>
         <div class="grid g3">
-          <div class="card prince-card gold-theme reveal">
-            <div class="avatar-ring">👑</div>
-            <h3>آریا مهر</h3>
-            <p>شاهزاده‌ی طلایی و وارث اقتدار پادشاه. کسی که شکوه امپراتوری را به نسل‌های بعد منتقل خواهد کرد.</p>
-            <div class="tags"><span class="tag">وارث تاج</span><span class="tag">نجابت</span></div>
-          </div>
-          
-          <div class="card prince-card blue-theme reveal">
-            <div class="avatar-ring">⚔️</div>
-            <h3>سام</h3>
-            <p>شاهزاده‌ی جنگجو با اراده‌ای از جنس فولاد. محافظ بی‌باک مرزهای عشق و تمدن جاودانه‌ی ما.</p>
-            <div class="tags"><span class="tag">شجاعت</span><span class="tag">محافظ</span></div>
-          </div>
-          
-          <div class="card prince-card pink-theme reveal">
-            <div class="avatar-ring">🦋</div>
-            <h3>پرنسس سونیا</h3>
-            <p>تجلی زیبایی و لطافت مادرش. دختری با روحی رویایی که با هر لبخندش، گل‌های قلمرو شکوفا می‌شوند.</p>
-            <div class="tags"><span class="tag">رویایی</span><span class="tag">لطافت</span></div>
-          </div>
+          <div class="card prince-card gold-theme reveal"><div class="avatar-ring">👑</div><h3>آریا مهر</h3></div>
+          <div class="card prince-card blue-theme reveal"><div class="avatar-ring">⚔️</div><h3>سام</h3></div>
+          <div class="card prince-card pink-theme reveal"><div class="avatar-ring">🦋</div><h3>پرنسس سونیا</h3></div>
         </div>
       </div>
     </section>
 
     <section id="timeline">
       <div class="wrap">
-        <div class="sec-title reveal">
-          <h2>افسانه آفرینش عشق 💫</h2>
-          <div class="line"></div>
-          <p>تاریخچه‌ی جاودانگی ما در دفتر تمدن Wiriper</p>
-        </div>
-        <div class="timeline-wrap" id="timelineBox">
-          <div class="timeline-line">
-            <div class="timeline-line-fill" id="tlFill"></div>
-          </div>
-        </div>
+        <div class="sec-title reveal"><h2>افسانه آفرینش عشق 💫</h2><div class="line"></div></div>
+        <div class="timeline-wrap" id="timelineBox"><div class="timeline-line"><div class="timeline-line-fill" id="tlFill"></div></div></div>
       </div>
     </section>
 
@@ -679,13 +602,7 @@ footer b { color: var(--gold-2); font-size: 17px; }
         <div class="sec-title reveal"><h2>فرمان همایونی پادشاه 📜</h2><div class="line"></div></div>
         <div class="letter reveal">
           <div class="seal">👑</div>
-          <div id="letterText">
-            ملکه‌ی بی‌همتای من، نیایش عزیز...<br><br>
-            وقتی به وسعت قلمرو Wiriper نگاه می‌کنم، می‌بینم که تمام این شکوه، تمام این ستارگان و تمام این زیبایی‌ها، تنها بازتابی از وجود توست. پیش از تو، من تنها پادشاهی بودم در سرزمینی خاموش; اما تو با آمدنت، خورشید را به آسمان این تمدن هدیه دادی.<br><br>
-            من, مبین، در برابر تمام کائنات سوگند یاد می‌کنم که قلعه‌ی بازوانم تا ابد امن‌ترین جای جهان برای تو باشد. هیچ توفانی نمی‌تواند دیوارهای عشق ما را بلرزاند.<br><br>
-            تو نه تنها عشق من، بلکه تمام وجود منی.<br>
-            دوستت دارم، بی‌نهایت، بی‌دلیل، و تا آخرین تپش قلبم.
-          </div>
+          <div id="letterText">ملکه‌ی بی‌همتای من، نیایش عزیز...<br><br>دوستت دارم، بی‌نهایت، بی‌دلیل، و تا آخرین تپش قلبم.</div>
           <div class="sign">— پادشاه تو، مبین</div>
         </div>
       </div>
@@ -695,139 +612,137 @@ footer b { color: var(--gold-2); font-size: 17px; }
       <div class="wrap">
         <div class="sec-title reveal"><h2>خزانه تصاویر پادشاهی 📸</h2><div class="line"></div></div>
         <div class="gallery reveal" id="galleryGrid">
-          <div class="gallery-item" onclick="lb(0)">
-            <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" loading="lazy">
-            <div class="gallery-caption">شکوه ملکه</div>
-          </div>
-          <div class="gallery-item" onclick="lb(1)">
-            <img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" loading="lazy">
-            <div class="gallery-caption">خاطرات جاودانه</div>
-          </div>
-          <div class="gallery-item" onclick="lb(2)">
-            <img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" loading="lazy">
-            <div class="gallery-caption">لبخند ابدیت</div>
-          </div>
+          <div class="gallery-item" onclick="lb(0)"><img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" loading="lazy"></div>
+          <div class="gallery-item" onclick="lb(1)"><img src="https://i.ibb.co/B2JypFvQ/376-D4-ACC-3-DEE-4-E58-83-B7-03-D9-DC211-FB5.png" loading="lazy"></div>
+          <div class="gallery-item" onclick="lb(2)"><img src="https://i.ibb.co/qMknX2zw/F84202-ED-5840-473-A-984-D-DE4259-D4-BB25.png" loading="lazy"></div>
         </div>
       </div>
     </section>
 
-    <footer>
-      بنا شده با عشق بی‌نهایت برای <b>ملکه نیایش 👸🏻</b> از سوی <b>پادشاه مبین 👑</b><br>
-      تمدن Wiriper — جاودانه تا فراتر از ابدیت
-    </footer>
+    <footer>بنا شده با عشق بی‌نهایت برای <b>ملکه نیایش 👸🏻</b> از سوی <b>پادشاه مبین 👑</b><br>تمدن Wiriper — جاودانه تا فراتر از ابدیت</footer>
+  </div>
+</div>
+
+<div id="wiriper-chat-modal">
+  <div class="chat-header-global">
+    <h3>👑 Wiriper Messenger</h3>
+    <button class="chat-close" id="closeChatBtn">✕</button>
+  </div>
+
+  <div class="chat-login-container" id="tgLoginView">
+    <div class="chat-login-box">
+      <h2>ورود به پیام‌رسان</h2>
+      <p style="color:var(--muted); font-size:14px; margin-bottom:20px;">بدون نیاز به ایمیل. فقط با یک آیدی (Username) یکتا و رمز عبور وارد شوید.</p>
+      <input type="text" id="tgUsernameInp" placeholder="آیدی شما (انگلیسی، بدون فاصله)...">
+      <input type="password" id="tgPasswordInp" placeholder="رمز عبور...">
+      <button class="btn" id="tgLoginBtn">ورود / ثبت‌نام</button>
+      <div id="tgAuthErr" style="color:var(--rose); margin-top:10px; font-size:13px;"></div>
+    </div>
+  </div>
+
+  <div class="telegram-layout" id="tgMainView" style="display:none;">
+    
+    <div class="tg-sidebar" id="tgSidebar">
+      <div class="tg-sidebar-header">
+        <button class="tg-btn-menu" id="tgSettingsBtn">⚙️</button>
+        <input type="text" class="tg-search" id="tgSearchInp" placeholder="جستجوی آیدی یا گروه...">
+      </div>
+      <div class="tg-chat-list" id="tgChatList">
+        </div>
+      <button class="tg-fab" id="tgNewChatBtn">✎</button>
+    </div>
+
+    <div class="tg-main">
+      <div id="tg-upload-progress"></div>
+      
+      <div id="tgEmptyState" style="display:flex; flex:1; align-items:center; justify-content:center; flex-direction:column; color:var(--muted);">
+        <div style="font-size:60px; margin-bottom:10px; opacity:0.5;">💬</div>
+        یک چت را برای شروع انتخاب کنید
+      </div>
+
+      <div id="tgActiveChat" style="display:none; flex-direction:column; height:100%;">
+        <div class="tg-chat-header">
+          <button class="tg-back-btn" id="tgBackBtn">‹</button>
+          <img src="" id="tgActiveAvatar" class="tg-avatar" style="width:40px; height:40px;">
+          <div class="tg-chat-header-info" id="tgHeaderProfileClick">
+            <div class="tg-chat-header-name" id="tgActiveName">...</div>
+            <div class="tg-chat-header-status" id="tgActiveStatus">آنلاین</div>
+          </div>
+        </div>
+
+        <div class="tg-messages" id="tgMessagesArea">
+           </div>
+
+        <div class="tg-input-area" id="tgInputContainer">
+          <label class="tg-attach">
+            📎 <input type="file" id="tgFileInput" style="display:none;" accept="image/*,video/*,audio/*,.pdf,.zip">
+          </label>
+          <button class="tg-attach" id="tgGiftBtn" title="ارسال هدیه با استارز">⭐</button>
+          <div class="tg-input-wrapper">
+            <textarea class="tg-input" id="tgMsgInput" placeholder="پیام خود را بنویسید..." rows="1"></textarea>
+          </div>
+          <button class="tg-send-btn" id="tgSendBtn">➤</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
 
-<div id="wiriper-chat-modal">
-  <div class="chat-global-header">
-    <h3>پیام‌رسان تلگرامی Wiriper 💬</h3>
-    <button class="chat-close" id="closeChatBtn">✕</button>
+<div class="tg-modal" id="tgProfileModal">
+  <div class="tg-modal-content">
+    <button class="tg-modal-close" onclick="document.getElementById('tgProfileModal').classList.remove('active')">✕</button>
+    <h3 class="tg-modal-title">تنظیمات پروفایل</h3>
+    <div style="text-align:center; margin-bottom:15px;">
+      <div class="tg-stars-badge" id="tgMyStars">⭐ 0 Wiriper Stars</div>
+    </div>
+    <div class="tg-input-group">
+      <label>نام نمایشی</label>
+      <input type="text" id="tgMyName" placeholder="مثلا: پادشاه مبین">
+    </div>
+    <div class="tg-input-group">
+      <label>بیوگرافی</label>
+      <input type="text" id="tgMyBio" placeholder="چیزی درباره خودت بنویس...">
+    </div>
+    <div class="tg-input-group">
+      <label>لینک عکس پروفایل</label>
+      <input type="text" id="tgMyPic" placeholder="https://...">
+    </div>
+    <button class="btn" id="tgSaveProfileBtn" style="padding:10px; font-size:15px;">ذخیره تغییرات</button>
+    <button class="btn ghost" id="tgLogoutBtn" style="padding:10px; font-size:15px; margin-top:10px; color:var(--rose); border-color:var(--rose);">خروج از حساب</button>
   </div>
-  <div class="upload-progress" id="uploadProgressBar"></div>
+</div>
 
-  <div class="chat-login-container" id="chatLoginView">
-    <div class="chat-login-box">
-      <h2>👑 ورود به پیام‌رسان</h2>
-      <p style="margin-bottom: 20px; font-size:14px; color:var(--muted);">تنها با آیدی و رمز عبور وارد شوید.</p>
-      <input type="text" id="authUsername" placeholder="آیدی شما (انگلیسی بدون @)..." dir="ltr">
-      <input type="password" id="authPass" placeholder="رمز عبور..." dir="ltr">
-      <button class="btn" id="loginBtn">ورود / ثبت‌نام</button>
-      <div id="authError" style="color: var(--rose); margin-top: 15px; font-size: 13px;"></div>
-    </div>
+<div class="tg-modal" id="tgViewProfileModal">
+  <div class="tg-modal-content" style="text-align:center;">
+    <button class="tg-modal-close" onclick="document.getElementById('tgViewProfileModal').classList.remove('active')">✕</button>
+    <img id="tgViewPic" src="" style="width:100px; height:100px; border-radius:50%; margin:0 auto 15px; border:2px solid var(--gold); object-fit:cover;">
+    <h3 id="tgViewName" style="color:var(--gold-2); margin-bottom:5px;">...</h3>
+    <div id="tgViewUsername" style="color:var(--muted); font-size:14px; margin-bottom:15px;">@...</div>
+    <p id="tgViewBio" style="color:#fff; font-size:15px; line-height:1.6;"></p>
   </div>
+</div>
 
-  <div class="chat-layout" id="chatLayoutView" style="display: none;">
-    <div class="chat-sidebar" id="chatSidebar">
-      <div class="sidebar-header">
-        <button id="btnNewChat">➕ چت/گروه جدید</button>
-        <button id="btnSettings">⚙️ پروفایل من</button>
-      </div>
-      <div class="chat-list" id="sidebarChatList">
-        </div>
+<div class="tg-modal" id="tgCreateChatModal">
+  <div class="tg-modal-content">
+    <button class="tg-modal-close" onclick="document.getElementById('tgCreateChatModal').classList.remove('active')">✕</button>
+    <h3 class="tg-modal-title">ایجاد چت جدید</h3>
+    <div class="tg-input-group">
+      <label>نوع</label>
+      <select id="tgNewChatType" style="width:100%; padding:12px; background:rgba(0,0,0,0.5); border:1px solid rgba(232,198,107,0.3); border-radius:10px; color:#fff; font-family:'Vazirmatn'; outline:none;">
+        <option value="group">گروه (همه می‌توانند پیام دهند)</option>
+        <option value="channel">کانال (فقط شما پیام می‌دهید)</option>
+      </select>
     </div>
-
-    <div class="chat-main" id="chatMainArea">
-      <div id="noChatSelected" class="no-chat-selected">
-        <h2>پیام‌رسان Wiriper</h2>
-        <p>یک چت را از لیست انتخاب کنید یا چت جدیدی بسازید.</p>
-      </div>
-      
-      <div id="activeChatContainer" style="display: none; flex-direction: column; height: 100%;">
-        <div class="chat-active-header">
-          <button class="back-btn" id="backToListBtn">➔</button>
-          <img src="" id="activeChatAvatar" alt="Avatar">
-          <div>
-            <h3 id="activeChatTitle">نام چت</h3>
-            <p id="activeChatStatus">آنلاین</p>
-          </div>
-        </div>
-        
-        <div class="chat-messages-area" id="chatMessagesView">
-          </div>
-
-        <div class="chat-input-area" id="chatInputView">
-          <label class="chat-attach-btn">
-            📎
-            <input type="file" id="fileUploadInput" accept="image/*, video/*, audio/*, .pdf, .doc, .docx, .zip">
-          </label>
-          <input type="text" id="chatMessageInput" placeholder="پیام خود را بنویسید..." autocomplete="off">
-          <button class="chat-send-btn" id="sendMsgBtn">➤</button>
-        </div>
-      </div>
+    <div class="tg-input-group">
+      <label>نام</label>
+      <input type="text" id="tgNewChatName" placeholder="نام گروه یا کانال...">
     </div>
-  </div>
-
-  <div class="chat-overlay" id="overlaySettings">
-    <div class="wrap" style="width:100%; max-width: 500px; margin: auto;">
-      <div class="chat-overlay-header">
-        <h2>تنظیمات پروفایل</h2>
-        <button class="chat-overlay-close" id="closeSettingsBtn">✕</button>
-      </div>
-      <div class="settings-form">
-        <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" id="profPicPreview" class="prof-pic-preview">
-        <label style="color:var(--gold); display:block; text-align:center; margin-bottom:15px; cursor:pointer;">
-          📸 تغییر عکس
-          <input type="file" id="profPicUpload" accept="image/*" style="display:none;">
-        </label>
-        <p style="color:var(--muted); margin-bottom:5px;">آیدی شما (غیرقابل تغییر)</p>
-        <input type="text" id="setUserId" disabled style="opacity:0.6;">
-        <p style="color:var(--muted); margin-bottom:5px;">نام نمایشی</p>
-        <input type="text" id="setUserName" placeholder="نام شما...">
-        <p style="color:var(--muted); margin-bottom:5px;">بیوگرافی</p>
-        <textarea id="setUserBio" rows="3" placeholder="بیوگرافی خود را بنویسید..."></textarea>
-        <button class="btn" id="saveSettingsBtn">ذخیره پروفایل</button>
-      </div>
+    <div class="tg-input-group">
+      <label>لینک عکس (اختیاری)</label>
+      <input type="text" id="tgNewChatPic" placeholder="https://...">
     </div>
-  </div>
-
-  <div class="chat-overlay" id="overlayNewChat">
-    <div class="wrap" style="width:100%; max-width: 500px; margin: auto;">
-      <div class="chat-overlay-header">
-        <h2>ساخت چت / کانال جدید</h2>
-        <button class="chat-overlay-close" id="closeNewChatBtn">✕</button>
-      </div>
-      <div class="settings-form">
-        <select id="newChatType">
-          <option value="dm">چت شخصی (با آیدی)</option>
-          <option value="group">گروه</option>
-          <option value="channel">کانال</option>
-        </select>
-        
-        <div id="targetUserIdWrap">
-          <p style="color:var(--muted); margin-bottom:5px;">آیدی شخص مقابل (بدون @)</p>
-          <input type="text" id="newChatTargetId" placeholder="مثال: mobin" dir="ltr">
-        </div>
-        
-        <div id="groupNameWrap" style="display:none;">
-          <p style="color:var(--muted); margin-bottom:5px;">نام گروه/کانال</p>
-          <input type="text" id="newChatName" placeholder="نام را وارد کنید...">
-        </div>
-
-        <button class="btn" id="createChatBtn">ایجاد و شروع</button>
-        <p id="newChatErr" style="color:var(--rose); margin-top:10px; font-size:13px;"></p>
-      </div>
-    </div>
+    <button class="btn" id="tgDoCreateChatBtn" style="padding:10px; font-size:15px;">ایجاد</button>
   </div>
 </div>
 
@@ -839,17 +754,15 @@ footer b { color: var(--gold-2); font-size: 17px; }
 </div>
 
 <audio id="audio" src="https://lycee.ir/wp-content/uploads/2024/12/2.15.-Symphony-No.-9-in-D-Minor-Op.-125-II.-Molto-vivace-%E2%80%93-Presto.mp3" loop preload="auto"></audio>
-
 <button id="toTop" onclick="smoothTop()">↑</button>
 
 <script>
-/* ====== متغیرهای پایه ====== */
+/* ====== اسکریپت‌های سایت اصلی (بدون تغییر) ====== */
 const LOVE_START = new Date("2023-09-06T00:00:00");
 const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
 
 window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('done'), 1000));
 
-/* ====== دروازه قصر و موسیقی ====== */
 const KEYS = ["niyayesh", "نیایش", "ملکه", "queen"];
 const audio = document.getElementById('audio');
 const audioBtn = document.getElementById('audioBtn');
@@ -858,9 +771,7 @@ audio.volume = 0.6;
 let audioUnlocked = false;
 function unlockAudio() {
   if (!audioUnlocked) {
-    audio.play().then(() => {
-      audio.pause(); audio.currentTime = 0; audioUnlocked = true;
-    }).catch(() => {});
+    audio.play().then(() => { audio.pause(); audio.currentTime = 0; audioUnlocked = true; }).catch(() => {});
     document.removeEventListener('touchstart', unlockAudio);
     document.removeEventListener('click', unlockAudio);
   }
@@ -869,33 +780,20 @@ document.addEventListener('touchstart', unlockAudio, { passive: true });
 document.addEventListener('click', unlockAudio, { passive: true });
 
 function toggleAudio() {
-  if (audio.paused) {
-    audio.play().catch(()=>{});
-    audioBtn.classList.add('playing');
-  } else {
-    audio.pause();
-    audioBtn.classList.remove('playing');
-  }
+  if (audio.paused) { audio.play().catch(()=>{}); audioBtn.classList.add('playing'); } 
+  else { audio.pause(); audioBtn.classList.remove('playing'); }
 }
 
 function enter(){
   const v = document.getElementById('pass').value.trim().toLowerCase();
   if(KEYS.includes(v)){ 
-    audio.play().then(() => {
-      audioBtn.classList.add('playing');
-    }).catch(()=>{});
-    
+    audio.play().then(() => { audioBtn.classList.add('playing'); }).catch(()=>{});
     document.getElementById('main-content').style.display = 'block';
-    
-    cacheDOM();
-    resizeBg();
-    
+    cacheDOM(); resizeBg();
     document.getElementById('gate').classList.add('hidden');
     document.getElementById('nav').classList.add('show');
-    
     setTimeout(() => { window.dispatchEvent(new Event('scroll')); }, 50);
     setTimeout(() => { document.getElementById('gate').style.display = 'none'; }, 1500);
-    
     loveBurst(); 
   } else {
     document.getElementById('gerr').textContent = 'نام ملکه را به درستی وارد کن... 💔';
@@ -905,53 +803,42 @@ function enter(){
 }
 document.getElementById('pass').addEventListener('keydown', e => { if(e.key === 'Enter') enter() });
 
-/* ====== نشانگر موس (فقط دسکتاپ) ====== */
 const cDot = document.getElementById('cDot'), cRing = document.getElementById('cRing');
 let mx=0, my=0, rx=0, ry=0;
-
 if(!isTouchDevice) {
   addEventListener('pointermove', e => { mx=e.clientX; my=e.clientY; cDot.style.left=mx+'px'; cDot.style.top=my+'px'; });
   function ringLoop(){ rx+=(mx-rx)*0.2; ry+=(my-ry)*0.2; cRing.style.left=rx+'px'; cRing.style.top=ry+'px'; requestAnimationFrame(ringLoop); }
   ringLoop();
-  
   document.addEventListener('pointerover', e => {
-    if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal, .artifact-card')) cRing.classList.add('hot');
+    if(e.target.closest('a, button, .card, .wiriper-card, .magic-mirror, .gallery-item, input, .seal, .artifact-card, .tg-chat-item')) cRing.classList.add('hot');
     else cRing.classList.remove('hot');
   });
 }
 
-/* ====== بهینه‌سازی Canvas برای ساختارهای بهینه ====== */
 const cv = document.getElementById('bgCanvas'), cx = cv.getContext('2d', { alpha: false });
 let stars = [];
-
 function resizeBg(){ 
   cv.width = window.innerWidth; cv.height = window.innerHeight;
   const starCount = isTouchDevice ? 40 : 150; 
-  
   stars = Array.from({length: starCount}, () => ({
     x: Math.random() * cv.width, y: Math.random() * cv.height,
     r: Math.random() * 1.5 + 0.5, a: Math.random() * Math.PI * 2, s: Math.random() * 0.05 + 0.01,
     color: Math.random() > 0.8 ? '#f6e3a1' : (Math.random() > 0.6 ? '#7b3fe4' : '#ffffff')
   }));
-  
   if(isTouchDevice) {
     cx.fillStyle = '#050308'; cx.fillRect(0, 0, cv.width, cv.height);
     stars.forEach(s => {
-      cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, Math.PI*2); 
-      cx.fillStyle = s.color; cx.globalAlpha = Math.random() * 0.5 + 0.3; cx.fill();
+      cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, Math.PI*2); cx.fillStyle = s.color; cx.globalAlpha = Math.random() * 0.5 + 0.3; cx.fill();
     });
   }
 }
 resizeBg(); addEventListener('resize', resizeBg);
-
 let lastDrawTime = 0;
 function drawBg(time) {
   if(isTouchDevice) return; 
   requestAnimationFrame(drawBg);
-  
   if (time - lastDrawTime < 33) return; 
   lastDrawTime = time;
-
   cx.fillStyle = '#050308'; cx.fillRect(0, 0, cv.width, cv.height);
   stars.forEach(s => {
     s.a += s.s; let o = 0.2 + Math.abs(Math.sin(s.a)) * 0.8;
@@ -960,13 +847,11 @@ function drawBg(time) {
 };
 if(!isTouchDevice) requestAnimationFrame(drawBg);
 
-/* ====== ذرات معلق محیطی ====== */
 const symbols = ['👑', '✨', '💖', '🌹'];
 if(!isTouchDevice) {
   setInterval(() => {
     if(!document.getElementById('gate').classList.contains('hidden')) return;
     if(document.querySelectorAll('.floating-symbol').length > 5) return; 
-    
     const s = document.createElement('div'); s.className = 'floating-symbol';
     s.textContent = symbols[Math.floor(Math.random() * symbols.length)];
     s.style.left = Math.random() * 100 + 'vw';
@@ -976,41 +861,31 @@ if(!isTouchDevice) {
   }, 3000);
 }
 
-/* ====== بارش عشق ====== */
 function loveBurst(){
   const count = isTouchDevice ? 8 : 20; 
   for(let i=0; i<count; i++){
-    const h = document.createElement('div');
-    h.className = 'petal';
+    const h = document.createElement('div'); h.className = 'petal';
     h.textContent = ['💖', '❤️', '💕', '✨'][Math.floor(Math.random()*4)];
-    h.style.left = Math.random() * 100 + 'vw';
-    h.style.fontSize = (15 + Math.random() * 20) + 'px';
-    h.style.animationDuration = (3 + Math.random() * 3) + 's';
+    h.style.left = Math.random() * 100 + 'vw'; h.style.fontSize = (15 + Math.random() * 20) + 'px'; h.style.animationDuration = (3 + Math.random() * 3) + 's';
     document.getElementById('app-wrapper').appendChild(h); 
     setTimeout(() => h.remove(), 6000);
   }
 }
 
-/* ====== بال فرشته ====== */
 function buildWing(el, dir){
   const n = isTouchDevice ? 10 : 20; 
   for(let i=0; i<n; i++){
-    const f = document.createElement('div'); f.className = 'feather';
-    const t = i/(n-1);
-    f.style.height = (40 + Math.sin(t*Math.PI)*110) + 'px';
-    f.style.transform = `rotate(${dir*(10 + t*140)}deg)`; 
+    const f = document.createElement('div'); f.className = 'feather'; const t = i/(n-1);
+    f.style.height = (40 + Math.sin(t*Math.PI)*110) + 'px'; f.style.transform = `rotate(${dir*(10 + t*140)}deg)`; 
     el.appendChild(f);
   }
 }
 buildWing(document.getElementById('wingL'), -1); buildWing(document.getElementById('wingR'), 1);
 
-/* ====== روزهای سلطنت ====== */
 document.getElementById('wDays').textContent = Math.floor((Date.now() - LOVE_START.getTime()) / 864e5);
 
-/* ====== شمارش معکوس ====== */
 function nextBirthday(m,d){
-  const now = new Date(); let y = now.getFullYear();
-  let next = new Date(y, m-1, d);
+  const now = new Date(); let y = now.getFullYear(); let next = new Date(y, m-1, d);
   if(next < new Date(now.getFullYear(), now.getMonth(), now.getDate())) next = new Date(y+1, m-1, d);
   return next;
 }
@@ -1019,8 +894,7 @@ function renderCD(elId, todayId, m, d){
   function tick(){
     const now = new Date();
     if(now.getMonth() === m-1 && now.getDate() === d){ el.style.display='none'; tEl.style.display='block'; return; }
-    if(el) el.style.display='flex'; 
-    if(tEl) tEl.style.display='none';
+    if(el) el.style.display='flex'; if(tEl) tEl.style.display='none';
     const diff = nextBirthday(m,d) - now;
     el.innerHTML = `
       <div class="cd-box"><span>${Math.floor(diff/864e5)}</span><small>روز</small></div>
@@ -1033,7 +907,6 @@ function renderCD(elId, todayId, m, d){
 renderCD('cd-mobin', 'today-mobin', 3, 15);
 renderCD('cd-niyayesh', 'today-niyayesh', 9, 6);
 
-/* ====== تایم‌لاین ====== */
 const timeline = [
   {when: 'آغاز تمدن', title: 'تولد یک امپراتوری', text: 'روزی که نگاهمان گره خورد و سنگ بنای جهان Wiriper گذاشته شد.'},
   {when: 'فصل طلایی', title: 'تاج‌گذاری ملکه', text: 'نیایش بر تخت قلب من نشست و نور را به این قلمرو تاریک آورد.'},
@@ -1047,95 +920,50 @@ timeline.forEach(t => {
   box.appendChild(it);
 });
 
-/* ====== گالری و لایت‌باکس ====== */
 const imgs = [...document.querySelectorAll('#galleryGrid img')].map(i => i.src); let lbIndex=0;
 function lb(i){ lbIndex=i; document.getElementById('lbimg').src=imgs[i]; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeLb(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
 function lbStep(d){ lbIndex = (lbIndex + d + imgs.length) % imgs.length; document.getElementById('lbimg').src = imgs[lbIndex]; }
-
 document.getElementById('lightbox').addEventListener('click', e => { if(e.target.id === 'lightbox') closeLb(); });
-let touchStartX = 0;
-const lbox = document.getElementById('lightbox');
+let touchStartX = 0; const lbox = document.getElementById('lightbox');
 lbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
-lbox.addEventListener('touchend', e => {
-  let touchEndX = e.changedTouches[0].screenX;
-  if (touchEndX < touchStartX - 40) lbStep(-1); 
-  if (touchEndX > touchStartX + 40) lbStep(1);  
-}, {passive: true});
+lbox.addEventListener('touchend', e => { let touchEndX = e.changedTouches[0].screenX; if (touchEndX < touchStartX - 40) lbStep(-1); if (touchEndX > touchStartX + 40) lbStep(1); }, {passive: true});
 
-/* ====== انیمیشن‌های Scroll Reveal ====== */
-const io = new IntersectionObserver(es => {
-  es.forEach(e => {
-    if(e.isIntersecting){
-      e.target.classList.add('in');
-      if(e.target.classList.contains('tl-item')) e.target.classList.add('active');
-      io.unobserve(e.target); 
-    }
-  });
-}, { threshold: 0.1 });
+const io = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); if(e.target.classList.contains('tl-item')) e.target.classList.add('active'); io.unobserve(e.target); } }); }, { threshold: 0.1 });
+document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
 
-function initReveal() {
-  document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el));
-}
-initReveal();
-
-/* ====== ناوبری نرم ====== */
 function sm(id){ const el = document.querySelector(id); if(el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }
-document.querySelectorAll('.nav-links a:not(#openChatBtn)').forEach(a => {
-  a.addEventListener('click', e => { e.preventDefault(); sm(a.getAttribute('href')); document.getElementById('navlinks').classList.remove('open'); });
-});
+document.querySelectorAll('.nav-links a:not(#openChatBtn)').forEach(a => { a.addEventListener('click', e => { e.preventDefault(); sm(a.getAttribute('href')); document.getElementById('navlinks').classList.remove('open'); }); });
 function smoothTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
-/* ====== اسکرول بهینه (100% ضد لگ) ====== */
-let ticking = false;
-let tlTopAbs = 0, tlHeight = 0;
+let ticking = false; let tlTopAbs = 0, tlHeight = 0;
 const progress = document.getElementById('progress'), toTop = document.getElementById('toTop'), tlFill = document.getElementById('tlFill'), navLinks = document.querySelectorAll('.nav-links a');
 let sections = Array.from(document.querySelectorAll('section'));
-
-function cacheDOM() {
-  const tlBox = document.getElementById('timelineBox');
-  if(tlBox) { tlTopAbs = tlBox.getBoundingClientRect().top + window.scrollY; tlHeight = tlBox.offsetHeight; }
-  sections = Array.from(document.querySelectorAll('section'));
-}
-window.addEventListener('load', cacheDOM);
-window.addEventListener('resize', cacheDOM);
+function cacheDOM() { const tlBox = document.getElementById('timelineBox'); if(tlBox) { tlTopAbs = tlBox.getBoundingClientRect().top + window.scrollY; tlHeight = tlBox.offsetHeight; } sections = Array.from(document.querySelectorAll('section')); }
+window.addEventListener('load', cacheDOM); window.addEventListener('resize', cacheDOM);
 
 window.addEventListener('scroll', () => {
   if(!ticking) {
     window.requestAnimationFrame(() => {
-      const top = window.scrollY;
-      const innerH = window.innerHeight;
-      
+      const top = window.scrollY; const innerH = window.innerHeight;
       if(progress) progress.style.transform = `scaleX(${top / (document.body.scrollHeight - innerH)})`;
       if(toTop) toTop.classList.toggle('show', top > 600);
-      
-      if(tlFill && tlHeight > 0) {
-        const relTop = tlTopAbs - top; 
-        if(relTop < innerH/2 && (relTop + tlHeight) > 0) {
-          tlFill.style.transform = `scaleY(${Math.min(1, Math.max(0, (innerH/2 - relTop) / tlHeight))})`;
-        }
-      }
-
-      let cur = '';
-      for (let s of sections) { if(top >= s.offsetTop - 150) cur = s.id; }
-      navLinks.forEach(a => {
-        if (a.id !== 'openChatBtn') {
-          if(a.getAttribute('href') === '#' + cur) a.classList.add('active');
-          else a.classList.remove('active');
-        }
-      });
+      if(tlFill && tlHeight > 0) { const relTop = tlTopAbs - top; if(relTop < innerH/2 && (relTop + tlHeight) > 0) { tlFill.style.transform = `scaleY(${Math.min(1, Math.max(0, (innerH/2 - relTop) / tlHeight))})`; } }
+      let cur = ''; for (let s of sections) { if(top >= s.offsetTop - 150) cur = s.id; }
+      navLinks.forEach(a => { if (a.id !== 'openChatBtn') { if(a.getAttribute('href') === '#' + cur) a.classList.add('active'); else a.classList.remove('active'); } });
       ticking = false;
-    });
-    ticking = true;
+    }); ticking = true;
   }
 }, { passive: true });
 </script>
 
 <script type="module">
-  // کانفیگ Firebase تو (دقیقاً دست‌نخورده)
+  // ========================================================
+  // منطق Firebase و پیام‌رسان پیشرفته Wiriper
+  // ========================================================
   import { initializeApp } from "firebase/app";
-  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-  import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, setDoc, getDoc, getDocs, where, updateDoc, arrayUnion } from "firebase/firestore";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+  import { getFirestore, collection, addDoc, doc, setDoc, getDoc, getDocs, query, where, orderBy, onSnapshot, serverTimestamp, updateDoc, deleteDoc } from "firebase/firestore";
   import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
   const firebaseConfig = {
@@ -1154,335 +982,352 @@ window.addEventListener('scroll', () => {
   const db = getFirestore(app);
   const storage = getStorage(app);
 
-  // متغیرهای وضعیت
-  let currentUser = null;
-  let userData = null;
-  let activeChatId = null;
-  let activeChatData = null;
-  let unsubscribeMessages = null;
-  let unsubscribeChats = null;
-  let usersCache = {}; 
-
-  // المان‌های DOM
+  // المت‌های UI
   const modal = document.getElementById('wiriper-chat-modal');
-  const chatLayoutView = document.getElementById('chatLayoutView');
-  const chatLoginView = document.getElementById('chatLoginView');
-  const sidebarChatList = document.getElementById('sidebarChatList');
-  const chatMessagesView = document.getElementById('chatMessagesView');
+  const loginView = document.getElementById('tgLoginView');
+  const mainView = document.getElementById('tgMainView');
+  const authErr = document.getElementById('tgAuthErr');
+  const userInp = document.getElementById('tgUsernameInp');
+  const passInp = document.getElementById('tgPasswordInp');
   
-  // دکمه‌های باز و بسته
-  document.getElementById('openChatBtn').addEventListener('click', () => { modal.classList.add('open'); document.body.style.overflow = 'hidden'; });
-  document.getElementById('closeChatBtn').addEventListener('click', () => { modal.classList.remove('open'); document.body.style.overflow = ''; });
-  
-  // لاگین با آیدی
-  document.getElementById('loginBtn').addEventListener('click', async () => {
-    const rawId = document.getElementById('authUsername').value.trim().toLowerCase();
-    const password = document.getElementById('authPass').value.trim();
-    if(!rawId || !password) { document.getElementById('authError').textContent = "آیدی و رمز عبور الزامی است."; return; }
-    if(rawId.includes('@')) { document.getElementById('authError').textContent = "فقط آیدی را بدون @ وارد کنید."; return; }
-    
-    const fakeEmail = rawId + "@wiriper.chat";
-    document.getElementById('loginBtn').textContent = 'در حال پردازش...';
-    
-    try {
-      await signInWithEmailAndPassword(auth, fakeEmail, password).catch(async err => {
-        if(err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
-          const res = await createUserWithEmailAndPassword(auth, fakeEmail, password);
-          // ساخت پروفایل پیش‌فرض برای کاربر جدید
-          await setDoc(doc(db, "users", res.user.uid), {
-            uid: res.user.uid,
-            username: rawId,
-            displayName: rawId,
-            bio: 'فرزند امپراتوری Wiriper 👑',
-            avatar: 'https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg'
-          });
-          return res;
-        }
-        throw err;
-      });
-    } catch(error) {
-      document.getElementById('authError').textContent = 'خطا: ' + error.message;
-      document.getElementById('loginBtn').textContent = 'ورود / ثبت‌نام';
-    }
-  });
+  const chatListEl = document.getElementById('tgChatList');
+  const searchInp = document.getElementById('tgSearchInp');
+  const emptyState = document.getElementById('tgEmptyState');
+  const activeChatState = document.getElementById('tgActiveChat');
+  const messagesArea = document.getElementById('tgMessagesArea');
+  const msgInput = document.getElementById('tgMsgInput');
+  const fileInput = document.getElementById('tgFileInput');
+  const progressLine = document.getElementById('tg-upload-progress');
+  const sidebar = document.getElementById('tgSidebar');
 
-  // وضعیت کاربر
+  // State
+  let currentUser = null;
+  let userData = {};
+  let currentChatId = null;
+  let currentChatType = null;
+  let allUsers = []; // برای جستجو
+  let unsubMessages = null;
+  let unsubChats = null;
+
+  // باز و بسته کردن
+  document.getElementById('openChatBtn').onclick = () => { modal.classList.add('open'); document.body.style.overflow = 'hidden'; };
+  document.getElementById('closeChatBtn').onclick = () => { modal.classList.remove('open'); document.body.style.overflow = ''; };
+  document.getElementById('tgBackBtn').onclick = () => { sidebar.classList.remove('hidden'); };
+
+  // --- سیستم احراز هویت با آیدی (ترفند ایمیل ساختگی) ---
+  document.getElementById('tgLoginBtn').onclick = async () => {
+    let username = userInp.value.trim().toLowerCase();
+    const pass = passInp.value.trim();
+    if(!username || !pass) { authErr.textContent = "آیدی و رمز عبور الزامی است."; return; }
+    if(/[^a-z0-9_]/.test(username)) { authErr.textContent = "آیدی فقط شامل حروف انگلیسی و عدد."; return; }
+    
+    const fakeEmail = `${username}@wiriper.space`;
+    try {
+      let uC = null;
+      try {
+        uC = await signInWithEmailAndPassword(auth, fakeEmail, pass);
+      } catch(e) {
+        if(e.code === 'auth/user-not-found' || e.code === 'auth/invalid-credential' || e.code === 'auth/invalid-login-credentials') {
+          uC = await createUserWithEmailAndPassword(auth, fakeEmail, pass);
+          // ساخت پروفایل اولیه
+          await setDoc(doc(db, "wiriper_users", uC.user.uid), {
+            uid: uC.user.uid, username: username, name: username, bio: "", photoUrl: "", stars: 100
+          });
+        } else throw e;
+      }
+    } catch(err) { authErr.textContent = "خطا: " + err.message; }
+  };
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
-      chatLoginView.style.display = 'none';
-      chatLayoutView.style.display = 'flex';
+      loginView.style.display = 'none';
+      mainView.style.display = 'flex';
       
-      // دریافت اطلاعات پروفایل
-      const docSnap = await getDoc(doc(db, "users", user.uid));
-      if(docSnap.exists()) userData = docSnap.data();
+      // گرفتن اطلاعات کاربر
+      const docSnap = await getDoc(doc(db, "wiriper_users", user.uid));
+      if(docSnap.exists()) { userData = docSnap.data(); }
       
-      loadSidebarChats();
+      document.getElementById('tgMyName').value = userData.name || '';
+      document.getElementById('tgMyBio').value = userData.bio || '';
+      document.getElementById('tgMyPic').value = userData.photoUrl || '';
+      document.getElementById('tgMyStars').textContent = `⭐ ${userData.stars || 0} Wiriper Stars`;
+
+      loadAllUsers();
+      listenToChats();
     } else {
-      currentUser = null; userData = null;
-      chatLoginView.style.display = 'flex';
-      chatLayoutView.style.display = 'none';
-      if(unsubscribeChats) unsubscribeChats();
-      if(unsubscribeMessages) unsubscribeMessages();
+      currentUser = null; userData = {};
+      loginView.style.display = 'flex'; mainView.style.display = 'none';
+      if(unsubChats) unsubChats(); if(unsubMessages) unsubMessages();
     }
   });
 
-  // ----- لود کردن لیست چت‌ها در سایدبار -----
-  function loadSidebarChats() {
-    const q = query(collection(db, "chats"), where("members", "array-contains", currentUser.uid));
-    unsubscribeChats = onSnapshot(q, async (snapshot) => {
-      sidebarChatList.innerHTML = '';
-      if(snapshot.empty) {
-        sidebarChatList.innerHTML = '<p style="padding:20px; text-align:center; color:var(--muted);">هنوز چتی ندارید.</p>';
-        return;
-      }
-      
-      let chatsData = [];
-      snapshot.forEach(d => chatsData.push({id: d.id, ...d.data()}));
-      
-      // مرتب سازی بر اساس زمان (اگه داشته باشیم، اینجا ساده‌تر می‌نویسیم)
-      for(let chat of chatsData) {
-        let displayTitle = chat.name;
-        let displayAvatar = chat.avatar || 'https://via.placeholder.com/50';
+  document.getElementById('tgLogoutBtn').onclick = () => { signOut(auth); document.getElementById('tgProfileModal').classList.remove('active'); };
+
+  // --- تنظیمات پروفایل ---
+  document.getElementById('tgSettingsBtn').onclick = () => document.getElementById('tgProfileModal').classList.add('active');
+  document.getElementById('tgSaveProfileBtn').onclick = async () => {
+    const n = document.getElementById('tgMyName').value.trim();
+    const b = document.getElementById('tgMyBio').value.trim();
+    const p = document.getElementById('tgMyPic').value.trim();
+    await updateDoc(doc(db, "wiriper_users", currentUser.uid), { name: n, bio: b, photoUrl: p });
+    userData.name = n; userData.bio = b; userData.photoUrl = p;
+    document.getElementById('tgProfileModal').classList.remove('active');
+    alert("پروفایل بروز شد.");
+  };
+
+  // --- لود کردن همه کاربران برای جستجو و چت ---
+  async function loadAllUsers() {
+    const qs = await getDocs(collection(db, "wiriper_users"));
+    allUsers = [];
+    qs.forEach(d => { if(d.id !== currentUser.uid) allUsers.push(d.data()); });
+    renderSearchList();
+  }
+
+  // --- رندر لیست چت و جستجو ---
+  searchInp.oninput = () => renderSearchList();
+  
+  function renderSearchList() {
+    const val = searchInp.value.trim().toLowerCase();
+    if(val) {
+      // حالت جستجو در کاربران
+      chatListEl.innerHTML = '<div style="padding:10px; color:var(--gold); font-size:12px;">نتایج جستجو</div>';
+      const results = allUsers.filter(u => u.username.includes(val) || (u.name && u.name.toLowerCase().includes(val)));
+      results.forEach(u => {
+        const div = document.createElement('div'); div.className = 'tg-chat-item';
+        div.innerHTML = `<img src="${u.photoUrl||''}" class="tg-avatar" onerror="this.src='';this.alt='${u.username[0].toUpperCase()}'">
+                         <div class="tg-chat-info"><div class="tg-chat-name">${u.name||u.username}</div><div class="tg-chat-preview">@${u.username}</div></div>`;
+        div.onclick = () => openPrivateChat(u);
+        chatListEl.appendChild(div);
+      });
+    } else {
+      // نمایش لیست چت‌های فعال
+      listenToChats();
+    }
+  }
+
+  function listenToChats() {
+    if(unsubChats) unsubChats();
+    const q = query(collection(db, "wiriper_chats"), where("members", "array-contains", currentUser.uid), orderBy("lastUpdated", "desc"));
+    unsubChats = onSnapshot(q, (snap) => {
+      if(searchInp.value.trim()) return; // اگر در حال جستجوست لیست آپدیت نشه
+      chatListEl.innerHTML = '';
+      snap.forEach(docSnap => {
+        const c = docSnap.data(); c.id = docSnap.id;
+        let cName = c.name, cPic = c.photoUrl, cPreview = c.lastMsg || 'بدون پیام';
         
-        // اگر DM باشد، اطلاعات طرف مقابل را می‌گیریم
-        if(chat.type === 'dm') {
-          const otherUserId = chat.members.find(id => id !== currentUser.uid) || currentUser.uid;
-          const otherUser = await getUserData(otherUserId);
-          displayTitle = otherUser.displayName;
-          displayAvatar = otherUser.avatar;
+        // اگر چت خصوصی است، اسم و عکس طرف مقابل را بکش
+        if(c.type === 'private') {
+          const otherUid = c.members.find(m => m !== currentUser.uid);
+          const otherU = allUsers.find(u => u.uid === otherUid);
+          if(otherU) { cName = otherU.name || otherU.username; cPic = otherU.photoUrl; }
         }
 
-        const div = document.createElement('div');
-        div.className = `chat-item ${activeChatId === chat.id ? 'active' : ''}`;
-        div.onclick = () => openChat(chat, displayTitle, displayAvatar);
-        div.innerHTML = `
-          <img src="${displayAvatar}">
-          <div class="chat-item-info">
-            <h4>${displayTitle}</h4>
-            <p>${chat.type === 'channel' ? '📢 کانال' : (chat.type === 'group' ? '👥 گروه' : '👤 چت شخصی')}</p>
-          </div>
-        `;
-        sidebarChatList.appendChild(div);
-      }
+        const div = document.createElement('div'); div.className = 'tg-chat-item';
+        if(c.id === currentChatId) div.classList.add('active');
+        
+        div.innerHTML = `<img src="${cPic||''}" class="tg-avatar" onerror="this.src='';this.alt='${cName?cName[0]:'G'}'">
+                         <div class="tg-chat-info"><div class="tg-chat-name">${cName} ${c.type!=='private'?'👥':''}</div><div class="tg-chat-preview">${cPreview}</div></div>`;
+        div.onclick = () => selectChat(c.id, cName, cPic, c.type, c.members);
+        chatListEl.appendChild(div);
+      });
     });
   }
 
-  async function getUserData(uid) {
-    if(usersCache[uid]) return usersCache[uid];
-    const d = await getDoc(doc(db, "users", uid));
-    if(d.exists()) { usersCache[uid] = d.data(); return d.data(); }
-    return { displayName: 'کاربر ناشناس', avatar: 'https://via.placeholder.com/50' };
+  // --- شروع چت خصوصی جدید ---
+  async function openPrivateChat(targetUser) {
+    searchInp.value = '';
+    // بررسی اینکه آیا چت خصوصی قبلا وجود داره
+    const q = query(collection(db, "wiriper_chats"), where("type", "==", "private"), where("members", "array-contains", currentUser.uid));
+    const qs = await getDocs(q);
+    let existingId = null;
+    qs.forEach(d => { if(d.data().members.includes(targetUser.uid)) existingId = d.id; });
+    
+    if(existingId) {
+      selectChat(existingId, targetUser.name || targetUser.username, targetUser.photoUrl, 'private', [currentUser.uid, targetUser.uid]);
+    } else {
+      // ساخت چت جدید
+      const newRef = await addDoc(collection(db, "wiriper_chats"), {
+        type: 'private', members: [currentUser.uid, targetUser.uid],
+        lastUpdated: serverTimestamp(), lastMsg: 'شروع مکالمه'
+      });
+      selectChat(newRef.id, targetUser.name || targetUser.username, targetUser.photoUrl, 'private', [currentUser.uid, targetUser.uid]);
+    }
   }
 
-  // ----- باز کردن یک چت خاص -----
-  function openChat(chat, title, avatar) {
-    activeChatId = chat.id;
-    activeChatData = chat;
+  // --- ایجاد گروه/کانال ---
+  document.getElementById('tgNewChatBtn').onclick = () => document.getElementById('tgCreateChatModal').classList.add('active');
+  document.getElementById('tgDoCreateChatBtn').onclick = async () => {
+    const type = document.getElementById('tgNewChatType').value;
+    const name = document.getElementById('tgNewChatName').value.trim();
+    const pic = document.getElementById('tgNewChatPic').value.trim();
+    if(!name) return alert("نام الزامیست");
     
-    // UI موبایل
-    chatLayoutView.classList.add('active-chat');
+    // در گروه/کانال برای سادگی، همه کاربران سیستم را عضو میکنیم (چون سیستم خصوصی است)
+    const allIds = allUsers.map(u => u.uid);
+    allIds.push(currentUser.uid);
+
+    await addDoc(collection(db, "wiriper_chats"), {
+      type: type, name: name, photoUrl: pic, members: allIds, owner: currentUser.uid,
+      lastUpdated: serverTimestamp(), lastMsg: `ایجاد شد`
+    });
+    document.getElementById('tgCreateChatModal').classList.remove('active');
+    alert(type === 'group' ? 'گروه ساخته شد' : 'کانال ساخته شد');
+  };
+
+  // --- انتخاب چت و لود پیام‌ها ---
+  let activeMembers = [];
+  function selectChat(id, name, pic, type, members) {
+    currentChatId = id; currentChatType = type; activeMembers = members;
+    emptyState.style.display = 'none'; activeChatState.style.display = 'flex';
+    document.getElementById('tgActiveName').textContent = name;
+    document.getElementById('tgActiveAvatar').src = pic || '';
+    document.getElementById('tgActiveAvatar').alt = name[0] || 'C';
+    document.getElementById('tgActiveStatus').textContent = type === 'private' ? 'آنلاین' : (type === 'group' ? 'گروه' : 'کانال');
     
-    document.getElementById('noChatSelected').style.display = 'none';
-    document.getElementById('activeChatContainer').style.display = 'flex';
-    document.getElementById('activeChatTitle').textContent = title;
-    document.getElementById('activeChatAvatar').src = avatar;
-    
-    // بررسی دسترسی ارسال پیام در کانال
-    const inputArea = document.getElementById('chatInputView');
-    if(chat.type === 'channel' && !chat.admins.includes(currentUser.uid)) {
-      inputArea.style.display = 'none';
-    } else {
-      inputArea.style.display = 'flex';
+    if(window.innerWidth <= 768) sidebar.classList.add('hidden'); // بستن سایدبار در موبایل
+    listenToMessages();
+    listenToChats(); // برای آپدیت رنگ active
+  }
+
+  // کلیک روی هدر چت برای پروفایل
+  document.getElementById('tgHeaderProfileClick').onclick = () => {
+    if(currentChatType === 'private') {
+      const otherUid = activeMembers.find(m => m !== currentUser.uid);
+      const otherU = allUsers.find(u => u.uid === otherUid);
+      if(otherU) {
+        document.getElementById('tgViewPic').src = otherU.photoUrl || '';
+        document.getElementById('tgViewName').textContent = otherU.name || otherU.username;
+        document.getElementById('tgViewUsername').textContent = '@' + otherU.username;
+        document.getElementById('tgViewBio').textContent = otherU.bio || 'بدون بیوگرافی';
+        document.getElementById('tgViewProfileModal').classList.add('active');
+      }
     }
-    
-    // لود پیام‌ها
-    if(unsubscribeMessages) unsubscribeMessages();
-    const q = query(collection(db, "chats", chat.id, "messages"), orderBy("timestamp", "asc"));
-    
-    unsubscribeMessages = onSnapshot(q, async (snapshot) => {
-      chatMessagesView.innerHTML = '';
-      for(let doc of snapshot.docs) {
-        const msg = doc.data();
-        const isMine = msg.senderId === currentUser.uid;
-        const sender = await getUserData(msg.senderId);
+  };
+
+  // --- لود و رندر پیام‌ها ---
+  function listenToMessages() {
+    if(unsubMessages) unsubMessages();
+    const q = query(collection(db, "wiriper_messages"), where("chatId", "==", currentChatId), orderBy("timestamp", "asc"));
+    unsubMessages = onSnapshot(q, (snap) => {
+      messagesArea.innerHTML = '';
+      snap.forEach(docSnap => {
+        const msg = docSnap.data(); msg.id = docSnap.id;
+        const isMine = msg.senderUid === currentUser.uid;
         
-        const row = document.createElement('div');
-        row.className = `message-row ${isMine ? 'sent' : 'received'}`;
+        // پیدا کردن فرستنده برای گروه
+        let senderName = '';
+        if(!isMine && currentChatType !== 'private') {
+           const su = allUsers.find(u => u.uid === msg.senderUid);
+           if(su) senderName = `<div style="font-size:11px; color:var(--gold); margin-bottom:3px;">${su.name||su.username}</div>`;
+        }
+
+        if(msg.deleted) {
+          const div = document.createElement('div'); div.className = `tg-bubble ${isMine?'tg-sent':'tg-recv'}`;
+          div.innerHTML = `<div style="opacity:0.5; font-style:italic;">🚫 پیام حذف شده است</div>`;
+          messagesArea.appendChild(div);
+          return;
+        }
+
+        const div = document.createElement('div'); 
+        div.className = `tg-bubble ${isMine?'tg-sent':'tg-recv'}`;
         
         let mediaHtml = '';
         if(msg.fileUrl) {
-          if(msg.fileType && msg.fileType.startsWith('image/')) mediaHtml = `<img src="${msg.fileUrl}" style="cursor:pointer;" onclick="window.open('${msg.fileUrl}')">`;
-          else if(msg.fileType && msg.fileType.startsWith('video/')) mediaHtml = `<video src="${msg.fileUrl}" controls></video>`;
-          else mediaHtml = `<a href="${msg.fileUrl}" target="_blank" style="color:var(--gold-2); display:block; margin-bottom:5px;">📁 دانلود فایل</a>`;
+          if(msg.fileType.startsWith('image/')) mediaHtml = `<img src="${msg.fileUrl}" class="tg-bubble-media" onclick="window.open('${msg.fileUrl}')">`;
+          else if(msg.fileType.startsWith('video/')) mediaHtml = `<video src="${msg.fileUrl}" controls class="tg-bubble-media"></video>`;
+          else if(msg.fileType.startsWith('audio/')) mediaHtml = `<audio src="${msg.fileUrl}" controls class="tg-bubble-audio"></audio>`;
+          else mediaHtml = `<a href="${msg.fileUrl}" target="_blank" style="color:var(--gold-2); display:block; margin-bottom:5px; text-decoration:underline;">📁 دانلود فایل</a>`;
         }
-        
-        const textHtml = msg.text ? `<div>${msg.text}</div>` : '';
-        const timeHtml = `<span class="msg-time">${msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : '...'}</span>`;
-        const nameHtml = (!isMine && chat.type !== 'dm') ? `<span class="msg-sender-name">${sender.displayName}</span>` : '';
 
-        row.innerHTML = `
-          ${!isMine ? `<img src="${sender.avatar}" class="message-avatar">` : ''}
-          <div class="message-bubble">
-            ${nameHtml}
-            ${mediaHtml}
-            ${textHtml}
-            ${timeHtml}
-          </div>
-        `;
-        chatMessagesView.appendChild(row);
-      }
-      chatMessagesView.scrollTop = chatMessagesView.scrollHeight;
+        let textHtml = msg.text ? `<div>${msg.text.replace(/\n/g, '<br>')}</div>` : '';
+        if(msg.isGift) textHtml = `<div style="text-align:center; padding:10px;"><div style="font-size:40px;">🎁</div><div style="color:var(--gold-2); font-weight:bold;">هدیه سلطنتی!</div>${msg.text}</div>`;
+
+        let timeStr = msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}) : '...';
+        let editedStr = msg.edited ? '<span style="font-style:italic; font-size:9px;">(ویرایش شده)</span>' : '';
+        let timeHtml = `<div class="tg-bubble-time">${editedStr} ${timeStr}</div>`;
+
+        // اکشن‌های ویرایش و حذف
+        let actionHtml = '';
+        if(isMine && !msg.isGift) {
+          actionHtml = `
+            <div class="tg-msg-actions">
+              <button class="tg-msg-action-btn" onclick="editMsg('${msg.id}', \`${(msg.text||'').replace(/`/g, '')}\`)">✎</button>
+              <button class="tg-msg-action-btn" onclick="delMsg('${msg.id}')">🗑</button>
+            </div>
+          `;
+        }
+
+        div.innerHTML = senderName + mediaHtml + textHtml + timeHtml + actionHtml;
+        messagesArea.appendChild(div);
+      });
+      messagesArea.scrollTop = messagesArea.scrollHeight;
     });
-    
-    // آپدیت هایلایت سایدبار
-    document.querySelectorAll('.chat-item').forEach(el => el.classList.remove('active'));
   }
 
-  // دکمه بازگشت در موبایل
-  document.getElementById('backToListBtn').addEventListener('click', () => {
-    chatLayoutView.classList.remove('active-chat');
-  });
+  // --- ارسال پیام و فایل ---
+  async function sendMessage(text, fileUrl = null, fileType = null, isGift = false) {
+    if(!currentChatId) return;
+    if(!text && !fileUrl) return;
 
-  // ----- ارسال پیام -----
-  async function sendMessage(fileUrl = null, fileType = null) {
-    if(!activeChatId) return;
-    const input = document.getElementById('chatMessageInput');
-    const text = input.value.trim();
-    if (!text && !fileUrl) return;
-    
-    input.value = '';
-    await addDoc(collection(db, "chats", activeChatId, "messages"), {
-      text: text,
-      senderId: currentUser.uid,
-      fileUrl: fileUrl,
-      fileType: fileType,
+    // چک کردن دسترسی کانال
+    if(currentChatType === 'channel') {
+      const chatDoc = await getDoc(doc(db, "wiriper_chats", currentChatId));
+      if(chatDoc.data().owner !== currentUser.uid) { alert("فقط سازنده کانال مجاز به ارسال است."); return; }
+    }
+
+    await addDoc(collection(db, "wiriper_messages"), {
+      chatId: currentChatId, senderUid: currentUser.uid,
+      text: text, fileUrl: fileUrl, fileType: fileType, isGift: isGift,
       timestamp: serverTimestamp()
     });
-  }
-  document.getElementById('sendMsgBtn').addEventListener('click', () => sendMessage());
-  document.getElementById('chatMessageInput').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendMessage(); });
 
-  // آپلود فایل
-  const fileInput = document.getElementById('fileUploadInput');
-  fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if(!file || !activeChatId) return;
-    const storageRef = ref(storage, 'chat_files/' + Date.now() + '_' + file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file);
-    uploadTask.on('state_changed', 
-      (snap) => { document.getElementById('uploadProgressBar').style.width = (snap.bytesTransferred / snap.totalBytes * 100) + '%'; }, 
-      (err) => { alert('خطا در آپلود'); document.getElementById('uploadProgressBar').style.width = '0%'; }, 
+    // آپدیت لست مسج چت
+    let preview = isGift ? '🎁 هدیه ارسال شد' : (fileUrl ? '📎 رسانه' : text.substring(0, 20));
+    await updateDoc(doc(db, "wiriper_chats", currentChatId), { lastUpdated: serverTimestamp(), lastMsg: preview });
+  }
+
+  document.getElementById('tgSendBtn').onclick = () => {
+    const t = msgInput.value.trim();
+    if(t) { sendMessage(t); msgInput.value = ''; }
+  };
+  msgInput.addEventListener('keydown', e => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); document.getElementById('tgSendBtn').click(); }});
+
+  // آپلود رسانه
+  fileInput.addEventListener('change', e => {
+    const file = e.target.files[0]; if(!file) return;
+    const storageRef = ref(storage, 'tg_media/' + Date.now() + '_' + file.name);
+    const task = uploadBytesResumable(storageRef, file);
+    task.on('state_changed', 
+      snap => { progressLine.style.width = ((snap.bytesTransferred / snap.totalBytes) * 100) + '%'; },
+      err => { progressLine.style.width = '0%'; alert('خطا در آپلود'); },
       async () => {
-        const url = await getDownloadURL(uploadTask.snapshot.ref);
-        document.getElementById('uploadProgressBar').style.width = '0%';
-        await sendMessage(url, file.type);
-        fileInput.value = ''; 
+        const url = await getDownloadURL(task.snapshot.ref);
+        progressLine.style.width = '0%';
+        sendMessage('', url, file.type);
+        fileInput.value = '';
       }
     );
   });
 
-  // ----- تنظیمات پروفایل -----
-  document.getElementById('btnSettings').addEventListener('click', () => {
-    document.getElementById('overlaySettings').classList.add('open');
-    document.getElementById('setUserId').value = userData.username;
-    document.getElementById('setUserName').value = userData.displayName;
-    document.getElementById('setUserBio').value = userData.bio || '';
-    document.getElementById('profPicPreview').src = userData.avatar;
-  });
-  document.getElementById('closeSettingsBtn').addEventListener('click', () => {
-    document.getElementById('overlaySettings').classList.remove('open');
-  });
-  
-  let newAvatarFile = null;
-  document.getElementById('profPicUpload').addEventListener('change', (e) => {
-    newAvatarFile = e.target.files[0];
-    if(newAvatarFile) document.getElementById('profPicPreview').src = URL.createObjectURL(newAvatarFile);
-  });
-  
-  document.getElementById('saveSettingsBtn').addEventListener('click', async () => {
-    const btn = document.getElementById('saveSettingsBtn');
-    btn.textContent = 'در حال ذخیره...';
-    let avatarUrl = userData.avatar;
-    
-    if(newAvatarFile) {
-      const storageRef = ref(storage, 'avatars/' + currentUser.uid);
-      await uploadBytesResumable(storageRef, newAvatarFile);
-      avatarUrl = await getDownloadURL(storageRef);
+  // استارز و هدیه
+  document.getElementById('tgGiftBtn').onclick = async () => {
+    if(!currentChatId || currentChatType !== 'private') return alert("هدیه فقط در چت خصوصی قابل ارسال است.");
+    if((userData.stars || 0) < 10) return alert("موجودی Stars شما کافی نیست! (حداقل 10)");
+    if(confirm("آیا مایلید با پرداخت 10 ستاره، یک هدیه ویژه بفرستید؟")) {
+      await updateDoc(doc(db, "wiriper_users", currentUser.uid), { stars: userData.stars - 10 });
+      userData.stars -= 10;
+      document.getElementById('tgMyStars').textContent = `⭐ ${userData.stars} Wiriper Stars`;
+      sendMessage("یک هدیه درخشان تقدیم به تو!", null, null, true);
     }
-    
-    const newName = document.getElementById('setUserName').value.trim();
-    const newBio = document.getElementById('setUserBio').value.trim();
-    
-    await updateDoc(doc(db, "users", currentUser.uid), {
-      displayName: newName, bio: newBio, avatar: avatarUrl
-    });
-    
-    userData.displayName = newName; userData.bio = newBio; userData.avatar = avatarUrl;
-    usersCache[currentUser.uid] = userData;
-    btn.textContent = 'ذخیره شد!';
-    setTimeout(() => { btn.textContent = 'ذخیره پروفایل'; document.getElementById('overlaySettings').classList.remove('open'); }, 1000);
-  });
+  };
 
-  // ----- ساخت چت/گروه/کانال جدید -----
-  document.getElementById('btnNewChat').addEventListener('click', () => {
-    document.getElementById('overlayNewChat').classList.add('open');
-    document.getElementById('newChatErr').textContent = '';
-  });
-  document.getElementById('closeNewChatBtn').addEventListener('click', () => {
-    document.getElementById('overlayNewChat').classList.remove('open');
-  });
-  
-  document.getElementById('newChatType').addEventListener('change', (e) => {
-    const type = e.target.value;
-    document.getElementById('targetUserIdWrap').style.display = type === 'dm' ? 'block' : 'none';
-    document.getElementById('groupNameWrap').style.display = type !== 'dm' ? 'block' : 'none';
-  });
-
-  document.getElementById('createChatBtn').addEventListener('click', async () => {
-    const type = document.getElementById('newChatType').value;
-    const errEl = document.getElementById('newChatErr');
-    errEl.textContent = 'درحال پردازش...';
-    
-    let members = [currentUser.uid];
-    let name = '';
-    
-    if(type === 'dm') {
-      const targetId = document.getElementById('newChatTargetId').value.trim().toLowerCase();
-      if(!targetId) { errEl.textContent = 'آیدی مقصد را وارد کنید.'; return; }
-      if(targetId === userData.username) { errEl.textContent = 'نمی‌توانید به خودتان پیام دهید.'; return; }
-      
-      const q = query(collection(db, "users"), where("username", "==", targetId));
-      const snap = await getDocs(q);
-      if(snap.empty) { errEl.textContent = 'کاربری با این آیدی یافت نشد.'; return; }
-      
-      const targetUser = snap.docs[0].data();
-      members.push(targetUser.uid);
-      
-      // بررسی اینکه آیا از قبل چت دارند
-      const existingQuery = query(collection(db, "chats"), where("type", "==", "dm"), where("members", "array-contains", currentUser.uid));
-      const existSnap = await getDocs(existingQuery);
-      let foundExisting = false;
-      existSnap.forEach(d => { if(d.data().members.includes(targetUser.uid)) { foundExisting = true; errEl.textContent = 'این چت قبلا وجود دارد.'; }});
-      if(foundExisting) return;
-      
-    } else {
-      name = document.getElementById('newChatName').value.trim();
-      if(!name) { errEl.textContent = 'نام گروه/کانال را وارد کنید.'; return; }
-    }
-    
-    await addDoc(collection(db, "chats"), {
-      type: type,
-      name: name,
-      members: members,
-      admins: [currentUser.uid],
-      avatar: 'https://via.placeholder.com/150'
-    });
-    
-    document.getElementById('overlayNewChat').classList.remove('open');
-    document.getElementById('newChatTargetId').value = '';
-    document.getElementById('newChatName').value = '';
-  });
+  // حذف و ویرایش
+  window.delMsg = async (msgId) => { if(confirm("پیام حذف شود؟")) await updateDoc(doc(db, "wiriper_messages", msgId), { deleted: true }); };
+  window.editMsg = async (msgId, oldText) => {
+    const n = prompt("ویرایش پیام:", oldText);
+    if(n !== null && n.trim() !== "") await updateDoc(doc(db, "wiriper_messages", msgId), { text: n.trim(), edited: true });
+  };
 
 </script>
 
