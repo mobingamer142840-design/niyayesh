@@ -17,8 +17,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Lalezar&family=Vazirmatn:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+
 <style>
-/* === تمام استایل‌های اصلی سایت Wiriper (بدون تغییر) === */
+/* ====== تمام استایل‌های اصلی سایت Wiriper (بدون تغییر) ====== */
 :root {
   --bg: #050308;
   --bg2: #120a24;
@@ -326,9 +327,8 @@ footer b { color: var(--gold-2); font-size: 17px; }
 }
 </style>
 
-<!-- استایل‌های اختصاصی پیام‌رسان Wiriper Messenger (مشابه تلگرام) -->
+<!-- استایل اختصاصی پیام‌رسان Wiriper Messenger (مشابه تلگرام) -->
 <style>
-/* مودال اصلی پیام‌رسان */
 .messenger-modal {
   position: fixed;
   inset: 0;
@@ -371,7 +371,6 @@ footer b { color: var(--gold-2); font-size: 17px; }
   overflow: hidden;
   position: relative;
 }
-/* لیست چت‌ها (sidebar) */
 .chats-sidebar {
   width: 320px;
   background: rgba(5, 3, 10, 0.9);
@@ -442,7 +441,6 @@ footer b { color: var(--gold-2); font-size: 17px; }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-/* منطقه چت اصلی */
 .chat-area {
   flex: 1;
   display: flex;
@@ -651,9 +649,7 @@ footer b { color: var(--gold-2); font-size: 17px; }
       <div class="brand">👑 WIRIPER</div>
       <div class="nav-controls">
         <div class="audio-visualizer-btn" id="audioBtn" onclick="toggleAudio()" title="قطع/وصل موسیقی سمفونی">
-          <div class="bar-container">
-            <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-          </div>
+          <div class="bar-container"><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div></div>
         </div>
         <button class="icon-btn nav-toggle" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
       </div>
@@ -667,26 +663,7 @@ footer b { color: var(--gold-2); font-size: 17px; }
       </div>
     </nav>
 
-    <!-- بقیه بخش‌های سایت (hero, wiriper, magic-mirror, countdown, king, princes, timeline, letter, gallery, footer) به همان شکل قبل -->
-    <section class="hero" id="hero">
-      <div class="wrap">
-        <div class="sub" id="heroSub">پادشاه مبین ♾️ ملکه نیایش</div>
-        <h1>قلب تپنده‌ی امپراتوری<br>مبین و نیایش</h1>
-        <div class="angel-container" id="angelContainer">
-          <div class="angel" id="angel">
-            <div class="wing wing-left" id="wingL"></div>
-            <div class="wing wing-right" id="wingR"></div>
-            <div class="halo"></div>
-            <div class="photo-frame">
-              <img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش">
-            </div>
-          </div>
-        </div>
-        <p class="love reveal">او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b>نیایش</b> عزیز من.</p>
-        <div class="hero-btns reveal"><button class="btn" onclick="loveBurst()">💖 بارش عشق بر ملکه</button><button class="btn ghost" onclick="document.getElementById('magic-mirror').scrollIntoView({behavior:'smooth'})">✨ آینه جادویی</button></div>
-        <div class="scroll-down reveal"><span>به تمدن ما قدم بگذار</span><i>↓</i></div>
-      </div>
-    </section>
+    <section class="hero" id="hero"><div class="wrap"><div class="sub" id="heroSub">پادشاه مبین ♾️ ملکه نیایش</div><h1>قلب تپنده‌ی امپراتوری<br>مبین و نیایش</h1><div class="angel-container" id="angelContainer"><div class="angel" id="angel"><div class="wing wing-left" id="wingL"></div><div class="wing wing-right" id="wingR"></div><div class="halo"></div><div class="photo-frame"><img src="https://i.ibb.co/XxMQKGvM/ED9-E654-F-95-B3-48-C3-822-E-F5920-F9-AC8-B6.jpg" alt="ملکه نیایش"></div></div></div><p class="love reveal">او ملکهٔ بی‌همتای این امپراتوری است. حضورش شکوه را معنا می‌بخشد و نگاهش آسمان را به ستاره تبدیل می‌کند. تبلور فرشته‌ای واقعی در قالب <b>نیایش</b> عزیز من.</p><div class="hero-btns reveal"><button class="btn" onclick="loveBurst()">💖 بارش عشق بر ملکه</button><button class="btn ghost" onclick="document.getElementById('magic-mirror').scrollIntoView({behavior:'smooth'})">✨ آینه جادویی</button></div><div class="scroll-down reveal"><span>به تمدن ما قدم بگذار</span><i>↓</i></div></div></section>
 
     <section id="wiriper" class="reveal"><div id="wiriper-realm"><div class="wrap"><div class="wiriper-card"><div class="wiriper-logo">🌍</div><h2 class="wiriper-title">تمدن جاودانه Wiriper</h2><p class="wiriper-desc">اینجا تنها یک قصر یا یک ساختمان نیست. Wiriper یک جهان است، تمدنی پهناور و بی‌کران که بر پایه‌ی عشق بی‌پایان پادشاه مبین و ملکه نیایش بنا شده است. سرزمینی که مرزهایش تا بی‌نهایت امتداد دارد و خورشید آن هرگز غروب نمی‌کند، زیرا منبع نورش، لبخند ملکه است.</p><div class="wiriper-stats"><div class="wstat"><span class="num">∞</span><span class="lbl">وسعت قلمرو</span></div><div class="wstat"><span class="num" id="wDays">1000</span><span class="lbl">روزهای سلطنت</span></div><div class="wstat"><span class="num">۱</span><span class="lbl">قلب واحد</span></div></div><div class="artifacts-grid"><div class="artifact-card"><div class="artifact-icon">⏳</div><h4>گاه‌شمار ابدیت</h4><p>سنجش ثانیه‌های مقدس با بالا‌ترین عیار وفاداری و مهندسی زمان، تا فراتر از مرزهای مکان.</p></div><div class="artifact-card"><div class="artifact-icon">🔮</div><h4>عدسی حقیقت</h4><p>ثبت دقیق تار و پود خاطرات تمدن با کادربندی‌های هنری و نورپردازی اصیل رمبراند.</p></div><div class="artifact-card"><div class="artifact-icon">✨</div><h4>تار و پود طلایی</h4><p>طراحی و بافت لوکس‌ترین جامه‌های تمدن Wiriper برای حفاظت از شکوه استایل ملکه.</p></div></div></div></div></div></section>
 
@@ -708,14 +685,10 @@ footer b { color: var(--gold-2); font-size: 17px; }
   </div>
 </div>
 
-<!-- مودال پیام‌رسان کامل شبیه تلگرام -->
+<!-- مودال پیام‌رسان Wiriper Messenger (کامل شبیه تلگرام) -->
 <div id="wiriperMessenger" class="messenger-modal">
-  <div class="messenger-header">
-    <h2>✨ Wiriper Messenger ✨</h2>
-    <button class="messenger-close" id="closeMessengerBtn">✕</button>
-  </div>
+  <div class="messenger-header"><h2>✨ Wiriper Messenger ✨</h2><button class="messenger-close" id="closeMessengerBtn">✕</button></div>
   <div class="messenger-body">
-    <!-- قسمت لاگین و ثبت‌نام -->
     <div id="authContainer" style="flex:1; display: flex; align-items: center; justify-content: center; background: var(--bg);">
       <div style="background: var(--glass-strong); padding: 40px; border-radius: 30px; width: 90%; max-width: 400px; text-align: center;">
         <h3 style="color: var(--gold-2);">👑 ورود به قصر ارتباطات</h3>
@@ -726,34 +699,12 @@ footer b { color: var(--gold-2); font-size: 17px; }
         <div id="authMsg" style="margin-top:15px; color:var(--rose); font-size:13px;"></div>
       </div>
     </div>
-    <!-- بخش اصلی پیام‌رسان (بعد از لاگین) -->
     <div id="messengerMain" style="flex:1; display: none; flex-direction: row; overflow: hidden;">
-      <div class="chats-sidebar" id="chatsSidebar">
-        <div class="chats-header">
-          <input type="text" id="searchUserInput" class="search-user" placeholder="جستجوی کاربر با نام کاربری...">
-          <button id="profileBtn" class="btn" style="margin-top:8px; padding:8px;">👤 ویرایش پروفایل</button>
-        </div>
-        <div id="chatsList" class="chats-list"></div>
-      </div>
-      <div class="chat-area" id="chatArea" style="display: none;">
-        <div class="chat-header-info" id="chatHeaderInfo"></div>
-        <div id="messagesList" class="messages-container"></div>
-        <div class="chat-input-area">
-          <label class="attach-btn">📎<input type="file" id="fileInputChat" style="display:none;" accept="image/*,video/*,audio/*,application/pdf"></label>
-          <input type="text" id="messageInput" placeholder="پیام خود را بنویسید...">
-          <button id="sendMsgBtnMessenger">➤</button>
-        </div>
-      </div>
+      <div class="chats-sidebar" id="chatsSidebar"><div class="chats-header"><input type="text" id="searchUserInput" class="search-user" placeholder="جستجوی کاربر با نام کاربری..."><button id="profileBtn" class="btn" style="margin-top:8px; padding:8px;">👤 ویرایش پروفایل</button></div><div id="chatsList" class="chats-list"></div></div>
+      <div class="chat-area" id="chatArea" style="display: none;"><div class="chat-header-info" id="chatHeaderInfo"></div><div id="messagesList" class="messages-container"></div><div class="chat-input-area"><label class="attach-btn">📎<input type="file" id="fileInputChat" style="display:none;" accept="image/*,video/*,audio/*,application/pdf"></label><input type="text" id="messageInput" placeholder="پیام خود را بنویسید..."><button id="sendMsgBtnMessenger">➤</button></div></div>
     </div>
   </div>
-  <div id="profileEditor" class="profile-editor">
-    <h4>ویرایش پروفایل</h4>
-    <input type="text" id="editDisplayName" placeholder="نام نمایشی"><br>
-    <textarea id="editBio" placeholder="بیوگرافی"></textarea><br>
-    <input type="file" id="avatarUpload" accept="image/*"><br>
-    <button id="saveProfileBtn" class="btn">ذخیره</button>
-    <button id="closeProfileBtn" style="margin-top:8px;">بستن</button>
-  </div>
+  <div id="profileEditor" class="profile-editor"><h4>ویرایش پروفایل</h4><input type="text" id="editDisplayName" placeholder="نام نمایشی"><br><textarea id="editBio" placeholder="بیوگرافی"></textarea><br><input type="file" id="avatarUpload" accept="image/*"><br><button id="saveProfileBtn" class="btn">ذخیره</button><button id="closeProfileBtn" style="margin-top:8px;">بستن</button></div>
 </div>
 
 <div id="lightbox"><div class="x" onclick="closeLb()">✕</div><div class="lb-nav lb-prev" onclick="lbStep(-1)">‹</div><img id="lbimg" src=""><div class="lb-nav lb-next" onclick="lbStep(1)">›</div></div>
@@ -761,20 +712,20 @@ footer b { color: var(--gold-2); font-size: 17px; }
 <button id="toTop" onclick="smoothTop()">↑</button>
 
 <script>
-/* ====== اسکریپت‌های قبلی سایت (بدون تغییر) ====== */
+/* ====== اسکریپت‌های اصلی سایت (بدون تغییر) ====== */
 const LOVE_START = new Date("2023-09-06T00:00:00");
 const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0));
 window.addEventListener('load', () => setTimeout(() => document.getElementById('loader').classList.add('done'), 1000));
 const KEYS = ["niyayesh", "نیایش", "ملکه", "queen"];
-const audio = document.getElementById('audio');
+const audioEl = document.getElementById('audio');
 const audioBtn = document.getElementById('audioBtn');
-audio.volume = 0.6;
+audioEl.volume = 0.6;
 let audioUnlocked = false;
-function unlockAudio() { if (!audioUnlocked) { audio.play().then(() => { audio.pause(); audio.currentTime = 0; audioUnlocked = true; }).catch(()=>{}); document.removeEventListener('touchstart', unlockAudio); document.removeEventListener('click', unlockAudio); } }
+function unlockAudio() { if (!audioUnlocked) { audioEl.play().then(() => { audioEl.pause(); audioEl.currentTime = 0; audioUnlocked = true; }).catch(()=>{}); document.removeEventListener('touchstart', unlockAudio); document.removeEventListener('click', unlockAudio); } }
 document.addEventListener('touchstart', unlockAudio, { passive: true });
 document.addEventListener('click', unlockAudio, { passive: true });
-function toggleAudio() { if (audio.paused) { audio.play().catch(()=>{}); audioBtn.classList.add('playing'); } else { audio.pause(); audioBtn.classList.remove('playing'); } }
-function enter(){ const v = document.getElementById('pass').value.trim().toLowerCase(); if(KEYS.includes(v)){ audio.play().then(() => { audioBtn.classList.add('playing'); }).catch(()=>{}); document.getElementById('main-content').style.display = 'block'; cacheDOM(); resizeBg(); document.getElementById('gate').classList.add('hidden'); document.getElementById('nav').classList.add('show'); setTimeout(() => { window.dispatchEvent(new Event('scroll')); }, 50); setTimeout(() => { document.getElementById('gate').style.display = 'none'; }, 1500); loveBurst(); } else { document.getElementById('gerr').textContent = 'نام ملکه را به درستی وارد کن... 💔'; const card = document.querySelector('.gate-card'); card.style.animation = 'none'; card.offsetHeight; card.style.animation = 'shake 0.4s'; } }
+function toggleAudio() { if (audioEl.paused) { audioEl.play().catch(()=>{}); audioBtn.classList.add('playing'); } else { audioEl.pause(); audioBtn.classList.remove('playing'); } }
+function enter(){ const v = document.getElementById('pass').value.trim().toLowerCase(); if(KEYS.includes(v)){ audioEl.play().then(() => { audioBtn.classList.add('playing'); }).catch(()=>{}); document.getElementById('main-content').style.display = 'block'; cacheDOM(); resizeBg(); document.getElementById('gate').classList.add('hidden'); document.getElementById('nav').classList.add('show'); setTimeout(() => { window.dispatchEvent(new Event('scroll')); }, 50); setTimeout(() => { document.getElementById('gate').style.display = 'none'; }, 1500); loveBurst(); } else { document.getElementById('gerr').textContent = 'نام ملکه را به درستی وارد کن... 💔'; const card = document.querySelector('.gate-card'); card.style.animation = 'none'; card.offsetHeight; card.style.animation = 'shake 0.4s'; } }
 document.getElementById('pass').addEventListener('keydown', e => { if(e.key === 'Enter') enter() });
 const cDot = document.getElementById('cDot'), cRing = document.getElementById('cRing');
 let mx=0, my=0, rx=0, ry=0;
@@ -794,49 +745,38 @@ function nextBirthday(m,d){ const now = new Date(); let y = now.getFullYear(); l
 function renderCD(elId, todayId, m, d){ const el = document.getElementById(elId), tEl = document.getElementById(todayId); function tick(){ const now = new Date(); if(now.getMonth() === m-1 && now.getDate() === d){ if(el) el.style.display='none'; if(tEl) tEl.style.display='block'; return; } if(el) el.style.display='flex'; if(tEl) tEl.style.display='none'; const diff = nextBirthday(m,d) - now; el.innerHTML = `<div class="cd-box"><span>${Math.floor(diff/864e5)}</span><small>روز</small></div><div class="cd-box"><span>${Math.floor(diff/36e5)%24}</span><small>ساعت</small></div><div class="cd-box"><span>${Math.floor(diff/6e4)%60}</span><small>دقیقه</small></div><div class="cd-box"><span>${Math.floor(diff/1e3)%60}</span><small>ثانیه</small></div>`; } tick(); setInterval(tick, 1000); }
 renderCD('cd-mobin', 'today-mobin', 3, 15); renderCD('cd-niyayesh', 'today-niyayesh', 9, 6);
 const timeline = [{when:'آغاز تمدن',title:'تولد یک امپراتوری',text:'روزی که نگاهمان گره خورد و سنگ بنای جهان Wiriper گذاشته شد.'},{when:'فصل طلایی',title:'تاج‌گذاری ملکه',text:'نیایش بر تخت قلب من نشست و نور را به این قلمرو تاریک آورد.'},{when:'سوگند ابدی',title:'عهد پادشاه',text:'قسم خوردم تا واپسین نفس، سپر بلا و نگهبان خنده‌های زیبایش باشم.'},{when:'تا بی‌نهایت',title:'آینده‌ی روشن',text:'هر روز که می‌گذرد، تمدن ما وسیع‌تر و عشقمان دست‌نیافتنی‌تر می‌شود.'}];
-const box = document.getElementById('timelineBox'); timeline.forEach(t => { const it = document.createElement('div'); it.className = 'tl-item reveal'; it.innerHTML = `<div class="dot"></div><div class="tl-card"><span class="when">${t.when}</span><h4>${t.title}</h4><p>${t.text}</p></div>`; box.appendChild(it); });
+const boxTimeline = document.getElementById('timelineBox'); timeline.forEach(t => { const it = document.createElement('div'); it.className = 'tl-item reveal'; it.innerHTML = `<div class="dot"></div><div class="tl-card"><span class="when">${t.when}</span><h4>${t.title}</h4><p>${t.text}</p></div>`; boxTimeline.appendChild(it); });
 const imgs = [...document.querySelectorAll('#galleryGrid img')].map(i => i.src); let lbIndex=0;
 function lb(i){ lbIndex=i; document.getElementById('lbimg').src=imgs[i]; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
 function closeLb(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
 function lbStep(d){ lbIndex = (lbIndex + d + imgs.length) % imgs.length; document.getElementById('lbimg').src = imgs[lbIndex]; }
 document.getElementById('lightbox').addEventListener('click', e => { if(e.target.id === 'lightbox') closeLb(); });
-let touchStartX = 0; const lbox = document.getElementById('lightbox'); lbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, {passive: true}); lbox.addEventListener('touchend', e => { let touchEndX = e.changedTouches[0].screenX; if (touchEndX < touchStartX - 40) lbStep(-1); if (touchEndX > touchStartX + 40) lbStep(1); }, {passive: true});
+let touchStartX2 = 0; const lbox2 = document.getElementById('lightbox'); lbox2.addEventListener('touchstart', e => { touchStartX2 = e.changedTouches[0].screenX; }, {passive: true}); lbox2.addEventListener('touchend', e => { let touchEndX = e.changedTouches[0].screenX; if (touchEndX < touchStartX2 - 40) lbStep(-1); if (touchEndX > touchStartX2 + 40) lbStep(1); }, {passive: true});
 const io = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); if(e.target.classList.contains('tl-item')) e.target.classList.add('active'); io.unobserve(e.target); } }); }, { threshold: 0.1 });
 function initReveal() { document.querySelectorAll('.reveal, .tl-item').forEach(el => io.observe(el)); } initReveal();
 function sm(id){ const el = document.querySelector(id); if(el) window.scrollTo({ top: el.offsetTop - 80, behavior: 'smooth' }); }
 document.querySelectorAll('.nav-links a:not(#openMessengerBtn)').forEach(a => { a.addEventListener('click', e => { e.preventDefault(); sm(a.getAttribute('href')); document.getElementById('navlinks').classList.remove('open'); }); });
 function smoothTop(){ window.scrollTo({ top: 0, behavior: 'smooth' }); }
-let ticking = false; let tlTopAbs = 0, tlHeight = 0; const progress = document.getElementById('progress'), toTop = document.getElementById('toTop'), tlFill = document.getElementById('tlFill'), navLinks = document.querySelectorAll('.nav-links a'); let sections = Array.from(document.querySelectorAll('section'));
+let ticking = false; let tlTopAbs = 0, tlHeight = 0; const progress = document.getElementById('progress'), toTop = document.getElementById('toTop'), tlFill = document.getElementById('tlFill'), navLinks2 = document.querySelectorAll('.nav-links a'); let sections = Array.from(document.querySelectorAll('section'));
 function cacheDOM() { const tlBox = document.getElementById('timelineBox'); if(tlBox) { tlTopAbs = tlBox.getBoundingClientRect().top + window.scrollY; tlHeight = tlBox.offsetHeight; } sections = Array.from(document.querySelectorAll('section')); }
 window.addEventListener('load', cacheDOM); window.addEventListener('resize', cacheDOM);
-window.addEventListener('scroll', () => { if(!ticking) { window.requestAnimationFrame(() => { const top = window.scrollY; const innerH = window.innerHeight; if(progress) progress.style.transform = `scaleX(${top / (document.body.scrollHeight - innerH)})`; if(toTop) toTop.classList.toggle('show', top > 600); if(tlFill && tlHeight > 0) { const relTop = tlTopAbs - top; if(relTop < innerH/2 && (relTop + tlHeight) > 0) { tlFill.style.transform = `scaleY(${Math.min(1, Math.max(0, (innerH/2 - relTop) / tlHeight))})`; } } let cur = ''; for (let s of sections) { if(top >= s.offsetTop - 150) cur = s.id; } navLinks.forEach(a => { if (a.id !== 'openMessengerBtn') { if(a.getAttribute('href') === '#' + cur) a.classList.add('active'); else a.classList.remove('active'); } }); ticking = false; }); ticking = true; } }, { passive: true });
+window.addEventListener('scroll', () => { if(!ticking) { window.requestAnimationFrame(() => { const top = window.scrollY; const innerH = window.innerHeight; if(progress) progress.style.transform = `scaleX(${top / (document.body.scrollHeight - innerH)})`; if(toTop) toTop.classList.toggle('show', top > 600); if(tlFill && tlHeight > 0) { const relTop = tlTopAbs - top; if(relTop < innerH/2 && (relTop + tlHeight) > 0) { tlFill.style.transform = `scaleY(${Math.min(1, Math.max(0, (innerH/2 - relTop) / tlHeight))})`; } } let cur = ''; for (let s of sections) { if(top >= s.offsetTop - 150) cur = s.id; } navLinks2.forEach(a => { if (a.id !== 'openMessengerBtn') { if(a.getAttribute('href') === '#' + cur) a.classList.add('active'); else a.classList.remove('active'); } }); ticking = false; }); ticking = true; } }, { passive: true });
 
-/* ====== اسکریپت پیام‌رسان کامل شبیه تلگرام با Firebase ====== */
+/* ====== اسکریپت پیام‌رسان کامل ====== */
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
-import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, addDoc, query, where, orderBy, onSnapshot, getDocs, serverTimestamp, arrayUnion, arrayRemove } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDoc, updateDoc, addDoc, query, where, orderBy, onSnapshot, getDocs, serverTimestamp } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ",
-  authDomain: "niyayesh-universe.firebaseapp.com",
-  databaseURL: "https://niyayesh-universe-default-rtdb.firebaseio.com",
-  projectId: "niyayesh-universe",
-  storageBucket: "niyayesh-universe.firebasestorage.app",
-  messagingSenderId: "675804346928",
-  appId: "1:675804346928:web:8e8c33f7a26d2824340bf5",
-  measurementId: "G-5X7BKVZBNN"
-};
+const firebaseConfig = { apiKey: "AIzaSyDsqisH5TT77Wq1qJ8_gljRs7wnzH8h0PQ", authDomain: "niyayesh-universe.firebaseapp.com", databaseURL: "https://niyayesh-universe-default-rtdb.firebaseio.com", projectId: "niyayesh-universe", storageBucket: "niyayesh-universe.firebasestorage.app", messagingSenderId: "675804346928", appId: "1:675804346928:web:8e8c33f7a26d2824340bf5", measurementId: "G-5X7BKVZBNN" };
+const appFirebase = initializeApp(firebaseConfig);
+const auth = getAuth(appFirebase);
+const db = getFirestore(appFirebase);
+const storage = getStorage(appFirebase);
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-// DOM elements messenger
 const messengerModal = document.getElementById('wiriperMessenger');
-const openBtn = document.getElementById('openMessengerBtn');
-const closeBtn = document.getElementById('closeMessengerBtn');
+const openMessengerBtn = document.getElementById('openMessengerBtn');
+const closeMessengerBtn = document.getElementById('closeMessengerBtn');
 const authContainerDiv = document.getElementById('authContainer');
 const messengerMainDiv = document.getElementById('messengerMain');
 const signupBtn = document.getElementById('doSignup');
@@ -861,123 +801,63 @@ const avatarUpload = document.getElementById('avatarUpload');
 const saveProfileBtn = document.getElementById('saveProfileBtn');
 const closeProfileBtn = document.getElementById('closeProfileBtn');
 
-let currentUserData = null; // { uid, username, displayName, bio, photoURL }
-let currentChatId = null; // chatId = "user1_user2"
+let currentUserData = null;
+let currentChatId = null;
 let currentChatUser = null;
 let unsubscribeMessages = null;
 
-// Helper: generate chat id between two users
-function getChatId(uid1, uid2) {
-  return uid1 < uid2 ? `${uid1}_${uid2}` : `${uid2}_${uid1}`;
-}
+function getChatId(uid1, uid2) { return uid1 < uid2 ? `${uid1}_${uid2}` : `${uid2}_${uid1}`; }
 
-// Show/Hide messenger
-openBtn.addEventListener('click', () => {
-  messengerModal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-});
-closeBtn.addEventListener('click', () => {
-  messengerModal.classList.remove('open');
-  document.body.style.overflow = '';
-});
+openMessengerBtn.addEventListener('click', () => { messengerModal.classList.add('open'); document.body.style.overflow = 'hidden'; });
+closeMessengerBtn.addEventListener('click', () => { messengerModal.classList.remove('open'); document.body.style.overflow = ''; });
 
-// Authentication
 signupBtn.addEventListener('click', async () => {
   const username = regUsername.value.trim();
   const email = regEmail.value.trim();
   const password = regPass.value.trim();
-  if (!username || !email || !password) {
-    authMsg.textContent = 'لطفا همه فیلدها را پر کنید.';
-    return;
-  }
+  if (!username || !email || !password) { authMsg.textContent = 'لطفا همه فیلدها را پر کنید.'; return; }
   try {
-    // check if username exists
     const usersRef = collection(db, "users");
     const q = query(usersRef, where("username", "==", username));
     const querySnap = await getDocs(q);
-    if (!querySnap.empty) {
-      authMsg.textContent = 'این نام کاربری قبلاً ثبت شده است.';
-      return;
-    }
-    // sign up
+    if (!querySnap.empty) { authMsg.textContent = 'این نام کاربری قبلاً ثبت شده است.'; return; }
     const userCred = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCred.user;
-    await setDoc(doc(db, "users", user.uid), {
-      uid: user.uid,
-      username: username,
-      displayName: username,
-      bio: "عضو جدید امپراتوری Wiriper",
-      photoURL: "",
-      online: true,
-      lastSeen: serverTimestamp()
-    });
+    await setDoc(doc(db, "users", user.uid), { uid: user.uid, username: username, displayName: username, bio: "عضو جدید امپراتوری Wiriper", photoURL: "", online: true, lastSeen: serverTimestamp() });
     authMsg.textContent = 'ثبت‌نام موفق! در حال ورود...';
     setTimeout(() => authMsg.textContent = '', 2000);
   } catch (err) {
     if (err.code === 'auth/email-already-in-use') {
-      // try login
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        // update username in firestore if needed
         const user = auth.currentUser;
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (!userDoc.exists() || !userDoc.data().username) {
-          await setDoc(doc(db, "users", user.uid), {
-            uid: user.uid,
-            username: username,
-            displayName: username,
-            bio: "عضو قدیمی",
-            photoURL: "",
-            online: true
-          }, { merge: true });
+          await setDoc(doc(db, "users", user.uid), { uid: user.uid, username: username, displayName: username, bio: "عضو قدیمی", photoURL: "", online: true }, { merge: true });
         }
         authMsg.textContent = 'ورود موفق!';
-      } catch (loginErr) {
-        authMsg.textContent = 'خطا در ورود: ' + loginErr.message;
-      }
-    } else {
-      authMsg.textContent = 'خطا: ' + err.message;
-    }
+      } catch (loginErr) { authMsg.textContent = 'خطا در ورود: ' + loginErr.message; }
+    } else { authMsg.textContent = 'خطا: ' + err.message; }
   }
 });
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    // fetch user data
     const userDoc = await getDoc(doc(db, "users", user.uid));
-    if (userDoc.exists()) {
-      currentUserData = userDoc.data();
-    } else {
-      // emergency create
-      await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
-        username: user.email.split('@')[0],
-        displayName: user.email.split('@')[0],
-        bio: "",
-        photoURL: "",
-        online: true
-      });
-      currentUserData = (await getDoc(doc(db, "users", user.uid))).data();
-    }
+    if (userDoc.exists()) currentUserData = userDoc.data();
+    else { await setDoc(doc(db, "users", user.uid), { uid: user.uid, username: user.email.split('@')[0], displayName: user.email.split('@')[0], bio: "", photoURL: "", online: true }); currentUserData = (await getDoc(doc(db, "users", user.uid))).data(); }
     authContainerDiv.style.display = 'none';
     messengerMainDiv.style.display = 'flex';
     loadChatsList();
-    // update online status
     await updateDoc(doc(db, "users", user.uid), { online: true, lastSeen: serverTimestamp() });
-  } else {
-    authContainerDiv.style.display = 'flex';
-    messengerMainDiv.style.display = 'none';
-    currentUserData = null;
-    if (unsubscribeMessages) unsubscribeMessages();
-  }
+  } else { authContainerDiv.style.display = 'flex'; messengerMainDiv.style.display = 'none'; currentUserData = null; if (unsubscribeMessages) unsubscribeMessages(); }
 });
 
-// Load list of chats (private chats where current user is participant)
 async function loadChatsList() {
   if (!currentUserData) return;
   const chatsRef = collection(db, "chats");
   const q = query(chatsRef, where("participants", "array-contains", currentUserData.uid));
-  const unsubscribeChats = onSnapshot(q, async (snapshot) => {
+  onSnapshot(q, async (snapshot) => {
     chatsListDiv.innerHTML = '';
     for (const docSnap of snapshot.docs) {
       const chat = docSnap.data();
@@ -987,59 +867,39 @@ async function loadChatsList() {
       if (!userDoc.exists()) continue;
       const otherUser = userDoc.data();
       const lastMsg = chat.lastMessage || '';
-      const chatDiv = document.createElement('div');
-      chatDiv.className = 'chat-item';
-      chatDiv.innerHTML = `
-        <div class="chat-avatar">${otherUser.photoURL ? `<img src="${otherUser.photoURL}">` : '👤'}</div>
-        <div class="chat-info"><div class="chat-name">${otherUser.displayName || otherUser.username}</div><div class="chat-preview">${lastMsg.substring(0,30)}</div></div>
-      `;
+      const chatDiv = document.createElement('div'); chatDiv.className = 'chat-item';
+      chatDiv.innerHTML = `<div class="chat-avatar">${otherUser.photoURL ? `<img src="${otherUser.photoURL}">` : '👤'}</div><div class="chat-info"><div class="chat-name">${otherUser.displayName || otherUser.username}</div><div class="chat-preview">${lastMsg.substring(0,30)}</div></div>`;
       chatDiv.addEventListener('click', () => openChat(otherUid, otherUser));
       chatsListDiv.appendChild(chatDiv);
     }
   });
 }
-
-// Search users
 searchUserInput.addEventListener('input', async (e) => {
   const term = e.target.value.trim().toLowerCase();
   if (term.length < 2) return;
   const usersRef = collection(db, "users");
   const q = query(usersRef, where("username", ">=", term), where("username", "<=", term + "\uf8ff"));
   const snap = await getDocs(q);
-  // show results in a dropdown or directly in chats? For simplicity, add temporary items
   chatsListDiv.innerHTML = '';
   snap.forEach(docSnap => {
     if (docSnap.id === currentUserData.uid) return;
     const user = docSnap.data();
-    const chatDiv = document.createElement('div');
-    chatDiv.className = 'chat-item';
+    const chatDiv = document.createElement('div'); chatDiv.className = 'chat-item';
     chatDiv.innerHTML = `<div class="chat-avatar">👤</div><div class="chat-info"><div class="chat-name">${user.displayName || user.username}</div><div class="chat-preview">کلیک برای شروع چت</div></div>`;
     chatDiv.addEventListener('click', () => openChat(docSnap.id, user));
     chatsListDiv.appendChild(chatDiv);
   });
 });
-
 async function openChat(targetUid, targetUser) {
   if (!currentUserData) return;
   currentChatUser = targetUser;
   const chatId = getChatId(currentUserData.uid, targetUid);
   currentChatId = chatId;
-  // ensure chat document exists
   const chatRef = doc(db, "chats", chatId);
   const chatSnap = await getDoc(chatRef);
-  if (!chatSnap.exists()) {
-    await setDoc(chatRef, {
-      participants: [currentUserData.uid, targetUid],
-      createdAt: serverTimestamp(),
-      lastMessage: ""
-    });
-  }
+  if (!chatSnap.exists()) { await setDoc(chatRef, { participants: [currentUserData.uid, targetUid], createdAt: serverTimestamp(), lastMessage: "" }); }
   chatArea.style.display = 'flex';
-  chatHeaderInfo.innerHTML = `
-    <div class="avatar-small">${targetUser.photoURL ? `<img src="${targetUser.photoURL}" style="width:40px;height:40px;border-radius:50%;">` : '👤'}</div>
-    <h3>${targetUser.displayName || targetUser.username}</h3>
-  `;
-  // load messages
+  chatHeaderInfo.innerHTML = `<div class="avatar-small">${targetUser.photoURL ? `<img src="${targetUser.photoURL}" style="width:40px;height:40px;border-radius:50%;">` : '👤'}</div><h3>${targetUser.displayName || targetUser.username}</h3>`;
   if (unsubscribeMessages) unsubscribeMessages();
   const messagesRef = collection(db, "chats", chatId, "messages");
   const q = query(messagesRef, orderBy("timestamp", "asc"));
@@ -1048,69 +908,28 @@ async function openChat(targetUid, targetUser) {
     snap.forEach(msgDoc => {
       const msg = msgDoc.data();
       const isMine = msg.senderId === currentUserData.uid;
-      const div = document.createElement('div');
-      div.className = `message ${isMine ? 'outgoing' : 'incoming'}`;
+      const div = document.createElement('div'); div.className = `message ${isMine ? 'outgoing' : 'incoming'}`;
       let mediaHtml = '';
       if (msg.fileUrl) {
         if (msg.fileType?.startsWith('image/')) mediaHtml = `<img src="${msg.fileUrl}" class="message-media" onclick="window.open('${msg.fileUrl}')">`;
         else if (msg.fileType?.startsWith('video/')) mediaHtml = `<video src="${msg.fileUrl}" controls class="message-media"></video>`;
         else mediaHtml = `<a href="${msg.fileUrl}" target="_blank">📎 دانلود فایل</a>`;
       }
-      div.innerHTML = `
-        <div class="message-bubble">
-          ${mediaHtml}
-          <div class="message-text">${msg.text || ''}</div>
-          <div class="message-meta">
-            <span>${msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString('fa-IR') : ''}</span>
-            ${isMine ? `<div class="message-actions"><button class="editMsgBtn" data-id="${msgDoc.id}">✏️</button><button class="delMsgBtn" data-id="${msgDoc.id}">🗑️</button></div>` : ''}
-          </div>
-        </div>
-      `;
+      div.innerHTML = `<div class="message-bubble">${mediaHtml}<div class="message-text">${msg.text || ''}</div><div class="message-meta"><span>${msg.timestamp ? new Date(msg.timestamp.toDate()).toLocaleTimeString('fa-IR') : ''}</span>${isMine ? `<div class="message-actions"><button class="editMsgBtn" data-id="${msgDoc.id}">✏️</button><button class="delMsgBtn" data-id="${msgDoc.id}">🗑️</button></div>` : ''}</div></div>`;
       messagesList.appendChild(div);
     });
     messagesList.scrollTop = messagesList.scrollHeight;
-    // attach edit/delete handlers
-    document.querySelectorAll('.editMsgBtn').forEach(btn => {
-      btn.addEventListener('click', async (e) => {
-        const msgId = btn.dataset.id;
-        const newText = prompt('ویرایش پیام:', btn.closest('.message-bubble')?.querySelector('.message-text')?.innerText);
-        if (newText) {
-          await updateDoc(doc(db, "chats", chatId, "messages", msgId), { text: newText, edited: true });
-        }
-      });
-    });
-    document.querySelectorAll('.delMsgBtn').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        if (confirm('حذف پیام؟')) {
-          await updateDoc(doc(db, "chats", chatId, "messages", btn.dataset.id), { text: 'این پیام حذف شده است', fileUrl: null });
-        }
-      });
-    });
+    document.querySelectorAll('.editMsgBtn').forEach(btn => btn.addEventListener('click', async (e) => { const msgId = btn.dataset.id; const newText = prompt('ویرایش پیام:', btn.closest('.message-bubble')?.querySelector('.message-text')?.innerText); if (newText) await updateDoc(doc(db, "chats", chatId, "messages", msgId), { text: newText, edited: true }); }));
+    document.querySelectorAll('.delMsgBtn').forEach(btn => btn.addEventListener('click', async () => { if (confirm('حذف پیام؟')) await updateDoc(doc(db, "chats", chatId, "messages", btn.dataset.id), { text: 'این پیام حذف شده است', fileUrl: null }); }));
   });
 }
-
-// Send message
 async function sendMessage(text, fileUrl = null, fileType = null) {
   if (!text && !fileUrl) return;
   if (!currentChatId) return;
-  await addDoc(collection(db, "chats", currentChatId, "messages"), {
-    senderId: currentUserData.uid,
-    text: text,
-    fileUrl: fileUrl,
-    fileType: fileType,
-    timestamp: serverTimestamp()
-  });
-  // update last message in chat doc
-  await updateDoc(doc(db, "chats", currentChatId), {
-    lastMessage: text || (fileType ? 'فایل' : ''),
-    lastUpdated: serverTimestamp()
-  });
+  await addDoc(collection(db, "chats", currentChatId, "messages"), { senderId: currentUserData.uid, text: text, fileUrl: fileUrl, fileType: fileType, timestamp: serverTimestamp() });
+  await updateDoc(doc(db, "chats", currentChatId), { lastMessage: text || (fileType ? 'فایل' : ''), lastUpdated: serverTimestamp() });
 }
-sendMsgBtn.addEventListener('click', () => {
-  const text = messageInput.value.trim();
-  if (text) sendMessage(text);
-  messageInput.value = '';
-});
+sendMsgBtn.addEventListener('click', () => { const text = messageInput.value.trim(); if (text) sendMessage(text); messageInput.value = ''; });
 messageInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') sendMsgBtn.click(); });
 attachBtn.addEventListener('click', () => fileInputChat.click());
 fileInputChat.addEventListener('change', async (e) => {
@@ -1118,13 +937,8 @@ fileInputChat.addEventListener('change', async (e) => {
   if (!file) return;
   const storageRef = ref(storage, `chat_files/${Date.now()}_${file.name}`);
   const uploadTask = uploadBytesResumable(storageRef, file);
-  uploadTask.on('state_changed', null, null, async () => {
-    const url = await getDownloadURL(uploadTask.snapshot.ref);
-    await sendMessage('', url, file.type);
-  });
+  uploadTask.on('state_changed', null, null, async () => { const url = await getDownloadURL(uploadTask.snapshot.ref); await sendMessage('', url, file.type); });
 });
-
-// Profile editor
 profileBtn.addEventListener('click', () => profileEditor.classList.toggle('show'));
 closeProfileBtn.addEventListener('click', () => profileEditor.classList.remove('show'));
 saveProfileBtn.addEventListener('click', async () => {
